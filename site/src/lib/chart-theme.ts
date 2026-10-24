@@ -86,7 +86,7 @@ export const chrome = {
 } as const;
 
 /**
- * « Call Intelligence » (brand-ci.css) — the same roles, other values. A test keeps them in sync with the
+ * The shipped look (brand-ci.css) — the same roles, other values. A test keeps them in sync with the
  * CSS. Validation (dataviz skill, scripts/validate_palette.js; plates = the darkest surface of each mode):
  *   categorical light  adjacent CVD ΔE 14.4 (target 8), normal-vision 25.1 (floor 15), all ≥ 3 : 1 on #e4e0d3
  *   categorical dark   adjacent CVD ΔE 13.3,             normal-vision 22.8,            all ≥ 3 : 1 on #262c29
@@ -301,9 +301,8 @@ const SVG_NS = 'http://www.w3.org/2000/svg';
 /**
  * Adds (once) a 45° hatch <pattern> to an SVG and returns the `url(#id)` to use as a `fill`.
  * Tone-on-tone: a 14 % wash of `color` with 1.5 px diagonal strokes of `color` — so the same series
- * hue stays readable and « annoncé » is never signalled by colour alone. A brand may set `--hatch-stroke`
- * (« Call Intelligence »: the signal, README « hatching in signal marks the highlighted zone ») to recolour
- * the strokes over the same wash; the variable is read by the browser, so a brand switch needs no re-render.
+ * hue stays readable and « annoncé » is never signalled by colour alone. `--hatch-stroke` recolours
+ * the strokes over the same wash; the variable is read by the browser, so a look change needs no re-render.
  * Call after `Plot.plot()` returned the element (patterns resolve lazily), e.g.
  *   const hatch = hatchFill(svg, 'announced-1', css.series[0]!);
  */

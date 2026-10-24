@@ -90,7 +90,7 @@ describe('French tick formatters', () => {
   });
 });
 
-describe('chart-theme mirrors brand-ci.css (« Call Intelligence »)', () => {
+describe('chart-theme mirrors brand-ci.css', () => {
   const ci = brandColors('ci');
   for (const mode of ['light', 'dark'] as const) {
     const t = ciTokens[mode];

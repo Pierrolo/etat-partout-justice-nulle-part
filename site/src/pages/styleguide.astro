@@ -5,7 +5,6 @@
  * Contrast ratios are computed at build time from src/styles/tokens.css.
  */
 import StyleguideChart from '@/components/charts/StyleguideChart';
-import BrandSwitch from '@/components/site/BrandSwitch.astro';
 import BrandValue from '@/components/site/BrandValue.astro';
 import PageHeader from '@/components/site/PageHeader.astro';
 import {
@@ -37,7 +36,7 @@ import {
 import brandCiCss from '@/styles/brand-ci.css?raw';
 import tokensCss from '@/styles/tokens.css?raw';
 
-// The tokens of each brand (tokens.css = « Éditorial »; brand-ci.css overrides them for « Call Intelligence »).
+// Tokens in force on the site: tokens.css, overridden by brand-ci.css (data-brand="ci").
 const tokens = parseTokens(tokensCss);
 const ciTokens = resolveBrand(tokens, parseTokens(brandCiCss));
 const ratio = (fg: string, bg: string, map = tokens) => ({
@@ -156,40 +155,27 @@ const formatRows: Array<[string, string]> = [
     <section id="apparence" aria-labelledby="apparence-t" class="space-y-6">
       <div>
         <h2 id="apparence-t" class="text-3xl">
-          Apparence : deux identités
+          Apparence
         </h2>
         <p class="mt-2 max-w-2xl text-ink-2">
-          Le site sait porter deux identités visuelles, construites sur les <em>mêmes</em> jetons :
-          <strong>Éditorial</strong> (Fraunces + Inter, accent violet, par défaut) et
-          <strong>Call Intelligence</strong> (Schibsted Grotesk + JetBrains Mono, papier / encre et
-          un seul accent chaud, le signal). Aucun composant ne connaît la marque : tous lisent les
-          jetons. Le choix se fait ici ou en pied de page, il est mémorisé dans ce navigateur (
-          <code>localStorage</code>, aucun cookie) ; <code>?brand=ci</code> dans l’adresse le force,
-          et la variable de build <code>PUBLIC_BRAND=ci</code> change la marque par défaut.
+          Une seule identité, construite sur les jetons. Schibsted Grotesk pour le texte et les
+          titres, JetBrains Mono pour les étiquettes et les chiffres clés, papier et encre, un seul
+          accent chaud (le signal). Le thème clair ou sombre se règle en haut de page. Aucun
+          composant ne connaît la marque : tous lisent les jetons.
         </p>
       </div>
 
-      <BrandSwitch id="styleguide-brand" />
-
-      <div
-        class="overflow-x-auto"
-        tabindex="0"
-        role="region"
-        aria-label="Contrastes clés des deux marques"
-      >
-        <table class="data-table min-w-[40rem]">
+      <div class="overflow-x-auto" tabindex="0" role="region" aria-label="Contrastes clés">
+        <table class="data-table min-w-[28rem]">
           <caption>
             Contrastes WCAG des paires clés, clair / sombre. Toutes les paires du système sont
-            vérifiées pour chaque marque (<code>pnpm --filter @epjn/site contrast</code>).
+            vérifiées (<code>pnpm --filter @epjn/site contrast</code>).
           </caption>
           <thead>
             <tr>
               <th scope="col">Paire</th>
               <th scope="col" data-numeric>
-                Éditorial
-              </th>
-              <th scope="col" data-numeric>
-                Call Intelligence
+                Contraste
               </th>
             </tr>
           </thead>
@@ -202,7 +188,6 @@ const formatRows: Array<[string, string]> = [
                     {fg.slice(2)} sur {bg.slice(2)}
                   </span>
                 </th>
-                <td data-numeric>{ratioText(fg, bg)}</td>
                 <td data-numeric>{ratioText(fg, bg, ciTokens)}</td>
               </tr>
             ))}
@@ -213,36 +198,34 @@ const formatRows: Array<[string, string]> = [
       <dl class="grid gap-x-8 gap-y-3 text-sm sm:grid-cols-[10rem_1fr]">
         <dt class="font-semibold text-ink">Accent</dt>
         <dd class="text-ink-2">
-          Éditorial : violet profond (« le plan »). Call Intelligence :{' '}
-          <strong>le plan est tracé en encre</strong>&#8239;; l’unique accent chaud, le{' '}
-          <strong>signal</strong> (<code>#ff5a1f</code>), ne sert qu’à des aplats et des traits —
-          action principale, chiffre clé, repère de navigation, hachures — jamais à du texte sur le
-          papier (2,8 : 1). Texte sur le signal : toujours l’encre.
+          Le plan est tracé en encre. L’unique accent chaud, le <strong>signal</strong> (
+          <code>#ff5a1f</code>
+          ), ne sert qu’à des aplats et des traits — action principale, chiffre clé, repère de
+          navigation, hachures — jamais à du texte sur le papier (2,8 : 1). Texte sur le signal :
+          toujours l’encre.
         </dd>
         <dt class="font-semibold text-ink">Gain et perte</dt>
         <dd class="text-ink-2">
-          Éditorial : bleu-vert / vermillon. Call Intelligence : <strong>teal</strong> de la marque
-          pour le gain, <strong>orange dérivé du signal</strong> pour la perte (une variante sombre
-          pour le texte, une variante plus claire pour les marques). Les deux se distinguent aussi
-          par la <em>clarté</em>, jamais seulement par la teinte, et par le signe, la flèche et les
-          mots.
+          <strong>Teal</strong> pour le gain, <strong>orange dérivé du signal</strong> pour la perte
+          (une variante sombre pour le texte, une variante plus claire pour les marques). Les deux
+          se distinguent aussi par la <em>clarté</em>, jamais seulement par la teinte, et par le
+          signe, la flèche et les mots.
         </dd>
         <dt class="font-semibold text-ink">Typographie</dt>
         <dd class="text-ink-2">
-          Éditorial : Fraunces (titres, grands chiffres) + Inter. Call Intelligence : Schibsted
-          Grotesk (tout le texte, titres alignés à gauche) + JetBrains Mono pour les étiquettes en
-          capitales numérotées (« 01 — VOTRE FOYER ») et les chiffres clés.
+          Schibsted Grotesk (tout le texte, titres alignés à gauche) et JetBrains Mono pour les
+          étiquettes en capitales numérotées (« 01 — VOTRE FOYER ») et les chiffres clés.
         </dd>
         <dt class="font-semibold text-ink">Formes</dt>
         <dd class="text-ink-2">
-          Éditorial : rayons de 4, 8 et 14 px, cartes cernées d’un filet. Call Intelligence : angles
-          droits par défaut, 4 px pour les cartes et les boutons, pastilles pour les étiquettes ;
-          cartes en aplat « paper-deep » sans cadre, filets de 1,5 px, aucune ombre, aucun dégradé.
+          Angles droits par défaut, 4 px pour les cartes et les boutons, pastilles pour les
+          étiquettes ; cartes en aplat « paper-deep » sans cadre, filets de 1,5 px, aucune ombre,
+          aucun dégradé.
         </dd>
         <dt class="font-semibold text-ink">Hachures</dt>
         <dd class="text-ink-2">
-          « Promis, sans texte précis » : hachures et contour tireté dans les deux marques ; sous
-          Call Intelligence elles sont tracées en signal à 45°, réservées à la zone mise en avant.
+          « Promis, sans texte précis » : hachures et contour tireté, tracés en signal à 45°,
+          réservés à la zone mise en avant.
         </dd>
       </dl>
     </section>
@@ -253,19 +236,12 @@ const formatRows: Array<[string, string]> = [
         <h2 id="couleurs-t" class="text-3xl">
           Couleurs
         </h2>
-        <p class="mt-2 max-w-2xl text-ink-2" data-brand-only="editorial">
-          Papier crème, encre profonde, <strong>un seul accent</strong> (violet profond, « le plan
-           »), une paire divergente sûre pour le daltonisme (bleu-vert = gain, orange-vermillon =
-          perte — jamais rouge/vert) et des gris neutres. Thème clair et sombre via{' '}
-          <code>light-dark()</code>&#8239;: basculez avec le bouton en haut de page. Ratios de
-          contraste : clair / sombre.
-        </p>
-        <p class="mt-2 max-w-2xl text-ink-2" data-brand-only="ci">
+        <p class="mt-2 max-w-2xl text-ink-2">
           Deux fonds (<code>paper</code> clair, <code>ink</code> sombre),{' '}
           <strong>un seul accent chaud</strong> (<code>signal</code>), le teal en second plan, des
-          neutres chauds. Le thème sombre est dérivé du clair comme le fait la marque pour ses
-          scènes sombres : fond encre, surfaces <code>ink-soft</code>, texte papier, texte
-          secondaire <code>muted-dark</code>. Thème clair et sombre via <code>light-dark()</code>
+          neutres chauds. Le thème sombre est dérivé du clair : fond encre, surfaces{' '}
+          <code>ink-soft</code>, texte papier, texte secondaire <code>muted-dark</code>. Thème clair
+          et sombre via <code>light-dark()</code>
           &#8239;: basculez avec le bouton en haut de page. Ratios de contraste : clair / sombre.
         </p>
       </div>
@@ -413,19 +389,12 @@ const formatRows: Array<[string, string]> = [
         <h2 id="typo-t" class="text-3xl">
           Typographie
         </h2>
-        <p class="mt-2 max-w-2xl text-ink-2" data-brand-only="editorial">
-          <strong>Fraunces</strong> (empattement à axe optique) pour les titres et les grands
-          chiffres ;<strong>Inter</strong> pour l’interface et le texte. Polices servies localement,
-          sous-ensemble latin. Les grands chiffres isolés restent proportionnels ; les colonnes de
-          montants utilisent
-          <code>num</code> (chiffres tabulaires).
-        </p>
-        <p class="mt-2 max-w-2xl text-ink-2" data-brand-only="ci">
+        <p class="mt-2 max-w-2xl text-ink-2">
           <strong>Schibsted Grotesk</strong> pour tout le texte et les titres (gras, serrés, alignés
           à gauche) ; <strong>JetBrains Mono</strong> pour les étiquettes en capitales (« 01 — VOTRE
-          FOYER ») et les chiffres clés. Polices servies localement, sous-ensemble latin, chargées
-          seulement quand cette marque est affichée ; l’espace fine insécable des milliers vient
-          d’une police de 324 octets. Les colonnes de montants utilisent
+          FOYER ») et les chiffres clés. Polices servies localement, sous-ensemble latin. L’espace
+          fine insécable des milliers vient d’une police de 324 octets. Les colonnes de montants
+          utilisent
           <code>num</code> (chiffres tabulaires).
         </p>
       </div>

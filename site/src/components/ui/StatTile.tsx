@@ -21,7 +21,7 @@ export interface StatTileProps {
   /** `announced` renders the tile hatched with a dashed border (« annoncé, sans texte de loi »). */
   tier?: Tier;
   size?: 'md' | 'lg';
-  /** The ONE figure of the view that deserves the brand's accent (« Call Intelligence » paints it in signal). */
+  /** The ONE figure of the view that deserves the accent (painted in signal). */
   keyFigure?: boolean;
   /** Element used for the tile (use `li` inside a list). */
   as?: 'article' | 'div' | 'li';

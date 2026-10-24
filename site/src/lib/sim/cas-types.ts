@@ -116,7 +116,7 @@ export interface TileColor {
   bgDark: string;
   fgLight: string;
   fgDark: string;
-  /** Same four colours on the « Call Intelligence » ramp. */
+  /** Same four colours on the shipped ramp. */
   ci: { bgLight: string; bgDark: string; fgLight: string; fgDark: string };
 }
 
@@ -130,7 +130,7 @@ function best(bg: string): string {
 
 const light = divergingInterpolator('light');
 const dark = divergingInterpolator('dark');
-// « Call Intelligence » has its own diverging ramp; the page chooses between the two with CSS
+// The shipped look has its own diverging ramp; the page chooses it with CSS
 // (brand-ci.css reads the --tile-*-ci properties), so the heat map is right on first paint.
 const lightCi = divergingInterpolator('light', 'ci');
 const darkCi = divergingInterpolator('dark', 'ci');

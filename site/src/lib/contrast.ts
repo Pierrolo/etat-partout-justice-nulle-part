@@ -3,8 +3,8 @@
  * Parses `src/styles/tokens.css` (light-dark(#a, #b) declarations), so the CSS stays the single
  * source of truth. Used by contrast.test.ts, scripts/contrast-report.ts and the /styleguide page.
  *
- * Two brands share the same token NAMES: « Éditorial » is tokens.css, « Call Intelligence » is
- * tokens.css overridden by brand-ci.css. `resolveBrand()` merges the two parsed files, so every pair
+ * Two token files share the same names: tokens.css is the base, brand-ci.css overrides it for the
+ * look the site ships (`data-brand="ci"`). `resolveBrand()` merges the two parsed files, so every pair
  * below is checked for each brand; `BRAND_PAIRS` adds the pairs that only exist in one brand.
  */
 
@@ -140,7 +140,7 @@ export const PAIRS: Pair[] = [
 ];
 
 /**
- * Pairs that exist in one brand only. « Call Intelligence » has a second accent, `signal`, with its
+ * Pairs that exist on the shipped look only. It has a second accent, `signal`, with its
  * own rules (README of the brand): text on it is always `ink`; as TEXT it is only allowed on the dark
  * scene (2,8 : 1 on paper: fills and strokes only), so that pair is checked in dark mode only.
  */

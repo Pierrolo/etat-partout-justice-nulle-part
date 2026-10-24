@@ -38,11 +38,9 @@
  * Hex values are 6-digit on purpose: src/lib/contrast.ts parses this file, and
  * src/lib/chart-theme.ts mirrors the chart tokens (a test keeps both in sync).
  *
- * BRANDS
- *   This file is the « Éditorial » brand (the default, <html data-brand="editorial">). A second brand,
- *   « Call Intelligence » (<html data-brand="ci">), lives in brand-ci.css and overrides the SAME
- *   custom properties (+ the shape / type tokens at the bottom of :root). Components never know which
- *   brand is active: they read tokens. See docs in brand-ci.css and src/lib/brand.ts.
+ * LOOK
+ *   tokens.css holds the base custom properties. brand-ci.css overrides them when
+ *   <html data-brand="ci">, which is the only look the site ships. Components read tokens.
  */
 
 :root {

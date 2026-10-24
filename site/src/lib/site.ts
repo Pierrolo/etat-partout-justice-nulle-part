@@ -24,6 +24,7 @@ export interface NavItem {
 /** Primary navigation (header). Hrefs are site-relative, with trailing slash; pass through `withBase`. */
 export const NAV: NavItem[] = [
   { label: 'Simulateur', href: '/simulateur/' },
+  { label: 'Questionnaire', href: '/questionnaire/' },
   { label: 'Comprendre', href: '/comprendre/' },
   { label: 'Méthode', href: '/methode/' },
   { label: 'À propos', href: '/a-propos/' },

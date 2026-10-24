@@ -1,12 +1,9 @@
 import { expect, test, type Page } from '@playwright/test';
 
 /**
- * The brand layer: « Éditorial » (default) and « Call Intelligence » (`data-brand="ci"`).
- * Selection (URL, storage, control), no flash, self-hosted fonts loaded only for the brand in use,
- * and the signature rules of the brand. The a11y / contrast sweep of every page under both brands
- * lives in smoke.spec.ts.
- *
- * These tests assume the default build (`PUBLIC_BRAND` unset → « editorial »).
+ * The only look: data-brand="ci" is in the HTML. A query or a stored choice cannot change it.
+ * Fonts are self-hosted. The signature rules (signal, square corners, numbered sections, dark footer)
+ * apply on a normal URL.
  */
 
 const brand = (page: Page) => page.locator('html').getAttribute('data-brand');
@@ -17,122 +14,34 @@ const css = (page: Page, selector: string, prop: string, pseudo?: string) =>
   );
 const SIGNAL = 'rgb(255, 90, 31)';
 
-test.describe('selection', () => {
-  test('the default brand is « editorial », written in the HTML itself', async ({ page }) => {
+test.describe('the look is fixed', () => {
+  test('the page is ci, in the HTML itself, in Schibsted Grotesk', async ({ page }) => {
     await page.goto('');
-    expect(await brand(page)).toBe('editorial');
-    expect(await css(page, 'body', 'font-family')).toContain('Inter Variable');
+    expect(await brand(page)).toBe('ci');
+    expect(await css(page, 'body', 'font-family')).toContain('Schibsted Grotesk');
+    await expect(page.getByRole('group', { name: 'Apparence' })).toHaveCount(0);
+    expect(await page.content()).not.toContain('Call Intelligence');
   });
 
-  test('?brand=ci wins, is remembered, and an unknown value is ignored', async ({ page }) => {
-    await page.goto('?brand=ci');
+  test('a stored or queried alternate look does not apply', async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('epjn-brand', 'editorial'));
+    await page.goto('?brand=editorial');
     expect(await brand(page)).toBe('ci');
-    // remembered: another page, no parameter
-    await page.goto('methode/');
-    expect(await brand(page)).toBe('ci');
-    await page.reload();
-    expect(await brand(page)).toBe('ci');
-    // nonsense changes nothing
     await page.goto('?brand=neon');
     expect(await brand(page)).toBe('ci');
-    // the URL beats the saved choice
-    await page.goto('?brand=editorial');
-    expect(await brand(page)).toBe('editorial');
-    await page.goto('a-propos/');
-    expect(await brand(page)).toBe('editorial');
+    expect(await css(page, 'h1', 'font-family')).toContain('Schibsted Grotesk');
   });
 
-  test('the brand is applied before first paint (no flash)', async ({ page }) => {
-    await page.addInitScript(() => localStorage.setItem('epjn-brand', 'ci'));
-    // sample the attribute as early as a script can: at DOMContentLoaded it is already « ci »
-    await page.addInitScript(() => {
-      document.addEventListener('readystatechange', () => {
-        if (document.readyState === 'interactive')
-          (window as unknown as { __brandAtInteractive: string }).__brandAtInteractive =
-            document.documentElement.dataset.brand ?? '';
-      });
-    });
-    await page.goto('');
-    const seen = await page.evaluate(
-      () => (window as unknown as { __brandAtInteractive: string }).__brandAtInteractive,
-    );
-    expect(seen).toBe('ci');
-    expect(await css(page, 'html', 'background-color')).toBe('rgb(243, 241, 234)'); // paper
-  });
-
-  test('a blocked localStorage never breaks the page: the URL and the control still work', async ({
-    page,
-  }) => {
-    await page.addInitScript(() => {
-      Object.defineProperty(window, 'localStorage', {
-        get() {
-          throw new Error('storage blocked');
-        },
-      });
-    });
-    const errors: string[] = [];
-    page.on('pageerror', (e) => errors.push(e.message));
-    await page.goto('?brand=ci');
-    expect(await brand(page)).toBe('ci');
-    await page.getByRole('group', { name: 'Apparence' }).first().scrollIntoViewIfNeeded();
-    await page.getByRole('radio', { name: 'Éditorial' }).first().check({ force: true });
-    expect(await brand(page)).toBe('editorial');
-    expect(errors).toEqual([]);
-  });
-});
-
-test.describe('« Apparence » control', () => {
-  test('is a labelled radio group in the footer, switches live and survives a reload', async ({
-    page,
-  }) => {
-    await page.goto('');
-    const group = page.getByRole('contentinfo').getByRole('group', { name: 'Apparence' });
-    await expect(group).toBeVisible();
-    const editorial = group.getByRole('radio', { name: 'Éditorial' });
-    const ci = group.getByRole('radio', { name: 'Call Intelligence' });
-    await expect(editorial).toBeChecked();
-    await expect(ci).not.toBeChecked();
-
-    await ci.check({ force: true }); // the real input is visually hidden: its label is what people click
-    expect(await brand(page)).toBe('ci');
-    await expect(ci).toBeChecked();
-    expect(await page.evaluate(() => localStorage.getItem('epjn-brand'))).toBe('ci');
-    await page.reload();
-    expect(await brand(page)).toBe('ci');
-    await expect(ci).toBeChecked();
-  });
-
-  test('is usable with the keyboard (arrow keys inside the group)', async ({ page }) => {
-    await page.goto('');
-    const group = page.getByRole('contentinfo').getByRole('group', { name: 'Apparence' });
-    const editorial = group.getByRole('radio', { name: 'Éditorial' });
-    await editorial.focus();
-    await page.keyboard.press('ArrowRight');
-    expect(await brand(page)).toBe('ci');
-    await page.keyboard.press('ArrowLeft');
-    expect(await brand(page)).toBe('editorial');
-  });
-
-  test('also lives on /styleguide, and the two controls stay in step', async ({ page }) => {
+  test('styleguide does not name an alternate look', async ({ page }) => {
     await page.goto('styleguide/');
-    const groups = page.getByRole('group', { name: 'Apparence' });
-    await expect(groups).toHaveCount(2); // the guide's own + the footer's
-    await groups.first().getByRole('radio', { name: 'Call Intelligence' }).check({ force: true });
-    expect(await brand(page)).toBe('ci');
-    await expect(groups.last().getByRole('radio', { name: 'Call Intelligence' })).toBeChecked();
-  });
-
-  test('keeps a ?brand= in the address bar consistent with the choice', async ({ page }) => {
-    await page.goto('?brand=ci');
-    await page
-      .getByRole('contentinfo')
-      .getByRole('radio', { name: 'Éditorial' })
-      .check({ force: true });
-    expect(new URL(page.url()).searchParams.get('brand')).toBe('editorial');
+    const html = await page.content();
+    expect(html).not.toContain('Call Intelligence');
+    expect(html).not.toContain('Éditorial');
+    await expect(page.getByRole('group', { name: 'Apparence' })).toHaveCount(0);
   });
 });
 
-test.describe('fonts: self-hosted, loaded only for the brand in use', () => {
+test.describe('fonts: self-hosted, only the families in use', () => {
   async function fontRequests(page: Page, url: string) {
     const fonts: string[] = [];
     page.on('response', (res) => {
@@ -144,28 +53,19 @@ test.describe('fonts: self-hosted, loaded only for the brand in use', () => {
     return fonts;
   }
 
-  test('« Éditorial » never downloads the Call Intelligence fonts', async ({ page, baseURL }) => {
-    const fonts = await fontRequests(page, '?brand=editorial');
-    expect(fonts.length).toBeGreaterThan(0);
-    for (const f of fonts) expect(f.startsWith(new URL(baseURL!).origin)).toBe(true);
-    expect(fonts.filter((f) => /schibsted|jetbrains/i.test(f))).toEqual([]);
-  });
-
-  test('« Call Intelligence » downloads Schibsted Grotesk + JetBrains Mono, and not Fraunces / Inter', async ({
+  test('downloads Schibsted Grotesk and JetBrains Mono, not Fraunces or Inter', async ({
     page,
     baseURL,
   }) => {
-    const fonts = await fontRequests(page, '?brand=ci');
+    const fonts = await fontRequests(page, '');
     for (const f of fonts) expect(f.startsWith(new URL(baseURL!).origin)).toBe(true);
     expect(fonts.some((f) => /schibsted-grotesk/i.test(f))).toBe(true);
     expect(fonts.some((f) => /jetbrains-mono/i.test(f))).toBe(true);
     expect(fonts.filter((f) => /fraunces|inter-latin/i.test(f))).toEqual([]);
   });
 
-  test('« Call Intelligence » renders the narrow no-break space (U+202F) of French numbers', async ({
-    page,
-  }) => {
-    await page.goto('?brand=ci');
+  test('renders the narrow no-break space (U+202F) of French numbers', async ({ page }) => {
+    await page.goto('');
     await page.evaluate(() => document.fonts.ready);
     const m = await page.evaluate(() => {
       const probe = (font: string, text: string) => {
@@ -189,15 +89,15 @@ test.describe('fonts: self-hosted, loaded only for the brand in use', () => {
       return out;
     });
     for (const k of ['sans', 'mono']) {
-      expect(m[`${k}-nnbsp`]!).toBeGreaterThan(m[`${k}-plain`]!); // the glyph exists and has a width…
-      expect(m[`${k}-nnbsp`]!).toBeLessThan(m[`${k}-space`]!); // …narrower than a regular space
+      expect(m[`${k}-nnbsp`]!).toBeGreaterThan(m[`${k}-plain`]!);
+      expect(m[`${k}-nnbsp`]!).toBeLessThan(m[`${k}-space`]!);
     }
   });
 });
 
-test.describe('« Call Intelligence » signature', () => {
+test.describe('signature', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('?brand=ci');
+    await page.goto('');
     await page.waitForLoadState('networkidle');
   });
 
@@ -261,7 +161,7 @@ test.describe('« Call Intelligence » signature', () => {
   });
 
   test('form steps read « 01 — VOTRE FOYER »', async ({ page }) => {
-    await page.goto('simulateur/?brand=ci');
+    await page.goto('simulateur/');
     await page.waitForLoadState('networkidle');
     const num = page.locator('[data-step="foyer"] .step-num');
     await expect(num).toBeVisible();
@@ -280,24 +180,12 @@ test.describe('« Call Intelligence » signature', () => {
     expect(await tile.evaluate((el) => getComputedStyle(el).borderTopStyle)).toBe('dashed');
   });
 
-  test('the dark theme keeps the brand: ink ground, ink-soft cards, paper text', async ({
+  test('the dark theme keeps the look: ink ground, ink-soft cards, paper text', async ({
     page,
   }) => {
     await page.emulateMedia({ colorScheme: 'dark' });
     expect(await css(page, 'body', 'background-color')).toBe('rgb(18, 22, 20)');
     expect(await css(page, 'body', 'color')).toBe('rgb(243, 241, 234)');
     expect(await css(page, 'main .card', 'background-color')).toBe('rgb(38, 44, 41)');
-  });
-
-  test('« Éditorial » is untouched by all of this', async ({ page }) => {
-    await page.goto('?brand=editorial');
-    expect(await css(page, '.btn-primary', 'background-color')).not.toBe(SIGNAL);
-    expect(await css(page, '.card', 'border-top-left-radius')).toBe('14px');
-    expect(await css(page, 'h1', 'font-family')).toContain('Fraunces');
-    const content = await page
-      .locator('main h2:not(.sr-only)')
-      .first()
-      .evaluate((el) => getComputedStyle(el, '::before').content);
-    expect(content).toBe('none');
   });
 });

@@ -18,10 +18,13 @@ const SRC = join(import.meta.dirname, '..');
 const ROOTS = [
   'pages',
   'components/story',
+  'components/questionnaire',
   'components/explorer',
   'components/site',
   'layouts',
   'lib/site.ts',
+  'lib/questionnaire.ts',
+  'lib/questionnaire-model.ts',
   'lib/situations.ts',
   'lib/etat-data.ts',
   'lib/story-data.ts',

@@ -1,9 +1,8 @@
 /*
- * BRAND « CALL INTELLIGENCE » — <html data-brand="ci">
+ * SITE LOOK — <html data-brand="ci">
  *
- * A second visual identity for the same site, built on the owner's design system (README + tokens.json
- * of « Call Intelligence »). Selected by an attribute on <html> (see src/lib/brand.ts, BaseLayout.astro,
- * BrandSwitch.astro); « Éditorial » (tokens.css) stays the default and is not touched by anything below.
+ * Token overrides and the rules a token cannot express (numbered labels, the key figure, the dark
+ * footer, rules, hatching). Written on <html> by BaseLayout. There is no switcher.
  *
  *   1. TOKENS      every brand-specific value as a custom property, light + dark, same names as tokens.css
  *   2. FONTS       Schibsted Grotesk (text) + JetBrains Mono (labels, figures); self-hosted, lazy
@@ -43,7 +42,7 @@
 
 /* ── 2. Fonts ───────────────────────────────────────────────────────────── */
 /* Latin subsets of @fontsource (static weights, only the ones used). A @font-face costs nothing until a
-   glyph is rendered with it: under « Éditorial » none of these files is ever requested. U+202F (narrow
+   glyph is rendered with it. U+202F (narrow
    no-break space, French thousands separator) is in neither font: 'EPJN Narrow Space' (global.css) is
    listed first in every stack, exactly as for Fraunces and Inter. */
 @font-face {
@@ -291,7 +290,7 @@
   initial-value: #121614;
 }
 
-/* What a token cannot express. Everything here is scoped to the brand: « Éditorial » never sees it. */
+/* What a token cannot express. Scoped to data-brand="ci". */
 
 :root[data-brand='ci'] {
   /* The dark « scene » (README: alternate light and dark worlds, open and close on ink): the footer and
