@@ -2,7 +2,7 @@
 
 *An independent, open-source companion to the book « État partout, justice nulle part » (Barrat, Marle, Mitterrand — Éditions Chronique, 2026).*
 
-Status: v1 spec, written by the orchestrator. Inputs: `research/source-analysis.md`, `research/reform_parameters.json`, `research/sota-inspiration.md`, `research/baseline/*`.
+Status: v1.1 spec (review by an independent agent folded in — see docs/VISION-review.md), written by the orchestrator. Inputs: `research/source-analysis.md`, `research/reform_parameters.json`, `research/sota-inspiration.md`, `research/baseline/*`.
 
 ---
 
@@ -13,7 +13,9 @@ The book makes a big, abstract claim — "the State is everywhere, so justice is
 1. **"Et moi ?"** — In under a minute, a person sees what the plan would change *for their household*, in euros per month, with every euro traceable to an amendment or a stated hypothesis.
 2. **"Où va l'argent ?"** — A visual, explorable walk through the book's data: 1 672 Md€ of public spending, 1 104 agencies, 486 niches, 49 million words of law, reframed at human scale (per household, per day, per hour worked).
 
-**North-star sentence on the result page:** *« Avec le plan Résolution, en régime de croisière, votre foyer disposerait de **+212 €/mois** (+9 %). »* — one honest sentence, then the "why".
+**North-star sentence on the result page:** *« Avec le plan complet appliqué à votre situation de 2026, votre ménage disposerait de **[±X] €/mois** ([±Y] %). »* — one honest sentence, then the "why". (Never hard-code an example figure.)
+
+**Signature visual — « Votre heure de travail »**: the book's 63 €/h value-added split (29 € État / 11 € capital / 23 € salaire net) recomputed for *the user's own pay*, today vs with the plan. It appears on the landing page (generic, average worker), on the simulator result (personal), and on /comprendre/le-plan.
 
 ## 2. Principles (non-negotiable)
 
@@ -44,12 +46,10 @@ The book makes a big, abstract claim — "the State is everywhere, so justice is
 /simulateur            Simulator (express → result → détails)  — state in #hash
 /simulateur/cas-types  "Qui gagne, qui perd ?" heatmap over ~40 standard households (pre-computed by the engine at build time)
 /comprendre            Dashboard hub (scrolly intro + cards)
-  /comprendre/depenses       1 672 Md€ : où va l'argent public (treemap COFOG, per-foyer/per-day reframing)
-  /comprendre/europe         France vs Europe (spending % GDP, deficit, median income)  — OWID-style chart/table tabs
-  /comprendre/etat-partout   L'État partout : ministères, agences, impôts, niches, CERFA, mots de loi (unit viz, growth line)
+  /comprendre/depenses       1 672 Md€ : où va l'argent public (treemap COFOG, per-foyer/per-day reframing) + section « Et ailleurs en Europe ? » (spending % GDP, deficit, median income; the Finland-above-France conflict shown honestly)
+  /comprendre/etat-partout   L'État partout : ministères, agences (waffle of the 1 104 agencies' fate + searchable list), impôts, niches, CERFA, mots de loi (unit viz, growth line)
   /comprendre/le-plan        Le plan en un schéma : 236 Md€ → salaire net + épargne (Sankey) ; heure de travail 63 € (29/11/23)
   /comprendre/niches         Explorer les 465 niches fiscales (search, sort by cost, "me concerne ?")
-  /comprendre/agences        Le sort des 1 104 agences (waffle + searchable list)
   /comprendre/calendrier     La transition 2027 → 2030 (timeline of every dated measure)
   /comprendre/amendements    Les 81 amendements, par thème (searchable)
 /methode               Méthode & hypothèses: modelled / not modelled, hypotheses register, sources, gap table vs official simulators, changelog
@@ -58,46 +58,53 @@ The book makes a big, abstract claim — "the State is everywhere, so justice is
 
 ## 5. The simulator
 
-### 5.1 Inputs — "Express" (≤ 6 questions, one screen on desktop, stepper on mobile)
+### 5.1 Inputs — "Express" (one screen on desktop, stepper on mobile)
 
-1. **Votre foyer** : seul·e / en couple — + number of children (and ages bucket: <3, 3–13, 14–17, 18+ à charge).
-2. **Votre activité** (per adult): salarié·e (salaire **net mensuel** — what people know; toggle brut), indépendant·e, sans emploi (indemnisé / non), retraité·e (pension nette), étudiant·e, inactif·ve.
-3. **Logement** : locataire (loyer, zone 1/2/3 via a "ville" picker mapping to zone), propriétaire, hébergé·e. "Locataire depuis avant juin 2027 ?" matters for APL transition — default: existing lease.
-4. **Situation particulière** : handicap (CMI invalidité), parent isolé.
-5. (Optional) **Aides que vous touchez** — *computed by default* (RSA, prime d'activité, APL, AF…), displayed with "corriger si différent" override. Never ask people to type benefit amounts first.
+1. **Votre foyer** : seul·e / en couple (+ « marié·e ou pacsé·e ? » — only today's tax depends on it; the plan side is individual) — + children with **age** (bucket per child: 0–2, 3–5, 6–10, 11–13, 14–17, 18–24 à charge/rattaché). Parent isolé derived.
+2. **Chaque adulte** : **âge** (RSA ≥ 25, ASPA, AFU adulte vs enfant, rattachement) ; activité : salarié·e (**salaire net mensuel**, toggle brut; statut **privé non-cadre / cadre / fonctionnaire**), sans emploi (indemnisé·e : ARE mensuelle / non), retraité·e (pension nette + **année de départ** — the +3 300 € supplement only applies to pensions liquidated before 1/1/2028), étudiant·e, inactif·ve. *(Indépendants: "pas encore" in v1.)*
+3. **Logement** : locataire (loyer hors charges, zone 1/2/3 via a commune → zone helper or a simple 3-choice with explanations), propriétaire (avec / sans crédit), hébergé·e gratuitement.
+4. **Handicap** (per person) : AAH avec taux ≥ 80 % (→ carte mobilité inclusion « invalidité ») / AAH 50–79 % / enfant bénéficiaire AEEH. The two adult cases diverge sharply under the plan (+6 600 € supplement only with CMI invalidité).
+5. **Aides** — *computed by default* (RSA, prime d'activité, APL, AF, CF, ARS, ASF, AEEH, AAH…), shown with: « je ne touche pas ces aides » (non-recours, ~34 % for RSA, ~39 % for PA per DREES) and a single override « total versé chaque mois par la CAF » if different. Never ask people to type benefit amounts first.
 
-"Affiner" (progressive disclosure): second earner details, frais réels, garde d'enfants, emploi à domicile, dons, épargne (Livret A / assurance-vie balance), consommation (to estimate TVA), public-agent-whose-post-is-removed scenario (grade, seniority).
+"Affiner" (progressive disclosure): mode de garde for children < 6 (crèche / assistante maternelle → CMG / parent), emploi à domicile, dons, frais réels, épargne (Livret A / assurance-vie balance), consommation (TVA estimate), public-agent-whose-post-is-removed scenario (stretch).
 
 ### 5.2 Outputs
 
-1. **The sentence** (headline, € and %), monthly, régime de croisière (2030 rules, 2026 € — no inflation modelling).
+1. **The sentence** (headline, € and %), monthly, **« plan complet appliqué à 2026 »**: all measures fully phased in, applied to 2026 incomes and 2026 baseline rules (AFU at its nominal 6 600 € — it is not indexed, see H12).
 2. **Before → after waterfall**, one bar per measure: + salaire net (fin CSG/CRDS), − impôt à 23 %, + AFU, − prestations familiales, − RSA/prime d'activité, − APL, − TVA (estimation), etc. Each bar expandable → formula with *your* numbers + source chip ("Amendement PLF-P1 n° 28").
 3. **Side-by-side table** "Aujourd'hui (règles 2026)" vs "Avec le plan", every component, monthly & yearly.
-4. **"Hors revenu disponible" panel** (dashed): promises without legal amounts — CEP (300 €/mois annoncés), restitution du patrimoine (20 000 €/foyer annoncés), compte éducation (6 600 €/enfant/an annoncés) — shown with « montant fixé chaque année par la loi de finances ; 0 € par défaut dans le texte ».
-5. **Calendrier personnel 2027 → 2030**: monthly disposable income line through the transition (CSG steps Jul–Dec 2027, AFU Jan 2028, APL –1/3 steps, TVA steps) — the transition is where real people get hurt or helped; show it.
+4. **Two equal "non chiffré" panels, side by side, same visual weight** (dashed, outside disposable income):
+   - *Promesses non chiffrées dans la loi*: CEP (300 €/mois annoncés), restitution du patrimoine (20 000 €/foyer annoncés), compte éducation (6 600 €/enfant/an annoncés), lower rents/notary fees… — « montant fixé chaque année par la loi de finances ; 0 € par défaut dans le texte ».
+   - *Pertes non chiffrées*: unemployment duration 6 months, end of crèche funding / CMG, health co-pay 10 %/acte (capped by bouclier), pension indexation frozen, end of savings tax exemptions, taxe foncière unknown, loss of public job, etc. — filtered to those relevant to the household.
+5. **La transition, en 3 photos**: annual disposable income for **2027, 2028, 2030** (e.g., retirees' 2027 dip: pension abattement gone + indexation frozen before the AFU arrives in 2028; CSG steps H2 2027; APL –1/3 steps; TVA steps).
 6. **"Si je gagnais plus ?"** chart: disposable income vs gross earnings, today vs plan, with the marginal effective tax rate (0,77 € kept per € claim made visible vs today's cliffs). Expert toggle shows MTR line.
 7. **"Les gens comme vous"**: where you sit in the cas-types heatmap / income decile.
-8. **Hypothèses actives** list with toggles (see §6), and a share button (URL hash + generated OG-style summary card, client-side canvas → PNG download).
+8. **Votre heure de travail** (signature visual, workers only).
+9. **Hypothèses actives** list with toggles (see §6), and a share button (copy URL with hash). No PNG card in v1.
+10. **No population claims** ("X % des ménages gagnent") — we have no microdata. Only cas types, clearly labelled as such.
 
 ### 5.3 Modes of time
-- **Régime de croisière (défaut)**: all measures fully phased in (2030 rules, existing pensions keep +3 300 supplement).
-- **Année par année**: 2027, 2028, 2029, 2030 annual figures + monthly transition chart.
+- **Plan complet appliqué à 2026 (défaut)**: all measures fully phased in, applied to 2026 situation and € (existing pensions keep the +3 300 supplement if liquidated before 2028).
+- **Transition**: annual snapshots 2027, 2028, 2030 with the dated measures in force (2026 €, no inflation projection; indexation freeze shown as a note).
 
-## 6. Modelling decisions (the hypotheses register v1)
+## 6. Modelling decisions (the hypotheses register v1.1 — after review, see docs/VISION-review.md)
 
-| # | Where the text is silent | Default | Toggle? |
-|---|---|---|---|
-| H1 | RSA, prime d'activité, AAH, ASPA replaced by the AFU? (manifesto says « à la place de toutes les aides »; no amendment abrogates them) | **Replaced** (authors' stated intent) | Yes: "maintenus en complément" |
-| H2 | 10 % frais professionnels deduction on wages survives the niche abolition? | **Maintenu** (common-law definition of income is an explicit exception) — *to be challenged* | Yes |
-| H3 | Revenu net imposable after CSG/CRDS removal | = net salary (no non-deductible CSG left) − 10 % (if H2) | — |
-| H4 | Employer-side: who captures removal of exonérations/taxe sur salaires? | Not modelled; CSG gain goes 100 % to employee (authors' claim) | No |
-| H5 | TVA reduced rates → 20 %: pass-through to prices | **100 % pass-through**, budget shares by income decile (INSEE BdF) | Yes: 0 % / 50 % / 100 % |
-| H6 | Unemployment benefit 13 → 6 months | Indemnisé·e: ARE annualised at 6/13 of current duration-weighted amount — *simplified; flagged* | — |
-| H7 | CEP, patrimoine, compte éducation | Shown outside disposable income at authors' announced amounts, tagged "annoncé" | Show/hide |
-| H8 | Taxe foncière unique | Not modelled (INSEE tariffs don't exist) — said explicitly | — |
-| H9 | Pension indexation frozen | Régime de croisière in 2026 €: not modelled; timeline mode shows a "pouvoir d'achat" note | — |
-| H10 | Shared custody / AFU split between separated parents | Not modelled (v1 assumes children in one foyer) | — |
-| H11 | Couple: foyer fiscal = couple married/PACS; unmarried couple = 2 foyers fiscaux in IR but 1 ménage for CAF | Ask "marié·e/pacsé·e ?" only in Affiner; default married/PACS | Yes |
+| # | Where the text is silent | Default | Tier | Toggle? |
+|---|---|---|---|---|
+| H1 | RSA, prime d'activité, AAH, ASPA, bourses replaced by the AFU? (manifesto « à la place de toutes les aides »; financing counts 135 Md€ merged; Am. 1 IV.C & Am. 28 VII abrogate the tax exemptions of « revenus que remplace l'aide fondamentale »; but no amendment abrogates the benefits) | **Replaced** | Annoncé | Yes: « maintenus en différentiel » (AFU counted as a resource; benefit tops up to today's level; maintained benefits taxable at 23 %) |
+| H2 | 10 % frais professionnels deduction on wages survives? (art. 83 3° not abrogated; common-law definition of income is an explicit exception) | **Maintenu** — consequence shown honestly: 0,793 € kept per € and break-even ≈ 31 900 € net; the book's 0,77 € / 28 700 € figures are reproduced with H2 off | Hypothèse | Yes |
+| H3 | Baseline net → taxable: taxable = net + CSG non déductible 2,4 % + CRDS 0,5 % (of 98,25 % of gross); plan: taxable = net salary (no CSG/CRDS left) − 10 % (H2). Pensions: CSG stays, deductible part (154 quinquies) survives; 10 % pension abattement abolished | as stated | Loi | — |
+| H4 | Employer-side: who captures removal of exonérations/taxe sur salaires? | Not modelled; CSG gain 100 % to employee (authors' claim) | Annoncé | No |
+| H5 | TVA reduced rates → 20 % + end of CEE (−) / energy accises: pass-through to prices | **100 % pass-through**, **smooth** fixed-basket estimate (share of consumption at reduced rates as a smooth function of income, INSEE BdF) — no decile cliffs | Hypothèse | Yes: 0 % / 50 % / 100 % |
+| H6 | Unemployment 13 → 6 months (no legal text) | ARE monthly amount **unchanged**; separate line « à partir du 7e mois d'indemnisation : ARE = 0 » shown in the "pertes non chiffrées" panel and as an alternative figure | Annoncé | — |
+| H7 | CEP, patrimoine, compte éducation | Shown outside disposable income at authors' announced amounts | Annoncé | Show/hide |
+| H8 | Taxe foncière unique | Not modelled (INSEE tariffs don't exist) — said explicitly | — | — |
+| H9 | Pension & benefit indexation frozen | Steady state in 2026 €: not modelled; transition notes it | Loi | — |
+| H10 | Shared custody / AFU split between separated parents | Not modelled (children in one ménage) | — | — |
+| H11 | Couples: plan is individual (AFU per person, flat 23 %); today IR depends on married/PACS (joint) vs not (2 foyers); CAF benefits per ménage either way | Ask married/PACS in Express; headline unit = **ménage** | Loi | — |
+| H12 | AFU not indexed (6 600 € nominal) | Applied at 6 600 € to 2026 incomes ("plan complet appliqué à 2026") | Loi | — |
+| H13 | Young adults 18–24: every person 18+ gets the adult AFU (550 €/mois), whether rattaché·e to parents' foyer or not | as stated | Loi | — |
+| H14 | Non-recours today | Default: aides perçues if eligible; user can tick « je ne touche pas ces aides » | Hypothèse | Yes |
 
 Anything not modelled appears in a **"Ce que le simulateur ne compte pas"** list on the result page (not hidden in /methode).
 
@@ -125,7 +132,8 @@ Anything not modelled appears in a **"Ce que le simulateur ne compte pas"** list
 ### Engine invariants (tests)
 - Components sum exactly to headline disposable income (both scenarios).
 - Identity: plan with all switches off ≡ baseline.
-- Plan: for any household, d(disposable)/d(gross) ≥ 0.77 × (1−cotisations) ± ε in the steady state (no cliffs) under H1-default.
+- Plan (steady state, H1 default, H5 smooth): no cliffs — marginal retention on net earnings ≥ 0,77 − ε (0,793 with H2 on).
+- Plan side is independent of marital status (married vs not gives identical plan disposable income).
 - Baseline matches OpenFisca golden cases within tolerance (± 2 % or ± 15 €/mois per component; documented gap table).
 - Book cas types reproduced exactly: CSG gain at SMIC 171,72 €/mois (2025 SMIC), GraphIR 5-point table, 1 100 €/mois disabled adult, 28 695,65 € break-even.
 
@@ -139,8 +147,8 @@ Anything not modelled appears in a **"Ce que le simulateur ne compte pas"** list
 
 ## 9. Scope cut for v1
 
-**In**: express simulator (salariés, sans-emploi, retraités, inactifs, étudiants, handicap, familles, locataires), steady state + 2027–2030 timeline, waterfall, side-by-side, hypotheses, si-je-gagnais-plus, cas-types heatmap, share link; dashboard pages listed in §4; méthode page; tests; CI.
-**Out (v1, listed as "pas encore")**: indépendants beyond a simple flat model, agriculteurs, DOM, capital income & wealth taxation detail, taxe foncière, health out-of-pocket, public-agent exit indemnity (stretch goal), maps (the book's data is national only — **no fake geography**).
+**In**: express simulator (salariés privé/cadre/fonctionnaire, sans-emploi, retraités, inactifs, étudiants, handicap, familles, locataires), steady state + 3-snapshot transition, waterfall, side-by-side, two "non chiffré" panels, hypotheses, si-je-gagnais-plus, votre heure de travail, cas-types heatmap, share link; dashboard pages listed in §4; méthode page; tests; CI.
+**Out (v1, listed as "pas encore")**: indépendants, agriculteurs, DOM, capital income & wealth taxation detail, taxe foncière, health out-of-pocket, public-agent exit indemnity (stretch goal), PNG share card, maps (the book's data is national only — **no fake geography**).
 
 ## 10. Definition of done
 - `pnpm test` green (golden, property, unit); `pnpm build` green; Playwright e2e + axe: 0 serious violations; Lighthouse ≥ 95 perf/a11y on simulator & landing (mobile).
