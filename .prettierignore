@@ -11,3 +11,8 @@ dist/
 coverage/
 playwright-report/
 test-results/
+
+# engine: generated files
+engine/src/params/baseline-2026.ts
+engine/cas-types-results.json
+engine/test/__snapshots__

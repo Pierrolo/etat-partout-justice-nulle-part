@@ -1,70 +1,24 @@
 /**
- * @epjn/engine — public API (SKELETON).
- *
- * TODO(engine-builder): replace the stub below with the real engine described in
- * docs/VISION.md §7 (src/params, src/baseline, src/plan, src/simulate.ts, src/explain.ts).
- *
- * Contract with the site (keep stable):
- *  - pure TypeScript, ESM, no DOM, no I/O, no Date.now();
+ * @epjn/engine — public API. Contract: docs/ENGINE-API.md.
+ *  - pure TypeScript, ESM, no DOM, no I/O, no Date; deterministic;
  *  - the site imports this package as source (`exports` → ./src/index.ts, compiled by Vite);
- *  - `Tier` and `SourceRef` are used by the site's UI primitives (TierBadge, SourceChip);
- *    do not rename them without updating site/src/components/ui/.
- *  - the site NEVER computes tax logic itself: everything goes through `simulate()`.
+ *  - `Tier` and `SourceRef` are used by the site's UI primitives — keep them stable.
  */
+export const ENGINE_VERSION = '1.0.0';
 
-export const ENGINE_VERSION = '0.0.0';
+export * from './types.ts';
+export { DEFAULT_HYPOTHESES } from './hypotheses.ts';
+export { simulate, COMPONENT_META } from './simulate.ts';
+export { compare } from './compare.ts';
+export { earningsCurve, type CurvePoint } from './curves.ts';
+export { hourOfWork, type HourSplit } from './hour.ts';
+export { CAS_TYPES, type CasType } from './cas-types.ts';
+export { encodeState, decodeState } from './state.ts';
+export { PARAMS } from './params/index.ts';
 
-/** The three epistemic tiers of every figure (VISION §2.3). */
-export const TIERS = ['law', 'announced', 'hypothesis'] as const;
-
-/**
- * - `law`        « Écrit dans la loi » — amendment text.
- * - `announced`  « Annoncé par les auteurs » — fiches / manifesto / workbook, no legal text.
- * - `hypothesis` « Hypothèse du simulateur » — our choice where the text is silent.
- */
-export type Tier = (typeof TIERS)[number];
-
-export interface SourceRef {
-  /** Short human label, e.g. « Amendement PLF-P1 n° 28 ». */
-  label: string;
-  url?: string;
-}
-
-/** One line of the explanation tree (VISION §7 `explain.ts`). Amounts are €/month. */
-export interface Component {
-  id: string;
-  label: string;
-  amount: number;
-  /** Formula rendered with the user's own numbers. */
-  formula: string;
-  sources: SourceRef[];
-  tier: Tier;
-}
-
-/** TODO(engine-builder): real household model (adults, children, activity, housing, …). */
-export interface Household {
-  adults: number;
-  children: number;
-}
-
-export type Scenario = 'baseline' | 'plan';
-
-export interface SimulationOptions {
-  /** `steady` = régime de croisière (2030 rules, 2026 €). */
-  year: 'steady' | 2027 | 2028 | 2029 | 2030;
-}
-
-export interface SimulationResult {
-  /** Disposable income, €/month. Must equal the sum of `components`. */
-  disposable: number;
-  components: Component[];
-}
-
-/** TODO(engine-builder): implement. Placeholder signature only. */
-export function simulate(
-  _household: Household,
-  _scenario: Scenario,
-  _options: SimulationOptions = { year: 'steady' },
-): SimulationResult {
-  throw new Error('@epjn/engine: simulate() is not implemented yet');
-}
+export const PARAMS_META = {
+  baselineYear: 'Législation 2026 (état du droit au 24 octobre 2026 ; barème IR LF 2026)',
+  planSource:
+    'Amendements Résolution au PLF 2027 (1re et 2de parties) et au PLFSS 2027, 19 octobre 2026 ; fiches et manifeste france-resolution.fr ; classeurs « Synthèse » des auteurs',
+  engineVersion: ENGINE_VERSION,
+} as const;

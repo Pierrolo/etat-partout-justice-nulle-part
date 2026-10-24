@@ -19,7 +19,7 @@ export interface Adult {
   pension?: { amount: number; basis: 'net' | 'brut'; startYear: number };
   disability: Disability;
 }
-export interface Child { age: number; aeeh?: boolean }   // 18–24 = rattaché·e / à charge
+export interface Child { age: number; aeeh?: boolean; cmiInvalidite?: boolean /* added: default true when aeeh (H15) */ }   // 18–24 = rattaché·e / à charge
 
 export interface Household {
   adults: [Adult] | [Adult, Adult];
@@ -33,6 +33,7 @@ export interface Household {
   benefits: {
     nonRecours: boolean;             // « je ne touche pas ces aides » (RSA/PA/APL/AF… today)
     cafOverrideMonthly?: number;     // single override of the computed total CAF today
+    isolementRecent?: boolean;       // added: lone parent separated < 18 months ⇒ RSA/PA « majorés »
   };
   extras?: {
     childcare?: 'parent' | 'creche' | 'assistante_maternelle'; // for children < 6
@@ -72,12 +73,14 @@ export interface Component {
   tier: Tier;
   personIndex?: number;            // when per adult
 }
-// ComponentId examples: 'salaire_net', 'pension_nette', 'are', 'impot_revenu', 'afu', 'rsa', 'prime_activite',
-// 'aides_logement', 'allocations_familiales', 'complement_familial', 'paje_base', 'ars', 'asf', 'aeeh', 'aah', 'aspa', 'tva'
+// ComponentId (exported as COMPONENT_IDS, always all present in this order, amount 0 when absent):
+// 'salaire_net', 'are', 'pension_nette', 'impot_revenu', 'credits_impot', 'afu', 'rsa', 'prime_activite',
+// 'aides_logement', 'allocations_familiales', 'complement_familial', 'paje_base', 'ars', 'asf', 'aeeh', 'aah', 'aspa',
+// 'aides_caf_declarees', 'tva', 'cee'   (group 'impots_indirects' = tva + cee)
 
 export interface ScenarioResult {
-  disposable: number;              // === sum(components.amount) (excluding tva unless includeTva) — see `disposableAfterTva`
-  disposableAfterTva: number;
+  disposable: number;              // === sum of components whose group !== 'impots_indirects' (to the cent)
+  disposableAfterTva: number;      // === disposable + sum('impots_indirects' components); === disposable when includeTva is false
   components: Component[];
   employerCost: number;            // total employer cost of salaried adults
   perAdult: Array<{ gross: number; net: number; employerCost: number; csgCrds: number; cotisationsSalariales: number; cotisationsPatronales: number }>;
@@ -104,11 +107,14 @@ export interface Comparison {
 }
 
 export function compare(h: Household, opts?: { period?: Period; hypotheses?: Partial<Hypotheses> }): Comparison;
-export function simulate(h: Household, scenario: 'baseline' | 'plan', opts?: { period?: Period; hypotheses?: Partial<Hypotheses> }): ScenarioResult;
+export function simulate(h: Household, scenario: 'baseline' | 'plan', opts?: { period?: Period; hypotheses?: Partial<Hypotheses>; __planSwitches?: Partial<PlanSwitches> /* internal, tests */ }): ScenarioResult;
 
 /** « Si je gagnais plus ? » — vary the first adult's salary. x = net monthly salary TODAY (what users know). */
 export function earningsCurve(h: Household, opts?: { hypotheses?: Partial<Hypotheses>; maxNet?: number; step?: number }):
-  Array<{ netToday: number; gross: number; baseline: number; plan: number; mtrBaseline: number; mtrPlan: number }>;
+  Array<{ netToday: number; gross: number; baseline: number; plan: number; mtrBaseline: number; mtrPlan: number;
+          mtrBaselineGross: number; mtrPlanGross: number; baselineAfterTva: number; planAfterTva: number /* added */ }>;
+// mtr* = 1 − Δdisposable / Δ(salaire net of THAT scenario) between consecutive points (forward difference);
+// mtr*Gross = same per € of gross salary. baseline/plan = disposable before TVA.
 
 /** « Votre heure de travail » — for a salaried adult: per hour of labour cost, where the money goes. */
 export function hourOfWork(h: Household, adultIndex?: number, opts?: { hypotheses?: Partial<Hypotheses> }): {
@@ -127,6 +133,16 @@ export function decodeState(s: string): { household: Household; hypotheses: Hypo
 
 export const PARAMS_META: { baselineYear: string; planSource: string; engineVersion: string };
 ```
+
+## Implementation notes (engine 1.0.0 — additions and clarifications, no removal)
+
+- **Which income is used.** `salary` is used when `activity` is `'salarie'` (or `'etudiant'` with a job), `unemployment` only for `'chomage'`, `pension` only for `'retraite'`; anything else is ignored with a warning (cumuls not modelled in v1). `unemployment.areMonthly` is the NET ARE received.
+- **Gross is the anchor.** A NET salary is inverted to gross (bisection, per status) with today's rules; the plan keeps the same gross. A NET pension is inverted with today's CSG tier; the plan keeps the same gross.
+- **Components are per household** (one per id; `personIndex` unused in v1). Per-adult salary detail is in `perAdult`.
+- **`deltaPct`** is 0 when `baseline.disposable ≤ 0`.
+- **Periods 2027/2028/2030** are the average month of the calendar year (12 monthly computations averaged; income tax computed once on the year's average taxable income).
+- **Extra exports:** `COMPONENT_IDS`, `COMPONENT_META`, `PERIODS`, `PARAMS` (every parameter with value/unit/effective/source/status), `TIERS`, `ENGINE_VERSION`, types `CasType`, `CurvePoint`, `HourSplit`, `PlanSwitches`.
+- **Invariant scopes.** (5) households without pensions (the pension CSG tiers, kept by the plan, create cliffs for retired members); tested as Δdisposable/Δ(plan net salary of adult 1) ≥ 0,77 at cent precision. (6) holds for gross incomes held constant: tested with pensions typed gross, no CAF override, periods `'steady'` and `2030` (in 2027–2028 the income tax is still the joint barème).
 
 ## Invariants (tested)
 1. `sum(components.amount) === disposable` (to the cent), both scenarios.
