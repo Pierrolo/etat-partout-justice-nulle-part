@@ -1,0 +1,506 @@
+<!doctype html><html lang=fr><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>J’écris à mon élu — Résolution</title><meta name=description content="Écrivez à votre député et à votre maire : redresser la France dès le budget 2027."><meta property="og:title" content="J’écris à mon élu — Résolution"><meta property="og:description" content="Écrivez à votre député et à votre maire : redresser la France dès le budget 2027."><meta property="og:type" content="article"><link rel=stylesheet href="fiche.css"><div class=s-retour><a class=s-marque href="index.html">← Résolution</a><ul class=a-rub><li><a href="manifeste.html">Manifeste</a></li><li><a href="fiches.html">Propositions</a></li><li><a href="donnees.html">Données</a></li><li><a href="videos.html">Vidéos</a></li><li><a href="auteurs.html">Auteurs</a></li></ul></div>
+<div class="r-page e-page">
+<header class=r-tete><p class=r-sur>Résolution</p><h1 class=r-titre id=e-titre>J’écris à mon élu</h1><p class=r-chapeau id=e-chapeau>Objet : <b>redresser la France dès le budget 2027.</b> Votre député vote le budget, votre maire porte la voix de la commune. Écrivez-leur.</p></header>
+<ol class=e-etapes><li data-etape=1 aria-current=step><b>1</b><span>Vos élus</span></li><li data-etape=2><b>2</b><span>Vos lettres</span></li><li data-etape=3><b>3</b><span>Envoi</span></li></ol>
+<div class=r-corps>
+<noscript><p class=e-msg>Cette page a besoin de JavaScript pour trouver vos élus. Les modèles de lettre restent à votre disposition : <a href="lettres/lettre-depute.docx" download style="color:var(--dor)">au député</a>, <a href="lettres/lettre-maire.docx" download style="color:var(--dor)">au maire</a>, <a href="lettres/lettre-senateur.docx" download style="color:var(--dor)">au sénateur</a>.</p></noscript>
+
+<section id=e0 hidden><p class=e-msg id=e-resultat></p><button class=e-retour type=button data-aller=1>← J’écris à un autre élu</button></section>
+
+<section id=e1>
+<form id=e-form-cp class=e-cp novalidate><label class=e-champ><span>Votre code postal</span><input id=e-cp inputmode=numeric autocomplete=postal-code maxlength=5 pattern="[0-9]{5}" required></label><button class="g-bouton g-plein" type=submit style="align-self:flex-end;padding-top:1.05rem;padding-bottom:1.05rem">Je trouve mes élus</button></form>
+<p class="e-msg e-lien" id=e-vers-etranger><a href="#etranger">J’habite à l’étranger →</a></p>
+<form id=e-form-etr class=e-cp novalidate hidden><label class="e-champ e-circo"><span>Votre circonscription géographique</span><select id=e-circo-etr required><option value="">Choisissez…</option><option value="99-1">1re — Canada, États-Unis</option><option value="99-2">2e — Amérique latine, Caraïbes</option><option value="99-3">3e — Royaume-Uni, Irlande, pays nordiques et baltes</option><option value="99-4">4e — Belgique, Pays-Bas, Luxembourg</option><option value="99-5">5e — Espagne, Portugal, Andorre, Monaco</option><option value="99-6">6e — Suisse, Liechtenstein</option><option value="99-7">7e — Allemagne, Europe centrale, Balkans</option><option value="99-8">8e — Italie, Grèce, Turquie, Israël, Chypre, Malte</option><option value="99-9">9e — Maghreb, Afrique de l’Ouest</option><option value="99-10">10e — Afrique centrale, orientale et australe, Moyen-Orient, Bénin, Ghana, Nigeria, Togo</option><option value="99-11">11e — Russie, Ukraine, Biélorussie, Moldavie, Caucase, Asie, Océanie</option></select></label><button class="g-bouton g-plein" type=submit style="align-self:flex-end;padding-top:1.05rem;padding-bottom:1.05rem">Je trouve mes élus</button></form>
+<p class="e-msg e-lien" id=e-vers-france hidden><a href="#">← J’habite en France</a></p>
+<p id=e-msg-cp class=e-msg role=status></p>
+<div id=e-communes hidden><p class=r-lab>Votre commune</p><div class=e-choix id=e-liste-communes></div></div>
+<div id=e-circos hidden><p class=r-lab>Votre circonscription</p><p class=e-msg style="margin-top:0">Votre commune compte plusieurs circonscriptions. Choisissez votre député ; le numéro de votre circonscription figure sur votre carte électorale.</p><div class=e-choix id=e-liste-circos></div></div>
+<div id=e-elus class=e-elus hidden></div>
+<div class=e-deux id=e-tous hidden><button class="g-bouton g-plein e-gros" type=button id=e-tous-b></button></div>
+</section>
+
+<section id=e2 hidden>
+<div class=e-grille>
+<div>
+<p class=r-lab style="margin-top:.4rem">Vos coordonnées</p>
+<label class=e-champ><span>Prénom et nom</span><input id=c-nom autocomplete=name required></label>
+<label class=e-champ><span>Adresse</span><input id=c-adr autocomplete=street-address required></label>
+<label class=e-champ><span id=c-cp-lab>Code postal et commune</span><input id=c-cp autocomplete=off required></label>
+<label class=e-champ><span>Courriel</span><input id=c-mel type=email autocomplete=email></label>
+<label class=e-champ><span>Téléphone <i>facultatif</i></span><input id=c-tel type=tel autocomplete=tel></label>
+<div id=e-appel-arr hidden><p class=r-lab>Votre maire d’arrondissement</p><div class=e-choix><button type=button data-farr=1>Madame la Maire</button><button type=button data-farr=0>Monsieur le Maire</button></div></div>
+<p class=r-note style="margin-top:.6rem">Ces coordonnées remplissent la lettre.</p>
+<p class="e-msg e-msg-coord" role=status></p>
+<div class=g-outils style="margin-top:1rem;border:0;padding:0"><button class="g-bouton g-plein e-gros e-continuer" type=button>Je passe à l’envoi →</button></div>
+</div>
+<div><div class=e-onglets role=tablist id=e-onglets></div>
+<div class=e-lettre id=e-lettre aria-live=polite></div>
+<div class=e-outils-lettre style="margin:1rem 0 0"><button class=g-bouton type=button id=e-modifier>Je modifie le texte</button><button class=g-bouton type=button id=e-word>Je télécharge la lettre (Word)</button><button class="g-bouton g-plein e-continuer" type=button>Je passe à l’envoi →</button></div>
+<p class=e-papier id=e-papier style="margin:.6rem 0 0"></p>
+<p class="e-msg e-msg-coord" role=status></p>
+</div>
+</div>
+<button class=e-retour type=button data-aller=1>← Je change d’élu</button>
+</section>
+
+<section id=e3 hidden>
+<div class=e-adhesion><h3>Avant d’envoyer</h3>
+<p>Votre lettre dit : « l’association Résolution, à laquelle j’adhère ». <b>En envoyant la version originale de votre lettre, vous adhérez à l’association Résolution</b> (association déclarée n° 991 580 622). L’adhésion est gratuite ; vous la retirez à tout moment en écrivant à contact@france-resolution.fr.</p>
+<p>Chaque lettre part en copie à l’association : c’est ainsi qu’elle enregistre votre adhésion. Elle conserve vos nom, adresse, courriel et téléphone pour tenir la liste de ses adhérents et vous écrire ; ces données disent votre soutien à ses positions. Ni cession, ni vente, ni transfert à un tiers. <a href="#e-donnees">Vos données</a></p></div>
+<div id=e-relais hidden>
+<div class=g-outils style="margin:0 0 .6rem;border:0;padding:0"><button class="g-bouton g-plein e-gros" type=button id=e-envoyer></button></div>
+<p class=e-msg style="margin:0 0 1.6rem" id=e-msg-envoi role=status>Le site envoie vos lettres pour vous, après confirmation par un courriel que vous recevrez. L’élu vous répond directement.</p>
+<p class=r-lab>Ou envoyez-les vous-même</p>
+</div>
+<div class=e-recap id=e-cartes></div>
+<p class=e-msg>Par la poste ? Pour que votre adhésion soit comptée, écrivez-nous un mot à contact@france-resolution.fr.</p>
+<p class=e-compteur id=e-compteur hidden></p><p class=r-lab>Et après</p><div class=r-suivre><a href="videos.html">Les vidéos</a><a href="https://www.youtube.com/@FranceResolution" target=_blank rel="noopener noreferrer">YouTube</a><a href="https://www.instagram.com/franceresolution/" target=_blank rel="noopener noreferrer">Instagram</a></div>
+<button class=e-retour type=button data-aller=2>← Je revois mes lettres</button>
+</section>
+</div>
+<div class=m-rgpd id=e-donnees><h3>Ce que nous recueillons, et ce que nous en faisons</h3><p>Vos coordonnées restent dans votre navigateur, le temps de remplir la lettre. Elles ne partent que dans les lettres que vous envoyez, à votre élu et en copie à l’association.</p><p id=e-rgpd-relais hidden>Si vous envoyez depuis le site, vos coordonnées et vos lettres passent par notre prestataire d’envoi, Brevo (France), le temps de l’envoi ; le site n’en garde rien.</p><p><b>Données recueillies</b> : par l’association, au moyen de cette copie : votre nom, votre adresse postale, votre adresse électronique et, si vous l’indiquez, votre téléphone. Elles disent votre soutien à ses positions.</p><p><b>Finalité</b> : tenir la liste des adhérents et vous envoyer les nouvelles du mouvement. Aucune cession, aucune vente, aucun transfert à un tiers.</p><p><b>Durée</b> : jusqu’à votre demande de retrait.</p><p><b>Vos droits</b> : accès, rectification, effacement et opposition, en écrivant à contact@france-resolution.fr. Un seul message suffit, et il est traité sans condition.</p><p><b>Les élus</b> : noms et adresses tirés des données publiques de l’Assemblée nationale, du Sénat, du Répertoire national des élus et de l’Annuaire de l’administration<span id=e-maj></span>.</p></div>
+</div>
+<p class=s-pied><a class=a-parici href="contact.html">Je m’exprime</a><a class=a-parici href="adherer.html">J’adhère</a><a class="a-parici a-elu" href="ecrire.html">J’écris à mon élu</a><a class=s-ml href="mentions-legales.html">Mentions légales</a></p>
+<script src="lettres/commun.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+<script>
+(function () {
+  // Parcours en trois écrans. Les élus viennent de donnees/elus/<préfixe>.json
+  // (outils/elus.py), le texte des lettres de lettres/textes.json et des Word
+  // (outils/lettres.py), le remplissage de lettres/commun.js, partagé avec le
+  // relais d'envoi (api/). Sans relais actif, le citoyen écrit depuis sa
+  // messagerie ou télécharge le Word. Français de l'étranger (#etranger) :
+  // circonscription → député et sénateurs (donnees/elus/etranger.json).
+  // Lettres : dep, mai, arr, et sen:<matricule> pour chaque sénateur coché.
+  var L = window.Lettres;
+  var MODELES = { dep: 'lettres/lettre-depute.docx', mai: 'lettres/lettre-maire.docx', sen: 'lettres/lettre-senateur.docx' };
+  var $ = function (id) { return document.getElementById(id); };
+  var etat = { d: null, cp: null, commune: null, circo: null, dep: null, mai: null, arr: null, fArr: undefined, choix: [], onglet: null, corps: {},
+               etranger: false, sen: [], coches: {} };
+  var cache = {}, relais = false;
+  var textes = fetch('lettres/textes.json').then(function (r) { return r.json(); });
+
+  function aller(n) {
+    [0, 1, 2, 3].forEach(function (k) { $('e' + k).hidden = k !== n; });
+    Array.prototype.forEach.call(document.querySelectorAll('.e-etapes li'), function (li) {
+      var k = +li.getAttribute('data-etape');
+      if (k === n) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
+      li.classList.toggle('e-fait', k < n);
+    });
+    document.querySelector('.e-etapes').scrollIntoView({ block: 'start' });
+  }
+  function echappe(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function prefixe(cp) { return /^9[78]/.test(cp) ? cp.slice(0, 3) : cp.slice(0, 2); }
+  function charger(cp) {
+    var p = prefixe(cp);
+    if (!cache[p]) cache[p] = fetch('donnees/elus/' + p + '.json').then(function (r) { if (!r.ok) throw new Error(); return r.json(); });
+    return cache[p];
+  }
+  function bouton(texte, petit, action) {
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = texte;
+    if (petit) { var s = document.createElement('small'); s.textContent = petit; b.appendChild(s); }
+    b.addEventListener('click', function () {
+      Array.prototype.forEach.call(b.parentNode.children, function (x) { x.setAttribute('aria-pressed', x === b); });
+      action();
+    });
+    return b;
+  }
+  function ctx() {
+    return { coord: coord(), ville: etat.etranger ? L.villeSaisie($('c-cp').value)
+               : (etat.mai && etat.mai.ville) || (etat.commune && etat.commune.v) || '',
+             dep: etat.dep, mai: etat.mai, arr: etat.arr, fArr: etat.fArr, etranger: etat.etranger };
+  }
+  // Une lettre de sénateur : genre sen, sa fiche dans le contexte.
+  function genre(g) { return g.indexOf('sen:') === 0 ? 'sen' : g; }
+  function senateur(g) { return etat.sen.filter(function (x) { return 'sen:' + x.id === g; })[0]; }
+  function ctxDe(g) { var c = ctx(); if (genre(g) === 'sen') c.sen = senateur(g); return c; }
+  function ficheDe(g) { return g === 'dep' ? etat.dep : g === 'arr' ? etat.arr : g === 'mai' ? etat.mai : senateur(g); }
+  function coord() {
+    return { nom: $('c-nom').value.trim(), adr: $('c-adr').value.trim(), cp: $('c-cp').value.trim(),
+             mel: $('c-mel').value.trim(), tel: $('c-tel').value.trim() };
+  }
+  function nomElu(g) {
+    if (genre(g) === 'sen') { var x = senateur(g); return x.p + ' ' + x.n; }
+    if (g === 'dep') return etat.dep.p + ' ' + etat.dep.n;
+    if (g === 'arr') return etat.arr.p ? etat.arr.p + ' ' + etat.arr.n + ' · ' + etat.arr.lib : etat.arr.lib;
+    return etat.mai.p + ' ' + etat.mai.n;
+  }
+  // « à mon député », « au sénateur Roger Karoutchi » ; aMaj : « À … ».
+  function a(g) {
+    if (genre(g) === 'sen') { var x = senateur(g); return (x.f ? 'à la sénatrice ' : 'au sénateur ') + x.p + ' ' + x.n; }
+    if (g === 'dep') return etat.dep && etat.dep.f ? 'à ma députée' : 'à mon député';
+    if (g === 'arr') return etat.arr && etat.arr.p ? (etat.arr.f ? 'à ma maire d’arrondissement' : 'à mon maire d’arrondissement') : 'à ma mairie d’arrondissement';
+    return 'à mon maire';
+  }
+  function aMaj(g) { return a(g).charAt(0).toUpperCase() + a(g).slice(1); }
+  function codeSenat(insee) { return /^9[78]/.test(insee) ? insee.slice(0, 3) : insee.slice(0, 2); }
+
+  // France ou étranger, selon l'adresse (#etranger).
+  var CHAPEAU = $('e-chapeau').innerHTML;
+  function mode() {
+    etat.etranger = location.hash === '#etranger';
+    $('e-form-cp').hidden = $('e-vers-etranger').hidden = etat.etranger;
+    $('e-form-etr').hidden = $('e-vers-france').hidden = !etat.etranger;
+    $('e-chapeau').innerHTML = etat.etranger ? '<b>Français de l’étranger.</b> Vous élisez un député de votre circonscription et, avec tous les Français établis hors de France, douze sénateurs. Écrivez-leur.' : CHAPEAU;
+    $('c-cp-lab').textContent = etat.etranger ? 'Code postal, ville et pays' : 'Code postal et commune';
+    ['e-communes', 'e-circos', 'e-elus', 'e-tous'].forEach(function (id) { $(id).hidden = true; });
+    $('e-msg-cp').textContent = '';
+    if (!$('e1').hidden || !$('e0').hidden) return;
+    aller(1);
+  }
+  window.addEventListener('hashchange', mode);
+
+  // Écran 1 : code postal → commune → circonscription → fiches des élus.
+  $('e-form-cp').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var cp = $('e-cp').value.replace(/\D/g, '');
+    ['e-communes', 'e-circos', 'e-elus', 'e-tous'].forEach(function (id) { $(id).hidden = true; });
+    if (cp.length !== 5) { $('e-msg-cp').textContent = 'Indiquez les cinq chiffres de votre code postal.'; return; }
+    $('e-msg-cp').textContent = 'Recherche…';
+    charger(cp).then(function (d) {
+      var liste = d.cp[cp];
+      if (!liste) { $('e-msg-cp').textContent = 'Ce code postal n’est pas dans la base de La Poste. Vérifiez-le.'; return; }
+      etat.d = d; etat.cp = cp; etat.circo = null; $('e-msg-cp').textContent = '';
+      if (liste.length === 1) return choisirCommune(liste[0]);
+      var l = $('e-liste-communes'); l.textContent = '';
+      liste.forEach(function (c) { l.appendChild(bouton(c.v, null, function () { choisirCommune(c); })); });
+      $('e-communes').hidden = false;
+    }).catch(function () { $('e-msg-cp').textContent = 'Ce code postal n’est pas couvert. Vérifiez-le.'; });
+  });
+
+  // Étranger : la circonscription donne le député ; les sénateurs sont ceux
+  // des Français établis hors de France.
+  var etranger = null;
+  $('e-form-etr').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var k = $('e-circo-etr').value;
+    ['e-elus', 'e-tous'].forEach(function (id) { $(id).hidden = true; });
+    if (!k) { $('e-msg-cp').textContent = 'Choisissez votre circonscription.'; return; }
+    $('e-msg-cp').textContent = 'Recherche…';
+    if (!etranger) etranger = fetch('donnees/elus/etranger.json').then(function (r) { if (!r.ok) throw new Error(); return r.json(); });
+    etranger.then(function (d) {
+      $('e-msg-cp').textContent = '';
+      etat.d = d; etat.cp = null; etat.commune = null; etat.mai = null; etat.arr = null;
+      etat.circo = k; etat.dep = d.dep[k] || { vacant: k };
+      etat.region = $('e-circo-etr').selectedOptions[0].textContent.split(' — ')[1];
+      fiches();
+    }).catch(function () { etranger = null; $('e-msg-cp').textContent = 'La recherche n’a pas abouti. Réessayez.'; });
+  });
+
+  function choisirCommune(c) {
+    var d = etat.d;
+    etat.commune = c; etat.dep = null; etat.circo = null;
+    etat.mai = c.x ? d.mai[c.x] : null;
+    etat.arr = c.a ? d.arr[c.a] : null;
+    $('e-circos').hidden = true;
+    if (c.c.length > 1) {
+      var l = $('e-liste-circos'); l.textContent = '';
+      c.c.forEach(function (k) {
+        var x = d.dep[k];
+        l.appendChild(bouton(x ? x.p + ' ' + x.n : 'Siège vacant', x ? x.c : k, function () { etat.circo = k; etat.dep = x || { vacant: k }; fiches(); }));
+      });
+      $('e-circos').hidden = false;
+    } else if (c.c.length) {
+      etat.circo = c.c[0]; etat.dep = d.dep[c.c[0]] || { vacant: c.c[0] };
+    }
+    fiches();
+  }
+
+  function fiche(lab, nom, qui, g) {
+    var div = document.createElement('div'); div.className = 'e-elu';
+    div.innerHTML = '<p class=r-lab>' + echappe(lab) + '</p><p class=e-elu-nom>' + echappe(nom) + '</p><p class=e-elu-qui>' + echappe(qui) + '</p>';
+    if (g) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'g-bouton';
+      b.textContent = 'J’écris ' + a(g);
+      b.addEventListener('click', function () { ecrire([g]); });
+      div.appendChild(b);
+    }
+    return div;
+  }
+  function fiches() {
+    var box = $('e-elus'), d = etat.dep, m = etat.mai, ar = etat.arr, ok = [];
+    box.textContent = '';
+    if (d && d.vacant) box.appendChild(fiche('Votre circonscription', 'Siège vacant', 'Une élection partielle doit pourvoir le siège.'));
+    else if (d) {
+      var qui = etat.etranger ? d.c.replace(' · Français établis hors de France', ' des Français de l’étranger · ' + etat.region) : d.c;
+      box.appendChild(fiche(d.f ? 'Votre députée' : 'Votre député', d.p + ' ' + d.n, qui + (d.g ? ' · ' + d.g : ''), 'dep')); ok.push('dep');
+    }
+    else if (etat.commune.c.length > 1) box.appendChild(fiche('Votre député', 'À choisir ci-dessus', 'Selon votre circonscription.'));
+    if (ar) { box.appendChild(ar.p ? fiche(ar.f ? 'Votre maire d’arrondissement' : 'Votre maire d’arrondissement', ar.p + ' ' + ar.n, ar.lib, 'arr') : fiche('Votre mairie d’arrondissement', ar.lib, ar.ville, 'arr')); ok.push('arr'); }
+    if (m) { box.appendChild(fiche(ar ? 'Le maire de ' + m.ville : 'Votre maire', m.p + ' ' + m.n, L.mairieDe(m.ville), 'mai')); ok.push('mai'); }
+    else if (etat.etranger) box.appendChild(fiche('Par la poste', 'Assemblée nationale', '126, rue de l’Université, 75355 Paris 07 SP, France. Les lettres aux sénateurs vont au Sénat, 15, rue de Vaugirard, 75291 Paris Cedex 06.'));
+    else box.appendChild(fiche('Votre maire', 'Maire introuvable', 'Votre commune n’est pas dans le Répertoire national des élus.'));
+    box.classList.toggle('e-trois', box.children.length === 3);
+    // Sénateurs : rubrique repliée ; le membre de la commission des finances
+    // est coché d'avance.
+    etat.sen = (etat.d.sen && etat.d.sen[etat.etranger ? '99' : codeSenat(etat.commune.i)]) || [];
+    etat.coches = {};
+    etat.sen.forEach(function (x) { etat.coches[x.id] = x.fin; });
+    var plier = etat.sen.length ? senateurs() : null;
+    if (plier) box.appendChild(plier);
+    box.hidden = false;
+    function cochés() { return etat.sen.filter(function (x) { return etat.coches[x.id]; }).map(function (x) { return 'sen:' + x.id; }); }
+    function tous() {
+      var ouvert = plier && plier.open, liste = ok.concat(ouvert ? cochés() : []);
+      $('e-tous').hidden = !plier && ok.length < 2 || !liste.length;
+      $('e-tous-b').textContent = (ouvert ? 'J’écris à tous mes élus cochés (' + liste.length + ')'
+        : liste.length === 1 ? 'J’écris ' + a(liste[0]) : liste.length === 3 ? 'J’écris aux trois' : 'J’écris aux deux') + ' →';
+      $('e-tous-b').onclick = function () { ecrire(liste); };
+      if (plier) {
+        var n = cochés().length, b = $('n-ecrire');
+        b.textContent = 'J’écris ' + (etat.sen.length === 1 ? a('sen:' + etat.sen[0].id) : 'aux sénateurs cochés (' + n + ')');
+        b.disabled = !n && etat.sen.length > 1;
+      }
+    }
+    if (plier) {
+      plier.addEventListener('toggle', tous);
+      Array.prototype.forEach.call(plier.querySelectorAll('input'), function (i) {
+        i.addEventListener('change', function () { etat.coches[i.value] = i.checked; i.parentNode.classList.toggle('n-fin', i.checked && senateur('sen:' + i.value).fin); tous(); });
+      });
+      $('n-ecrire').onclick = function () { ecrire(etat.sen.length === 1 ? ['sen:' + etat.sen[0].id] : cochés()); };
+      if ($('n-tous')) $('n-tous').onclick = function () {
+        Array.prototype.forEach.call(plier.querySelectorAll('input'), function (i) { i.checked = true; etat.coches[i.value] = true; });
+        tous();
+      };
+    }
+    tous();
+  }
+  function senateurs() {
+    var l = etat.sen, n = l.length, fin = l.some(function (x) { return x.fin; }), d = etat.etranger ? 'Français établis hors de France' : l[0].d;
+    var det = document.createElement('details'); det.className = 'n-plier';
+    var qui = n === 1 ? (l[0].f ? 'ma sénatrice' : 'mon sénateur') + ' · ' + d : 'mes sénateurs · ' + d + ' (' + n + ')';
+    // Collectivités d'outre-mer (Saint-Pierre-et-Miquelon, Saint-Barthélemy…) : « territoire ».
+    var ou = /^9(7[578]|8)/.test(etat.etranger ? '' : codeSenat(etat.commune.i)) ? 'tout le territoire' : 'tout le département';
+    var intro = (etat.etranger ? 'Élus par tous les Français établis hors de France' : (n === 1 ? (l[0].f ? 'Élue' : 'Élu') : 'Élus') + ' par ' + ou)
+      + (n === 1 ? (l[0].f ? ', elle vous représente.' : ', il vous représente.') : ' : chacun vous représente.')
+      + (n === 1 ? (fin ? ' La commission des finances, où siège ' + (l[0].f ? 'votre sénatrice' : 'votre sénateur') + ', examine le budget.' : '')
+         : fin ? ' Cochez ceux à qui vous écrivez ; la commission des finances examine le budget.' : ' Aucun ne siège à la commission des finances ; cochez ceux à qui vous écrivez.');
+    det.innerHTML = '<summary class=g-bouton>J’écris aussi à ' + echappe(qui) + '</summary><div class="e-elu n-bloc"><p class=e-elu-qui style="margin:.2rem 0 .8rem">' + echappe(intro) + '</p><div class=n-liste>'
+      + l.map(function (x) {
+        return '<label class="n-ligne' + (x.fin ? ' n-fin' : '') + '"><input type=checkbox value="' + echappe(x.id) + '"' + (x.fin ? ' checked' : '') + '><span class=n-nom>' + echappe(x.p + ' ' + x.n) + '</span>'
+          + '<span class=n-qui>' + echappe([x.g, x.k, x.b].filter(Boolean).join(' · ')) + '</span>' + (x.fin ? '<span class=n-badge>Examine le budget</span>' : '') + '</label>';
+      }).join('') + '</div><div class=g-outils style="margin:1rem 0 0;padding:0;border:0"><button class=g-bouton type=button id=n-ecrire></button>'
+      + (n > 1 ? '<button class=g-bouton type=button id=n-tous>Je les coche tous</button>' : '') + '</div></div>';
+    if (n === 1) det.querySelector('.n-liste').style.gridTemplateColumns = '1fr';
+    return det;
+  }
+
+  function ecrire(choix) {
+    if (!choix.length) return;
+    etat.choix = choix; etat.onglet = choix[0];
+    if (!$('c-cp').value && !etat.etranger) $('c-cp').value = etat.cp + ' ' + ctx().ville;
+    // Civilité du maire d'arrondissement connue : formule d'appel automatique.
+    etat.fArr = etat.arr && typeof etat.arr.f === 'boolean' ? etat.arr.f : undefined;
+    $('e-appel-arr').hidden = choix.indexOf('arr') < 0 || etat.fArr !== undefined;
+    etat.corps = {};
+    onglets(); aller(2); apercu();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-aller]'), function (b) {
+    b.addEventListener('click', function () { aller(+b.getAttribute('data-aller')); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-farr]'), function (b) {
+    b.addEventListener('click', function () {
+      etat.fArr = b.getAttribute('data-farr') === '1';
+      Array.prototype.forEach.call(b.parentNode.children, function (x) { x.setAttribute('aria-pressed', x === b); });
+      apercu();
+    });
+  });
+
+  // Écran 2 : aperçu de la lettre, rempli au fil de la saisie.
+  function onglets() {
+    var o = $('e-onglets'); o.textContent = '';
+    o.hidden = etat.choix.length < 2;
+    etat.choix.forEach(function (g) {
+      var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab');
+      b.textContent = aMaj(g);
+      b.setAttribute('aria-selected', g === etat.onglet);
+      b.addEventListener('click', function () { etat.onglet = g; onglets(); apercu(); });
+      o.appendChild(b);
+    });
+  }
+  // Le corps modifié (etat.corps[g]) remplace, dans l'aperçu, le texte qui va
+  // de la formule d'appel à la formule de politesse.
+  function apercu() {
+    var g = etat.onglet;
+    textes.then(function (t) {
+      if (g !== etat.onglet) return;
+      var c = ctxDe(g), paras = t[L.modele(genre(g))], b = L.bornes(paras.map(function (p) { return p[0]; }));
+      var edite = typeof etat.corps[g] === 'string';
+      var html = paras.map(function (p, k) {
+        if (edite && k >= b[0] && k <= b[1]) return k === b[0] ? '<textarea class=e-texte id=e-texte aria-label="Texte de la lettre"></textarea>' : '';
+        var cl = p[1] === 'd' ? ' class=e-droite' : (p[1] === 'j' || p[0].length > 140 ? ' class=e-just' : '');
+        return '<p' + cl + '>' + L.remplir(p[0], genre(g), c, true) + '</p>';
+      }).join('');
+      $('e-lettre').innerHTML = html;
+      if (edite) {
+        var ta = $('e-texte'); ta.value = etat.corps[g];
+        var hauteur = function () { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; };
+        ta.addEventListener('input', function () { etat.corps[g] = ta.value; hauteur(); });
+        hauteur();
+      }
+      $('e-modifier').textContent = edite ? 'Je reviens au texte d’origine' : 'Je modifie le texte';
+      $('e-papier').innerHTML = 'Envoi papier : imprimez la lettre, signez-la et postez-la. Adresse : ' + echappe(L.poste(genre(g), c))
+        + '. En envoyant la version originale, vous adhérez à l’association Résolution.';
+    }).catch(function () { $('e-lettre').textContent = 'La lettre n’a pas pu être chargée. Rechargez la page.'; });
+  }
+  $('e-modifier').addEventListener('click', function () {
+    var g = etat.onglet;
+    if (typeof etat.corps[g] === 'string') { delete etat.corps[g]; apercu(); return; }
+    textes.then(function (t) { etat.corps[g] = L.corpsModele(genre(g), ctxDe(g), t); apercu(); setTimeout(function () { var ta = $('e-texte'); if (ta) ta.focus(); }, 50); });
+  });
+  $('e-word').addEventListener('click', function () { telecharger(etat.onglet, $('e-word')); });
+  ['c-nom', 'c-adr', 'c-cp', 'c-mel', 'c-tel'].forEach(function (id) { $(id).addEventListener('input', apercu); });
+
+  function message(t) { Array.prototype.forEach.call(document.querySelectorAll('.e-msg-coord'), function (m) { m.textContent = t; }); }
+  Array.prototype.forEach.call(document.querySelectorAll('.e-continuer'), function (bc) { bc.addEventListener('click', function () {
+    var manque = ['c-nom', 'c-adr', 'c-cp'].filter(function (id) {
+      var vide = !$(id).value.trim(); $(id).setAttribute('aria-invalid', vide); return vide;
+    });
+    if (manque.length) { message(etat.etranger ? 'Indiquez votre nom, votre adresse, votre code postal, votre ville et votre pays.' : 'Indiquez votre nom, votre adresse, votre code postal et votre commune.'); $(manque[0]).focus(); return; }
+    if (etat.choix.indexOf('arr') >= 0 && etat.fArr === undefined) { message('Choisissez la formule d’appel de votre maire d’arrondissement.'); $('e-appel-arr').scrollIntoView({ block: 'center' }); return; }
+    message('');
+    cartes(); aller(3);
+  }); });
+
+  // Écran 3 : envoi par le site (si le relais est ouvert), sinon par lettre :
+  // messagerie, copie du texte, Word, adresse postale.
+  function cartes() {
+    var box = $('e-cartes'); box.textContent = '';
+    box.classList.toggle('e-seul', etat.choix.length < 2);
+    box.classList.toggle('e-trois', etat.choix.length >= 3);
+    // L'envoi par le site vaut pour les élus qui ont une adresse électronique.
+    etat.joignables = etat.choix.filter(function (g) { return ficheDe(g).m; });
+    var n = etat.joignables.length, autres = etat.choix.filter(function (g) { return etat.joignables.indexOf(g) < 0; });
+    var modifie = etat.joignables.some(function (g) { return typeof etat.corps[g] === 'string'; });
+    $('e-envoyer').textContent = (modifie ? 'J’envoie ' : 'J’adhère et j’envoie ') + (n > 1 ? 'mes ' + (n === 2 ? 'deux' : n === 3 ? 'trois' : n) + ' lettres' : 'ma lettre')
+      + (autres.length ? ' (' + etat.joignables.map(a).join(', ') + ')' : '');
+    $('e-envoyer').disabled = false;
+    $('e-msg-envoi').textContent = 'Le site envoie vos lettres pour vous, après confirmation par un courriel que vous recevrez. L’élu vous répond directement.'
+      + (autres.length ? ' ' + (autres.length > 1 ? 'Les lettres ' : 'La lettre ') + autres.map(a).join(', ') + (autres.length > 1 ? ' partent' : ' part') + ' par formulaire ou par la poste, ci-dessous.' : '');
+    textes.then(function (t) {
+      etat.choix.forEach(function (g) {
+        var c = ctxDe(g), fiche = ficheDe(g), gr = genre(g);
+        var corps = L.courriel(gr, c, t, etat.corps[g]);
+        var div = document.createElement('div'); div.className = 'e-envoi';
+        var u = encodeURIComponent;
+        // Destinataire, copie et objet en clair : on peut toujours écrire à la main,
+        // depuis n'importe quelle messagerie, même si aucun bouton n'ouvre rien.
+        var dest = fiche.m
+          ? '<dt>À</dt><dd><b class=e-sel>' + echappe(fiche.m) + '</b> <button type=button class=e-copie data-copie="' + echappe(fiche.m) + '" data-ok="Adresse copiée">Je copie l’adresse</button></dd>'
+          : '<dt>À</dt><dd>' + (fiche.w
+              ? 'pas d’adresse électronique publique ; formulaire de contact : <a class=e-sel target=_blank rel="noopener noreferrer" href="' + echappe(fiche.w) + '">' + echappe(fiche.w.replace(/^https?:\/\//, '')) + '</a>'
+              : 'pas d’adresse électronique publique ; écrivez par la poste.') + '</dd>';
+        div.innerHTML = '<h3>' + echappe(aMaj(g)) + '</h3><p>' + echappe((L.appel(gr, c) ? L.appel(gr, c) + (g === 'arr' && !etat.arr.p ? ', ' : ' ') : '') + nomElu(g)) + '</p>'
+          + '<dl class=e-courriel>' + dest
+          + '<dt>Copie</dt><dd>' + echappe(L.COPIE) + '</dd>'
+          + '<dt>Objet</dt><dd>' + echappe(L.OBJET) + '</dd></dl>'
+          + '<div class=g-outils></div><p class=e-poste>Par la poste : ' + echappe(L.poste(gr, c)) + '</p>';
+        var outils = div.querySelector('.g-outils');
+        if (fiche.m) {
+          var mt = document.createElement('a'); mt.className = 'g-bouton' + (relais ? '' : ' g-plein');
+          mt.href = 'mailto:' + fiche.m + '?cc=' + L.COPIE + '&subject=' + u(L.OBJET) + '&body=' + u(corps);
+          mt.textContent = 'J’ouvre ma messagerie'; outils.appendChild(mt);
+          // Messagerie en ligne : le lien mailto n'ouvre rien sans logiciel de courrier.
+          var web = document.createElement('p'); web.className = 'e-web';
+          web.innerHTML = 'Messagerie en ligne : <a target=_blank rel="noopener noreferrer" href="https://mail.google.com/mail/?view=cm&fs=1&to='
+            + u(fiche.m) + '&cc=' + u(L.COPIE) + '&su=' + u(L.OBJET) + '&body=' + u(corps) + '">Gmail</a> · '
+            + '<a target=_blank rel="noopener noreferrer" href="https://outlook.live.com/mail/0/deeplink/compose?to=' + u(fiche.m)
+            + '&cc=' + u(L.COPIE) + '&subject=' + u(L.OBJET) + '&body=' + u(corps) + '">Outlook</a>'
+            + '. Sinon : copiez l’adresse et le texte dans votre messagerie habituelle.';
+          div.insertBefore(web, div.querySelector('.e-poste'));
+        } else if (fiche.w) {
+          var w = document.createElement('a'); w.className = 'g-bouton g-plein'; w.href = fiche.w; w.target = '_blank'; w.rel = 'noopener noreferrer';
+          w.textContent = 'J’ouvre le formulaire de la mairie'; outils.appendChild(w);
+          var n2 = document.createElement('p'); n2.className = 'e-web';
+          n2.textContent = 'Copiez le texte, collez-le dans le formulaire de la mairie, puis envoyez-nous une copie à ' + L.COPIE + '.';
+          div.insertBefore(n2, div.querySelector('.e-poste'));
+        }
+        var cpy = document.createElement('button'); cpy.type = 'button'; cpy.className = 'g-bouton'; cpy.textContent = 'Je copie le texte';
+        cpy.addEventListener('click', function () { copier(corps, cpy, 'Texte copié'); }); outils.appendChild(cpy);
+        var wd = document.createElement('button'); wd.type = 'button'; wd.className = 'g-bouton'; wd.textContent = 'Je télécharge le Word';
+        wd.addEventListener('click', function () { telecharger(g, wd); }); outils.appendChild(wd);
+        Array.prototype.forEach.call(div.querySelectorAll('.e-copie'), function (b) {
+          b.addEventListener('click', function () { copier(b.getAttribute('data-copie'), b, b.getAttribute('data-ok')); });
+        });
+        box.appendChild(div);
+      });
+    });
+    $('e-relais').hidden = !relais || !n;
+  }
+  function copier(t, b, okTexte) {
+    var dit = b.textContent;
+    function fini(ok) { b.textContent = ok ? (okTexte || 'Copié') : 'Copie impossible'; setTimeout(function () { b.textContent = dit; }, 2200); }
+    try { navigator.clipboard.writeText(t).then(function () { fini(true); }, function () { fini(false); }); } catch (e) { fini(false); }
+  }
+  var zips = {};
+  function telecharger(g, b) {
+    var dit = b.textContent; b.textContent = 'Préparation…';
+    var m = L.modele(genre(g));
+    if (!zips[m]) zips[m] = fetch(MODELES[m]).then(function (r) { return r.arrayBuffer(); }).then(function (buf) {
+      return JSZip.loadAsync(buf).then(function (zip) { return zip.file('word/document.xml').async('string').then(function (xml) { return { zip: zip, xml: xml }; }); });
+    });
+    zips[m].then(function (mo) {
+      mo.zip.file('word/document.xml', L.remplirXml(mo.xml, genre(g), ctxDe(g), etat.corps[g]));
+      return mo.zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    }).then(function (blob) {
+      var dl = document.createElement('a'); dl.href = URL.createObjectURL(blob);
+      dl.download = 'Lettre ' + (g === 'dep' ? 'au député' : g === 'arr' ? 'à la mairie d’arrondissement' : g === 'mai' ? 'au maire' : a(g)) + ' — ' + (coord().nom || 'Résolution') + '.docx';
+      document.body.appendChild(dl); dl.click(); dl.remove();
+      setTimeout(function () { URL.revokeObjectURL(dl.href); }, 4000);
+      b.textContent = dit;
+    }).catch(function () { b.textContent = 'Échec, réessayez'; setTimeout(function () { b.textContent = dit; }, 2500); });
+  }
+
+  $('e-envoyer').addEventListener('click', function () {
+    var b = $('e-envoyer'), msg = $('e-msg-envoi'), c = coord();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.mel)) {
+      msg.innerHTML = '<b>Indiquez votre courriel</b> à l’étape précédente : le lien de confirmation y sera envoyé.'; return;
+    }
+    b.disabled = true; msg.textContent = 'Envoi…';
+    fetch('api/envoyer', { method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ cp: etat.cp, insee: etat.commune && etat.commune.i, circo: etat.circo, etranger: etat.etranger, lettres: etat.joignables, fArr: etat.fArr, coord: c, date: L.dateFr(),
+        corps: etat.joignables.reduce(function (o, g) { if (typeof etat.corps[g] === 'string') o[g] = etat.corps[g]; return o; }, {}) }) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (x) {
+        if (!x.ok) throw new Error(x.j && x.j.erreur);
+        msg.innerHTML = '<b>Un courriel vient de partir à ' + echappe(c.mel) + '.</b> Ouvrez le lien qu’il contient pour envoyer vos lettres ; il est valable 48 heures.';
+      })
+      .catch(function (e) {
+        b.disabled = false;
+        msg.textContent = 'L’envoi n’a pas abouti' + (e.message ? ' (' + e.message + ')' : '') + '. Envoyez vos lettres depuis votre messagerie, ci-dessous.';
+      });
+  });
+
+  // Retour du lien de confirmation.
+  var q = new URLSearchParams(location.search);
+  if (q.has('envoye') || q.has('erreur')) {
+    var n = +q.get('envoye') || 0;
+    if (!q.has('erreur')) {
+      $('e-titre').textContent = n > 1 ? 'Vos lettres sont parties' : 'Votre lettre est partie';
+      $('e-chapeau').innerHTML = '<b>Merci.</b> Une copie vous est parvenue ; l’élu vous répondra directement.';
+      $('e-resultat').textContent = q.has('adh') ? 'Bienvenue dans l’association Résolution.' : 'Merci de votre engagement.';
+    } else {
+      $('e-resultat').textContent = q.get('erreur') === 'lien expiré'
+        ? 'Ce lien a expiré : refaites la demande, ou envoyez vos lettres depuis votre messagerie.'
+        : 'L’envoi n’a pas abouti' + (n ? ' pour une partie de vos lettres (' + n + ' envoyée' + (n > 1 ? 's' : '') + ')' : '') + '. Refaites la demande, ou envoyez vos lettres depuis votre messagerie.';
+    }
+    aller(0);
+  }
+
+  if (location.hash === '#etranger') mode();
+  fetch('api/etat').then(function (r) { return r.ok ? r.json() : { actif: false }; }).then(function (s) {
+    relais = !!s.actif; $('e-rgpd-relais').hidden = !relais;
+  }).catch(function () {});
+  // Compteur : lettres dont l'association a reçu la copie (donnees/compteur.json,
+  // tenu à jour au relevé de contact@).
+  fetch('donnees/compteur.json').then(function (r) { return r.json(); }).then(function (c) {
+    var d = c.au.split('-');
+    $('e-compteur').innerHTML = '<b>' + c.lettres + '</b> lettres déjà envoyées à des élus depuis ce site, au ' + L.dateFr(new Date(+d[0], +d[1] - 1, +d[2])) + '.';
+    $('e-compteur').hidden = false;
+  }).catch(function () {});
+  fetch('donnees/elus/sources.json').then(function (r) { return r.json(); }).then(function (s) {
+    var d = s.date.split('-'); $('e-maj').textContent = ', mises à jour le ' + (+d[2]) + '/' + d[1] + '/' + d[0];
+  }).catch(function () {});
+})();
+</script>
+</html>

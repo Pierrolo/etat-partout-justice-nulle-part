@@ -1,0 +1,828 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap');
+:root{
+ --enc:#1a1a1a; --pap:#fdfcfa; --creme:#f6f2ea; --fil:#ddd7cd;
+ --gain:#1f5c3a; --perte:#8a2f22; --ocre:#6b5b3e; --gris:#6d6a64;
+ --rose:#fbeae7; --sable:#f7f3e8; --nuit:#16150f;
+ --titre:Archivo,'Helvetica Neue',Arial,sans-serif;
+ --texte:'Source Serif 4','Source Serif Pro',Georgia,'Iowan Old Style',serif;
+ --chif:Archivo,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body:has(.a-fond){padding:0}
+body{margin:0;background:var(--nuit);color:var(--enc);padding:1.4rem 1rem;
+ font:16.5px/1.52 var(--texte);-webkit-font-smoothing:antialiased}
+.page{max-width:40rem;margin:0 auto 1.4rem;background:var(--pap);
+ padding:0 0 1.6rem;box-shadow:0 2px 0 rgba(0,0,0,.35)}
+
+/* --- signature Résolution ---------------------------------------------- */
+.marque{display:flex;align-items:baseline;justify-content:space-between;
+ gap:1rem;padding:1.1rem 1.8rem .7rem}
+.marque .nom{font:700 12px/1 var(--chif);letter-spacing:.32em;
+ text-transform:uppercase;color:var(--enc)}
+.marque .quoi{font:400 10px/1.3 var(--chif);letter-spacing:.12em;
+ text-transform:uppercase;color:var(--gris);text-align:right}
+/* Sous la signature, le tricolore en dégradé, d'un bord à l'autre. */
+.filet{height:3px;margin:0 1.8rem;
+ background:linear-gradient(90deg,#000091,#fff 50%,#e1000f)}
+
+/* --- tête de fiche ------------------------------------------------------ */
+.tete{padding:1.5rem 1.8rem 1.1rem}
+.qui{font-family:var(--titre);font-size:2.05rem;line-height:1.06;
+ font-weight:700;margin:0 0 .35rem;letter-spacing:-.015em}
+.propose{display:inline-block;margin-left:.5rem;font:400 9px/1.6 var(--chif);
+ letter-spacing:.05em;text-transform:uppercase;color:#a8632a;
+ border:1px solid #e0c7a8;background:#fbf3e7;padding:0 .3rem;vertical-align:.4em}
+.sur{margin:0 0 .5rem;font:700 10px/1 var(--chif);letter-spacing:.18em;
+ text-transform:uppercase;color:var(--ocre)}
+.def{margin:0;color:var(--gris);font-size:.95rem}
+.lib{font-weight:600}
+.compte{font:700 10.5px/1 var(--chif);letter-spacing:.12em;
+ text-transform:uppercase;color:var(--ocre);margin:.8rem 0 0}
+
+.corps{padding:0 1.8rem}
+.bande{font:700 10.5px/1 var(--chif);letter-spacing:.14em;text-transform:uppercase;
+ padding:.55rem 1.8rem;margin:1.5rem -1.8rem .9rem;color:var(--pap)}
+.bande.g{background:var(--gain)} .bande.p{background:var(--perte)}
+
+/* --- le côté moins : une carte, jamais une ligne ------------------------ */
+.perte{background:var(--rose);border-left:4px solid var(--perte);
+ padding:.85rem 1rem;margin:0 0 .7rem}
+.perte .n{font:700 1.15rem/1 var(--titre);color:var(--perte);display:block;
+ margin-bottom:.25rem;letter-spacing:-.01em}
+.perte .l{font-size:1rem}
+.perte .j{display:block;margin-top:.35rem;color:#6a4a44;font-size:.89rem}
+.perte .r{display:block;margin-top:.6rem;padding-top:.55rem;
+ border-top:1px solid #eccfc9;color:var(--gain);font-size:.93rem}
+.perte .r b{font-weight:600}
+.perte .r em{font-style:normal;font-family:var(--chif);font-weight:700;
+ font-variant-numeric:tabular-nums}
+.perte .r.meme{color:var(--gris);font-style:italic}
+.transitoire{border-bottom:1px dotted var(--gris);color:var(--gris)}
+.trou{display:inline-block;margin-left:.4rem;font:400 9px/1.6 var(--chif);
+ font-style:normal;letter-spacing:.05em;text-transform:uppercase;color:#a8632a;
+ border:1px solid #e0c7a8;background:#fbf3e7;padding:0 .3rem;vertical-align:.1em}
+
+/* --- le côté plus : la tête en grand, puis des lignes ------------------- */
+.dom{background:var(--gain);color:var(--pap);padding:1.4rem 1.3rem;margin:0}
+.dom .v{font:700 3.6rem/.94 var(--chif);letter-spacing:-.03em;display:block;
+ font-variant-numeric:tabular-nums;word-spacing:-.06em}
+.dom .v.mot{font:700 2.5rem/1 var(--titre);letter-spacing:-.02em;
+ word-spacing:normal}
+.dom .p{margin:.55rem 0 0;font-size:1.06rem;max-width:26rem}
+.dom .s{margin:.45rem 0 0;font-size:.98rem;opacity:.88;max-width:26rem}
+.lg{display:grid;grid-template-columns:7.2rem 1fr;gap:.55rem 1rem;
+ padding:.75rem 0;border-bottom:1px solid var(--fil);align-items:baseline}
+.lg .v{text-align:right;font:700 1.45rem/1 var(--chif);color:var(--gain);
+ letter-spacing:-.02em;font-variant-numeric:tabular-nums;word-spacing:-.06em;
+ white-space:nowrap}
+.lg .v.mot{font:700 1.1rem/1.2 var(--titre);letter-spacing:0;word-spacing:normal;
+ white-space:normal}
+.lg .v.long{font-size:1rem}
+.lg .t{font-size:1rem}
+.lg .m{display:block;color:var(--gris);font-size:.84rem;margin-top:.25rem}
+.suite{grid-column:2;margin:.45rem 0 0;padding-left:.85rem;
+ border-left:2px solid var(--fil);list-style:none}
+.suite li{color:#3a3a38;font-size:.93rem;padding:.15rem 0}
+.suite li::before{content:'·';color:var(--gain);font-weight:700;
+ margin-right:.45rem}
+
+/* --- qui paie, dit une fois --------------------------------------------- */
+
+
+.rappel{margin:.9rem 0 0;padding:.6rem 0 0;border-top:1px solid var(--fil);
+ color:var(--gris);font-size:.92rem;line-height:1.9}
+.rappel span{display:block;font:700 9.5px/1 var(--chif);letter-spacing:.14em;
+ text-transform:uppercase;color:var(--ocre);margin-bottom:.35rem}
+.rappel b{font-weight:700;color:var(--gain);font-family:var(--chif);
+ font-size:.92em;font-variant-numeric:tabular-nums;word-spacing:-.05em}
+.pied{margin:1.4rem 1.8rem 0;padding-top:.8rem;border-top:1px solid var(--fil);
+ color:var(--gris);font-size:.78rem}
+.interne{font:400 10px/1.5 var(--chif);color:#9a958c;margin-top:.5rem}
+@media(max-width:600px){
+ body{padding:.8rem .5rem}
+ .corps,.tete{padding-left:1.1rem;padding-right:1.1rem}
+ .bande{padding-left:1.1rem;padding-right:1.1rem;margin-left:-1.1rem;
+  margin-right:-1.1rem}
+ .marque{padding:.9rem 1.1rem .6rem}.filet{margin:0 1.1rem}
+ .qui{font-size:1.65rem}.dom .v{font-size:2.8rem}
+ .lg{grid-template-columns:5.6rem 1fr}.lg .v{font-size:1.2rem}
+}
+
+/* --- la page de garde -----------------------------------------------------
+   Projection de `ResolutionD1a`. Elle a sa propre langue typographique — un
+   sans condensé très gras sur fond brique — et elle ne partage avec la fiche
+   que sa famille de titre, la fiche restant sur papier crème. Les deux se suivent sans se
+   mélanger : la garde annonce, la fiche démontre. */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap');
+
+.a-fond{
+ --briq:#b23a10; --briqc:#b84923; --dor:#ffd24a; --crm:#fffdf2;
+ margin:0;padding:1.5rem clamp(1.2rem,4vw,3.2rem) .9rem;
+ /* La photo des auteurs sous un voile brique uniforme (calque ::after),
+    couvrant toute la largeur, fondue dans le brique en haut si elle descend. Échelle et position sont calculées dans la page
+    (script de la garde) pour que les visages évitent les textes ; à défaut,
+    cadrage centré. */
+ --voile:rgba(178,58,16,.74);
+ background:var(--briq);position:relative;isolation:isolate;overflow:hidden;
+ min-height:100vh;min-height:100svh;display:flex;flex-direction:column;
+ font-family:Archivo,'Archivo Narrow','Arial Narrow','Helvetica Neue',
+   Arial,sans-serif;color:var(--crm)}
+.a-cond{font-weight:900;font-stretch:66%;
+ font-variation-settings:'wdth' 66,'wght' 900;
+ text-transform:uppercase;line-height:.88;letter-spacing:-.008em}
+
+.a-haut{display:flex;flex-wrap:wrap;gap:.9rem 2rem;
+ justify-content:space-between;align-items:flex-start}
+.a-sig{margin:0;font-size:clamp(1.05rem,2.4vw,1.5rem);line-height:1.32;
+ color:var(--dor)}
+.a-sig b{color:var(--crm);font-weight:700}
+.a-marque{display:block;margin-top:.6rem;font-size:.9rem;font-weight:700;
+ letter-spacing:.42em;text-transform:uppercase;color:var(--dor)}
+
+.a-appels{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center}
+/* Le bloc du livre, en haut à droite : le nom de la page, la précommande, la
+   date. Une seule ligne ; sous la marque sur mobile. */
+.a-livre{display:flex;flex-wrap:wrap;align-items:center;gap:.55rem 1rem}
+.a-livre-nom,.a-livre .a-appel{padding:.85rem 1.25rem;border:1px solid var(--dor);font-size:1.1rem}
+.a-livre-nom,.a-livre .a-bientot{font:700 1.1rem/1 Archivo,'Arial Narrow',Arial,sans-serif;
+ letter-spacing:0;text-transform:none;margin:0}
+.a-livre-nom{color:var(--dor);text-decoration:none;background:rgba(255,210,74,.1)}
+.a-livre-nom:hover{background:rgba(255,210,74,.2)}
+.a-livre .a-bientot{font-weight:400;color:var(--crm);opacity:.72}
+.a-livre-nom:focus-visible{outline:2px solid var(--crm);outline-offset:3px}
+@media(max-width:600px){
+ .s-livre,.s-classeur{padding-left:1.1rem;padding-right:1.1rem}
+ .s-classeur{grid-template-columns:2.2rem 1fr;column-gap:.9rem}.s-xls{width:2.2rem}
+ .s-classeur .s-dl{padding:.75rem .9rem;font-size:.72rem}
+ .s-compte{padding:0 1.1rem}
+ .s-trame{padding-top:9rem;background-size:auto,auto 100%}}
+.a-appel{position:relative;font:700 .95rem/1 Archivo,'Arial Narrow',Arial,sans-serif;
+ padding:.85rem 1.25rem;border:1px solid var(--dor);background:none;
+ color:var(--dor);cursor:not-allowed}
+.a-appel.a-plein{background:var(--crm);border-color:var(--crm);
+ color:var(--briq)}
+.a-promesse .a-parici{font-size:1.4rem;font-weight:800}
+.a-appel.a-lien{cursor:pointer;text-decoration:none;display:inline-block}
+.a-appel.a-lien:hover{background:rgba(255,210,74,.16)}
+.a-appel.a-lien.a-plein:hover{background:var(--dor);border-color:var(--dor)}
+.a-appel.a-lien:focus-visible{outline:2px solid var(--crm);outline-offset:3px}
+/* La précommande en or plein : c'est le seul appel qui vend le livre, et il se
+   distingue des deux autres. Arbitrage de l'auteur. */
+.a-appel.a-vif{background:var(--dor);border-color:var(--dor);
+ color:var(--briq)}
+.a-appel.a-vif:hover{background:var(--crm);border-color:var(--crm)}
+/* Commander : le bouton déroule les trois liens d'achat. */
+.a-commande{position:relative;display:inline-block}
+.a-commande>summary{list-style:none;user-select:none}
+.a-commande>summary::-webkit-details-marker{display:none}
+.a-options{position:absolute;z-index:10;top:calc(100% + .3rem);left:0;min-width:100%;
+ display:flex;flex-direction:column;background:var(--crm);border:1px solid var(--dor);
+ box-shadow:0 .5rem 1.4rem rgba(0,0,0,.25)}
+.a-options a{display:block;padding:.8rem 1.1rem;font:700 1rem/1.1 Archivo,'Arial Narrow',Arial,sans-serif;
+ color:var(--briq);text-decoration:none;white-space:nowrap}
+.a-options a+a{border-top:1px solid rgba(178,58,16,.18)}
+.a-options a:hover{background:var(--dor)}
+.a-options a:focus-visible{outline:2px solid var(--briq);outline-offset:-2px}
+.s-livre .a-appels{margin:.9rem 0 1.4rem}
+.s-livre .a-appels .a-appel{margin:0}
+.a-bientot{display:block;margin-top:.3rem;font:400 .6rem/1 Archivo,'Arial Narrow',Arial,sans-serif;
+ letter-spacing:.14em;text-transform:uppercase;opacity:.72}
+
+.a-corps{flex:1;display:flex;flex-direction:column;justify-content:flex-end;
+ padding:1.2rem 0 .8rem}
+.a-titre.a-cond{font-weight:700;font-variation-settings:'wdth' 66,'wght' 700}
+.a-titre{font-size:clamp(2.4rem,min(9.6vw,13vh),7rem);margin:0;color:var(--crm);
+ text-wrap:balance}
+.a-titre span{display:block;color:var(--dor)}
+.a-promesse{display:flex;flex-wrap:wrap;align-items:baseline;
+ gap:.5rem 1.8rem;margin:1.3rem 0 0}
+.a-promesse p{margin:0;font-size:clamp(1.3rem,min(4.4vw,5vh),2.5rem);font-weight:800;
+ font-variation-settings:'wdth' 84,'wght' 800;line-height:1.04;
+ color:var(--crm)}
+.a-promesse b{color:var(--dor);font-weight:800}
+.a-parici{font:700 1.05rem/1 Archivo,'Arial Narrow',Arial,sans-serif;color:var(--dor);
+ text-decoration:none;border-bottom:2px solid var(--dor);padding-bottom:.28rem}
+.a-parici:hover{color:var(--crm);border-color:var(--crm)}
+.a-parici:focus-visible,.a-rub a:focus-visible{outline:2px solid var(--crm);
+ outline-offset:4px}
+
+.a-filet{border:0;border-top:1px solid rgba(255,210,74,.42);margin:0}
+.a-bas{display:flex;flex-wrap:wrap;gap:.7rem 2.4rem;align-items:baseline;
+ justify-content:space-between;padding-top:1.1rem}
+.a-rub{display:flex;flex-wrap:wrap;gap:.7rem 2.2rem;list-style:none;
+ margin:0;padding:0}
+.a-rub a,.a-rub span{font-size:1.05rem;font-weight:800;letter-spacing:.24em;
+ text-transform:uppercase;text-decoration:none;color:var(--crm);
+ border-bottom:2px solid transparent;padding-bottom:.2rem}
+.a-rub a:hover{color:var(--dor)}
+/* Les onglets de la garde portent l'accent de la navigation : le corps de
+   l'ancienne date. Aucun souligné : seul « par ici » en porte un. */
+.a-bas .a-rub a{font-size:1.3rem;letter-spacing:.2em}
+.a-rub span{color:rgba(255,253,242,.44)}
+.a-rub span::after{content:' · à venir';letter-spacing:.1em;
+ text-transform:none;font-weight:400}
+.a-date{margin:0;font-size:1.2rem;color:var(--dor)}
+.a-date b{color:var(--crm);font-weight:700}
+
+/* --- couche du site -------------------------------------------------------
+   Sélecteurs de classe uniquement : la feuille de la galerie garde la main sur
+   les éléments nus, et les deux couches ne se disputent rien. */
+.s-page{max-width:40rem;margin:0 auto;box-shadow:0 2px 0 rgba(0,0,0,.35)}
+.s-tete{background:var(--pap);padding:0 0 1.6rem}
+.s-h1{font:700 2.4rem/1.06 var(--titre);margin:1.2rem 0 0;padding:0 1.8rem;
+ color:var(--enc)}
+.s-chapeau{margin:.8rem 0 0;padding:0 1.8rem;font-size:1rem;line-height:1.45;
+ color:var(--gris)}
+
+.s-groupe{background:var(--pap);padding:0 0 .9rem;
+ border-top:1px solid var(--fil)}
+.s-gt{font:700 12px/1 var(--chif);letter-spacing:.22em;text-transform:uppercase;
+ color:var(--ocre);margin:0;padding:1.2rem 1.8rem .5rem}
+.s-gc{margin:0;padding:0 1.8rem .9rem;font-size:.9rem;color:var(--gris);
+ border-bottom:1px solid var(--fil)}
+.s-liste{list-style:none;margin:0;padding:0}
+.s-liste li{border-bottom:1px solid var(--fil)}
+.s-liste li:last-child{border-bottom:0}
+.s-liste a{display:block;padding:.95rem 1.8rem;text-decoration:none;
+ color:var(--enc)}
+.s-liste a:hover{background:var(--sable)}
+.s-liste a:focus-visible{outline:2px solid var(--gain);outline-offset:-2px}
+.s-qui{display:block;font-weight:700;font-size:1.12rem;line-height:1.2}
+.s-axe{display:block;margin-top:.2rem;font-size:.9rem;color:var(--gris);
+ line-height:1.35}
+
+.s-retour{--dor:#ffd24a; --crm:#fffdf2;max-width:40rem;margin:0 auto .5rem;display:flex;
+ flex-wrap:wrap;gap:.5rem 1.2rem;justify-content:space-between;
+ align-items:baseline}
+.s-retour>a{font:700 11px/1.4 var(--chif);letter-spacing:.16em;
+ text-transform:uppercase;text-decoration:none;color:var(--sable);
+ border-bottom:1px solid rgba(246,242,234,.32);padding-bottom:.15rem}
+.s-retour>a:hover{color:var(--pap);border-bottom-color:var(--pap)}
+.s-retour>a:focus-visible{outline:2px solid var(--sable);outline-offset:3px}
+.s-retour .s-marque{letter-spacing:.32em;border-bottom-color:transparent}
+/* Les rubriques de l'accueil, reprises telles quelles dans le bandeau ; la
+   rubrique courante garde le filet or de leur survol. */
+.s-retour .a-rub{font-family:var(--chif);gap:.5rem 1.2rem}
+/* Cinq onglets sur la colonne de 40rem : ils prennent le corps et l'espacement
+   de la marque, pour tenir sur la même ligne qu'elle. */
+.s-retour .a-rub a{font-size:11px;letter-spacing:.16em}
+.a-rub a[aria-current]{color:var(--dor)}
+
+.s-nav{max-width:40rem;margin:0 auto;background:var(--pap);display:flex;gap:1px;
+ border-bottom:1px solid var(--fil)}
+.s-nav a,.s-nav span{flex:1;padding:.8rem 1rem;font:700 11px/1.3 var(--chif);
+ letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+ color:var(--enc)}
+.s-nav span{color:var(--fil)}
+.s-nav a:hover{background:var(--sable)}
+.s-nav .s-suiv{text-align:right}
+.s-nav .s-idx{flex:0 0 auto;text-align:center;color:var(--ocre)}
+
+.s-voisins{max-width:40rem;margin:0 auto;background:var(--pap);
+ padding:0 0 .9rem;box-shadow:0 2px 0 rgba(0,0,0,.35)}
+.s-pied{--dor:#ffd24a; --crm:#fffdf2;max-width:40rem;margin:1.8rem auto .9rem;
+ display:flex;flex-wrap:wrap;gap:.7rem 2.2rem;align-items:baseline;
+ font-family:var(--chif)}
+.a-fond .s-pied{max-width:none;margin:1.8rem 0 0}
+/* Service : Je m'exprime et J'adhère à l'identique ; les mentions légales en
+   retrait. */
+/* Liens de service un peu plus grands que le bloc du livre (1,1rem). */
+.s-pied .a-parici{border-bottom:0;padding-bottom:0;font-size:1.25rem}
+.s-pied .s-ml{font:400 .78rem/1 var(--chif);color:var(--crm);opacity:.72;
+ text-decoration:none}
+.s-pied .s-ml:hover{color:var(--crm);opacity:1}
+.s-pied a:focus-visible{outline:2px solid var(--crm);outline-offset:4px}
+.s-classeur{padding:1.3rem 1.8rem 1.4rem;border-bottom:1px solid var(--fil);
+ display:grid;grid-template-columns:2.75rem 1fr;gap:0 1.2rem;align-items:start}
+/* Une icône de classeur par fichier : on voit d'emblée qu'on télécharge un Excel. */
+.s-xls{width:2.75rem;height:auto;display:block;margin-top:.15rem}
+.s-compte{margin:.9rem 0 0;padding:0 1.8rem;font:700 10.5px/1 var(--chif);
+ letter-spacing:.16em;text-transform:uppercase;color:#1d6f42}
+.s-classeur .s-dl{border-color:#1d6f42;color:#1d6f42;margin-top:.7rem}
+.s-classeur .s-dl:hover{background:#1d6f42;color:#fff}
+.s-classeur .s-dl span{margin-right:.35rem}
+.s-classeur .s-dl.s-word{border-color:#2b579a;color:#2b579a;margin-right:.5rem}
+.s-classeur .s-dl.s-word:hover{background:#2b579a;color:#fff}
+.s-classeur .s-dl.s-pdf{border-color:#b3261e;color:#b3261e}
+.s-classeur .s-dl.s-pdf:hover{background:#b3261e;color:#fff}
+.s-classeur:last-child{border-bottom:0}
+.s-classeur h2{font:700 1.12rem/1.2 var(--titre);margin:0;color:var(--enc)}
+.s-classeur .s-meta{margin:.35rem 0 .7rem;font:400 10px/1.3 var(--chif);
+ letter-spacing:.12em;text-transform:uppercase;color:var(--gris)}
+.s-classeur p{margin:0 0 .45rem;font-size:.95rem;line-height:1.45}
+.s-classeur p b{font:700 10px/1 var(--chif);letter-spacing:.14em;
+ text-transform:uppercase;color:var(--ocre);margin-right:.4rem}
+.s-sous{font-size:1.12rem;color:var(--enc)}
+/* Le livre, les auteurs, les mentions : la carte du sommaire, du texte suivi. */
+.s-livre{--briq:#b23a10; --dor:#ffd24a; --crm:#fffdf2;padding:1.2rem 1.8rem 1.6rem}
+.s-livre .qui{margin:1.4rem 0 .8rem}
+.s-livre p{margin:0 0 .35rem}
+.s-livre .a-appel{margin:.9rem 0 1.4rem}
+.s-livre .s-bloc{margin:1.1rem 0 0}
+.s-image{display:block;width:100%;height:auto}
+.s-trame{background:linear-gradient(rgba(253,252,250,.74),rgba(253,252,250,.74)),
+ url(img/auteurs-2.jpg) center 20%/cover;padding-top:14rem}
+.s-livre .s-bloc a{color:var(--gain);text-decoration-thickness:1px;
+ text-underline-offset:2px}
+.s-livre .s-bloc a:hover{color:var(--enc)}
+.s-livre .s-image[src$="couverture.png"],.s-livre .s-image[src$="quatrieme.png"]{
+ max-width:22rem}
+
+/* --- manifeste et adhésion ------------------------------------------------
+   Même papier crème que la fiche, colonne de lecture plus étroite : c'est du
+   texte suivi, pas une carte. */
+.m-page{max-width:44rem;margin:0 auto 1.4rem;background:var(--pap);
+ box-shadow:0 2px 0 rgba(0,0,0,.35)}
+
+/* Le manifeste porte la charte du livre, non celle de la fiche : fond brique
+   strié, Archivo, or et crème. C'est le produit phare, il parle la langue de
+   la couverture. Arbitrage de l'auteur du 20260828. */
+.g-page{--briq:#b23a10; --briqc:#b84923; --dor:#ffd24a; --crm:#fffdf2;
+ max-width:46rem;margin:0 auto 1.4rem;background:var(--briq);
+ background-image:repeating-linear-gradient(90deg,
+   var(--briqc) 0 2px, transparent 2px 22px);
+ color:var(--crm);
+ font-family:Archivo,'Archivo Narrow','Arial Narrow',Arial,sans-serif}
+.g-page .g-corps{padding:1.6rem clamp(1.3rem,4.4vw,3rem) 1.8rem}
+.g-marque{display:flex;align-items:baseline;justify-content:space-between;
+ gap:1rem;font:700 11px/1 Archivo,'Arial Narrow',sans-serif;
+ letter-spacing:.34em;text-transform:uppercase;color:var(--crm)}
+.g-marque em{font-style:normal;letter-spacing:.1em;text-transform:none;
+ font-weight:400}
+.g-filet{display:flex;height:4px;margin:.9rem 0 1.6rem}
+.g-filet i{flex:1;background:var(--dor)}
+.g-filet i:nth-child(2){flex:.45;background:rgba(255,253,242,.5)}
+.g-filet i:nth-child(3){flex:.2;background:rgba(255,253,242,.22)}
+.g-page.m-page .m-titre{font-size:clamp(1.9rem,6.4vw,3.3rem);font-weight:900;
+ font-stretch:66%;font-variation-settings:'wdth' 66,'wght' 900;
+ text-transform:uppercase;line-height:.92;letter-spacing:-.008em;
+ color:var(--crm);margin:0 0 1.4rem}
+.g-page.m-page .m-titre.g-titre{font-size:clamp(1.6rem,4.2vw,2.3rem);
+ margin:0 0 .9rem;letter-spacing:.03em;word-spacing:.18em;line-height:1.05}
+/* Le livre, sous le titre du manifeste : la langue de la couverture, un cran
+   en dessous du titre ; la date à côté, en texte. */
+.g-livre{margin:0;font-size:clamp(1.2rem,3.2vw,1.7rem);color:var(--dor)}
+.g-livre em{font-style:normal;font-size:.95rem;font-weight:400;text-transform:none;
+ font-stretch:100%;font-variation-settings:normal;letter-spacing:0;
+ color:var(--crm);white-space:nowrap}
+.g-tagline{margin:-1rem 0 1.4rem;font-size:clamp(1.2rem,3.2vw,1.7rem);
+ font-weight:800;font-variation-settings:'wdth' 84,'wght' 800;
+ line-height:1.2;color:var(--dor)}
+.g-adresse{margin:1.8rem 0 0;font:700 .95rem/1 Archivo,'Arial Narrow',sans-serif;
+ color:var(--crm)}
+/* L'or sur le brique ne dépasse pas 3:1 de contraste : il tient pour un filet
+   ou une vedette, pas pour du texte. Les intertitres passent donc en crème, et
+   l'or reste à la ligne qui les souligne. */
+.g-page.m-page h2{font:600 10.5px/1 Archivo,'Arial Narrow',sans-serif;
+ letter-spacing:.28em;text-transform:uppercase;color:var(--crm);
+ margin:1.7rem 0 .8rem;padding-bottom:.5rem;
+ border-bottom:1px solid rgba(255,210,74,.55)}
+.g-page.m-page #P1-constat h2{margin-top:0}
+.g-page.m-page .bloc{margin:0 0 .9rem;text-align:justify}
+/* Un peu plus petit, un peu plus aéré, un peu moins gras : le texte suivi se
+   lit, il ne s'affiche pas. Le gras reste sur l'affirmation seule. */
+.g-page.m-page .affirmation{display:inline;margin:0;font-weight:700;
+ font-variation-settings:'wdth' 94,'wght' 700;font-size:1rem;line-height:1.4;
+ color:var(--crm)}
+/* Aucune transparence sur le fond strié : elle laissait un gris illisible.
+   L'appui se distingue de l'affirmation par le poids, pas par l'opacité. */
+.g-page.m-page .appui{display:inline;margin:0;font-size:.97rem;
+ line-height:1.42;color:var(--crm);font-weight:400}
+.g-page.m-page ul.mesures{list-style:none;margin:0 0 .9rem;padding:0;
+ display:grid;gap:.75rem}
+.g-page.m-page li.mesure{padding-left:1.15rem;
+ border-left:2px solid var(--dor);text-align:justify}
+.g-outils{display:flex;flex-wrap:wrap;gap:.6rem;margin:2.6rem 0 0;
+ padding-top:1.5rem;border-top:1px solid rgba(255,210,74,.38)}
+.g-bouton{font:700 .9rem/1 Archivo,'Arial Narrow',Arial,sans-serif;
+ cursor:pointer;text-decoration:none;padding:.85rem 1.25rem;
+ border:1px solid var(--dor);background:none;color:var(--dor);
+ display:inline-block}
+.g-bouton.g-plein{background:var(--crm);border-color:var(--crm);
+ color:var(--briq)}
+.g-bouton:hover{background:rgba(255,210,74,.16)}
+.g-bouton.g-plein:hover{background:var(--dor);border-color:var(--dor)}
+.g-bouton:focus-visible{outline:2px solid var(--crm);outline-offset:3px}
+/* Ces règles sont celles de la fiche — Archivo en titre, Source Serif en
+   texte courant, sur papier crème. Le
+   manifeste partage les mêmes classes de contenu et porte une autre
+   charte : il est exclu ici, une fois, au lieu de surenchérir en
+   spécificité à chaque règle (A-215, A-220). */
+.m-page:not(.g-page) .m-corps{padding:1.6rem clamp(1.2rem,4vw,2.6rem) 2.2rem}
+.m-titre{font-size:clamp(1.9rem,5.4vw,3rem);line-height:1.04;font-weight:700;
+ margin:.2rem 0 1.4rem;color:var(--enc);text-wrap:balance}
+.m-page:not(.g-page) .m-corps h2{font:700 11px/1 var(--chif);letter-spacing:.22em;
+ text-transform:uppercase;color:var(--ocre);margin:2.2rem 0 .7rem;
+ padding-bottom:.5rem;border-bottom:1px solid var(--fil)}
+.m-page:not(.g-page) .m-corps .bloc{margin:0 0 1.1rem}
+.m-page:not(.g-page) .m-corps .affirmation{margin:0;font-weight:700;font-size:1.06rem;
+ line-height:1.4;color:var(--enc)}
+.m-page:not(.g-page) .m-corps .appui{margin:.2rem 0 0;font-size:1rem;line-height:1.5;
+ color:var(--gris)}
+.m-page:not(.g-page) .m-corps .bloc .appui{display:inline}
+.m-page:not(.g-page) .m-corps .bloc .affirmation{display:inline}
+.m-page:not(.g-page) .m-corps ul.mesures{list-style:none;margin:0;padding:0;display:grid;
+ gap:.85rem}
+.m-page:not(.g-page) .m-corps li.mesure{padding-left:1rem;border-left:3px solid var(--gain)}
+.m-page:not(.g-page) .m-corps li.mesure .affirmation{font-weight:700}
+.m-page:not(.g-page) .m-corps li.mesure .appui{color:var(--gris)}
+.m-outils{display:flex;flex-wrap:wrap;gap:.6rem;margin:2.4rem 0 0;
+ padding-top:1.4rem;border-top:1px solid var(--fil)}
+.m-bouton{font:700 .78rem/1 var(--chif);letter-spacing:.08em;
+ text-transform:uppercase;cursor:pointer;text-decoration:none;
+ padding:.85rem 1.3rem;border:1px solid var(--enc);background:none;
+ color:var(--enc);display:inline-block}
+.m-bouton.m-plein{background:var(--enc);border-color:var(--enc);
+ color:var(--pap)}
+.m-bouton:hover{background:var(--enc);color:var(--pap)}
+.m-bouton.m-plein:hover{background:none;color:var(--enc)}
+.m-bouton:focus-visible{outline:2px solid var(--enc);outline-offset:3px}
+
+.m-rgpd{margin:2rem 0 0;padding:1.4rem 0 0;border-top:1px solid var(--fil)}
+.m-rgpd h3{font:700 11px/1 var(--chif);letter-spacing:.18em;
+ text-transform:uppercase;color:var(--ocre);margin:0 0 .6rem}
+.m-rgpd p{margin:0 0 .5rem;font-size:.88rem;line-height:1.5;color:var(--gris)}
+.m-rgpd p:last-child{margin-bottom:0}
+.m-rgpd a{color:var(--gain);text-decoration-thickness:1px;
+ text-underline-offset:2px}
+.m-rgpd a:hover{color:var(--enc)}
+.m-partage{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 0}
+.m-chapeau{margin:.5rem 0 0;font-size:1rem;line-height:1.5;color:var(--gris);
+ max-width:38rem}
+.m-note{margin:.9rem 0 0;font-size:.92rem;line-height:1.5;color:var(--gris)}
+.m-note a{color:var(--gain)}
+.m-adresse{margin:1.4rem 0 0;padding:0 0 1.3rem;
+ border-bottom:1px solid var(--fil)}
+.m-adr-lab{margin:0;font:700 10px/1 var(--chif);letter-spacing:.2em;
+ text-transform:uppercase;color:var(--ocre)}
+.m-adr{margin:.4rem 0 0;font:700 clamp(1.05rem,3.4vw,1.5rem)/1.2 var(--chif);
+ color:var(--enc);word-break:break-all;user-select:all}
+.f-outils{margin:1.6rem 0 0;padding:1.3rem 1.8rem 0;border-top:1px solid var(--fil)}
+.f-outils .m-bouton{font-size:.86rem}
+.m-part{font:700 .8rem/1 var(--chif);letter-spacing:.06em;text-decoration:none;
+ padding:.65rem .95rem;border:1px solid var(--fil);color:var(--enc)}
+.m-part:hover{background:var(--sable);border-color:var(--enc)}
+.m-part-off{color:var(--gris);border-color:var(--fil);opacity:.55;
+ cursor:default;user-select:none}
+.m-etape{font:700 11px/1 var(--chif);letter-spacing:.18em;
+ text-transform:uppercase;color:var(--ocre);margin:1.8rem 0 .5rem}
+
+@media print{
+ @page{margin:0}
+ body{background:#fff;padding:0;-webkit-print-color-adjust:exact;
+  print-color-adjust:exact}
+ /* Le corps reste brique même sous le contenu, sur les pages qui portent le
+    manifeste : sinon la dernière page finit sur une bande blanche là où le
+    texte s'arrête avant le bas de la feuille. Sans effet sur les autres
+    pages (fiches, contact...), qui n'ont pas de .g-page. */
+ body:has(.g-page){background:#b23a10}
+ .page,.m-page,.g-page{box-shadow:none;max-width:none;margin:0}
+ .s-nav,.s-retour,.m-outils,.g-outils,.f-outils,.s-pied{display:none}
+ /* Le téléchargement doit rendre la charte du site, pas une version à
+    l'encre économisée : le fond brique et l'or sont conservés à
+    l'impression comme à l'écran. */
+ .g-page{-webkit-print-color-adjust:exact;print-color-adjust:exact;
+  padding:1.6rem clamp(1.3rem,4.4vw,3rem) 1.8rem}
+ /* Une coupure en plein milieu d'une phrase est illisible : chaque bloc et
+    chaque mesure reste entier sur une page, quitte à pousser la suivante. */
+ .g-page.m-page .bloc,.g-page.m-page li.mesure{break-inside:avoid;
+  page-break-inside:avoid}
+ .g-page.m-page h2{break-after:avoid;page-break-after:avoid}
+ .g-page.m-page .m-titre,.g-tagline{break-after:avoid;page-break-after:avoid}
+}
+
+.m-video{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;
+ margin:1.4rem 0 0;background:#000}
+.m-video iframe{position:absolute;top:0;left:0;width:100%;height:100%;
+ border:0}
+.m-video-item{margin:1.6rem 0 0;padding:1.6rem 0 0;border-top:1px solid var(--fil)}
+.m-video-item:first-child{margin-top:1.4rem;padding-top:1.4rem}
+.m-video-titre{margin:.4rem 0 0;font:700 1.1rem/1.35 var(--chif);color:var(--enc)}
+.m-video-titre a{color:inherit;text-decoration:none;border-bottom:2px solid var(--fil)}
+.m-video-titre a:hover{border-color:var(--enc)}
+.s-video{padding:1.2rem 1.8rem 1.4rem}
+.s-video .m-etape{margin-top:0}
+.s-video .m-video{margin-top:0}
+.m-video-vignette{display:block;margin:.8rem 0 0;background:#000}
+.m-video-vignette img{width:100%;display:block}
+.m-video-vignette:hover img{opacity:.9}
+
+/* Sur mobile, un visage à la fois : le script calcule la position de chacun,
+   la photo passe de l'un à l'autre. Immobile si moins de mouvement demandé. */
+.a-fond.a-defile::after{animation:a-defile 21s ease-in-out infinite alternate}
+@keyframes a-defile{
+ 0%,28%{background-position:0 0,0 0,var(--x1) var(--y1);--b1:var(--f1);--b2:var(--g1)}
+ 38%,62%{background-position:0 0,0 0,var(--x2) var(--y2);--b1:var(--f2);--b2:var(--g2)}
+ 72%,100%{background-position:0 0,0 0,var(--x3) var(--y3);--b1:var(--f3);--b2:var(--g3)}}
+/* Le fondu du haut suit chaque arrêt : ses bornes s'animent comme des longueurs. */
+@property --b1{syntax:'<length>';inherits:true;initial-value:0px}
+@property --b2{syntax:'<length>';inherits:true;initial-value:0px}
+@media(max-width:380px){
+ .a-livre{column-gap:.6rem}
+ .a-livre-nom,.a-livre .a-appel{padding:.75rem .7rem}}
+@media(prefers-reduced-motion:reduce){.a-fond::after{animation:none}}
+@media(max-width:600px){
+ .a-fond{padding:1.1rem 1.1rem .8rem}
+ .a-bas{padding-top:.8rem}
+ .a-bas .a-rub{gap:.55rem 1.4rem}
+ .a-bas .a-rub a{font-size:.95rem;letter-spacing:.16em}
+ .a-fond .s-pied{margin-top:1rem}
+ .a-livre-nom,.a-livre .a-appel{padding:.8rem .95rem}
+ .a-corps{padding:.8rem 0 .6rem}
+ .a-promesse{margin-top:.9rem}}
+
+/* Titres des cartes et des fiches : la lettre condensée de la garde et du
+   manifeste, au lieu de l'Archivo large. */
+.s-h1,.qui{font-weight:700;font-stretch:66%;
+ font-variation-settings:'wdth' 66,'wght' 700;text-transform:uppercase;
+ letter-spacing:-.005em}
+
+/* Auteurs : la photo glisse lentement d'un bord à l'autre, en aller-retour ;
+   sur mobile, d'un auteur à l'autre. Immobile si moins de mouvement est demandé. */
+.s-trame{background-size:auto,125% auto;
+ animation:s-defile 24s ease-in-out infinite alternate}
+@keyframes s-defile{
+ 0%,20%{background-position:0 0,0% 20%}
+ 80%,100%{background-position:0 0,100% 20%}}
+@media(max-width:600px){.s-trame{background-size:auto,auto 100%;
+ animation-name:a-defile-auteurs;animation-duration:21s}}
+@keyframes a-defile-auteurs{
+ 0%,28%{background-position:0 0,0% 0}
+ 38%,62%{background-position:0 0,50% 0}
+ 72%,100%{background-position:0 0,100% 0}}
+@media(prefers-reduced-motion:reduce){.s-trame{animation:none}}
+
+.a-fond::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:linear-gradient(180deg,var(--briq) 0,var(--briq) var(--b1,0px),
+   transparent var(--b2,0px)),linear-gradient(var(--voile),var(--voile)),url(img/auteurs.jpg);
+ background-repeat:no-repeat;background-size:auto,auto,var(--ps,cover);
+ background-position:0 0,0 0,var(--px,50%) var(--py,30%)}
+
+/* --- réseaux du mouvement et pages de contact -------------------------------
+   Charte des vidéos de la chaîne : photo chaude, brique, capitales serif en
+   crème, accent or. Classes r- (réseaux) et v- (vidéos), ajoutées sans
+   toucher aux règles existantes. */
+.r-sigles{display:flex;gap:1.1rem;align-items:center;margin-left:auto}
+.r-sigles a{display:inline-flex;line-height:0}
+.r-sigles a:hover{opacity:.8}
+.r-sigles svg{width:1.45rem;height:1.45rem}
+
+/* Bannière de la page Vidéos : le format court, présentation du mouvement. */
+.v-ban{--briq:#b23a10; --briqc:#b84923; --dor:#ffd24a; --crm:#fffdf2;
+ background:var(--briq);background-image:repeating-linear-gradient(90deg,
+   var(--briqc) 0 2px, transparent 2px 22px);color:var(--crm);
+ display:grid;grid-template-columns:minmax(0,15rem) 1fr;gap:1.8rem;
+ align-items:center;padding:1.8rem}
+.v-ban-image{position:relative;display:block;background:#000;
+ box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.v-ban-image img{display:block;width:100%;height:auto}
+.v-ban-image::after{content:'';position:absolute;left:.9rem;bottom:.9rem;
+ width:3.4rem;height:3.4rem;border-radius:50%;
+ background:rgba(178,58,16,.9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fffdf2' d='M9 6.5v11l9-5.5z'/%3E%3C/svg%3E") center/58% no-repeat;
+ box-shadow:0 0 0 3px var(--crm)}
+.v-ban-image:hover::after{background-color:var(--briq);box-shadow:0 0 0 3px var(--dor)}
+.v-ban-lab{margin:0;font:700 11px/1.3 var(--chif);letter-spacing:.2em;
+ text-transform:uppercase;color:var(--dor)}
+.v-ban-titre{margin:.8rem 0 0;font:700 clamp(1.7rem,4.6vw,2.4rem)/1.06 var(--texte);
+ text-transform:uppercase;color:var(--crm);text-wrap:balance}
+.v-ban-titre span{color:var(--dor)}
+.v-ban-texte{margin:.9rem 0 0;font:400 1rem/1.45 var(--texte);color:var(--crm);opacity:.9}
+.v-ban .g-outils{margin:1.4rem 0 0;padding:0;border:0}
+.v-ban .g-bouton{display:inline-flex;align-items:center;gap:.5rem}
+.v-ban .g-bouton svg{width:1.1rem;height:1.1rem}
+@media(max-width:600px){
+ .v-ban{grid-template-columns:1fr;padding:1.3rem 1.1rem 1.5rem;gap:1.3rem}
+ .v-ban-image{width:min(100%,17rem);margin:0 auto}
+}
+
+/* Je m'exprime, J'adhère : la photo des auteurs, chaude, fondue dans le
+   brique ; le texte en crème ; les mentions RGPD restent sur papier. */
+.r-page{--briq:#b23a10; --briqc:#b84923; --dor:#ffd24a; --crm:#fffdf2;
+ max-width:44rem;margin:0 auto 1.4rem;color:var(--crm);
+ box-shadow:0 2px 0 rgba(0,0,0,.35);
+ background:repeating-linear-gradient(90deg,rgba(184,73,35,.55) 0 2px,transparent 2px 22px),
+   linear-gradient(rgba(178,58,16,.84),rgba(178,58,16,.84)),
+   url(img/auteurs-2.jpg) center 18%/cover var(--briq)}
+.r-tete{padding:2.6rem clamp(1.2rem,4vw,2.6rem) .4rem}
+/* Variante couverture : le livre posé en biais à droite du titre. */
+.r-page.r-couv{position:relative;overflow:hidden;
+ background:repeating-linear-gradient(90deg,var(--briqc) 0 2px,transparent 2px 22px) var(--briq)}
+.r-couv .r-tete{padding-right:clamp(9rem,30%,15rem)}
+.r-couv-img{position:absolute;top:1.6rem;right:clamp(1rem,4vw,2.4rem);
+ width:clamp(7rem,24%,11.5rem);height:auto;transform:rotate(4deg);
+ box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.r-sur{margin:0;font:700 .85rem/1 var(--chif);letter-spacing:.42em;
+ text-transform:uppercase;color:var(--dor)}
+.r-titre{margin:.5rem 0 0;font:700 clamp(2.4rem,8vw,4rem)/.98 var(--texte);
+ text-transform:uppercase;color:var(--crm)}
+.r-chapeau{margin:.8rem 0 0;font:400 clamp(1.05rem,2.6vw,1.25rem)/1.45 var(--texte);
+ color:var(--crm);max-width:34rem}
+.r-chapeau b{color:var(--dor);font-weight:700}
+.r-corps{padding:1.2rem clamp(1.2rem,4vw,2.6rem) 2rem}
+.r-lab{margin:1.8rem 0 .5rem;font:700 11px/1.3 var(--chif);letter-spacing:.2em;
+ text-transform:uppercase;color:var(--dor)}
+.r-corps > .r-lab:first-child{margin-top:.4rem}
+.r-adr{margin:0;font:800 clamp(1.25rem,4.4vw,2rem)/1.15 var(--chif);
+ color:var(--crm);word-break:break-all;user-select:all}
+.r-corps .g-outils{margin:1rem 0 0;padding:0;border:0}
+.r-note{margin:1rem 0 0;font:400 .98rem/1.5 var(--texte);color:var(--crm);opacity:.88;
+ max-width:36rem}
+.r-suivre{display:flex;flex-wrap:wrap;gap:.6rem;margin:.2rem 0 0}
+.r-suivre a{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 1.15rem;
+ font:700 1rem/1 var(--chif);color:var(--crm);text-decoration:none;
+ border:1px solid rgba(255,253,242,.5)}
+.r-suivre a:hover{border-color:var(--dor);color:var(--dor)}
+.r-suivre svg{width:1.3rem;height:1.3rem}
+.r-suivre a:focus-visible,.r-sigles a:focus-visible{outline:2px solid var(--crm);outline-offset:3px}
+.r-page .m-rgpd{margin:0;padding:1.4rem clamp(1.2rem,4vw,2.6rem) 1.6rem;
+ background:var(--pap);border-top:0}
+@media(max-width:600px){.r-tete{padding-top:1.8rem}
+ .r-couv .r-tete{padding-right:7.5rem}
+ .r-couv-img{width:6.4rem;top:1.2rem}}
+
+/* Page Vidéos, liste compacte : vignette à gauche, texte à droite, pour que
+   la page défile vite à mesure que les capsules s'ajoutent. */
+.s-video .m-video-item{display:grid;grid-template-columns:13rem minmax(0,1fr);
+ column-gap:1.2rem;align-items:start;margin:1rem 0 0;padding:1rem 0 0}
+.s-video > .m-video-item:first-child{margin-top:0;padding-top:0;border-top:0}
+.s-video .m-video-item > .m-video-vignette,.s-video .m-video-item > .m-video{
+ grid-column:1;grid-row:1 / span 4;margin:0}
+.s-video .m-video-item > :not(.m-video-vignette):not(.m-video){grid-column:2}
+.s-video .m-video-item .m-etape{margin:.15rem 0 .45rem}
+.s-video .m-video-item .m-video-titre{margin:0;font-size:1rem}
+.s-video .m-video-item .m-note{margin:.5rem 0 0;font-size:.85rem;line-height:1.45}
+.v-ban{grid-template-columns:minmax(0,11rem) 1fr;gap:1.5rem;padding:1.4rem 1.8rem}
+.v-ban-titre{font-size:clamp(1.35rem,3.4vw,1.85rem)}
+.v-ban .g-outils{margin-top:1.1rem}
+.v-ban-image::after{left:.6rem;bottom:.6rem;width:2.6rem;height:2.6rem}
+@media(max-width:600px){
+ .s-video .m-video-item{grid-template-columns:8.5rem minmax(0,1fr);column-gap:.8rem}
+ .s-video .m-video-item .m-etape{font-size:9.5px;letter-spacing:.12em;line-height:1.3}
+ .s-video .m-video-item .m-video-titre{font-size:.9rem}
+ .s-video .m-video-item .m-note{font-size:.8rem}
+ .v-ban{grid-template-columns:7.5rem minmax(0,1fr);gap:1rem;padding:1.1rem 1.1rem 1.2rem}
+ .v-ban-image{width:auto;margin:0}
+ .v-ban-titre{font-size:1.15rem;margin-top:.5rem}
+ .v-ban-lab{font-size:9.5px;letter-spacing:.14em}
+ .v-ban .g-outils{margin-top:.8rem;gap:.4rem}
+ .v-ban .g-bouton{font-size:.78rem;padding:.6rem .75rem}
+ .v-ban-image::after{width:2rem;height:2rem;left:.4rem;bottom:.4rem}
+}
+
+/* --- J'écris à mon élu (ecrire.html) ----------------------------------------
+   Gabarit r-page ; trois écrans dans la même page. Classes e-. */
+.s-pied .a-parici.a-elu{border-bottom:2px solid currentColor;padding-bottom:.18rem}
+.e-page{max-width:60rem}
+.e-page [hidden]{display:none!important}
+.e-etapes{display:flex;margin:0;padding:0 clamp(1.2rem,4vw,2.6rem);list-style:none;
+ font:700 11px/1 var(--chif);letter-spacing:.16em;text-transform:uppercase}
+.e-etapes li{padding:.7rem 0;margin-right:1.6rem;color:rgba(255,253,242,.55);
+ border-bottom:3px solid transparent}
+.e-etapes li b{display:inline-block;width:1.5rem;height:1.5rem;line-height:1.5rem;text-align:center;
+ border:1px solid currentColor;border-radius:50%;margin-right:.5rem;letter-spacing:0}
+.e-etapes li[aria-current]{color:var(--dor);border-color:var(--dor)}
+.e-etapes li.e-fait{color:var(--crm)}
+.e-champ{display:block;margin:0 0 .9rem}
+.e-champ span{display:block;margin:0 0 .35rem;font:700 11px/1.2 var(--chif);letter-spacing:.14em;
+ text-transform:uppercase;color:var(--dor)}
+.e-champ span i{font-style:normal;font-weight:400;letter-spacing:.04em;text-transform:none;
+ color:var(--crm);opacity:.75}
+.e-champ input{width:100%;font:600 1.05rem/1.2 var(--chif);color:var(--enc);
+ background:var(--pap);border:2px solid var(--pap);padding:.75rem .85rem;border-radius:0}
+.e-champ input:focus{outline:none;border-color:var(--dor)}
+.e-champ input[aria-invalid=true]{border-color:#ffb199}
+.e-cp{display:flex;flex-wrap:wrap;gap:.6rem;align-items:stretch}
+.e-cp .e-champ{margin:0;flex:none}
+.e-cp input{font-size:1.5rem;letter-spacing:.12em;width:9.5rem}
+.e-cp .g-bouton{display:flex;align-items:center}
+.e-msg{margin:.9rem 0 0;font:400 .98rem/1.45 var(--texte);color:var(--crm)}
+.e-msg b{color:var(--dor)}
+.e-choix{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0 0}
+.e-choix button{font:700 .92rem/1.25 var(--chif);text-align:left;cursor:pointer;
+ padding:.65rem .9rem;color:var(--crm);background:rgba(22,21,15,.28);border:1px solid rgba(255,253,242,.4)}
+.e-choix button:hover,.e-choix button[aria-pressed=true]{border-color:var(--dor);color:var(--dor)}
+.e-choix button small{display:block;font-weight:400;opacity:.8;margin-top:.15rem}
+.e-elus{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem 0 0}
+.e-elu{background:rgba(22,21,15,.28);border:1px solid rgba(255,253,242,.28);padding:1.2rem 1.2rem 1.3rem}
+.e-elu .r-lab{margin:0 0 .6rem}
+.e-elu-nom{margin:0;font:700 1.45rem/1.15 var(--texte);color:var(--crm)}
+.e-elu-qui{margin:.45rem 0 1.1rem;font:400 .95rem/1.4 var(--texte);color:var(--crm);opacity:.85}
+.e-deux{margin:1rem 0 0}
+.e-grille{display:grid;grid-template-columns:minmax(0,19rem) minmax(0,1fr);gap:2rem;align-items:start}
+.e-onglets{display:flex;gap:.4rem;margin:0 0 .8rem}
+.e-onglets button{font:700 .85rem/1 var(--chif);padding:.65rem 1rem;color:var(--crm);cursor:pointer;
+ background:none;border:1px solid rgba(255,253,242,.4)}
+.e-onglets button[aria-selected=true]{background:var(--crm);color:var(--briq);border-color:var(--crm)}
+/* La lettre : une feuille de papier posée sur le brique. */
+.e-lettre{background:var(--pap);color:var(--enc);padding:2rem 2.2rem 2.2rem;
+ font:400 .82rem/1.5 var(--texte);box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.e-lettre p{margin:0;min-height:1.2em}
+.e-lettre p.e-droite{margin-left:52%}
+.e-lettre p.e-just{text-align:justify;margin:0 0 .5rem}
+.e-var{background:#fff3c4}
+.e-vide{color:#9a8f7a}
+.e-case{display:flex;gap:.7rem;align-items:flex-start;margin:0 0 .7rem;
+ font:400 .95rem/1.45 var(--texte);color:var(--crm)}
+.e-case input{width:1.2rem;height:1.2rem;margin:.15rem 0 0;accent-color:var(--dor);flex:none}
+.e-recap{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0 0 1.2rem}
+.e-recap.e-seul{grid-template-columns:1fr}
+.e-envoi{border:1px solid rgba(255,253,242,.28);background:rgba(22,21,15,.28);padding:1.2rem}
+.e-envoi h3{margin:0 0 .3rem;font:700 1.15rem/1.2 var(--texte);color:var(--crm)}
+.e-envoi p{margin:0 0 .9rem;font:400 .9rem/1.4 var(--texte);color:var(--crm);opacity:.88}
+.e-envoi .g-outils{margin:0;padding:0;border:0;gap:.5rem}
+.e-envoi .g-bouton{font-size:.82rem}
+.e-envoi .e-poste{margin:.9rem 0 0;font-size:.82rem}
+.e-envoi a:not(.g-bouton){color:var(--dor)}
+.e-adhesion{background:var(--pap);color:var(--enc);padding:1.3rem 1.5rem;margin:0 0 1.4rem;
+ border-left:6px solid var(--dor)}
+.e-adhesion h3{margin:0 0 .5rem;font:700 11px/1.2 var(--chif);letter-spacing:.18em;
+ text-transform:uppercase;color:var(--briq)}
+.e-adhesion p{margin:0 0 .5rem;font:400 .95rem/1.5 var(--texte)}
+.e-adhesion p:last-child{margin:0}
+.e-adhesion a{color:var(--briq)}
+.e-gros{font-size:1.05rem!important;padding:1.05rem 1.5rem!important}
+.e-retour{font:700 .85rem/1 var(--chif);color:var(--crm);background:none;border:0;padding:0;
+ cursor:pointer;text-decoration:underline;text-underline-offset:3px;margin:1.4rem 0 0}
+.e-retour:hover{color:var(--dor)}
+.e-page button:focus-visible{outline:2px solid var(--crm);outline-offset:3px}
+@media(max-width:700px){
+ .e-elus,.e-grille,.e-recap{grid-template-columns:1fr}
+ .e-etapes li{margin-right:.9rem;font-size:10px}
+ .e-etapes li span{display:none}
+ .e-lettre{padding:1.3rem 1.2rem;font-size:.78rem}
+ .e-lettre p.e-droite{margin-left:30%}
+
+}
+.e-elus.e-trois,.e-recap.e-trois{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:900px){.e-elus.e-trois,.e-recap.e-trois{grid-template-columns:1fr}}
+.e-outils-lettre{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 .5rem}
+.e-papier{margin:0 0 .9rem;font:400 .88rem/1.45 var(--texte);color:var(--crm);opacity:.9}
+.e-texte{display:block;width:100%;margin:0 0 .6rem;padding:.6rem .7rem;font:400 .82rem/1.5 var(--texte);
+ color:var(--enc);background:#fffbea;border:1px dashed var(--ocre);resize:vertical;overflow:hidden}
+.e-texte:focus{outline:2px solid var(--dor);outline-offset:1px}
+.e-web{margin:.7rem 0 0;font:400 .85rem/1.4 var(--texte);color:var(--crm)}
+.e-web a{color:var(--dor)}
+.e-outils-lettre .g-bouton{font-size:.82rem;padding:.75rem .9rem}
+.e-courriel{display:grid;grid-template-columns:auto 1fr;gap:.3rem .8rem;margin:0 0 1rem;
+ font:400 .9rem/1.4 var(--texte);color:var(--crm)}
+.e-courriel dt{font:700 10px/1.9 var(--chif);letter-spacing:.16em;text-transform:uppercase;color:var(--dor)}
+.e-courriel dd{margin:0;word-break:break-word}
+.e-courriel b{font-weight:700;user-select:all}
+.e-courriel a{color:var(--dor)}
+.e-copie{margin-left:.4rem;font:700 .72rem/1 var(--chif);padding:.35rem .55rem;cursor:pointer;
+ color:var(--crm);background:none;border:1px solid rgba(255,253,242,.5)}
+.e-copie:hover{border-color:var(--dor);color:var(--dor)}
+/* J'écris à mon élu : sénateurs (rubrique repliée, cases à cocher) et
+   Français de l'étranger (choix de la circonscription). */
+.n-plier{grid-column:1 / -1}
+.n-plier summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem}
+/* Même fond que les fiches du député et du maire. */
+.n-plier summary.g-bouton{background:rgba(22,21,15,.28)}
+.n-plier summary.g-bouton:hover{background:rgba(255,210,74,.16)}
+.n-plier summary::-webkit-details-marker{display:none}
+.n-plier summary::after{content:'▾';font-size:.9em}
+.n-plier[open] summary::after{content:'▴'}
+.n-plier[open] summary{margin-bottom:.8rem}
+.n-bloc{grid-column:1 / -1}
+.n-liste{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem}
+.n-ligne{display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:auto auto;column-gap:.6rem;align-items:center;
+ padding:.55rem .7rem;border:1px solid rgba(255,253,242,.22);cursor:pointer}
+.n-ligne:hover{border-color:var(--dor)}
+.n-ligne input{grid-row:1 / 3;width:1.15rem;height:1.15rem;accent-color:var(--dor)}
+.n-nom{font:700 1rem/1.25 var(--texte);color:var(--crm)}
+.n-qui{grid-column:2;font:400 .82rem/1.35 var(--texte);color:var(--crm);opacity:.8}
+.n-badge{grid-row:1 / 3;grid-column:3;font:700 9.5px/1.2 var(--chif);letter-spacing:.12em;text-transform:uppercase;
+ color:var(--briq);background:var(--dor);padding:.3rem .45rem}
+.n-fin{border-color:var(--dor);background:rgba(255,210,74,.08)}
+@media(max-width:700px){.n-liste{grid-template-columns:1fr}.n-ligne{grid-template-columns:auto 1fr}.n-badge{grid-row:auto;grid-column:2;justify-self:start;margin-top:.35rem}}
+.e-lien{margin:.6rem 0 0}
+.e-lien a{color:var(--dor)}
+.e-cp select{width:100%;font:600 1.05rem/1.2 var(--chif);color:var(--enc);background:var(--pap);border:2px solid var(--pap);padding:.8rem .7rem}
+.e-cp select:focus{outline:none;border-color:var(--dor)}
+.e-cp .e-champ.e-circo{flex:1 1 16rem;max-width:30rem}
+
+/* Données : le tableau des 236 milliards, tel que le livre le publie en annexe. */
+.s-synth{padding:.6rem 1.8rem .9rem}
+.s-synth table{width:100%;border-collapse:collapse;font-size:.84rem;line-height:1.25}
+.s-synth th,.s-synth td{padding:.16rem .4rem;border-bottom:1px solid var(--fil);vertical-align:baseline}
+.s-synth thead th{font:700 9px/1.2 var(--chif);letter-spacing:.1em;text-transform:uppercase;color:var(--gris);text-align:right;border-bottom:2px solid var(--enc);padding-bottom:.3rem}
+.s-synth tbody th{text-align:left;font-weight:400}
+.s-synth td{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;width:5.2rem}
+.s-synth .s-n0 th,.s-synth .s-n0 td{font:700 .98rem/1.25 var(--titre);border-bottom:2px solid var(--enc);padding:.3rem .4rem}
+.s-synth .s-n1 th,.s-synth .s-n1 td{font-weight:700;padding-top:.45rem}
+.s-synth .s-n2 th{padding-left:.9rem;font-weight:700}
+.s-synth .s-n2 td{font-weight:700}
+.s-synth .s-n3 th{padding-left:1.8rem;color:#444}
+.s-synth .s-n3 td{color:#444}
+.s-synth-src{margin:.55rem 0 0;font-size:.78rem;color:var(--gris)}
+@media(max-width:600px){.s-synth{padding:.5rem .8rem .8rem}.s-synth table{font-size:.8rem}.s-synth td{width:auto;padding-left:.25rem}.s-synth .s-n2 th{padding-left:.5rem}.s-synth .s-n3 th{padding-left:1rem}.s-synth thead th{letter-spacing:.04em}}
+/* J'écris à mon élu : compteur de lettres, à l'écran d'envoi. */
+.e-compteur{margin:1.4rem 0 0;font:400 1rem/1.4 var(--texte);color:var(--crm)}
+.e-compteur b{font:700 1.6rem/1 var(--titre);color:var(--dor);margin-right:.3rem}
+
+/* J'adhère : la cagnotte de l'association, troisième étape. */
+.c-cagnotte{display:grid;grid-template-columns:7.5rem 1fr;gap:1.1rem;align-items:center;margin:.4rem 0 0;padding:1rem;background:rgba(22,21,15,.28);border:1px solid rgba(255,253,242,.28)}
+.c-cagnotte img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.c-txt{margin:0 0 .8rem;font:400 .98rem/1.45 var(--texte);color:var(--crm)}
+@media(max-width:520px){.c-cagnotte{grid-template-columns:1fr}.c-cagnotte img{max-width:9rem}}
