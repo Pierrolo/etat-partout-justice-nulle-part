@@ -1,0 +1,3014 @@
+{
+ "by_age": [
+  {
+   "age": 0,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 1,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 2,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 3,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 4,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 5,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 6,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 7,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 8,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 9,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 10,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 11,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 12,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 13,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 14,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 15,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 16,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 17,
+   "aide_fondamentale": 3300,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 16764
+  },
+  {
+   "age": 18,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": 6600,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 20064
+  },
+  {
+   "age": 19,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 20,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 21,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 22,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 23,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 24,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 25,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 26,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 27,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 28,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 29,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 30,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 31,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 32,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 33,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 34,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 35,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 36,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 37,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 38,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 39,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 40,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 41,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 42,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 43,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 44,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 45,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 46,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 47,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 48,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 49,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 50,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 51,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 52,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 53,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 54,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 55,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 56,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 57,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 58,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 59,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 60,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 61,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 62,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 63,
+   "aide_fondamentale": 6600,
+   "aide_handicap": 6600,
+   "compte_education": null,
+   "epargne_retraite_serie_1": null,
+   "epargne_retraite_serie_2": null,
+   "part_contributive_retraite": null,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 64,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 65,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 66,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 67,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 68,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 69,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 70,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 71,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 72,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 73,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 74,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 75,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 76,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 77,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 78,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 79,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 80,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 81,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 82,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 83,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 84,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  },
+  {
+   "age": 85,
+   "aide_fondamentale": 6600,
+   "aide_handicap": null,
+   "compte_education": null,
+   "epargne_retraite_serie_1": 20064,
+   "epargne_retraite_serie_2": 6600,
+   "part_contributive_retraite": 6600,
+   "rendement_patrimoine": 264,
+   "total_flux_annuels_eur_an": 13464
+  }
+ ],
+ "meta": {
+  "ages": [
+   0,
+   85
+  ],
+  "notes": [
+   "Deux séries portent le même libellé « Epargne retraite personnelle » dans le classeur (lignes 29 et 30) : elles sont exportées séparément (serie_1 = 20 064 €, serie_2 = 6 600 €) ; leur sens n'est pas documenté.",
+   "total_flux_annuels_eur_an = somme des cinq séries de flux annuels (hors les deux séries « épargne retraite personnelle », dont le sens — stock ou flux — n'est pas documenté) : calcul du pipeline, aucun total n'est publié dans le classeur.",
+   "Âge de 64 ans : début de la « part contributive de retraite » et de l'épargne retraite dans le modèle.",
+   "L'aide fondamentale de l'enfant (3 300 €) cesse l'année des 18 ans ; le compte éducation court de 0 à 18 ans inclus (19 valeurs) : écart d'un an signalé dans source-analysis §7.6."
+  ],
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphAFU › B23:CJ30",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+  },
+  "tier": "annonce",
+  "tier_note": "Calcul de Résolution sur des hypothèses du plan ; seule l'aide fondamentale (et sa majoration invalidité) a une base légale (PLF-P1 n° 28).",
+  "title_fr": "Solidarité nationale au cours de la vie (aide fondamentale, compte éducation, retraite, patrimoine)",
+  "unit": "€ par an et par personne"
+ },
+ "records": [
+  {
+   "age": 0,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 1,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 2,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 3,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 4,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 5,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 6,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 7,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 8,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 9,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 10,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 11,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 12,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 13,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 14,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 15,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 16,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 17,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 3300
+  },
+  {
+   "age": 18,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 19,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 20,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 21,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 22,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 23,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 24,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 25,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 26,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 27,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 28,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 29,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 30,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 31,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 32,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 33,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 34,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 35,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 36,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 37,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 38,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 39,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 40,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 41,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 42,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 43,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 44,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 45,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 46,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 47,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 48,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 49,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 50,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 51,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 52,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 53,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 54,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 55,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 56,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 57,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 58,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 59,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 60,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 61,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 62,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 63,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 64,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 65,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 66,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 67,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 68,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 69,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 70,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 71,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 72,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 73,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 74,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 75,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 76,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 77,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 78,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 79,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 80,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 81,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 82,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 83,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 84,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 85,
+   "label_fr": "Aide fondamentale universelle",
+   "series_id": "aide_fondamentale",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 0,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 1,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 2,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 3,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 4,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 5,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 6,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 7,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 8,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 9,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 10,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 11,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 12,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 13,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 14,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 15,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 16,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 17,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 18,
+   "label_fr": "Compte éducation",
+   "series_id": "compte_education",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 64,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 65,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 66,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 67,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 68,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 69,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 70,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 71,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 72,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 73,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 74,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 75,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 76,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 77,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 78,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 79,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 80,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 81,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 82,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 83,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 84,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 85,
+   "label_fr": "Part contributive de retraite",
+   "series_id": "part_contributive_retraite",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 0,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 1,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 2,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 3,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 4,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 5,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 6,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 7,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 8,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 9,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 10,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 11,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 12,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 13,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 14,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 15,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 16,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 17,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 18,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 19,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 20,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 21,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 22,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 23,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 24,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 25,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 26,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 27,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 28,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 29,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 30,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 31,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 32,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 33,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 34,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 35,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 36,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 37,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 38,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 39,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 40,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 41,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 42,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 43,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 44,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 45,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 46,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 47,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 48,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 49,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 50,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 51,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 52,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 53,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 54,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 55,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 56,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 57,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 58,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 59,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 60,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 61,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 62,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 63,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 64,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 65,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 66,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 67,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 68,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 69,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 70,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 71,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 72,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 73,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 74,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 75,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 76,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 77,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 78,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 79,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 80,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 81,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 82,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 83,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 84,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 85,
+   "label_fr": "Rendement du patrimoine restitué",
+   "series_id": "rendement_patrimoine",
+   "value_eur_an": 264
+  },
+  {
+   "age": 0,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 1,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 2,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 3,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 4,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 5,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 6,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 7,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 8,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 9,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 10,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 11,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 12,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 13,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 14,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 15,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 16,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 17,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 18,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 19,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 20,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 21,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 22,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 23,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 24,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 25,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 26,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 27,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 28,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 29,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 30,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 31,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 32,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 33,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 34,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 35,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 36,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 37,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 38,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 39,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 40,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 41,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 42,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 43,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 44,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 45,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 46,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 47,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 48,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 49,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 50,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 51,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 52,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 53,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 54,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 55,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 56,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 57,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 58,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 59,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 60,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 61,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 62,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 63,
+   "label_fr": "Part d'aide handicap",
+   "series_id": "aide_handicap",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 64,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 65,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 66,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 67,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 68,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 69,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 70,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 71,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 72,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 73,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 74,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 75,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 76,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 77,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 78,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 79,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 80,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 81,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 82,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 83,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 84,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 85,
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "series_id": "epargne_retraite_serie_1",
+   "value_eur_an": 20064
+  },
+  {
+   "age": 64,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 65,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 66,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 67,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 68,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 69,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 70,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 71,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 72,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 73,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 74,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 75,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 76,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 77,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 78,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 79,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 80,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 81,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 82,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 83,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 84,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  },
+  {
+   "age": 85,
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "series_id": "epargne_retraite_serie_2",
+   "value_eur_an": 6600
+  }
+ ],
+ "series": [
+  {
+   "age_max": 85,
+   "age_min": 0,
+   "cells": "C24:CJ24",
+   "distinct_values_eur": [
+    3300,
+    6600
+   ],
+   "id": "aide_fondamentale",
+   "label_fr": "Aide fondamentale universelle",
+   "label_source": "Aide fondamentale",
+   "n_values": 86,
+   "note": "3 300 €/an jusqu'à 17 ans, 6 600 €/an à partir de 18 ans (PLF-P1 n° 28 : 3 300 € par personne à charge « jusqu'à l'année au cours de laquelle elle atteint l'âge de dix-huit ans », 6 600 € par adulte).",
+   "row": 24,
+   "tier": "loi",
+   "unit": "€ par an"
+  },
+  {
+   "age_max": 18,
+   "age_min": 0,
+   "cells": "C25:CJ25",
+   "distinct_values_eur": [
+    6600
+   ],
+   "id": "compte_education",
+   "label_fr": "Compte éducation",
+   "label_source": "Compte éducation",
+   "n_values": 19,
+   "note": "6 600 €/an de 0 à 18 ans inclus (19 valeurs) : annonce du manifeste, sans texte de loi (l'aide fondamentale cesse de 3 300 € à l'âge de 18 ans mais le compte éducation court jusqu'à 18 ans inclus).",
+   "row": 25,
+   "tier": "annonce",
+   "unit": "€ par an"
+  },
+  {
+   "age_max": 85,
+   "age_min": 64,
+   "cells": "C26:CJ26",
+   "distinct_values_eur": [
+    6600
+   ],
+   "id": "part_contributive_retraite",
+   "label_fr": "Part contributive de retraite",
+   "label_source": "Part contributive de retraite",
+   "n_values": 22,
+   "note": "6 600 €/an à partir de 64 ans (le modèle suppose un départ à 64 ans) : sens non documenté dans le classeur.",
+   "row": 26,
+   "tier": "annonce",
+   "unit": "€ par an"
+  },
+  {
+   "age_max": 85,
+   "age_min": 0,
+   "cells": "C27:CJ27",
+   "distinct_values_eur": [
+    264
+   ],
+   "id": "rendement_patrimoine",
+   "label_fr": "Rendement du patrimoine restitué",
+   "label_source": "Rendement du patrimoine restitué",
+   "n_values": 86,
+   "note": "264 €/an à tout âge (18,209 Md€ de rendement net annuel ÷ population) : voir facts.json.",
+   "row": 27,
+   "tier": "annonce",
+   "unit": "€ par an"
+  },
+  {
+   "age_max": 63,
+   "age_min": 0,
+   "cells": "C28:CJ28",
+   "distinct_values_eur": [
+    6600
+   ],
+   "id": "aide_handicap",
+   "label_fr": "Part d'aide handicap",
+   "label_source": "Part d'aide handicap",
+   "n_values": 64,
+   "note": "6 600 €/an de 0 à 63 ans (majoration invalidité de l'aide fondamentale, PLF-P1 n° 28) ; la série s'arrête à 63 ans, quand la part contributive de retraite prend le relais.",
+   "row": 28,
+   "tier": "loi",
+   "unit": "€ par an"
+  },
+  {
+   "age_max": 85,
+   "age_min": 64,
+   "cells": "C29:CJ29",
+   "distinct_values_eur": [
+    20064
+   ],
+   "id": "epargne_retraite_serie_1",
+   "label_fr": "Épargne retraite personnelle (série 1)",
+   "label_source": "Epargne retraite personnelle",
+   "n_values": 22,
+   "note": "20 064 €/an à partir de 64 ans — même libellé que la série 2 dans le classeur ; sens non documenté (20 064 = 3 × 6 600 + 264, calcul du pipeline : 19 800 + 264, non écrit dans le classeur).",
+   "row": 29,
+   "tier": "annonce",
+   "unit": "€ par an"
+  },
+  {
+   "age_max": 85,
+   "age_min": 64,
+   "cells": "C30:CJ30",
+   "distinct_values_eur": [
+    6600
+   ],
+   "id": "epargne_retraite_serie_2",
+   "label_fr": "Épargne retraite personnelle (série 2)",
+   "label_source": "Epargne retraite personnelle",
+   "n_values": 22,
+   "note": "6 600 €/an à partir de 64 ans — même libellé que la série 1 dans le classeur ; sens non documenté.",
+   "row": 30,
+   "tier": "annonce",
+   "unit": "€ par an"
+  }
+ ]
+}

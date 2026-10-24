@@ -1,0 +1,2154 @@
+{
+ "afu_courbe": {
+  "afu_adulte_eur_an": 6600,
+  "cas": [
+   {
+    "afu_eur": 6600,
+    "cells": "C27:C31",
+    "impot_brut_eur": 0,
+    "revenu_imposable_eur": 0,
+    "revenu_net_apres_impot_eur": 6600,
+    "versement_net_eur": 6600
+   },
+   {
+    "afu_eur": 6600,
+    "cells": "D27:D31",
+    "impot_brut_eur": 1840,
+    "revenu_imposable_eur": 8000,
+    "revenu_net_apres_impot_eur": 12760,
+    "versement_net_eur": 4760
+   },
+   {
+    "afu_eur": 6600,
+    "cells": "E27:E31",
+    "impot_brut_eur": 4830,
+    "revenu_imposable_eur": 21000,
+    "revenu_net_apres_impot_eur": 22770,
+    "versement_net_eur": 1770
+   },
+   {
+    "afu_eur": 6600,
+    "cells": "F27:F31",
+    "impot_brut_eur": 7820,
+    "revenu_imposable_eur": 34000,
+    "revenu_net_apres_impot_eur": 32780,
+    "versement_net_eur": -1220
+   },
+   {
+    "afu_eur": 6600,
+    "cells": "G27:G31",
+    "impot_brut_eur": 11040,
+    "revenu_imposable_eur": 48000,
+    "revenu_net_apres_impot_eur": 43560,
+    "versement_net_eur": -4440
+   }
+  ],
+  "conventions": {
+   "impot_brut_eur": "montant dû = 23 % du revenu imposable (positif). Le classeur l'affiche avec le signe − (flux sortant du foyer) dans les lignes « Impôt brut à payer ».",
+   "revenu_net_apres_impot_eur": "revenu imposable + AFU − impôt brut (ligne « Revenu net après impôt »).",
+   "versement_net_eur": "AFU − impôt brut ; positif = le foyer reçoit de l'administration, négatif = il lui verse (ligne « Versement net de / à l'administration »)."
+  },
+  "note": "Courbe pour une personne seule, sans enfant, sans majoration ; formules du classeur : impôt = 23 % × revenu, AFU = 6 600 €. Le revenu « imposable » n'est pas défini plus précisément par les textes (voir DISCREPANCIES.md).",
+  "retention_marginale": 0.77,
+  "serie": [
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 0,
+    "revenu_disponible_net_eur": 6600,
+    "revenu_imposable_eur": 0,
+    "versement_net_eur": 6600
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 230,
+    "revenu_disponible_net_eur": 7370,
+    "revenu_imposable_eur": 1000,
+    "versement_net_eur": 6370
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 460,
+    "revenu_disponible_net_eur": 8140,
+    "revenu_imposable_eur": 2000,
+    "versement_net_eur": 6140
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 690,
+    "revenu_disponible_net_eur": 8910,
+    "revenu_imposable_eur": 3000,
+    "versement_net_eur": 5910
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 920,
+    "revenu_disponible_net_eur": 9680,
+    "revenu_imposable_eur": 4000,
+    "versement_net_eur": 5680
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 1150,
+    "revenu_disponible_net_eur": 10450,
+    "revenu_imposable_eur": 5000,
+    "versement_net_eur": 5450
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 1380,
+    "revenu_disponible_net_eur": 11220,
+    "revenu_imposable_eur": 6000,
+    "versement_net_eur": 5220
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 1610,
+    "revenu_disponible_net_eur": 11990,
+    "revenu_imposable_eur": 7000,
+    "versement_net_eur": 4990
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 1840,
+    "revenu_disponible_net_eur": 12760,
+    "revenu_imposable_eur": 8000,
+    "versement_net_eur": 4760
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 2070,
+    "revenu_disponible_net_eur": 13530,
+    "revenu_imposable_eur": 9000,
+    "versement_net_eur": 4530
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 2300,
+    "revenu_disponible_net_eur": 14300,
+    "revenu_imposable_eur": 10000,
+    "versement_net_eur": 4300
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 2530,
+    "revenu_disponible_net_eur": 15070,
+    "revenu_imposable_eur": 11000,
+    "versement_net_eur": 4070
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 2760,
+    "revenu_disponible_net_eur": 15840,
+    "revenu_imposable_eur": 12000,
+    "versement_net_eur": 3840
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 2990,
+    "revenu_disponible_net_eur": 16610,
+    "revenu_imposable_eur": 13000,
+    "versement_net_eur": 3610
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 3220,
+    "revenu_disponible_net_eur": 17380,
+    "revenu_imposable_eur": 14000,
+    "versement_net_eur": 3380
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 3450,
+    "revenu_disponible_net_eur": 18150,
+    "revenu_imposable_eur": 15000,
+    "versement_net_eur": 3150
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 3680,
+    "revenu_disponible_net_eur": 18920,
+    "revenu_imposable_eur": 16000,
+    "versement_net_eur": 2920
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 3910,
+    "revenu_disponible_net_eur": 19690,
+    "revenu_imposable_eur": 17000,
+    "versement_net_eur": 2690
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 4140,
+    "revenu_disponible_net_eur": 20460,
+    "revenu_imposable_eur": 18000,
+    "versement_net_eur": 2460
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 4370,
+    "revenu_disponible_net_eur": 21230,
+    "revenu_imposable_eur": 19000,
+    "versement_net_eur": 2230
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 4600,
+    "revenu_disponible_net_eur": 22000,
+    "revenu_imposable_eur": 20000,
+    "versement_net_eur": 2000
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 4830,
+    "revenu_disponible_net_eur": 22770,
+    "revenu_imposable_eur": 21000,
+    "versement_net_eur": 1770
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 5060,
+    "revenu_disponible_net_eur": 23540,
+    "revenu_imposable_eur": 22000,
+    "versement_net_eur": 1540
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 5290,
+    "revenu_disponible_net_eur": 24310,
+    "revenu_imposable_eur": 23000,
+    "versement_net_eur": 1310
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 5520,
+    "revenu_disponible_net_eur": 25080,
+    "revenu_imposable_eur": 24000,
+    "versement_net_eur": 1080
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 5750,
+    "revenu_disponible_net_eur": 25850,
+    "revenu_imposable_eur": 25000,
+    "versement_net_eur": 850
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 5980,
+    "revenu_disponible_net_eur": 26620,
+    "revenu_imposable_eur": 26000,
+    "versement_net_eur": 620
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 6210,
+    "revenu_disponible_net_eur": 27390,
+    "revenu_imposable_eur": 27000,
+    "versement_net_eur": 390
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 6440,
+    "revenu_disponible_net_eur": 28160,
+    "revenu_imposable_eur": 28000,
+    "versement_net_eur": 160
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 6670,
+    "revenu_disponible_net_eur": 28930,
+    "revenu_imposable_eur": 29000,
+    "versement_net_eur": -70
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 6900,
+    "revenu_disponible_net_eur": 29700,
+    "revenu_imposable_eur": 30000,
+    "versement_net_eur": -300
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 7130,
+    "revenu_disponible_net_eur": 30470,
+    "revenu_imposable_eur": 31000,
+    "versement_net_eur": -530
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 7360,
+    "revenu_disponible_net_eur": 31240,
+    "revenu_imposable_eur": 32000,
+    "versement_net_eur": -760
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 7590,
+    "revenu_disponible_net_eur": 32010,
+    "revenu_imposable_eur": 33000,
+    "versement_net_eur": -990
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 7820,
+    "revenu_disponible_net_eur": 32780,
+    "revenu_imposable_eur": 34000,
+    "versement_net_eur": -1220
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 8050,
+    "revenu_disponible_net_eur": 33550,
+    "revenu_imposable_eur": 35000,
+    "versement_net_eur": -1450
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 8280,
+    "revenu_disponible_net_eur": 34320,
+    "revenu_imposable_eur": 36000,
+    "versement_net_eur": -1680
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 8510,
+    "revenu_disponible_net_eur": 35090,
+    "revenu_imposable_eur": 37000,
+    "versement_net_eur": -1910
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 8740,
+    "revenu_disponible_net_eur": 35860,
+    "revenu_imposable_eur": 38000,
+    "versement_net_eur": -2140
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 8970,
+    "revenu_disponible_net_eur": 36630,
+    "revenu_imposable_eur": 39000,
+    "versement_net_eur": -2370
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 9200,
+    "revenu_disponible_net_eur": 37400,
+    "revenu_imposable_eur": 40000,
+    "versement_net_eur": -2600
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 9430,
+    "revenu_disponible_net_eur": 38170,
+    "revenu_imposable_eur": 41000,
+    "versement_net_eur": -2830
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 9660,
+    "revenu_disponible_net_eur": 38940,
+    "revenu_imposable_eur": 42000,
+    "versement_net_eur": -3060
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 9890,
+    "revenu_disponible_net_eur": 39710,
+    "revenu_imposable_eur": 43000,
+    "versement_net_eur": -3290
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 10120,
+    "revenu_disponible_net_eur": 40480,
+    "revenu_imposable_eur": 44000,
+    "versement_net_eur": -3520
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 10350,
+    "revenu_disponible_net_eur": 41250,
+    "revenu_imposable_eur": 45000,
+    "versement_net_eur": -3750
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 10580,
+    "revenu_disponible_net_eur": 42020,
+    "revenu_imposable_eur": 46000,
+    "versement_net_eur": -3980
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 10810,
+    "revenu_disponible_net_eur": 42790,
+    "revenu_imposable_eur": 47000,
+    "versement_net_eur": -4210
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 11040,
+    "revenu_disponible_net_eur": 43560,
+    "revenu_imposable_eur": 48000,
+    "versement_net_eur": -4440
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 11270,
+    "revenu_disponible_net_eur": 44330,
+    "revenu_imposable_eur": 49000,
+    "versement_net_eur": -4670
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 11500,
+    "revenu_disponible_net_eur": 45100,
+    "revenu_imposable_eur": 50000,
+    "versement_net_eur": -4900
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 11730,
+    "revenu_disponible_net_eur": 45870,
+    "revenu_imposable_eur": 51000,
+    "versement_net_eur": -5130
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 11960,
+    "revenu_disponible_net_eur": 46640,
+    "revenu_imposable_eur": 52000,
+    "versement_net_eur": -5360
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 12190,
+    "revenu_disponible_net_eur": 47410,
+    "revenu_imposable_eur": 53000,
+    "versement_net_eur": -5590
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 12420,
+    "revenu_disponible_net_eur": 48180,
+    "revenu_imposable_eur": 54000,
+    "versement_net_eur": -5820
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 12650,
+    "revenu_disponible_net_eur": 48950,
+    "revenu_imposable_eur": 55000,
+    "versement_net_eur": -6050
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 12880,
+    "revenu_disponible_net_eur": 49720,
+    "revenu_imposable_eur": 56000,
+    "versement_net_eur": -6280
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 13110,
+    "revenu_disponible_net_eur": 50490,
+    "revenu_imposable_eur": 57000,
+    "versement_net_eur": -6510
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 13340,
+    "revenu_disponible_net_eur": 51260,
+    "revenu_imposable_eur": 58000,
+    "versement_net_eur": -6740
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 13570,
+    "revenu_disponible_net_eur": 52030,
+    "revenu_imposable_eur": 59000,
+    "versement_net_eur": -6970
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 13800,
+    "revenu_disponible_net_eur": 52800,
+    "revenu_imposable_eur": 60000,
+    "versement_net_eur": -7200
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 14030,
+    "revenu_disponible_net_eur": 53570,
+    "revenu_imposable_eur": 61000,
+    "versement_net_eur": -7430
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 14260,
+    "revenu_disponible_net_eur": 54340,
+    "revenu_imposable_eur": 62000,
+    "versement_net_eur": -7660
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 14490,
+    "revenu_disponible_net_eur": 55110,
+    "revenu_imposable_eur": 63000,
+    "versement_net_eur": -7890
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 14720,
+    "revenu_disponible_net_eur": 55880,
+    "revenu_imposable_eur": 64000,
+    "versement_net_eur": -8120
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 14950,
+    "revenu_disponible_net_eur": 56650,
+    "revenu_imposable_eur": 65000,
+    "versement_net_eur": -8350
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 15180,
+    "revenu_disponible_net_eur": 57420,
+    "revenu_imposable_eur": 66000,
+    "versement_net_eur": -8580
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 15410,
+    "revenu_disponible_net_eur": 58190,
+    "revenu_imposable_eur": 67000,
+    "versement_net_eur": -8810
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 15640,
+    "revenu_disponible_net_eur": 58960,
+    "revenu_imposable_eur": 68000,
+    "versement_net_eur": -9040
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 15870,
+    "revenu_disponible_net_eur": 59730,
+    "revenu_imposable_eur": 69000,
+    "versement_net_eur": -9270
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 16100,
+    "revenu_disponible_net_eur": 60500,
+    "revenu_imposable_eur": 70000,
+    "versement_net_eur": -9500
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 16330,
+    "revenu_disponible_net_eur": 61270,
+    "revenu_imposable_eur": 71000,
+    "versement_net_eur": -9730
+   },
+   {
+    "afu_eur": 6600,
+    "impot_brut_eur": 16560,
+    "revenu_disponible_net_eur": 62040,
+    "revenu_imposable_eur": 72000,
+    "versement_net_eur": -9960
+   }
+  ],
+  "seuil_equilibre_loi": "« l'impôt devient négatif en deçà de 28 700 € pour une personne seule » (PLF-P1 n° 28, exposé)",
+  "seuil_equilibre_personne_seule_eur_an": 28695.65,
+  "seuil_equilibre_workbook": 28695.65,
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphIR › B26:G31, B33:BW38",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+  },
+  "taux_unique": 0.23,
+  "tier": "loi"
+ },
+ "afu_economie": {
+  "aah_adultes_millions": 1.24,
+  "adultes_millions": 50.4,
+  "adultes_recenses_millions": 54.5,
+  "aeeh_enfants_millions": 0.435,
+  "afu_brute_md_par_an": 402.006,
+  "cout_net_calcule_md": 266.66,
+  "cout_net_note": "calcul du pipeline : 402,006 − 135,346 = 266,660 Md€ à financer par l'impôt à 23 % sur une assiette élargie ; le classeur ne publie pas de microsimulation (gagnants/perdants par décile).",
+  "depenses_fusionnees_md_par_an": 135.34564,
+  "enfants_millions": 13.04,
+  "enfants_recenses_millions": 14.1,
+  "fusion_detail_md": {
+   "budgetaire_rsa_pa_aah": 31.8,
+   "fiscal_hors_quotient": 21.6,
+   "social_cnaf_aspa_local": 81.94564
+  },
+  "ir_total_brut_md": 114.3,
+  "population_fiscale_2025_millions": 63.4,
+  "population_recensee_2025_millions": 68.6,
+  "seuil_entree_ir_net_eur": 28695.65,
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › B47:K76",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+  },
+  "taux_legal_pct": 23,
+  "taux_moyen_ir_reference_pct": 7.322,
+  "taux_unique_estime_pct": 22.737,
+  "tier": "annonce"
+ },
+ "csg_cas_types": {
+  "annonces_a_rapprocher": [
+   {
+    "id": "manifeste_300",
+    "texte": "« 300 euros par mois restitués dès la première année, soit 13 % de salaire net en plus pour tous » (manifeste)",
+    "valeur_eur_mois": 300,
+    "valeur_pct": 13
+   },
+   {
+    "id": "fiche_travailleur_180",
+    "texte": "« +13 % votre salaire net en un an, au salaire médian. 180 euros de plus par mois au SMIC » (fiche Travailleur)",
+    "valeur_eur_mois": 180,
+    "valeur_pct": 13
+   },
+   {
+    "id": "classeur_median",
+    "texte": "classeur : 275,08 €/mois (12,56 %) au salaire net médian de 2 190 € ; 171,72 €/mois (12,04 %) au SMIC 2025",
+    "valeur_eur_mois": 275.076,
+    "valeur_pct": 12.56
+   }
+  ],
+  "formule_inferee": "gain mensuel = salaire brut × 0,9825 × 9,7 % (vérifiée sur le SMIC brut 2025 : 1 801,80 × 0,9825 × 0,097 = 171,716 €) — inférence du pipeline, non écrite dans le classeur",
+  "rows": [
+   {
+    "cells": "C7:I7",
+    "csg_mensuelle_eur": 162.8647,
+    "gain_annuel_eur": 2060.59,
+    "gain_mensuel_csg_crds_eur": 171.716,
+    "gain_pct": null,
+    "id": "smic_brut_2025",
+    "label_fr": "SMIC brut 2025",
+    "point_csg_mensuel_eur": 17.7027,
+    "row": 7,
+    "salaire_mensuel_eur": 1801.8
+   },
+   {
+    "cells": "C8:I8",
+    "csg_mensuelle_eur": 162.8647,
+    "gain_annuel_eur": 2060.59,
+    "gain_mensuel_csg_crds_eur": 171.716,
+    "gain_pct": 12.0393,
+    "id": "smic_net_2025",
+    "label_fr": "SMIC net 2025",
+    "point_csg_mensuel_eur": 17.7027,
+    "row": 8,
+    "salaire_mensuel_eur": 1426.3
+   },
+   {
+    "cells": "C9:I9",
+    "csg_mensuelle_eur": 164.781,
+    "gain_annuel_eur": 2084.84,
+    "gain_mensuel_csg_crds_eur": 173.7365,
+    "gain_pct": null,
+    "id": "smic_brut_2026_01",
+    "label_fr": "SMIC brut 01/2026",
+    "point_csg_mensuel_eur": 17.911,
+    "row": 9,
+    "salaire_mensuel_eur": 1823
+   },
+   {
+    "cells": "C10:I10",
+    "csg_mensuelle_eur": 164.781,
+    "gain_annuel_eur": 2084.84,
+    "gain_mensuel_csg_crds_eur": 173.7365,
+    "gain_pct": 12.0399,
+    "id": "smic_net_2026_01",
+    "label_fr": "SMIC net 01/2026",
+    "point_csg_mensuel_eur": 17.911,
+    "row": 10,
+    "salaire_mensuel_eur": 1443
+   },
+   {
+    "cells": "C11:I11",
+    "csg_mensuelle_eur": 168.7581,
+    "gain_annuel_eur": 2135.16,
+    "gain_mensuel_csg_crds_eur": 177.9298,
+    "gain_pct": null,
+    "id": "smic_brut_2026_06",
+    "label_fr": "SMIC brut 06/2026",
+    "point_csg_mensuel_eur": 18.3433,
+    "row": 11,
+    "salaire_mensuel_eur": 1867
+   },
+   {
+    "cells": "C12:I12",
+    "csg_mensuelle_eur": 168.7581,
+    "gain_annuel_eur": 2135.16,
+    "gain_mensuel_csg_crds_eur": 177.9298,
+    "gain_pct": 12.0385,
+    "id": "smic_net_2026_06",
+    "label_fr": "SMIC net 06/2026",
+    "point_csg_mensuel_eur": 18.3433,
+    "row": 12,
+    "salaire_mensuel_eur": 1478
+   },
+   {
+    "cells": "C13:I13",
+    "csg_mensuelle_eur": 260.8967,
+    "gain_annuel_eur": 3300.91,
+    "gain_mensuel_csg_crds_eur": 275.0759,
+    "gain_pct": 12.5605,
+    "id": "net_median",
+    "label_fr": "Salaire net médian",
+    "point_csg_mensuel_eur": 28.3583,
+    "row": 13,
+    "salaire_mensuel_eur": 2190
+   },
+   {
+    "cells": "C14:I14",
+    "csg_mensuelle_eur": 325.5848,
+    "gain_annuel_eur": 4119.36,
+    "gain_mensuel_csg_crds_eur": 343.2796,
+    "gain_pct": 9.5303,
+    "id": "brut_moyen",
+    "label_fr": "Salaire brut moyen",
+    "point_csg_mensuel_eur": 35.3897,
+    "row": 14,
+    "salaire_mensuel_eur": 3602
+   },
+   {
+    "cells": "C15:I15",
+    "csg_mensuelle_eur": 325.5848,
+    "gain_annuel_eur": 4119.36,
+    "gain_mensuel_csg_crds_eur": 343.2796,
+    "gain_pct": 12.5605,
+    "id": "net_moyen",
+    "label_fr": "Salaire net moyen",
+    "point_csg_mensuel_eur": 35.3897,
+    "row": 15,
+    "salaire_mensuel_eur": 2733
+   }
+  ],
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse Chiffres Résolution_0910.xlsx › CSG-CRDS › B2:J16",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+  },
+  "tier": "annonce"
+ },
+ "destinations": {
+  "actifs_a_restituer": {
+   "postes": [
+    {
+     "cell": "C11",
+     "id": "participations",
+     "label_fr": "Participations financières",
+     "md": 201.915
+    },
+    {
+     "cell": "C12",
+     "id": "foncier_public",
+     "label_fr": "Patrimoine foncier public",
+     "md": 200.195372
+    },
+    {
+     "cell": "C13",
+     "id": "logements_publics",
+     "label_fr": "Logements publics",
+     "md": 51.96
+    },
+    {
+     "cell": "C14",
+     "id": "parc_social",
+     "label_fr": "Parc social",
+     "md": 152.902294
+    }
+   ],
+   "rendement_md": 18.20918,
+   "rendement_net": 0.03,
+   "source": {
+    "kind": "workbook",
+    "ref": "Synthèse Chiffres Résolution_0910.xlsx › Input Capitalisation › B10:E14",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+   },
+   "tier": "annonce",
+   "total_md": 606.972666
+  },
+  "capitalisation": {
+   "composition_md": [
+    {
+     "id": "eco_budgetaire_pleine",
+     "label_fr": "Économie budgétaire en année pleine",
+     "md": 38.5
+    },
+    {
+     "id": "eco_locale_pleine",
+     "label_fr": "Économie locale en année pleine",
+     "md": 20.1
+    },
+    {
+     "id": "assurance_chomage",
+     "label_fr": "Transformation de l'assurance chômage",
+     "md": 30
+    },
+    {
+     "id": "reliquat_annee_1",
+     "label_fr": "Reliquat de l'année 1 après suppression de la CSG",
+     "md": 14.94
+    },
+    {
+     "id": "rendement_actifs",
+     "label_fr": "Rendement net des actifs publics rendus",
+     "md": 18.20918
+    }
+   ],
+   "id": "capitalisation",
+   "label_fr": "Capitalisation / compte d'épargne personnel",
+   "manifeste_300_eur_par_mois": "« 300 euros par mois versés sur un compte épargne retraite personnel d'ici trois ans » : aucune base légale chiffrée (PLF-P1 n° 27 : « aucun montant n'est inscrit ici »)",
+   "md_par_an": 121.74918,
+   "source": {
+    "kind": "workbook",
+    "ref": "Synthèse Chiffres Résolution_0910.xlsx › Input Capitalisation › E2:E10",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+   },
+   "tier": "annonce"
+  },
+  "salaire_net": {
+   "csg_seule_md": 108.56,
+   "id": "salaire_net",
+   "label_fr": "Salaire net : fin de la CSG et de la CRDS sur les revenus d'activité",
+   "md_par_an": 114.46,
+   "note": "PLACSS 2024, annexe 1 (données 2024). L'amendement PLFSS n° 1 écrit « 114 milliards d'euros en année pleine » et « 33 milliards d'euros en 2027 ».",
+   "point_de_csg_md": 11.8,
+   "recettes_perdues_par_affectataire_md": [
+    {
+     "id": "assurance_maladie",
+     "label_fr": "Régimes obligatoires d'assurance maladie",
+     "md": 50
+    },
+    {
+     "id": "autonomie",
+     "label_fr": "Caisse d'autonomie",
+     "md": 25
+    },
+    {
+     "id": "assurance_chomage",
+     "label_fr": "Assurance chômage",
+     "md": 17
+    },
+    {
+     "id": "allocations_familiales",
+     "label_fr": "Caisse des allocations familiales",
+     "md": 11
+    },
+    {
+     "id": "cades",
+     "label_fr": "Caisse d'amortissement de la dette sociale (5 CSG + 6 CRDS)",
+     "md": 11
+    }
+   ],
+   "recettes_perdues_source": {
+    "kind": "amendment",
+    "quote": "dont 50 aux régimes obligatoires d’assurance maladie, 25 à la caisse d’autonomie, 17 à l’assurance chômage, 11 à la caisse des allocations familiales et 11 à la caisse d’amortissement de la dette sociale",
+    "ref": "PLFSS, amendement n° 2 (exposé sommaire)",
+    "tier": "loi",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=8"
+   },
+   "source": {
+    "kind": "workbook",
+    "ref": "Synthèse Chiffres Résolution_0910.xlsx › CSG-CRDS › H3:J3",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+   },
+   "tier": "donnee"
+  }
+ },
+ "flux_mesures": {
+  "note": "Autre lecture des mêmes économies, par mesure (feuille Flux) : 129,4 Md€ la première année (niches 52,1 + État 44 + collectivités 33,3), dont 114,46 pour la CSG/CRDS et 14,94 de reliquat. Les niches fiscales ont un « gain supplémentaire à terme » (29,1 + 9 de niches sociales) qui compense la refonte fiscale et n'entre pas dans les 236 Md€.",
+  "rows": [
+   {
+    "autre_gisement_md": 53,
+    "cells": "B8:J8",
+    "commentaire_gisement_fr": "Refonte fiscalité",
+    "commentaire_terme_fr": "Refonte fiscalité",
+    "effet_annee_1_fr": null,
+    "gain_annee_1_md": 43.1,
+    "gain_supp_terme_md": 29.1,
+    "label_fr": "Niches fiscales",
+    "level": 1,
+    "parent": null,
+    "source_fr": "Calculs Résolution",
+    "total_supprime_a_terme_md": 72.3
+   },
+   {
+    "autre_gisement_md": 33.4,
+    "cells": "B9:J9",
+    "commentaire_gisement_fr": "Taux réduits généraux",
+    "commentaire_terme_fr": "Compense suppressions de taxe",
+    "effet_annee_1_fr": "Transfert des consommateurs et secteurs soutenus vers les actifs",
+    "gain_annee_1_md": 9.9,
+    "gain_supp_terme_md": 9.9,
+    "label_fr": "Taux réduits TVA",
+    "level": 2,
+    "parent": "Niches fiscales",
+    "source_fr": "PLF 2026, Voies et moyens Tome 2 ; CPO, février 2023",
+    "total_supprime_a_terme_md": 19.9
+   },
+   {
+    "autre_gisement_md": 12.6,
+    "cells": "B10:J10",
+    "commentaire_gisement_fr": "Affectés à l'aide unique",
+    "commentaire_terme_fr": "Compense refonte fiscalité",
+    "effet_annee_1_fr": "Transfert des inactifs et revenus exonérés vers les actifs",
+    "gain_annee_1_md": 19.8,
+    "gain_supp_terme_md": 7.2,
+    "label_fr": "Impôt sur le revenu",
+    "level": 2,
+    "parent": "Niches fiscales",
+    "source_fr": "PLF 2026, Voies et moyens Tome 2",
+    "total_supprime_a_terme_md": 27
+   },
+   {
+    "autre_gisement_md": null,
+    "cells": "B11:J11",
+    "commentaire_gisement_fr": null,
+    "commentaire_terme_fr": "Compense suppressions de taxe",
+    "effet_annee_1_fr": "Transferts des secteurs soutenus vers les actifs",
+    "gain_annee_1_md": 8.2,
+    "gain_supp_terme_md": 7.8,
+    "label_fr": "Impôt sur les sociétés",
+    "level": 2,
+    "parent": "Niches fiscales",
+    "source_fr": "PLF 2026, Voies et moyens Tome 2",
+    "total_supprime_a_terme_md": 16
+   },
+   {
+    "autre_gisement_md": 7,
+    "cells": "B12:J12",
+    "commentaire_gisement_fr": "Dont pacte Dutreil",
+    "commentaire_terme_fr": "Compense refonte fiscalité",
+    "effet_annee_1_fr": "Transfert des consommateurs et secteurs soutenus vers les actifs",
+    "gain_annee_1_md": 5.2,
+    "gain_supp_terme_md": 4.2,
+    "label_fr": "Autres impôts et taxes",
+    "level": 2,
+    "parent": "Niches fiscales",
+    "source_fr": "PLF 2026, Voies et moyens Tome 2",
+    "total_supprime_a_terme_md": 9.4
+   },
+   {
+    "autre_gisement_md": null,
+    "cells": "B13:J13",
+    "commentaire_gisement_fr": null,
+    "commentaire_terme_fr": "Compense refonte fiscalité",
+    "effet_annee_1_fr": "Transfert des revenus exonérés vers les actifs",
+    "gain_annee_1_md": 9,
+    "gain_supp_terme_md": 9,
+    "label_fr": "Niches sociales",
+    "level": 1,
+    "parent": null,
+    "source_fr": "Cour des comptes, RALFSS 2024, chapitre IV",
+    "total_supprime_a_terme_md": 18
+   },
+   {
+    "autre_gisement_md": 44,
+    "cells": "B15:J15",
+    "commentaire_gisement_fr": null,
+    "commentaire_terme_fr": "Fléché sur la capitalisation",
+    "effet_annee_1_fr": "Dont taxes affectées",
+    "gain_annee_1_md": 44,
+    "gain_supp_terme_md": 38.5,
+    "label_fr": "Economies Etat",
+    "level": 1,
+    "parent": null,
+    "source_fr": "Calculs Résolution",
+    "total_supprime_a_terme_md": 82.5
+   },
+   {
+    "autre_gisement_md": 0.9,
+    "cells": "B16:J16",
+    "commentaire_gisement_fr": null,
+    "commentaire_terme_fr": "Effet aides en année pleine",
+    "effet_annee_1_fr": "Transfert des secteurs subventionnés et agents publics aux actifs",
+    "gain_annee_1_md": 14.5,
+    "gain_supp_terme_md": 13.455,
+    "label_fr": "Opérateurs (y. c. salaires)",
+    "level": 2,
+    "parent": "Economies Etat",
+    "source_fr": "PLF 2026, données des PAP ; Voies et moyens Tome 1 ; BI 2025 France Compétences, France Travail et Ademe",
+    "total_supprime_a_terme_md": 28
+   },
+   {
+    "autre_gisement_md": 31.8,
+    "cells": "B17:J17",
+    "commentaire_gisement_fr": "Affectés à l'aide unique",
+    "commentaire_terme_fr": "Effet APL et exo en année pleine",
+    "effet_annee_1_fr": "Transfert des bas revenus vers les actifs",
+    "gain_annee_1_md": 8.4,
+    "gain_supp_terme_md": 11.5,
+    "label_fr": "Chèques aux ménages",
+    "level": 2,
+    "parent": "Economies Etat",
+    "source_fr": "PLF 2026, données des PAP",
+    "total_supprime_a_terme_md": 19.9
+   },
+   {
+    "autre_gisement_md": 11.3,
+    "cells": "B18:J18",
+    "commentaire_gisement_fr": "Dont énergie, agriculture",
+    "commentaire_terme_fr": "Effet aides en année pleine",
+    "effet_annee_1_fr": "Transfert des secteurs subventionnés vers les actifs",
+    "gain_annee_1_md": 8.4,
+    "gain_supp_terme_md": 6.8,
+    "label_fr": "Aides aux entreprises",
+    "level": 2,
+    "parent": "Economies Etat",
+    "source_fr": "PLF 2026, données des PAP",
+    "total_supprime_a_terme_md": 15.2
+   },
+   {
+    "autre_gisement_md": 0.4,
+    "cells": "B19:J19",
+    "commentaire_gisement_fr": null,
+    "commentaire_terme_fr": "Effet aides type entreprise",
+    "effet_annee_1_fr": "Transfert des secteurs associatifs et populations cibles aux actifs",
+    "gain_annee_1_md": 8,
+    "gain_supp_terme_md": 4.6,
+    "label_fr": "Subventions aux associations",
+    "level": 2,
+    "parent": "Economies Etat",
+    "source_fr": "PLF 2026, données des PAP",
+    "total_supprime_a_terme_md": 12.6
+   },
+   {
+    "autre_gisement_md": null,
+    "cells": "B20:J20",
+    "commentaire_gisement_fr": null,
+    "commentaire_terme_fr": null,
+    "effet_annee_1_fr": "Transfert des marchés publics vers les actifs",
+    "gain_annee_1_md": 3.8,
+    "gain_supp_terme_md": null,
+    "label_fr": "Charges courantes et achats",
+    "level": 2,
+    "parent": "Economies Etat",
+    "source_fr": "PLF 2026, données des PAP",
+    "total_supprime_a_terme_md": 3.8
+   },
+   {
+    "autre_gisement_md": null,
+    "cells": "B21:J21",
+    "commentaire_gisement_fr": "Plus chèque éducation",
+    "commentaire_terme_fr": null,
+    "effet_annee_1_fr": "Transfert des agents publics (compensés à 70 %) vers les actifs",
+    "gain_annee_1_md": 0.9,
+    "gain_supp_terme_md": 2.1,
+    "label_fr": "Départs fonctionnaires Etat",
+    "level": 2,
+    "parent": "Economies Etat",
+    "source_fr": "PLF 2026, données des PAP",
+    "total_supprime_a_terme_md": 3
+   },
+   {
+    "autre_gisement_md": null,
+    "cells": "B22:J22",
+    "commentaire_gisement_fr": null,
+    "commentaire_terme_fr": "Fléché sur la capitalisation",
+    "effet_annee_1_fr": "Dont financements Etat",
+    "gain_annee_1_md": 33.3,
+    "gain_supp_terme_md": 20.1,
+    "label_fr": "Economies Collectivités",
+    "level": 1,
+    "parent": null,
+    "source_fr": "Calculs Résolution",
+    "total_supprime_a_terme_md": 53.4
+   },
+   {
+    "autre_gisement_md": null,
+    "cells": "B23:J23",
+    "commentaire_gisement_fr": null,
+    "commentaire_terme_fr": null,
+    "effet_annee_1_fr": "Transfert des secteurs associatifs et populations cibles aux actifs",
+    "gain_annee_1_md": 11.6,
+    "gain_supp_terme_md": null,
+    "label_fr": "Dépenses culturelles",
+    "level": 2,
+    "parent": "Economies Collectivités",
+    "source_fr": "Insee, comptes de la nation 2023, données COFOG",
+    "total_supprime_a_terme_md": 11.6
+   },
+   {
+    "autre_gisement_md": null,
+    "cells": "B24:J24",
+    "commentaire_gisement_fr": null,
+    "commentaire_terme_fr": "Effet année pleine à terme",
+    "effet_annee_1_fr": "Transfert des secteurs subventionnés vers les actifs",
+    "gain_annee_1_md": 9.7,
+    "gain_supp_terme_md": 2.6,
+    "label_fr": "Aides aux entreprises",
+    "level": 2,
+    "parent": "Economies Collectivités",
+    "source_fr": "Insee, comptes de la nation 2023, données COFOG",
+    "total_supprime_a_terme_md": 12.3
+   },
+   {
+    "autre_gisement_md": null,
+    "cells": "B25:J25",
+    "commentaire_gisement_fr": null,
+    "commentaire_terme_fr": "Effet année pleine à terme",
+    "effet_annee_1_fr": "Transfert des marchés publics vers les actifs",
+    "gain_annee_1_md": 6.1,
+    "gain_supp_terme_md": 3.5,
+    "label_fr": "Charges courantes et achats",
+    "level": 2,
+    "parent": "Economies Collectivités",
+    "source_fr": "Insee, comptes de la nation 2023, données COFOG",
+    "total_supprime_a_terme_md": 9.6
+   },
+   {
+    "autre_gisement_md": null,
+    "cells": "B26:J26",
+    "commentaire_gisement_fr": null,
+    "commentaire_terme_fr": null,
+    "effet_annee_1_fr": "Transfert des agents publics (compensés à 70 %) vers les actifs",
+    "gain_annee_1_md": 6,
+    "gain_supp_terme_md": 14,
+    "label_fr": "Départs fonctionnaires locaux",
+    "level": 2,
+    "parent": "Economies Collectivités",
+    "source_fr": "Insee, comptes de la nation 2023, données COFOG",
+    "total_supprime_a_terme_md": 20
+   }
+  ],
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Flux › B5:J26",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+  },
+  "tier": "annonce",
+  "totaux": {
+   "autre_gisement_md": 97,
+   "gain_annee_1_md": 129.4,
+   "gain_supp_terme_md": 96.7,
+   "somme_postes_niveau_1_annee_1_md": 129.4,
+   "total_supprime_a_terme_md": 226.2
+  },
+  "unit": "Md€"
+ },
+ "meta": {
+  "notes": [
+   "Utiliser le tableau savings_table (26 lignes) pour la table de données ; id/parent_id donnent la hiérarchie.",
+   "Les valeurs « web_arrondi » viennent du tableau arrondi de donnees.html ; leurs sous-totaux ne s'additionnent pas toujours (39 affiché contre 37,43 exact pour le fonctionnement des administrations)."
+  ],
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Annexe Manuscrit › A2:F28",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+  },
+  "tier": "annonce",
+  "tier_note": "Estimations de Résolution (Calculs de Résolution) : aucune de ces valeurs n'est écrite dans un amendement, sauf mention « loi ».",
+  "title_fr": "Le plan en un schéma : 236 Md€ d'économies → salaire net et épargne",
+  "unit": "Md€ par an (régime de croisière) sauf mention contraire"
+ },
+ "prelevements_obligatoires": {
+  "baisse_md": 191.046,
+  "baisse_pts": 6.543,
+  "fiche_contribuable": "« 36 % de la richesse produite, contre 43 % aujourd'hui »",
+  "pib_2024_md": 2919.9,
+  "po_2024_md": 1251.8,
+  "po_cible_md": 1060.75436,
+  "po_pib_2024_pct": 42.871331,
+  "po_pib_cible_pct": 36.328448,
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › C3:F4",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+  },
+  "tier": "annonce"
+ },
+ "reconciliation": {
+  "headline_236": "« 236 milliards » (manifeste, lettres) = 236,055 Md€ (colonne C) ; 236,264 si l'on additionne E + F ; 236,209 si l'on additionne les destinations 114,46 + 121,749. Les trois valeurs arrondissent à 236.",
+  "per_foyer": {
+   "eur_par_foyer": 8000,
+   "foyers_implicites_millions": 29.507,
+   "md_par_an": 236.054667,
+   "note": "Dénominateur implicite du tableau « € par foyer » : 236,055 Md€ ÷ 8 000 € = 29,507 M de foyers (les fiches parlent de 30 M, la loi de 40,2 M de foyers fiscaux)."
+  },
+  "residuels": [
+   {
+    "explication": "Dans l'Annexe Manuscrit, la ligne « Patrimoine public valorisé et restitué » vaut 18 en colonne C (et dans le total 236,055) mais 18,209 en colonne F (gain supplémentaire en année pleine) : la somme E + F du tableau (236,264) dépasse donc son propre total de 0,209 Md€. 18,209 = 3 % × 606,973 (Input Capitalisation).",
+    "id": "patrimoine_18_vs_18_209",
+    "md": 0.20918
+   },
+   {
+    "explication": "Les montants de la réconciliation (feuilles Flux et Input Capitalisation) sont arrondis différemment de l'Annexe Manuscrit : gain année 1 de 129,4 (Flux) contre 127,352 (Annexe), et économies État + collectivités en année pleine de 58,6 (Input Capitalisation : 38,5 + 20,1) contre 60,7025 (Annexe : structures 27,9025 + subventions 32,8). Les deux écarts (+2,048 et −2,102) se compensent presque : solde −0,055 Md€.",
+    "id": "annexe_vs_flux",
+    "md": -0.054667
+   },
+   {
+    "explication": "Dans le Sankey par catégorie, la destination capitalisation vaut 121,804 Md€ (reliquat année 1 + année pleine, d'après l'Annexe Manuscrit) contre 121,749 Md€ affirmés par Input Capitalisation!E2 : même écart de 0,055 Md€ que ci-dessus.",
+    "id": "capitalisation_calcule_vs_affirme",
+    "md": 0.054667
+   }
+  ],
+  "totaux": {
+   "annexe_manuscrit_E_plus_F": 236.263847,
+   "annexe_manuscrit_colonne_C": 236.054667,
+   "destinations_classeur_114_46_plus_121_749": 236.20918
+  },
+  "unit": "Md€",
+  "year_1_vs_flux": {
+   "annexe": 127.352167,
+   "ecart_md": 2.0478,
+   "flux": 129.4
+  }
+ },
+ "sankey": {
+  "balanced": true,
+  "destinations": {
+   "capitalisation_md_calcule": 121.803847,
+   "capitalisation_md_classeur": 121.74918,
+   "salaire_net_md": 114.46
+  },
+  "interpretation": "Catégories d'économies (Annexe Manuscrit, colonnes E et F) → calendrier → destination. Conformément à l'onglet « Input Capitalisation », la restitution de la CSG/CRDS sur l'activité (114,46 Md€) est financée par les gains de l'année 1 ; le reliquat de l'année 1, les gains supplémentaires de l'année pleine, l'assurance chômage transformée en épargne et le rendement des actifs publics alimentent la capitalisation. Le classeur n'affecte pas chaque économie à une destination précise : seuls les totaux par destination (114,46 et 121,749 Md€) sont affirmés.",
+  "links": [
+   {
+    "cell": "E4",
+    "kind": "exact_classeur",
+    "source": "structures",
+    "target": "annee_1",
+    "value_md": 39.104167
+   },
+   {
+    "cell": "F4",
+    "kind": "exact_classeur",
+    "source": "structures",
+    "target": "annee_pleine",
+    "value_md": 27.9025
+   },
+   {
+    "cell": "E14",
+    "kind": "exact_classeur",
+    "source": "subventions",
+    "target": "annee_1",
+    "value_md": 36.148
+   },
+   {
+    "cell": "F14",
+    "kind": "exact_classeur",
+    "source": "subventions",
+    "target": "annee_pleine",
+    "value_md": 32.8
+   },
+   {
+    "cell": "E24",
+    "kind": "exact_classeur",
+    "source": "niches",
+    "target": "annee_1",
+    "value_md": 52.1
+   },
+   {
+    "cell": "F27",
+    "kind": "exact_classeur",
+    "source": "chomage",
+    "target": "annee_pleine",
+    "value_md": 30
+   },
+   {
+    "cell": "F28",
+    "kind": "exact_classeur",
+    "source": "patrimoine",
+    "target": "annee_pleine",
+    "value_md": 18.20918
+   },
+   {
+    "kind": "montant_affirme_classeur",
+    "ref": "Synthèse Chiffres › CSG-CRDS!I3 (114,46 Md€, PLACSS 2024 annexe 1)",
+    "source": "annee_1",
+    "target": "salaire_net",
+    "value_md": 114.46
+   },
+   {
+    "formula": "gain année 1 (127,352) − CSG/CRDS restituée (114,46)",
+    "kind": "calcule",
+    "source": "annee_1",
+    "target": "capitalisation",
+    "value_md": 12.892167
+   },
+   {
+    "kind": "exact_classeur",
+    "source": "annee_pleine",
+    "target": "capitalisation",
+    "value_md": 108.91168
+   }
+  ],
+  "node_value_note": "value_md des catégories = colonnes E + F de l'Annexe Manuscrit (donc 18,209 pour le patrimoine, alors que la colonne C du même onglet affiche 18) ; md_par_an_classeur = colonne C. La destination « capitalisation » vaut 121,804 Md€ dans ce schéma, contre 121,749 Md€ affirmés (Input Capitalisation!E2) : écart de 0,055 Md€ documenté dans reconciliation.",
+  "nodes": [
+   {
+    "id": "structures",
+    "kind": "categorie",
+    "label_fr": "Structures facultatives de l'État et des collectivités",
+    "layer": 0,
+    "md_par_an_classeur": 67.006667,
+    "value_md": 67.006667
+   },
+   {
+    "id": "subventions",
+    "kind": "categorie",
+    "label_fr": "Subventions aux entreprises, particuliers et associations",
+    "layer": 0,
+    "md_par_an_classeur": 68.948,
+    "value_md": 68.948
+   },
+   {
+    "id": "niches",
+    "kind": "categorie",
+    "label_fr": "Niches fiscales et sociales (net)",
+    "layer": 0,
+    "md_par_an_classeur": 52.1,
+    "value_md": 52.1
+   },
+   {
+    "id": "chomage",
+    "kind": "categorie",
+    "label_fr": "Assurance chômage transformée en épargne",
+    "layer": 0,
+    "md_par_an_classeur": 30,
+    "value_md": 30
+   },
+   {
+    "id": "patrimoine",
+    "kind": "categorie",
+    "label_fr": "Rendement net du patrimoine public valorisé",
+    "layer": 0,
+    "md_par_an_classeur": 18,
+    "value_md": 18.20918
+   },
+   {
+    "id": "annee_1",
+    "kind": "calendrier",
+    "label_fr": "Gain dès l'année 1",
+    "layer": 1,
+    "value_md": 127.352167
+   },
+   {
+    "id": "annee_pleine",
+    "kind": "calendrier",
+    "label_fr": "Gain supplémentaire en année pleine",
+    "layer": 1,
+    "value_md": 108.91168
+   },
+   {
+    "id": "salaire_net",
+    "kind": "destination",
+    "label_fr": "Salaire net (fin de la CSG/CRDS sur l'activité)",
+    "layer": 2,
+    "value_md": 114.46,
+    "value_md_classeur": 114.46
+   },
+   {
+    "id": "capitalisation",
+    "kind": "destination",
+    "label_fr": "Capitalisation / compte d'épargne",
+    "layer": 2,
+    "value_md": 121.803847,
+    "value_md_classeur": 121.74918
+   }
+  ],
+  "total_in_md": 236.263847,
+  "total_out_md": 236.263847,
+  "unit": "Md€ par an (régime de croisière)"
+ },
+ "sankey_classeur": {
+  "balanced": true,
+  "description": "Réconciliation propre au classeur (feuilles Flux, CSG-CRDS et Input Capitalisation) : équilibrée à l'euro près, mais sur 236,209 Md€ et non 236,055.",
+  "links": [
+   {
+    "source": "gain_annee_1",
+    "target": "salaire_net",
+    "value_md": 114.46
+   },
+   {
+    "note": "reliquat de l'année 1 après suppression de la CSG (Input Capitalisation!E8)",
+    "source": "gain_annee_1",
+    "target": "capitalisation",
+    "value_md": 14.94
+   },
+   {
+    "source": "eco_budgetaire_pleine",
+    "target": "capitalisation",
+    "value_md": 38.5
+   },
+   {
+    "source": "eco_locale_pleine",
+    "target": "capitalisation",
+    "value_md": 20.1
+   },
+   {
+    "source": "assurance_chomage",
+    "target": "capitalisation",
+    "value_md": 30
+   },
+   {
+    "source": "rendement_actifs",
+    "target": "capitalisation",
+    "value_md": 18.20918
+   }
+  ],
+  "nodes": [
+   {
+    "cell": "Flux!C6",
+    "id": "gain_annee_1",
+    "label_fr": "Gains de l'année 1 (feuille Flux)",
+    "layer": 0,
+    "value_md": 129.4
+   },
+   {
+    "cell": "Input Capitalisation!E5",
+    "id": "eco_budgetaire_pleine",
+    "label_fr": "Économie budgétaire en année pleine",
+    "layer": 0,
+    "value_md": 38.5
+   },
+   {
+    "cell": "Input Capitalisation!E6",
+    "id": "eco_locale_pleine",
+    "label_fr": "Économie locale en année pleine",
+    "layer": 0,
+    "value_md": 20.1
+   },
+   {
+    "cell": "Input Capitalisation!E7",
+    "id": "assurance_chomage",
+    "label_fr": "Assurance chômage transformée en épargne",
+    "layer": 0,
+    "value_md": 30
+   },
+   {
+    "cell": "Input Capitalisation!E10",
+    "id": "rendement_actifs",
+    "label_fr": "Rendement net des actifs rendus (3 % de 606,97 Md€)",
+    "layer": 0,
+    "value_md": 18.20918
+   },
+   {
+    "cell": "CSG-CRDS!I3",
+    "id": "salaire_net",
+    "label_fr": "Salaire net (fin CSG/CRDS activité)",
+    "layer": 1,
+    "value_md": 114.46
+   },
+   {
+    "cell": "Input Capitalisation!E2",
+    "id": "capitalisation",
+    "label_fr": "Capitalisation / épargne",
+    "layer": 1,
+    "value_md": 121.74918
+   }
+  ],
+  "parts": {
+   "annee_1": 129.4,
+   "assurance_chomage": 30,
+   "capitalisation_total": 121.74918,
+   "economie_budgetaire_annee_pleine": 38.5,
+   "economie_locale_annee_pleine": 20.1,
+   "flux_economise": 103.54,
+   "reliquat_annee_1": 14.94,
+   "rendement_actifs": 18.20918,
+   "salaire_net": 114.46
+  },
+  "total_in_md": 236.20918,
+  "total_out_md": 236.20918,
+  "vs_annexe_manuscrit": {
+   "annexe_total_E_plus_F_md": 236.263847,
+   "annexe_total_colonne_C_md": 236.054667,
+   "ecart_C_vs_flux_md": 0.154513,
+   "ecart_E_plus_F_vs_flux_md": -0.054667,
+   "flux_et_input_capitalisation_md": 236.20918
+  }
+ },
+ "savings_checks": {
+  "children_sums": [
+   {
+    "id": "total",
+    "n_children": 5,
+    "ok": true
+   },
+   {
+    "id": "structures",
+    "n_children": 2,
+    "ok": true
+   },
+   {
+    "id": "fonctionnement",
+    "n_children": 5,
+    "ok": true
+   },
+   {
+    "id": "masse_salariale",
+    "n_children": 2,
+    "ok": true
+   },
+   {
+    "id": "subventions",
+    "n_children": 2,
+    "ok": true
+   },
+   {
+    "id": "subv_entreprises",
+    "n_children": 3,
+    "ok": true
+   },
+   {
+    "id": "subv_particuliers_asso",
+    "n_children": 4,
+    "ok": true
+   },
+   {
+    "id": "niches",
+    "n_children": 2,
+    "ok": true
+   }
+  ],
+  "rows_where_C_differs_from_E_plus_F": [
+   {
+    "e_plus_f": 236.263847,
+    "ecart_md": -0.20918,
+    "id": "total",
+    "label_fr": "Total des économies",
+    "md_par_an": 236.054667
+   },
+   {
+    "e_plus_f": 18.20918,
+    "ecart_md": -0.20918,
+    "id": "patrimoine",
+    "label_fr": "Patrimoine public valorisé et restitué (rendement net par an)",
+    "md_par_an": 18
+   }
+  ],
+  "web_rounding_breaks": [
+   {
+    "id": "structures",
+    "web_children_sum": 69,
+    "web_subtotal": 67,
+    "workbook_subtotal_md": 67.006667
+   },
+   {
+    "id": "subventions",
+    "web_children_sum": 70,
+    "web_subtotal": 69,
+    "workbook_subtotal_md": 68.948
+   }
+  ]
+ },
+ "savings_table": [
+  {
+   "cells": "C3:F3",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": -0.20918,
+   "eur_par_foyer_an": 8000,
+   "gain_annee_1_md": 127.352167,
+   "gain_supp_annee_pleine_md": 108.91168,
+   "id": "total",
+   "kind": "total",
+   "label_fr": "Total des économies",
+   "level": 0,
+   "md_par_an": 236.054667,
+   "parent_id": null,
+   "web_arrondi": {
+    "eur_par_foyer": 8000,
+    "label_fr": "Total des économies",
+    "md": 236
+   },
+   "web_md_ecart": -0.055
+  },
+  {
+   "cells": "C4:F4",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 2280,
+   "gain_annee_1_md": 39.104167,
+   "gain_supp_annee_pleine_md": 27.9025,
+   "id": "structures",
+   "kind": "categorie",
+   "label_fr": "Economies sur les structures facultatives",
+   "level": 1,
+   "md_par_an": 67.006667,
+   "parent_id": "total",
+   "web_arrondi": {
+    "eur_par_foyer": 2280,
+    "label_fr": "Économies sur les structures facultatives",
+    "md": 67
+   },
+   "web_md_ecart": -0.007
+  },
+  {
+   "cells": "C5:F5",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 1280,
+   "gain_annee_1_md": 30.231667,
+   "gain_supp_annee_pleine_md": 7.2,
+   "id": "fonctionnement",
+   "kind": "sous_total",
+   "label_fr": "Économies sur le fonctionnement des administrations",
+   "level": 2,
+   "md_par_an": 37.431667,
+   "parent_id": "structures",
+   "web_arrondi": {
+    "eur_par_foyer": 1280,
+    "label_fr": "Économies sur le fonctionnement des administrations",
+    "md": 39
+   },
+   "web_md_ecart": 1.568
+  },
+  {
+   "cells": "C6:F6",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 130,
+   "gain_annee_1_md": 3.8,
+   "gain_supp_annee_pleine_md": 0,
+   "id": "etat_fonctionnement",
+   "kind": "poste",
+   "label_fr": "Fin des dépenses de fonctionnement des administrations de l'Etat non indispensables",
+   "level": 3,
+   "md_par_an": 3.8,
+   "parent_id": "fonctionnement",
+   "web_arrondi": {
+    "eur_par_foyer": 130,
+    "label_fr": "Fin des dépenses de fonctionnement des administrations de l’État non indispensables",
+    "md": 4
+   },
+   "web_md_ecart": 0.2
+  },
+  {
+   "cells": "C7:F7",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 330,
+   "gain_annee_1_md": 6.1,
+   "gain_supp_annee_pleine_md": 3.5,
+   "id": "echelons_locaux",
+   "kind": "poste",
+   "label_fr": "Fin des dépenses de fonctionnement des échelons locaux non indispensables",
+   "level": 3,
+   "md_par_an": 9.6,
+   "parent_id": "fonctionnement",
+   "web_arrondi": {
+    "eur_par_foyer": 330,
+    "label_fr": "Fin des dépenses de fonctionnement des échelons locaux non indispensables",
+    "md": 10
+   },
+   "web_md_ecart": 0.4
+  },
+  {
+   "cells": "C8:F8",
+   "code": "O",
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 300,
+   "gain_annee_1_md": 4.931667,
+   "gain_supp_annee_pleine_md": 3.7,
+   "id": "agences",
+   "kind": "poste",
+   "label_fr": "Fermeture des agences non indispensables, dont interventions en logement, culture, écologie, etc.",
+   "level": 3,
+   "md_par_an": 8.631667,
+   "parent_id": "fonctionnement",
+   "web_arrondi": {
+    "eur_par_foyer": 300,
+    "label_fr": "Fermeture des agences non indispensables, dont interventions en logement, culture, écologie, etc.",
+    "md": 9
+   },
+   "web_md_ecart": 0.368
+  },
+  {
+   "cells": "C9:F9",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 390,
+   "gain_annee_1_md": 11.6,
+   "gain_supp_annee_pleine_md": 0,
+   "id": "culture_loisirs_locaux",
+   "kind": "poste",
+   "label_fr": "Extinction des dépenses locales de culture et loisir",
+   "level": 3,
+   "md_par_an": 11.6,
+   "parent_id": "fonctionnement",
+   "web_arrondi": {
+    "eur_par_foyer": 390,
+    "label_fr": "Fin des dépenses locales de culture et loisirs",
+    "md": 12
+   },
+   "web_md_ecart": 0.4
+  },
+  {
+   "cells": "C10:F10",
+   "code": "AVP",
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 130,
+   "gain_annee_1_md": 3.8,
+   "gain_supp_annee_pleine_md": 0,
+   "id": "audiovisuel_public",
+   "kind": "poste",
+   "label_fr": "Privatisation de l’audiovisuel public",
+   "level": 3,
+   "md_par_an": 3.8,
+   "parent_id": "fonctionnement",
+   "web_arrondi": {
+    "eur_par_foyer": 130,
+    "label_fr": "Privatisation de l’audiovisuel public",
+    "md": 4
+   },
+   "web_md_ecart": 0.2
+  },
+  {
+   "cells": "C11:F11",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 1000,
+   "gain_annee_1_md": 8.8725,
+   "gain_supp_annee_pleine_md": 20.7025,
+   "id": "masse_salariale",
+   "kind": "sous_total",
+   "label_fr": "Économies sur la masse salariale des administrations",
+   "level": 2,
+   "md_par_an": 29.575,
+   "parent_id": "structures",
+   "web_arrondi": {
+    "eur_par_foyer": 1000,
+    "label_fr": "Économies sur la masse salariale des administrations",
+    "md": 30
+   },
+   "web_md_ecart": 0.425
+  },
+  {
+   "cells": "C12:F12",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 330,
+   "gain_annee_1_md": 2.8725,
+   "gain_supp_annee_pleine_md": 6.7025,
+   "id": "depart_agents_etat",
+   "kind": "poste",
+   "label_fr": "Plan de départ des agents administratifs de l'Etat et ses agences",
+   "level": 3,
+   "md_par_an": 9.575,
+   "parent_id": "masse_salariale",
+   "web_arrondi": {
+    "eur_par_foyer": 330,
+    "label_fr": "Plan de départ des agents administratifs de l’État et fermeture de ses agences",
+    "md": 10
+   },
+   "web_md_ecart": 0.425
+  },
+  {
+   "cells": "C13:F13",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 670,
+   "gain_annee_1_md": 6,
+   "gain_supp_annee_pleine_md": 14,
+   "id": "depart_agents_locaux",
+   "kind": "poste",
+   "label_fr": "Plan de départ des agents administratifs locaux",
+   "level": 3,
+   "md_par_an": 20,
+   "parent_id": "masse_salariale",
+   "web_arrondi": {
+    "eur_par_foyer": 670,
+    "label_fr": "Plan de départ des agents administratifs locaux",
+    "md": 20
+   },
+   "web_md_ecart": 0
+  },
+  {
+   "cells": "C14:F14",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 2330,
+   "gain_annee_1_md": 36.148,
+   "gain_supp_annee_pleine_md": 32.8,
+   "id": "subventions",
+   "kind": "categorie",
+   "label_fr": "Economies sur les subventions",
+   "level": 1,
+   "md_par_an": 68.948,
+   "parent_id": "total",
+   "web_arrondi": {
+    "eur_par_foyer": 2330,
+    "label_fr": "Économies sur les subventions",
+    "md": 69
+   },
+   "web_md_ecart": 0.052
+  },
+  {
+   "cells": "C15:F15",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 1400,
+   "gain_annee_1_md": 21.448,
+   "gain_supp_annee_pleine_md": 20,
+   "id": "subv_entreprises",
+   "kind": "sous_total",
+   "label_fr": "Économies sur les subventions aux entreprises",
+   "level": 2,
+   "md_par_an": 41.448,
+   "parent_id": "subventions",
+   "web_arrondi": {
+    "eur_par_foyer": 1400,
+    "label_fr": "Économies sur les subventions aux entreprises",
+    "md": 42
+   },
+   "web_md_ecart": 0.552
+  },
+  {
+   "cells": "C16:F16",
+   "code": "AE",
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 770,
+   "gain_annee_1_md": 8.448,
+   "gain_supp_annee_pleine_md": 14.1,
+   "id": "aides_emploi_entreprises",
+   "kind": "poste",
+   "label_fr": "Extinction des aides aux entreprises pour l’emploi, l'apprentissage et l'insertion (dont France Compétences)",
+   "level": 3,
+   "md_par_an": 22.548,
+   "parent_id": "subv_entreprises",
+   "web_arrondi": {
+    "eur_par_foyer": 770,
+    "label_fr": "Fin des aides aux entreprises pour l’emploi, l’apprentissage et l’insertion (dont France compétences)",
+    "md": 23
+   },
+   "web_md_ecart": 0.452
+  },
+  {
+   "cells": "C17:F17",
+   "code": "E",
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 230,
+   "gain_annee_1_md": 3.3,
+   "gain_supp_annee_pleine_md": 3.3,
+   "id": "aides_investissement",
+   "kind": "poste",
+   "label_fr": "Extinction des aides aux entreprises pour l’investissement (dont France 2030)",
+   "level": 3,
+   "md_par_an": 6.6,
+   "parent_id": "subv_entreprises",
+   "web_arrondi": {
+    "eur_par_foyer": 230,
+    "label_fr": "Fin des aides aux entreprises pour l’investissement (dont France 2030)",
+    "md": 7
+   },
+   "web_md_ecart": 0.4
+  },
+  {
+   "cells": "C18:F18",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 400,
+   "gain_annee_1_md": 9.7,
+   "gain_supp_annee_pleine_md": 2.6,
+   "id": "aides_locales_entreprises",
+   "kind": "poste",
+   "label_fr": "Extinction des aides locales aux entreprises",
+   "level": 3,
+   "md_par_an": 12.3,
+   "parent_id": "subv_entreprises",
+   "web_arrondi": {
+    "eur_par_foyer": 400,
+    "label_fr": "Fin des aides locales aux entreprises",
+    "md": 12
+   },
+   "web_md_ecart": -0.3
+  },
+  {
+   "cells": "C19:F19",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 930,
+   "gain_annee_1_md": 14.7,
+   "gain_supp_annee_pleine_md": 12.8,
+   "id": "subv_particuliers_asso",
+   "kind": "sous_total",
+   "label_fr": "Économies sur les aides aux particuliers et aux associations",
+   "level": 2,
+   "md_par_an": 27.5,
+   "parent_id": "subventions",
+   "web_arrondi": {
+    "eur_par_foyer": 930,
+    "label_fr": "Économies sur les aides aux particuliers et aux associations",
+    "md": 28
+   },
+   "web_md_ecart": 0.5
+  },
+  {
+   "cells": "C20:F20",
+   "code": "M",
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 600,
+   "gain_annee_1_md": 6.9,
+   "gain_supp_annee_pleine_md": 10.8,
+   "id": "cheques_cibles",
+   "kind": "poste",
+   "label_fr": "Extinction des chèques ciblés aux particuliers (dont APL)",
+   "level": 3,
+   "md_par_an": 17.7,
+   "parent_id": "subv_particuliers_asso",
+   "web_arrondi": {
+    "eur_par_foyer": 600,
+    "label_fr": "Fin des chèques ciblés aux particuliers (dont APL)",
+    "md": 18
+   },
+   "web_md_ecart": 0.3
+  },
+  {
+   "cells": "C21:F21",
+   "code": "HU+AME",
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 130,
+   "gain_annee_1_md": 3.6,
+   "gain_supp_annee_pleine_md": 0,
+   "id": "hebergement_soins",
+   "kind": "poste",
+   "label_fr": "Fin des aides inconditionnelles à l'hébergement et aux soins",
+   "level": 3,
+   "md_par_an": 3.6,
+   "parent_id": "subv_particuliers_asso",
+   "web_arrondi": {
+    "eur_par_foyer": 130,
+    "label_fr": "Fin des aides inconditionnelles à l’hébergement et aux soins",
+    "md": 4
+   },
+   "web_md_ecart": 0.4
+  },
+  {
+   "cells": "C22:F22",
+   "code": "A",
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 100,
+   "gain_annee_1_md": 3.2,
+   "gain_supp_annee_pleine_md": 0,
+   "id": "autres_associations",
+   "kind": "poste",
+   "label_fr": "Extinction des subventions aux autres associations",
+   "level": 3,
+   "md_par_an": 3.2,
+   "parent_id": "subv_particuliers_asso",
+   "web_arrondi": {
+    "eur_par_foyer": 100,
+    "label_fr": "Fin des subventions aux autres associations",
+    "md": 3
+   },
+   "web_md_ecart": -0.2
+  },
+  {
+   "cells": "C23:F23",
+   "code": "APD",
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 100,
+   "gain_annee_1_md": 1,
+   "gain_supp_annee_pleine_md": 2,
+   "id": "apd",
+   "kind": "poste",
+   "label_fr": "Fin de l’aide publique au développement",
+   "level": 3,
+   "md_par_an": 3,
+   "parent_id": "subv_particuliers_asso",
+   "web_arrondi": {
+    "eur_par_foyer": 100,
+    "label_fr": "Fin de l’aide publique au développement",
+    "md": 3
+   },
+   "web_md_ecart": 0
+  },
+  {
+   "cells": "C24:F24",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 1750,
+   "gain_annee_1_md": 52.1,
+   "gain_supp_annee_pleine_md": 0,
+   "id": "niches",
+   "kind": "categorie",
+   "label_fr": "Économies sur les niches fiscales et sociales",
+   "level": 1,
+   "md_par_an": 52.1,
+   "parent_id": "total",
+   "web_arrondi": {
+    "eur_par_foyer": 1750,
+    "label_fr": "Économies sur les niches fiscales et sociales",
+    "md": 52
+   },
+   "web_md_ecart": -0.1
+  },
+  {
+   "cells": "C25:F25",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 970,
+   "gain_annee_1_md": 28.8,
+   "gain_supp_annee_pleine_md": 0,
+   "id": "niches_revenus",
+   "kind": "poste",
+   "label_fr": "Extinction des niches sur les revenus",
+   "level": 2,
+   "md_par_an": 28.8,
+   "parent_id": "niches",
+   "web_arrondi": {
+    "eur_par_foyer": 970,
+    "label_fr": "Fin des niches sur les revenus",
+    "md": 29
+   },
+   "web_md_ecart": 0.2
+  },
+  {
+   "cells": "C26:F26",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 780,
+   "gain_annee_1_md": 23.3,
+   "gain_supp_annee_pleine_md": 0,
+   "id": "niches_tva_societes",
+   "kind": "poste",
+   "label_fr": "Extinction des niches sur la TVA et les sociétés",
+   "level": 2,
+   "md_par_an": 23.3,
+   "parent_id": "niches",
+   "web_arrondi": {
+    "eur_par_foyer": 780,
+    "label_fr": "Fin des niches sur la TVA et les sociétés",
+    "md": 23
+   },
+   "web_md_ecart": -0.3
+  },
+  {
+   "cells": "C27:F27",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": 0,
+   "eur_par_foyer_an": 1000,
+   "gain_annee_1_md": 0,
+   "gain_supp_annee_pleine_md": 30,
+   "id": "chomage",
+   "kind": "categorie",
+   "label_fr": "Assurance chômage transformée en épargne",
+   "level": 1,
+   "md_par_an": 30,
+   "parent_id": "total",
+   "web_arrondi": {
+    "eur_par_foyer": 1000,
+    "label_fr": "Assurance-chômage transformée en épargne",
+    "md": 30
+   },
+   "web_md_ecart": 0
+  },
+  {
+   "cells": "C28:F28",
+   "code": null,
+   "ecart_c_vs_e_plus_f_md": -0.20918,
+   "eur_par_foyer_an": 600,
+   "gain_annee_1_md": 0,
+   "gain_supp_annee_pleine_md": 18.20918,
+   "id": "patrimoine",
+   "kind": "categorie",
+   "label_fr": "Patrimoine public valorisé et restitué (rendement net par an)",
+   "level": 1,
+   "md_par_an": 18,
+   "parent_id": "total",
+   "web_arrondi": {
+    "eur_par_foyer": 600,
+    "label_fr": "Patrimoine public valorisé et restitué (rendement net par an)",
+    "md": 18
+   },
+   "web_md_ecart": 0
+  }
+ ],
+ "valeur_ajoutee_horaire": {
+  "note": "Calcul de Résolution, sans source externe indiquée dans l'onglet (colonne source vide). 29 + 11 + 23 = 63. Les parts en % sont calculées par le pipeline.",
+  "parts": [
+   {
+    "cell": "B26",
+    "eur_par_heure": 29,
+    "id": "etat",
+    "label_fr": "Prélèvements de l'État",
+    "share_pct": 46.03
+   },
+   {
+    "cell": "B27",
+    "eur_par_heure": 11,
+    "id": "capital",
+    "label_fr": "Rémunération du capital",
+    "share_pct": 17.46
+   },
+   {
+    "cell": "B28",
+    "eur_par_heure": 23,
+    "id": "salaire_net",
+    "label_fr": "Salaire net du travailleur",
+    "share_pct": 36.51
+   }
+  ],
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphVA › A25:B28",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+  },
+  "tier": "annonce",
+  "titre_fr": "Répartition de la valeur ajoutée créée par une heure de travail",
+  "total_cell": "B25",
+  "total_eur_par_heure": 63,
+  "unit": "€ par heure de travail"
+ },
+ "year_split": {
+  "annee_1_md": 127.352167,
+  "autre_lecture_flux": {
+   "annee_1_md": 129.4,
+   "note": "feuille Flux : 129,4 Md€ la première année (écart de 2,048 Md€ avec l'Annexe Manuscrit, voir reconciliation)"
+  },
+  "par_categorie": [
+   {
+    "annee_1_md": 39.104167,
+    "id": "structures",
+    "label_fr": "Structures facultatives de l'État et des collectivités",
+    "supplement_annee_pleine_md": 27.9025
+   },
+   {
+    "annee_1_md": 36.148,
+    "id": "subventions",
+    "label_fr": "Subventions aux entreprises, particuliers et associations",
+    "supplement_annee_pleine_md": 32.8
+   },
+   {
+    "annee_1_md": 52.1,
+    "id": "niches",
+    "label_fr": "Niches fiscales et sociales (net)",
+    "supplement_annee_pleine_md": 0
+   },
+   {
+    "annee_1_md": 0,
+    "id": "chomage",
+    "label_fr": "Assurance chômage transformée en épargne",
+    "supplement_annee_pleine_md": 30
+   },
+   {
+    "annee_1_md": 0,
+    "id": "patrimoine",
+    "label_fr": "Rendement net du patrimoine public valorisé",
+    "supplement_annee_pleine_md": 18.20918
+   }
+  ],
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Annexe Manuscrit › E3:F28",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+  },
+  "supplement_annee_pleine_md": 108.91168,
+  "total_E_plus_F_md": 236.263847,
+  "unit": "Md€"
+ }
+}

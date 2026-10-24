@@ -1,0 +1,1496 @@
+{
+ "meta": {
+  "ae": "autorisations d'engagement",
+  "cp": "crédits de paiement",
+  "notes": [
+   "Chaque ligne TOTAUX de la liasse est reprise telle que publiée ; la somme des programmes diffère de 1 € d'autorisations d'engagement pour les amendements n° 4, n° 5, n° 13 : arrondi de la source (voir ecart_somme_programmes_vs_total_eur).",
+   "Les 22 amendements ne retirent que des crédits (colonnes « + » toutes à zéro). Total : 43 855,4 M€ d'AE et 39 905,0 M€ de CP.",
+   "Effet : 1er janvier 2027 pour les personnes morales et 1er juillet 2027 pour les personnes physiques (demi-exercice) — voir effet_fr pour la phrase exacte de chaque amendement.",
+   "Écart APL : l'exposé de PLF-P2 n° 32 chiffre l'économie 2027 de l'aide personnelle au logement à 5,4 Md€, alors que l'amendement n° 1 retire 8 067,8 M€ de CP du programme « Aide à l'accès au logement » (voir DISCREPANCIES.md).",
+   "Les 7 missions conservées par le plan (Défense, Sécurités, Justice, Action extérieure, Gestion des finances publiques, Solidarité, Enseignement scolaire) sont peu touchées : Sécurités 37,9 M€, Justice 5,9 M€, Action extérieure 200,1 M€, Solidarité 102,0 M€, Enseignement scolaire 225,4 M€ de CP ; Défense et Gestion des finances publiques ne figurent pas dans les 22 amendements."
+  ],
+  "source": {
+   "kind": "amendment",
+   "ref": "Liasse PLF seconde partie, amendements n° 1 à 22 (article 58, état B) ; tableau extrait de la liasse dans data/derived/etat_b_credits_retires_plf2027.csv",
+   "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf"
+  },
+  "tier": "loi",
+  "title_fr": "Crédits de l'État retirés par les 22 amendements « état B » (PLF 2027, seconde partie)",
+  "totals": {
+   "ae_retirees_eur": 43855438934,
+   "ae_retirees_md": 43.855,
+   "ae_retirees_meur": 43855.4,
+   "cp_retirees_eur": 39905020176,
+   "cp_retirees_md": 39.905,
+   "cp_retirees_meur": 39905,
+   "n_amendements": 22,
+   "n_programmes": 57
+  },
+  "unit": "euros ; *_md = milliards d'euros (3 décimales) ; *_meur = millions d'euros (1 décimale)"
+ },
+ "missions": [
+  {
+   "ae_programmes_vises_texte_depose_eur": 26904534644,
+   "ae_retirees_eur": 13292801242,
+   "ae_retirees_md": 13.293,
+   "ae_retirees_meur": 13292.8,
+   "amendment": 1,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 13129046079,
+   "cp_retirees_md": 13.129,
+   "cp_retirees_meur": 13129,
+   "ecart_ae_cp_eur": 163755163,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-1",
+   "mission_fr": "Cohésion des territoires",
+   "n_programmes": 6,
+   "natures_de_credits_fr": [
+    "rémunérations",
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "investissement de l’État",
+    "transferts aux ménages",
+    "transferts aux entreprises",
+    "transferts aux collectivités",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 49.4,
+   "part_du_total_cp_pct": 32.9,
+   "programmes": [
+    {
+     "ae_retirees_eur": 8067767822,
+     "ae_retirees_md": 8.068,
+     "cp_retirees_eur": 8067767822,
+     "cp_retirees_md": 8.068,
+     "programme_fr": "Aide à l’accès au logement"
+    },
+    {
+     "ae_retirees_eur": 3045085425,
+     "ae_retirees_md": 3.045,
+     "cp_retirees_eur": 3044844750,
+     "cp_retirees_md": 3.045,
+     "programme_fr": "Hébergement, parcours vers le logement et insertion des personnes vulnérables"
+    },
+    {
+     "ae_retirees_eur": 1207214064,
+     "ae_retirees_md": 1.207,
+     "cp_retirees_eur": 1148251105,
+     "cp_retirees_md": 1.148,
+     "programme_fr": "Urbanisme, territoires et amélioration de l’habitat"
+    },
+    {
+     "ae_retirees_eur": 619066960,
+     "ae_retirees_md": 0.619,
+     "cp_retirees_eur": 593720209,
+     "cp_retirees_md": 0.594,
+     "programme_fr": "Politique de la ville"
+    },
+    {
+     "ae_retirees_eur": 278067963,
+     "ae_retirees_md": 0.278,
+     "cp_retirees_eur": 210215669,
+     "cp_retirees_md": 0.21,
+     "programme_fr": "Impulsion et coordination de la politique d’aménagement du territoire"
+    },
+    {
+     "ae_retirees_eur": 75599008,
+     "ae_retirees_md": 0.076,
+     "cp_retirees_eur": 64246524,
+     "cp_retirees_md": 0.064,
+     "programme_fr": "Interventions territoriales de l’État"
+    }
+   ],
+   "rang_par_cp": 1,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 1 (article 58, état B, mission « Cohésion des territoires »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=4"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 19087173283,
+   "ae_retirees_eur": 12065359297,
+   "ae_retirees_md": 12.065,
+   "ae_retirees_meur": 12065.4,
+   "amendment": 2,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 10695643750,
+   "cp_retirees_md": 10.696,
+   "cp_retirees_meur": 10695.6,
+   "ecart_ae_cp_eur": 1369715547,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-2",
+   "mission_fr": "Travail, emploi et administration des ministères sociaux",
+   "n_programmes": 4,
+   "natures_de_credits_fr": [
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "investissement de l’État",
+    "transferts aux ménages",
+    "transferts aux entreprises",
+    "transferts aux collectivités",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 63.2,
+   "part_du_total_cp_pct": 26.8,
+   "programmes": [
+    {
+     "ae_retirees_eur": 7558550632,
+     "ae_retirees_md": 7.559,
+     "cp_retirees_eur": 6393345786,
+     "cp_retirees_md": 6.393,
+     "programme_fr": "Accompagnement des mutations économiques et développement de l’emploi"
+    },
+    {
+     "ae_retirees_eur": 3822922930,
+     "ae_retirees_md": 3.823,
+     "cp_retirees_eur": 3619136201,
+     "cp_retirees_md": 3.619,
+     "programme_fr": "Accès et retour à l’emploi"
+    },
+    {
+     "ae_retirees_eur": 644808463,
+     "ae_retirees_md": 0.645,
+     "cp_retirees_eur": 644808463,
+     "cp_retirees_md": 0.645,
+     "programme_fr": "Soutien des ministères sociaux"
+    },
+    {
+     "ae_retirees_eur": 39077272,
+     "ae_retirees_md": 0.039,
+     "cp_retirees_eur": 38353300,
+     "cp_retirees_md": 0.038,
+     "programme_fr": "Amélioration de la qualité de l’emploi et des relations du travail"
+    }
+   ],
+   "rang_par_cp": 2,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 2 (article 58, état B, mission « Travail, emploi et administration des ministères sociaux »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=5"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 2334755315,
+   "ae_retirees_eur": 2334755315,
+   "ae_retirees_md": 2.335,
+   "ae_retirees_meur": 2334.8,
+   "amendment": 3,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 2185603430,
+   "cp_retirees_md": 2.186,
+   "cp_retirees_meur": 2185.6,
+   "ecart_ae_cp_eur": 149151885,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-3",
+   "mission_fr": "Aide publique au développement",
+   "n_programmes": 3,
+   "natures_de_credits_fr": [
+    "fonctionnement courant",
+    "transferts aux ménages",
+    "transferts aux entreprises",
+    "transferts aux collectivités",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 100,
+   "part_du_total_cp_pct": 5.48,
+   "programmes": [
+    {
+     "ae_retirees_eur": 887151885,
+     "ae_retirees_md": 0.887,
+     "cp_retirees_eur": 738000000,
+     "cp_retirees_md": 0.738,
+     "programme_fr": "Fonds de solidarité pour le développement"
+    },
+    {
+     "ae_retirees_eur": 769194672,
+     "ae_retirees_md": 0.769,
+     "cp_retirees_eur": 769194672,
+     "cp_retirees_md": 0.769,
+     "programme_fr": "Solidarité à l’égard des pays en développement"
+    },
+    {
+     "ae_retirees_eur": 678408758,
+     "ae_retirees_md": 0.678,
+     "cp_retirees_eur": 678408758,
+     "cp_retirees_md": 0.678,
+     "programme_fr": "Aide économique et financière au développement"
+    }
+   ],
+   "rang_par_cp": 5,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 3 (article 58, état B, mission « Aide publique au développement »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=6"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 13140628909,
+   "ae_retirees_eur": 3772521584,
+   "ae_retirees_md": 3.773,
+   "ae_retirees_meur": 3772.5,
+   "amendment": 4,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 3269826313,
+   "cp_retirees_md": 3.27,
+   "cp_retirees_meur": 3269.8,
+   "ecart_ae_cp_eur": 502695271,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 1,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-4",
+   "mission_fr": "Écologie, développement et mobilité durables",
+   "n_programmes": 7,
+   "natures_de_credits_fr": [
+    "rémunérations",
+    "avantages salariaux",
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "investissement de l’État",
+    "transferts aux ménages",
+    "transferts aux entreprises",
+    "transferts aux collectivités",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 28.7,
+   "part_du_total_cp_pct": 8.19,
+   "programmes": [
+    {
+     "ae_retirees_eur": 1249237747,
+     "ae_retirees_md": 1.249,
+     "cp_retirees_eur": 1124566140,
+     "cp_retirees_md": 1.125,
+     "programme_fr": "Prévention des risques"
+    },
+    {
+     "ae_retirees_eur": 701556282,
+     "ae_retirees_md": 0.702,
+     "cp_retirees_eur": 658250498,
+     "cp_retirees_md": 0.658,
+     "programme_fr": "Énergie, climat et après-mines"
+    },
+    {
+     "ae_retirees_eur": 649000000,
+     "ae_retirees_md": 0.649,
+     "cp_retirees_eur": 486850000,
+     "cp_retirees_md": 0.487,
+     "programme_fr": "Fonds d’accélération de la transition écologique dans les territoires"
+    },
+    {
+     "ae_retirees_eur": 447843227,
+     "ae_retirees_md": 0.448,
+     "cp_retirees_eur": 343156557,
+     "cp_retirees_md": 0.343,
+     "programme_fr": "Infrastructures et services de transports"
+    },
+    {
+     "ae_retirees_eur": 363819311,
+     "ae_retirees_md": 0.364,
+     "cp_retirees_eur": 337875414,
+     "cp_retirees_md": 0.338,
+     "programme_fr": "Paysages, eau et biodiversité"
+    },
+    {
+     "ae_retirees_eur": 340059662,
+     "ae_retirees_md": 0.34,
+     "cp_retirees_eur": 310907781,
+     "cp_retirees_md": 0.311,
+     "programme_fr": "Conduite et pilotage des politiques de l’écologie, du développement et de la mobilité durables"
+    },
+    {
+     "ae_retirees_eur": 21005356,
+     "ae_retirees_md": 0.021,
+     "cp_retirees_eur": 8219923,
+     "cp_retirees_md": 0.008,
+     "programme_fr": "Expertise, information géographique et météorologie"
+    }
+   ],
+   "rang_par_cp": 3,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 4 (article 58, état B, mission « Écologie, développement et mobilité durables »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=7"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 4121875856,
+   "ae_retirees_eur": 3760085442,
+   "ae_retirees_md": 3.76,
+   "ae_retirees_meur": 3760.1,
+   "amendment": 5,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 2814605562,
+   "cp_retirees_md": 2.815,
+   "cp_retirees_meur": 2814.6,
+   "ecart_ae_cp_eur": 945479880,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 1,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-5",
+   "mission_fr": "Relations avec les collectivités territoriales",
+   "n_programmes": 2,
+   "natures_de_credits_fr": [
+    "fonctionnement courant",
+    "investissement de l’État",
+    "transferts aux collectivités"
+   ],
+   "part_ae_retiree_pct": 91.2,
+   "part_du_total_cp_pct": 7.05,
+   "programmes": [
+    {
+     "ae_retirees_eur": 3511126769,
+     "ae_retirees_md": 3.511,
+     "cp_retirees_eur": 2633345077,
+     "cp_retirees_md": 2.633,
+     "programme_fr": "Concours financiers aux collectivités territoriales et à leurs groupements"
+    },
+    {
+     "ae_retirees_eur": 248958674,
+     "ae_retirees_md": 0.249,
+     "cp_retirees_eur": 181260485,
+     "cp_retirees_md": 0.181,
+     "programme_fr": "Concours spécifiques et administration"
+    }
+   ],
+   "rang_par_cp": 4,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 5 (article 58, état B, mission « Relations avec les collectivités territoriales »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=8"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 3689542686,
+   "ae_retirees_eur": 2027866360,
+   "ae_retirees_md": 2.028,
+   "ae_retirees_meur": 2027.9,
+   "amendment": 6,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 1743251527,
+   "cp_retirees_md": 1.743,
+   "cp_retirees_meur": 1743.3,
+   "ecart_ae_cp_eur": 284614833,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-6",
+   "mission_fr": "Culture",
+   "n_programmes": 4,
+   "natures_de_credits_fr": [
+    "rémunérations",
+    "avantages salariaux",
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "investissement de l’État",
+    "transferts aux ménages",
+    "transferts aux entreprises",
+    "transferts aux collectivités",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 55,
+   "part_du_total_cp_pct": 4.37,
+   "programmes": [
+    {
+     "ae_retirees_eur": 1019231644,
+     "ae_retirees_md": 1.019,
+     "cp_retirees_eur": 903386171,
+     "cp_retirees_md": 0.903,
+     "programme_fr": "Création"
+    },
+    {
+     "ae_retirees_eur": 716044529,
+     "ae_retirees_md": 0.716,
+     "cp_retirees_eur": 603026588,
+     "cp_retirees_md": 0.603,
+     "programme_fr": "Transmission des savoirs et démocratisation de la culture"
+    },
+    {
+     "ae_retirees_eur": 156440673,
+     "ae_retirees_md": 0.156,
+     "cp_retirees_eur": 117330505,
+     "cp_retirees_md": 0.117,
+     "programme_fr": "Patrimoines"
+    },
+    {
+     "ae_retirees_eur": 136149514,
+     "ae_retirees_md": 0.136,
+     "cp_retirees_eur": 119508263,
+     "cp_retirees_md": 0.12,
+     "programme_fr": "Soutien aux politiques du ministère de la culture"
+    }
+   ],
+   "rang_par_cp": 6,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 6 (article 58, état B, mission « Culture »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=9"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 1183987268,
+   "ae_retirees_eur": 1005644806,
+   "ae_retirees_md": 1.006,
+   "ae_retirees_meur": 1005.6,
+   "amendment": 7,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 974423297,
+   "cp_retirees_md": 0.974,
+   "cp_retirees_meur": 974.4,
+   "ecart_ae_cp_eur": 31221509,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-7",
+   "mission_fr": "Sport, jeunesse et vie associative",
+   "n_programmes": 3,
+   "natures_de_credits_fr": [
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "transferts aux entreprises",
+    "transferts aux collectivités",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 84.9,
+   "part_du_total_cp_pct": 2.44,
+   "programmes": [
+    {
+     "ae_retirees_eur": 623758615,
+     "ae_retirees_md": 0.624,
+     "cp_retirees_eur": 623117495,
+     "cp_retirees_md": 0.623,
+     "programme_fr": "Jeunesse et vie associative"
+    },
+    {
+     "ae_retirees_eur": 61600000,
+     "ae_retirees_md": 0.062,
+     "cp_retirees_eur": 47053861,
+     "cp_retirees_md": 0.047,
+     "programme_fr": "Jeux olympiques et paralympiques d’hiver 2030"
+    },
+    {
+     "ae_retirees_eur": 320286191,
+     "ae_retirees_md": 0.32,
+     "cp_retirees_eur": 304251941,
+     "cp_retirees_md": 0.304,
+     "programme_fr": "Sport"
+    }
+   ],
+   "rang_par_cp": 8,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 7 (article 58, état B, mission « Sport, jeunesse et vie associative »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=10"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 2261946723,
+   "ae_retirees_eur": 1259249135,
+   "ae_retirees_md": 1.259,
+   "ae_retirees_meur": 1259.2,
+   "amendment": 8,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 1257002837,
+   "cp_retirees_md": 1.257,
+   "cp_retirees_meur": 1257,
+   "ecart_ae_cp_eur": 2246298,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-8",
+   "mission_fr": "Immigration, asile et intégration",
+   "n_programmes": 2,
+   "natures_de_credits_fr": [
+    "subventions pour charges de service public",
+    "transferts aux ménages",
+    "transferts aux entreprises",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 55.7,
+   "part_du_total_cp_pct": 3.15,
+   "programmes": [
+    {
+     "ae_retirees_eur": 1223394135,
+     "ae_retirees_md": 1.223,
+     "cp_retirees_eur": 1221147837,
+     "cp_retirees_md": 1.221,
+     "programme_fr": "Immigration et asile"
+    },
+    {
+     "ae_retirees_eur": 35855000,
+     "ae_retirees_md": 0.036,
+     "cp_retirees_eur": 35855000,
+     "cp_retirees_md": 0.036,
+     "programme_fr": "Intégration et accès à la nationalité française"
+    }
+   ],
+   "rang_par_cp": 7,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 8 (article 58, état B, mission « Immigration, asile et intégration »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=11"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 1525633278,
+   "ae_retirees_eur": 781560604,
+   "ae_retirees_md": 0.782,
+   "ae_retirees_meur": 781.6,
+   "amendment": 9,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 779217127,
+   "cp_retirees_md": 0.779,
+   "cp_retirees_meur": 779.2,
+   "ecart_ae_cp_eur": 2343477,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-9",
+   "mission_fr": "Santé",
+   "n_programmes": 2,
+   "natures_de_credits_fr": [
+    "rémunérations",
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "transferts aux ménages",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 51.2,
+   "part_du_total_cp_pct": 1.95,
+   "programmes": [
+    {
+     "ae_retirees_eur": 608150000,
+     "ae_retirees_md": 0.608,
+     "cp_retirees_eur": 608150000,
+     "cp_retirees_md": 0.608,
+     "programme_fr": "Protection maladie"
+    },
+    {
+     "ae_retirees_eur": 173410604,
+     "ae_retirees_md": 0.173,
+     "cp_retirees_eur": 171067127,
+     "cp_retirees_md": 0.171,
+     "programme_fr": "Prévention, sécurité sanitaire et offre de soins"
+    }
+   ],
+   "rang_par_cp": 9,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 9 (article 58, état B, mission « Santé »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=12"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 3361217042,
+   "ae_retirees_eur": 772662106,
+   "ae_retirees_md": 0.773,
+   "ae_retirees_meur": 772.7,
+   "amendment": 10,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 670132264,
+   "cp_retirees_md": 0.67,
+   "cp_retirees_meur": 670.1,
+   "ecart_ae_cp_eur": 102529842,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-10",
+   "mission_fr": "Recherche et enseignement supérieur",
+   "n_programmes": 1,
+   "natures_de_credits_fr": [
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "investissement de l’État",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 23,
+   "part_du_total_cp_pct": 1.68,
+   "programmes": [
+    {
+     "ae_retirees_eur": 772662106,
+     "ae_retirees_md": 0.773,
+     "cp_retirees_eur": 670132264,
+     "cp_retirees_md": 0.67,
+     "programme_fr": "Vie étudiante"
+    }
+   ],
+   "rang_par_cp": 10,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 10 (article 58, état B, mission « Recherche et enseignement supérieur »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=13"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 701933880,
+   "ae_retirees_eur": 674689892,
+   "ae_retirees_md": 0.675,
+   "ae_retirees_meur": 674.7,
+   "amendment": 11,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 568920102,
+   "cp_retirees_md": 0.569,
+   "cp_retirees_meur": 568.9,
+   "ecart_ae_cp_eur": 105769790,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-11",
+   "mission_fr": "Médias, livre et industries culturelles",
+   "n_programmes": 2,
+   "natures_de_credits_fr": [
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "investissement de l’État",
+    "transferts aux entreprises",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 96.1,
+   "part_du_total_cp_pct": 1.43,
+   "programmes": [
+    {
+     "ae_retirees_eur": 338621270,
+     "ae_retirees_md": 0.339,
+     "cp_retirees_eur": 295672655,
+     "cp_retirees_md": 0.296,
+     "programme_fr": "Livre et industries culturelles"
+    },
+    {
+     "ae_retirees_eur": 336068622,
+     "ae_retirees_md": 0.336,
+     "cp_retirees_eur": 273247447,
+     "cp_retirees_md": 0.273,
+     "programme_fr": "Presse et médias"
+    }
+   ],
+   "rang_par_cp": 11,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 11 (article 58, état B, mission « Médias, livre et industries culturelles »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=14"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 2979267191,
+   "ae_retirees_eur": 630363522,
+   "ae_retirees_md": 0.63,
+   "ae_retirees_meur": 630.4,
+   "amendment": 12,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 556598409,
+   "cp_retirees_md": 0.557,
+   "cp_retirees_meur": 556.6,
+   "ecart_ae_cp_eur": 73765113,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-12",
+   "mission_fr": "Économie",
+   "n_programmes": 3,
+   "natures_de_credits_fr": [
+    "rémunérations",
+    "avantages salariaux",
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "investissement de l’État",
+    "transferts aux entreprises",
+    "transferts aux collectivités",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 21.2,
+   "part_du_total_cp_pct": 1.39,
+   "programmes": [
+    {
+     "ae_retirees_eur": 405118987,
+     "ae_retirees_md": 0.405,
+     "cp_retirees_eur": 333632524,
+     "cp_retirees_md": 0.334,
+     "programme_fr": "Stratégies économiques"
+    },
+    {
+     "ae_retirees_eur": 222109535,
+     "ae_retirees_md": 0.222,
+     "cp_retirees_eur": 219830885,
+     "cp_retirees_md": 0.22,
+     "programme_fr": "Développement des entreprises et régulations"
+    },
+    {
+     "ae_retirees_eur": 3135000,
+     "ae_retirees_md": 0.003,
+     "cp_retirees_eur": 3135000,
+     "cp_retirees_md": 0.003,
+     "programme_fr": "Plan France Très haut débit"
+    }
+   ],
+   "rang_par_cp": 12,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 12 (article 58, état B, mission « Économie »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=15"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 952703564,
+   "ae_retirees_eur": 513541366,
+   "ae_retirees_md": 0.514,
+   "ae_retirees_meur": 513.5,
+   "amendment": 13,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 368209896,
+   "cp_retirees_md": 0.368,
+   "cp_retirees_meur": 368.2,
+   "ecart_ae_cp_eur": 145331470,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 1,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-13",
+   "mission_fr": "Direction de l’action du Gouvernement",
+   "n_programmes": 2,
+   "natures_de_credits_fr": [
+    "rémunérations",
+    "avantages salariaux",
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "investissement de l’État",
+    "transferts aux ménages",
+    "transferts aux entreprises",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 53.9,
+   "part_du_total_cp_pct": 0.92,
+   "programmes": [
+    {
+     "ae_retirees_eur": 446655321,
+     "ae_retirees_md": 0.447,
+     "cp_retirees_eur": 302767844,
+     "cp_retirees_md": 0.303,
+     "programme_fr": "Coordination du travail gouvernemental"
+    },
+    {
+     "ae_retirees_eur": 66886046,
+     "ae_retirees_md": 0.067,
+     "cp_retirees_eur": 65442052,
+     "cp_retirees_md": 0.065,
+     "programme_fr": "Protection des droits et libertés"
+    }
+   ],
+   "rang_par_cp": 13,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 13 (article 58, état B, mission « Direction de l’action du Gouvernement »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=16"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 282288468,
+   "ae_retirees_eur": 207779344,
+   "ae_retirees_md": 0.208,
+   "ae_retirees_meur": 207.8,
+   "amendment": 14,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 168004952,
+   "cp_retirees_md": 0.168,
+   "cp_retirees_meur": 168,
+   "ecart_ae_cp_eur": 39774392,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-14",
+   "mission_fr": "Transformation et fonction publiques",
+   "n_programmes": 2,
+   "natures_de_credits_fr": [
+    "rémunérations",
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "investissement de l’État",
+    "transferts aux ménages",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 73.6,
+   "part_du_total_cp_pct": 0.42,
+   "programmes": [
+    {
+     "ae_retirees_eur": 57141756,
+     "ae_retirees_md": 0.057,
+     "cp_retirees_eur": 34124061,
+     "cp_retirees_md": 0.034,
+     "programme_fr": "Performance et résilience des bâtiments de l’État et de ses opérateurs"
+    },
+    {
+     "ae_retirees_eur": 150637588,
+     "ae_retirees_md": 0.151,
+     "cp_retirees_eur": 133880891,
+     "cp_retirees_md": 0.134,
+     "programme_fr": "Fonction publique"
+    }
+   ],
+   "rang_par_cp": 16,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 14 (article 58, état B, mission « Transformation et fonction publiques »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=17"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 50996061881,
+   "ae_retirees_eur": 225417181,
+   "ae_retirees_md": 0.225,
+   "ae_retirees_meur": 225.4,
+   "amendment": 15,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 225417181,
+   "cp_retirees_md": 0.225,
+   "cp_retirees_meur": 225.4,
+   "ecart_ae_cp_eur": 0,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er juillet 2027 : elle atteint des personnes physiques et la moitié de l’exercice leur est laissée.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes physiques (demi-exercice)",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-15",
+   "mission_fr": "Enseignement scolaire",
+   "n_programmes": 3,
+   "natures_de_credits_fr": [
+    "transferts aux ménages"
+   ],
+   "part_ae_retiree_pct": 0.4,
+   "part_du_total_cp_pct": 0.56,
+   "programmes": [
+    {
+     "ae_retirees_eur": 113811500,
+     "ae_retirees_md": 0.114,
+     "cp_retirees_eur": 113811500,
+     "cp_retirees_md": 0.114,
+     "programme_fr": "Enseignement scolaire public du second degré"
+    },
+    {
+     "ae_retirees_eur": 74338182,
+     "ae_retirees_md": 0.074,
+     "cp_retirees_eur": 74338182,
+     "cp_retirees_md": 0.074,
+     "programme_fr": "Enseignement privé du premier et du second degrés"
+    },
+    {
+     "ae_retirees_eur": 37267499,
+     "ae_retirees_md": 0.037,
+     "cp_retirees_eur": 37267499,
+     "cp_retirees_md": 0.037,
+     "programme_fr": "Enseignement technique agricole"
+    }
+   ],
+   "rang_par_cp": 14,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 15 (article 58, état B, mission « Enseignement scolaire »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=18"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 772599840,
+   "ae_retirees_eur": 205826724,
+   "ae_retirees_md": 0.206,
+   "ae_retirees_meur": 205.8,
+   "amendment": 16,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 200134647,
+   "cp_retirees_md": 0.2,
+   "cp_retirees_meur": 200.1,
+   "ecart_ae_cp_eur": 5692077,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-16",
+   "mission_fr": "Action extérieure de l’État",
+   "n_programmes": 2,
+   "natures_de_credits_fr": [
+    "fonctionnement courant",
+    "transferts aux ménages",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 26.6,
+   "part_du_total_cp_pct": 0.5,
+   "programmes": [
+    {
+     "ae_retirees_eur": 127083174,
+     "ae_retirees_md": 0.127,
+     "cp_retirees_eur": 123363774,
+     "cp_retirees_md": 0.123,
+     "programme_fr": "Diplomatie culturelle et d’influence"
+    },
+    {
+     "ae_retirees_eur": 78743550,
+     "ae_retirees_md": 0.079,
+     "cp_retirees_eur": 76770873,
+     "cp_retirees_md": 0.077,
+     "programme_fr": "Français à l’étranger et affaires consulaires"
+    }
+   ],
+   "rang_par_cp": 15,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 16 (article 58, état B, mission « Action extérieure de l’État »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=19"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 32186322565,
+   "ae_retirees_eur": 102086614,
+   "ae_retirees_md": 0.102,
+   "ae_retirees_meur": 102.1,
+   "amendment": 17,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 101987363,
+   "cp_retirees_md": 0.102,
+   "cp_retirees_meur": 102,
+   "ecart_ae_cp_eur": 99251,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-17",
+   "mission_fr": "Solidarité, insertion et égalité des chances",
+   "n_programmes": 3,
+   "natures_de_credits_fr": [
+    "fonctionnement courant",
+    "subventions pour charges de service public",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 0.3,
+   "part_du_total_cp_pct": 0.26,
+   "programmes": [
+    {
+     "ae_retirees_eur": 65169454,
+     "ae_retirees_md": 0.065,
+     "cp_retirees_eur": 65070203,
+     "cp_retirees_md": 0.065,
+     "programme_fr": "Égalité entre les femmes et les hommes"
+    },
+    {
+     "ae_retirees_eur": 22349854,
+     "ae_retirees_md": 0.022,
+     "cp_retirees_eur": 22349854,
+     "cp_retirees_md": 0.022,
+     "programme_fr": "Handicap et dépendance"
+    },
+    {
+     "ae_retirees_eur": 14567306,
+     "ae_retirees_md": 0.015,
+     "cp_retirees_eur": 14567306,
+     "cp_retirees_md": 0.015,
+     "programme_fr": "Inclusion sociale et protection des personnes"
+    }
+   ],
+   "rang_par_cp": 17,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 17 (article 58, état B, mission « Solidarité, insertion et égalité des chances »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=20"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 637989867,
+   "ae_retirees_eur": 92065085,
+   "ae_retirees_md": 0.092,
+   "ae_retirees_meur": 92.1,
+   "amendment": 18,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 78679546,
+   "cp_retirees_md": 0.079,
+   "cp_retirees_meur": 78.7,
+   "ecart_ae_cp_eur": 13385539,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-18",
+   "mission_fr": "Agriculture, alimentation, forêt et affaires rurales",
+   "n_programmes": 1,
+   "natures_de_credits_fr": [
+    "rémunérations",
+    "avantages salariaux",
+    "fonctionnement courant",
+    "investissement de l’État"
+   ],
+   "part_ae_retiree_pct": 14.4,
+   "part_du_total_cp_pct": 0.2,
+   "programmes": [
+    {
+     "ae_retirees_eur": 92065085,
+     "ae_retirees_md": 0.092,
+     "cp_retirees_eur": 78679546,
+     "cp_retirees_md": 0.079,
+     "programme_fr": "Conduite et pilotage des politiques de l’agriculture"
+    }
+   ],
+   "rang_par_cp": 18,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 18 (article 58, état B, mission « Agriculture, alimentation, forêt et affaires rurales »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=21"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 587023619,
+   "ae_retirees_eur": 68670672,
+   "ae_retirees_md": 0.069,
+   "ae_retirees_meur": 68.7,
+   "amendment": 19,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 68670672,
+   "cp_retirees_md": 0.069,
+   "cp_retirees_meur": 68.7,
+   "ecart_ae_cp_eur": 0,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 : elle n’atteint que des personnes morales et l’exercice est plein.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales (exercice plein)",
+     "date": "2027-01-01"
+    }
+   ],
+   "id": "PLF-P2-19",
+   "mission_fr": "Administration générale et territoriale de l’État",
+   "n_programmes": 1,
+   "natures_de_credits_fr": [
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 11.7,
+   "part_du_total_cp_pct": 0.17,
+   "programmes": [
+    {
+     "ae_retirees_eur": 68670672,
+     "ae_retirees_md": 0.069,
+     "cp_retirees_eur": 68670672,
+     "cp_retirees_md": 0.069,
+     "programme_fr": "Vie politique"
+    }
+   ],
+   "rang_par_cp": 19,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 19 (article 58, état B, mission « Administration générale et territoriale de l’État »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=22"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 78622634,
+   "ae_retirees_eur": 49278164,
+   "ae_retirees_md": 0.049,
+   "ae_retirees_meur": 49.3,
+   "amendment": 20,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 37946354,
+   "cp_retirees_md": 0.038,
+   "cp_retirees_meur": 37.9,
+   "ecart_ae_cp_eur": 11331810,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-20",
+   "mission_fr": "Sécurités",
+   "n_programmes": 1,
+   "natures_de_credits_fr": [
+    "fonctionnement courant",
+    "investissement de l’État",
+    "transferts aux ménages",
+    "transferts aux entreprises",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 62.7,
+   "part_du_total_cp_pct": 0.1,
+   "programmes": [
+    {
+     "ae_retirees_eur": 49278164,
+     "ae_retirees_md": 0.049,
+     "cp_retirees_eur": 37946354,
+     "cp_retirees_md": 0.038,
+     "programme_fr": "Sécurité et éducation routières"
+    }
+   ],
+   "rang_par_cp": 20,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 20 (article 58, état B, mission « Sécurités »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=23"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 832771821,
+   "ae_retirees_eur": 6924880,
+   "ae_retirees_md": 0.007,
+   "ae_retirees_meur": 6.9,
+   "amendment": 21,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 5886148,
+   "cp_retirees_md": 0.006,
+   "cp_retirees_meur": 5.9,
+   "ecart_ae_cp_eur": 1038732,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er juillet 2027 : elle atteint des personnes physiques et la moitié de l’exercice leur est laissée.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes physiques (demi-exercice)",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-21",
+   "mission_fr": "Justice",
+   "n_programmes": 1,
+   "natures_de_credits_fr": [
+    "fonctionnement courant"
+   ],
+   "part_ae_retiree_pct": 0.8,
+   "part_du_total_cp_pct": 0.01,
+   "programmes": [
+    {
+     "ae_retirees_eur": 6924880,
+     "ae_retirees_md": 0.007,
+     "cp_retirees_eur": 5886148,
+     "cp_retirees_md": 0.006,
+     "programme_fr": "Accès au droit et à la justice"
+    }
+   ],
+   "rang_par_cp": 21,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 21 (article 58, état B, mission « Justice »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=24"
+   },
+   "tier": "loi"
+  },
+  {
+   "ae_programmes_vises_texte_depose_eur": 301105696,
+   "ae_retirees_eur": 6289599,
+   "ae_retirees_md": 0.006,
+   "ae_retirees_meur": 6.3,
+   "amendment": 22,
+   "article_fr": "Article 58, état B",
+   "cp_retirees_eur": 5812720,
+   "cp_retirees_md": 0.006,
+   "cp_retirees_meur": 5.8,
+   "ecart_ae_cp_eur": 476879,
+   "ecart_somme_programmes_vs_total_eur": {
+    "ae": 0,
+    "cp": 0
+   },
+   "effet_fr": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques.",
+   "effets": [
+    {
+     "applies_to_fr": "personnes morales",
+     "date": "2027-01-01"
+    },
+    {
+     "applies_to_fr": "personnes physiques",
+     "date": "2027-07-01"
+    }
+   ],
+   "id": "PLF-P2-22",
+   "mission_fr": "Conseil et contrôle de l’État",
+   "n_programmes": 2,
+   "natures_de_credits_fr": [
+    "rémunérations",
+    "avantages salariaux",
+    "fonctionnement courant",
+    "transferts aux autres collectivités"
+   ],
+   "part_ae_retiree_pct": 2.1,
+   "part_du_total_cp_pct": 0.01,
+   "programmes": [
+    {
+     "ae_retirees_eur": 6215699,
+     "ae_retirees_md": 0.006,
+     "cp_retirees_eur": 5738820,
+     "cp_retirees_md": 0.006,
+     "programme_fr": "Conseil économique, social et environnemental"
+    },
+    {
+     "ae_retirees_eur": 73900,
+     "ae_retirees_md": 0,
+     "cp_retirees_eur": 73900,
+     "cp_retirees_md": 0,
+     "programme_fr": "Cour des comptes et autres juridictions financières"
+    }
+   ],
+   "rang_par_cp": 22,
+   "source": {
+    "csv": "data/derived/etat_b_credits_retires_plf2027.csv",
+    "kind": "amendment",
+    "ref": "Amendement PLF-P2 n° 22 (article 58, état B, mission « Conseil et contrôle de l’État »)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=25"
+   },
+   "tier": "loi"
+  }
+ ]
+}

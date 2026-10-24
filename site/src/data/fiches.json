@@ -1,0 +1,1464 @@
+{
+ "fiches": [
+  {
+   "comme_chacun_fr": [
+    "La paperasse",
+    "Le formulaire",
+    "550 €"
+   ],
+   "gains": [
+    {
+     "figure": null,
+     "headline_fr": "L'État utile",
+     "sub_items_fr": [],
+     "text_fr": "Concentré sur sept missions, il les remplit — et vous le voyez."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Le terrain",
+     "sub_items_fr": [],
+     "text_fr": "Policiers, gendarmes et magistrats renforcés, et présents là où vous vivez."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Le régalien",
+     "sub_items_fr": [],
+     "text_fr": "Police, justice, défense : un responsable identifié, qui répond devant vous."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Un guichet",
+     "sub_items_fr": [],
+     "text_fr": "Un seul interlocuteur de l'État sur votre territoire."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Votre voix",
+     "sub_items_fr": [],
+     "text_fr": "Un échelon local lisible, et votre vote qui décide vraiment."
+    },
+    {
+     "figure": null,
+     "headline_fr": "L'audit",
+     "sub_items_fr": [],
+     "text_fr": "Chaque euro public est auditable en permanence, et vous pouvez le vérifier."
+    }
+   ],
+   "group_description_fr": "Ce que le plan change pour chacun, quel que soit son état.",
+   "group_fr": "Tout le monde",
+   "header_counts": {
+    "gains": 13,
+    "pertes": 1
+   },
+   "header_fr": "68 M · 1 perte · 13 gains",
+   "header_population": {
+    "raw": "68 M",
+    "unit_fr": null,
+    "value": 68000000
+   },
+   "header_vs_listed": {
+    "gains_header": 13,
+    "gains_listes_avec_sous_points": 6,
+    "gains_listes_hors_sous_points": 6,
+    "gains_listes_plus_comme_chacun": 9,
+    "gains_match": false,
+    "pertes_header": 1,
+    "pertes_listees": 1,
+    "pertes_match": true
+   },
+   "order": 1,
+   "pdf_url": "https://france-resolution.fr/fiches/citoyen.pdf",
+   "pertes": [
+    {
+     "text_fr": "Les prix se réajustent, avec une inflation faciale inférieure à 2 %. Les prix disent enfin ce que les choses coûtent. La surtaxe disparaît, l’impôt se déplace sur le résultat, les certificats d’économie d’énergie s’arrêtent, et ces prix-là baissent. Le solde tient dans une inflation faciale inférieure à 2 %.",
+     "title_fr": "La vérité des prix"
+    }
+   ],
+   "population_fact_id": "fiche_pop_citoyens",
+   "slug": "citoyen",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › citoyen",
+    "url": "https://france-resolution.fr/fiches/citoyen.html"
+   },
+   "tagline_fr": "Un État qui fait moins, et qui le fait bien.",
+   "tier": "annonce",
+   "title_fr": "Citoyen",
+   "url": "https://france-resolution.fr/fiches/citoyen.html"
+  },
+  {
+   "comme_chacun_fr": [
+    "Un seul impôt",
+    "Les taxes"
+   ],
+   "gains": [
+    {
+     "figure": {
+      "raw": "36 %",
+      "signed_plus": false,
+      "unit": "%",
+      "value": 36
+     },
+     "headline_fr": "36 %",
+     "sub_items_fr": [],
+     "text_fr": "De la richesse produite, contre 43 % aujourd'hui : c'est ce que vous verserez."
+    },
+    {
+     "figure": {
+      "raw": "143 Md€",
+      "signed_plus": false,
+      "unit": "Md€",
+      "value": 143
+     },
+     "headline_fr": "143 Md€",
+     "sub_items_fr": [],
+     "text_fr": "De niches supprimées, dont 52 milliards vous reviennent en baisse de charges et de taxes."
+    },
+    {
+     "figure": {
+      "raw": "68,9 Md€",
+      "signed_plus": false,
+      "unit": "Md€",
+      "value": 68.9
+     },
+     "headline_fr": "68,9 Md€",
+     "sub_items_fr": [],
+     "text_fr": "Par an de subventions et d'aides que vous ne financez plus."
+    },
+    {
+     "figure": {
+      "raw": "29,6 Md€",
+      "signed_plus": false,
+      "unit": "Md€",
+      "value": 29.6
+     },
+     "headline_fr": "29,6 Md€",
+     "sub_items_fr": [],
+     "text_fr": "Par an de masse salariale publique en moins sur votre feuille d'impôt."
+    },
+    {
+     "figure": {
+      "raw": "12,4 Md€",
+      "signed_plus": false,
+      "unit": "Md€",
+      "value": 12.4
+     },
+     "headline_fr": "12,4 Md€",
+     "sub_items_fr": [],
+     "text_fr": "Par an d'agences et d'administrations dont vous payiez le fonctionnement."
+    },
+    {
+     "figure": {
+      "raw": "9,6 Md€",
+      "signed_plus": false,
+      "unit": "Md€",
+      "value": 9.6
+     },
+     "headline_fr": "9,6 Md€",
+     "sub_items_fr": [],
+     "text_fr": "Par an d'échelons locaux dont vous payiez le fonctionnement."
+    }
+   ],
+   "group_description_fr": "Ce que le plan change pour chacun, quel que soit son état.",
+   "group_fr": "Tout le monde",
+   "header_counts": {
+    "gains": 10,
+    "pertes": 0
+   },
+   "header_fr": "30 M foyers · 10 gains",
+   "header_population": {
+    "raw": "30 M foyers",
+    "unit_fr": "foyers",
+    "value": 30000000
+   },
+   "header_vs_listed": {
+    "gains_header": 10,
+    "gains_listes_avec_sous_points": 6,
+    "gains_listes_hors_sous_points": 6,
+    "gains_listes_plus_comme_chacun": 8,
+    "gains_match": false,
+    "pertes_header": 0,
+    "pertes_listees": 0,
+    "pertes_match": true
+   },
+   "order": 2,
+   "pdf_url": "https://france-resolution.fr/fiches/contribuable.pdf",
+   "pertes": [],
+   "population_fact_id": "fiche_pop_foyers",
+   "slug": "contribuable",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › contribuable",
+    "url": "https://france-resolution.fr/fiches/contribuable.html"
+   },
+   "tagline_fr": "Ce que l’État vous prend, et de combien ça baisse.",
+   "tier": "annonce",
+   "title_fr": "Contribuable",
+   "url": "https://france-resolution.fr/fiches/contribuable.html"
+  },
+  {
+   "comme_chacun_fr": [
+    "300 €",
+    "275 €"
+   ],
+   "gains": [
+    {
+     "figure": {
+      "raw": "20 000 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 20000
+     },
+     "headline_fr": "20 000 €",
+     "sub_items_fr": [],
+     "text_fr": "De patrimoine public rendu à votre foyer, en trois ans."
+    },
+    {
+     "figure": null,
+     "headline_fr": "La restitution",
+     "sub_items_fr": [],
+     "text_fr": "Vos choix se paient sur vos comptes, et personne ne porte la charge d'un autre."
+    },
+    {
+     "figure": null,
+     "headline_fr": "La transmission",
+     "sub_items_fr": [],
+     "text_fr": "Les impôts cachés sur vos mutations et vos successions disparaissent."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Le seuil",
+     "sub_items_fr": [],
+     "text_fr": "Un seuil unique, sans niche ni quotient : la même loi pour vous que pour tous."
+    },
+    {
+     "figure": {
+      "raw": "600 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 600
+     },
+     "headline_fr": "600 €",
+     "sub_items_fr": [],
+     "text_fr": "Par an, ce que votre capital rapporte au rythme de l’économie, non d’un vote, sans s'épuiser."
+    }
+   ],
+   "group_description_fr": "Ce que le plan change pour chacun, quel que soit son état.",
+   "group_fr": "Tout le monde",
+   "header_counts": {
+    "gains": 5,
+    "pertes": 1
+   },
+   "header_fr": "30 M · 1 perte · 5 gains",
+   "header_population": {
+    "raw": "30 M",
+    "unit_fr": null,
+    "value": 30000000
+   },
+   "header_vs_listed": {
+    "gains_header": 5,
+    "gains_listes_avec_sous_points": 5,
+    "gains_listes_hors_sous_points": 5,
+    "gains_listes_plus_comme_chacun": 7,
+    "gains_match": true,
+    "pertes_header": 1,
+    "pertes_listees": 1,
+    "pertes_match": true
+   },
+   "order": 3,
+   "pdf_url": "https://france-resolution.fr/fiches/foyer.pdf",
+   "pertes": [
+    {
+     "text_fr": "L’exonération sur l’emploi à domicile s’arrête. Une exonération sur l’emploi à domicile est une niche : elle réduit l’impôt de ceux qui peuvent employer, et le fait payer aux autres.",
+     "title_fr": "L’emploi à domicile"
+    }
+   ],
+   "population_fact_id": "fiche_pop_foyers",
+   "slug": "foyer",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › foyer",
+    "url": "https://france-resolution.fr/fiches/foyer.html"
+   },
+   "tagline_fr": "Votre patrimoine : ce qu’on vous rend, ce que vous gardez.",
+   "tier": "annonce",
+   "title_fr": "Foyer",
+   "url": "https://france-resolution.fr/fiches/foyer.html"
+  },
+  {
+   "comme_chacun_fr": [
+    "La restitution"
+   ],
+   "gains": [
+    {
+     "figure": {
+      "raw": "600 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 600
+     },
+     "headline_fr": "600 €",
+     "sub_items_fr": [],
+     "text_fr": "Rendus tous les mois : 300 euros sur votre salaire net, 300 euros sur un compte épargne à votre nom."
+    },
+    {
+     "figure": {
+      "raw": "+13 %",
+      "signed_plus": true,
+      "unit": "%",
+      "value": 13
+     },
+     "headline_fr": "+13 %",
+     "sub_items_fr": [],
+     "text_fr": "Votre salaire net en un an, au salaire médian. 180 euros de plus par mois au SMIC."
+    },
+    {
+     "figure": {
+      "raw": "0,77 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 0.77
+     },
+     "headline_fr": "0,77 €",
+     "sub_items_fr": [],
+     "text_fr": "Ce qui vous reste par euro gagné, quel que soit votre revenu. L'aide fondamentale n'est pas imposée : vous ne payez que sur ce qui la dépasse."
+    },
+    {
+     "figure": {
+      "raw": "300 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 300
+     },
+     "headline_fr": "300 €",
+     "sub_items_fr": [
+      "Vous en suivez la croissance, mois après mois.",
+      "Votre pension ne dépend plus d'aucune caisse ni d'aucun régime.",
+      "Vous ne dépendez plus d'une promesse politique ni du déficit public."
+     ],
+     "text_fr": "Sur votre compte épargne personnel : la retraite d'abord, le chômage ensuite. Vous partez quand il vous convient."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Votre carrière",
+     "sub_items_fr": [],
+     "text_fr": "Une carrière longue vous paie un départ plus tôt, ou une pension plus élevée."
+    }
+   ],
+   "group_description_fr": "Ceux qui vivent de leur travail ou le font vivre.",
+   "group_fr": "Le travail et l'entreprise",
+   "header_counts": {
+    "gains": 8,
+    "pertes": 0
+   },
+   "header_fr": "29 M · 8 gains",
+   "header_population": {
+    "raw": "29 M",
+    "unit_fr": null,
+    "value": 29000000
+   },
+   "header_vs_listed": {
+    "gains_header": 8,
+    "gains_listes_avec_sous_points": 8,
+    "gains_listes_hors_sous_points": 5,
+    "gains_listes_plus_comme_chacun": 9,
+    "gains_match": true,
+    "pertes_header": 0,
+    "pertes_listees": 0,
+    "pertes_match": true
+   },
+   "order": 4,
+   "pdf_url": "https://france-resolution.fr/fiches/travailleur.pdf",
+   "pertes": [],
+   "population_fact_id": "fiche_pop_travailleurs",
+   "slug": "travailleur",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › travailleur",
+    "url": "https://france-resolution.fr/fiches/travailleur.html"
+   },
+   "tagline_fr": "Ce que votre travail vous rapporte enfin.",
+   "tier": "annonce",
+   "title_fr": "Travailleur",
+   "url": "https://france-resolution.fr/fiches/travailleur.html"
+  },
+  {
+   "comme_chacun_fr": [
+    "+220 €",
+    "+13 %",
+    "550 €",
+    "0,77 €"
+   ],
+   "gains": [
+    {
+     "figure": null,
+     "headline_fr": "Compte épargne",
+     "sub_items_fr": [],
+     "text_fr": "Vos cotisations chômage l'alimentent tous les mois, à votre nom."
+    },
+    {
+     "figure": null,
+     "headline_fr": "La reprise",
+     "sub_items_fr": [],
+     "text_fr": "Ce que vous n'avez pas consommé de votre compte vous reste."
+    },
+    {
+     "figure": null,
+     "headline_fr": "L'embauche",
+     "sub_items_fr": [],
+     "text_fr": "Les entreprises qui vous recrutent paient le travail moins cher, et embauchent davantage."
+    }
+   ],
+   "group_description_fr": "Ceux qui vivent de leur travail ou le font vivre.",
+   "group_fr": "Le travail et l'entreprise",
+   "header_counts": {
+    "gains": 3,
+    "pertes": 3
+   },
+   "header_fr": "5,7 M · 3 pertes · 3 gains",
+   "header_population": {
+    "raw": "5,7 M",
+    "unit_fr": null,
+    "value": 5700000
+   },
+   "header_vs_listed": {
+    "gains_header": 3,
+    "gains_listes_avec_sous_points": 3,
+    "gains_listes_hors_sous_points": 3,
+    "gains_listes_plus_comme_chacun": 7,
+    "gains_match": true,
+    "pertes_header": 3,
+    "pertes_listees": 3,
+    "pertes_match": true
+   },
+   "order": 5,
+   "pdf_url": "https://france-resolution.fr/fiches/personne-sans-emploi.pdf",
+   "pertes": [
+    {
+     "text_fr": "L’indemnisation passe de treize à six mois. Treize mois d’indemnisation collective font vivre les organismes qui la gèrent autant que ceux qui la perçoivent. Six mois de solidarité, puis un compte qui est le vôtre : ce que vous n’utilisez pas vous reste.",
+     "title_fr": "Au-delà de six mois"
+    },
+    {
+     "text_fr": "Les aides attachées à votre contrat s’arrêtent. Un dispositif d’aide à l’emploi qui finance le contrat plutôt que le travail rend le retour à l’emploi dépendant du guichet. Ce qui rend l’emploi attractif, c’est son salaire.",
+     "title_fr": "L’aide au contrat"
+    },
+    {
+     "text_fr": "Les dispositifs d’insertion financés par l’État s’arrêtent. L’insertion financée par dispositif fait vivre l’opérateur d’insertion avant l’inséré. Ce qui insère durablement, c’est un emploi qui paie.",
+     "title_fr": "L’insertion"
+    }
+   ],
+   "population_fact_id": "fiche_pop_sans_emploi",
+   "slug": "personne-sans-emploi",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › personne-sans-emploi",
+    "url": "https://france-resolution.fr/fiches/personne-sans-emploi.html"
+   },
+   "tagline_fr": "Six mois de solidarité, puis un compte à vous et un marché qui embauche.",
+   "tier": "annonce",
+   "title_fr": "Personne sans emploi",
+   "url": "https://france-resolution.fr/fiches/personne-sans-emploi.html"
+  },
+  {
+   "comme_chacun_fr": [
+    "Aucune hausse",
+    "0,77 €"
+   ],
+   "gains": [
+    {
+     "figure": null,
+     "headline_fr": "0 € avant profit",
+     "sub_items_fr": [],
+     "text_fr": "Les impôts de production disparaissent : vous ne payez plus rien avant d'avoir gagné."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Un seul impôt",
+     "sub_items_fr": [],
+     "text_fr": "Un impôt unique sur les bénéfices remplace l'empilement, et nul ne le contourne à votre place."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Le formulaire",
+     "sub_items_fr": [],
+     "text_fr": "Vous entreprenez d'abord : l'autorisation préalable disparaît, l'abus se sanctionne."
+    },
+    {
+     "figure": null,
+     "headline_fr": "La paperasse",
+     "sub_items_fr": [],
+     "text_fr": "Un principe court remplace les milliers de pages que vous subissez, et le coût qui allait avec."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Vos clients",
+     "sub_items_fr": [],
+     "text_fr": "Ils ont 13 % de pouvoir d'achat en plus, et le travail moins taxé rend vos embauches rentables."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Le taux unique",
+     "sub_items_fr": [],
+     "text_fr": "Votre revenu d'indépendant est imposé au même taux que celui d'un salarié."
+    }
+   ],
+   "group_description_fr": "Ceux qui vivent de leur travail ou le font vivre.",
+   "group_fr": "Le travail et l'entreprise",
+   "header_counts": {
+    "gains": 9,
+    "pertes": 2
+   },
+   "header_fr": "2 pertes · 9 gains",
+   "header_population": null,
+   "header_vs_listed": {
+    "gains_header": 9,
+    "gains_listes_avec_sous_points": 6,
+    "gains_listes_hors_sous_points": 6,
+    "gains_listes_plus_comme_chacun": 8,
+    "gains_match": false,
+    "pertes_header": 2,
+    "pertes_listees": 2,
+    "pertes_match": true
+   },
+   "order": 6,
+   "pdf_url": "https://france-resolution.fr/fiches/entreprise.pdf",
+   "pertes": [
+    {
+     "text_fr": "L’impôt sur les sociétés augmente, en échange des impôts de production supprimés. L’impôt sur les bénéfices frappe ce qui a réussi, l’impôt de production frappe ce qui essaie. Déplacer la charge du second vers le premier, même de quelques points et à titre transitoire, favorise celui qui démarre.",
+     "title_fr": "L’impôt sur les bénéfices"
+    },
+    {
+     "text_fr": "Le gain de la suppression des taxes sur les salaires va au salarié, non à l’entreprise. Deux niveaux de lecture, tous deux assumés. L’entreprise est neutre : ses prélèvements nets de subventions et d’aides sont stables. Le propriétaire porte le solde par la marge, parce que c’est lui qui percevait la subvention.",
+     "title_fr": "Le gain net"
+    }
+   ],
+   "population_fact_id": null,
+   "slug": "entreprise",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › entreprise",
+    "url": "https://france-resolution.fr/fiches/entreprise.html"
+   },
+   "tagline_fr": "Produire sans être taxé avant d’avoir gagné.",
+   "tier": "annonce",
+   "title_fr": "Entreprise",
+   "url": "https://france-resolution.fr/fiches/entreprise.html"
+  },
+  {
+   "comme_chacun_fr": [],
+   "gains": [
+    {
+     "figure": {
+      "raw": "+13 %",
+      "signed_plus": true,
+      "unit": "%",
+      "value": 13
+     },
+     "headline_fr": "+13 %",
+     "sub_items_fr": [],
+     "text_fr": "Votre rémunération nette, une fois l'État recentré sur ses missions."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Votre carrière",
+     "sub_items_fr": [],
+     "text_fr": "Vous la conduisez vous-même : mobilité, promotion, primes au mérite."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Les moyens",
+     "sub_items_fr": [],
+     "text_fr": "Moins nombreux, mieux payés, mieux équipés : vous avez de quoi faire."
+    },
+    {
+     "figure": null,
+     "headline_fr": "L'estime",
+     "sub_items_fr": [],
+     "text_fr": "Votre métier se juge sur ce que vous produisez."
+    }
+   ],
+   "group_description_fr": "Ceux qui vivent de leur travail ou le font vivre.",
+   "group_fr": "Le travail et l'entreprise",
+   "header_counts": {
+    "gains": 4,
+    "pertes": 1
+   },
+   "header_fr": "5,22 M · 1 perte · 4 gains",
+   "header_population": {
+    "raw": "5,22 M",
+    "unit_fr": null,
+    "value": 5220000
+   },
+   "header_vs_listed": {
+    "gains_header": 4,
+    "gains_listes_avec_sous_points": 4,
+    "gains_listes_hors_sous_points": 4,
+    "gains_listes_plus_comme_chacun": 4,
+    "gains_match": true,
+    "pertes_header": 1,
+    "pertes_listees": 1,
+    "pertes_match": true
+   },
+   "order": 7,
+   "pdf_url": "https://france-resolution.fr/fiches/agent-public-indispensable.pdf",
+   "pertes": [
+    {
+     "text_fr": "Le statut de la fonction publique prend fin. Emploi garanti, carrière et règles propres cèdent au droit du travail commun. Le sens de l’intérêt général ne dépend pas d’un statut. La Suisse a supprimé le sien en 2002 sans que son administration s’effondre, et la Déclaration des droits ne connaît d’autre distinction que les vertus et les talents.",
+     "title_fr": "Le statut"
+    }
+   ],
+   "population_fact_id": "fiche_pop_agents_indispensables",
+   "slug": "agent-public-indispensable",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › agent-public-indispensable",
+    "url": "https://france-resolution.fr/fiches/agent-public-indispensable.html"
+   },
+   "tagline_fr": "Mieux payé, mieux équipé, mieux jugé.",
+   "tier": "annonce",
+   "title_fr": "Agent public indispensable",
+   "url": "https://france-resolution.fr/fiches/agent-public-indispensable.html"
+  },
+  {
+   "comme_chacun_fr": [],
+   "gains": [
+    {
+     "figure": {
+      "raw": "70 %",
+      "signed_plus": false,
+      "unit": "%",
+      "value": 70
+     },
+     "headline_fr": "70 %",
+     "sub_items_fr": [],
+     "text_fr": "De votre traitement, sans condition, jusqu'à sept ans. Cumulable avec un emploi privé."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Votre temps",
+     "sub_items_fr": [],
+     "text_fr": "Il vous revient. Le métier d'après, vous le choisissez."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Le privé",
+     "sub_items_fr": [],
+     "text_fr": "Une entreprise, une association, un projet à vous — et des salaires nets qui montent de 13 %."
+    }
+   ],
+   "group_description_fr": "Ceux qui vivent de leur travail ou le font vivre.",
+   "group_fr": "Le travail et l'entreprise",
+   "header_counts": {
+    "gains": 3,
+    "pertes": 1
+   },
+   "header_fr": "580 000 postes publics · 1 perte · 3 gains",
+   "header_population": {
+    "raw": "580 000 postes publics",
+    "unit_fr": "postes publics",
+    "value": 580000
+   },
+   "header_vs_listed": {
+    "gains_header": 3,
+    "gains_listes_avec_sous_points": 3,
+    "gains_listes_hors_sous_points": 3,
+    "gains_listes_plus_comme_chacun": 3,
+    "gains_match": true,
+    "pertes_header": 1,
+    "pertes_listees": 1,
+    "pertes_match": true
+   },
+   "order": 8,
+   "pdf_url": "https://france-resolution.fr/fiches/agent-public-dont-le-poste-est-supprime.pdf",
+   "pertes": [
+    {
+     "text_fr": "Votre administration ferme, et votre poste avec elle. Une agence n’est pas un emploi, c’est une mission. Quand la mission n’est plus voulue, maintenir l’agence revient à payer un travail dont personne ne veut plus — ce qui est la manière la plus sûre de le dévaloriser.",
+     "title_fr": "Le poste"
+    }
+   ],
+   "population_fact_id": "postes_publics_fermes_fiche",
+   "slug": "agent-public-dont-le-poste-est-supprime",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › agent-public-dont-le-poste-est-supprime",
+    "url": "https://france-resolution.fr/fiches/agent-public-dont-le-poste-est-supprime.html"
+   },
+   "tagline_fr": "Partir avec de quoi rebondir.",
+   "tier": "annonce",
+   "title_fr": "Agent public dont le poste est supprimé",
+   "url": "https://france-resolution.fr/fiches/agent-public-dont-le-poste-est-supprime.html"
+  },
+  {
+   "comme_chacun_fr": [],
+   "gains": [
+    {
+     "figure": null,
+     "headline_fr": "La liberté",
+     "sub_items_fr": [],
+     "text_fr": "Vous choisissez où et comment enseigner, et votre rémunération se négocie."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Votre salaire",
+     "sub_items_fr": [],
+     "text_fr": "Il est maintenu, puis augmenté par la restitution."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Les débuts",
+     "sub_items_fr": [],
+     "text_fr": "Instituteurs et jeunes enseignants, vous êtes les premiers revalorisés."
+    }
+   ],
+   "group_description_fr": "Ceux qui vivent de leur travail ou le font vivre.",
+   "group_fr": "Le travail et l'entreprise",
+   "header_counts": {
+    "gains": 3,
+    "pertes": 1
+   },
+   "header_fr": "1 perte · 3 gains",
+   "header_population": null,
+   "header_vs_listed": {
+    "gains_header": 3,
+    "gains_listes_avec_sous_points": 3,
+    "gains_listes_hors_sous_points": 3,
+    "gains_listes_plus_comme_chacun": 3,
+    "gains_match": true,
+    "pertes_header": 1,
+    "pertes_listees": 1,
+    "pertes_match": true
+   },
+   "order": 9,
+   "pdf_url": "https://france-resolution.fr/fiches/enseignant.pdf",
+   "pertes": [
+    {
+     "text_fr": "Le statut et l’avancement à la grille prennent fin. Le sens du métier ne dépend pas d’une grille. Une rémunération qui suit le travail fait mieux qu’un avancement à l’ancienneté, et l’école qui vous recrute vous choisit pour ce que vous savez faire.",
+     "title_fr": "La grille"
+    }
+   ],
+   "population_fact_id": null,
+   "slug": "enseignant",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › enseignant",
+    "url": "https://france-resolution.fr/fiches/enseignant.html"
+   },
+   "tagline_fr": "Vous choisissez où vous enseignez, et ce que vous valez se négocie.",
+   "tier": "annonce",
+   "title_fr": "Enseignant",
+   "url": "https://france-resolution.fr/fiches/enseignant.html"
+  },
+  {
+   "comme_chacun_fr": [
+    "+13 %",
+    "600 €",
+    "20 000 €",
+    "+25 %",
+    "Votre retraite",
+    "0,77 €",
+    "6 600 €"
+   ],
+   "gains": [
+    {
+     "figure": {
+      "raw": "550 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 550
+     },
+     "headline_fr": "550 €",
+     "sub_items_fr": [],
+     "text_fr": "Votre aide fondamentale, tous les mois, sans dossier ni guichet."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Vos études",
+     "sub_items_fr": [
+      "Chaque année travaillée compte pour vous, dès la première.",
+      "Si vous travaillez à vingt ans, vous ne payez plus les études des autres.",
+      "Les établissements vous proposeront des tarifs réduits sur vos résultats.",
+      "Une formation devra vous démontrer ce qu'elle vous ouvre.",
+      "Vous former par le travail redevient une voie qui en vaut une autre."
+     ],
+     "text_fr": "Poursuivre des études devient une décision qui vous appartient."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Une famille",
+     "sub_items_fr": [],
+     "text_fr": "Vous pouvez en fonder une : c'est devenu un projet finançable, plus un pari."
+    }
+   ],
+   "group_description_fr": "L'enfance, la parentalité, la retraite, la transmission.",
+   "group_fr": "La famille et les âges de la vie",
+   "header_counts": {
+    "gains": 8,
+    "pertes": 1
+   },
+   "header_fr": "4 M · 1 perte · 8 gains",
+   "header_population": {
+    "raw": "4 M",
+    "unit_fr": null,
+    "value": 4000000
+   },
+   "header_vs_listed": {
+    "gains_header": 8,
+    "gains_listes_avec_sous_points": 8,
+    "gains_listes_hors_sous_points": 3,
+    "gains_listes_plus_comme_chacun": 15,
+    "gains_match": true,
+    "pertes_header": 1,
+    "pertes_listees": 1,
+    "pertes_match": true
+   },
+   "order": 10,
+   "pdf_url": "https://france-resolution.fr/fiches/jeune-adulte.pdf",
+   "pertes": [
+    {
+     "text_fr": "Vos études se paient sur votre compte éducation. Des études gratuites en apparence sont payées par les jeunes travailleurs modestes qui n’y accèdent pas. Payer avec l’argent de son propre compte fait choisir, et fait choisir mieux.",
+     "title_fr": "La gratuité"
+    }
+   ],
+   "population_fact_id": "fiche_pop_jeunes_adultes",
+   "slug": "jeune-adulte",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › jeune-adulte",
+    "url": "https://france-resolution.fr/fiches/jeune-adulte.html"
+   },
+   "tagline_fr": "Démarrer dans la vie sans être plombé.",
+   "tier": "annonce",
+   "title_fr": "Jeune adulte",
+   "url": "https://france-resolution.fr/fiches/jeune-adulte.html"
+  },
+  {
+   "comme_chacun_fr": [],
+   "gains": [
+    {
+     "figure": {
+      "raw": "275 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 275
+     },
+     "headline_fr": "275 €",
+     "sub_items_fr": [],
+     "text_fr": "Par mois et par enfant, versés à votre foyer sans dossier."
+    },
+    {
+     "figure": {
+      "raw": "6 600 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 6600
+     },
+     "headline_fr": "6 600 €",
+     "sub_items_fr": [],
+     "text_fr": "Par an sur le compte éducation de votre enfant, où que vous viviez."
+    },
+    {
+     "figure": null,
+     "headline_fr": "La liberté scolaire",
+     "sub_items_fr": [],
+     "text_fr": "Vous choisissez l'école de votre enfant, et elle doit vous en donner les raisons."
+    },
+    {
+     "figure": null,
+     "headline_fr": "+",
+     "sub_items_fr": [],
+     "text_fr": "Agrément simple, sanction réelle : elle répond devant vous."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Vos parents",
+     "sub_items_fr": [],
+     "text_fr": "La part de chacun des deux parents est versée, quelle que soit leur situation."
+    }
+   ],
+   "group_description_fr": "L'enfance, la parentalité, la retraite, la transmission.",
+   "group_fr": "La famille et les âges de la vie",
+   "header_counts": {
+    "gains": 5,
+    "pertes": 1
+   },
+   "header_fr": "1 perte · 5 gains",
+   "header_population": null,
+   "header_vs_listed": {
+    "gains_header": 5,
+    "gains_listes_avec_sous_points": 5,
+    "gains_listes_hors_sous_points": 5,
+    "gains_listes_plus_comme_chacun": 5,
+    "gains_match": true,
+    "pertes_header": 1,
+    "pertes_listees": 1,
+    "pertes_match": true
+   },
+   "order": 11,
+   "pdf_url": "https://france-resolution.fr/fiches/famille.pdf",
+   "pertes": [
+    {
+     "text_fr": "Le quotient familial et les majorations pour enfants s’arrêtent. Le quotient familial rapporte d’autant plus que le revenu est élevé : c’est une aide à l’enfance qui croît avec l’aisance. Une aide égale par enfant la remplace.",
+     "title_fr": "Le quotient familial"
+    }
+   ],
+   "population_fact_id": null,
+   "slug": "famille",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › famille",
+    "url": "https://france-resolution.fr/fiches/famille.html"
+   },
+   "tagline_fr": "Ce que vos enfants coûtent, et ce qu’on vous rend.",
+   "tier": "annonce",
+   "title_fr": "Famille",
+   "url": "https://france-resolution.fr/fiches/famille.html"
+  },
+  {
+   "comme_chacun_fr": [
+    "20 000 €",
+    "Le bouclier sanitaire"
+   ],
+   "gains": [
+    {
+     "figure": {
+      "raw": "500 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 500
+     },
+     "headline_fr": "500 €",
+     "sub_items_fr": [],
+     "text_fr": "Par an au moins, votre complément viager du patrimoine restitué."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Votre pension",
+     "sub_items_fr": [],
+     "text_fr": "Le système se remet d'aplomb sans y toucher."
+    },
+    {
+     "figure": null,
+     "headline_fr": "L'autonomie",
+     "sub_items_fr": [],
+     "text_fr": "Votre capital santé finance aussi la perte d'autonomie, le moment venu."
+    }
+   ],
+   "group_description_fr": "L'enfance, la parentalité, la retraite, la transmission.",
+   "group_fr": "La famille et les âges de la vie",
+   "header_counts": {
+    "gains": 3,
+    "pertes": 2
+   },
+   "header_fr": "17 M · 2 pertes · 3 gains",
+   "header_population": {
+    "raw": "17 M",
+    "unit_fr": null,
+    "value": 17000000
+   },
+   "header_vs_listed": {
+    "gains_header": 3,
+    "gains_listes_avec_sous_points": 3,
+    "gains_listes_hors_sous_points": 3,
+    "gains_listes_plus_comme_chacun": 5,
+    "gains_match": true,
+    "pertes_header": 2,
+    "pertes_listees": 2,
+    "pertes_match": true
+   },
+   "order": 12,
+   "pdf_url": "https://france-resolution.fr/fiches/retraite.pdf",
+   "pertes": [
+    {
+     "text_fr": "L’abattement de 10 % sur les pensions imposables s’arrête. L’abattement de 10 % sur les pensions ne bénéficie qu’aux retraités déjà imposables, et il coûte 4,8 milliards par an à ceux qui travaillent.",
+     "title_fr": "L’abattement"
+    },
+    {
+     "text_fr": "L’indexation automatique des pensions est suspendue. L’indexation automatique promet une revalorisation que le déficit rend chaque année plus incertaine. Un capital qui rapporte suit les performances de l’économie, non le vote d’un budget.",
+     "title_fr": "L’indexation"
+    }
+   ],
+   "population_fact_id": "fiche_pop_retraites",
+   "slug": "retraite",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › retraite",
+    "url": "https://france-resolution.fr/fiches/retraite.html"
+   },
+   "tagline_fr": "Votre part des 20 000 € vous revient en rente, à vie.",
+   "tier": "annonce",
+   "title_fr": "Retraité",
+   "url": "https://france-resolution.fr/fiches/retraite.html"
+  },
+  {
+   "comme_chacun_fr": [],
+   "gains": [
+    {
+     "figure": {
+      "raw": "+25 %",
+      "signed_plus": true,
+      "unit": "%",
+      "value": 25
+     },
+     "headline_fr": "+25 %",
+     "sub_items_fr": [],
+     "text_fr": "D'offre locative privée en plus, et l'APL qui cesse de pousser les prix : les loyers baissent."
+    },
+    {
+     "figure": {
+      "raw": "+13 %",
+      "signed_plus": true,
+      "unit": "%",
+      "value": 13
+     },
+     "headline_fr": "+13 %",
+     "sub_items_fr": [],
+     "text_fr": "De salaire net en plus, pendant que le loyer, lui, cesse de monter."
+    },
+    {
+     "figure": null,
+     "headline_fr": "L'achat",
+     "sub_items_fr": [],
+     "text_fr": "Les frais de notaire s'effondrent : acheter cesse d'être hors d'atteinte."
+    }
+   ],
+   "group_description_fr": "Les services que le plan réordonne.",
+   "group_fr": "Se loger, se soigner, se former",
+   "header_counts": {
+    "gains": 3,
+    "pertes": 2
+   },
+   "header_fr": "2 pertes · 3 gains",
+   "header_population": null,
+   "header_vs_listed": {
+    "gains_header": 3,
+    "gains_listes_avec_sous_points": 3,
+    "gains_listes_hors_sous_points": 3,
+    "gains_listes_plus_comme_chacun": 3,
+    "gains_match": true,
+    "pertes_header": 2,
+    "pertes_listees": 2,
+    "pertes_match": true
+   },
+   "order": 13,
+   "pdf_url": "https://france-resolution.fr/fiches/locataire.pdf",
+   "pertes": [
+    {
+     "text_fr": "L’APL s’arrête pour les nouveaux contrats et se maintient jusqu’au terme des baux en cours. Subventionner les loyers augmente les loyers, pas le nombre de logements. L’aide au logement enrichit le bailleur avant le locataire, qui la paie deux fois : par l’impôt, puis par le loyer qu’elle a fait monter.",
+     "title_fr": "L’APL"
+    },
+    {
+     "text_fr": "Les logements sociaux sont proposés à la vente en trois ans. L’actif net des organismes de logement social est estimé à 340 milliards d’euros. Le céder rend aux occupants la propriété de ce qu’ils habitent et remet quatre millions et demi de logements sur le marché.",
+     "title_fr": "Le parc social"
+    }
+   ],
+   "population_fact_id": null,
+   "slug": "locataire",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › locataire",
+    "url": "https://france-resolution.fr/fiches/locataire.html"
+   },
+   "tagline_fr": "Se loger, dans un marché qui se détend.",
+   "tier": "annonce",
+   "title_fr": "Locataire",
+   "url": "https://france-resolution.fr/fiches/locataire.html"
+  },
+  {
+   "comme_chacun_fr": [],
+   "gains": [
+    {
+     "figure": null,
+     "headline_fr": "Le bouclier sanitaire",
+     "sub_items_fr": [],
+     "text_fr": "Votre reste à charge est plafonné à 5 % de votre revenu annuel : au-delà, vous ne payez plus rien."
+    },
+    {
+     "figure": {
+      "raw": "300 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 300
+     },
+     "headline_fr": "300 €",
+     "sub_items_fr": [],
+     "text_fr": "Par an de frais de gestion en moins : vous ne payez plus l'intermédiaire obligatoire."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Votre complémentaire",
+     "sub_items_fr": [],
+     "text_fr": "Les complémentaires se font concurrence, et vous choisissez la vôtre."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Le soin",
+     "sub_items_fr": [],
+     "text_fr": "Vous êtes soigné au moins aussi bien qu'aujourd'hui, et souvent mieux."
+    }
+   ],
+   "group_description_fr": "Les services que le plan réordonne.",
+   "group_fr": "Se loger, se soigner, se former",
+   "header_counts": {
+    "gains": 4,
+    "pertes": 1
+   },
+   "header_fr": "1 perte · 4 gains",
+   "header_population": null,
+   "header_vs_listed": {
+    "gains_header": 4,
+    "gains_listes_avec_sous_points": 4,
+    "gains_listes_hors_sous_points": 4,
+    "gains_listes_plus_comme_chacun": 4,
+    "gains_match": true,
+    "pertes_header": 1,
+    "pertes_listees": 1,
+    "pertes_match": true
+   },
+   "order": 14,
+   "pdf_url": "https://france-resolution.fr/fiches/patient.pdf",
+   "pertes": [
+    {
+     "text_fr": "Un reste à charge de 10 % par acte apparaît, plafonné à 5 % de votre revenu, et les dépenses de confort sortent du bouclier. Un reste à charge de 10 % rend visible le coût du soin sans le rendre inaccessible : il est plafonné à 5 % du revenu annuel, de sorte que la maladie grave ne ruine personne.",
+     "title_fr": "Le reste à charge"
+    }
+   ],
+   "population_fact_id": null,
+   "slug": "patient",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › patient",
+    "url": "https://france-resolution.fr/fiches/patient.html"
+   },
+   "tagline_fr": "Ce que les soins vous coûtent, plafonné.",
+   "tier": "annonce",
+   "title_fr": "Patient",
+   "url": "https://france-resolution.fr/fiches/patient.html"
+  },
+  {
+   "comme_chacun_fr": [],
+   "gains": [
+    {
+     "figure": {
+      "raw": "1 100 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 1100
+     },
+     "headline_fr": "1 100 €",
+     "sub_items_fr": [],
+     "text_fr": "Par mois, versés automatiquement : vous ne refaites plus de dossier."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Le bouclier sanitaire",
+     "sub_items_fr": [],
+     "text_fr": "Votre reste à charge est plafonné à 5 % de votre revenu annuel : la dépense lourde ne vous atteint pas."
+    }
+   ],
+   "group_description_fr": "Les services que le plan réordonne.",
+   "group_fr": "Se loger, se soigner, se former",
+   "header_counts": {
+    "gains": 2,
+    "pertes": 0
+   },
+   "header_fr": "2 gains",
+   "header_population": null,
+   "header_vs_listed": {
+    "gains_header": 2,
+    "gains_listes_avec_sous_points": 2,
+    "gains_listes_hors_sous_points": 2,
+    "gains_listes_plus_comme_chacun": 2,
+    "gains_match": true,
+    "pertes_header": 0,
+    "pertes_listees": 0,
+    "pertes_match": true
+   },
+   "order": 15,
+   "pdf_url": "https://france-resolution.fr/fiches/personne-handicapee.pdf",
+   "pertes": [],
+   "population_fact_id": null,
+   "slug": "personne-handicapee",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › personne-handicapee",
+    "url": "https://france-resolution.fr/fiches/personne-handicapee.html"
+   },
+   "tagline_fr": "Une part supplémentaire d’aide, et un reste à charge plafonné.",
+   "tier": "annonce",
+   "title_fr": "Personne handicapée",
+   "url": "https://france-resolution.fr/fiches/personne-handicapee.html"
+  },
+  {
+   "comme_chacun_fr": [],
+   "gains": [
+    {
+     "figure": {
+      "raw": "81 %",
+      "signed_plus": false,
+      "unit": "%",
+      "value": 81
+     },
+     "headline_fr": "81 %",
+     "sub_items_fr": [],
+     "text_fr": "Les produits faits en France que vous consommez deviennent plus abordables."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Les taxes",
+     "sub_items_fr": [],
+     "text_fr": "Les taxes spécifiques et les taux réduits disparaissent de vos prix."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Le choix",
+     "sub_items_fr": [],
+     "text_fr": "Plus d'offre, plus de concurrence : vous choisissez."
+    }
+   ],
+   "group_description_fr": "Le patrimoine, les prix, le pouvoir d'achat.",
+   "group_fr": "Épargner et consommer",
+   "header_counts": {
+    "gains": 3,
+    "pertes": 1
+   },
+   "header_fr": "1 perte · 3 gains",
+   "header_population": null,
+   "header_vs_listed": {
+    "gains_header": 3,
+    "gains_listes_avec_sous_points": 3,
+    "gains_listes_hors_sous_points": 3,
+    "gains_listes_plus_comme_chacun": 3,
+    "gains_match": true,
+    "pertes_header": 1,
+    "pertes_listees": 1,
+    "pertes_match": true
+   },
+   "order": 16,
+   "pdf_url": "https://france-resolution.fr/fiches/consommateur.pdf",
+   "pertes": [
+    {
+     "text_fr": "Les taux réduits de TVA disparaissent : tout passe à 20 %. Un taux réduit est une niche qui se cache dans un prix : il fait payer par tous l’avantage consenti à quelques-uns. Un taux unique se voit, se discute et se baisse.",
+     "title_fr": "Les taux réduits"
+    }
+   ],
+   "population_fact_id": null,
+   "slug": "consommateur",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › consommateur",
+    "url": "https://france-resolution.fr/fiches/consommateur.html"
+   },
+   "tagline_fr": "Plus de concurrence, plus de choix, plus de pouvoir d’achat.",
+   "tier": "annonce",
+   "title_fr": "Consommateur",
+   "url": "https://france-resolution.fr/fiches/consommateur.html"
+  },
+  {
+   "comme_chacun_fr": [],
+   "gains": [
+    {
+     "figure": {
+      "raw": "550 €",
+      "signed_plus": false,
+      "unit": "€",
+      "value": 550
+     },
+     "headline_fr": "550 €",
+     "sub_items_fr": [],
+     "text_fr": "Par mois en argent libre : vous en disposez en totalité, pour ce que vous voulez."
+    },
+    {
+     "figure": {
+      "raw": "+220 €",
+      "signed_plus": true,
+      "unit": "€",
+      "value": 220
+     },
+     "headline_fr": "+220 €",
+     "sub_items_fr": [],
+     "text_fr": "De plus par mois au salaire type : le revenu remplace le guichet."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Un payeur",
+     "sub_items_fr": [],
+     "text_fr": "L'État reprend les solidarités : un seul payeur pour vous, plus de guichet à chercher."
+    }
+   ],
+   "group_description_fr": "Les situations où le plan retire une aide et ouvre une autre voie.",
+   "group_fr": "Quand un dispositif public tient lieu de ressource",
+   "header_counts": {
+    "gains": 3,
+    "pertes": 1
+   },
+   "header_fr": "1 perte · 3 gains",
+   "header_population": null,
+   "header_vs_listed": {
+    "gains_header": 3,
+    "gains_listes_avec_sous_points": 3,
+    "gains_listes_hors_sous_points": 3,
+    "gains_listes_plus_comme_chacun": 3,
+    "gains_match": true,
+    "pertes_header": 1,
+    "pertes_listees": 1,
+    "pertes_match": true
+   },
+   "order": 17,
+   "pdf_url": "https://france-resolution.fr/fiches/beneficiaire-d-un-cheque-cible.pdf",
+   "pertes": [
+    {
+     "text_fr": "Les chèques ciblés — pass culture, chèque restaurant — s’arrêtent. Le chèque ciblé décide à votre place de ce que vous devez acheter. Ce qui compte est la solidarité réellement perçue, non le barème affiché : une part des droits n’est jamais réclamée, et le barème surestime donc ce que les familles touchent vraiment.",
+     "title_fr": "Les chèques"
+    }
+   ],
+   "population_fact_id": null,
+   "slug": "beneficiaire-d-un-cheque-cible",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › beneficiaire-d-un-cheque-cible",
+    "url": "https://france-resolution.fr/fiches/beneficiaire-d-un-cheque-cible.html"
+   },
+   "tagline_fr": "Votre salaire net monte, et votre aide devient de l’argent libre.",
+   "tier": "annonce",
+   "title_fr": "Bénéficiaire d’un chèque ciblé",
+   "url": "https://france-resolution.fr/fiches/beneficiaire-d-un-cheque-cible.html"
+  },
+  {
+   "comme_chacun_fr": [
+    "+13 %"
+   ],
+   "gains": [
+    {
+     "figure": null,
+     "headline_fr": "0 € avant profit",
+     "sub_items_fr": [],
+     "text_fr": "Vous ne payez plus rien avant d'avoir gagné : votre modèle tient sur ses recettes."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Des clients plus riches",
+     "sub_items_fr": [],
+     "text_fr": "Ils ont 13 % de pouvoir d'achat en plus : ils achètent ce que la subvention vous faisait produire à leur place."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Sans formulaire",
+     "sub_items_fr": [],
+     "text_fr": "Vous agissez d'abord : aucun dossier à monter, aucune aide à mériter."
+    },
+    {
+     "figure": null,
+     "headline_fr": "Un seul impôt",
+     "sub_items_fr": [],
+     "text_fr": "Un impôt unique sur les bénéfices : votre concurrent aidé perd son avantage."
+    }
+   ],
+   "group_description_fr": "Les situations où le plan retire une aide et ouvre une autre voie.",
+   "group_fr": "Quand un dispositif public tient lieu de ressource",
+   "header_counts": {
+    "gains": 4,
+    "pertes": 1
+   },
+   "header_fr": "1 perte · 4 gains",
+   "header_population": null,
+   "header_vs_listed": {
+    "gains_header": 4,
+    "gains_listes_avec_sous_points": 4,
+    "gains_listes_hors_sous_points": 4,
+    "gains_listes_plus_comme_chacun": 5,
+    "gains_match": true,
+    "pertes_header": 1,
+    "pertes_listees": 1,
+    "pertes_match": true
+   },
+   "order": 18,
+   "pdf_url": "https://france-resolution.fr/fiches/entreprise-ou-association-subventionnee.pdf",
+   "pertes": [
+    {
+     "text_fr": "Les aides à l’investissement et les plans de soutien s’arrêtent. L’investissement administré empêche d’autres d’innover : l’État choisit les projets à la place du marché, avec l’argent de ceux qu’il n’a pas choisis. Aucune des technologies du quotidien ne lui revient.",
+     "title_fr": "Les plans"
+    }
+   ],
+   "population_fact_id": null,
+   "slug": "entreprise-ou-association-subventionnee",
+   "source": {
+    "kind": "site",
+    "ref": "france-resolution.fr › fiches › entreprise-ou-association-subventionnee",
+    "url": "https://france-resolution.fr/fiches/entreprise-ou-association-subventionnee.html"
+   },
+   "tagline_fr": "La liberté d’agir sans formulaire, et des clients plus riches.",
+   "tier": "annonce",
+   "title_fr": "Entreprise ou association subventionnée",
+   "url": "https://france-resolution.fr/fiches/entreprise-ou-association-subventionnee.html"
+  }
+ ],
+ "meta": {
+  "count": 18,
+  "groups": [
+   {
+    "description_fr": "Ce que le plan change pour chacun, quel que soit son état.",
+    "label_fr": "Tout le monde",
+    "slugs": [
+     "citoyen",
+     "contribuable",
+     "foyer"
+    ]
+   },
+   {
+    "description_fr": "Ceux qui vivent de leur travail ou le font vivre.",
+    "label_fr": "Le travail et l'entreprise",
+    "slugs": [
+     "travailleur",
+     "personne-sans-emploi",
+     "entreprise",
+     "agent-public-indispensable",
+     "agent-public-dont-le-poste-est-supprime",
+     "enseignant"
+    ]
+   },
+   {
+    "description_fr": "L'enfance, la parentalité, la retraite, la transmission.",
+    "label_fr": "La famille et les âges de la vie",
+    "slugs": [
+     "jeune-adulte",
+     "famille",
+     "retraite"
+    ]
+   },
+   {
+    "description_fr": "Les services que le plan réordonne.",
+    "label_fr": "Se loger, se soigner, se former",
+    "slugs": [
+     "locataire",
+     "patient",
+     "personne-handicapee"
+    ]
+   },
+   {
+    "description_fr": "Le patrimoine, les prix, le pouvoir d'achat.",
+    "label_fr": "Épargner et consommer",
+    "slugs": [
+     "consommateur"
+    ]
+   },
+   {
+    "description_fr": "Les situations où le plan retire une aide et ouvre une autre voie.",
+    "label_fr": "Quand un dispositif public tient lieu de ressource",
+    "slugs": [
+     "beneficiaire-d-un-cheque-cible",
+     "entreprise-ou-association-subventionnee"
+    ]
+   }
+  ],
+  "header_mismatch_slugs": [
+   "citoyen",
+   "contribuable",
+   "entreprise"
+  ],
+  "header_note": "Le compte « N pertes · N gains » de l'en-tête de chaque fiche est celui du site ; il ne correspond pas toujours au nombre d'éléments affichés (voir header_vs_listed et DISCREPANCIES.md). Les éléments « Et comme chacun » sont des rappels de gains communs à plusieurs fiches.",
+  "persona_link": "slug = clé stable pour relier les fiches aux profils du simulateur ; population_fact_id renvoie à facts.json ; figure donne la valeur numérique analysée des chiffres en gras.",
+  "tier": "annonce",
+  "tier_note": "Textes des fiches de france-resolution.fr : affirmations des auteurs, sans texte de loi ; reprises mot pour mot.",
+  "title_fr": "Les 18 situations : ce que le plan donne et retire"
+ }
+}
