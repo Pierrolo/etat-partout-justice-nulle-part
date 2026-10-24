@@ -142,7 +142,7 @@ export default function Simulator() {
       if (!engine || !STATE_HASH.test(hash)) return false; // an in-page anchor such as #main: not ours
       const decoded = engine.decodeState(hash.replace(/^#/, ''));
       const fail = () => {
-        setHashNotice('Ce lien ne semble pas complet : nous avons repris un formulaire vide.');
+        setHashNotice('Ce lien ne semble pas complet : nous avons repris un formulaire vide.');
         return true;
       };
       if (!decoded) return fail();
@@ -420,7 +420,7 @@ export default function Simulator() {
                   sideHeadline.direction === 'flat' && 'text-ink',
                 )}
               >
-                {sideHeadline.direction === 'flat' ? '≈ 0 €/mois' : sideHeadline.amount}
+                {sideHeadline.direction === 'flat' ? '≈ 0 €/mois' : sideHeadline.amount}
               </span>
             </p>
             <Button size="sm" variant="secondary" onClick={() => editAnswers()}>
@@ -440,7 +440,7 @@ function EmptyResultUnsupported() {
       <h2 className="eyebrow eyebrow-accent">Votre résultat</h2>
       <p className="font-serif text-xl font-medium text-ink">Pas encore couvert</p>
       <p className="text-[0.9375rem] text-ink-2">
-        Le revenu d’un indépendant ou d’un gérant majoritaire n’est pas modélisé : aucun chiffre
+        Le revenu d’un indépendant ou d’un gérant majoritaire n’est pas modélisé : aucun chiffre
         n’est affiché plutôt qu’un chiffre qui ne serait pas le vôtre.
       </p>
     </div>

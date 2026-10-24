@@ -79,7 +79,7 @@ export function Transition({ household, hypotheses, period, onPick }: Transition
   const signs = new Set(photos.map((p) => Math.sign(p.delta)));
   const summary = (
     <>
-      Écart de revenu disponible par rapport à aujourd’hui :{' '}
+      Écart de revenu disponible par rapport à aujourd’hui :{' '}
       {photos.map((p, i) => (
         <span key={String(p.period)}>
           {i > 0 && (i === photos.length - 1 ? ' et ' : ', ')}
@@ -89,7 +89,7 @@ export function Transition({ household, hypotheses, period, onPick }: Transition
       ))}
       .{' '}
       {signs.has(-1) && signs.has(1)
-        ? 'Le chemin n’est pas régulier : le signe de l’écart change selon l’année.'
+        ? 'Le chemin n’est pas régulier : le signe de l’écart change selon l’année.'
         : 'Les mesures arrivant par étapes, l’écart évolue d’année en année.'}
     </>
   );
@@ -174,7 +174,7 @@ export function Transition({ household, hypotheses, period, onPick }: Transition
                 />
               </span>
               <p className="text-sm text-ink-2">
-                Revenu disponible :{' '}
+                Revenu disponible :{' '}
                 <span className="num font-semibold text-ink">{formatEuro(p.plan)}</span>
               </p>
               <div className="text-xs text-ink-2">

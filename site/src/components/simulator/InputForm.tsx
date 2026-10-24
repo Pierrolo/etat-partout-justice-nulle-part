@@ -217,8 +217,8 @@ export function InputForm({
           {couple && (
             <div data-field="foyer.married">
               <SegmentedControl
-                legend="Êtes-vous marié·e ou pacsé·e ?"
-                hint="Mariés ou pacsés, vous payez l’impôt d’aujourd’hui ensemble ; sinon, chacun le sien. Cela change donc le point de départ, pas le plan : avec le plan, l’impôt est individuel."
+                legend="Êtes-vous marié·e ou pacsé·e ?"
+                hint="Mariés ou pacsés, vous payez l’impôt d’aujourd’hui ensemble ; sinon, chacun le sien. Cela change donc le point de départ, pas le plan : avec le plan, l’impôt est individuel."
                 options={[
                   { value: 'oui', label: 'Oui' },
                   { value: 'non', label: 'Non' },
@@ -285,8 +285,8 @@ export function InputForm({
                       />
                       {c.aeeh && (
                         <Checkbox
-                          label="Carte mobilité inclusion « invalidité » (taux de 80 % ou plus)"
-                          hint="L’AEEH existe dès 50 % de taux d’incapacité. Seule la carte « invalidité » (80 % ou plus) ouvre le supplément prévu par le plan pour les enfants."
+                          label="Carte mobilité inclusion « invalidité » (taux de 80 % ou plus)"
+                          hint="L’AEEH existe dès 50 % de taux d’incapacité. Seule la carte « invalidité » (80 % ou plus) ouvre le supplément prévu par le plan pour les enfants."
                           checked={c.cmi}
                           onChange={(cmi) =>
                             setForm((f) => ({
@@ -334,11 +334,11 @@ export function InputForm({
           {hasKidUnder6 && (
             <div className="space-y-4">
               <SegmentedControl
-                legend="Comment sont gardés vos enfants de moins de 6 ans ?"
+                legend="Comment sont gardés vos enfants de moins de 6 ans ?"
                 layout="stack"
                 hint={
                   <>
-                    Le plan supprime l’aide à la garde (<Term id="cmg">CMG</Term>) : la réponse
+                    Le plan supprime l’aide à la garde (<Term id="cmg">CMG</Term>) : la réponse
                     compte dans le résultat.
                   </>
                 }
@@ -353,7 +353,7 @@ export function InputForm({
                   <NumberInput
                     id="childcare-cost"
                     label="Ce que coûte la garde, par mois"
-                    hint="Le total payé avant les aides (salaire et indemnités de l’assistante maternelle, ou facture de la structure). Laissez vide si vous ne savez pas : le simulateur retient un coût moyen et vous le dit dans le résultat."
+                    hint="Le total payé avant les aides (salaire et indemnités de l’assistante maternelle, ou facture de la structure). Laissez vide si vous ne savez pas : le simulateur retient un coût moyen et vous le dit dans le résultat."
                     unit="€/mois"
                     value={form.extras.childcareCostMonthly}
                     onChange={(childcareCostMonthly) =>
@@ -375,11 +375,11 @@ export function InputForm({
             <div className="space-y-4">
               <div data-field="foyer.childSupport">
                 <SegmentedControl
-                  legend="Recevez-vous une pension alimentaire pour vos enfants ?"
+                  legend="Recevez-vous une pension alimentaire pour vos enfants ?"
                   hint={
                     <>
                       Elle réduit l’allocation de soutien familial (<Term id="asf">ASF</Term>), que
-                      le plan supprime aussi. Si vous n’en recevez pas, répondez « Non ».
+                      le plan supprime aussi. Si vous n’en recevez pas, répondez « Non ».
                     </>
                   }
                   options={[
@@ -478,8 +478,8 @@ export function InputForm({
           </div>
           {owner && (
             <p className="rounded-md bg-sunken px-3 py-2 text-sm text-ink-2">
-              Propriétaire : pas d’aide au logement dans ce calcul. La mensualité du crédit et la
-              taxe foncière ne sont pas comptées : cette réponse ne change rien d’autre au résultat.
+              Propriétaire : pas d’aide au logement dans ce calcul. La mensualité du crédit et la
+              taxe foncière ne sont pas comptées : cette réponse ne change rien d’autre au résultat.
             </p>
           )}
           {form.housing.status === 'locataire' && (
@@ -488,7 +488,7 @@ export function InputForm({
                 <NumberInput
                   id="rent"
                   label="Loyer mensuel hors charges"
-                  hint="Le loyer inscrit dans votre bail, sans les charges ni le chauffage. Si l’aide au logement est versée directement à votre propriétaire, indiquez quand même le loyer complet : le simulateur calcule l’aide lui-même."
+                  hint="Le loyer inscrit dans votre bail, sans les charges ni le chauffage. Si l’aide au logement est versée directement à votre propriétaire, indiquez quand même le loyer complet : le simulateur calcule l’aide lui-même."
                   unit="€/mois"
                   value={form.housing.rentMonthly}
                   onChange={(rentMonthly) => set({ housing: { ...form.housing, rentMonthly } })}
@@ -506,7 +506,7 @@ export function InputForm({
                   hint={
                     <>
                       Les <Term id="zones">zones</Term> classent les communes selon la cherté des
-                      loyers ; elles fixent le plafond de loyer retenu pour l’
+                      loyers ; elles fixent le plafond de loyer retenu pour l’
                       <Term id="aides-logement">aide au logement</Term>.
                     </>
                   }
@@ -542,18 +542,18 @@ export function InputForm({
         'Vos aides',
         <>
           <p className="text-[0.9375rem] text-ink-2">
-            Vous n’avez rien à saisir : nous calculons pour vous le <Term id="rsa">RSA</Term>
+            Vous n’avez rien à saisir : nous calculons pour vous le <Term id="rsa">RSA</Term>
             {', la '}
             <Term id="prime-activite">prime d’activité</Term>, les aides au logement et les
             allocations familiales. Dans le résultat, vous verrez la liste de ces aides, avec la
-            raison quand l’une d’elles est à 0 €.
+            raison quand l’une d’elles est à 0 €.
           </p>
           <Checkbox
             label="Je ne touche pas ces aides"
             hint={
               <>
                 Certains foyers ne demandent pas les aides auxquelles ils ont droit (
-                <Term id="non-recours">non-recours</Term>). Cochez si c’est votre cas : le calcul
+                <Term id="non-recours">non-recours</Term>). Cochez si c’est votre cas : le calcul
                 d’aujourd’hui n’en tiendra pas compte.
               </>
             }
@@ -573,7 +573,7 @@ export function InputForm({
                   <NumberInput
                     id="caf"
                     label="Total versé chaque mois par la CAF"
-                    hint="Toutes aides confondues : RSA, prime d’activité, logement, famille."
+                    hint="Toutes aides confondues : RSA, prime d’activité, logement, famille."
                     unit="€/mois"
                     value={form.cafOverrideMonthly}
                     onChange={(cafOverrideMonthly) => set({ cafOverrideMonthly })}
@@ -623,24 +623,25 @@ function ZoneLabel({ text }: { text: string }) {
 function ZoneHelp() {
   return (
     <div className="space-y-2 rounded-md bg-sunken px-3.5 py-3 text-sm text-ink-2">
-      <p className="font-semibold text-ink">Dans quelle zone est votre commune ?</p>
+      <p className="font-semibold text-ink">Dans quelle zone est votre commune ?</p>
       <ul className="list-disc space-y-1 ps-5">
         <li>
-          <strong className="text-ink">Zone 1</strong> : Paris et la petite couronne (Montreuil,
-          Saint-Denis, Boulogne-Billancourt…), plus quelques communes proches de Paris.
+          <strong className="text-ink">Zone 1</strong>&#8239;: Paris et la petite couronne
+          (Montreuil, Saint-Denis, Boulogne-Billancourt…), plus quelques communes proches de Paris.
         </li>
         <li>
-          <strong className="text-ink">Zone 2</strong> : les villes de plus de 100 000 habitants et
-          leur agglomération (Lille, Lyon, Marseille, Toulouse, Nantes, Bordeaux, Strasbourg…), le
-          reste de l’Île-de-France. Roubaix et Tourcoing : zone 2 (agglomération lilloise).
+          <strong className="text-ink">Zone 2</strong>&#8239;: les villes de plus de 100 000
+          habitants et leur agglomération (Lille, Lyon, Marseille, Toulouse, Nantes, Bordeaux,
+          Strasbourg…), le reste de l’Île-de-France. Roubaix et Tourcoing : zone 2 (agglomération
+          lilloise).
         </li>
         <li>
-          <strong className="text-ink">Zone 3</strong> : le reste de la France — villes moyennes,
-          petites villes, campagne.
+          <strong className="text-ink">Zone 3</strong>&#8239;: le reste de la France — villes
+          moyennes, petites villes, campagne.
         </li>
       </ul>
       <p>
-        Un doute ? Choisissez « Je ne sais pas » : le simulateur retient alors la zone 2, le cas
+        Un doute ? Choisissez « Je ne sais pas » : le simulateur retient alors la zone 2, le cas
         intermédiaire.
       </p>
     </div>
@@ -649,7 +650,7 @@ function ZoneHelp() {
 
 const WORK_RATIOS = [
   { value: '1', label: 'Temps plein' },
-  { value: '0.8', label: '80 %' },
+  { value: '0.8', label: '80 %' },
   { value: '0.5', label: 'Mi-temps (50 %)' },
 ] as const;
 
@@ -691,7 +692,7 @@ function Refine({
               ? `Temps de travail ${i === 0 ? 'de votre part' : 'de votre conjoint·e'}`
               : 'Temps de travail'
           }
-          hint="Votre salaire reste celui que vous indiquez : cette information sert surtout à calculer votre heure de travail."
+          hint="Votre salaire reste celui que vous indiquez : cette information sert surtout à calculer votre heure de travail."
           options={[...WORK_RATIOS]}
           value={ratioKey(form.adults[i]!.workRatio)}
           onChange={(v) => patchAdult(i, { workRatio: Number(v) })}
@@ -729,7 +730,7 @@ function Refine({
       <NumberInput
         id="emploi-domicile"
         label="Dépenses d’emploi à domicile"
-        hint="Ménage, garde à domicile, soutien scolaire : total sur l’année."
+        hint="Ménage, garde à domicile, soutien scolaire : total sur l’année."
         unit="€/an"
         value={form.extras.emploiDomicileAnnual}
         onChange={(emploiDomicileAnnual) => setExtras({ emploiDomicileAnnual })}
@@ -759,7 +760,7 @@ function Refine({
         label="Dépenses de consommation du foyer"
         hint={
           <>
-            Pour estimer la <Term id="tva">TVA</Term>. Laissez vide : nous l’estimons à partir de
+            Pour estimer la <Term id="tva">TVA</Term>. Laissez vide : nous l’estimons à partir de
             votre revenu.
           </>
         }

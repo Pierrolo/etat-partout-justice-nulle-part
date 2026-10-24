@@ -147,8 +147,8 @@ export function headlineSentence(c: Comparison, d: DisplayComparison, period: Pe
 /** The short sentence announced politely after each recomputation (the long one stays static text). */
 export function announcement(c: Comparison, d: DisplayComparison): string {
   const h = buildHeadline(c, d);
-  if (h.direction === 'flat') return 'Résultat mis à jour : pas de différence notable.';
-  return typo(`Résultat mis à jour : ${h.amount}${h.pct === null ? '' : ` (${h.percent})`}.`);
+  if (h.direction === 'flat') return 'Résultat mis à jour : pas de différence notable.';
+  return typo(`Résultat mis à jour : ${h.amount}${h.pct === null ? '' : ` (${h.percent})`}.`);
 }
 
 /** Text of the native share sheet / clipboard message. */
@@ -161,7 +161,7 @@ export function shareText(c: Comparison, d: DisplayComparison): string {
         ? `${formatEuro(Math.abs(h.delta))} de plus par mois`
         : `${formatEuro(Math.abs(h.delta))} de moins par mois`;
   return typo(
-    `Ce que le plan « État partout, justice nulle part » changerait pour un foyer comme le mien : ${what} (estimation, outil indépendant).`,
+    `Ce que le plan « État partout, justice nulle part » changerait pour un foyer comme le mien : ${what} (estimation, outil indépendant).`,
   );
 }
 

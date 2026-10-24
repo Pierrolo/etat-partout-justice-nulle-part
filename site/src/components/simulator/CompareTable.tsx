@@ -108,7 +108,7 @@ export function CompareTable({ data }: { data: ResultData }) {
 
       <div
         role="region"
-        aria-label="Tableau : revenu disponible aujourd’hui et avec le plan"
+        aria-label="Tableau : revenu disponible aujourd’hui et avec le plan"
         tabIndex={0}
         className="max-w-full overflow-x-auto rounded-md border border-rule bg-surface"
       >
@@ -194,8 +194,8 @@ export function CompareTable({ data }: { data: ResultData }) {
         </table>
       </div>
       <p className="text-xs text-ink-3">
-        Montants arrondis à 5 € par mois ; les lignes s’additionnent exactement aux totaux. Une
-        ligne « — » ne change pas. Le revenu disponible est l’ensemble des revenus, moins les
+        Montants arrondis à 5 € par mois ; les lignes s’additionnent exactement aux totaux. Une
+        ligne « — » ne change pas. Le revenu disponible est l’ensemble des revenus, moins les
         prélèvements, plus les prestations, en euros de 2026.
         {hasIndirect && ' Les impôts indirects sont une estimation (hypothèses H5 et TVA).'}
       </p>

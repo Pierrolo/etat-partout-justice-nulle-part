@@ -31,7 +31,7 @@ export function Recap({
       <p className="text-sm text-ink-2">
         {shared
           ? 'Voici les réponses de la personne qui a partagé ce résultat. Le chiffre n’a de sens que pour cette situation.'
-          : 'Le résultat repose sur ces réponses. Une erreur ? Corrigez-la, le résultat se met à jour.'}
+          : 'Le résultat repose sur ces réponses. Une erreur ? Corrigez-la, le résultat se met à jour.'}
       </p>
       {foldable && !shared ? (
         <Disclosure variant="card" summary="Voir mes réponses et les modifier" meta="5 réponses">
@@ -70,7 +70,7 @@ function RecapRows({
               <button
                 type="button"
                 onClick={() => onEdit(g.step)}
-                aria-label={`Modifier : ${g.label}`}
+                aria-label={`Modifier : ${g.label}`}
                 className="rounded-sm px-1.5 py-1 text-sm font-semibold text-accent underline underline-offset-2 hover:text-accent-hover"
               >
                 Modifier

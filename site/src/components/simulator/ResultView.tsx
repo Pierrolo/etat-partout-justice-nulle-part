@@ -86,7 +86,7 @@ export function ResultView({
       {shared && (
         <Callout tone="note" title="Simulation partagée">
           <p>
-            Vous regardez le résultat d’une autre personne : il décrit sa situation (les réponses
+            Vous regardez le résultat d’une autre personne : il décrit sa situation (les réponses
             sont rappelées plus bas), pas la vôtre.
           </p>
           <p className="mt-2">
@@ -177,15 +177,15 @@ export function ResultView({
             Partager ce résultat
           </h2>
           <p className="text-sm text-ink-2">
-            Le lien contient vos réponses dans son adresse (après le « # »). Rien n’est envoyé à un
-            serveur : seule la personne qui ouvre le lien les verra, avec le résultat.
+            Le lien contient vos réponses dans son adresse (après le « # »). Rien n’est envoyé à un
+            serveur : seule la personne qui ouvre le lien les verra, avec le résultat.
           </p>
           <p className="text-xs text-ink-3">
             Moteur de calcul, version {engineVersion}. {baselineYear}.
           </p>
           <p className="pt-1 text-sm">
             <a href={withBase('/simulateur/cas-types/')}>
-              Voir comment le plan touche d’autres foyers : qui gagne, qui perd ? →
+              Voir comment le plan touche d’autres foyers : qui gagne, qui perd ? →
             </a>
           </p>
         </div>

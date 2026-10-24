@@ -26,11 +26,11 @@ export function HypothesisControls({ value, onChange, idPrefix = 'hyp' }: Hypoth
       <Row tier="announced">
         <SegmentedControl
           name={`${idPrefix}-h1`}
-          legend="H1 · Le RSA, la prime d’activité, l’AAH et les bourses sont-ils remplacés ?"
+          legend="H1 · Le RSA, la prime d’activité, l’AAH et les bourses sont-ils remplacés ?"
           hint={
             <>
               Le programme parle de les remplacer par l’aide universelle (<Term id="afu">AFU</Term>
-              ), mais aucun amendement ne les supprime. Nous les remplaçons par défaut ; vous pouvez
+              ), mais aucun amendement ne les supprime. Nous les remplaçons par défaut ; vous pouvez
               voir l’autre lecture (<Term id="differentiel">différentiel</Term>
               {'). '}
               <a href={withBase('/methode/#h1')}>Pourquoi ce choix →</a>
@@ -46,11 +46,11 @@ export function HypothesisControls({ value, onChange, idPrefix = 'hyp' }: Hypoth
       </Row>
       <Row tier="hypothesis">
         <Switch
-          label="H2 · Déduction de 10 % pour frais professionnels"
+          label="H2 · Déduction de 10 % pour frais professionnels"
           hint={
             <>
               Le texte ne l’abroge pas. Si on la supprime, on retrouve les chiffres cités dans le
-              livre ; l’impôt est alors un peu plus {'élevé. '}
+              livre ; l’impôt est alors un peu plus {'élevé. '}
               <a href={withBase('/methode/#h2')}>Détail →</a>
             </>
           }
@@ -65,14 +65,14 @@ export function HypothesisControls({ value, onChange, idPrefix = 'hyp' }: Hypoth
           legend="H5 · Part de la hausse de TVA répercutée sur les prix"
           hint={
             <>
-              Les taux réduits de <Term id="tva">TVA</Term> passent à 20 %. Quelle part se retrouve
-              dans les prix que vous payez ? <a href={withBase('/methode/#h5')}>Détail →</a>
+              Les taux réduits de <Term id="tva">TVA</Term> passent à 20 %. Quelle part se retrouve
+              dans les prix que vous payez ? <a href={withBase('/methode/#h5')}>Détail →</a>
             </>
           }
           options={[
-            { value: '0', label: '0 %' },
-            { value: '0.5', label: '50 %' },
-            { value: '1', label: '100 %' },
+            { value: '0', label: '0 %' },
+            { value: '0.5', label: '50 %' },
+            { value: '1', label: '100 %' },
           ]}
           value={String(value.H5_tvaPassThrough) as '0' | '0.5' | '1'}
           onChange={(v) => onChange({ ...value, H5_tvaPassThrough: Number(v) as 0 | 0.5 | 1 })}
@@ -106,7 +106,7 @@ export function HypothesesSection({ value, onChange, comparison }: HypothesesSec
           Les choix que nous avons dû faire
         </h4>
         <p className="text-[0.9375rem] text-ink-2">
-          Là où le texte est muet, nous avons dû choisir. Changez un choix : le résultat se met à
+          Là où le texte est muet, nous avons dû choisir. Changez un choix : le résultat se met à
           jour tout de suite.
         </p>
       </header>

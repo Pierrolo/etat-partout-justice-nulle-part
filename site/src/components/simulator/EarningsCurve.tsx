@@ -156,7 +156,7 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
               x: 'netToday',
               y: 'plan',
               title: (d: EarningsPoint) =>
-                `Salaire net ${formatEuro(d.netToday)}\nAujourd’hui : ${formatEuro(roundForDisplay(d.baseline, DISPLAY_STEP))}\nAvec le plan : ${formatEuro(roundForDisplay(d.plan, DISPLAY_STEP))}`,
+                `Salaire net ${formatEuro(d.netToday)}\nAujourd’hui : ${formatEuro(roundForDisplay(d.baseline, DISPLAY_STEP))}\nAvec le plan : ${formatEuro(roundForDisplay(d.plan, DISPLAY_STEP))}`,
             }),
           ),
         ],
@@ -212,7 +212,7 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
               x: 'netToday',
               y: 'mtrPlan',
               title: (d: EarningsPoint) =>
-                `Salaire net ${formatEuro(d.netToday)}\nAujourd’hui : ${formatPercent(d.mtrBaseline)}\nAvec le plan : ${formatPercent(d.mtrPlan)}`,
+                `Salaire net ${formatEuro(d.netToday)}\nAujourd’hui : ${formatPercent(d.mtrBaseline)}\nAvec le plan : ${formatPercent(d.mtrPlan)}`,
             }),
           ),
         ],
@@ -229,7 +229,7 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
         </h4>
         <p className="text-[0.9375rem] text-ink-2">
           Cette courbe montre l’effet d’un salaire plus élevé. Elle n’est pas proposée quand la
-          première personne du foyer est retraitée : une pension n’est pas un salaire.
+          première personne du foyer est retraitée : une pension n’est pas un salaire.
         </p>
       </section>
     );
@@ -253,7 +253,7 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
       Avec un salaire net de {formatEuro(userNet)} par mois, votre revenu disponible est de{' '}
       {formatEuro(roundForDisplay(me!.baseline, DISPLAY_STEP))} aujourd’hui et de{' '}
       {formatEuro(roundForDisplay(me!.plan, DISPLAY_STEP))} avec le plan ({formatEuroDelta(gap)}).
-      Les deux courbes montrent ce que devient ce revenu si votre salaire net change ; leur écart
+      Les deux courbes montrent ce que devient ce revenu si votre salaire net change ; leur écart
       indique où le plan aide le plus, et où il aide moins.
     </>
   );
@@ -323,7 +323,7 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
           ],
           rows: tableRows,
         }}
-        note="Seul le salaire du premier adulte varie ; le reste du foyer est inchangé. Euros de 2026, plan complet."
+        note="Seul le salaire du premier adulte varie ; le reste du foyer est inchangé. Euros de 2026, plan complet."
       >
         <div className="space-y-4">
           <ul
@@ -376,8 +376,8 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
           </div>
           <div className="border-t border-rule pt-2">
             <Switch
-              label="Mode expert : taux marginal d’imposition effectif"
-              hint="Sur un euro gagné en plus, quelle part s’en va en impôts, cotisations et aides perdues ?"
+              label="Mode expert : taux marginal d’imposition effectif"
+              hint="Sur un euro gagné en plus, quelle part s’en va en impôts, cotisations et aides perdues ?"
               checked={expert}
               onChange={setExpert}
               stateLabels={['Affiché', 'Masqué']}
@@ -389,7 +389,7 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
       {expert && (
         <ChartFrame
           headingLevel={4}
-          title="Sur un euro gagné en plus, combien reste-t-il ?"
+          title="Sur un euro gagné en plus, combien reste-t-il ?"
           subtitle="Part de chaque euro de salaire net supplémentaire qui disparaît (impôt, cotisations, aides perdues)."
           summary={
             <>
@@ -399,7 +399,7 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
             </>
           }
           sources={SOURCES}
-          note="Calculé par différence finie sur de petits pas de salaire. Les pics d’aujourd’hui viennent de la perte progressive des aides ; le tableau ci-dessus donne les mêmes valeurs en chiffres."
+          note="Calculé par différence finie sur de petits pas de salaire. Les pics d’aujourd’hui viennent de la perte progressive des aides ; le tableau ci-dessus donne les mêmes valeurs en chiffres."
         >
           <PlotFigure
             options={mtrOptions}

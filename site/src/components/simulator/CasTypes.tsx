@@ -63,7 +63,7 @@ export default function CasTypes() {
     unit === 'eur' ? `${formatNumber(r.delta, { signed: true })}${NBSP}€` : pctText(r.pct);
   /** Accessible name = the visible text first (WCAG 2.5.3), then who it is. */
   const aria = (r: CaseRow) =>
-    `${tileText(r)}, ${r.label}, revenu net ${formatEuro(roundForDisplay(r.income, DISPLAY_STEP))} par mois : ${
+    `${tileText(r)}, ${r.label}, revenu net ${formatEuro(roundForDisplay(r.income, DISPLAY_STEP))} par mois : ${
       r.delta === 0 ? 'pas d’écart' : `${formatEuroDelta(r.delta)} par mois, ${pctSpoken(r.pct)}`
     }. Ouvrir dans le simulateur.`;
 
@@ -181,7 +181,7 @@ export default function CasTypes() {
       <Callout tone="announced" title="Des cas types, pas la population">
         <p>
           Ces foyers sont des exemples choisis pour illustrer des situations courantes. Ce n’est pas
-          un échantillon représentatif : nous ne savons pas combien de foyers se trouvent dans
+          un échantillon représentatif : nous ne savons pas combien de foyers se trouvent dans
           chaque situation. On ne peut donc pas en déduire la part des ménages qui gagnent ou
           perdent.
         </p>
@@ -200,7 +200,7 @@ export default function CasTypes() {
           ))}
         </ul>
         <p className="text-sm text-ink-3">
-          Avec la période et les hypothèses choisies ci-dessous. Chaque foyer est un exemple : la
+          Avec la période et les hypothèses choisies ci-dessous. Chaque foyer est un exemple : la
           liste complète est dans la carte et dans le tableau.
         </p>
       </section>
@@ -233,16 +233,16 @@ export default function CasTypes() {
 
       <ChartFrame
         headingLevel={2}
-        title="Qui gagne, qui perd ?"
-        subtitle={`Écart de revenu disponible par foyer type (${period === 'steady' ? 'plan complet' : period}). Chaque case ou chaque ligne est un foyer : touchez-la pour l’ouvrir dans le simulateur.`}
+        title="Qui gagne, qui perd ?"
+        subtitle={`Écart de revenu disponible par foyer type (${period === 'steady' ? 'plan complet' : period}). Chaque case ou chaque ligne est un foyer : touchez-la pour l’ouvrir dans le simulateur.`}
         summary={typo(
-          `${pattern.map((p) => p.text).join(' ')} Le plus fort gain est pour « ${bestRow.label} » (${formatEuroDelta(bestRow.delta)} par mois), la plus forte perte pour « ${worstRow.label} » (${formatEuroDelta(worstRow.delta)} par mois). Ce sont des cas types, pas une estimation de la population.`,
+          `${pattern.map((p) => p.text).join(' ')} Le plus fort gain est pour « ${bestRow.label} » (${formatEuroDelta(bestRow.delta)} par mois), la plus forte perte pour « ${worstRow.label} » (${formatEuroDelta(worstRow.delta)} par mois). Ce sont des cas types, pas une estimation de la population.`,
         )}
         sources={SOURCES}
         note={
           <>
-            Revenu net : salaires, pensions et allocation chômage du ménage, avant impôt et avant
-            prestations. Montants arrondis à 5 € près, après impôts, aides et TVA estimée. « — » :
+            Revenu net : salaires, pensions et allocation chômage du ménage, avant impôt et avant
+            prestations. Montants arrondis à 5 € près, après impôts, aides et TVA estimée. « — » :
             pas de pourcentage, parce que le revenu d’aujourd’hui est presque nul.
           </>
         }
@@ -319,7 +319,7 @@ export default function CasTypes() {
               {activeRow ? (
                 <>
                   <span className="font-semibold text-ink">{activeRow.label}</span> · revenu net{' '}
-                  {formatEuro(roundForDisplay(activeRow.income, DISPLAY_STEP))} par mois :{' '}
+                  {formatEuro(roundForDisplay(activeRow.income, DISPLAY_STEP))} par mois :{' '}
                   {formatEuro(activeRow.baseline)} aujourd’hui, {formatEuro(activeRow.plan)} avec le
                   plan ({formatEuroDelta(activeRow.delta)}).
                 </>
@@ -360,13 +360,13 @@ export default function CasTypes() {
         </header>
         <div
           role="region"
-          aria-label="Tableau : foyers types, revenu disponible aujourd’hui et avec le plan"
+          aria-label="Tableau : foyers types, revenu disponible aujourd’hui et avec le plan"
           tabIndex={0}
           className="max-w-full overflow-x-auto rounded-md border border-rule bg-surface"
         >
           <table className="data-table min-w-[44rem]">
             <caption className="sr-only">
-              Foyers types : revenu net, revenu disponible aujourd’hui et avec le plan, écart
+              Foyers types : revenu net, revenu disponible aujourd’hui et avec le plan, écart
             </caption>
             <thead>
               <tr>

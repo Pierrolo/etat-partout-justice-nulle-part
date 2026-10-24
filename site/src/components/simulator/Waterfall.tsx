@@ -101,10 +101,10 @@ export function Waterfall({ data, periodLabel }: WaterfallProps) {
       Votre revenu disponible passe de {formatEuro(display.baselineAfterTva)} à{' '}
       {formatEuro(display.planAfterTva)} par mois ({formatEuroDelta(display.deltaAfterTva)}).{' '}
       {best
-        ? `La plus forte hausse vient de « ${best.label} » (${formatEuroDelta(best.shown)}). `
+        ? `La plus forte hausse vient de « ${best.label} » (${formatEuroDelta(best.shown)}). `
         : 'Aucune ligne n’augmente pour ce foyer. '}
       {worst
-        ? `La plus forte baisse vient de « ${worst.label} » (${formatEuroDelta(worst.shown)}).`
+        ? `La plus forte baisse vient de « ${worst.label} » (${formatEuroDelta(worst.shown)}).`
         : 'Aucune ligne ne baisse pour ce foyer.'}
     </>
   );
@@ -139,7 +139,7 @@ export function Waterfall({ data, periodLabel }: WaterfallProps) {
           after: s.formulaAfter,
         })),
       }}
-      note="Montants arrondis à 5 € près ; les écarts s’additionnent exactement au résultat. Lignes hachurées : promises par les auteurs sans texte précis. Lignes pointillées : notre estimation."
+      note="Montants arrondis à 5 € près ; les écarts s’additionnent exactement au résultat. Lignes hachurées : promises par les auteurs sans texte précis. Lignes pointillées : notre estimation."
     >
       <div className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
@@ -190,7 +190,7 @@ export function Waterfall({ data, periodLabel }: WaterfallProps) {
           </div>
         </div>
         <p className="-mt-2 text-xs text-ink-3" aria-hidden="true">
-          0 = votre revenu disponible d’aujourd’hui ; chaque barre ajoute ou retire de l’argent à
+          0 = votre revenu disponible d’aujourd’hui ; chaque barre ajoute ou retire de l’argent à
           partir de là.
         </p>
 
@@ -288,7 +288,7 @@ export function Waterfall({ data, periodLabel }: WaterfallProps) {
           })}
           {steps.length === 0 && (
             <li className="py-6 text-[0.9375rem] text-ink-2">
-              Pour ce foyer, aucune ligne ne change : le plan donne le même revenu disponible
+              Pour ce foyer, aucune ligne ne change : le plan donne le même revenu disponible
               qu’aujourd’hui.
             </li>
           )}

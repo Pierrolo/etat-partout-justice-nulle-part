@@ -41,12 +41,12 @@ export function EmptyResult({
             Répondez aux questions pour voir votre résultat.
           </p>
           <p className="text-[0.9375rem] text-ink-2">
-            Aucun chiffre n’apparaît tant que vous n’avez pas répondu : le simulateur ne part
+            Aucun chiffre n’apparaît tant que vous n’avez pas répondu : le simulateur ne part
             d’aucun profil par défaut.
           </p>
           {missing.length > 0 && (
             <div className="text-[0.9375rem] text-ink-2">
-              <p className="font-semibold text-ink">Il reste à indiquer :</p>
+              <p className="font-semibold text-ink">Il reste à indiquer :</p>
               <ul className="mt-1 flex flex-wrap gap-x-2 gap-y-1">
                 {missing.slice(0, 6).map((m) => (
                   <li key={m.key}>
@@ -164,7 +164,7 @@ export function Hero({ data, period, stale, getUrl, shareText, onEdit, onResetPe
             data-testid="headline-figure"
             className={cn('stat-number text-[length:var(--text-display)]', tone.text)}
           >
-            {h.direction === 'flat' ? '≈ 0 €' : h.amount.replace('/mois', '')}
+            {h.direction === 'flat' ? '≈ 0 €' : h.amount.replace('/mois', '')}
           </span>
           <span className="font-serif text-lg text-ink-2 sm:text-xl">par mois</span>
           <span
@@ -181,7 +181,7 @@ export function Hero({ data, period, stale, getUrl, shareText, onEdit, onResetPe
         </p>
         {h.pct === null && (
           <p className="text-sm text-ink-3">
-            Pas de pourcentage : votre revenu d’aujourd’hui est presque nul, la variation relative
+            Pas de pourcentage : votre revenu d’aujourd’hui est presque nul, la variation relative
             n’aurait aucun sens.
           </p>
         )}
@@ -264,7 +264,7 @@ export function SideCard({
           </span>
         )}
         <span data-key-figure className={cn('stat-number text-[2.5rem]', tone.text)}>
-          {h.direction === 'flat' ? '≈ 0 €' : h.amount.replace('/mois', '')}
+          {h.direction === 'flat' ? '≈ 0 €' : h.amount.replace('/mois', '')}
         </span>
         <span className="font-serif text-lg text-ink-2">par mois</span>
         <span className={cn('rounded-full px-2.5 py-1 text-sm font-bold', tone.soft, tone.text)}>
@@ -275,7 +275,7 @@ export function SideCard({
       <p className="text-sm text-ink-2">{h.basis}</p>
       {important > 0 && (
         <p className="rounded-md bg-loss-soft px-3 py-2 text-sm text-ink">
-          <strong className="font-semibold">À lire aussi :</strong>{' '}
+          <strong className="font-semibold">À lire aussi :</strong>{' '}
           {important === 1
             ? '1 perte non chiffrée compte pour vous'
             : `${important} pertes non chiffrées comptent pour vous`}

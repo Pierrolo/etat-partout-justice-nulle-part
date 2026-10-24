@@ -30,7 +30,7 @@ export function BenefitsToday({ data }: { data: ResultData }) {
           <>Selon la loi d’aujourd’hui, le simulateur ne vous attribue aucune de ces aides.</>
         ) : (
           <>
-            Selon la loi d’aujourd’hui, le simulateur vous attribue :{' '}
+            Selon la loi d’aujourd’hui, le simulateur vous attribue :{' '}
             {paid.map((r, i) => (
               <span key={r.id}>
                 {i > 0 && (i === paid.length - 1 ? ' et ' : ', ')}
@@ -43,7 +43,7 @@ export function BenefitsToday({ data }: { data: ResultData }) {
           </>
         )}{' '}
         {zero.length > 0 &&
-          `${zero.length === 1 ? 'Une autre aide est' : `Les ${zero.length} autres aides sont`} à 0 € : la raison est donnée pour chacune.`}
+          `${zero.length === 1 ? 'Une autre aide est' : `Les ${zero.length} autres aides sont`} à 0 € : la raison est donnée pour chacune.`}
       </p>
       <Disclosure
         variant="card"
@@ -68,7 +68,7 @@ export function BenefitsToday({ data }: { data: ResultData }) {
               </span>
               {r.reason && (
                 <span className="col-span-2 text-sm text-ink-2">
-                  Pourquoi 0 € : {plainText(r.reason)}.
+                  Pourquoi 0 € : {plainText(r.reason)}.
                 </span>
               )}
             </li>
@@ -76,7 +76,7 @@ export function BenefitsToday({ data }: { data: ResultData }) {
         </ul>
         <p className="mt-3 text-xs text-ink-3">
           Chaque aide est calculée à partir de vos réponses, comme le fait la CAF. Si le montant que
-          vous touchez est différent, indiquez-le à l’étape « Vos aides ».
+          vous touchez est différent, indiquez-le à l’étape « Vos aides ».
         </p>
       </Disclosure>
     </section>

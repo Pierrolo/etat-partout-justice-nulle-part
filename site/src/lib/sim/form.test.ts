@@ -98,13 +98,13 @@ describe('formToHousehold', () => {
     expect(h.marriedOrPacs).toBe(false);
   });
 
-  it('a salaried adult must pick a status (no hidden « privé non-cadre »)', () => {
+  it('a salaried adult must pick a status (no hidden « privé non-cadre »)', () => {
     const f = filled();
     f.adults[0] = { ...f.adults[0], salaryStatus: null };
     expect(formToHousehold(f).errors['adult0.status']).toBeDefined();
   });
 
-  it('gives friendly French messages, keyed by field, with the partner worded as « son »', () => {
+  it('gives friendly French messages, keyed by field, with the partner worded as « son »', () => {
     const f = filled();
     f.couple = true;
     f.marriedOrPacs = true;
@@ -138,7 +138,7 @@ describe('formToHousehold', () => {
     expect(h.adults[0].salary).toBeUndefined();
   });
 
-  it('unemployed: say whether benefit is received; the amount only when « oui »', () => {
+  it('unemployed: say whether benefit is received; the amount only when « oui »', () => {
     const f = filled();
     f.adults[0] = emptyAdult({ age: 40, activity: 'chomage' });
     expect(formToHousehold(f).errors['adult0.are']).toBeDefined();
@@ -193,7 +193,7 @@ describe('formToHousehold', () => {
     expect(formToHousehold(f).household?.extras).toBeUndefined();
   });
 
-  it('the zone « Je ne sais pas » gives zone 2; the zone is required for a tenant', () => {
+  it('the zone « Je ne sais pas » gives zone 2; the zone is required for a tenant', () => {
     const f = filled();
     f.housing = { status: 'locataire', rentMonthly: 500, zone: null };
     expect(formToHousehold(f).errors['housing.zone']).toBeDefined();
@@ -203,7 +203,7 @@ describe('formToHousehold', () => {
     expect(formToHousehold(f).household?.housing.zone).toBe(3);
   });
 
-  it('the CAF override only applies when asked for and not combined with « je ne touche pas ces aides »', () => {
+  it('the CAF override only applies when asked for and not combined with « je ne touche pas ces aides »', () => {
     const f = { ...filled(), cafOverrideOn: true, cafOverrideMonthly: 320 };
     expect(formToHousehold(f).household?.benefits).toEqual({
       nonRecours: false,
@@ -229,7 +229,7 @@ describe('formToHousehold', () => {
     ]);
   });
 
-  it('« séparé·e récemment » only applies to a lone parent', () => {
+  it('« séparé·e récemment » only applies to a lone parent', () => {
     const f = filled();
     f.isolementRecent = true;
     expect(formToHousehold(f).household!.benefits.isolementRecent).toBeUndefined(); // no child
@@ -288,7 +288,7 @@ describe('householdToForm', () => {
     expect(formToHousehold(householdToForm(retiree)).household).toEqual(retiree);
   });
 
-  it('opens « Affiner » only when something was refined', () => {
+  it('opens « Affiner » only when something was refined', () => {
     expect(hasExtras(emptyFormState())).toBe(false);
     const f = filled();
     f.extras.donsAnnual = 120;

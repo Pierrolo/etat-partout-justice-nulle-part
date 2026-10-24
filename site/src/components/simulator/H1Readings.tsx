@@ -13,7 +13,7 @@ const READING: Record<Reading, { title: string; text: React.ReactNode }> = {
     title: 'Remplacés par l’aide universelle',
     text: (
       <>
-        Le RSA, la prime d’activité et l’AAH disparaissent : l’<Term id="afu">AFU</Term> les
+        Le RSA, la prime d’activité et l’AAH disparaissent : l’<Term id="afu">AFU</Term> les
         remplace, comme le disent les auteurs.
       </>
     ),
@@ -63,7 +63,7 @@ export function H1Readings({
         <p className="text-[0.9375rem] text-ink-2">
           Les auteurs annoncent que l’aide universelle remplace certaines aides, mais aucun
           amendement ne les supprime. Pour votre foyer, les deux lectures ne donnent pas le même
-          résultat :
+          résultat :
         </p>
       </header>
       <ul className="grid gap-3 md:grid-cols-2">
@@ -111,7 +111,7 @@ export function H1Readings({
       </ul>
       <p className="text-sm">
         <a href={withBase('/methode/#h1')}>
-          Pourquoi ce choix : hypothèse H1 sur la page Méthode →
+          Pourquoi ce choix : hypothèse H1 sur la page Méthode →
         </a>
       </p>
     </section>

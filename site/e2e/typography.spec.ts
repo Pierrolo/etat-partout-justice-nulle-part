@@ -11,7 +11,7 @@ import { builtPages } from './pages';
  * `node scripts/typo-fix.mjs --write` on their files, then empty this list) are checked for console
  * problems only.
  */
-const PENDING_CODEMOD = new Set<string>(['simulateur/', 'simulateur/cas-types/']);
+const PENDING_CODEMOD = new Set<string>([]);
 
 /** Legitimate regular spaces: code samples and the design-system showcase. */
 const IGNORE_SELECTOR = 'code, pre, kbd, samp, script, style, noscript, [data-typo-ignore]';

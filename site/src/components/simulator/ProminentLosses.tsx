@@ -116,8 +116,8 @@ export function ProminentLosses({
           Ce que le chiffre ne dit pas
         </h3>
         <p className="text-[0.9375rem] text-ink-2">
-          Le plan ne donne aucun montant pour les points ci-dessous : ils ne sont donc pas dans le
-          chiffre du haut. Pour un foyer comme le vôtre, chacun peut dépasser 50 € par mois.
+          Le plan ne donne aucun montant pour les points ci-dessous : ils ne sont donc pas dans le
+          chiffre du haut. Pour un foyer comme le vôtre, chacun peut dépasser 50 € par mois.
         </p>
       </header>
 
@@ -128,13 +128,13 @@ export function ProminentLosses({
           className="rounded-lg border-s-4 border-loss bg-loss-soft px-4 py-3 text-[0.9375rem] text-ink"
         >
           <p className="font-semibold">
-            Vous êtes fonctionnaire : ce chiffre ne dit rien de votre poste.
+            Vous êtes fonctionnaire : ce chiffre ne dit rien de votre poste.
           </p>
           <p className="mt-1">
             {postes
               ? `${plainText(postes.title)}. `
               : 'Le plan prévoit de fermer des postes publics et de mettre fin au statut. '}
-            Le simulateur ne chiffre pas ce risque : le gain ou la perte affiché suppose que vous
+            Le simulateur ne chiffre pas ce risque : le gain ou la perte affiché suppose que vous
             gardez votre poste.
           </p>
           <p className="mt-1.5">

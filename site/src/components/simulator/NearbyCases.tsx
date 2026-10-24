@@ -58,7 +58,7 @@ export function NearbyCases({
         </h4>
         <p className="text-[0.9375rem] text-ink-2">
           Trois foyers de notre liste de cas types, choisis pour leur composition et leur revenu. Ce
-          sont des exemples : ils ne disent pas combien de foyers se trouvent dans votre situation.
+          sont des exemples : ils ne disent pas combien de foyers se trouvent dans votre situation.
         </p>
       </header>
       <ul className="grid gap-3 md:grid-cols-3">
@@ -79,7 +79,7 @@ export function NearbyCases({
                 )}
               >
                 {dir !== 'flat' && <Icon size={16} strokeWidth={2} aria-hidden="true" />}
-                <span className="num">{r.delta === 0 ? '≈ 0 €' : formatEuroDelta(r.delta)}</span>
+                <span className="num">{r.delta === 0 ? '≈ 0 €' : formatEuroDelta(r.delta)}</span>
                 <span className="text-sm font-normal text-ink-2">par mois ({pctText(r.pct)})</span>
               </p>
               <p className="text-sm text-ink-2">
@@ -94,7 +94,7 @@ export function NearbyCases({
       </ul>
       <p className="text-sm">
         <a href={withBase('/simulateur/cas-types/')}>
-          Voir tous les foyers types : qui gagne, qui perd ? →
+          Voir tous les foyers types : qui gagne, qui perd ? →
         </a>
       </p>
     </section>

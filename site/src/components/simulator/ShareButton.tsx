@@ -78,7 +78,7 @@ export function ShareButton({
     const url = getUrl();
     if (native) {
       try {
-        await navigator.share({ title: 'Et moi, dans tout ça ?', text, url });
+        await navigator.share({ title: 'Et moi, dans tout ça ?', text, url });
         return;
       } catch (e) {
         if (e instanceof DOMException && e.name === 'AbortError') return; // the person closed the sheet
@@ -98,7 +98,7 @@ export function ShareButton({
       </span>
       {manual && (
         <label className="mt-2 block text-sm text-ink-2">
-          Copiez ce lien (Ctrl + C) :
+          Copiez ce lien (Ctrl + C) :
           <input
             ref={field}
             readOnly

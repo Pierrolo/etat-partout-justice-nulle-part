@@ -215,10 +215,10 @@ export function formToHousehold(f: FormState): {
     } else if (f.childSupport.received) {
       const m = f.childSupport.monthly;
       if (m === null || m <= 0) {
-        errors['childSupport.amount'] = 'Indiquez le montant reçu chaque mois (supérieur à 0 €).';
+        errors['childSupport.amount'] = 'Indiquez le montant reçu chaque mois (supérieur à 0 €).';
       } else if (m > LIMITS.childSupportMax) {
         errors['childSupport.amount'] =
-          `Ce montant dépasse ${formatEuro(LIMITS.childSupportMax)} par mois : vérifiez la saisie.`;
+          `Ce montant dépasse ${formatEuro(LIMITS.childSupportMax)} par mois : vérifiez la saisie.`;
       } else {
         childSupport = m;
       }
@@ -246,22 +246,22 @@ export function formToHousehold(f: FormState): {
 
     if (a.activity === null) {
       errors[`${k}.activity`] = you
-        ? 'Indiquez ce que vous faites : salarié·e, retraité·e…'
-        : 'Indiquez ce que fait votre conjoint·e : salarié·e, retraité·e…';
+        ? 'Indiquez ce que vous faites : salarié·e, retraité·e…'
+        : 'Indiquez ce que fait votre conjoint·e : salarié·e, retraité·e…';
     } else if (a.activity === 'salarie') {
       if (a.salaryStatus === null) {
         errors[`${k}.status`] = you
-          ? 'Indiquez votre statut : salarié du privé, fonctionnaire, dirigeant…'
-          : 'Indiquez le statut de votre conjoint·e : salarié du privé, fonctionnaire, dirigeant…';
+          ? 'Indiquez votre statut : salarié du privé, fonctionnaire, dirigeant…'
+          : 'Indiquez le statut de votre conjoint·e : salarié du privé, fonctionnaire, dirigeant…';
       } else if (a.salaryStatus === 'tns') {
         // Not modelled: the engine ignores the income and flags the comparison `unsupported`.
         adult.salary = { amount: 0, basis: a.salaryBasis, status: 'tns' };
       } else if (a.salaryAmount === null || a.salaryAmount <= 0) {
         errors[`${k}.salary`] =
-          `Indiquez ${poss} salaire mensuel (supérieur à 0 €), ou choisissez « Sans emploi ».`;
+          `Indiquez ${poss} salaire mensuel (supérieur à 0 €), ou choisissez « Sans emploi ».`;
       } else if (a.salaryAmount > LIMITS.salaryMax) {
         errors[`${k}.salary`] =
-          `Ce salaire dépasse ${formatEuro(LIMITS.salaryMax)} par mois : vérifiez que vous n’avez pas saisi un montant annuel.`;
+          `Ce salaire dépasse ${formatEuro(LIMITS.salaryMax)} par mois : vérifiez que vous n’avez pas saisi un montant annuel.`;
       } else {
         adult.salary = {
           amount: a.salaryAmount,
@@ -278,10 +278,10 @@ export function formToHousehold(f: FormState): {
       } else if (a.areOn) {
         if (a.areMonthly === null || a.areMonthly <= 0) {
           errors[`${k}.are`] =
-            'Indiquez le montant mensuel de l’allocation, ou choisissez « Non indemnisé·e ».';
+            'Indiquez le montant mensuel de l’allocation, ou choisissez « Non indemnisé·e ».';
         } else if (a.areMonthly > LIMITS.areMax) {
           errors[`${k}.are`] =
-            `Ce montant dépasse ${formatEuro(LIMITS.areMax)} par mois : vérifiez la saisie.`;
+            `Ce montant dépasse ${formatEuro(LIMITS.areMax)} par mois : vérifiez la saisie.`;
         } else {
           adult.unemployment = { areMonthly: a.areMonthly };
         }
@@ -294,7 +294,7 @@ export function formToHousehold(f: FormState): {
         ok = false;
       } else if (a.pensionAmount > LIMITS.pensionMax) {
         errors[`${k}.pension`] =
-          `Cette pension dépasse ${formatEuro(LIMITS.pensionMax)} par mois : vérifiez la saisie.`;
+          `Cette pension dépasse ${formatEuro(LIMITS.pensionMax)} par mois : vérifiez la saisie.`;
         ok = false;
       }
       if (
@@ -331,7 +331,7 @@ export function formToHousehold(f: FormState): {
       housing.rentMonthly = f.housing.rentMonthly;
     }
     if (f.housing.zone === null) {
-      errors['housing.zone'] = 'Choisissez la zone de votre logement, ou « Je ne sais pas ».';
+      errors['housing.zone'] = 'Choisissez la zone de votre logement, ou « Je ne sais pas ».';
     }
   }
   housing.zone = f.housing.zone === 1 || f.housing.zone === 3 ? f.housing.zone : 2;
@@ -380,7 +380,7 @@ export function formToHousehold(f: FormState): {
   if (f.extras.consumptionMonthly !== null) {
     if (f.extras.consumptionMonthly < 0 || f.extras.consumptionMonthly > 100_000) {
       errors['extras.consumption'] =
-        'La consommation mensuelle doit être comprise entre 0 et 100 000 €.';
+        'La consommation mensuelle doit être comprise entre 0 et 100 000 €.';
     } else {
       extras.consumptionMonthly = f.extras.consumptionMonthly;
     }

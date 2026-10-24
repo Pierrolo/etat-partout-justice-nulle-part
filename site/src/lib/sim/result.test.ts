@@ -100,7 +100,7 @@ describe('the numbers on screen agree (engine roundForDisplay)', () => {
 });
 
 describe('percentages', () => {
-  it('shows « — », never « 0,0 % », when the engine says a percentage is meaningless', () => {
+  it('shows « — », never « 0,0 % », when the engine says a percentage is meaningless', () => {
     const jeune = CAS_TYPES.find((c) => c.id === 'jeune-22-inactif')!;
     const c = compare(jeune.household);
     expect(c.deltaPct).toBeNull();
@@ -161,7 +161,7 @@ describe('the engine summary, prominent losses and benefits are there to be show
     expect(prominentLosses(retiree).map((i) => i.id)).toContain('gel_indexation');
   });
 
-  it('twelve benefits, and a reason for each one at 0 €', () => {
+  it('twelve benefits, and a reason for each one at 0 €', () => {
     const c = compare(scenarios[1]![1]);
     expect(c.baselineBenefitsExplained).toHaveLength(12);
     for (const b of c.baselineBenefitsExplained) {
@@ -171,7 +171,7 @@ describe('the engine summary, prominent losses and benefits are there to be show
 });
 
 describe('h1Alternative is there when the two readings differ', () => {
-  it('an AAH 50–79 % adult without income: both readings, far apart', () => {
+  it('an AAH 50–79 % adult without income: both readings, far apart', () => {
     const h = household((f) => {
       f.adults[0] = emptyAdult({ age: 40, activity: 'inactif', disability: 'aah_50_79' });
     });
@@ -193,7 +193,7 @@ describe('text hygiene', () => {
       { label: 'Liasse PLF 2027, am. n° 28' },
       { label: 'loi n° 2026-103, art. 4' },
       { label: 'BOFiP actualité du 07/04/2026' },
-      { label: 'loi n° 2026-103, art. 4 ; BOFiP actualité du 07/04/2026' },
+      { label: 'loi n° 2026-103, art. 4 ; BOFiP actualité du 07/04/2026' },
       { label: 'Liasse PLF 2027, am. n° 28' },
     ];
     expect(uniqueSources(sources).map((s) => s.label)).toEqual([

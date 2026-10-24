@@ -102,7 +102,7 @@ export function EnClair({ data }: { data: ResultData }) {
       </div>
 
       <p className="text-sm leading-relaxed text-ink sm:text-[0.9375rem]">
-        <strong className="font-semibold">Pourquoi ? </strong>
+        <strong className="font-semibold">Pourquoi ? </strong>
         {plainText(s.why)}
       </p>
 

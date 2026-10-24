@@ -180,7 +180,7 @@ export function describePattern(rows: CaseRow[]): Array<{ key: string; text: str
     text:
       losers.length === 0
         ? 'Avec ces réglages, aucun des foyers types ne perd.'
-        : `Les foyers types qui perdent se trouvent dans ces familles : ${joinList(uniq(losers.map((r) => lowerFirst(r.family))))}.`,
+        : `Les foyers types qui perdent se trouvent dans ces familles : ${joinList(uniq(losers.map((r) => lowerFirst(r.family))))}.`,
   });
 
   const modest = rows.filter((r) => r.income < MODEST_INCOME);
@@ -191,7 +191,7 @@ export function describePattern(rows: CaseRow[]): Array<{ key: string; text: str
     const lossText =
       mLosers.length === 0
         ? 'aucun foyer type ne perd'
-        : `les foyers types qui perdent sont : ${joinList(uniq(mLosers.map((r) => lowerFirst(r.family))))}`;
+        : `les foyers types qui perdent sont : ${joinList(uniq(mLosers.map((r) => lowerFirst(r.family))))}`;
     const gainText =
       mWinners.length === 0
         ? ''

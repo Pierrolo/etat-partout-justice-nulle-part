@@ -26,7 +26,7 @@ export function Unquantified({ promises, losses }: UnquantifiedProps) {
           Ce que le plan promet ou laisse ouvert, sans le chiffrer
         </h4>
         <p className="text-[0.9375rem] text-ink-2">
-          Ces éléments ne sont pas comptés dans votre revenu disponible : aucun montant n’est écrit
+          Ces éléments ne sont pas comptés dans votre revenu disponible : aucun montant n’est écrit
           dans les amendements. Nous les montrons à part, côte à côte, avec le même poids. Les plus
           importants pour votre foyer sont déjà signalés sous le résultat.
         </p>
@@ -35,7 +35,7 @@ export function Unquantified({ promises, losses }: UnquantifiedProps) {
         <Panel
           id="unq-promises"
           title="Promesses non chiffrées"
-          intro="Annoncées par les auteurs. Le montant serait fixé chaque année par la loi de finances ; 0 € par défaut dans le texte des amendements."
+          intro="Annoncées par les auteurs. Le montant serait fixé chaque année par la loi de finances ; 0 € par défaut dans le texte des amendements."
           items={promises}
           empty="Aucune promesse non chiffrée ne concerne votre foyer."
         />
@@ -65,7 +65,7 @@ function ItemList({ items }: { items: UnquantifiedItem[] }) {
           )}
           <p className="mt-1 text-sm text-ink-2">{plainText(it.detail)}</p>
           {it.plainTitle && it.plainTitle !== it.title && (
-            <p className="mt-1 text-xs text-ink-3">Titre exact du texte : {plainText(it.title)}</p>
+            <p className="mt-1 text-xs text-ink-3">Titre exact du texte : {plainText(it.title)}</p>
           )}
           {it.sources.length > 0 && (
             <p className="mt-2 flex flex-wrap gap-1.5">

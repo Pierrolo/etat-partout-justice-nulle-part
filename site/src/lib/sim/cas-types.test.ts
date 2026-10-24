@@ -23,7 +23,7 @@ describe('income buckets', () => {
 });
 
 describe('tile colours', () => {
-  it('text is readable (≥ 4.5 : 1) at every point of the diverging scale, in both themes', () => {
+  it('text is readable (≥ 4.5 : 1) at every point of the diverging scale, in both themes', () => {
     for (let i = -100; i <= 100; i++) {
       const c = tileColor(i / 100);
       expect(contrastRatio(c.bgLight, c.fgLight)).toBeGreaterThanOrEqual(4.5);
@@ -53,7 +53,7 @@ describe('case rows', () => {
     expect(families(rows).length).toBeGreaterThan(1);
   });
 
-  it('the young person without income has no percentage (null), never « 0,0 % »', () => {
+  it('the young person without income has no percentage (null), never « 0,0 % »', () => {
     const jeune = rows.find((r) => r.id === 'jeune-22-inactif')!;
     expect(jeune.pct).toBeNull();
     expect(jeune.delta).toBeGreaterThan(0);
@@ -65,7 +65,7 @@ describe('the pattern in words', () => {
   const rows = buildRows(CAS_TYPES, engine, 'steady', DEFAULT_HYPOTHESES);
   const pattern = describePattern(rows);
 
-  it('leads with who loses and what happens to modest incomes, without a « n sur N » counter', () => {
+  it('leads with who loses and what happens to modest incomes, without a « n sur N » counter', () => {
     expect(pattern.map((p) => p.key)).toEqual(['loss', 'modest', 'ends']);
     const all = pattern.map((p) => p.text).join(' ');
     expect(all).toMatch(/perdent/);

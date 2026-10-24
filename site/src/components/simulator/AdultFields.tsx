@@ -21,8 +21,8 @@ const STATUSES: Array<{ value: SalaryStatus; label: string }> = [
 
 const DISABILITIES: Array<{ value: Disability; label: string }> = [
   { value: 'none', label: 'Non' },
-  { value: 'aah_80', label: 'Oui, taux de 80 % ou plus' },
-  { value: 'aah_50_79', label: 'Oui, taux de 50 à 79 %' },
+  { value: 'aah_80', label: 'Oui, taux de 80 % ou plus' },
+  { value: 'aah_50_79', label: 'Oui, taux de 50 à 79 %' },
 ];
 
 export interface AdultFieldsProps {
@@ -93,9 +93,9 @@ export function AdultFields({
                 <>
                   Les cotisations ne sont pas les mêmes selon le statut. Si vous dirigez une
                   entreprise et recevez une fiche de paie (président·e de SAS, gérant·e minoritaire
-                  de SARL), choisissez « dirigeant·e »{', '}
+                  de SARL), choisissez « dirigeant·e »{', '}
                   <Term id="dirigeant-assimile">assimilé salarié</Term>. Gérant majoritaire,
-                  indépendant et micro-entrepreneur (<Term id="tns">TNS</Term>) : pas encore pris en
+                  indépendant et micro-entrepreneur (<Term id="tns">TNS</Term>) : pas encore pris en
                   compte.
                 </>
               }
@@ -113,9 +113,9 @@ export function AdultFields({
             >
               <strong>Pas encore couvert.</strong> Le revenu d’un indépendant ou d’un gérant
               majoritaire (cotisations aux indépendants, bénéfices, micro-entreprise) n’est pas
-              modélisé : nous ne vous montrerons pas de chiffre qui ne serait pas le vôtre. Si vous
-              êtes en réalité président·e de SAS ou gérant·e minoritaire de SARL, choisissez «
-              dirigeant·e ».
+              modélisé : nous ne vous montrerons pas de chiffre qui ne serait pas le vôtre. Si vous
+              êtes en réalité président·e de SAS ou gérant·e minoritaire de SARL, choisissez
+              « dirigeant·e ».
             </p>
           )}
 
@@ -161,8 +161,8 @@ export function AdultFields({
             <SegmentedControl
               legend={
                 you
-                  ? 'Touchez-vous une allocation chômage ?'
-                  : 'Cette personne touche-t-elle une allocation chômage ?'
+                  ? 'Touchez-vous une allocation chômage ?'
+                  : 'Cette personne touche-t-elle une allocation chômage ?'
               }
               hint={
                 <>
@@ -237,13 +237,13 @@ export function AdultFields({
 
       <SegmentedControl
         legend={
-          you ? 'Avez-vous un handicap reconnu ?' : 'Cette personne a-t-elle un handicap reconnu ?'
+          you ? 'Avez-vous un handicap reconnu ?' : 'Cette personne a-t-elle un handicap reconnu ?'
         }
         hint={
           <>
             Allocation aux adultes handicapés (<Term id="aah">AAH</Term>). À partir d’un taux de 80
-            %, la carte mobilité inclusion « invalidité » (<Term id="cmi">CMI</Term>) ouvre un
-            supplément prévu par le plan ; pas en dessous.
+            %, la carte mobilité inclusion « invalidité » (<Term id="cmi">CMI</Term>) ouvre un
+            supplément prévu par le plan ; pas en dessous.
           </>
         }
         options={DISABILITIES}

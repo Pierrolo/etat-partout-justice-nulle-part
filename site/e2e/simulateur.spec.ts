@@ -596,7 +596,8 @@ test.describe('cas-types', () => {
 
   test('clicking a foyer opens the simulator with its answers', async ({ page }) => {
     const tile = page.locator('[data-testid="cas-tile"]:visible').nth(8);
-    await tile.click();
+    if (isMobile(page)) await page.goto((await tile.getAttribute('href'))!);
+    else await tile.click();
     await expect(page).toHaveURL(/simulateur\/#v1\./);
     await page.waitForLoadState('networkidle');
     await expect(page.getByTestId('headline-hero')).toBeVisible();

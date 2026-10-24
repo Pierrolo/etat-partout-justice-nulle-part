@@ -139,7 +139,7 @@ export function MoreSections({
     sections.push(
       {
         id: 'courbe',
-        label: 'Si je gagnais plus ?',
+        label: 'Si je gagnais plus ?',
         teaser: 'Votre revenu selon votre salaire, aujourd’hui et avec le plan.',
         render: () => (
           <EarningsCurve household={household} hypotheses={hyp} comparison={data.comparison} />
@@ -148,7 +148,7 @@ export function MoreSections({
       {
         id: 'transition',
         label: 'La transition, année par année',
-        teaser: '2027, 2028, 2030 : le chemin jusqu’au plan complet.',
+        teaser: '2027, 2028, 2030 : le chemin jusqu’au plan complet.',
         render: () => (
           <Transition
             household={household}
@@ -180,7 +180,7 @@ export function MoreSections({
       {
         id: 'hypotheses',
         label: 'Les hypothèses',
-        teaser: 'Les choix que nous avons dû faire : changez-en un, le résultat suit.',
+        teaser: 'Les choix que nous avons dû faire : changez-en un, le résultat suit.',
         render: () => (
           <HypothesesSection value={hyp} onChange={onHyp} comparison={data.comparison} />
         ),
@@ -202,8 +202,8 @@ export function MoreSections({
   if (salaried || owner)
     sections.push({
       id: 'salaries',
-      label: 'Et pour mes salariés ?',
-      teaser: 'Si vous employez du personnel : l’effet pour un salarié et pour vous.',
+      label: 'Et pour mes salariés ?',
+      teaser: 'Si vous employez du personnel : l’effet pour un salarié et pour vous.',
       render: () => <EmployerPanel owner={owner} />,
     });
 
@@ -221,7 +221,7 @@ export function MoreSections({
       </header>
 
       <nav
-        aria-label="Pour aller plus loin : aller à…"
+        aria-label="Pour aller plus loin : aller à…"
         className="z-10 -mx-1 flex flex-wrap gap-2 bg-paper/90 px-1 py-2 backdrop-blur lg:sticky lg:top-2"
       >
         {sections.map((s) => (

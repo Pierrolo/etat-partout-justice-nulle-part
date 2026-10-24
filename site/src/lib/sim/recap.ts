@@ -30,8 +30,8 @@ const STATUS: Record<string, string> = {
 };
 
 const DISABILITY: Record<string, string> = {
-  aah_80: 'handicap avec AAH, taux de 80 % ou plus',
-  aah_50_79: 'handicap avec AAH, taux de 50 à 79 %',
+  aah_80: 'handicap avec AAH, taux de 80 % ou plus',
+  aah_50_79: 'handicap avec AAH, taux de 50 à 79 %',
 };
 
 function adultText(a: Adult): string {
@@ -104,14 +104,14 @@ export function buildRecap(h: Household): RecapGroup[] {
     foyer.push(
       mode === 'parent'
         ? CHILDCARE[mode]!
-        : `garde : ${CHILDCARE[mode]}, ${cost !== undefined ? `${formatEuro(cost)} par mois` : 'coût non précisé'}`,
+        : `garde : ${CHILDCARE[mode]}, ${cost !== undefined ? `${formatEuro(cost)} par mois` : 'coût non précisé'}`,
     );
   }
   if (!couple && h.children.some((c) => c.age < 20)) {
     const s = h.benefits.childSupportReceivedMonthly;
     foyer.push(
       s !== undefined && s > 0
-        ? `pension alimentaire reçue : ${formatEuro(s)} par mois`
+        ? `pension alimentaire reçue : ${formatEuro(s)} par mois`
         : 'pas de pension alimentaire',
     );
   }
@@ -149,15 +149,15 @@ export function buildRecap(h: Household): RecapGroup[] {
   if (h.benefits.nonRecours) aides.push('ne touche pas les aides auxquelles elle a droit');
   else if (h.benefits.cafOverrideMonthly !== undefined)
     aides.push(
-      `total versé par la CAF indiqué : ${formatEuro(h.benefits.cafOverrideMonthly)} par mois`,
+      `total versé par la CAF indiqué : ${formatEuro(h.benefits.cafOverrideMonthly)} par mois`,
     );
   else aides.push('aides calculées par le simulateur');
   const e = h.extras;
   if (e?.emploiDomicileAnnual !== undefined)
-    aides.push(`emploi à domicile : ${formatEuro(e.emploiDomicileAnnual)} par an`);
-  if (e?.donsAnnual !== undefined) aides.push(`dons : ${formatEuro(e.donsAnnual)} par an`);
+    aides.push(`emploi à domicile : ${formatEuro(e.emploiDomicileAnnual)} par an`);
+  if (e?.donsAnnual !== undefined) aides.push(`dons : ${formatEuro(e.donsAnnual)} par an`);
   if (e?.consumptionMonthly !== undefined)
-    aides.push(`consommation : ${formatEuro(e.consumptionMonthly)} par mois`);
+    aides.push(`consommation : ${formatEuro(e.consumptionMonthly)} par mois`);
   out.push({ id: 'aides', step: 'aides', label: 'Aides', text: aides.join(' · ') });
 
   return out.map((g) => ({ ...g, text: typo(g.text) }));

@@ -60,7 +60,7 @@ describe('recap of the answers', () => {
     expect(text.logement).toBe('Propriétaire, sans crédit');
   });
 
-  it('uses French typography (no space before « : » left breakable)', () => {
+  it('uses French typography (no space before « : » left breakable)', () => {
     for (const g of buildRecap(nadia)) expect(g.text).not.toMatch(/\S :/);
   });
 });

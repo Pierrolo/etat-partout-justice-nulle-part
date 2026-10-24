@@ -27,9 +27,9 @@ export function EmployerPanel({ owner }: { owner: boolean }) {
         </h4>
         <p className="text-[0.9375rem] text-ink-2">
           {owner
-            ? 'Vous dirigez une entreprise : voici ce que le plan change, pour vous comme employeur et pour un salarié à temps plein. '
-            : 'Si vous employez du personnel : voici ce que le plan change pour un salarié à temps plein, et pour vous comme employeur. '}
-          Indiquez sa paie : le calcul porte sur son salaire, pas sur la situation de son foyer.
+            ? 'Vous dirigez une entreprise : voici ce que le plan change, pour vous comme employeur et pour un salarié à temps plein. '
+            : 'Si vous employez du personnel : voici ce que le plan change pour un salarié à temps plein, et pour vous comme employeur. '}
+          Indiquez sa paie : le calcul porte sur son salaire, pas sur la situation de son foyer.
         </p>
       </header>
       <div className="grid gap-5 sm:grid-cols-2">
@@ -105,7 +105,7 @@ export function EmployerPanel({ owner }: { owner: boolean }) {
                 {formatEuro(v.plan.cotisationsPatronales)}
               </dd>
               <dd className="text-sm text-ink-2">
-                Salaire brut : {formatEuro(v.today.gross)}, inchangé
+                Salaire brut : {formatEuro(v.today.gross)}, inchangé
               </dd>
             </div>
           </dl>

@@ -100,10 +100,10 @@ export function HourOfWork({ household, hypotheses, headlineText }: HourOfWorkPr
   const summary = (
     <>
       Une heure de travail coûte {euro2(b.employerCostPerHour)} à l’employeur. Aujourd’hui, vous en
-      gardez {euro2(keepB)} ; avec le plan, {euro2(keepP)} une fois l’aide universelle comptée (
-      {delta2(gain)} par heure).{' '}
+      gardez {euro2(keepB)}&#8239;; avec le plan, {euro2(keepP)} une fois l’aide universelle comptée
+      ({delta2(gain)} par heure).{' '}
       {stateGives
-        ? `L’impôt net de chaque heure devient négatif : l’État vous verse ${euro2(-p.netIncomeTaxPerHour)} par heure travaillée.`
+        ? `L’impôt net de chaque heure devient négatif : l’État vous verse ${euro2(-p.netIncomeTaxPerHour)} par heure travaillée.`
         : `L’impôt net de chaque heure est de ${euro2(p.netIncomeTaxPerHour)}.`}{' '}
       Le reste va à l’impôt sur le revenu, à la TVA, à la CSG et à la CRDS, et aux cotisations.
     </>
@@ -168,12 +168,12 @@ export function HourOfWork({ household, hypotheses, headlineText }: HourOfWorkPr
           },
         ],
       }}
-      note="Cette vue ne concerne que le salaire d’une personne. Les aides du foyer (prime d’activité, aides au logement…), l’aide universelle des enfants et la TVA ne sont pas rapportées à ses heures : elles comptent dans le résultat du foyer, plus haut."
+      note="Cette vue ne concerne que le salaire d’une personne. Les aides du foyer (prime d’activité, aides au logement…), l’aide universelle des enfants et la TVA ne sont pas rapportées à ses heures : elles comptent dans le résultat du foyer, plus haut."
     >
       <div className="space-y-6">
         {salaried.length > 1 && (
           <SegmentedControl
-            legend="Pour qui ?"
+            legend="Pour qui ?"
             size="sm"
             options={salaried.map((i) => ({
               value: String(i),
@@ -185,8 +185,8 @@ export function HourOfWork({ household, hypotheses, headlineText }: HourOfWorkPr
         )}
 
         <p data-testid="hour-sentence" className="text-[1.0625rem] leading-relaxed text-ink">
-          Chaque heure de travail vous laissait <strong>{euro2(keepB)}</strong> ; avec le plan, elle
-          vous laisse <strong>{euro2(keepP)}</strong>, parce que l’aide universelle (
+          Chaque heure de travail vous laissait <strong>{euro2(keepB)}</strong>&#8239;; avec le
+          plan, elle vous laisse <strong>{euro2(keepP)}</strong>, parce que l’aide universelle (
           {formatEuro(afuMonthly)} par mois, versée à chaque adulte quel que soit son salaire) est
           répartie sur vos heures de travail
           {stateGives ? ' et dépasse même votre impôt' : ''}. {headlineText}
@@ -339,7 +339,7 @@ function HourBar({
       <div
         ref={ref}
         role="img"
-        aria-label={`${title} : ${shown.map((x) => `${x.label} ${euro2(split[x.id])}`).join(', ')}`}
+        aria-label={`${title} : ${shown.map((x) => `${x.label} ${euro2(split[x.id])}`).join(', ')}`}
       >
         <div className="flex h-14 sm:h-16" style={{ gap: GAP }}>
           {shown.map((x, i) => {
