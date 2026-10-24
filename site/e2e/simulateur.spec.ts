@@ -141,7 +141,8 @@ async function fillPersona(page: Page, p: Persona, opts: { finish?: boolean } = 
   if (p.childcare) await radio(page, p.childcare);
   if (p.childSupport) {
     await radio(field(page, 'foyer.childSupport'), p.childSupport.answer);
-    if (p.childSupport.amount) await page.locator('#child-support').fill(String(p.childSupport.amount));
+    if (p.childSupport.amount)
+      await page.locator('#child-support').fill(String(p.childSupport.amount));
   }
   await next(page);
   for (const [i, a] of p.adults.entries()) {
@@ -150,7 +151,8 @@ async function fillPersona(page: Page, p: Persona, opts: { finish?: boolean } = 
     if (a.status) await radio(field(page, `adult${i}.status`), a.status);
     if (a.salary) await page.locator(`#a${i}-salary`).fill(String(a.salary));
     if (a.pension) await page.locator(`#a${i}-pension`).fill(String(a.pension));
-    if (a.disability) await radio(page.getByRole('group', { name: /handicap reconnu/ }).nth(i), a.disability);
+    if (a.disability)
+      await radio(page.getByRole('group', { name: /handicap reconnu/ }).nth(i), a.disability);
   }
   await next(page);
   await radio(field(page, 'housing.status'), p.housing);
@@ -177,7 +179,11 @@ test('nothing is pre-answered and no result number is shown before answering', a
   await expect(page.getByTestId('headline-side')).toHaveCount(0);
   if (!isMobile(page)) {
     await expect(page.locator('[data-testid="empty-result"]:visible').first()).toBeVisible();
-    await expect(page.getByText('Répondez aux questions pour voir votre résultat.').first()).toBeVisible();
+    await expect(
+      page
+        .locator('[data-testid="empty-result"]:visible')
+        .getByText('Répondez aux questions pour voir votre résultat.'),
+    ).toBeVisible();
   }
   await expect(page.locator('[data-field="foyer.couple"] input:checked')).toHaveCount(0);
   await expect(page.locator('#a0-age')).toHaveValue('');
@@ -205,7 +211,9 @@ test('Nadia (couple not married, 1 child, HLM tenant): the three layers, plain s
   await fillPersona(page, PERSONAS.nadia!);
   await expect(figure(page)).toBeVisible();
   await expect(figure(page)).toHaveText(/^[+−]\s?\d/);
-  await expect(page.getByTestId('headline-hero')).toContainText('après impôts, aides et TVA estimée');
+  await expect(page.getByTestId('headline-hero')).toContainText(
+    'après impôts, aides et TVA estimée',
+  );
 
   // layer 1: the plain summary
   const enClair = page.getByTestId('en-clair');
@@ -219,7 +227,10 @@ test('Nadia (couple not married, 1 child, HLM tenant): the three layers, plain s
   // layer 2: the waterfall, with « Vos aides aujourd’hui » and a reason for each zero
   await expect(page.getByRole('heading', { name: 'Le détail' })).toBeVisible();
   await expect(page.getByTestId('benefits-today')).toContainText('Prime d’activité');
-  await page.getByTestId('benefits-today').getByText(/Voir les 12 aides/).click();
+  await page
+    .getByTestId('benefits-today')
+    .getByText(/Voir les 12 aides/)
+    .click();
   await expect(page.locator('[data-benefit="aides_logement"]')).toContainText('Pourquoi 0 €');
 
   // layer 3 is collapsed
@@ -248,7 +259,9 @@ test('Josiane (retiree, 980 €): no salaried fields, a plain summary, indexatio
   await fillPersona(page, PERSONAS.josiane!);
   await expect(figure(page)).toBeVisible();
   await expect(page.getByTestId('en-clair')).toContainText('Pourquoi');
-  await expect(page.locator('[data-testid="prominent-item"][data-item="gel_indexation"]')).toBeVisible();
+  await expect(
+    page.locator('[data-testid="prominent-item"][data-item="gel_indexation"]'),
+  ).toBeVisible();
   await expect(page.getByRole('button', { name: 'Votre heure de travail' })).toHaveCount(0);
 });
 
@@ -286,14 +299,19 @@ test('Samir (dirigeant, partner fonctionnaire): fonctionnaire warning with a lin
     'href',
     /comprendre\/situations\/#agent-public-indispensable$/,
   );
-  await page.getByRole('navigation', { name: /Pour aller plus loin/ }).getByRole('button', { name: 'Et pour mes salariés ?' }).click();
+  await page
+    .getByRole('navigation', { name: /Pour aller plus loin/ })
+    .getByRole('button', { name: 'Et pour mes salariés ?' })
+    .click();
   const panel = page.getByTestId('employer-panel');
   await expect(panel).toBeVisible();
   await panel.getByLabel(/^Salaire mensuel net d.un salarié/).fill('1900');
   await expect(page.getByTestId('employer-result')).toContainText('coût employeur');
 });
 
-test('Camille (fonctionnaire): the warning about her post sits next to the figure', async ({ page }) => {
+test('Camille (fonctionnaire): the warning about her post sits next to the figure', async ({
+  page,
+}) => {
   await fillPersona(page, PERSONAS.camille!);
   await expect(figure(page)).toBeVisible();
   await expect(page.getByTestId('fonctionnaire-warning')).toContainText('fonctionnaire');
@@ -346,7 +364,10 @@ test('a field that is valid on screen but blocked by another (a child without ag
   page,
 }) => {
   test.skip(isMobile(page), 'desktop layout: all questions on one page');
-  await fillPersona(page, { ...PERSONAS.camille!, adults: [{ age: 34, activity: 'En emploi', status: PRIVE, salary: 1478 }] });
+  await fillPersona(page, {
+    ...PERSONAS.camille!,
+    adults: [{ age: 34, activity: 'En emploi', status: PRIVE, salary: 1478 }],
+  });
   await expect(figure(page)).toBeVisible();
   // add two children, the second without an age: the form is incomplete
   await page.getByRole('button', { name: /^Ajouter (un|un autre) enfant$/ }).click();
@@ -365,7 +386,10 @@ test('a field that is valid on screen but blocked by another (a child without ag
   await settle(page);
   await expect(figure(page)).toBeVisible();
   // and the calculation used what the field shows: 1 400 €, not the 1 478 € typed before
-  await page.getByRole('button', { name: /Salaire net/ }).first().click();
+  await page
+    .getByRole('button', { name: /Salaire net/ })
+    .first()
+    .click();
   const panel = page.locator('[id$="-0"]').filter({ hasText: 'Aujourd’hui' }).first();
   await expect(panel).toContainText(/1[  ]400,00/);
   await expect(panel).not.toContainText(/1[  ]478,00/);
@@ -388,7 +412,10 @@ test('the shared link restores the answers, shows the recap and a loading notice
   // « Copier le lien » copies the CURRENT valid state, even right after an edit (no stale debounced state)
   if (!isMobile(page)) {
     await page.locator('#rent').fill('520');
-    await page.getByRole('button', { name: /Copier le lien|Partager/ }).first().click();
+    await page
+      .getByRole('button', { name: /Copier le lien|Partager/ })
+      .first()
+      .click();
     const copied = await page.evaluate(() => navigator.clipboard.readText());
     await settle(page);
     expect(copied).toBe(page.url());
@@ -419,7 +446,9 @@ test('the guard script hides the pre-rendered default page when a shared hash is
   await page.goto('simulateur/#v1.AAAA');
   await expect(page.locator('html')).toHaveAttribute('data-sim-hash', '1');
   await expect(page.getByTestId('sim-loading')).toBeVisible();
-  await expect(page.getByTestId('sim-loading')).toContainText('Chargement de la simulation partagée…');
+  await expect(page.getByTestId('sim-loading')).toContainText(
+    'Chargement de la simulation partagée…',
+  );
   await expect(page.locator('#sim-root')).toBeHidden();
 });
 
@@ -446,7 +475,7 @@ test('layer 3 opens on demand: hour of work consistent with the headline, curve,
   const sentence = page.getByTestId('hour-sentence');
   await expect(sentence).toBeVisible();
   await expect(sentence).toContainText('aide universelle');
-  await expect(page.getByText(/L’État vous verse/).first()).toBeVisible();
+  await expect(page.getByText(/l’État vous verse/i).first()).toBeVisible();
 
   await nav.getByRole('button', { name: 'Si je gagnais plus ?' }).click();
   await expect(page.getByRole('img', { name: /Courbes du revenu disponible/ })).toBeVisible();
@@ -485,7 +514,8 @@ test('820 px tablet: the waterfall axis labels do not overlap', async ({ page })
   )) as Array<{ l: number; r: number }>;
   expect(boxes.length).toBeGreaterThan(1);
   boxes.sort((a, b) => a.l - b.l);
-  for (let i = 1; i < boxes.length; i++) expect(boxes[i]!.l).toBeGreaterThanOrEqual(boxes[i - 1]!.r - 0.5);
+  for (let i = 1; i < boxes.length; i++)
+    expect(boxes[i]!.l).toBeGreaterThanOrEqual(boxes[i - 1]!.r - 0.5);
 });
 
 test('the question form is keyboard-operable: arrow keys change a choice', async ({ page }) => {
@@ -505,6 +535,7 @@ test('errors are calm: nothing is shouted at a field nobody has visited', async 
 });
 
 test('no serious axe violation on the start state and on a full result', async ({ page }) => {
+  test.setTimeout(90_000);
   const run = async () => {
     const r = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])

@@ -46,7 +46,7 @@ const GRID =
   'grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 gap-y-2 lg:grid-cols-[minmax(10rem,15rem)_minmax(0,1fr)_8.25rem]';
 
 /** Axis labels never closer than this many px (the 820 px tablet case: « aujourd’hui » over « −200 € »). */
-const MIN_TICK_GAP = 72;
+const MIN_TICK_GAP = 96;
 
 export interface WaterfallProps {
   data: ResultData;
