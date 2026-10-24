@@ -1,7 +1,13 @@
 import { expect, test } from '@playwright/test';
 
-test('a guess on the security share reveals the sourced figure', async ({ page }) => {
+// The questionnaire is a React island: wait for it to hydrate before interacting.
+async function open(page: import('@playwright/test').Page) {
   await page.goto('questionnaire/');
+  await page.waitForLoadState('networkidle');
+}
+
+test('a guess on the security share reveals the sourced figure', async ({ page }) => {
+  await open(page);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('où va l’argent public');
   const slider = page.getByRole('slider');
   await slider.fill('40');
@@ -36,7 +42,7 @@ async function answerCurrent(page: import('@playwright/test').Page) {
 }
 
 test('the rank question shows the table, not a world record', async ({ page }) => {
-  await page.goto('questionnaire/');
+  await open(page);
   for (let i = 0; i < 24; i++) {
     if (await page.getByText('Oui, elle est première').count()) break;
     await answerCurrent(page);
@@ -54,7 +60,7 @@ test('the rank question shows the table, not a world record', async ({ page }) =
 });
 
 test('the closing summary keeps the guesses', async ({ page }) => {
-  await page.goto('questionnaire/');
+  await open(page);
   for (let i = 0; i < 24; i++) {
     const next = page.getByRole('button', { name: 'Question suivante' });
     const bilan = page.getByRole('button', { name: 'Voir le bilan' });
@@ -69,7 +75,7 @@ test('the closing summary keeps the guesses', async ({ page }) => {
   }
   await expect(page.getByTestId('questionnaire-bilan')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Où vous en étiez' })).toBeVisible();
-  await expect(page.getByText(/proche de la référence/)).toBeVisible();
+  await expect(page.getByText(/proches? de la référence/)).toBeVisible();
 });
 
 test('the answers are in the page without JavaScript', async ({ browser }) => {
