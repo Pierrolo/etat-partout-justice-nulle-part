@@ -11,6 +11,8 @@ export const SITE = {
     'Compagnon indépendant du livre « État partout, justice nulle part » : voyez ce que le plan changerait pour votre foyer, et où va l’argent public.',
   locale: 'fr_FR',
   independence: 'Outil indépendant, non affilié à l’association Résolution ni à l’État.',
+  /** Public repository (code, data pipeline, engine, QA reports). */
+  repo: 'https://github.com/Pierrolo/etat-partout-justice-nulle-part',
   dataSources: 'Données : france-resolution.fr, Insee, Eurostat, DGFiP.',
 } as const;
 

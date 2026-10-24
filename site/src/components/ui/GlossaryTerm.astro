@@ -1,0 +1,52 @@
+---
+/**
+ * Variante Astro de <Term> (components/ui/Glossary.tsx) : même balisage, même toggletip, mais sans
+ * île React — donc sans JavaScript de framework sur les pages qui n’en ont pas besoin.
+ *
+ *   <p>Le plan crée l’<GlossaryTerm id="afu">AFU</GlossaryTerm>…</p>
+ *
+ * Sans JavaScript, la définition reste lisible dans l’infobulle native (`title`) ; avec JavaScript
+ * elle devient une bulle ouverte au clic, au tap ou au clavier (Échap ferme).
+ */
+import { lookupTerm, termHref } from '@/lib/glossary';
+import './glossary.css';
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+const entry = lookupTerm(id);
+const href = entry ? termHref(entry) : undefined;
+// Identifiant déterministe : terme + numéro d’occurrence dans la page (compteur porté par la requête).
+const store = Astro.locals as unknown as Record<string, number | undefined>;
+store.glossCount = (store.glossCount ?? 0) + 1;
+const uid = `gloss-${id}-${store.glossCount}`;
+---
+
+{
+  entry ? (
+    <span class="gloss" data-gloss={entry.id}>
+      <button
+        type="button"
+        class="gloss-btn"
+        aria-expanded="false"
+        aria-controls={uid}
+        data-term={entry.term}
+        data-definition={entry.definition}
+        data-href={href}
+        title={`${entry.term}\u202F: ${entry.definition}`}
+      >
+        <slot />
+        <span class="sr-only"> (définition)</span>
+      </button>
+      <span id={uid} class="gloss-live" role="status" />
+    </span>
+  ) : (
+    <slot />
+  )
+}
+
+<script>
+  import { initGlossary } from '@/lib/glossary-client';
+  initGlossary();
+</script>

@@ -2,10 +2,26 @@
  * WCAG 2.x contrast helpers + the list of colour pairs the design system guarantees.
  * Parses `src/styles/tokens.css` (light-dark(#a, #b) declarations), so the CSS stays the single
  * source of truth. Used by contrast.test.ts, scripts/contrast-report.ts and the /styleguide page.
+ *
+ * Two brands share the same token NAMES: « Éditorial » is tokens.css, « Call Intelligence » is
+ * tokens.css overridden by brand-ci.css. `resolveBrand()` merges the two parsed files, so every pair
+ * below is checked for each brand; `BRAND_PAIRS` adds the pairs that only exist in one brand.
  */
 
+import { BRANDS, type Brand } from './brands.ts';
+
+export { BRANDS, type Brand };
 export type Mode = 'light' | 'dark';
 export type TokenMap = Record<Mode, Record<string, string>>;
+
+/** Tokens of a brand = the base token file with the brand's overrides on top. */
+export function resolveBrand(base: TokenMap, overrides?: TokenMap): TokenMap {
+  if (!overrides) return base;
+  return {
+    light: { ...base.light, ...overrides.light },
+    dark: { ...base.dark, ...overrides.dark },
+  };
+}
 
 const HEX = /^#[0-9a-f]{6}$/i;
 
@@ -24,6 +40,15 @@ export function parseTokens(css: string): TokenMap {
     } else if (HEX.test(value)) {
       out.light[name] = value.toLowerCase();
       out.dark[name] = value.toLowerCase();
+    }
+  }
+  // Plain aliases (`--field-bg: var(--surface)`) take the value of their target, per mode.
+  for (const m of noComments.matchAll(re)) {
+    const alias = /^var\(\s*(--[a-z0-9-]+)\s*\)$/i.exec(m[2]!.trim());
+    if (!alias) continue;
+    for (const mode of ['light', 'dark'] as const) {
+      const target = out[mode][alias[1]!];
+      if (target && !out[mode][m[1]!]) out[mode][m[1]!] = target;
     }
   }
   return out;
@@ -54,6 +79,8 @@ export interface Pair {
   min: number;
   /** What the pair is used for. */
   use: string;
+  /** Only evaluated in these modes (default: both). */
+  modes?: readonly Mode[];
 }
 
 const text = (fg: string, bg: string, use: string): Pair => ({ fg, bg, min: 4.5, use });
@@ -94,12 +121,41 @@ export const PAIRS: Pair[] = [
     graphic(`--series-${n}`, '--paper', `Categorical series ${n} on paper`),
     graphic(`--series-${n}`, '--surface', `Categorical series ${n} on card`),
   ]),
-  graphic('--gain', '--paper', 'Diverging gain pole'),
-  graphic('--loss', '--paper', 'Diverging loss pole'),
+  graphic('--gain-mark', '--paper', 'Diverging gain pole (mark) on paper'),
+  graphic('--loss-mark', '--paper', 'Diverging loss pole (mark) on paper'),
+  graphic('--gain-mark', '--surface', 'Diverging gain pole (mark) on card'),
+  graphic('--loss-mark', '--surface', 'Diverging loss pole (mark) on card'),
+  // Form fields
+  text('--ink', '--field-bg', 'Typed text in a field'),
+  text('--ink-3', '--field-bg', 'Placeholder / hint in a field'),
+  graphic('--rule-strong', '--field-bg', 'Field border on its own fill'),
   graphic('--div-gain-3', '--surface', 'Diverging gain, 3rd step'),
   graphic('--div-loss-3', '--surface', 'Diverging loss, 3rd step'),
   graphic('--seq-5', '--surface', 'Sequential, 5th step'),
 ];
+
+/**
+ * Pairs that exist in one brand only. « Call Intelligence » has a second accent, `signal`, with its
+ * own rules (README of the brand): text on it is always `ink`; as TEXT it is only allowed on the dark
+ * scene (2,8 : 1 on paper: fills and strokes only), so that pair is checked in dark mode only.
+ */
+export const BRAND_PAIRS: Record<Brand, Pair[]> = {
+  editorial: [],
+  ci: [
+    text('--on-signal', '--signal', 'Label on the signal fill (primary button, key figure)'),
+    text('--on-signal', '--btn-primary-hover', 'Label on the hovered primary button'),
+    ...surfaces.map((s) => ({
+      ...text('--signal', s, 'Key figure in signal, on the dark scene'),
+      modes: ['dark'] as const,
+    })),
+    { ...graphic('--signal', '--surface', 'Signal pulse on the dark scene'), modes: ['dark'] },
+    graphic('--line', '--paper', 'Brand rule (1,5 px line) on the page'),
+    graphic('--line', '--surface', 'Brand rule (1,5 px line) on a card'),
+  ],
+};
+
+/** Every pair that must hold for a brand. */
+export const pairsFor = (brand: Brand): Pair[] => [...PAIRS, ...BRAND_PAIRS[brand]];
 
 export interface PairResult extends Pair {
   mode: Mode;
@@ -113,6 +169,7 @@ export function evaluate(tokens: TokenMap, pairs: Pair[] = PAIRS): PairResult[] 
   const results: PairResult[] = [];
   for (const mode of ['light', 'dark'] as const) {
     for (const p of pairs) {
+      if (p.modes && !p.modes.includes(mode)) continue;
       const fgHex = tokens[mode][p.fg];
       const bgHex = tokens[mode][p.bg];
       if (!fgHex || !bgHex) throw new Error(`Unknown token in pair ${p.fg} / ${p.bg} (${mode})`);

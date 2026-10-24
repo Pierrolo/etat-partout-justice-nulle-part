@@ -17,8 +17,14 @@ export interface NumberInputProps {
   /** Suffix shown inside the field: « € », « €/mois ». */
   unit?: string;
   hint?: ReactNode;
-  /** External error message (e.g. from the engine); a built-in parse error is shown otherwise. */
+  /**
+   * External error message (e.g. from the form validation); a built-in parse / range error is used otherwise.
+   * An error is only SHOWN (and announced) once the field has lost focus, or when `validate` is true:
+   * never per keystroke, never on a field nobody has touched yet.
+   */
   error?: string;
+  /** Show the error now even if the field was never visited (after a « Suivant » / « Voir mon résultat »). */
+  validate?: boolean;
   min?: number;
   max?: number;
   /** Arrow-key increment. Default 10. */
@@ -44,6 +50,19 @@ const round = (n: number, decimals: number) => {
 };
 
 /**
+ * `parseFrenchNumber` reads a lone « . » or « , » as the decimal mark (« 1.234 » = 1,234). In a whole-number
+ * field nobody means 1,4 € when typing « 1.400 » or « 1,400 »: that is a thousands separator.
+ */
+function parseInput(text: string, decimals: number): number | null {
+  if (decimals === 0) {
+    const compact = text.replace(/[\s\u00A0\u202F]/g, '').replace(/€|\/mois|\/an/gi, '');
+    if (/^[-+−]?\d{1,3}(?:[.,]\d{3})+$/.test(compact))
+      return parseFrenchNumber(compact.replace(/[.,]/g, ''));
+  }
+  return parseFrenchNumber(text);
+}
+
+/**
  * French money / quantity input. `type="text"` + `inputmode="decimal"` (never `type="number"`:
  * no spinners, no locale surprises, no scroll-wheel edits). Accepts « 1 234,5 », « 1234.5 », « 2 500 € ».
  * While focused you edit the raw text; on blur it is re-displayed as « 1 234,5 » with U+202F grouping.
@@ -59,6 +78,7 @@ export function NumberInput({
   max,
   step = 10,
   decimals = 0,
+  validate,
   id,
   name,
   placeholder,
@@ -72,32 +92,34 @@ export function NumberInput({
   const hintId = `${inputId}-hint`;
   const errId = `${inputId}-err`;
   const [draft, setDraft] = useState<string | null>(null);
+  /** Text left in the field after a blur that could not be read as a number: kept on screen, with its error. */
+  const [badText, setBadText] = useState<string | null>(null);
+  const [touched, setTouched] = useState(false);
 
   const shown =
-    draft !== null
-      ? draft
-      : value === null
-        ? ''
-        : formatNumber(value, { decimals: { min: 0, max: decimals } });
+    draft ??
+    badText ??
+    (value === null ? '' : formatNumber(value, { decimals: { min: 0, max: decimals } }));
 
-  const parsed = draft !== null && draft.trim() !== '' ? parseFrenchNumber(draft) : null;
   const parseError =
-    draft !== null && draft.trim() !== '' && parsed === null
-      ? 'Saisissez un nombre, par exemple 1 850 ou 1 850,50.'
-      : undefined;
+    badText !== null ? 'Saisissez un nombre, par exemple 1 850 ou 1 850,50.' : undefined;
   const rangeError =
-    parsed !== null && ((min !== undefined && parsed < min) || (max !== undefined && parsed > max))
-      ? min !== undefined && parsed < min
+    value !== null && ((min !== undefined && value < min) || (max !== undefined && value > max))
+      ? min !== undefined && value < min
         ? `La valeur minimale est ${formatNumber(min, { decimals: { min: 0, max: decimals } })}.`
         : `La valeur maximale est ${formatNumber(max!, { decimals: { min: 0, max: decimals } })}.`
       : undefined;
-  const message = error ?? parseError ?? rangeError;
+  const focused = draft !== null;
+  const found = parseError ?? error ?? rangeError;
+  // Calm validation: nothing while the person is typing, nothing on a field not yet visited.
+  const message = found && (touched || validate) && !focused ? found : undefined;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;
     setDraft(text);
+    setBadText(null);
     if (text.trim() === '') return onChange(null);
-    const n = parseFrenchNumber(text);
+    const n = parseInput(text, decimals);
     if (n !== null) onChange(round(n, decimals));
   };
 
@@ -105,21 +127,22 @@ export function NumberInput({
   // caret on focus, then select it: typing replaces the whole number, like a native field.
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     setDraft(shown);
+    setBadText(null);
     e.currentTarget.select();
   };
 
   const handleBlur = () => {
-    if (draft !== null && draft.trim() !== '') {
-      const n = parseFrenchNumber(draft);
-      if (n !== null) onChange(clamp(round(n, decimals), min, max));
-    }
+    // Every readable keystroke already reached the parent: only an unreadable text needs care.
+    if (draft !== null && draft.trim() !== '' && parseInput(draft, decimals) === null)
+      setBadText(draft);
     setDraft(null);
+    setTouched(true);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
     e.preventDefault();
-    const base = (draft !== null ? parseFrenchNumber(draft) : value) ?? 0;
+    const base = (draft !== null ? parseInput(draft, decimals) : value) ?? 0;
     const next = clamp(round(base + (e.key === 'ArrowUp' ? step : -step), decimals), min, max);
     setDraft(String(next).replace('.', ','));
     onChange(next);
@@ -146,7 +169,7 @@ export function NumberInput({
       )}
       <div
         className={cn(
-          'flex min-h-12 items-center rounded-md border-[1.5px] bg-surface px-3 focus-within:outline-3 focus-within:outline-offset-2 focus-within:outline-accent',
+          'flex min-h-12 items-center rounded-md border-[1.5px] bg-field px-3 focus-within:outline-3 focus-within:outline-offset-2 focus-within:outline-accent',
           message ? 'border-loss' : 'border-rule-strong',
           disabled && 'opacity-60',
           fieldClassName,
@@ -156,7 +179,7 @@ export function NumberInput({
           id={inputId}
           name={name}
           type="text"
-          inputMode="decimal"
+          inputMode={decimals === 0 && (min === undefined || min >= 0) ? 'numeric' : 'decimal'}
           autoComplete="off"
           autoCorrect="off"
           spellCheck={false}

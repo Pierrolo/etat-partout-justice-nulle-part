@@ -30,8 +30,8 @@ export interface HeadlineProps {
 }
 
 const TONE = {
-  gain: { text: 'text-gain', soft: 'bg-gain-soft', bar: 'bg-gain' },
-  loss: { text: 'text-loss', soft: 'bg-loss-soft', bar: 'bg-loss' },
+  gain: { text: 'text-gain', soft: 'bg-gain-soft', bar: 'bg-gain-mark' },
+  loss: { text: 'text-loss', soft: 'bg-loss-soft', bar: 'bg-loss-mark' },
   flat: { text: 'text-ink', soft: 'bg-sunken', bar: 'bg-ink-3' },
 } as const;
 
@@ -106,6 +106,7 @@ export function Headline({
                   </span>
                 )}
                 <span
+                  data-key-figure
                   className={cn(
                     'stat-number',
                     tone.text,

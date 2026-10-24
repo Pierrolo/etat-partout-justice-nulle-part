@@ -1,9 +1,10 @@
 ---
 import { COMPRENDRE_PAGES, NAV, SITE, withBase } from '@/lib/site';
+import BrandSwitch from './BrandSwitch.astro';
 import Logo from './Logo.astro';
 ---
 
-<footer class="mt-24 border-t border-rule bg-sunken">
+<footer class="brand-footer mt-24 border-t border-rule bg-sunken">
   <div class="wrap grid gap-10 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
     <div class="space-y-3">
       <p class="flex items-center gap-2.5 font-serif text-lg font-medium text-ink">
@@ -17,6 +18,7 @@ import Logo from './Logo.astro';
         Aucun cookie, aucun traceur, aucune requête vers un service tiers : le calcul se fait dans
         votre navigateur.
       </p>
+      <BrandSwitch id="footer-brand" class="pt-2" />
     </div>
 
     <nav aria-label="Pages du site">

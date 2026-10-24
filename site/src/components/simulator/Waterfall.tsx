@@ -12,7 +12,7 @@ const SOURCES = [{ label: 'Moteur de calcul du simulateur', tier: 'law' as const
 
 /** Fill for a bar: solid (law), hatched + dashed outline (announced), dotted outline (hypothesis). */
 function barStyle(tier: Tier, positive: boolean): CSSProperties {
-  const c = positive ? 'var(--gain)' : 'var(--loss)';
+  const c = positive ? 'var(--gain-mark)' : 'var(--loss-mark)';
   if (tier === 'announced')
     return {
       backgroundImage: `repeating-linear-gradient(135deg, ${c} 0 2px, transparent 2px 6px)`,

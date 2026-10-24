@@ -21,6 +21,8 @@ export interface StatTileProps {
   /** `announced` renders the tile hatched with a dashed border (« annoncé, sans texte de loi »). */
   tier?: Tier;
   size?: 'md' | 'lg';
+  /** The ONE figure of the view that deserves the brand's accent (« Call Intelligence » paints it in signal). */
+  keyFigure?: boolean;
   /** Element used for the tile (use `li` inside a list). */
   as?: 'article' | 'div' | 'li';
   className?: string;
@@ -44,6 +46,7 @@ export function StatTile({
   tone = 'neutral',
   tier,
   size = 'md',
+  keyFigure,
   as: Tag = 'article',
   className,
 }: StatTileProps) {
@@ -60,6 +63,7 @@ export function StatTile({
       <p className="text-sm font-medium text-ink-2">{label}</p>
       <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
         <span
+          data-key-figure={keyFigure || undefined}
           className={cn(
             'stat-number',
             TONE[tone],

@@ -8,10 +8,13 @@ export {
   decodeState,
   DEFAULT_HYPOTHESES,
   earningsCurve,
+  employerView,
+  ENGINE_VERSION,
   encodeState,
   hourOfWork,
   CAS_TYPES,
   PARAMS_META,
+  roundForDisplay,
   simulate,
 } from '@epjn/engine';
 

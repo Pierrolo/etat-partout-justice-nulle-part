@@ -48,7 +48,7 @@ export function Checkbox({
       <span
         aria-hidden="true"
         className={cn(
-          'mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-sm border-[1.5px] border-rule-strong bg-surface text-on-accent transition-colors',
+          'mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-sm border-[1.5px] border-rule-strong bg-field text-on-accent transition-colors',
           'peer-checked:border-accent peer-checked:bg-accent',
           'peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent',
           '[&>svg]:opacity-0 peer-checked:[&>svg]:opacity-100',

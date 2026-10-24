@@ -12,8 +12,12 @@
 import '@/styles/global.css';
 import fraunces from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
 import inter from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import schibsted400 from '@fontsource/schibsted-grotesk/files/schibsted-grotesk-latin-400-normal.woff2?url';
+import schibsted700 from '@fontsource/schibsted-grotesk/files/schibsted-grotesk-latin-700-normal.woff2?url';
+import jetbrains500 from '@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2?url';
 import Footer from '@/components/site/Footer.astro';
 import Header from '@/components/site/Header.astro';
+import { BRAND_QUERY_PARAM, BRAND_STORAGE_KEY, BRAND_THEME_COLOR, DEFAULT_BRAND } from '@/lib/brand';
 import { SITE, withBase } from '@/lib/site';
 
 interface Props {
@@ -38,22 +42,54 @@ const fullTitle = title
   : `${SITE.name} — le plan, vu depuis votre foyer`;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 const ogImageUrl = Astro.site ? new URL(withBase(ogImage), Astro.site).href : undefined;
+
+// Brands (see lib/brand.ts). Fonts of the brand in use are preloaded; the inline script below swaps the
+// preloads when the saved / requested brand differs from the build-time default. All other font files
+// are only fetched when a glyph needs them (unused @font-face costs nothing).
+const brandFonts = { editorial: [fraunces, inter], ci: [schibsted400, schibsted700, jetbrains500] };
+const brandBoot = {
+  fallback: DEFAULT_BRAND,
+  storageKey: BRAND_STORAGE_KEY,
+  param: BRAND_QUERY_PARAM,
+  themeColor: BRAND_THEME_COLOR,
+  fonts: brandFonts,
+};
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-brand={DEFAULT_BRAND}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#14151a" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="theme-color"
+      content={BRAND_THEME_COLOR[DEFAULT_BRAND].light}
+      media="(prefers-color-scheme: light)"
+      data-brand-theme="light"
+    />
+    <meta
+      name="theme-color"
+      content={BRAND_THEME_COLOR[DEFAULT_BRAND].dark}
+      media="(prefers-color-scheme: dark)"
+      data-brand-theme="dark"
+    />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
-    <link rel="preload" href={fraunces} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={inter} as="font" type="font/woff2" crossorigin />
+    {
+      brandFonts[DEFAULT_BRAND].map((href) => (
+        <link
+          rel="preload"
+          href={href}
+          as="font"
+          type="font/woff2"
+          crossorigin
+          data-brand-font={DEFAULT_BRAND}
+        />
+      ))
+    }
     {canonical && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
@@ -69,6 +105,55 @@ const ogImageUrl = Astro.site ? new URL(withBase(ogImage), Astro.site).href : un
     <meta name="twitter:description" content={description} />
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 
+    <!--
+      Apply the brand before first paint (no flash), like the dark theme below: ?brand=… in the URL wins
+      (and is remembered), else the saved choice, else the build-time default already on <html>.
+      localStorage only, in try/catch; never a cookie.
+    -->
+    <script is:inline define:vars={{ boot: brandBoot }}>
+      (function () {
+        var root = document.documentElement;
+        var brand = boot.fallback;
+        var ok = function (v) {
+          return v === 'editorial' || v === 'ci';
+        };
+        try {
+          var asked = new URLSearchParams(location.search).get(boot.param);
+          if (ok(asked)) {
+            brand = asked;
+            try {
+              localStorage.setItem(boot.storageKey, asked);
+            } catch (e) {
+              /* storage blocked: the URL alone decides for this page view */
+            }
+          } else {
+            var saved = localStorage.getItem(boot.storageKey);
+            if (ok(saved)) brand = saved;
+          }
+        } catch (e) {
+          /* storage or URL API unavailable: keep the build-time default */
+        }
+        root.dataset.brand = brand;
+        if (brand === boot.fallback) return;
+        // Not the default brand: its meta colours and font preloads replace the default's.
+        document.querySelectorAll('meta[data-brand-theme]').forEach(function (m) {
+          m.setAttribute('content', boot.themeColor[brand][m.getAttribute('data-brand-theme')]);
+        });
+        document.querySelectorAll('link[data-brand-font]').forEach(function (l) {
+          l.remove();
+        });
+        boot.fonts[brand].forEach(function (href) {
+          var l = document.createElement('link');
+          l.rel = 'preload';
+          l.as = 'font';
+          l.type = 'font/woff2';
+          l.crossOrigin = 'anonymous';
+          l.href = href;
+          l.setAttribute('data-brand-font', brand);
+          document.head.appendChild(l);
+        });
+      })();
+    </script>
     <!-- Apply the saved theme before first paint (no flash). localStorage only; never a cookie. -->
     <script is:inline>
       try {

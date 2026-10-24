@@ -67,7 +67,7 @@ export function AgencyList({ packed }: { packed: AgencyTuple[] }) {
   };
 
   const field =
-    'min-h-11 w-full rounded-md border-[1.5px] border-rule-strong bg-surface px-3 text-[0.9375rem] text-ink';
+    'min-h-11 w-full rounded-md border-[1.5px] border-rule-strong bg-field px-3 text-[0.9375rem] text-ink';
 
   return (
     <div className="card space-y-4">

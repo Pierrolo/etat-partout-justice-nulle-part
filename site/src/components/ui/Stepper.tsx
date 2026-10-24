@@ -89,8 +89,7 @@ export function StepIndicator({ steps, current, className }: StepIndicatorProps)
         <span className="text-ink-3">
           Étape {current + 1} sur {steps.length}
         </span>
-        <span aria-hidden="true"> · </span>
-        <span className="sr-only">, </span>
+        {' — '}
         {steps[current]}
       </p>
       <ol className="flex gap-1.5">

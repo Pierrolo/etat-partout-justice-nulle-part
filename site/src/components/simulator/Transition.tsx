@@ -164,7 +164,7 @@ export function Transition({ household, hypotheses, period, onPick }: Transition
                 <span
                   className={cn(
                     'absolute inset-y-0.5 rounded-full',
-                    dir === 'loss' ? 'bg-loss' : 'bg-gain',
+                    dir === 'loss' ? 'bg-loss-mark' : 'bg-gain-mark',
                   )}
                   style={
                     p.delta >= 0

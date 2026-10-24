@@ -61,7 +61,7 @@ export function ShareButton({
             readOnly
             value={manual}
             onFocus={(e) => e.currentTarget.select()}
-            className="mt-1 block w-full rounded-md border-[1.5px] border-rule-strong bg-surface px-3 py-2 font-mono text-xs text-ink"
+            className="mt-1 block w-full rounded-md border-[1.5px] border-rule-strong bg-field px-3 py-2 font-mono text-xs text-ink"
           />
         </label>
       )}

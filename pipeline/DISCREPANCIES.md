@@ -24,9 +24,9 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Traitement : Corrigé (mapping explicite) et signalé `mapping_inferred: true` sur les nœuds concernés.
 
 ## D04 — Dépenses publiques 2024 : 57,0 % (Eurostat) contre 57,26 % (INSEE ÷ PIB du classeur)
-- Constat : Eurostat tec00023 donne 57,0 % du PIB ; le total COFOG INSEE (1 671,794 Md€) rapporté au PIB 2024 du classeur (2 919,9 Md€) donne 57,26 %.
-- Interprétation : non expliqué par les sources (agrégats ou millésimes de PIB différents, hypothèse non vérifiée).
-- Traitement : Documenté. `europe.json` utilise Eurostat (comparabilité entre pays) ; `facts.json` expose les deux (groupe `depenses_pib_france_2024`, le second est un calcul).
+- Constat : Eurostat tec00023 donne 57,0 % du PIB ; le total COFOG INSEE (1 671,794 Md€) rapporté au PIB 2024 du classeur (2 919,9 Md€, feuille « Refonte fiscalité », cellule C3, d'après l'INSEE, tableau 3.217, extraits) donne 57,26 %.
+- Interprétation : la dépense est la même ; l'écart vient du PIB pris au dénominateur. Avec 1 671,794 Md€, un taux de 57,0 % correspond à un PIB d'environ 2 933 Md€, soit 13 Md€ (0,4 %) de plus que celui du classeur (à l'arrondi de 57,0 % près : 2 930 à 2 936 Md€). Le classeur ne dit pas de quel millésime ou périmètre de PIB il s'agit ; nous n'avons pas la table qui l'expliquerait.
+- Traitement : Documenté. `europe.json` utilise Eurostat (comparabilité entre pays) ; `facts.json` expose les deux (groupe `depenses_pib_france_2024`, le second est un calcul) et la note donne le PIB implicite.
 
 ## D05 — « Record mondial » : la Finlande dépasse la France
 - Constat : dans les données Eurostat du classeur, 2024 : Finlande 57,7 %, France 57,0 % (France 2e sur 30) ; 2025 : 57,5 % contre 57,2 %. Le manifeste parle de « record mondial ».

@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
+import { rehypeMethode } from './src/lib/rehype-methode.mjs';
+import { typoJson } from './src/lib/vite-typo-json.mjs';
 
 /**
  * BASE_PATH: sub-path the site is served from (GitHub Pages project site → "/etat-partout-justice-nulle-part/").
@@ -26,7 +28,13 @@ export default defineConfig({
   compressHTML: true,
   devToolbar: { enabled: false },
   integrations: [react()],
+  // docs/METHODE.md is rendered by pages/methode.astro: anchors, typography, glossary, scrollable tables.
+  markdown: {
+    smartypants: false,
+    rehypePlugins: [[rehypeMethode, { base: normaliseBase(process.env.BASE_PATH) }]],
+  },
   vite: {
-    plugins: [tailwindcss()],
+    // French typography for the JSON datasets at build time (the pipeline output stays verbatim).
+    plugins: [typoJson(), tailwindcss()],
   },
 });

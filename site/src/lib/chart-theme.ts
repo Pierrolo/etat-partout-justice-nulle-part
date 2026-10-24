@@ -17,6 +17,7 @@
  */
 import { interpolateRgb, piecewise } from 'd3';
 import type * as PlotNS from '@observablehq/plot';
+import { isBrand, type Brand } from './brands.ts';
 import {
   formatCompactEuro,
   formatEuro,
@@ -26,6 +27,7 @@ import {
 } from './format';
 
 export type ColorMode = 'light' | 'dark';
+export type { Brand };
 
 /* ── Palettes (hex) ─────────────────────────────────────────────────────── */
 
@@ -83,15 +85,78 @@ export const chrome = {
   paper: { light: '#faf8f4', dark: '#14151a' },
 } as const;
 
-export function palette(mode: ColorMode) {
+/**
+ * « Call Intelligence » (brand-ci.css) — the same roles, other values. A test keeps them in sync with the
+ * CSS. Validation (dataviz skill, scripts/validate_palette.js; plates = the darkest surface of each mode):
+ *   categorical light  adjacent CVD ΔE 14.4 (target 8), normal-vision 23.2 (floor 15), all ≥ 3 : 1 on #e4e0d3
+ *   categorical dark   adjacent CVD ΔE 13.3,             normal-vision 22.5,            all ≥ 3 : 1 on #262c29
+ *   first three slots also pass `--pairs all` in both modes.
+ *   polarity  teal vs signal-orange: lightness differs (OKLCH L .44 / .60 light, .78 / .66 dark), CVD ΔE ≥ 11.
+ */
+export const ciPalette = {
+  categorical: {
+    light: ['#0b8e7f', '#d9480f', '#1d5b92', '#937224', '#83297e', '#4e6c1e', '#7e4ba1', '#74670c'],
+    dark: ['#0b9989', '#f25820', '#2389e2', '#926e10', '#b75ab0', '#79a23a', '#a883c4', '#918112'],
+  },
+  names: ['sarcelle', 'orange signal', 'bleu', 'ocre', 'prune', 'olive', 'violet', 'bronze'],
+  other: { light: '#747b77', dark: '#7d857f' },
+  sequential: {
+    light: ['#d6e4de', '#b0cfc5', '#82b3a6', '#559787', '#2f7a6b', '#0f5e55', '#093d37'],
+    dark: ['#1c3a35', '#24524a', '#2c6c61', '#36887a', '#46a898', '#6ec6b6', '#9ddfd2'],
+  },
+  diverging: {
+    light: {
+      gain: ['#0f5e55', '#3a8377', '#8fbbb0', '#cde0d9'],
+      mid: '#ece9df',
+      loss: ['#f3d3c1', '#eba283', '#dc501a', '#c43c06'],
+    },
+    dark: {
+      gain: ['#4ad0ba', '#35a392', '#27766b', '#1e4a43'],
+      mid: '#2c3330',
+      loss: ['#4e2e22', '#8d3f1e', '#d9551d', '#ff5a1f'],
+    },
+  },
+  polarity: {
+    gain: { light: '#0f5e55', dark: '#4ad0ba' },
+    loss: { light: '#d9480f', dark: '#f25820' },
+  },
+  accent: { light: '#121614', dark: '#f3f1ea' },
+  chrome: {
+    grid: { light: '#d2cdbd', dark: '#353d39' },
+    axis: { light: '#121614', dark: '#a3aaa5' },
+    ink: { light: '#121614', dark: '#f3f1ea' },
+    ink2: { light: '#323935', dark: '#d3d5ce' },
+    ink3: { light: '#5c635f', dark: '#a3aaa5' },
+    surface: { light: '#e4e0d3', dark: '#262c29' },
+    paper: { light: '#f3f1ea', dark: '#121614' },
+  },
+} as const;
+
+/** The colour tables of a brand (« editorial » = the exports above). */
+export function brandColors(brand: Brand = 'editorial') {
+  if (brand === 'ci') return ciPalette;
   return {
-    categorical: categorical[mode],
-    sequential: sequential[mode],
-    diverging: [...diverging[mode].gain, diverging[mode].mid, ...diverging[mode].loss] as string[],
-    gain: polarity.gain[mode],
-    loss: polarity.loss[mode],
-    accent: accent[mode],
-    other: otherColor[mode],
+    categorical,
+    names: categoricalNames,
+    other: otherColor,
+    sequential,
+    diverging,
+    polarity,
+    accent,
+    chrome,
+  };
+}
+
+export function palette(mode: ColorMode, brand: Brand = 'editorial') {
+  const b = brandColors(brand);
+  return {
+    categorical: b.categorical[mode],
+    sequential: b.sequential[mode],
+    diverging: [...b.diverging[mode].gain, b.diverging[mode].mid, ...b.diverging[mode].loss] as string[],
+    gain: b.polarity.gain[mode],
+    loss: b.polarity.loss[mode],
+    accent: b.accent[mode],
+    other: b.other[mode],
   };
 }
 
@@ -102,8 +167,9 @@ const seriesVars = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `var(--series-${n})`);
 export const css = {
   series: seriesVars,
   other: 'var(--series-other)',
-  gain: 'var(--gain)',
-  loss: 'var(--loss)',
+  /** Poles as MARKS (bars, lines, dots). For gain / loss as TEXT use the `text-gain` / `text-loss` classes. */
+  gain: 'var(--gain-mark)',
+  loss: 'var(--loss-mark)',
   accent: 'var(--accent)',
   ink: 'var(--ink)',
   ink2: 'var(--ink-2)',
@@ -139,16 +205,22 @@ export function series(index: number): string {
 /* ── Continuous interpolators (hex → need the colour mode) ──────────────── */
 
 /** 0 → 1 over the sequential ramp. */
-export function sequentialInterpolator(mode: ColorMode): (t: number) => string {
-  return piecewise(interpolateRgb, [...sequential[mode]]);
+export function sequentialInterpolator(
+  mode: ColorMode,
+  brand: Brand = 'editorial',
+): (t: number) => string {
+  return piecewise(interpolateRgb, [...brandColors(brand).sequential[mode]]);
 }
 
 /**
  * Diverging interpolator on [−1, 1]: −1 = strongest loss, 0 = neutral, +1 = strongest gain.
  * Use with a symmetric domain (`[-m, m]`) so equal magnitudes get equal intensity.
  */
-export function divergingInterpolator(mode: ColorMode): (t: number) => string {
-  const d = diverging[mode];
+export function divergingInterpolator(
+  mode: ColorMode,
+  brand: Brand = 'editorial',
+): (t: number) => string {
+  const d = brandColors(brand).diverging[mode];
   const stops = [...[...d.loss].reverse(), d.mid, ...[...d.gain].reverse()];
   const interp = piecewise(interpolateRgb, stops);
   return (v) => interp((Math.max(-1, Math.min(1, v)) + 1) / 2);
@@ -225,7 +297,8 @@ const SVG_NS = 'http://www.w3.org/2000/svg';
 /**
  * Adds (once) a 45° hatch <pattern> to an SVG and returns the `url(#id)` to use as a `fill`.
  * Tone-on-tone: a 14 % wash of `color` with 1.5 px diagonal strokes of `color` — so the same series
- * hue stays readable and « annoncé » is never signalled by colour alone.
+ * hue stays readable and « annoncé » is never signalled by colour alone. Under « Call Intelligence » the
+ * strokes are the brand's signal (README: hatching in signal marks the highlighted zone) over the same wash.
  * Call after `Plot.plot()` returned the element (patterns resolve lazily), e.g.
  *   const hatch = hatchFill(svg, 'announced-1', css.series[0]!);
  */
@@ -253,7 +326,7 @@ export function hatchFill(svg: SVGSVGElement | HTMLElement, id: string, color: s
     const line = document.createElementNS(SVG_NS, 'rect');
     line.setAttribute('width', '1.5');
     line.setAttribute('height', '7');
-    line.setAttribute('fill', color);
+    line.setAttribute('fill', currentBrand() === 'ci' ? 'var(--signal)' : color);
     p.append(wash, line);
     defs.append(p);
   }
@@ -261,6 +334,13 @@ export function hatchFill(svg: SVGSVGElement | HTMLElement, id: string, color: s
 }
 
 /* ── Runtime helpers (browser only) ─────────────────────────────────────── */
+
+/** Brand currently applied to the page (`data-brand` on <html>); « editorial » outside a browser. */
+export function currentBrand(): Brand {
+  if (typeof document === 'undefined') return 'editorial';
+  const b = document.documentElement.dataset.brand;
+  return isBrand(b) ? b : 'editorial';
+}
 
 /** Current colour mode: explicit `data-theme`, else the OS preference. */
 export function currentColorMode(): ColorMode {

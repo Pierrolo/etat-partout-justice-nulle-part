@@ -13,6 +13,7 @@
 
 @import 'tailwindcss';
 @import './tokens.css';
+@import './brand-ci.css';
 
 /* ── Fonts ──────────────────────────────────────────────────────────────── */
 /* Fraunces (display serif, optical-size axis) and Inter (UI sans) from @fontsource, latin subset. */
@@ -95,6 +96,7 @@
 @theme inline {
   --color-paper: var(--paper);
   --color-surface: var(--surface);
+  --color-field: var(--field-bg);
   --color-sunken: var(--sunken);
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
@@ -107,9 +109,11 @@
   --color-on-accent: var(--on-accent);
   --color-gain: var(--gain);
   --color-gain-soft: var(--gain-soft);
+  --color-gain-mark: var(--gain-mark);
   --color-on-gain: var(--on-gain);
   --color-loss: var(--loss);
   --color-loss-soft: var(--loss-soft);
+  --color-loss-mark: var(--loss-mark);
   --color-on-loss: var(--on-loss);
 
   --font-serif: var(--ff-serif);
@@ -123,10 +127,18 @@
 
 /* Diagonal hatching = « annoncé, sans texte de loi » (VISION §2.3). Tone-on-tone, never decorative. */
 @utility hatch {
-  background-image: repeating-linear-gradient(135deg, var(--hatch) 0 1.5px, transparent 1.5px 7px);
+  background-image: repeating-linear-gradient(
+    var(--hatch-angle),
+    var(--hatch) 0 var(--hatch-w),
+    transparent var(--hatch-w) var(--hatch-gap)
+  );
 }
 @utility hatch-fine {
-  background-image: repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 4.5px);
+  background-image: repeating-linear-gradient(
+    var(--hatch-angle),
+    var(--hatch) 0 var(--hatch-fine-w),
+    transparent var(--hatch-fine-w) var(--hatch-fine-gap)
+  );
 }
 /* Tabular lining figures for money columns. Big standalone numbers stay proportional. */
 @utility num {
@@ -168,9 +180,7 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-feature-settings:
-      'cv11' 1,
-      'ss03' 0;
+    font-feature-settings: var(--font-features);
     min-height: 100dvh;
   }
 
@@ -184,36 +194,36 @@
   h1,
   h2 {
     font-family: var(--font-serif);
-    font-weight: 500;
-    letter-spacing: -0.018em;
+    font-weight: var(--fw-h1);
+    letter-spacing: var(--ls-h1);
   }
   h3,
   h4 {
     font-family: var(--font-sans);
-    font-weight: 650;
-    letter-spacing: -0.005em;
+    font-weight: var(--fw-h3);
+    letter-spacing: var(--ls-h3);
   }
   p {
     text-wrap: pretty;
   }
 
   a {
-    color: var(--accent);
+    color: var(--link);
     text-decoration: underline;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: var(--link-underline-w);
     text-underline-offset: 0.2em;
-    text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent);
+    text-decoration-color: var(--link-underline);
     transition: text-decoration-color 120ms ease;
   }
   a:hover {
-    color: var(--accent-hover);
-    text-decoration-thickness: 2px;
+    color: var(--link-hover);
+    text-decoration-thickness: var(--link-underline-hover-w);
     text-decoration-color: currentColor;
   }
 
   :focus-visible {
-    outline: 3px solid var(--focus);
-    outline-offset: 2px;
+    outline: var(--focus-w) solid var(--focus);
+    outline-offset: var(--focus-offset);
     border-radius: 2px;
   }
 
@@ -230,7 +240,7 @@
 
   hr {
     border: 0;
-    border-top: 1px solid var(--rule);
+    border-top: var(--rule-w) solid var(--rule);
   }
 
   img,
@@ -288,10 +298,10 @@
 
   /* Eyebrow / kicker */
   .eyebrow {
-    font-family: var(--font-sans);
-    font-size: var(--text-xs);
-    font-weight: 650;
-    letter-spacing: 0.09em;
+    font-family: var(--ff-label);
+    font-size: var(--fs-label);
+    font-weight: var(--fw-label);
+    letter-spacing: var(--ls-label);
     text-transform: uppercase;
     color: var(--ink-3);
   }
@@ -302,10 +312,10 @@
   /* Hero headline and lede */
   .display {
     font-family: var(--font-serif);
-    font-weight: 500;
+    font-weight: var(--fw-h1);
     font-size: var(--text-display);
     line-height: var(--text-display--line-height);
-    letter-spacing: -0.03em;
+    letter-spacing: var(--ls-display);
     text-wrap: balance;
   }
   .lede {
@@ -323,20 +333,20 @@
 
   /* Big stat number: serif, proportional lining figures, optical size follows font size. */
   .stat-number {
-    font-family: var(--font-serif);
-    font-weight: 500;
+    font-family: var(--ff-figure);
+    font-weight: var(--fw-figure);
     font-size: var(--text-stat);
     line-height: var(--text-stat--line-height);
-    letter-spacing: -0.03em;
+    letter-spacing: var(--ls-figure);
     font-variant-numeric: proportional-nums lining-nums;
     white-space: nowrap;
   }
 
   /* Cards: hairline border, no shadow. */
   .card {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: var(--r-lg);
+    background: var(--card-bg);
+    border: var(--card-bw) solid var(--card-bc);
+    border-radius: var(--card-r);
     padding: 1.25rem;
   }
   @media (min-width: 40rem) {
@@ -354,7 +364,7 @@
     min-height: var(--tap);
     padding: 0.5rem 1.125rem;
     border: 1.5px solid transparent;
-    border-radius: var(--r-md);
+    border-radius: var(--btn-r);
     font-family: var(--font-sans);
     font-size: var(--text-sm);
     font-weight: 600;
@@ -372,18 +382,18 @@
     cursor: not-allowed;
   }
   .btn-primary {
-    background: var(--accent);
-    color: var(--on-accent);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-fg);
   }
   .btn-primary:hover {
-    background: var(--accent-hover);
-    color: var(--on-accent);
+    background: var(--btn-primary-hover);
+    color: var(--btn-primary-fg);
     text-decoration: none;
   }
   .btn-secondary {
-    background: var(--surface);
+    background: var(--btn-secondary-bg);
     color: var(--ink);
-    border-color: var(--rule-strong);
+    border-color: var(--btn-secondary-bc);
   }
   .btn-secondary:hover {
     border-color: var(--ink);
@@ -420,7 +430,7 @@
   .data-table th,
   .data-table td {
     padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid var(--rule);
+    border-bottom: var(--rule-w) solid var(--rule);
     text-align: start;
     vertical-align: baseline;
   }
@@ -430,7 +440,7 @@
     font-weight: 600;
     font-size: var(--text-xs);
     white-space: nowrap;
-    border-bottom: 1px solid var(--rule-strong);
+    border-bottom: var(--rule-w) solid var(--rule-strong);
   }
   .data-table .num,
   .data-table td[data-numeric],
@@ -484,7 +494,7 @@
     color: var(--ink-3);
   }
   .prose-epjn strong {
-    font-weight: 650;
+    font-weight: var(--fw-strong);
   }
   .prose-epjn blockquote {
     border-inline-start: 3px solid var(--accent);

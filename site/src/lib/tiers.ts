@@ -1,10 +1,16 @@
 /**
  * The three epistemic tiers (docs/VISION.md §2.3). Every figure on the site wears exactly one.
- * The `Tier` type is owned by the engine so that `explain()` output and the UI can never drift.
+ * The `Tier` type is owned by the engine so that `explain()` output and the UI can never drift;
+ * the ids (`law`, `announced`, `hypothesis`) never change, only the words readers see.
  *
- *   law         solid      « Écrit dans la loi »        (amendment text)
- *   announced   hatched    « Annoncé par les auteurs »  (fiches / manifeste / tableurs, no legal text)
- *   hypothesis  dotted     « Hypothèse du simulateur »  (our choice where the text is silent)
+ * Plain-French vocabulary (docs/qa/FIX-PLAN.md, « Tier vocabulary »): « Loi » made readers think the
+ * text was voted, so the words now say what the authors actually did.
+ *
+ *   law         solid      « Proposé dans un amendement »  (text written by the authors, not tabled, not voted)
+ *   announced   hatched    « Promis par les auteurs »      (fiches / manifeste / tableurs, no precise text)
+ *   hypothesis  dotted     « Notre estimation »            (our choice where the text is silent)
+ *
+ * Simulator outputs carry no tier of their own: each line carries the tier of the rule that drives it.
  */
 import { TIERS, type Tier } from '@epjn/engine';
 
@@ -12,33 +18,45 @@ export type { Tier };
 export { TIERS };
 
 export interface TierMeta {
+  /** Full label (« Proposé dans un amendement »). */
   label: string;
-  /** Short label for tight spaces (table cells, chart legends). */
+  /** Short label for tight spaces (table cells, chart legends, source chips). */
   short: string;
-  /** One plain-French sentence explaining what the tier means. */
+  /** Parenthetical, lower-case clarification, to follow the label (« texte précis rédigé par les auteurs… »). */
+  explanation: string;
+  /** One or two plain-French sentences explaining what the tier means for the reader. */
   description: string;
 }
 
 export const TIER_META: Record<Tier, TierMeta> = {
   law: {
-    label: 'Écrit dans la loi',
-    short: 'Loi',
+    label: 'Proposé dans un amendement',
+    short: 'Amendement proposé',
+    explanation: 'texte précis rédigé par les auteurs, ni déposé ni voté',
     description:
-      'Chiffré dans le texte d’un amendement : il s’appliquerait tel quel si le texte était voté.',
+      'Texte précis rédigé par les auteurs, ni déposé ni voté. Il s’appliquerait tel quel si l’amendement était adopté.',
   },
   announced: {
-    label: 'Annoncé par les auteurs',
-    short: 'Annoncé',
+    label: 'Promis par les auteurs',
+    short: 'Promis',
+    explanation: 'annoncé, sans texte précis',
     description:
-      'Avancé par les auteurs (fiches, manifeste, tableurs) mais sans texte de loi. Montré à part, hors revenu disponible.',
+      'Annoncé par les auteurs (fiches, manifeste, classeurs) mais sans texte précis. Quand il n’y a pas de montant, c’est montré à part, hors revenu disponible.',
   },
   hypothesis: {
-    label: 'Hypothèse du simulateur',
-    short: 'Hypothèse',
+    label: 'Notre estimation',
+    short: 'Estimation',
+    explanation: 'choix du simulateur là où le texte est muet',
     description:
-      'Notre choix là où le texte est muet. Listé dans le registre des hypothèses, modifiable quand cela compte.',
+      'Choix du simulateur là où le texte est muet. Listé dans le registre des hypothèses, modifiable quand cela compte.',
   },
 };
+
+/** Label followed by its clarification, for sentences and `title` attributes. */
+export function tierSentence(tier: Tier): string {
+  const m = TIER_META[tier];
+  return `${m.label} (${m.explanation})`;
+}
 
 export function isTier(value: unknown): value is Tier {
   return typeof value === 'string' && (TIERS as readonly string[]).includes(value);

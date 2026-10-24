@@ -153,7 +153,7 @@ def _c_prelevements(F: Facts):
     F.site("po_cible_fiche_pct", 36, "% du PIB", "« 36 % de la richesse produite… » (fiche Contribuable) : cible", 2026, "fiches__contribuable", "**36 %** : De la richesse produite")
     F.calc("dep_pib_insee_calc_pct", ["dep_total_2024_md", "po_pib_2024_md"], lambda a, b: a / b * 100, "% du PIB", "Dépenses publiques COFOG 2024 rapportées au PIB 2024 (Insee)", 2024,
            "dep_total_2024_md ÷ po_pib_2024_md × 100", nd=2,
-           note="57,26 % avec le total COFOG Insee et le PIB du classeur, contre 57,0 % pour Eurostat (tec00023) : définitions ou millésimes différents.")
+           note="57,26 % avec le total COFOG Insee (1 671,794 Md€) et le PIB 2024 du classeur (2 919,9 Md€, feuille « Refonte fiscalité », cellule C3), contre 57,0 % pour Eurostat (tec00023). Avec la même dépense, 57,0 % correspond à un PIB d'environ 2 933 Md€, soit 13 Md€ (0,4 %) de plus que celui du classeur : l'écart vient du PIB pris au dénominateur, pas de la dépense.")
 
 
 # ======================================================================================
@@ -553,7 +553,7 @@ def _i_conflicts(F: Facts):
     F.conflict("record_mondial", ["eu_dep_rang_fr_2024", "eu_dep_pib_fi_2024_pct", "eu_dep_pib_fr_2024_pct"],
                "Le manifeste parle de « record mondial » de dépense publique. Dans les données Eurostat reprises par le classeur du livre, la Finlande (57,7 % du PIB en 2024 ; 57,5 % en 2025) dépasse la France (57,0 % ; 57,2 %) : la France est 2e sur 30 pays.")
     F.conflict("depenses_pib_france_2024", ["eu_dep_pib_fr_2024_pct", "dep_pib_insee_calc_pct"],
-               "57,0 % (Eurostat tec00023) contre 57,26 % en rapportant le total COFOG Insee (1 671,794 Md€) au PIB 2024 du classeur (2 919,9 Md€) : agrégats ou millésimes de PIB différents.")
+               "57,0 % (Eurostat tec00023) contre 57,26 % en rapportant le total COFOG Insee (1 671,794 Md€) au PIB 2024 du classeur (2 919,9 Md€, « Refonte fiscalité », C3). Pour obtenir 57,0 % avec cette dépense, il faudrait un PIB d'environ 2 933 Md€ (13 Md€, soit 0,4 %, de plus) : l'écart tient au PIB pris au dénominateur, la dépense étant la même.")
     F.conflict("eco236_total", ["eco236_total_md", "eco236_somme_e_plus_f_md"],
                "Dans l'Annexe Manuscrit, le total de la colonne C (236,055 Md€) est inférieur de 0,209 Md€ à la somme du gain d'année 1 et du gain supplémentaire (236,264 Md€) : la ligne patrimoine affiche 18 en colonne C et 18,209 en colonne F.")
     F.conflict("plan_gain_annee_1", ["eco236_total_an1_md", "plan_gain_annee_1_flux_md"],

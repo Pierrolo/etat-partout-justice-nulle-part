@@ -5,9 +5,15 @@
 import { rgb } from 'd3';
 import { divergingInterpolator } from '@/lib/chart-theme';
 import { contrastRatio } from '@/lib/contrast';
-import type { CasType, Comparison, Hypotheses, Period } from '@/lib/engine-types';
+import type {
+  CasType,
+  Comparison,
+  DisplayComparison,
+  Hypotheses,
+  Period,
+} from '@/lib/engine-types';
 import { formatEuro } from '@/lib/format';
-import { displayFigures } from '@/lib/sim/result';
+import { headlinePct } from '@/lib/sim/result';
 
 export interface IncomeBucket {
   id: string;
@@ -50,24 +56,31 @@ export interface CaseRow {
   family: string;
   income: number;
   bucket: string;
+  /** Today's disposable income, after the estimated TVA, rounded for display (engine `roundForDisplay`). */
   baseline: number;
   plan: number;
   delta: number;
-  pct: number;
+  /** Relative change, or `null` when today's income is almost nil (the engine's `deltaPct` is `null`): show « — ». */
+  pct: number | null;
   /** Largest single line, for the table's « principal effet » hint. */
   top: string;
   cas: CasType;
 }
 
+export interface RowEngine {
+  compare: (h: CasType['household'], o: { period: Period; hypotheses: Hypotheses }) => Comparison;
+  roundForDisplay: (c: Comparison) => DisplayComparison;
+}
+
 export function buildRows(
   cases: CasType[],
-  compare: (h: CasType['household'], o: { period: Period; hypotheses: Hypotheses }) => Comparison,
+  engine: RowEngine,
   period: Period,
   hypotheses: Hypotheses,
 ): CaseRow[] {
   return cases.map((cas) => {
-    const c = compare(cas.household, { period, hypotheses });
-    const fig = displayFigures(c);
+    const c = engine.compare(cas.household, { period, hypotheses });
+    const fig = engine.roundForDisplay(c);
     const income = householdIncome(c);
     const biggest = c.waterfall.reduce<(typeof c.waterfall)[number] | null>(
       (b, w) => (!b || Math.abs(w.delta) > Math.abs(b.delta) ? w : b),
@@ -79,10 +92,10 @@ export function buildRows(
       family: cas.family,
       income,
       bucket: bucketOf(income).id,
-      baseline: fig.baseline,
-      plan: fig.plan,
-      delta: fig.delta,
-      pct: fig.pct,
+      baseline: fig.baselineAfterTva,
+      plan: fig.planAfterTva,
+      delta: fig.deltaAfterTva,
+      pct: headlinePct(c),
       top: biggest?.label ?? '—',
       cas,
     };
@@ -126,6 +139,3 @@ export const tileStyle = (c: TileColor) => ({
   color: `light-dark(${c.fgLight}, ${c.fgDark})`,
 });
 
-export function stateHash(cas: CasType, hypotheses: Hypotheses, period: Period): string {
-  return `${cas.id}|${period}|${JSON.stringify(hypotheses)}`;
-}

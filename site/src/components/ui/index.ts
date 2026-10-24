@@ -3,6 +3,7 @@ export { Button } from './Button';
 export { Checkbox, type CheckboxProps } from './Checkbox';
 export { Callout, type CalloutProps, type CalloutTone } from './Callout';
 export { ChartFrame, type ChartFrameProps } from './ChartFrame';
+export { Term, type TermProps } from './Glossary';
 export { DataTable, type DataTableProps } from './DataTable';
 export { Disclosure, type DisclosureProps } from './Disclosure';
 export { NumberInput, type NumberInputProps } from './NumberInput';

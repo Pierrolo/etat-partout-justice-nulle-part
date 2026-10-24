@@ -1,116 +1,293 @@
 ---
-import { ENGINE_VERSION } from '@epjn/engine';
+/**
+ * /methode : la page de crédibilité. Le texte vit dans docs/METHODE.md (une seule source de vérité,
+ * rendue ici par le pipeline Markdown d’Astro + lib/rehype-methode.mjs : ancres stables par hypothèse
+ * #h1, #h2…, typographie française, sigles du glossaire, tableaux défilants). Cette page y ajoute ce
+ * qu’un fichier Markdown ne peut pas porter : les écarts entre sources (pipeline/DISCREPANCIES.md) et
+ * les dénominateurs « par foyer » (facts.json).
+ */
+import * as doc from '../../../docs/METHODE.md';
 import PageHeader from '@/components/site/PageHeader.astro';
-import Todo from '@/components/site/Todo.astro';
 import { Callout, TierLegend } from '@/components/ui';
+import '@/components/ui/glossary.css';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ENGINE_VERSION } from '@/lib/engine';
+import { formatEuro, formatMdEuro, formatNumber, formatPercentPoints } from '@/lib/format';
+import { FOYERS_LABEL } from '@/lib/foyers';
+import {
+  FEATURED_DISCREPANCIES,
+  foyerDenominators,
+  impliedGdpMd,
+  parseDiscrepancies,
+} from '@/lib/methode-data';
+import { SITE, withBase } from '@/lib/site';
+import { typo } from '@/lib/typo';
+import { num } from '@/lib/facts';
 
-const sections = [
-  { id: 'niveaux', label: 'Trois niveaux de preuve' },
-  { id: 'modelise', label: 'Ce qui est modélisé' },
-  { id: 'non-modelise', label: 'Ce qui ne l’est pas' },
-  { id: 'hypotheses', label: 'Registre des hypothèses' },
-  { id: 'sources', label: 'Sources' },
-  { id: 'ecarts', label: 'Écarts avec les simulateurs officiels' },
-  { id: 'journal', label: 'Journal des modifications' },
-];
+const html = await doc.compiledContent();
+// Section « Journal des modifications » : après les écarts entre sources, que la page complète.
+const cut = html.indexOf('<h2 id="journal"');
+const before = cut >= 0 ? html.slice(0, cut) : html;
+const after = cut >= 0 ? html.slice(cut) : '';
+
+const toc = doc
+  .getHeadings()
+  .filter((h) => h.depth === 2)
+  .map((h) => ({ id: h.slug, label: typo(h.text) }));
+
+const all = parseDiscrepancies();
+const featured = FEATURED_DISCREPANCIES.map((code) => all.find((d) => d.code === code)).filter(
+  (d): d is NonNullable<typeof d> => d !== undefined,
+);
+const others = all.filter((d) => !(FEATURED_DISCREPANCIES as readonly string[]).includes(d.code));
+
+const foyers = foyerDenominators();
+const gdp = impliedGdpMd();
+const pct = (v: number) => formatPercentPoints(v, { decimals: 2 });
 ---
 
 <BaseLayout
   title="Méthode et hypothèses"
-  description="Ce que le simulateur calcule, ce qu’il ne calcule pas, ses hypothèses et ses sources."
+  description="Ce que le simulateur calcule et ne calcule pas, ses hypothèses numérotées, son écart avec OpenFisca, et les endroits où les sources du livre se contredisent."
 >
   <PageHeader
     eyebrow="Méthode"
     title="Méthode et hypothèses"
-    lede="Un simulateur se juge à ses hypothèses. Voici ce qu’il calcule, comment, et ce qu’il laisse de côté."
+    lede="Un simulateur se juge à ses hypothèses. Voici ce qu’il calcule, comment, ce qu’il laisse de côté, et où les sources du livre se contredisent."
   />
 
-  <div class="wrap grid gap-10 lg:grid-cols-[14rem_1fr] lg:gap-16">
-    <nav aria-label="Sur cette page" class="lg:sticky lg:top-6 lg:self-start">
-      <p class="eyebrow mb-3">Sur cette page</p>
-      <ul class="space-y-1 text-sm">
-        {sections.map((s) => (
-          <li>
-            <a
-              href={`#${s.id}`}
-              class="inline-flex min-h-8 items-center text-ink-2 no-underline hover:text-ink hover:underline"
-            >
-              {s.label}
-            </a>
-          </li>
-        ))}
+  <div class="wrap pb-6">
+    <p class="text-sm text-ink-3">
+      Moteur de calcul, version <strong class="text-ink">{ENGINE_VERSION}</strong>. Le code, les
+      données et les paramètres sont publics :
+      <a href={SITE.repo}>dépôt du projet</a>.
+    </p>
+    <h2 class="mt-8 text-xl text-ink">Comment lire les étiquettes</h2>
+    <p class="mt-2 mb-4 max-w-2xl text-ink-2">
+      Chaque chiffre du site porte l’un de ces trois statuts, avec la même présentation partout.
+      C’est la règle centrale : ne jamais faire passer une promesse pour un texte voté.
+    </p>
+    <TierLegend />
+  </div>
+
+  <div class="wrap grid gap-8 lg:grid-cols-[14rem_1fr] lg:gap-16">
+    <div class="lg:sticky lg:top-6 lg:self-start">
+      <details class="rounded-md border border-rule bg-surface px-4 lg:hidden">
+        <summary class="min-h-11 cursor-pointer py-3 font-semibold text-ink">Sur cette page</summary>
+        <ul class="space-y-1 pb-3 text-sm">
+          {
+            toc.map((s) => (
+              <li>
+                <a
+                  href={`#${s.id}`}
+                  class="inline-flex min-h-8 items-center text-ink-2 no-underline hover:text-ink hover:underline"
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+      <nav aria-label="Sur cette page" class="hidden lg:block">
+        <p class="eyebrow mb-3">Sur cette page</p>
+        <ul class="space-y-1 text-sm">
+          {
+            toc.map((s) => (
+              <li>
+                <a
+                  href={`#${s.id}`}
+                  class="inline-flex min-h-8 items-center text-ink-2 no-underline hover:text-ink hover:underline"
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+
+    <div class="prose-epjn methode-doc min-w-0">
+      <Fragment set:html={before} />
+
+      <!-- Écarts entre sources : « par foyer » d’abord (le plus trompeur), puis le reste -->
+      <h3 id="foyers">Les quatre « foyers » du livre</h3>
+      <p>
+        Le livre ne définit pas son « foyer » : il en emploie quatre selon la page. Un montant « par
+        foyer » n’a donc de sens qu’avec son dénominateur, et deux montants « par foyer » de sources
+        différentes ne se comparent pas.
+      </p>
+      <div class="table-scroll" role="region" aria-label="Tableau : les dénominateurs par foyer" tabindex="0">
+        <table class="data-table methode-table">
+          <thead>
+            <tr>
+              <th scope="col">Où le livre l’emploie</th>
+              <th scope="col" data-numeric>Foyers (millions)</th>
+              <th scope="col">D’où vient ce nombre</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              foyers.map((r) => (
+                <tr>
+                  <td>
+                    {typo(r.usage)}
+                    {r.isDefault && (
+                      <>
+                        {' '}
+                        <strong>(retenu par le site)</strong>
+                      </>
+                    )}
+                  </td>
+                  <td data-numeric>{formatNumber(r.millions, { decimals: { min: 0, max: 3 } })}</td>
+                  <td>{typo(r.origin)}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <strong>Le site retient un seul dénominateur : {FOYERS_LABEL}.</strong> C’est le seul des
+        quatre que les auteurs écrivent tel quel (dans leurs fiches), il est aussi celui de « 600 Md€,
+        soit 20 000 € par foyer », et il correspond à l’unité du simulateur, le ménage. Les trois
+        autres sont déduits ou mesurent autre chose : un foyer fiscal n’est pas un ménage. Les
+        montants « par foyer » écrits par les auteurs eux-mêmes (par exemple {formatEuro(num('dep_par_foyer_manifeste_eur'))}
+        par an pour les dépenses publiques) restent leurs chiffres, avec leur dénominateur ci-dessus.
+      </p>
+
+      <h3 id="pib-57">57,0 % ou 57,3 % du PIB ?</h3>
+      <p>
+        Eurostat donne {pct(num('eu_dep_pib_fr_2024_pct'))} du PIB pour les dépenses publiques de la
+        France en 2024. En rapportant le total de l’Insee ({formatMdEuro(num('dep_total_2024_md'))}) au
+        PIB 2024 du classeur des auteurs ({formatMdEuro(gdp.workbook)}, feuille « Refonte fiscalité »,
+        cellule C3), on obtient {pct(num('dep_pib_insee_calc_pct'))}. <strong>La dépense est la même :
+        l’écart vient du PIB.</strong> Pour obtenir {pct(num('eu_dep_pib_fr_2024_pct'))} avec
+        {formatMdEuro(num('dep_total_2024_md'))}, il faudrait un PIB d’environ {formatMdEuro(gdp.implied, { decimals: 0 })},
+        soit {formatMdEuro(gdp.gap, { decimals: 0 })} ({formatNumber(gdp.gapPct, { decimals: 1 })} %) de plus que celui du
+        classeur. Le classeur ne précise pas le millésime ou le périmètre de son PIB ; nous n’avons
+        pas la table qui l’expliquerait. Le site utilise Eurostat pour comparer les pays, et
+        l’Insee pour répartir la dépense française.
+      </p>
+
+      <h3 id="ecarts">Les écarts les plus visibles</h3>
+      <ul class="space-y-3">
+        {
+          featured.map((d) => (
+            <li id={d.code.toLowerCase()}>
+              <strong>
+                {d.code} · {d.title}
+              </strong>
+              <br />
+              {d.constat}
+              {d.interpretation && (
+                <>
+                  {' '}
+                  <span class="text-ink-2">{d.interpretation}</span>
+                </>
+              )}
+            </li>
+          ))
+        }
       </ul>
-    </nav>
 
-    <div class="prose-epjn min-w-0">
-      <section id="niveaux" aria-labelledby="niveaux-t">
-        <h2 id="niveaux-t" class="mt-0!">
-          Trois niveaux de preuve
-        </h2>
+      <details class="mt-6 rounded-md border border-rule bg-surface px-4 py-1">
+        <summary class="min-h-11 cursor-pointer py-3 font-semibold text-ink">
+          Tous les autres écarts ({others.length})
+        </summary>
+        <ul class="space-y-3 pt-2 pb-3 text-[0.9375rem]">
+          {
+            others.map((d) => (
+              <li id={d.code.toLowerCase()}>
+                <strong>
+                  {d.code} · {d.title}
+                </strong>
+                <br />
+                {d.constat}
+                {d.interpretation && (
+                  <>
+                    {' '}
+                    <span class="text-ink-2">{d.interpretation}</span>
+                  </>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+
+      <Callout tone="note" className="mt-8">
         <p>
-          Chaque chiffre du site porte l’un de ces trois statuts, avec la même présentation partout.
-          C’est la règle centrale : ne jamais faire passer une promesse pour un texte de loi.
+          Une erreur, un écart que nous n’avons pas vu ? Les sources, les données et le moteur sont
+          publics : <a href={`${SITE.repo}/issues`}>signalez-le sur le dépôt</a>. Retour au
+          <a href={withBase('/simulateur/')}>simulateur</a> ou aux
+          <a href={withBase('/comprendre/')}>pages « Comprendre »</a>.
         </p>
-        <TierLegend columns={1} />
-      </section>
+      </Callout>
 
-      <section id="modelise" aria-labelledby="modelise-t">
-        <h2 id="modelise-t">Ce qui est modélisé</h2>
-        <!-- TODO(builder): list the mechanisms modelled (CSG/CRDS, IR, AFU, prestations familiales, APL, prime d'activité, RSA…), each linked to its amendment. -->
-        <Todo title="Liste des mécanismes modélisés">
-          À écrire depuis le moteur et les amendements.
-        </Todo>
-      </section>
-
-      <section id="non-modelise" aria-labelledby="non-modelise-t">
-        <h2 id="non-modelise-t">Ce qui ne l’est pas</h2>
-        <Callout tone="note">
-          <p>
-            Tout ce que le simulateur ne sait pas calculer est aussi affiché sur la page de
-            résultat, sous « Ce que le simulateur ne compte pas » — pas seulement ici.
-          </p>
-        </Callout>
-        <!-- TODO(builder): list of limits (taxe foncière, DOM, agriculteurs, santé, garde alternée…) from docs/VISION.md §6 and §9. -->
-        <Todo title="Liste des limites">À écrire (VISION §6 et §9).</Todo>
-      </section>
-
-      <section id="hypotheses" aria-labelledby="hypotheses-t">
-        <h2 id="hypotheses-t">Registre des hypothèses</h2>
-        <p>
-          Là où le texte est muet, nous faisons un choix, nous le numérotons et nous le rendons
-          modifiable quand il compte.
-        </p>
-        <!-- TODO(builder): render the H1…Hn register (docs/VISION.md §6) from a JSON file, with default, rationale, toggle, book page. -->
-        <Todo title="Tableau H1 … Hn">
-          Défaut, justification, bascule possible, renvoi au livre.
-        </Todo>
-      </section>
-
-      <section id="sources" aria-labelledby="sources-t">
-        <h2 id="sources-t">Sources</h2>
-        <!-- TODO(builder): sources list (france-resolution.fr, Insee, Eurostat, DGFiP, Légifrance, CAF) with year and licence. -->
-        <Todo title="Liste des sources">
-          Chaque source : organisme, jeu de données, année, licence, lien.
-        </Todo>
-      </section>
-
-      <section id="ecarts" aria-labelledby="ecarts-t">
-        <h2 id="ecarts-t">Écarts avec les simulateurs officiels</h2>
-        <!-- TODO(builder): published gap table vs OpenFisca / impots.gouv / caf.fr golden cases. -->
-        <Todo title="Table des écarts">
-          Notre baseline comparée aux calculateurs officiels, cas par cas.
-        </Todo>
-      </section>
-
-      <section id="journal" aria-labelledby="journal-t">
-        <h2 id="journal-t">Journal des modifications</h2>
-        <p>
-          Version du moteur de calcul : <code>{ENGINE_VERSION}</code>.
-        </p>
-        <!-- TODO(builder): changelog -->
-        <Todo title="Changelog">Date, version, ce qui a changé et pourquoi.</Todo>
-      </section>
+      <Fragment set:html={after} />
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  import { initGlossary } from '@/lib/glossary-client';
+  initGlossary();
+</script>
+
+<style is:global>
+  .methode-doc {
+    max-width: 56rem;
+  }
+  .methode-doc > p,
+  .methode-doc > ul,
+  .methode-doc > ol,
+  .methode-doc > h2,
+  .methode-doc > h3 {
+    max-width: var(--measure);
+  }
+  .methode-doc .table-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: var(--r-md);
+    background: var(--surface);
+  }
+  .methode-doc .table-scroll + * {
+    margin-top: 1.1em;
+  }
+  .methode-doc .methode-table {
+    min-width: 36rem;
+    font-size: var(--text-sm);
+  }
+  .methode-doc .methode-table th,
+  .methode-doc .methode-table td {
+    vertical-align: top;
+    line-height: 1.45;
+  }
+  .methode-doc .methode-table th:first-child,
+  .methode-doc .methode-table td:first-child {
+    white-space: nowrap;
+  }
+  .methode-doc .methode-table tr:target {
+    background: var(--accent-soft);
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+  .methode-doc .h-anchor {
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .methode-doc li:target {
+    background: var(--accent-soft);
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: var(--r-sm);
+  }
+  @media (forced-colors: active) {
+    .methode-doc .methode-table tr:target,
+    .methode-doc li:target {
+      outline-color: Highlight;
+    }
+  }
+</style>

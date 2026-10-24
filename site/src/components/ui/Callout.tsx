@@ -5,10 +5,10 @@ import { IconAnnounced, IconDown, IconInfo, IconPlan, IconUp } from './icons';
 export type CalloutTone = 'note' | 'plan' | 'gain' | 'loss' | 'announced';
 
 const TONES: Record<CalloutTone, { box: string; icon: string; Icon: typeof IconInfo }> = {
-  note: { box: 'border-s-4 bg-sunken border-ink-3', icon: 'text-ink-2', Icon: IconInfo },
-  plan: { box: 'border-s-4 bg-accent-soft border-accent', icon: 'text-accent', Icon: IconPlan },
-  gain: { box: 'border-s-4 bg-gain-soft border-gain', icon: 'text-gain', Icon: IconUp },
-  loss: { box: 'border-s-4 bg-loss-soft border-loss', icon: 'text-loss', Icon: IconDown },
+  note: { box: 'border-s-[length:var(--bar-w)] bg-sunken border-ink-3', icon: 'text-ink-2', Icon: IconInfo },
+  plan: { box: 'border-s-[length:var(--bar-w)] bg-accent-soft border-accent', icon: 'text-accent', Icon: IconPlan },
+  gain: { box: 'border-s-[length:var(--bar-w)] bg-gain-soft border-gain', icon: 'text-gain', Icon: IconUp },
+  loss: { box: 'border-s-[length:var(--bar-w)] bg-loss-soft border-loss', icon: 'text-loss', Icon: IconDown },
   /** « Hors revenu disponible »: promises without legal amounts. Hatched + dashed. */
   announced: {
     box: 'hatch bg-surface border-[1.5px] border-dashed border-[var(--tier-announced-bd)]',

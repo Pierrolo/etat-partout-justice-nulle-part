@@ -6,9 +6,10 @@ const ICONS = { law: IconLaw, announced: IconAnnounced, hypothesis: IconHypothes
 
 /**
  * Visual grammar of the three tiers — never colour alone: shape of the border, fill and icon differ.
- *   law         solid ink fill, solid border, page icon
- *   announced   hatched fill, dashed border, dashed-circle icon
- *   hypothesis  sunken fill, dotted border, « ≈ » icon
+ *   law         « Proposé dans un amendement »  solid ink fill, solid border, page icon
+ *   announced   « Promis par les auteurs »      hatched fill, dashed border, dashed-circle icon
+ *   hypothesis  « Notre estimation »            sunken fill, dotted border, « ≈ » icon
+ * Words come from `TIER_META` (lib/tiers.ts).
  */
 export const tierBadgeClasses: Record<Tier, string> = {
   law: 'bg-[var(--tier-law-bg)] text-[var(--tier-law-fg)] border-[var(--tier-law-bg)] border-solid',
@@ -18,7 +19,7 @@ export const tierBadgeClasses: Record<Tier, string> = {
 
 export interface TierBadgeProps {
   tier: Tier;
-  /** `short` uses the compact label (« Loi », « Annoncé », « Hypothèse »). */
+  /** `short` uses the compact label (« Amendement proposé », « Promis », « Estimation »). */
   short?: boolean;
   size?: 'sm' | 'md';
   className?: string;
@@ -31,7 +32,7 @@ export function TierBadge({ tier, short = false, size = 'md', className }: TierB
     <span
       data-tier={tier}
       className={cn(
-        'inline-flex items-center gap-1.5 rounded-sm border-[1.5px] font-semibold leading-none whitespace-nowrap',
+        'inline-flex items-center gap-1.5 rounded-[var(--r-tag)] border-[1.5px] font-semibold leading-none whitespace-nowrap',
         size === 'sm' ? 'px-1.5 py-1 text-[0.75rem]' : 'px-2 py-1.5 text-xs',
         tierBadgeClasses[tier],
         className,

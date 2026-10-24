@@ -47,7 +47,7 @@ export function SearchBox({
           placeholder={placeholder}
           aria-describedby={hint ? hintId : undefined}
           onChange={(e) => onChange(e.target.value)}
-          className="[&::-webkit-search-cancel-button]:hidden min-h-11 w-full rounded-md border-[1.5px] border-rule-strong bg-surface py-2 pe-12 ps-3 text-[1rem] text-ink placeholder:text-ink-3 hover:border-ink focus-visible:border-accent"
+          className="[&::-webkit-search-cancel-button]:hidden min-h-11 w-full rounded-md border-[1.5px] border-rule-strong bg-field py-2 pe-12 ps-3 text-[1rem] text-ink placeholder:text-ink-3 hover:border-ink focus-visible:border-accent"
         />
         {value && (
           <button

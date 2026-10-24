@@ -2127,14 +2127,14 @@
   "conflicts": [
    {
     "group": "depenses_pib_france_2024",
-    "note": "57,0 % (Eurostat tec00023) contre 57,26 % en rapportant le total COFOG Insee (1 671,794 Md€) au PIB 2024 du classeur (2 919,9 Md€) : agrégats ou millésimes de PIB différents.",
+    "note": "57,0 % (Eurostat tec00023) contre 57,26 % en rapportant le total COFOG Insee (1 671,794 Md€) au PIB 2024 du classeur (2 919,9 Md€, « Refonte fiscalité », C3). Pour obtenir 57,0 % avec cette dépense, il faudrait un PIB d'environ 2 933 Md€ (13 Md€, soit 0,4 %, de plus) : l'écart tient au PIB pris au dénominateur, la dépense étant la même.",
     "with": [
      "eu_dep_pib_fr_2024_pct"
     ]
    }
   ],
   "label_fr": "Dépenses publiques COFOG 2024 rapportées au PIB 2024 (Insee)",
-  "note": "57,26 % avec le total COFOG Insee et le PIB du classeur, contre 57,0 % pour Eurostat (tec00023) : définitions ou millésimes différents. Formule : dep_total_2024_md ÷ po_pib_2024_md × 100",
+  "note": "57,26 % avec le total COFOG Insee (1 671,794 Md€) et le PIB 2024 du classeur (2 919,9 Md€, feuille « Refonte fiscalité », cellule C3), contre 57,0 % pour Eurostat (tec00023). Avec la même dépense, 57,0 % correspond à un PIB d'environ 2 933 Md€, soit 13 Md€ (0,4 %) de plus que celui du classeur : l'écart vient du PIB pris au dénominateur, pas de la dépense. Formule : dep_total_2024_md ÷ po_pib_2024_md × 100",
   "source": {
    "inputs": [
     "dep_total_2024_md",
@@ -4160,7 +4160,7 @@
    },
    {
     "group": "depenses_pib_france_2024",
-    "note": "57,0 % (Eurostat tec00023) contre 57,26 % en rapportant le total COFOG Insee (1 671,794 Md€) au PIB 2024 du classeur (2 919,9 Md€) : agrégats ou millésimes de PIB différents.",
+    "note": "57,0 % (Eurostat tec00023) contre 57,26 % en rapportant le total COFOG Insee (1 671,794 Md€) au PIB 2024 du classeur (2 919,9 Md€, « Refonte fiscalité », C3). Pour obtenir 57,0 % avec cette dépense, il faudrait un PIB d'environ 2 933 Md€ (13 Md€, soit 0,4 %, de plus) : l'écart tient au PIB pris au dénominateur, la dépense étant la même.",
     "with": [
      "dep_pib_insee_calc_pct"
     ]

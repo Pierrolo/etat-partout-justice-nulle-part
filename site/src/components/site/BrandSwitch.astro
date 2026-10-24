@@ -1,0 +1,107 @@
+---
+import { BRANDS, BRAND_LABEL, BRAND_QUERY_PARAM, BRAND_STORAGE_KEY, BRAND_THEME_COLOR } from '@/lib/brand';
+
+interface Props {
+  /** Distinguishes several controls on one page (radio `name`, ids). */
+  id?: string;
+  class?: string;
+}
+const { id = 'brand', class: className } = Astro.props;
+---
+
+<!--
+  « Apparence : Éditorial / Call Intelligence » — compares the site's two visual identities.
+  A native radio group (arrow keys, one tab stop, announced as « Apparence, groupe de 2 boutons radio »).
+  The choice is the `data-brand` attribute of <html>, saved in localStorage ("epjn-brand": a per-viewer
+  convenience, not a cookie) and overridable with ?brand=ci in the URL (see BaseLayout.astro).
+  The control stays invisible until the script has run: without JavaScript it would do nothing.
+-->
+<fieldset
+  class:list={['brand-switch min-w-0', className]}
+  data-brand-switch
+  data-storage-key={BRAND_STORAGE_KEY}
+  data-param={BRAND_QUERY_PARAM}
+  data-theme-colors={JSON.stringify(BRAND_THEME_COLOR)}
+>
+  <legend class="eyebrow mb-2 p-0">Apparence</legend>
+  <div class="inline-flex flex-wrap gap-2">
+    {
+      BRANDS.map((b) => (
+        <label class="relative cursor-pointer">
+          <input
+            type="radio"
+            name={`${id}-choice`}
+            value={b}
+            class="peer sr-only"
+            checked={b === 'editorial'}
+          />
+          <span class="flex min-h-11 items-center justify-center rounded-md border-[1.5px] border-rule-strong bg-field px-3.5 text-sm font-semibold text-ink transition-colors hover:border-ink peer-checked:border-accent peer-checked:bg-accent peer-checked:text-on-accent peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent">
+            {BRAND_LABEL[b]}
+          </span>
+        </label>
+      ))
+    }
+  </div>
+</fieldset>
+
+<style>
+  .brand-switch:not([data-ready]) {
+    visibility: hidden;
+  }
+</style>
+
+<script>
+  import { isBrand, type Brand } from '@/lib/brands';
+
+  const root = document.documentElement;
+
+  function applyThemeColor(brand: Brand, colors: Record<string, { light: string; dark: string }>) {
+    document.querySelectorAll<HTMLMetaElement>('meta[data-brand-theme]').forEach((m) => {
+      const mode = m.dataset.brandTheme === 'dark' ? 'dark' : 'light';
+      const c = colors[brand]?.[mode];
+      if (c) m.content = c;
+    });
+  }
+
+  function current(): Brand {
+    const b = root.dataset.brand;
+    return isBrand(b) ? b : 'editorial';
+  }
+
+  document.querySelectorAll<HTMLFieldSetElement>('[data-brand-switch]').forEach((box) => {
+    const key = box.dataset.storageKey ?? 'epjn-brand';
+    const param = box.dataset.param ?? 'brand';
+    const colors = JSON.parse(box.dataset.themeColors ?? '{}');
+    const radios = box.querySelectorAll<HTMLInputElement>('input[type="radio"]');
+    const sync = () => {
+      const now = current();
+      radios.forEach((r) => (r.checked = r.value === now));
+    };
+    radios.forEach((r) =>
+      r.addEventListener('change', () => {
+        if (!r.checked || !isBrand(r.value)) return;
+        root.dataset.brand = r.value;
+        applyThemeColor(r.value, colors);
+        try {
+          localStorage.setItem(key, r.value);
+        } catch {
+          /* storage blocked: the choice lasts for this page view */
+        }
+        // keep a ?brand=… that is in the address bar consistent with what is shown
+        try {
+          const url = new URL(location.href);
+          if (url.searchParams.has(param)) {
+            url.searchParams.set(param, r.value);
+            history.replaceState(history.state, '', url);
+          }
+        } catch {
+          /* ignore */
+        }
+      }),
+    );
+    // another control (header, styleguide) or another tab may have changed it
+    new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['data-brand'] });
+    sync();
+    box.dataset.ready = '';
+  });
+</script>

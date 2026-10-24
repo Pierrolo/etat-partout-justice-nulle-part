@@ -1,7 +1,5 @@
 # Méthode et hypothèses
 
-*Page publique /methode — moteur de calcul `@epjn/engine` 1.1.0.*
-
 Le simulateur compare, pour **votre ménage**, deux situations :
 
 - **Aujourd'hui** : la législation en vigueur au 24 octobre 2026 (barème de l'impôt de la loi de finances pour 2026,
@@ -17,7 +15,16 @@ de chaque année. Tous les montants sont **mensuels**.
 Outil indépendant, non affilié à l'association Résolution ni à l'État. Le calcul se fait dans votre navigateur ;
 rien n'est envoyé nulle part.
 
-## 1. Ce qui est calculé
+## En deux minutes {#en-clair}
+
+- **Ce que fait le simulateur.** Il calcule ce qui vous reste pour vivre chaque mois (le [revenu disponible](#calcul)) aujourd'hui, puis avec le plan complet, et vous montre l'écart ligne par ligne.
+- **D'où viennent les règles du plan.** Des 81 amendements rédigés par les auteurs, qui ne sont ni déposés ni votés, complétés par leurs fiches et leur manifeste quand le texte est muet. Chaque ligne dit de quel type de source elle vient.
+- **Ce qui est compté par défaut.** Les mesures chiffrées dans les amendements, et le remplacement du RSA, de la prime d'activité et de l'AAH par l'AFU, que les auteurs promettent sans l'écrire dans un amendement (hypothèse [H1](#h1), réglable).
+- **Ce qui est montré à part.** Les promesses sans montant (compte d'épargne, patrimoine rendu, compte éducation) et les pertes que le simulateur ne sait pas chiffrer. Elles ne sont jamais additionnées au résultat.
+- **Ce qui est vérifié.** La situation d'aujourd'hui est comparée à OpenFisca, le moteur de référence, sur 40 ménages types : au pire quelques euros par mois d'écart ([détail](#openfisca)).
+- **Ce qui n'est pas calculé.** Patrimoine, taxe foncière, santé, travailleurs indépendants… La [liste complète](#non-compte) figure aussi sur la page de résultat.
+
+## 1. Ce qui est calculé {#calcul}
 
 Le **revenu disponible** est : salaires nets + allocations chômage + pensions nettes + prestations − impôt sur le
 revenu (+ crédits d'impôt) + aide fondamentale. La TVA est estimée à part (« après TVA »).
@@ -40,42 +47,45 @@ revenu (+ crédits d'impôt) + aide fondamentale. La TVA est estimée à part (�
 Chaque ligne du résultat affiche **sa formule avec vos chiffres** et **sa source** (amendement, page
 service-public, Légifrance, INSEE…).
 
-## 2. Trois niveaux de certitude
+## 2. Trois niveaux de certitude {#niveaux}
 
-- **Écrit dans la loi** — paramètre écrit dans un amendement (ou dans la loi actuelle pour « aujourd'hui »).
-- **Annoncé par les auteurs** — fiches, manifeste, classeurs ; aucun texte juridique.
-- **Hypothèse du simulateur** — notre choix quand le texte est muet ; listé ci-dessous, souvent réglable.
+Chaque chiffre du site porte l'un de ces trois statuts, avec la même présentation partout. C'est la règle centrale : ne jamais faire passer une promesse pour un texte voté.
 
-Les gains annoncés sans texte (compte d'épargne « 300 €/mois », patrimoine « 20 000 € par foyer », compte
-éducation « 6 600 € par enfant ») sont montrés **à part**, à côté des pertes non chiffrées, **jamais additionnés**
-au revenu disponible.
+- **Proposé dans un amendement** — texte précis rédigé par les auteurs, ni déposé ni voté. Il s'appliquerait tel quel si l'amendement était adopté. (Ce niveau s'appelait « Écrit dans la loi » : nous l'avons renommé, parce que ces textes n'ont pas été votés. Les lignes « aujourd'hui » suivent la législation en vigueur et n'ont pas de niveau : ce sont les règles actuelles.)
+- **Promis par les auteurs** — annoncé dans les fiches, le manifeste ou les classeurs, sans texte précis.
+- **Notre estimation** — notre choix là où le texte est muet. Chaque estimation est numérotée dans le [registre](#registre) et souvent réglable.
 
-## 3. Registre des hypothèses
+Deux règles découlent de ces niveaux :
+
+- Les promesses **sans montant** (compte d'épargne « 300 €/mois », patrimoine « 20 000 € par foyer », compte éducation « 6 600 € par enfant ») sont montrées **à part**, à côté des pertes non chiffrées, **jamais additionnées** au revenu disponible.
+- Le remplacement du RSA, de la prime d'activité et de l'AAH par l'AFU est lui aussi une promesse (« à la place de toutes les aides », hypothèse [H1](#h1)), mais il est **compté par défaut** : sans lui, le résultat additionnerait l'AFU et les anciennes aides, ce que les auteurs ne décrivent pas. Vous pouvez le désactiver (« maintenus en différentiel »), et le simulateur montre les deux lectures côte à côte quand elles diffèrent.
+
+## 3. Registre des hypothèses {#registre}
 
 | # | Là où le texte est muet | Choix par défaut | Niveau | Réglable |
 |---|---|---|---|---|
-| H1 | RSA, prime d'activité, AAH, ASPA, bourses remplacés par l'AFU ? Le manifeste dit « à la place de toutes les aides », les classeurs comptent 135 Md€ d'aides fusionnées, mais aucun amendement ne les abroge | **Remplacés** | Annoncé | Oui : « maintenus en différentiel » (l'AFU compte comme ressource, l'aide complète jusqu'au niveau actuel, elle devient imposable à 23 %) |
-| H2 | La déduction de 10 % pour frais professionnels survit-elle ? (art. 83 3° CGI non abrogé) | **Maintenue** : 0,793 € gardé par euro gagné, seuil d'équilibre ≈ 31 884 € de salaire net annuel | Hypothèse | Oui : supprimée = lecture des auteurs (0,77 € ; 28 695,65 €) |
-| H3 | Revenu imposable | Aujourd'hui : net + CSG non déductible + CRDS ; plan : salaire net (plus de CSG) − 10 % ; pensions : CSG déductible maintenue, abattement de 10 % supprimé | Loi | — |
-| H4 | Qui capte la baisse de CSG et la fin des exonérations patronales ? | 100 % au salarié (incidence légale de court terme), salaire brut et coût employeur inchangés | Annoncé | — |
-| H5 | Répercussion de la TVA et de la fin des CEE sur les prix | **100 %**, panier fixe lissé selon le niveau de vie | Hypothèse | Oui : 0 %, 50 %, 100 % |
-| H6 | Chômage « de treize à six mois » (aucun texte) | Montant mensuel de l'ARE inchangé ; « au 7e mois : ARE = 0 » montré dans les pertes non chiffrées | Annoncé | — |
-| H7 | Compte d'épargne, patrimoine, compte éducation | Montrés à part aux montants annoncés | Annoncé | — |
+| H1 | RSA, prime d'activité, AAH, ASPA, bourses remplacés par l'AFU ? Le manifeste dit « à la place de toutes les aides », les classeurs comptent 135 Md€ d'aides fusionnées, mais aucun amendement ne les abroge | **Remplacés** | Promis | Oui : « maintenus en différentiel » (l'AFU compte comme ressource, l'aide complète jusqu'au niveau actuel, elle devient imposable à 23 %) |
+| H2 | La déduction de 10 % pour frais professionnels survit-elle ? (art. 83 3° CGI non abrogé) | **Maintenue** : 0,793 € gardé par euro gagné, seuil d'équilibre ≈ 31 884 € de salaire net annuel | Estimation | Oui : supprimée = lecture des auteurs (0,77 € ; 28 695,65 €) |
+| H3 | Revenu imposable | Aujourd'hui : net + CSG non déductible + CRDS ; plan : salaire net (plus de CSG) − 10 % ; pensions : CSG déductible maintenue, abattement de 10 % supprimé | Amendement proposé | — |
+| H4 | Qui capte la baisse de CSG et la fin des exonérations patronales ? | 100 % au salarié (incidence légale de court terme), salaire brut et coût employeur inchangés | Promis | — |
+| H5 | Répercussion de la TVA et de la fin des CEE sur les prix | **100 %**, panier fixe lissé selon le niveau de vie | Estimation | Oui : 0 %, 50 %, 100 % |
+| H6 | Chômage « de treize à six mois » (aucun texte) | Montant mensuel de l'ARE inchangé ; « au 7e mois : ARE = 0 » montré dans les pertes non chiffrées | Promis | — |
+| H7 | Compte d'épargne, patrimoine, compte éducation | Montrés à part aux montants annoncés | Promis | — |
 | H8 | Taxe foncière unique | Non modélisée (les tarifs INSEE n'existent pas encore) | — | — |
-| H9 | Gel de l'indexation | En euros 2026 : non modélisé ; signalé | Loi | — |
+| H9 | Gel de l'indexation | En euros 2026 : non modélisé ; signalé | Amendement proposé | — |
 | H10 | Garde alternée, partage de l'AFU entre parents séparés | Non modélisé (enfants dans un seul ménage) | — | — |
-| H11 | Couples | Aujourd'hui : impôt commun si marié·e/pacsé·e, sinon deux foyers fiscaux (enfants rattachés à l'adulte 1) ; CAF : un seul ménage. Plan : individuel, indépendant du mariage | Loi | — |
-| H12 | AFU non indexée | 6 600 € nominaux appliqués aux revenus 2026 | Loi | — |
-| H13 | Jeunes de 18 à 24 ans | Toute personne majeure reçoit l'AFU adulte (550 €/mois) ; le rattachement (art. 196 B) étant abrogé en 2028 (am. 1, 130°), elle forme son propre foyer et reçoit sa propre aide — même total pour le ménage | Loi | — |
-| H14 | Non-recours | Aides perçues si éligible | Hypothèse | Oui : « je ne touche pas ces aides » ; total CAF déclaré |
-| H15 | Enfant bénéficiaire de l'AEEH | **Pas** supposé titulaire de la CMI « invalidité » : l'AEEH peut être versée dès 50 % d'incapacité, la CMI exige 80 %. Si la CMI est déclarée : +6 600 €/an d'AFU, et ½ part aujourd'hui | Hypothèse | Oui (champ `cmiInvalidite`, défaut non) |
-| H16 | Taux de CSG des pensions quand les parts fiscales disparaissent (l'art. L136-8 CSS renvoie aux « parts de quotient familial » de l'art. 194 CGI, abrogé, et n'est pas modifié) | RFR N-2 : taux actuel en 2027 ; en 2028, RFR 2026 calculé sans l'abattement de 10 % sur les pensions ; ensuite revenu imposable du plan, 1 part par adulte + ½ par enfant. Lecture littérale alternative (1 part par foyer) : un couple de retraités passerait souvent au taux plein | Hypothèse | — |
-| H17 | APL pendant la transition | Calendrier des logements conventionnés (am. 32 II) : −1/3 (juillet 2027), −2/3 (juillet 2028), 0 (juillet 2029). Parc privé (am. 32 III) : aide entière jusqu'au terme du bail, sans reconduction, au plus tard le 1er janvier 2030 ; pour un bail de 3 ans d'échéance inconnue (uniforme), la moyenne annuelle est la même (5/6, 1/2, 1/6). Un bail meublé (1 an) s'arrête plus tôt | Hypothèse | — |
-| H19 | Pension alimentaire d'un parent isolé | Non déclarée : supposée non versée, l'allocation de soutien familial est versée en entier ; déclarée : l'ASF est réduite d'autant | Hypothèse | Oui (montant reçu) |
-| H20 | Frais de garde non renseignés | Assistante maternelle : 873 €/mois par enfant (180 h au tarif médian de 4,85 €/h) ; micro-crèche : 1 620 € (180 h à 9 €/h) ; crèche : 180 h au barème national selon vos revenus. Mêmes frais avec le plan | Hypothèse | Oui (montant réel) |
-| H18 | Baisse progressive de la CSG en 2027 | Part déductible = min(taux, 6,8 points) : l'art. 154 quinquies CGI (« à hauteur de 6,8 points ») n'est pas modifié | Loi | — |
+| H11 | Couples | Aujourd'hui : impôt commun si marié·e/pacsé·e, sinon deux foyers fiscaux (enfants rattachés à l'adulte 1) ; CAF : un seul ménage. Plan : individuel, indépendant du mariage | Amendement proposé | — |
+| H12 | AFU non indexée | 6 600 € nominaux appliqués aux revenus 2026 | Amendement proposé | — |
+| H13 | Jeunes de 18 à 24 ans | Toute personne majeure reçoit l'AFU adulte (550 €/mois) ; le rattachement (art. 196 B) étant abrogé en 2028 (am. 1, 130°), elle forme son propre foyer et reçoit sa propre aide — même total pour le ménage | Amendement proposé | — |
+| H14 | Non-recours | Aides perçues si éligible | Estimation | Oui : « je ne touche pas ces aides » ; total CAF déclaré |
+| H15 | Enfant bénéficiaire de l'AEEH | **Pas** supposé titulaire de la CMI « invalidité » : l'AEEH peut être versée dès 50 % d'incapacité, la CMI exige 80 %. Si la CMI est déclarée : +6 600 €/an d'AFU, et ½ part aujourd'hui | Estimation | Oui (défaut : non) |
+| H16 | Taux de CSG des pensions quand les parts fiscales disparaissent (l'art. L136-8 CSS renvoie aux « parts de quotient familial » de l'art. 194 CGI, abrogé, et n'est pas modifié) | RFR N-2 : taux actuel en 2027 ; en 2028, RFR 2026 calculé sans l'abattement de 10 % sur les pensions ; ensuite revenu imposable du plan, 1 part par adulte + ½ par enfant. Lecture littérale alternative (1 part par foyer) : un couple de retraités passerait souvent au taux plein | Estimation | — |
+| H17 | APL pendant la transition | Calendrier des logements conventionnés (am. 32 II) : −1/3 (juillet 2027), −2/3 (juillet 2028), 0 (juillet 2029). Parc privé (am. 32 III) : aide entière jusqu'au terme du bail, sans reconduction, au plus tard le 1er janvier 2030 ; pour un bail de 3 ans d'échéance inconnue (uniforme), la moyenne annuelle est la même (5/6, 1/2, 1/6). Un bail meublé (1 an) s'arrête plus tôt | Estimation | — |
+| H18 | Baisse progressive de la CSG en 2027 | Part déductible = min(taux, 6,8 points) : l'art. 154 quinquies CGI (« à hauteur de 6,8 points ») n'est pas modifié | Amendement proposé | — |
+| H19 | Pension alimentaire d'un parent isolé | Non déclarée : supposée non versée, l'allocation de soutien familial est versée en entier ; déclarée : l'ASF est réduite d'autant | Estimation | Oui (montant reçu) |
+| H20 | Frais de garde non renseignés | Assistante maternelle : 873 €/mois par enfant (180 h au tarif médian de 4,85 €/h) ; micro-crèche : 1 620 € (180 h à 9 €/h) ; crèche : 180 h au barème national selon vos revenus. Mêmes frais avec le plan | Estimation | Oui (montant réel) |
 
-## 4. TVA : une estimation lissée
+## 4. TVA : une estimation lissée {#tva}
 
 Le simulateur ne connaît pas votre panier : il l'estime, **sans effet de seuil** (pas de déciles).
 
@@ -96,7 +106,7 @@ Le simulateur ne connaît pas votre panier : il l'estime, **sans effet de seuil*
 
 Repère : la TVA représente ≈ 10,7 % de la consommation des ménages (INSEE) ; le simulateur retrouve ce taux.
 
-## 5. Calendrier de la transition
+## 5. Calendrier de la transition {#calendrier}
 
 | Date | Mesure (source) |
 |---|---|
@@ -114,7 +124,7 @@ Chaque « photo » (2027, 2028, 2030) est la moyenne des 12 mois de l'année ; l
 revenu imposable de l'année. Les retraités voient un **creux en 2027** : l'abattement de 10 % disparaît avant
 l'arrivée de l'aide fondamentale.
 
-## 6. Simplifications assumées
+## 6. Simplifications assumées {#simplifications}
 
 - **Régime permanent** : revenus constants, donc les règles « trimestrielles » (RSA, prime d'activité), « N-2 »
   (prestations familiales, CSG des pensions) et « 12 mois » (APL) voient vos revenus actuels.
@@ -153,7 +163,7 @@ l'arrivée de l'aide fondamentale.
 - **Total CAF déclaré** : si vous le saisissez, les aides CAF calculées sont ajustées proportionnellement, dans les
   deux scénarios.
 
-## 7. Écart avec OpenFisca (situation actuelle)
+## 7. Écart avec OpenFisca (situation actuelle) {#openfisca}
 
 La situation actuelle est vérifiée sur **40 ménages types** calculés par OpenFisca-France 176.1.3 (le moteur
 open source de référence, publié le 23 octobre 2026), ligne par ligne :
@@ -178,7 +188,7 @@ Le plan est vérifié sur les chiffres des auteurs : gain de CSG au SMIC 2025 (1
 table « GraphIR » (revenu imposable 0 / 8 000 / 21 000 / 34 000 / 48 000 €) avec la lecture des auteurs (H2
 désactivée) ; seuil 28 695,65 € ; 0,77 € gardé par euro ; adulte handicapé : 1 100 €/mois.
 
-## 8. Ce que le simulateur ne compte pas
+## 8. Ce que le simulateur ne compte pas {#non-compte}
 
 - les revenus et la fiscalité du patrimoine et de l'épargne (intérêts, dividendes, loyers perçus, plus-values) ;
 - la taxe foncière, aujourd'hui comme avec la taxe foncière unique du plan ;
@@ -197,13 +207,13 @@ désactivée) ; seuil 28 695,65 € ; 0,77 € gardé par euro ; adulte handicap
 Ces éléments figurent, quand ils vous concernent, dans les panneaux « Promis, non chiffré par la loi » et « Retiré,
 non chiffré ici », à poids égal.
 
-## 9. Cas-types
+## 9. Cas-types {#cas-types}
 
 La page « Qui gagne, qui perd ? » montre 47 ménages types **illustratifs et non pondérés** : ils ne disent rien de la
 proportion de ménages gagnants ou perdants en France (nous n'avons pas de données individuelles). Les résultats sont
-publiés dans `engine/cas-types-results.json`.
+publiés dans le fichier [`cas-types-results.json`](https://github.com/Pierrolo/etat-partout-justice-nulle-part/blob/main/engine/cas-types-results.json) du dépôt.
 
-## 10. Sources principales
+## 10. Sources principales {#sources}
 
 - Plan : liasses d'amendements Résolution (PLF 2027 1re partie, 2de partie, PLFSS 2027, 19 octobre 2026) —
   france-resolution.fr/amendements ; fiches et manifeste — france-resolution.fr ; classeurs « Synthèse Chiffres » et
@@ -215,5 +225,18 @@ publiés dans `engine/cas-types-results.json`.
   prélèvements obligatoires (note TVA 2023), Cour des comptes (CEE).
 - Vérification : OpenFisca-France 176.1.3.
 
-Chaque paramètre (plus de 300) porte sa valeur, son unité, sa date d'effet et sa source dans le code
-(`engine/src/params`).
+Chaque paramètre (plus de 300) porte sa valeur, son unité, sa date d'effet et sa source dans le
+[code du moteur](https://github.com/Pierrolo/etat-partout-justice-nulle-part/tree/main/engine/src/params), publié en open source.
+
+## 11. Où les sources du livre se contredisent {#ecarts-sources}
+
+Le livre, ses amendements et ses classeurs ne disent pas toujours la même chose. **Aucun chiffre n'est corrigé en silence** : quand deux sources divergent, le site conserve les deux valeurs, dit laquelle sert au calcul ou au graphique, et renvoie ici. Les écarts sont numérotés D01 à D34 ; les plus visibles sont rappelés d'abord.
+
+## 12. Journal des modifications {#journal}
+
+| Date | Version | Ce qui a changé |
+|---|---|---|
+| 24 octobre 2026 | moteur 1.1.0 | Complément de libre choix du mode de garde (CMG) et crédit d'impôt garde d'enfants ; pension alimentaire et allocation de soutien familial ; phrase de synthèse en clair ; raison de chaque aide à 0 € ; heure de travail cohérente avec le revenu du foyer ; seconde lecture de H1 ; dirigeants assimilés salariés et travailleurs non salariés ; arrondi d'affichage à 5 € qui préserve les totaux. |
+| 24 octobre 2026 | site | Niveaux de certitude renommés (« Proposé dans un amendement », « Promis par les auteurs », « Notre estimation ») ; page Méthode complète ; glossaire des sigles ; page « Ce que le plan prévoit pour… ». |
+| 24 octobre 2026 | moteur 1.0.1 | Audit indépendant du moteur, quatre corrections : AEEH et carte mobilité inclusion (défaut), demi-part de la carte, CSG déductible en 2027, tranche de CSG des pensions en 2028. |
+| 24 octobre 2026 | moteur 1.0.0 | Première version publiée : situation 2026 vérifiée sur 40 ménages types OpenFisca, plan reproduit sur les cas du livre. |

@@ -37,6 +37,12 @@
  *
  * Hex values are 6-digit on purpose: src/lib/contrast.ts parses this file, and
  * src/lib/chart-theme.ts mirrors the chart tokens (a test keeps both in sync).
+ *
+ * BRANDS
+ *   This file is the « Éditorial » brand (the default, <html data-brand="editorial">). A second brand,
+ *   « Call Intelligence » (<html data-brand="ci">), lives in brand-ci.css and overrides the SAME
+ *   custom properties (+ the shape / type tokens at the bottom of :root). Components never know which
+ *   brand is active: they read tokens. See docs in brand-ci.css and src/lib/brand.ts.
  */
 
 :root {
@@ -69,6 +75,10 @@
   --loss-soft: light-dark(#fbe9e0, #3a2118);
   --on-gain: light-dark(#ffffff, #0b1d1e);
   --on-loss: light-dark(#ffffff, #2a1209);
+  /* The same poles as GRAPHICAL MARKS (bars, lines, dots: ≥ 3 : 1). In « Éditorial » one value does both
+     jobs (text ≥ 4.5 : 1 implies mark ≥ 3 : 1); a brand may split them (see brand-ci.css). */
+  --gain-mark: light-dark(#00737a, #28bac1);
+  --loss-mark: light-dark(#bc3f06, #ef8959);
 
   /* ── Tiers of evidence (see TierBadge) ────────────────────────────────── */
   --tier-law-bg: light-dark(#15171c, #edece7); /* solid: written in the law */
@@ -131,6 +141,52 @@
   --wrap: 72rem; /* page container */
   --measure: 40rem; /* comfortable reading column (≈ 68 characters) */
   --tap: 2.75rem; /* 44 px comfortable touch target (WCAG 2.5.8 needs only 24 px) */
+
+  /* ── Brand-level shape & type tokens (the « Éditorial » values; brand-ci.css overrides them) ───── */
+  --field-bg: var(--surface); /* text inputs, selects, segmented options */
+  --card-bg: var(--surface);
+  --card-bw: 1px;
+  --card-bc: var(--rule);
+  --card-r: var(--r-lg);
+  --btn-r: var(--r-md);
+  --btn-primary-bg: var(--accent);
+  --btn-primary-fg: var(--on-accent);
+  --btn-primary-hover: var(--accent-hover);
+  --btn-secondary-bg: var(--surface);
+  --btn-secondary-bc: var(--rule-strong);
+  --r-tag: var(--r-sm); /* tier badges, source chips' inner label */
+  --rule-w: 1px; /* hairline rules between blocks */
+  --bar-w: 4px; /* left bar of callouts */
+  --nav-mark: var(--accent); /* current-page mark in the header */
+  --focus-w: 3px;
+  --focus-offset: 2px;
+
+  --link: var(--accent);
+  --link-hover: var(--accent-hover);
+  --link-underline: color-mix(in oklab, var(--accent) 45%, transparent);
+  --link-underline-w: 1px;
+  --link-underline-hover-w: 2px;
+
+  --ff-label: var(--ff-sans); /* eyebrows, small captions in capitals */
+  --fs-label: var(--text-xs);
+  --fw-label: 650;
+  --ls-label: 0.09em;
+  --ff-figure: var(--ff-serif); /* big standalone numbers */
+  --fw-figure: 500;
+  --ls-figure: -0.03em;
+  --fw-h1: 500; /* h1, h2 and .display */
+  --ls-h1: -0.018em;
+  --ls-display: -0.03em;
+  --fw-h3: 650; /* h3, h4 */
+  --ls-h3: -0.005em;
+  --fw-strong: 650;
+  --font-features: 'cv11' 1, 'ss03' 0;
+
+  --hatch-angle: 135deg; /* « annoncé » hatching */
+  --hatch-w: 1.5px;
+  --hatch-gap: 7px;
+  --hatch-fine-w: 1px;
+  --hatch-fine-gap: 4.5px;
 }
 
 :root[data-theme='light'] {

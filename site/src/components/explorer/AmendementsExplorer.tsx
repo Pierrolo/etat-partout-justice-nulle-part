@@ -225,7 +225,7 @@ export default function AmendementsExplorer({
               id="am-theme"
               value={ui.theme}
               onChange={(e) => patch({ theme: e.target.value })}
-              className="min-h-11 w-full rounded-md border-[1.5px] border-rule-strong bg-surface px-3 text-[1rem] text-ink hover:border-ink focus-visible:border-accent"
+              className="min-h-11 w-full rounded-md border-[1.5px] border-rule-strong bg-field px-3 text-[1rem] text-ink hover:border-ink focus-visible:border-accent"
             >
               <option value="">Tous les thèmes ({themes.length})</option>
               {themes.map((t) => (

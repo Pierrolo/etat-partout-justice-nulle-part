@@ -1,0 +1,266 @@
+{
+  "_comment": "Glossaire du site, écrit à la main (seul fichier de ce dossier qui ne vient pas du pipeline). Définitions en français courant, une ou deux phrases. Utilisé par <Term id=\"afu\"> (React) et <GlossaryTerm id=\"afu\"> (Astro). `aliases` : autres identifiants acceptés. `href` : page du site pour en savoir plus (chemin sans préfixe).",
+  "abattement": {
+    "term": "Abattement",
+    "definition": "Part d’un revenu qu’on retire avant de calculer l’impôt. Exemple : 10 % de frais professionnels déduits d’un salaire."
+  },
+  "afu": {
+    "term": "Aide fondamentale universelle (AFU)",
+    "definition": "Somme versée chaque mois à chaque adulte (550 €, soit 6 600 € par an) et à chaque enfant (275 €), proposée par les auteurs du plan. Elle vient de l’administration fiscale et elle est versée même quand elle dépasse l’impôt dû.",
+    "href": "/comprendre/le-plan"
+  },
+  "aah": {
+    "term": "Allocation aux adultes handicapés (AAH)",
+    "definition": "Revenu mensuel versé aux adultes handicapés qui ne peuvent pas ou peu travailler, sous condition de ressources."
+  },
+  "aeeh": {
+    "term": "Allocation d’éducation de l’enfant handicapé (AEEH)",
+    "definition": "Aide versée aux parents d’un enfant handicapé de moins de 20 ans pour couvrir une partie des frais liés à son handicap."
+  },
+  "af": {
+    "term": "Allocations familiales (AF)",
+    "definition": "Somme versée par la CAF à partir du deuxième enfant à charge. Son montant dépend des revenus du ménage et de l’âge des enfants.",
+    "aliases": [
+      "allocations-familiales"
+    ]
+  },
+  "amendement": {
+    "term": "Amendement",
+    "definition": "Proposition de modification d’un projet de loi. Ceux du plan sont rédigés avec précision par les auteurs, mais ni déposés au Parlement ni votés."
+  },
+  "aides-logement": {
+    "term": "Aides au logement (APL, ALF, ALS)",
+    "definition": "Aide mensuelle de la CAF pour payer un loyer ou un crédit immobilier. Elle dépend des revenus, du loyer et de la zone où l’on habite.",
+    "aliases": [
+      "apl",
+      "al",
+      "aides-au-logement"
+    ]
+  },
+  "are": {
+    "term": "Allocation d’aide au retour à l’emploi (ARE)",
+    "definition": "Indemnité chômage versée par France Travail aux personnes qui ont perdu leur emploi et cotisé assez longtemps."
+  },
+  "ars": {
+    "term": "Allocation de rentrée scolaire (ARS)",
+    "definition": "Somme versée chaque été par la CAF aux familles modestes, pour chaque enfant scolarisé de 6 à 18 ans."
+  },
+  "asf": {
+    "term": "Allocation de soutien familial (ASF)",
+    "definition": "Aide versée à un parent qui élève seul son enfant quand l’autre parent ne paie pas, ou paie peu, de pension alimentaire."
+  },
+  "aspa": {
+    "term": "Allocation de solidarité aux personnes âgées (ASPA)",
+    "definition": "Complément versé aux retraités à très faibles ressources, à partir de 65 ans. On l’appelait autrefois le « minimum vieillesse ».",
+    "aliases": [
+      "minimum-vieillesse"
+    ]
+  },
+  "bmaf": {
+    "term": "Base mensuelle des allocations familiales (BMAF)",
+    "definition": "Montant de référence, revalorisé chaque année, qui sert à calculer plusieurs aides familiales (allocations familiales, aide à la garde…)."
+  },
+  "bouclier-sanitaire": {
+    "term": "Bouclier sanitaire",
+    "definition": "Plafond annuel de ce que chacun paie de sa poche pour se soigner : au-delà, la prise en charge est totale. Le plan en fait la protection qui accompagne la participation de 10 % par acte."
+  },
+  "caf": {
+    "term": "Caisse d’allocations familiales (CAF)",
+    "definition": "Organisme qui verse les aides au logement, les allocations familiales, le RSA et la prime d’activité."
+  },
+  "cee": {
+    "term": "Certificats d’économies d’énergie (CEE)",
+    "definition": "Obligation faite aux fournisseurs d’énergie de financer des travaux d’économie d’énergie, dont le coût se retrouve dans les factures de tous. Le plan la supprime."
+  },
+  "cep": {
+    "term": "Compte d’épargne personnel (CEP)",
+    "definition": "Compte d’épargne que les auteurs promettent à chaque personne (300 € par mois annoncés). Aucun amendement n’en fixe le montant : il serait décidé chaque année par la loi de finances.",
+    "href": "/comprendre/le-plan"
+  },
+  "cmg": {
+    "term": "Complément de libre choix du mode de garde (CMG)",
+    "definition": "Aide de la CAF qui rembourse une partie du coût d’une assistante maternelle ou d’une micro-crèche pour un enfant de moins de 6 ans."
+  },
+  "cmi": {
+    "term": "Carte mobilité inclusion (CMI) « invalidité »",
+    "definition": "Carte attribuée aux personnes dont le taux d’incapacité est d’au moins 80 %. Dans le plan, elle ouvre un supplément d’aide fondamentale de 6 600 € par an."
+  },
+  "cnracl": {
+    "term": "CNRACL",
+    "definition": "Caisse nationale de retraites des agents des collectivités locales : la caisse de retraite des fonctionnaires territoriaux et hospitaliers."
+  },
+  "cf": {
+    "term": "Complément familial (CF)",
+    "definition": "Aide versée aux familles d’au moins trois enfants à charge, tous âgés de plus de 3 ans, dont les revenus sont modestes ou moyens.",
+    "aliases": [
+      "complement-familial"
+    ]
+  },
+  "cofog": {
+    "term": "COFOG",
+    "definition": "Classement international des dépenses publiques par fonction (santé, éducation, défense…), utilisé par l’Insee pour comparer les pays."
+  },
+  "compte-education": {
+    "term": "Compte éducation",
+    "definition": "Somme promise par les auteurs pour financer la scolarité de chaque enfant (6 600 € par an annoncés). Aucun amendement n’en fixe le montant."
+  },
+  "cotisations": {
+    "term": "Cotisations sociales",
+    "definition": "Prélèvements sur le salaire qui financent la retraite, le chômage, la maladie. Une part est payée par le salarié (déjà retirée de son net), l’autre par l’employeur."
+  },
+  "cout-employeur": {
+    "term": "Coût employeur",
+    "definition": "Ce que l’entreprise paie vraiment pour un salarié : le salaire brut plus les cotisations à sa charge."
+  },
+  "crds": {
+    "term": "Contribution pour le remboursement de la dette sociale (CRDS)",
+    "definition": "Petit prélèvement de 0,5 % sur la plupart des revenus, qui sert à rembourser la dette de la Sécurité sociale."
+  },
+  "csg": {
+    "term": "Contribution sociale généralisée (CSG)",
+    "definition": "Prélèvement sur les revenus (salaires, pensions, capital) qui finance la Sécurité sociale (9,2 % sur un salaire). Le plan la supprime sur les revenus du travail.",
+    "href": "/methode"
+  },
+  "decote": {
+    "term": "Décote",
+    "definition": "Réduction d’impôt qui efface ou diminue l’impôt des foyers aux revenus modestes."
+  },
+  "differentiel": {
+    "term": "Maintenus en différentiel",
+    "definition": "L’AFU compte comme une ressource, et les aides actuelles (RSA, prime d’activité, AAH) ne complètent que ce qui manque pour retrouver leur niveau d’aujourd’hui.",
+    "aliases": [
+      "maintenus-en-differentiel"
+    ],
+    "href": "/methode#h1"
+  },
+  "dirigeant-assimile": {
+    "term": "Dirigeant assimilé salarié",
+    "definition": "Président d’une SAS ou d’une SASU, gérant minoritaire d’une SARL : il relève du régime des salariés pour la Sécurité sociale, mais sans assurance chômage.",
+    "aliases": [
+      "dirigeant"
+    ]
+  },
+  "foyer-fiscal": {
+    "term": "Foyer fiscal",
+    "definition": "Les personnes déclarées ensemble aux impôts : un adulte, ou un couple marié ou pacsé, avec ses enfants à charge."
+  },
+  "fonctionnaire": {
+    "term": "Fonctionnaire",
+    "definition": "Agent titulaire de la fonction publique. Ses cotisations et sa retraite relèvent de règles propres : le simulateur les approche, sans les calculer exactement.",
+    "href": "/methode"
+  },
+  "hypothese": {
+    "term": "Hypothèse du simulateur",
+    "definition": "Choix que nous faisons là où le texte du plan est muet (par exemple : les aides actuelles sont-elles remplacées par l’AFU ?). Elles portent un numéro H1, H2… et sont toutes listées sur la page Méthode.",
+    "href": "/methode#registre"
+  },
+  "indexation": {
+    "term": "Indexation",
+    "definition": "Revalorisation automatique d’un montant (pension, allocation) quand les prix augmentent."
+  },
+  "ir": {
+    "term": "Impôt sur le revenu (IR)",
+    "definition": "Impôt annuel calculé sur les revenus du foyer fiscal. Aujourd’hui progressif par tranches ; dans le plan, un taux unique de 23 %."
+  },
+  "liasse": {
+    "term": "Liasse d’amendements",
+    "definition": "Paquet d’amendements déposés ensemble sur un même projet de loi. Le plan en compte trois : PLF première partie, PLF seconde partie et PLFSS."
+  },
+  "menage": {
+    "term": "Ménage",
+    "definition": "Toutes les personnes qui vivent ensemble dans le même logement. C’est l’unité du simulateur, parce que les aides de la CAF se calculent pour le ménage."
+  },
+  "niche-fiscale": {
+    "term": "Niche fiscale",
+    "definition": "Réduction, crédit ou exonération d’impôt réservé à certaines personnes ou à certaines dépenses. Chacune coûte de l’argent à l’État.",
+    "aliases": [
+      "niche",
+      "niches"
+    ],
+    "href": "/comprendre/niches"
+  },
+  "non-recours": {
+    "term": "Non-recours",
+    "definition": "Fait de ne pas demander une aide à laquelle on a droit, par ignorance, par lassitude ou par crainte des démarches."
+  },
+  "paje": {
+    "term": "Prestation d’accueil du jeune enfant (PAJE)",
+    "definition": "Ensemble d’aides pour les enfants de moins de 3 ans : prime à la naissance, allocation de base, aide à la garde (CMG)."
+  },
+  "plf": {
+    "term": "Projet de loi de finances (PLF)",
+    "definition": "Le budget de l’État pour l’année suivante, voté chaque automne : la première partie fixe les recettes (impôts), la seconde les dépenses."
+  },
+  "plfss": {
+    "term": "Projet de loi de financement de la Sécurité sociale (PLFSS)",
+    "definition": "Le budget de la Sécurité sociale (maladie, famille, retraites), voté chaque automne."
+  },
+  "prime-activite": {
+    "term": "Prime d’activité",
+    "definition": "Complément de revenu versé par la CAF aux personnes qui travaillent avec un salaire modeste.",
+    "aliases": [
+      "prime-d-activite"
+    ]
+  },
+  "quotient-familial": {
+    "term": "Quotient familial",
+    "definition": "Mécanisme qui réduit l’impôt sur le revenu selon le nombre de parts du foyer (une par adulte, une demi-part ou une part par enfant). Son effet est plafonné."
+  },
+  "revenu-disponible": {
+    "term": "Revenu disponible",
+    "definition": "Ce qui reste au ménage pour vivre : salaires nets, pensions et allocations, moins l’impôt sur le revenu. Le simulateur en retire aussi une estimation de la TVA.",
+    "href": "/methode#calcul"
+  },
+  "revenu-net-imposable": {
+    "term": "Revenu net imposable",
+    "definition": "La part de vos revenus sur laquelle l’impôt est calculé, après abattements (par exemple 10 % de frais professionnels sur un salaire)."
+  },
+  "rgdu": {
+    "term": "Réduction générale dégressive unique (RGDU)",
+    "definition": "Baisse des cotisations patronales sur les bas salaires, qui diminue à mesure que le salaire augmente."
+  },
+  "rsa": {
+    "term": "Revenu de solidarité active (RSA)",
+    "definition": "Revenu minimum versé aux personnes qui n’ont pas ou presque pas de ressources, en général à partir de 25 ans."
+  },
+  "smic": {
+    "term": "Salaire minimum (SMIC)",
+    "definition": "Salaire minimum légal en France : le salaire horaire en dessous duquel aucun employeur ne peut payer."
+  },
+  "taux-marginal": {
+    "term": "Taux marginal",
+    "definition": "Part de chaque euro supplémentaire gagné qui part en impôts ou en aides perdues. À 30 %, un euro de plus ne rapporte que 70 centimes.",
+    "aliases": [
+      "tmef",
+      "taux-marginal-effectif"
+    ]
+  },
+  "tns": {
+    "term": "Travailleur non salarié (TNS)",
+    "definition": "Indépendant, micro-entrepreneur ou gérant majoritaire de SARL. Le simulateur ne sait pas encore calculer sa situation et le dit.",
+    "aliases": [
+      "independant"
+    ]
+  },
+  "tva": {
+    "term": "Taxe sur la valeur ajoutée (TVA)",
+    "definition": "Impôt compris dans le prix de presque tout ce qu’on achète : 20 % en taux normal, moins pour l’alimentation, les transports ou les travaux. Le plan relève les taux réduits."
+  },
+  "uc": {
+    "term": "Unité de consommation (UC)",
+    "definition": "Façon de comparer des ménages de tailles différentes : 1 pour le premier adulte, 0,5 pour chaque autre personne de 14 ans ou plus, 0,3 pour chaque enfant plus jeune.",
+    "aliases": [
+      "unite-de-consommation"
+    ]
+  },
+  "zones": {
+    "term": "Zones 1, 2 et 3",
+    "definition": "Classement des communes selon la cherté des loyers : zone 1 pour l’agglomération parisienne, zone 2 pour les autres grandes villes, zone 3 pour le reste. Il sert à calculer les aides au logement.",
+    "aliases": [
+      "zone",
+      "zone-1",
+      "zone-2",
+      "zone-3"
+    ]
+  }
+}

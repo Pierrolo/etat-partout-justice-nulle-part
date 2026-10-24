@@ -1,18 +1,20 @@
 /**
- * Pure derivations from an engine `Comparison` to what the result UI shows.
- * No tax logic: only joining, ordering, signs and wording. All numbers become strings via lib/format.
+ * Pure derivations from an engine `Comparison` (+ its `DisplayComparison`) to what the result UI shows.
+ * No tax logic: only joining, ordering, signs and wording. All numbers become strings via lib/format, and
+ * every displayed amount comes from the engine's `roundForDisplay` so that all screens show identical
+ * figures (docs/ENGINE-API.md, v1.1). This module never imports the engine at runtime (it is loaded lazily).
  */
 import type {
   Comparison,
-  Component,
   ComponentGroup,
+  DisplayComparison,
   Period,
-  ScenarioResult,
   SourceRef,
-  Tier,
+  UnquantifiedItem,
   WaterfallStep,
 } from '@/lib/engine-types';
-import { formatEuro, formatEuroDelta, formatPercent, roundForDisplay } from '@/lib/format';
+import { EM_DASH, formatEuro, formatEuroDelta, formatPercent } from '@/lib/format';
+import { typo } from '@/lib/typo';
 
 export const PERIODS: Period[] = ['steady', 2027, 2028, 2030];
 
@@ -41,36 +43,75 @@ export type Direction = 'gain' | 'loss' | 'flat';
 export const directionOf = (rounded: number): Direction =>
   rounded > 0 ? 'gain' : rounded < 0 ? 'loss' : 'flat';
 
-export interface Headline {
-  direction: Direction;
-  /** « +210 €/mois » (signed, rounded to 5 €). */
-  amount: string;
-  /** « +9 % » */
-  percent: string;
-  /** « 210 € de plus par mois » — spoken form, sign-free. */
-  words: string;
-  /** « Soit environ 7 € par jour ». */
-  perDay: string;
-  from: string;
-  to: string;
-  roundedDelta: number;
+/* ── Percentages ────────────────────────────────────────────────────────── */
+
+/**
+ * Relative change on the SAME basis as the headline figures (after the estimated TVA): the engine's
+ * `deltaPct` is measured before indirect taxes, so a reader dividing « +660 € » by « 3 090 € » would not
+ * find it. The engine decides WHEN a percentage is meaningful: `null` (today's income ≤ 50 €/month) stays
+ * `null` here, and the UI shows « — », never « 0,0 % ».
+ */
+export function headlinePct(c: Comparison): number | null {
+  if (c.deltaPct === null) return null;
+  const base = c.baseline.disposableAfterTva;
+  return base > 0 ? c.deltaAfterTva / base : null;
 }
 
 export function percentDigits(ratio: number): number {
   return Math.abs(ratio) < 0.1 ? 1 : 0;
 }
 
-export function buildHeadline(c: Comparison): Headline {
-  const fig = displayFigures(c);
-  const rounded = fig.delta;
+/** « +22 % », « −3,6 % », and « — » when the engine says the percentage is meaningless (null). */
+export function pctText(ratio: number | null | undefined): string {
+  if (ratio === null || ratio === undefined || !Number.isFinite(ratio)) return EM_DASH;
+  return formatPercent(ratio, { signed: true, decimals: percentDigits(ratio) });
+}
+
+/** Spoken form for a screen reader: « variation non calculée » when null. */
+export const pctSpoken = (ratio: number | null | undefined) =>
+  ratio === null || ratio === undefined || !Number.isFinite(ratio)
+    ? 'variation en pourcentage non calculée'
+    : pctText(ratio);
+
+/* ── Headline ───────────────────────────────────────────────────────────── */
+
+export interface Headline {
+  direction: Direction;
+  /** The headline, €/month, rounded for display (after the estimated TVA). */
+  delta: number;
+  /** « +210 €/mois » (signed). */
+  amount: string;
+  /** « +9 % », or « — » when it would be meaningless. */
+  percent: string;
+  pct: number | null;
+  /** « 210 € de plus par mois » — spoken form, sign-free. */
+  words: string;
+  /** « Soit environ 7 € par jour ». */
+  perDay: string;
+  baseline: number;
+  plan: number;
+  /** What the figure is after: « après impôts, aides et TVA estimée ». */
+  basis: string;
+}
+
+const tvaCounted = (c: Comparison) =>
+  (c.activeHypotheses.find((h) => h.id === 'includeTva')?.value ?? 'oui').startsWith('oui');
+
+export const BASIS_WITH_TVA = 'après impôts, aides et TVA estimée';
+export const BASIS_NO_TVA = 'après impôts et aides, sans la TVA';
+
+export function buildHeadline(c: Comparison, d: DisplayComparison): Headline {
+  const rounded = d.deltaAfterTva;
   const direction = directionOf(rounded);
   const abs = Math.abs(rounded);
   const perDay = Math.abs(rounded * 12) / 365;
+  const pct = headlinePct(c);
   return {
     direction,
-    roundedDelta: rounded,
+    delta: rounded,
     amount: `${formatEuroDelta(rounded)}/mois`,
-    percent: formatPercent(fig.pct, { signed: true, decimals: percentDigits(fig.pct) }),
+    percent: pctText(pct),
+    pct,
     words:
       direction === 'flat'
         ? 'pas de différence notable'
@@ -79,79 +120,80 @@ export function buildHeadline(c: Comparison): Headline {
       direction === 'flat'
         ? ''
         : `Soit environ ${formatEuro(perDay, { decimals: perDay < 10 ? { min: 0, max: 1 } : 0 })} par jour`,
-    from: formatEuro(fig.baseline),
-    to: formatEuro(fig.plan),
+    baseline: d.baselineAfterTva,
+    plan: d.planAfterTva,
+    basis: tvaCounted(c) ? BASIS_WITH_TVA : BASIS_NO_TVA,
   };
 }
 
 /** Lead-in of the headline sentence, depending on the period shown. */
 export function headlineLead(period: Period): string {
   return period === 'steady'
-    ? 'Avec le plan complet appliqué à votre situation de 2026, votre ménage disposerait de'
-    : `En ${period}, avec les mesures alors en vigueur, appliquées à votre situation de 2026, votre ménage disposerait de`;
+    ? 'Avec le plan complet appliqué à votre situation de 2026, votre ménage aurait'
+    : `En ${period}, avec les mesures alors en vigueur, appliquées à votre situation de 2026, votre ménage aurait`;
 }
 
-/** Full plain-text sentence (aria-live, copy, tests). */
-export function headlineSentence(c: Comparison, period: Period): string {
-  const h = buildHeadline(c);
+/** Full plain-text sentence (screen readers, share text, tests). */
+export function headlineSentence(c: Comparison, d: DisplayComparison, period: Period): string {
+  const h = buildHeadline(c, d);
   if (h.direction === 'flat')
-    return `${headlineLead(period)} à peu près le même revenu qu’aujourd’hui (écart inférieur à ${formatEuro(DISPLAY_STEP)} par mois).`;
-  return `${headlineLead(period)} ${h.amount} (${h.percent}).`;
-}
-
-/* ── Side-by-side table ─────────────────────────────────────────────────── */
-
-export interface JoinedRow {
-  key: string;
-  id: string;
-  personIndex?: number;
-  label: string;
-  group: ComponentGroup;
-  before: number;
-  after: number;
-  delta: number;
-  tierBefore: Tier;
-  tierAfter: Tier;
-  formulaBefore: string;
-  formulaAfter: string;
-  sources: SourceRef[];
-}
-
-const compKey = (c: Pick<Component, 'id' | 'personIndex'>) => `${c.id}|${c.personIndex ?? ''}`;
-
-/** Baseline and plan components joined on (id, personIndex); lines at 0 € on both sides are dropped. */
-export function joinComponents(c: Comparison): JoinedRow[] {
-  const base = new Map(c.baseline.components.map((x) => [compKey(x), x]));
-  const plan = new Map(c.plan.components.map((x) => [compKey(x), x]));
-  const keys = [...new Set([...base.keys(), ...plan.keys()])];
-  const rows: JoinedRow[] = [];
-  for (const key of keys) {
-    const b = base.get(key);
-    const p = plan.get(key);
-    const ref = (p ?? b)!;
-    const before = b?.amount ?? 0;
-    const after = p?.amount ?? 0;
-    if (Math.abs(before) < 0.5 && Math.abs(after) < 0.5) continue;
-    const sources = [...(p?.sources ?? []), ...(b?.sources ?? [])].filter(
-      (s, i, a) => a.findIndex((x) => x.label === s.label && x.url === s.url) === i,
+    return typo(
+      `${headlineLead(period).replace('aurait', 'aurait à peu près le même revenu qu’aujourd’hui')} (écart inférieur à ${formatEuro(DISPLAY_STEP)} par mois, ${h.basis}).`,
     );
-    rows.push({
-      key,
-      id: ref.id,
-      personIndex: ref.personIndex,
-      label: ref.label,
-      group: ref.group,
-      before,
-      after,
-      delta: after - before,
-      tierBefore: b?.tier ?? ref.tier,
-      tierAfter: p?.tier ?? ref.tier,
-      formulaBefore: b?.formula ?? '—',
-      formulaAfter: p?.formula ?? '—',
-      sources,
-    });
+  const pct = h.pct === null ? '' : ` (${h.percent})`;
+  return typo(`${headlineLead(period)} ${h.words}${pct}, ${h.basis}.`);
+}
+
+/** The short sentence announced politely after each recomputation (the long one stays static text). */
+export function announcement(c: Comparison, d: DisplayComparison): string {
+  const h = buildHeadline(c, d);
+  if (h.direction === 'flat') return 'Résultat mis à jour : pas de différence notable.';
+  return typo(
+    `Résultat mis à jour : ${h.amount}${h.pct === null ? '' : ` (${h.percent})`}.`,
+  );
+}
+
+/** Text of the native share sheet / clipboard message. */
+export function shareText(c: Comparison, d: DisplayComparison): string {
+  const h = buildHeadline(c, d);
+  const what =
+    h.direction === 'flat'
+      ? 'à peu près le même revenu qu’aujourd’hui'
+      : h.direction === 'gain'
+        ? `${formatEuro(Math.abs(h.delta))} de plus par mois`
+        : `${formatEuro(Math.abs(h.delta))} de moins par mois`;
+  return typo(
+    `Ce que le plan « État partout, justice nulle part » changerait pour un foyer comme le mien : ${what} (estimation, outil indépendant).`,
+  );
+}
+
+/* ── Sources, formulas: cleaning for display ────────────────────────────── */
+
+/** Replaces a developer path (« voir docs/METHODE.md ») with a reader-facing pointer, never a file path. */
+export function plainText(s: string): string {
+  return typo(
+    s
+      .replace(/\(?\s*voir\s+docs\/[\w./#-]+\s*\)?/gi, '(voir la page Méthode)')
+      .replace(/\bdocs\/[\w./#-]+/g, 'la page Méthode'),
+  );
+}
+
+/**
+ * One chip per distinct source: compound labels (« A ; B ») are split, and an entry whose parts were all
+ * seen already is dropped (the engine lists « loi 2026-103 art. 4 » and « loi 2026-103 art. 4 ; BOFiP… »).
+ */
+export function uniqueSources(sources: SourceRef[]): SourceRef[] {
+  const seen = new Set<string>();
+  const key = (s: string) => s.replace(/\s+/g, ' ').trim().toLowerCase();
+  const out: SourceRef[] = [];
+  for (const src of sources) {
+    const parts = src.label.split(/\s;\s/).map(key).filter(Boolean);
+    const fresh = parts.filter((p) => !seen.has(p));
+    parts.forEach((p) => seen.add(p));
+    if (fresh.length === 0) continue;
+    out.push({ ...src, label: plainText(src.label) });
   }
-  return rows.sort((x, y) => GROUP_ORDER.indexOf(x.group) - GROUP_ORDER.indexOf(y.group));
+  return out;
 }
 
 /* ── Waterfall geometry ─────────────────────────────────────────────────── */
@@ -201,100 +243,40 @@ export function zeroLeft(bridge: Bridge): number {
   return ((0 - (bridge.min - pad)) / (span + pad * 2)) * 100;
 }
 
-/** Monthly transfers received outside the pay slip: benefits today; benefits + AFU with the plan. */
-export function transfersOf(r: Pick<ScenarioResult, 'components'>): number {
-  return r.components
-    .filter((c) => c.group === 'prestations' || c.id === 'afu')
-    .reduce((s, c) => s + c.amount, 0);
+/* ── Waterfall steps with their displayed amount ────────────────────────── */
+
+export interface ShownStep extends WaterfallStep {
+  key: string;
+  /** Amount shown (engine `roundForDisplay`): the steps add up exactly to the headline. */
+  shown: number;
 }
 
-/* ── Display rounding (one rule, everywhere) ───────────────────────────── */
-
-/**
- * Round every value to a multiple of `step` so that the ROUNDED values add up exactly to the rounded
- * sum (largest-remainder method). This is what keeps « components sum to the headline » true on screen.
- */
-export function roundSumPreserving(values: number[], step = DISPLAY_STEP): number[] {
-  const units = values.map((v) => v / step);
-  const floors = units.map(Math.floor);
-  let missing = Math.round(units.reduce((s, u) => s + u, 0)) - floors.reduce((s, u) => s + u, 0);
-  const order = units
-    .map((u, i) => ({ i, r: u - Math.floor(u) }))
-    .sort((x, y) => y.r - x.r || x.i - y.i);
-  const out = floors.slice();
-  for (const { i } of order) {
-    if (missing <= 0) break;
-    out[i] = out[i]! + 1;
-    missing--;
-  }
-  return out.map((u) => (u === 0 ? 0 : u * step));
-}
-
-export interface DisplayRow extends JoinedRow {
-  beforeShown: number;
-  afterShown: number;
-  deltaShown: number;
-}
-
-export interface Figures {
-  /** Today's disposable income, rounded to 5 €. */
-  baseline: number;
-  /** = baseline + delta, so the three numbers always agree. */
-  plan: number;
-  /** The headline, €/month, rounded to 5 €. */
-  delta: number;
-  /** Relative change (ratio) of the household's disposable income after indirect taxes. */
-  pct: number;
-  /** Table rows with shown amounts: Σ before = baseline, Σ after = plan. */
-  rows: DisplayRow[];
-  /** Shown deltas aligned with `comparison.waterfall` (they add up to `delta`). */
-  steps: number[];
-}
-
-const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
-
-export function displayFigures(c: Comparison, step = DISPLAY_STEP): Figures {
-  const rows = joinComponents(c);
-  const sumBefore = rows.reduce((s, r) => s + r.before, 0);
-  const sumAfter = rows.reduce((s, r) => s + r.after, 0);
-  const baseline = roundForDisplay(sumBefore, step);
-  const delta = roundForDisplay(sumAfter - sumBefore, step);
-  const stepsRaw = c.waterfall.map((w) => w.delta);
-  const steps = roundSumPreserving(stepsRaw, step);
-  // reconcile with the headline if the engine's waterfall does not add up exactly (it should)
-  const stepsSum = steps.reduce((s, v) => s + v, 0);
-  if (steps.length > 0 && stepsSum !== delta) {
-    const k = steps.reduce((best, v, i, a) => (Math.abs(v) > Math.abs(a[best]!) ? i : best), 0);
-    steps[k] = steps[k]! + (delta - stepsSum);
-  }
-
-  const used = new Set<number>();
-  const rowDelta = rows.map((r) => {
-    const want = [norm(r.id), norm(`${r.id}${r.personIndex ?? ''}`), norm(r.label)];
-    const idx = c.waterfall.findIndex(
-      (w, i) => !used.has(i) && (want.includes(norm(w.id)) || norm(w.label) === norm(r.label)),
-    );
-    if (idx >= 0) {
-      used.add(idx);
-      return steps[idx]!;
-    }
-    return roundForDisplay(r.delta, step);
-  });
-  const beforeShown = roundSumPreserving(
-    rows.map((r) => r.before),
-    step,
-  );
-  const shown: DisplayRow[] = rows.map((r, i) => ({
-    ...r,
-    beforeShown: beforeShown[i]!,
-    deltaShown: rowDelta[i]!,
-    afterShown: beforeShown[i]! + rowDelta[i]!,
+export function shownSteps(c: Comparison, d: DisplayComparison): ShownStep[] {
+  return c.waterfall.map((w, i) => ({
+    ...w,
+    key: `${w.id}#${i}`,
+    shown: d.waterfall[i]?.delta ?? 0,
+    sources: uniqueSources(w.sources),
+    formulaBefore: plainText(w.formulaBefore),
+    formulaAfter: plainText(w.formulaAfter),
   }));
-  const pct = sumBefore > 0 ? (sumAfter - sumBefore) / sumBefore : 0;
-  return { baseline, plan: baseline + delta, delta, pct, rows: shown, steps };
 }
 
-/* ── Wording ────────────────────────────────────────────────────────────── */
+/* ── Unquantified items ─────────────────────────────────────────────────── */
 
-/** « +170 € » / « −90 € » for an amount already rounded for display. */
-export const deltaText = (v: number) => formatEuroDelta(v);
+export const unqTitle = (it: UnquantifiedItem) => it.plainTitle ?? it.title;
+
+/** Items that could plausibly exceed ~50 €/month for this household: shown next to the headline. */
+export const prominentLosses = (c: Comparison) =>
+  c.unquantified.losses.filter((it) => it.prominent === true);
+export const prominentPromises = (c: Comparison) =>
+  c.unquantified.promises.filter((it) => it.prominent === true);
+
+/** Splits « Aujourd’hui : … Avec le plan — A ; B ; C. » into its parts (falls back to the whole text). */
+export function certaintyParts(certainty: string): { intro: string; items: string[] } {
+  const m = /^(.*?)\s—\s(.*?)\.?$/.exec(certainty);
+  if (!m) return { intro: certainty, items: [] };
+  const items = m[2]!.split(/\s;\s/).filter(Boolean);
+  return { intro: m[1]!.replace(/\s*Avec le plan$/, '').trim(), items };
+}
+
