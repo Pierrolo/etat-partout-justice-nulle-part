@@ -766,10 +766,11 @@
     },
     "revalorisation_base_pensions_2026_01_01": {
       "value": 0.009,
-      "unit": "rate",
+      "unit": "rate (coefficient 1.009; informational — also applied to ASPA)",
       "effective_date": "2026-01-01",
-      "source": "LFSS 2026 (loi 2025-1403) / press; informational",
-      "status": "official_republished"
+      "source": "instruction interministérielle du 15/12/2025 ; https://www.moneyvox.fr/retraite/actualites/106682/retraites-carsat-sre-msa-voici-le-taux-officiel-augmentation-au-1er-janvier-2026",
+      "status": "official_republished",
+      "note": "Agirc-Arrco complementary pensions were NOT revalorised on 1 Nov 2025"
     }
   },
   "self_employed_micro": {
