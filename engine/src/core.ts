@@ -9,6 +9,12 @@
 import { aahMonthly } from './baseline/aah.ts';
 import { apl } from './baseline/aides-logement.ts';
 import { aspaMonthly } from './baseline/aspa.ts';
+import {
+  cmgAssistanteMaternelle,
+  cmgMicroCreche,
+  psuDefaultCost,
+  type CmgResult,
+} from './baseline/cmg.ts';
 import { areFromNet, type AreResult } from './baseline/chomage.ts';
 import {
   abattementSalaire,
@@ -83,6 +89,9 @@ export interface BaselineSnapshot {
   arsAnnual: number;
   asf: number;
   aeeh: number;
+  cmg: number;
+  /** today's childcare bill (user input or default) — kept by the plan */
+  childcareCost: number;
   pensionTiers: PensionTier[];
   pensionGross: number[];
   /** today's annual salary + ARE taxable income per adult (RFR 2026 for the 2028 pension CSG tier) */
@@ -105,6 +114,11 @@ export interface MonthFlows {
   arsAnnual: number;
   asf: number;
   aeeh: number;
+  /** CMG (complément de libre choix du mode de garde), monthly */
+  cmg: number;
+  cmgInfo: CmgResult | null;
+  /** childcare bill of the children < 6 (input, or default when not given), monthly */
+  childcareCost: number;
   aah: number[];
   aspa: number;
   rsa: number;
@@ -143,13 +157,14 @@ export function irBareme(
   salTaxY: number[],
   pensTaxY: number[],
   y: YearRules,
+  care: CareCost = NO_CARE,
 ): IncomeTaxResult & { rnc: number } {
   const rnc = netCategoricalIncome(
     f.adults.map((i) => salTaxY[i] ?? 0),
     f.adults.map((i) => pensTaxY[i] ?? 0),
     y.pensionAbattement,
   );
-  const credits = creditsOf(nh, f, y, rnc);
+  const credits = creditsOf(nh, f, y, rnc, care);
   const t = incomeTax({
     rnc,
     couple: f.couple,
@@ -175,17 +190,42 @@ export interface Credits {
   dons: number;
 }
 
-/** Annual tax credits / reductions of a foyer (garde d'enfants < 6 ans hors domicile, emploi à domicile, dons). */
-export function creditsOf(nh: NHousehold, f: Foyer, y: YearRules, taxableIncome: number): Credits {
+/** Monthly childcare bill used by the scenario and the CMG received (both averaged over the period). */
+export interface CareCost {
+  cost: number;
+  cmg: number;
+}
+export const NO_CARE: CareCost = { cost: 0, cmg: 0 };
+
+/** CMG activity condition (CSS L531-5): each parent works, is indemnified, studies or receives the AAH. */
+export function cmgActivityOk(nh: NHousehold): boolean {
+  return nh.adults.every(
+    (a) =>
+      a.salary !== null || a.areNet > 0 || a.activity === 'etudiant' || a.disability !== 'none',
+  );
+}
+
+export const PAID_CARE = ['creche', 'assistante_maternelle', 'micro_creche'] as const;
+export const isPaidCare = (m: NHousehold['childcare']): boolean =>
+  m === 'creche' || m === 'assistante_maternelle' || m === 'micro_creche';
+
+/**
+ * Annual tax credits / reductions of a foyer (garde d'enfants < 6 ans hors domicile, emploi à domicile, dons).
+ * Crédit garde (CGI 200 quater B): 50 % of the expense NET of the CMG received, capped at 3 500 € per child < 6.
+ */
+export function creditsOf(
+  nh: NHousehold,
+  f: Foyer,
+  y: YearRules,
+  taxableIncome: number,
+  care: CareCost = NO_CARE,
+): Credits {
   if (!f.main) return { garde: 0, emploiDomicile: 0, dons: 0 };
   let garde = 0;
   const under6 = f.children.filter((a) => a < 6).length;
-  if (
-    (nh.childcare === 'creche' || nh.childcare === 'assistante_maternelle') &&
-    nh.childcareCostMonthly > 0 &&
-    under6 > 0
-  ) {
-    const perChild = (12 * nh.childcareCostMonthly) / under6;
+  const netCare = Math.max(0, care.cost - care.cmg);
+  if (isPaidCare(nh.childcare) && netCare > 0 && under6 > 0) {
+    const perChild = (12 * netCare) / under6;
     garde =
       n('income_tax.garde_enfant_credit_rate') *
       Math.min(perChild, n('income_tax.garde_enfant_credit_expense_cap')) *
@@ -311,10 +351,40 @@ export function computeMonth(ctx: MonthContext): MonthFlows {
     cf = complementFamilial(ages, rncHousehold, bonus);
     paje = pajeBase(ages, rncHousehold, bonus);
     arsAnnual = ars(ages, rncHousehold);
-    asfAmt = isolated ? asf(under20.length) : 0;
+    asfAmt = isolated ? asf(under20.length, nh.childSupport) : 0;
     aeeh = aeehBase(nh.children.filter((c) => c.aeeh && c.age < 20).length);
   } else if (m.family === 'frozen' && base) {
     ({ af, afBase, cf, paje, arsAnnual, asf: asfAmt, aeeh } = base);
+  }
+
+  // ---- childcare: bill (input or default) and CMG ------------------------------------------------------------
+  const under6 = ages.filter((a) => a < n('x.cmg.max_child_age'));
+  const nDep = ages.filter((a) => a < n('benefits.family.af_max_child_age')).length;
+  let childcareCost = 0;
+  if (isPaidCare(nh.childcare) && under6.length > 0) {
+    if (base) childcareCost = base.childcareCost;
+    else if (nh.childcareCostProvided) childcareCost = nh.childcareCostMonthly;
+    else if (nh.childcare === 'assistante_maternelle')
+      childcareCost = n('x.cmg.default_cost_am') * under6.length;
+    else if (nh.childcare === 'micro_creche')
+      childcareCost = n('x.cmg.default_cost_micro_creche') * under6.length;
+    else childcareCost = psuDefaultCost(under6.length, nDep, rncHousehold);
+  }
+  let cmg = 0;
+  let cmgInfo: CmgResult | null = null;
+  const cmgActivity = cmgActivityOk(nh);
+  if (
+    childcareCost > 0 &&
+    cmgActivity &&
+    (nh.childcare === 'assistante_maternelle' || nh.childcare === 'micro_creche')
+  ) {
+    if (m.family === 'computed') {
+      cmgInfo =
+        nh.childcare === 'assistante_maternelle'
+          ? cmgAssistanteMaternelle(childcareCost, nDep, rncHousehold)
+          : cmgMicroCreche(childcareCost, under6, nDep, rncHousehold, isolated);
+      cmg = cmgInfo.amount;
+    } else if (m.family === 'frozen' && base) cmg = base.cmg;
   }
 
   // ---- housing aid ---------------------------------------------------------------------------------------------
@@ -332,7 +402,7 @@ export function computeMonth(ctx: MonthContext): MonthFlows {
   }
 
   if (nh.nonRecours) {
-    af = afBase = cf = paje = arsAnnual = asfAmt = aeeh = aplGross = 0;
+    af = afBase = cf = paje = arsAnnual = asfAmt = aeeh = aplGross = cmg = 0;
   }
 
   // ---- AFU ---------------------------------------------------------------------------------------------------
@@ -378,8 +448,12 @@ export function computeMonth(ctx: MonthContext): MonthFlows {
       paje +
       (cf > 0 ? n('benefits.family.cf_rate_base') * bmaf : 0) +
       (asfAmt > 0
-        ? n('benefits.family.asf_in_rsa_pa_base_rate') * bmaf * ages.filter((a) => a < 20).length
+        ? Math.min(
+            asfAmt,
+            n('benefits.family.asf_in_rsa_pa_base_rate') * bmaf * ages.filter((a) => a < 20).length,
+          )
         : 0) +
+      nh.childSupport +
       sum(pensNet) +
       aspa +
       sum(aah) +
@@ -423,6 +497,9 @@ export function computeMonth(ctx: MonthContext): MonthFlows {
     arsAnnual,
     asf: asfAmt,
     aeeh,
+    cmg,
+    cmgInfo,
+    childcareCost,
     aah,
     aspa,
     rsa: rsaAmt,
@@ -516,14 +593,15 @@ export function runScenario(
   const foyers = foyersOf(nh);
   let tax: TaxOutcome;
   if (y.ir === 'bareme') {
+    const care: CareCost = { cost: flows.childcareCost, cmg: flows.cmg };
     const fr = foyers.map((f) => ({
-      ...irBareme(nh, f, flows.salTaxY, flows.pensTaxY, y),
+      ...irBareme(nh, f, flows.salTaxY, flows.pensTaxY, y, care),
       foyer: f,
     }));
     const irGross = fr.reduce((s, t) => s + t.irAfterDecote, 0);
     const credits = fr.reduce((s, t) => s + t.reduction + t.credits, 0);
     const main = fr.find((t) => t.foyer.main)!;
-    const cd = creditsOf(nh, main.foyer, y, main.rni);
+    const cd = creditsOf(nh, main.foyer, y, main.rni, care);
     tax = {
       regime: 'bareme',
       irGross,
@@ -546,7 +624,10 @@ export function runScenario(
       parentIsole: false,
       main: true,
     };
-    const cd = creditsOf(nh, allChildren, y, base0);
+    const cd = creditsOf(nh, allChildren, y, base0, {
+      cost: flows.childcareCost,
+      cmg: flows.cmg,
+    });
     const dons = Math.min(cd.dons, irGross);
     tax = {
       regime: 'flat',
@@ -583,6 +664,8 @@ export function snapshotOf(core: ScenarioCore): BaselineSnapshot {
     arsAnnual: f.arsAnnual,
     asf: f.asf,
     aeeh: f.aeeh,
+    cmg: f.cmg,
+    childcareCost: f.childcareCost,
     pensionTiers: core.pensionTiers,
     pensionGross: f.pens.map((p) => p?.gross ?? 0),
     salTaxY: [...f.salTaxY],

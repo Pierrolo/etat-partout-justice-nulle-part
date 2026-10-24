@@ -7,6 +7,9 @@
  *   20 %, hypothesis); employee: retenue pension 11,10 % on the traitement + RAFP 5 % on primes (capped at 20 %
  *   of the traitement); employer: pension 37,65 % + maladie 9,88 % on the traitement, AF 5,25 %, CSA+FNAL 0,4 %,
  *   RAFP 5 %. No RGDU, no chômage. CSG/CRDS identical to the private sector.
+ * - dirigeant_assimile (v1.1): président·e de SAS/SASU, gérant·e minoritaire de SARL — like a cadre, without the
+ *   employer's assurance chômage and AGS contributions and without the RGDU (reserved for pay subject to
+ *   unemployment insurance). 'tns' never reaches this chain (not modelled, see normalize).
  * The CSG/CRDS rates on earned income are an input (`rates`) so the plan can switch them off (or phase them out).
  */
 import { n } from '../params/index.ts';
@@ -49,7 +52,7 @@ export interface SalaryResult {
   employerCost: number;
 }
 
-function privateChain(B: number, workRatio: number, cadre: boolean) {
+function privateChain(B: number, workRatio: number, cadre: boolean, dirigeant = false) {
   const P = n('general.pmss_monthly');
   const t1 = Math.min(B, P);
   const t2 = Math.max(0, Math.min(B, 8 * P) - P);
@@ -72,8 +75,7 @@ function privateChain(B: number, workRatio: number, cadre: boolean) {
     n('salary.employer.at_mp_default') * B +
     n('salary.employer.fnal_lt50') * t1 +
     n('salary.employer.csa') * B +
-    n('salary.employer.assurance_chomage') * b4 +
-    n('salary.employer.ags') * b4 +
+    (dirigeant ? 0 : n('salary.employer.assurance_chomage') * b4 + n('salary.employer.ags') * b4) +
     n('salary.employer.agirc_arrco_t1') * t1 +
     n('salary.employer.agirc_arrco_t2') * t2 +
     n('salary.employer.ceg_t1') * t1 +
@@ -90,7 +92,8 @@ function privateChain(B: number, workRatio: number, cadre: boolean) {
   const tMin = n('salary.rgdu.t_min');
   const tDelta = n('salary.rgdu.t_delta_lt50');
   let coef = 0;
-  if (B > 0 && B < n('salary.rgdu.exit_threshold_in_smic') * smicRef) {
+  // the RGDU only applies to pay subject to unemployment insurance: never to an assimilé-salarié director
+  if (!dirigeant && B > 0 && B < n('salary.rgdu.exit_threshold_in_smic') * smicRef) {
     const x = Math.max(0, 0.5 * ((3 * smicRef) / B - 1));
     coef = tMin + Math.round(tDelta * x ** n('salary.rgdu.power') * 1e4) / 1e4;
     coef = Math.min(coef, tMin + tDelta);
@@ -121,7 +124,12 @@ export function salaryChain(
   const { cot, employer, rgdu } =
     status === 'fonctionnaire'
       ? fonctionnaireChain(B)
-      : privateChain(B, workRatio, status === 'cadre');
+      : privateChain(
+          B,
+          workRatio,
+          status === 'cadre' || status === 'dirigeant_assimile',
+          status === 'dirigeant_assimile',
+        );
   const csgBase =
     n('salary.csg_crds.base_abattement_factor') * Math.min(B, 4 * P) + Math.max(0, B - 4 * P);
   const csgDed = rates.csgDed * csgBase;

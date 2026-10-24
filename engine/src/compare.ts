@@ -1,9 +1,12 @@
 /** compare(): baseline vs plan for one household, with waterfall, non-chiffré panels, hypotheses and caveats. */
-import { r2 } from './fmt.ts';
+import { isPaidCare } from './core.ts';
+import { buildSummary, explainBaselineBenefits } from './explain.ts';
+import { eur, r2 } from './fmt.ts';
 import { PERIOD_LABEL } from './plan/periods.ts';
 import { evaluate } from './simulate.ts';
 import type {
   Comparison,
+  Hypotheses,
   ComponentGroup,
   Household,
   SimulateOptions,
@@ -18,9 +21,13 @@ const GROUP_ORDER: ComponentGroup[] = [
   'impots_indirects',
 ];
 
-export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
-  const e = evaluate(h, opts, true);
-  const { nh, hyp, baseline } = e;
+/** v1.1: deltaPct is null below this baseline disposable income (€/month). */
+export const DELTA_PCT_MIN_BASELINE = 50;
+/** v1.1: h1Alternative is returned when the two H1 readings differ by more than this (€/month). */
+export const H1_ALTERNATIVE_THRESHOLD = 5;
+
+function waterfallOf(e: ReturnType<typeof evaluate>): WaterfallStep[] {
+  const { hyp, baseline } = e;
   const plan = e.plan!;
   const waterfall: WaterfallStep[] = [];
   for (const g of GROUP_ORDER) {
@@ -44,6 +51,14 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
       });
     }
   }
+  return waterfall;
+}
+
+export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
+  const e = evaluate(h, opts, true);
+  const { nh, hyp, baseline } = e;
+  const plan = e.plan!;
+  const waterfall = waterfallOf(e);
   const delta = r2(plan.disposable - baseline.disposable);
   const f = e.baselineCore.flows;
   const today = {
@@ -164,6 +179,25 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
       value: 'part déductible = min(taux, 6,8 points) (art. 154 quinquies CGI, non modifié)',
       tier: 'law',
     });
+  if (nh.adults.length === 1 && nh.children.some((k) => k.age < 20))
+    activeHypotheses.push({
+      id: 'H19',
+      label: 'Pension alimentaire reçue',
+      value:
+        nh.childSupport > 0
+          ? `${eur(nh.childSupport)} par mois déclarés : l’allocation de soutien familial est réduite d’autant (nulle au-delà de son montant)`
+          : 'non déclarée : supposée non versée, l’allocation de soutien familial est donc versée en entier (à corriger si vous recevez une pension)',
+      tier: 'hypothesis',
+    });
+  if (isPaidCare(nh.childcare) && nh.children.some((k) => k.age < 6))
+    activeHypotheses.push({
+      id: 'H20',
+      label: 'Frais de garde des enfants de moins de 6 ans',
+      value: nh.childcareCostProvided
+        ? `${eur(nh.childcareCostMonthly)} par mois déclarés, inchangés avec le plan`
+        : `non renseignés : ${eur(e.baselineCore.flows.childcareCost)} par mois supposés (${nh.childcare === 'assistante_maternelle' ? 'temps plein, 180 h au tarif médian de 4,85 €/h' : nh.childcare === 'micro_creche' ? 'temps plein, 180 h à 9 €/h' : 'temps plein, 180 h au barème des crèches selon vos revenus'})`,
+      tier: 'hypothesis',
+    });
   if (nh.adults.some((a) => a.activity === 'retraite'))
     activeHypotheses.push({
       id: 'H16',
@@ -186,6 +220,10 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
     nm.push(
       'Fonction publique : cotisations approchées (primes supposées = 20 % du brut ; cotisation employeur retraite CNRACL 37,65 % appliquée à tous — pour l’État, la contribution au CAS Pensions est d’environ 78 % : le coût employeur des fonctionnaires d’État est sous-estimé, sans effet sur le revenu disponible) ; indemnité compensatrice de CSG, GIPA et supplément familial de traitement non modélisés.',
     );
+  if (nh.adults.some((a) => a.salary?.status === 'dirigeant_assimile'))
+    nm.push(
+      'Dirigeant·e assimilé·e salarié·e : rémunération traitée comme un salaire de cadre sans assurance chômage ni réduction générale ; dividendes, prévoyance et mutuelle non modélisés.',
+    );
   if (nh.adults.some((a) => a.salary?.status === 'cadre'))
     nm.push(
       'Cadres : prévoyance obligatoire (1,50 % employeur) non modélisée ; seule l’APEC distingue le calcul du non-cadre.',
@@ -200,7 +238,7 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
     );
   if (nh.children.some((k) => k.age < 6))
     nm.push(
-      'Petite enfance : complément de mode de garde (CMG), prime à la naissance, PreParE et coût réel des crèches non modélisés.',
+      'Petite enfance : prime à la naissance, PreParE, garde à domicile, part « cotisations » du complément de mode de garde, complément transitoire de la réforme de 2025, majorations (horaires atypiques, AAH, AEEH) et prix des crèches après la fin de leur financement par les CAF non modélisés.',
     );
   if (nh.children.some((k) => k.aeeh))
     nm.push(
@@ -224,7 +262,9 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
     nm.push('ASPA : récupération sur succession et cumul avec l’AAH simplifiés.');
   if (nh.adults.length === 1 && nh.children.length > 0)
     nm.push(
-      'Parent isolé : pension alimentaire supposée non versée (ASF perçue) ; garde alternée non modélisée (H10).',
+      nh.childSupport > 0
+        ? 'Parent isolé : pension alimentaire déduite de l’ASF et comptée dans les ressources du RSA et de la prime d’activité, mais non ajoutée au revenu disponible (identique dans les deux scénarios ; imposition non modélisée) ; garde alternée non modélisée (H10).'
+        : 'Parent isolé : pension alimentaire supposée non versée (ASF perçue, H19) ; garde alternée non modélisée (H10).',
     );
   if (nh.adults.length === 2 && !nh.married)
     nm.push(
@@ -245,20 +285,46 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
     );
   if (nh.adults.some((a) => a.pension && a.pension.startYear >= 2028))
     warnings.push('Pension liquidée en 2028 ou après : pas de majoration de 3 300 €/an de l’AFU.');
-  if (Math.abs(delta) >= 0.005 && baseline.disposable <= 0)
-    warnings.push('Revenu disponible actuel nul : variation en % non calculée.');
+  if (Math.abs(delta) >= 0.005 && baseline.disposable <= DELTA_PCT_MIN_BASELINE)
+    warnings.push(
+      `Revenu disponible actuel inférieur à ${DELTA_PCT_MIN_BASELINE} € par mois : variation en % non calculée.`,
+    );
+  if (isPaidCare(nh.childcare) && !nh.childcareCostProvided && nh.children.some((k) => k.age < 6))
+    warnings.push(
+      `Frais de garde non renseignés : ${eur(e.baselineCore.flows.childcareCost)} par mois supposés (${nh.childcare === 'assistante_maternelle' ? 'assistante maternelle à temps plein, 180 h au tarif médian de 4,85 €/h' : nh.childcare === 'micro_creche' ? 'micro-crèche à temps plein, 180 h à 9 €/h' : 'crèche à temps plein, 180 h au barème national selon vos revenus'}). Indiquez votre coût réel pour un calcul juste du complément de mode de garde et du crédit d’impôt.`,
+    );
+
+  // ---- v1.1: the other reading of H1 -------------------------------------------------------------------
+  let h1Alternative: Comparison['h1Alternative'];
+  {
+    const other: Hypotheses['H1_benefits'] =
+      hyp.H1_benefits === 'replaced' ? 'differential' : 'replaced';
+    const alt = evaluate(h, { ...opts, hypotheses: { ...hyp, H1_benefits: other } }, true);
+    const altDelta = r2(alt.plan!.disposable - alt.baseline.disposable);
+    if (Math.abs(altDelta - delta) > H1_ALTERNATIVE_THRESHOLD)
+      h1Alternative = {
+        hypothesis: other,
+        delta: altDelta,
+        deltaAfterTva: r2(alt.plan!.disposableAfterTva - alt.baseline.disposableAfterTva),
+      };
+  }
 
   const unq = unquantifiedFor({ nh, today });
-  return {
+  const out: Comparison = {
     baseline,
     plan,
     delta,
-    deltaPct: baseline.disposable > 0 ? delta / baseline.disposable : 0,
+    deltaPct: baseline.disposable > DELTA_PCT_MIN_BASELINE ? delta / baseline.disposable : null,
     deltaAfterTva: r2(plan.disposableAfterTva - baseline.disposableAfterTva),
     waterfall,
     unquantified: unq,
     notModelled: nm,
     activeHypotheses,
     warnings,
+    summary: buildSummary(e, waterfall, delta),
+    baselineBenefitsExplained: explainBaselineBenefits(e),
   };
+  if (h1Alternative) out.h1Alternative = h1Alternative;
+  if (nh.unsupported.length > 0) out.unsupported = [...nh.unsupported];
+  return out;
 }

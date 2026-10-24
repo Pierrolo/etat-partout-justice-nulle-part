@@ -28,7 +28,21 @@ const CSG_REMPLACEMENT = {
     'CSS art. L136-1-2, L136-8 (CSG sur allocations chômage 6,2 % dont 3,8 % déductible, CRDS 0,5 %, écrêtement au SMIC)',
   url: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F2971',
 };
-const HYP = { label: 'Hypothèse du simulateur (voir docs/METHODE.md)' };
+const HYP = { label: 'Hypothèse du simulateur (voir la page « Méthode »)' };
+const CAF_CMG_2025 = {
+  label:
+    'CAF, « Réforme du CMG 2025 » (présentation SDSF : CMG linéarisé au 1er septembre 2025, taux d’effort PSU, plancher 815 €, plafond 8 500 €, tarif de référence 4,85 €/h, plafond horaire 8 €/h) — revalorisation 2026 du tarif de référence non publiée sur une source officielle consultée',
+  url: 'https://caf.fr/sites/default/files/medias/801/Accueil/actualit%C3%A9s/CMG2025%20I%20Pr%C3%A9sentation_SDSF.pdf',
+};
+const SP_CMG_ED = {
+  label:
+    'service-public.gouv.fr F39152 (CMG emploi direct ; CSS L531-5 à L531-9, D531-1 à D531-24)',
+  url: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F39152',
+};
+const SP_CMG_STRUCTURE = {
+  label: 'service-public.gouv.fr F345 (micro-crèche : montants 2026 selon les revenus 2024)',
+  url: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F345',
+};
 const CPO_TVA = {
   label: 'CPO, note n° 6 « La TVA est-elle un impôt juste ? » (sept. 2023)',
   url: 'https://www.ccomptes.fr/sites/default/files/2023-10/20230928-TVA-est-elle-impot-juste.pdf',
@@ -359,6 +373,118 @@ export const EXTRA_PARAMS = {
     unit: 'consumption units per household (average)',
     effective: '2026',
     source: HYP,
+    status: 'hypothesis',
+  },
+
+  // ---- Complément de libre choix du mode de garde (CMG), engine v1.1 ---------------------------------------
+  // « Emploi direct » (assistante maternelle): linearised barème in force since 1 Sept 2025 (CSS L531-5, D531-17
+  // s. as amended by the 2025 reform): CMG rémunération = heures × tarif horaire (≤ plafond) − heures × ressources
+  // mensuelles × taux d'effort × tarif horaire / tarif de référence. With a tarif ≤ the hourly cap this is
+  // coût × (1 − ressources × taux d'effort / tarif de référence): it only depends on the monthly cost.
+  'x.cmg.am_reference_hourly': {
+    value: 4.85,
+    unit: 'EUR/hour (tarif horaire de référence, assistante maternelle)',
+    effective: '2025-09-01',
+    source: CAF_CMG_2025,
+    status: 'approximation',
+  },
+  'x.cmg.am_hourly_cap': {
+    value: 8,
+    unit: 'EUR/hour (plafond horaire, assistante maternelle)',
+    effective: '2025-09-01',
+    source: CAF_CMG_2025,
+    status: 'official',
+  },
+  'x.cmg.effort_rates': {
+    value: [0.000619, 0.000516, 0.000413, 0.00031, 0.00031, 0.00031, 0.00031, 0.000206],
+    unit: 'taux d’effort horaire by number of dependent children (1, 2, 3, 4–7, 8+) — PSU barème, identical for AM',
+    effective: '2025-09-01',
+    source: CAF_CMG_2025,
+    status: 'official',
+  },
+  'x.cmg.resources_floor': {
+    value: 815,
+    unit: 'EUR/month (plancher de ressources, 2025)',
+    effective: '2025-09-01',
+    source: CAF_CMG_2025,
+    status: 'official',
+  },
+  'x.cmg.resources_ceiling': {
+    value: 8500,
+    unit: 'EUR/month (plafond de ressources)',
+    effective: '2025-09-01',
+    source: CAF_CMG_2025,
+    status: 'official',
+  },
+  'x.cmg.max_child_age': {
+    value: 6,
+    unit: 'years (strict; 12 for a lone parent since Sept 2025 — the simulator asks about children < 6 only)',
+    effective: '2025-09-01',
+    source: SP_CMG_ED,
+    status: 'official',
+  },
+  'x.cmg.default_cost_am': {
+    value: 873,
+    unit: 'EUR/month per child (default when the cost is not given: 180 h × 4,85 €, full time at the median rate)',
+    effective: '2025-09-01',
+    source: {
+      label:
+        'Hypothèse du simulateur : temps plein de 180 h/mois au tarif horaire de référence de la CAF (médiane des tarifs observés, 4,85 €/h en 2025)',
+    },
+    status: 'hypothesis',
+  },
+  // « Structure » (micro-crèche PAJE): not reformed in 2025; flat monthly maxima by resource tier (RNC N-2),
+  // halved for children aged 3 to 6, capped at 85 % of the bill.
+  'x.cmg.structure_amounts_couple': {
+    value: [992.12, 855.25, 718.41],
+    unit: 'EUR/month per child < 3 (tiers 1, 2, 3) — couple',
+    effective: '2026-04-01',
+    source: SP_CMG_STRUCTURE,
+    status: 'official',
+  },
+  'x.cmg.structure_amounts_isole': {
+    value: [1289.77, 1111.82, 933.94],
+    unit: 'EUR/month per child < 3 (tiers 1, 2, 3) — parent isolé',
+    effective: '2026-04-01',
+    source: SP_CMG_STRUCTURE,
+    status: 'official',
+  },
+  'x.cmg.structure_ceilings_couple': {
+    value: { t1: 24333, t1PerChild: 3453, t2: 54075, t2PerChild: 7676 },
+    unit: 'EUR/year (1 child; + per additional child) — couple',
+    effective: '2026-01-01',
+    source: SP_CMG_STRUCTURE,
+    status: 'official',
+  },
+  'x.cmg.structure_ceilings_isole': {
+    value: { t1: 34066, t1PerChild: 4834, t2: 75705, t2PerChild: 10746 },
+    unit: 'EUR/year (1 child; + per additional child) — parent isolé',
+    effective: '2026-01-01',
+    source: SP_CMG_STRUCTURE,
+    status: 'official',
+  },
+  'x.cmg.structure_half_from_age': {
+    value: 3,
+    unit: 'years (amounts halved from 3 to 6 years)',
+    effective: '2026-01-01',
+    source: SP_CMG_STRUCTURE,
+    status: 'official',
+  },
+  'x.cmg.structure_max_share': {
+    value: 0.85,
+    unit: 'share of the micro-crèche bill',
+    effective: '2026-01-01',
+    source: SP_CMG_STRUCTURE,
+    status: 'official',
+  },
+  'x.cmg.default_cost_micro_creche': {
+    value: 1620,
+    unit: 'EUR/month per child (default: 180 h × 9 €/h, below the 10 €/h cap of the CMG structure)',
+    effective: '2026-01-01',
+    source: {
+      label:
+        'Hypothèse du simulateur : temps plein de 180 h/mois à 9 €/h (la micro-crèche PAJE ne peut dépasser 10 €/h)',
+    },
     status: 'hypothesis',
   },
 } as const satisfies Record<string, ParamMeta>;

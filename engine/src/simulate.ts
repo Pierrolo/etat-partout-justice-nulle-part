@@ -12,7 +12,7 @@ import {
   tvaToday,
   type Basket,
 } from './baseline/tva.ts';
-import { runScenario, snapshotOf, type ScenarioCore } from './core.ts';
+import { cmgActivityOk, runScenario, snapshotOf, type ScenarioCore } from './core.ts';
 import { eur, eur0, pct, r2 } from './fmt.ts';
 import { resolveHypotheses } from './hypotheses.ts';
 import { normalize, type NHousehold } from './normalize.ts';
@@ -59,6 +59,10 @@ export const COMPONENT_META: Record<ComponentId, { label: string; group: Compone
   allocations_familiales: { label: 'Allocations familiales', group: 'prestations' },
   complement_familial: { label: 'Complément familial', group: 'prestations' },
   paje_base: { label: 'PAJE — allocation de base', group: 'prestations' },
+  cmg: {
+    label: 'Complément de libre choix du mode de garde (CMG)',
+    group: 'prestations',
+  },
   ars: { label: 'Allocation de rentrée scolaire (lissée sur 12 mois)', group: 'prestations' },
   asf: { label: 'Allocation de soutien familial', group: 'prestations' },
   aeeh: { label: "Allocation d'éducation de l'enfant handicapé (base)", group: 'prestations' },
@@ -79,6 +83,7 @@ const CAF_IDS: ComponentId[] = [
   'allocations_familiales',
   'complement_familial',
   'paje_base',
+  'cmg',
   'ars',
   'asf',
   'aeeh',
@@ -275,11 +280,13 @@ function build(c: BuildCtx): ScenarioResult {
   {
     const cd = t.creditsDetail;
     const bits: string[] = [];
-    if (cd.garde > 0) bits.push(`garde d’enfants < 6 ans ${eur0(cd.garde)}/an`);
+    if (cd.garde > 0)
+      bits.push(
+        `garde d’enfants < 6 ans ${eur0(cd.garde)}/an (50 % des frais ${eur0(12 * f.childcareCost)}/an${f.cmg > 0 ? ` diminués du CMG ${eur0(12 * f.cmg)}/an` : ''}, plafond 3 500 € par enfant)`,
+      );
     if (cd.emploiDomicile > 0) bits.push(`emploi à domicile ${eur0(cd.emploiDomicile)}/an`);
     if (cd.dons > 0) bits.push(`réduction pour dons ${eur0(cd.dons)}/an`);
-    const hadExpenses =
-      nh.childcareCostMonthly > 0 || nh.emploiDomicileAnnual > 0 || nh.donsAnnual > 0;
+    const hadExpenses = f.childcareCost > 0 || nh.emploiDomicileAnnual > 0 || nh.donsAnnual > 0;
     const factors = rules.year.credits;
     const phase =
       plan && hadExpenses && (factors.garde < 1 || factors.dons < 1)
@@ -452,6 +459,42 @@ function build(c: BuildCtx): ScenarioResult {
     sources: famSources('benefits.family.paje_base_rate_full'),
     tier: 'law',
   };
+  {
+    const ci = f.cmgInfo;
+    let computed: string;
+    if (!nh.children.some((k) => k.age < 6)) computed = 'Pas d’enfant de moins de 6 ans.';
+    else if (nh.childcare === 'creche')
+      computed =
+        'Crèche municipale ou associative (PSU) : pas de CMG, la CAF finance directement la crèche.';
+    else if (nh.childcare !== 'assistante_maternelle' && nh.childcare !== 'micro_creche')
+      computed = 'Pas de garde payante déclarée (assistante maternelle ou micro-crèche).';
+    else if (!cmgActivityOk(nh))
+      computed =
+        'Non éligible : chaque parent doit travailler, être indemnisé·e par France Travail, étudier ou percevoir l’AAH.';
+    else if (f.cmg > 0 && !ci)
+      computed = `${pre}montant de 2026 (${eur(c.baselineCore?.flows.cmg ?? f.cmg)}) maintenu jusqu’au 31 décembre 2027`;
+    else if (f.cmg <= 0 || !ci)
+      computed = `Frais de garde ${eur(f.childcareCost)} : droit nul (ressources au-dessus du seuil où l’aide s’annule).`;
+    else if (nh.childcare === 'assistante_maternelle')
+      computed = `${pre}frais ${eur(f.childcareCost)} (salaire net + indemnités, tarif ≤ 8 €/h) × (1 − ressources ${eur(ci.resources)} × taux d’effort ${String(Math.round(ci.effortRate * 1e6) / 1e4).replace('.', ',')} % ÷ tarif de référence 4,85 €/h) = ${eur(f.cmg)}, net de CRDS (barème linéarisé du 1er septembre 2025 ; cotisations sociales prises en charge en plus par Pajemploi, non comptées)`;
+    else
+      computed = `${pre}micro-crèche, ressources ${eur0(ci.resources)}/an (tranche ${ci.tier}) : montant par enfant (moitié de 3 à 6 ans), au plus 85 % de la facture ${eur(f.childcareCost)} = ${eur(f.cmg)}, net de CRDS`;
+    d.cmg = {
+      amount: f.cmg * (1 - CRDS),
+      formula: famTxt('Complément de libre choix du mode de garde', computed, ''),
+      sources:
+        plan && anyMonth((m) => m.family === 'abolished')
+          ? [SRC_PLFSS7_PF, SRC_AM28]
+          : src(
+              ...(nh.childcare === 'micro_creche'
+                ? (['x.cmg.structure_amounts_couple'] as const)
+                : (['x.cmg.effort_rates', 'x.cmg.max_child_age'] as const)),
+            ),
+      tier: 'law',
+    };
+    if (!nh.childcareCostProvided && f.childcareCost > 0)
+      d.cmg.formula += ` — frais de garde non renseignés : ${eur(f.childcareCost)}/mois supposés (hypothèse).`;
+  }
   d.ars = {
     amount: (f.arsAnnual * (1 - CRDS)) / 12,
     formula: famTxt(
@@ -468,8 +511,12 @@ function build(c: BuildCtx): ScenarioResult {
     formula: famTxt(
       'Allocation de soutien familial',
       f.asf > 0
-        ? `parent isolé sans pension alimentaire (hypothèse), 42,2 % BMAF × enfants = ${eur(f.asf)}, net de CRDS`
-        : 'Non éligible (parent isolé sans pension alimentaire uniquement).',
+        ? nh.childSupport > 0
+          ? `parent isolé, 42,2 % BMAF × enfants − pension alimentaire reçue ${eur(nh.childSupport)} (allocation différentielle) = ${eur(f.asf)}, net de CRDS`
+          : `parent isolé sans pension alimentaire (hypothèse : aucune pension déclarée), 42,2 % BMAF × enfants = ${eur(f.asf)}, net de CRDS`
+        : nh.adults.length === 1 && nh.childSupport > 0 && nh.children.some((k) => k.age < 20)
+          ? `Pension alimentaire reçue (${eur(nh.childSupport)}) supérieure ou égale au montant de l’allocation : pas d’ASF.`
+          : 'Non éligible (parent isolé sans pension alimentaire, ou pension inférieure à l’allocation).',
     ),
     sources: famSources('benefits.family.asf_rate'),
     tier: 'law',
@@ -639,7 +686,8 @@ function applyCafOverride(c: BuildCtx, d: Record<ComponentId, Draft>): void {
       baseFlows.cf +
       baseFlows.paje +
       baseFlows.asf +
-      baseFlows.aeeh) *
+      baseFlows.aeeh +
+      baseFlows.cmg) *
       (1 - CRDS) +
     (baseFlows.arsAnnual * (1 - CRDS)) / 12 +
     baseFlows.aah.reduce((s, x) => s + x, 0);

@@ -16,10 +16,11 @@ import type {
 } from './types.ts';
 
 const ACT: Activity[] = ['salarie', 'chomage', 'retraite', 'etudiant', 'inactif'];
-const STA: SalaryStatus[] = ['prive', 'cadre', 'fonctionnaire'];
+// v1.1 values are appended, so every 1.0 hash decodes unchanged
+const STA: SalaryStatus[] = ['prive', 'cadre', 'fonctionnaire', 'dirigeant_assimile', 'tns'];
 const DIS: Disability[] = ['none', 'aah_80', 'aah_50_79'];
 const HOU: HousingStatus[] = ['locataire', 'proprietaire', 'proprietaire_credit', 'gratuit'];
-const CARE = ['parent', 'creche', 'assistante_maternelle'] as const;
+const CARE = ['parent', 'creche', 'assistante_maternelle', 'micro_creche'] as const;
 
 const B64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
@@ -85,6 +86,10 @@ export function encodeState(h: Household, hyp: Hypotheses, period: Period): stri
         h.benefits.nonRecours ? 1 : 0,
         opt(h.benefits.cafOverrideMonthly),
         bit(h.benefits.isolementRecent),
+        // v1.1: 4th slot only when given (1.0 hashes stay byte-identical)
+        ...(h.benefits.childSupportReceivedMonthly === undefined
+          ? []
+          : [h.benefits.childSupportReceivedMonthly]),
       ],
       ex
         ? [
@@ -172,12 +177,14 @@ export function decodeState(
       if (z !== 1 && z !== 2 && z !== 3) return null;
       housing.zone = z;
     }
-    const bn = arr(hh[4], 3);
+    const bn = arr(hh[4]);
+    if (bn.length !== 3 && bn.length !== 4) return null;
     const benefits: Household['benefits'] = { nonRecours: flag(bn[0]) };
     const caf = optNum(bn[1]);
     if (caf !== undefined) benefits.cafOverrideMonthly = caf;
     const iso = optBit(bn[2]);
     if (iso !== undefined) benefits.isolementRecent = iso;
+    if (bn.length === 4) benefits.childSupportReceivedMonthly = num(bn[3]);
     const household: Household = {
       adults,
       marriedOrPacs: flag(hh[1]),

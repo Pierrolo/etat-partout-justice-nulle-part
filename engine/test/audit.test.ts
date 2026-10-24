@@ -119,9 +119,9 @@ describe('A3 — 2027: deductible CSG = min(rate, 6,8 points) (CGI 154 quinquies
     const s = e.planCore!.flows.sal[0]!;
     const dedPts = (6 * 6.8 + 6.8 + 6.0 + 4.3 + 2.7 + 1.1 + 0) / 12 / 100;
     expect(s.csgDed).toBeCloseTo(dedPts * 0.9825 * gross, 6);
-    expect(
-      compare(h, { period: 2027 }).activeHypotheses.find((x) => x.id === 'H18')!.tier,
-    ).toBe('law');
+    expect(compare(h, { period: 2027 }).activeHypotheses.find((x) => x.id === 'H18')!.tier).toBe(
+      'law',
+    );
   });
 });
 

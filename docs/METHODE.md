@@ -1,6 +1,6 @@
 # Méthode et hypothèses
 
-*Page publique /methode — moteur de calcul `@epjn/engine` 1.0.0.*
+*Page publique /methode — moteur de calcul `@epjn/engine` 1.1.0.*
 
 Le simulateur compare, pour **votre ménage**, deux situations :
 
@@ -33,7 +33,8 @@ revenu (+ crédits d'impôt) + aide fondamentale. La TVA est estimée à part (�
 | RSA, prime d'activité | barèmes 2026, forfait logement, majoration parent isolé | remplacés par l'AFU (H1, réglable) |
 | AAH, ASPA | AAH individuelle (abattements sur revenus d'activité), ASPA (seul / couple) | remplacées par l'AFU (H1, réglable) |
 | Aides au logement | barème APL/AL du parc privé, zones 1/2/3 | supprimées (droits existants réduits puis éteints) |
-| Prestations familiales | allocations familiales (modulation, majoration d'âge, complément dégressif), complément familial, PAJE de base, allocation de rentrée scolaire, ASF, AEEH de base | abrogées au 1er janvier 2028 |
+| Prestations familiales | allocations familiales (modulation, majoration d'âge, complément dégressif), complément familial, PAJE de base, allocation de rentrée scolaire, ASF (diminuée de la pension alimentaire déclarée), AEEH de base | abrogées au 1er janvier 2028 |
+| Garde des enfants de moins de 6 ans | complément de libre choix du mode de garde (CMG) : assistante maternelle, barème « linéarisé » du 1er septembre 2025 (frais × (1 − ressources × taux d'effort ÷ 4,85 €)) ; micro-crèche, montants 2026 par tranche (moitié de 3 à 6 ans, au plus 85 % de la facture) ; crèche municipale ou associative : pas de CMG. Crédit d'impôt de 50 % des frais diminués du CMG (plafond 3 500 € par enfant) | CMG abrogé au 1er janvier 2028 ; crédit d'impôt réduit d'un tiers (2027), de deux tiers (2028), supprimé (2029) |
 | TVA | estimation lissée (§4) | taux réduits portés à 20 % (alimentation 10 → 15 → 20 %) ; fin des certificats d'économies d'énergie |
 
 Chaque ligne du résultat affiche **sa formule avec vos chiffres** et **sa source** (amendement, page
@@ -70,6 +71,8 @@ au revenu disponible.
 | H15 | Enfant bénéficiaire de l'AEEH | **Pas** supposé titulaire de la CMI « invalidité » : l'AEEH peut être versée dès 50 % d'incapacité, la CMI exige 80 %. Si la CMI est déclarée : +6 600 €/an d'AFU, et ½ part aujourd'hui | Hypothèse | Oui (champ `cmiInvalidite`, défaut non) |
 | H16 | Taux de CSG des pensions quand les parts fiscales disparaissent (l'art. L136-8 CSS renvoie aux « parts de quotient familial » de l'art. 194 CGI, abrogé, et n'est pas modifié) | RFR N-2 : taux actuel en 2027 ; en 2028, RFR 2026 calculé sans l'abattement de 10 % sur les pensions ; ensuite revenu imposable du plan, 1 part par adulte + ½ par enfant. Lecture littérale alternative (1 part par foyer) : un couple de retraités passerait souvent au taux plein | Hypothèse | — |
 | H17 | APL pendant la transition | Calendrier des logements conventionnés (am. 32 II) : −1/3 (juillet 2027), −2/3 (juillet 2028), 0 (juillet 2029). Parc privé (am. 32 III) : aide entière jusqu'au terme du bail, sans reconduction, au plus tard le 1er janvier 2030 ; pour un bail de 3 ans d'échéance inconnue (uniforme), la moyenne annuelle est la même (5/6, 1/2, 1/6). Un bail meublé (1 an) s'arrête plus tôt | Hypothèse | — |
+| H19 | Pension alimentaire d'un parent isolé | Non déclarée : supposée non versée, l'allocation de soutien familial est versée en entier ; déclarée : l'ASF est réduite d'autant | Hypothèse | Oui (montant reçu) |
+| H20 | Frais de garde non renseignés | Assistante maternelle : 873 €/mois par enfant (180 h au tarif médian de 4,85 €/h) ; micro-crèche : 1 620 € (180 h à 9 €/h) ; crèche : 180 h au barème national selon vos revenus. Mêmes frais avec le plan | Hypothèse | Oui (montant réel) |
 | H18 | Baisse progressive de la CSG en 2027 | Part déductible = min(taux, 6,8 points) : l'art. 154 quinquies CGI (« à hauteur de 6,8 points ») n'est pas modifié | Loi | — |
 
 ## 4. TVA : une estimation lissée
@@ -134,8 +137,19 @@ l'arrivée de l'aide fondamentale.
   modélisés.
 - **Aides au logement** : barème du parc privé pour tous (pas de distinction HLM / conventionné, pas de réduction de
   loyer de solidarité ni de colocation).
-- **Parent isolé** : pension alimentaire supposée non versée (l'allocation de soutien familial est donc perçue) ;
+- **Parent isolé** : pension alimentaire supposée non versée (l'allocation de soutien familial est donc perçue)
+  sauf si vous la déclarez : l'ASF est alors diminuée de la pension, qui compte aussi dans les ressources du RSA et
+  de la prime d'activité (elle n'est pas ajoutée au revenu disponible, identique dans les deux situations) ;
   majoration « isolement » si le plus jeune enfant a moins de 3 ans ou si la séparation est récente.
+- **Garde d'enfants** : le CMG de l'assistante maternelle suit le barème du 1er septembre 2025 (taux d'effort des
+  crèches : 0,0619 % pour 1 enfant, 0,0516 % pour 2, 0,0413 % pour 3 ; ressources entre 815 € et 8 500 € par mois ;
+  tarif de référence 4,85 €/h, valeur 2025 ; tarif horaire supposé ≤ 8 €/h). Non modélisés : la part
+  « cotisations » (100 % des cotisations de l'assistante maternelle, payée par Pajemploi), la garde à domicile, le
+  complément transitoire, les majorations. OpenFisca-France 176.1.3 n'intègre pas encore cette réforme : le CMG
+  n'est pas vérifié sur les cas de référence.
+- **Dirigeant·e assimilé·e salarié·e** (président·e de SAS/SASU, gérant·e minoritaire de SARL) : comme un·e cadre,
+  sans assurance chômage ni réduction générale des cotisations. **Travailleurs non salariés** (gérant·e majoritaire,
+  indépendant·e, micro-entrepreneur·e) : non modélisés ; le simulateur le dit et ne compte pas leur revenu.
 - **Total CAF déclaré** : si vous le saisissez, les aides CAF calculées sont ajustées proportionnellement, dans les
   deux scénarios.
 
@@ -170,14 +184,15 @@ désactivée) ; seuil 28 695,65 € ; 0,77 € gardé par euro ; adulte handicap
 - la taxe foncière, aujourd'hui comme avec la taxe foncière unique du plan ;
 - le compte d'épargne personnel, le patrimoine « rendu », le compte éducation (montrés à part) ;
 - la durée de l'indemnisation chômage (six mois annoncés) ;
-- le complément de mode de garde et le coût des crèches (financement CAF supprimé) ;
+- la part « cotisations » du complément de mode de garde et le coût des crèches après la fin de leur financement
+  par les CAF ;
 - le reste à charge de 10 % par acte de soin et le bouclier sanitaire ;
 - le gel de la revalorisation des pensions et prestations (calcul en euros 2026) ;
 - la fin des exonérations sur l'épargne réglementée et l'assurance-vie ;
 - le chèque énergie, les bourses, la complémentaire santé solidaire, les tarifs sociaux et aides locales ;
 - les suppressions de postes publics et l'indemnité de départ ;
 - les effets sur les salaires, l'emploi, les loyers et les prix autres que la TVA et les CEE ;
-- les indépendants, les DOM, l'Alsace-Moselle.
+- les travailleurs non salariés (indépendants, gérants majoritaires), les DOM, l'Alsace-Moselle.
 
 Ces éléments figurent, quand ils vous concernent, dans les panneaux « Promis, non chiffré par la loi » et « Retiré,
 non chiffré ici », à poids égal.

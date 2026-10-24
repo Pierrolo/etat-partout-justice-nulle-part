@@ -33,8 +33,14 @@ export interface NHousehold {
   nonRecours: boolean;
   cafOverride: number | null;
   isolementRecent: boolean;
-  childcare: 'parent' | 'creche' | 'assistante_maternelle' | null;
+  childcare: 'parent' | 'creche' | 'assistante_maternelle' | 'micro_creche' | null;
   childcareCostMonthly: number;
+  /** false when `extras.childcareCostMonthly` was not given (a default is then used for a paid mode) */
+  childcareCostProvided: boolean;
+  /** pension alimentaire received, €/month (v1.1) */
+  childSupport: number;
+  /** parts of the household outside the model (v1.1), French */
+  unsupported: string[];
   emploiDomicileAnnual: number;
   donsAnnual: number;
   consumptionMonthly: number | null;
@@ -42,7 +48,7 @@ export interface NHousehold {
 }
 
 const ACTIVITIES: Activity[] = ['salarie', 'chomage', 'retraite', 'etudiant', 'inactif'];
-const STATUSES: SalaryStatus[] = ['prive', 'cadre', 'fonctionnaire'];
+const STATUSES: SalaryStatus[] = ['prive', 'cadre', 'fonctionnaire', 'dirigeant_assimile'];
 const DISABILITIES: Disability[] = ['none', 'aah_80', 'aah_50_79'];
 const HOUSING: HousingStatus[] = ['locataire', 'proprietaire', 'proprietaire_credit', 'gratuit'];
 
@@ -64,6 +70,7 @@ function money(x: unknown, w: string[], what: string): number {
 
 export function normalize(h: Household): NHousehold {
   const w: string[] = [];
+  const unsupported: string[] = [];
   const raw: unknown = h;
   const hh = isObj(raw) ? raw : {};
   let adultsIn = Array.isArray(hh.adults) ? (hh.adults as unknown[]) : [];
@@ -102,7 +109,13 @@ export function normalize(h: Household): NHousehold {
     if (isObj(a.salary)) {
       const s = a.salary;
       const amount = money(s.amount, w, `${who} : salaire`);
-      if (activity === 'salarie' || activity === 'etudiant') {
+      if ((activity === 'salarie' || activity === 'etudiant') && s.status === 'tns') {
+        // v1.1 safe behaviour: the TNS regime (cotisations SSI, BIC/BNC, micro-entreprise) is not modelled —
+        // the income is left out of both scenarios and the comparison is flagged `unsupported`.
+        const msg = `${who} : travailleur·se non salarié·e (gérant·e majoritaire de SARL, indépendant·e, micro-entrepreneur·e) — ce régime n’est pas modélisé : son revenu n’est pas pris en compte, et le résultat ne décrit pas votre ménage. Si vous êtes président·e de SAS/SASU ou gérant·e minoritaire de SARL, choisissez « dirigeant·e assimilé·e salarié·e ».`;
+        w.push(msg);
+        unsupported.push(msg);
+      } else if (activity === 'salarie' || activity === 'etudiant') {
         if (amount > 0) {
           const status: SalaryStatus = STATUSES.includes(s.status as SalaryStatus)
             ? (s.status as SalaryStatus)
@@ -208,6 +221,7 @@ export function normalize(h: Household): NHousehold {
   const childcare =
     ex.childcare === 'creche' ||
     ex.childcare === 'assistante_maternelle' ||
+    ex.childcare === 'micro_creche' ||
     ex.childcare === 'parent'
       ? ex.childcare
       : null;
@@ -229,6 +243,9 @@ export function normalize(h: Household): NHousehold {
     isolementRecent: b.isolementRecent === true,
     childcare,
     childcareCostMonthly: money(ex.childcareCostMonthly, w, 'Frais de garde'),
+    childcareCostProvided: fin(ex.childcareCostMonthly) && ex.childcareCostMonthly >= 0,
+    childSupport: money(b.childSupportReceivedMonthly, w, 'Pension alimentaire reçue'),
+    unsupported,
     emploiDomicileAnnual: money(ex.emploiDomicileAnnual, w, 'Emploi à domicile'),
     donsAnnual: money(ex.donsAnnual, w, 'Dons'),
     consumptionMonthly: consumption,

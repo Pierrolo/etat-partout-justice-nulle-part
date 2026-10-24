@@ -218,18 +218,47 @@ const CATALOGUE: Entry[] = [
     },
   },
   {
-    when: (c) => kids(c, 6),
+    when: (c) => kids(c, 6) && c.nh.childcare === 'creche',
+    item: {
+      id: 'creche_cmg',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Fin du financement des crèches par les caisses d’allocations familiales',
+      detail:
+        'Votre enfant va en crèche municipale ou associative : son tarif est aujourd’hui calculé selon vos revenus parce que la caisse d’allocations familiales (CAF) paie le reste à la crèche (prestation de service unique, PSU). Cette action sociale des CAF est abrogée au 1er janvier 2028 avec les prestations familiales. Personne ne sait combien la crèche facturerait ensuite : le simulateur ne le chiffre pas. Seul le crédit d’impôt pour frais de garde (chiffré, et supprimé progressivement d’ici 2029) est compté.',
+      amountHint:
+        'le financement public d’une place en crèche dépasse souvent ce que paient les parents',
+      sources: [SRC_PLFSS7_PF],
+    },
+  },
+  {
+    when: (c) => kids(c, 6) && c.nh.childcare === null,
+    item: {
+      id: 'creche_cmg',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Fin des aides à la garde des jeunes enfants',
+      detail:
+        'Mode de garde non renseigné. Le complément de libre choix du mode de garde (assistante maternelle, micro-crèche) et le financement des crèches par les caisses d’allocations familiales sont abrogés au 1er janvier 2028. Indiquez votre mode de garde pour que le complément soit chiffré.',
+      sources: [SRC_PLFSS7_PF],
+    },
+  },
+  {
+    when: (c) =>
+      kids(c, 6) &&
+      (c.nh.childcare === 'assistante_maternelle' || c.nh.childcare === 'micro_creche'),
     item: (c) => ({
       id: 'creche_cmg',
       direction: 'loss',
       tier: 'law',
-      title: 'Fin du financement CAF des crèches et du complément de mode de garde',
-      detail:
-        'La PAJE (dont le complément de libre choix du mode de garde, CMG) et l’action sociale des CAF (qui finance les crèches PSU) sont abrogées au 1er janvier 2028. Le simulateur ne chiffre pas le CMG ni la hausse possible du tarif de crèche.',
-      amountHint:
+      title:
         c.nh.childcare === 'assistante_maternelle'
-          ? 'CMG : souvent plusieurs centaines d’euros par mois pour une assistante maternelle'
-          : undefined,
+          ? 'Fin de la prise en charge des cotisations de votre assistante maternelle'
+          : 'Fin du complément de mode de garde de la micro-crèche',
+      detail:
+        c.nh.childcare === 'assistante_maternelle'
+          ? 'Le complément de libre choix du mode de garde (CMG) a deux parts : une aide sur le salaire (chiffrée ci-dessus) et la prise en charge à 100 % des cotisations sociales de l’assistante maternelle, payées directement par Pajemploi. Les deux disparaissent au 1er janvier 2028 (abrogation de la PAJE) : vous paieriez aussi ces cotisations, non chiffrées ici.'
+          : 'Le complément de mode de garde « structure » (chiffré ci-dessus) disparaît au 1er janvier 2028 avec la PAJE ; le prix de la micro-crèche pourrait aussi changer.',
       sources: [SRC_PLFSS7_PF],
     }),
   },
@@ -299,9 +328,9 @@ const CATALOGUE: Entry[] = [
       id: 'postes_publics',
       direction: 'loss',
       tier: 'announced',
-      title: '580 000 postes publics supprimés, fin du statut',
+      title: '580 000 postes publics fermés, fin du statut (indemnité de 70 % jusqu’à 7 ans)',
       detail:
-        'Les auteurs annoncent 580 000 suppressions de postes et la fin du statut de la fonction publique (droit du travail commun).',
+        'Les auteurs annoncent 580 000 postes publics fermés et la fin du statut de la fonction publique (droit du travail commun). Si votre poste est supprimé, l’amendement prévoit une indemnité de 70 % du traitement indiciaire pendant 1 à 7 ans selon l’ancienneté (voir « promesses ») : une baisse d’au moins 30 % de votre traitement pendant cette période, puis plus rien.',
       sources: [MANIFESTE, fiche('agent-public-indispensable', 'Agent public indispensable')],
     },
   },
@@ -416,6 +445,61 @@ const CATALOGUE: Entry[] = [
   },
 ];
 
+/** v1.1: short plain titles (no acronym without expansion). */
+const PLAIN: Record<string, string | ((c: Ctx) => string)> = {
+  cep_restitution: 'Un compte d’épargne promis, sans montant voté',
+  patrimoine_restitue: 'Des biens publics vendus et « rendus » aux foyers',
+  compte_education: 'Un compte pour payer l’école de vos enfants',
+  complement_viager: 'Un petit complément de retraite promis',
+  loyers_baisse: 'Des loyers qui baisseraient',
+  droits_mutation: 'Des frais de notaire payés par le vendeur',
+  bouclier_sanitaire: 'Vos frais de santé plafonnés à 5 % du revenu',
+  frais_gestion_sante: 'Une mutuelle moins chère',
+  prix_taxes: 'Des prix allégés de certaines taxes',
+  exonerations_salaire: 'Des salaires bruts qui pourraient monter',
+  compte_chomage: 'Un compte alimenté par vos cotisations chômage',
+  indemnite_agent_public:
+    'Si votre poste public est supprimé : 70 % de votre salaire jusqu’à 7 ans',
+  chomage_6_mois: 'Le chômage payé six mois seulement',
+  creche_cmg: (c) =>
+    c.nh.childcare === 'creche'
+      ? 'La crèche pourrait coûter beaucoup plus cher'
+      : c.nh.childcare === 'assistante_maternelle'
+        ? 'Les cotisations de votre assistante maternelle à votre charge'
+        : 'La micro-crèche sans aide',
+  reste_a_charge_10: '10 % de chaque soin à votre charge',
+  gel_indexation: 'Pensions et aides qui ne suivent plus les prix',
+  epargne_exonerations: 'Fin du Livret A et de l’assurance-vie sans impôt',
+  taxe_fonciere: 'Une nouvelle taxe foncière, montant inconnu',
+  plus_value_residence: 'Un impôt possible en revendant votre logement',
+  postes_publics: 'Votre poste public pourrait être supprimé',
+  cheque_energie: 'Plus de chèque énergie',
+  droits_connexes: 'Fin des aides liées au RSA (mutuelle gratuite, tarifs sociaux)',
+  etudes_payantes: 'Des études payantes, sans bourse',
+  emploi_domicile_cotisations: 'Une aide à domicile plus chère',
+  apl_nouveau_bail: 'Plus d’aide au logement si vous déménagez',
+  parc_social: 'Les logements sociaux mis en vente',
+  aeeh_complements: 'Fin des compléments pour enfant handicapé',
+  titres_restaurant_heures_sup: 'Heures sup et titres-restaurant imposés',
+};
+
+/**
+ * v1.1: an item is `prominent` when it could plausibly exceed ~50 €/month for THIS household, so the UI can
+ * show it next to the headline.
+ */
+const PROMINENT: Record<string, (c: Ctx) => boolean> = {
+  chomage_6_mois: (c) => c.today.are > 0,
+  creche_cmg: (c) => c.nh.childcare !== null, // a paid mode (crèche, AM, micro-crèche) is declared
+  postes_publics: () => true, // only listed for a fonctionnaire
+  indemnite_agent_public: () => false,
+  gel_indexation: (c) => retirees(c) || c.today.rsa > 0 || has(c, (a) => a.disability !== 'none'),
+  reste_a_charge_10: (c) => has(c, (a) => a.disability !== 'none'),
+  droits_connexes: (c) => c.today.rsa > 0,
+  aeeh_complements: () => true,
+  emploi_domicile_cotisations: (c) => c.nh.emploiDomicileAnnual >= 3000,
+  apl_nouveau_bail: (c) => c.today.apl >= 50,
+};
+
 export function unquantifiedFor(c: Ctx): {
   promises: UnquantifiedItem[];
   losses: UnquantifiedItem[];
@@ -424,7 +508,12 @@ export function unquantifiedFor(c: Ctx): {
     typeof e.item === 'function' ? e.item(c) : e.item,
   );
   const clean = (it: UnquantifiedItem): UnquantifiedItem => {
-    const out = { ...it };
+    const plain = PLAIN[it.id];
+    const out: UnquantifiedItem = {
+      ...it,
+      plainTitle: typeof plain === 'function' ? plain(c) : (plain ?? it.title),
+      prominent: PROMINENT[it.id]?.(c) ?? false,
+    };
     if (out.amountHint === undefined) delete out.amountHint;
     return out;
   };

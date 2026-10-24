@@ -7,7 +7,12 @@ export const salaryArb = fc.record(
   {
     amount: money(9000),
     basis: fc.constantFrom('net' as const, 'brut' as const),
-    status: fc.constantFrom('prive' as const, 'cadre' as const, 'fonctionnaire' as const),
+    status: fc.constantFrom(
+      'prive' as const,
+      'cadre' as const,
+      'fonctionnaire' as const,
+      'dirigeant_assimile' as const,
+    ),
     workRatio: fc.constantFrom(0.5, 0.8, 1),
   },
   { requiredKeys: ['amount', 'basis', 'status'] },
@@ -80,6 +85,7 @@ export const householdArb = (
         }),
       ),
       nonRecours: fc.boolean(),
+      childSupport: fc.option(money(600), { nil: undefined }),
       caf: opts.noCafOverride ? fc.constant(undefined) : fc.option(money(2500), { nil: undefined }),
       extras: fc.option(
         fc.record(
@@ -88,6 +94,7 @@ export const householdArb = (
               'parent' as const,
               'creche' as const,
               'assistante_maternelle' as const,
+              'micro_creche' as const,
             ),
             childcareCostMonthly: money(1200),
             emploiDomicileAnnual: money(15000),
@@ -107,6 +114,7 @@ export const householdArb = (
         benefits: { nonRecours: r.nonRecours },
       };
       if (r.caf !== undefined) h.benefits.cafOverrideMonthly = r.caf;
+      if (r.childSupport !== undefined) h.benefits.childSupportReceivedMonthly = r.childSupport;
       if (r.extras !== undefined) h.extras = r.extras;
       return h;
     });

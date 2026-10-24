@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Cas-types illustratifs, NON pondérés : variation du revenu disponible mensuel (€/mois, hors TVA sauf deltaAfterTva) entre la législation 2026 et le plan complet appliqué à 2026 (hypothèses par défaut : H1 remplacées, H2 frais pro maintenus, H5 répercussion 100 %). transition = variation moyenne mensuelle par année.",
-    "engineVersion": "1.0.0",
+    "engineVersion": "1.1.0",
     "baseline": "Législation 2026 (état du droit au 24 octobre 2026 ; barème IR LF 2026)",
     "plan": "Amendements Résolution au PLF 2027 (1re et 2de parties) et au PLFSS 2027, 19 octobre 2026 ; fiches et manifeste france-resolution.fr ; classeurs « Synthèse » des auteurs",
     "generatedBy": "pnpm --filter @epjn/engine gen:cas-types"
@@ -1219,7 +1219,7 @@
       "baseline": 0,
       "plan": 550,
       "delta": 550,
-      "deltaPct": 0,
+      "deltaPct": null,
       "deltaAfterTva": 561,
       "waterfall": {
         "afu": 550,

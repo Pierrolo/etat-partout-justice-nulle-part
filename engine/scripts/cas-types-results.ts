@@ -20,7 +20,7 @@ export function casTypesResults() {
       baseline: r0(steady.baseline.disposable),
       plan: r0(steady.plan.disposable),
       delta: r0(steady.delta),
-      deltaPct: r1(steady.deltaPct * 100),
+      deltaPct: steady.deltaPct === null ? null : r1(steady.deltaPct * 100),
       deltaAfterTva: r0(steady.deltaAfterTva),
       waterfall: Object.fromEntries(steady.waterfall.map((w) => [w.id, r0(w.delta)])),
       transition,

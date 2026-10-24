@@ -4,12 +4,19 @@
  *  - the site imports this package as source (`exports` → ./src/index.ts, compiled by Vite);
  *  - `Tier` and `SourceRef` are used by the site's UI primitives — keep them stable.
  */
-export const ENGINE_VERSION = '1.0.0';
+export const ENGINE_VERSION = '1.1.0';
 
 export * from './types.ts';
 export { DEFAULT_HYPOTHESES } from './hypotheses.ts';
 export { simulate, COMPONENT_META } from './simulate.ts';
-export { compare } from './compare.ts';
+export { compare, DELTA_PCT_MIN_BASELINE, H1_ALTERNATIVE_THRESHOLD } from './compare.ts';
+export {
+  roundForDisplay,
+  roundSumPreserving,
+  type DisplayComparison,
+  type DisplayLine,
+} from './display.ts';
+export { employerView, type EmployerSide, type EmployerView } from './employer.ts';
 export { earningsCurve, type CurvePoint } from './curves.ts';
 export { hourOfWork, type HourSplit } from './hour.ts';
 export { CAS_TYPES, type CasType } from './cas-types.ts';
