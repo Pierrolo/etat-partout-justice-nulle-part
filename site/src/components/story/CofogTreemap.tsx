@@ -1,4 +1,4 @@
-import { useId, useMemo, useState, type CSSProperties } from 'react';
+import { useEffect, useId, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { formatPercentPoints } from '@/lib/format';
 import { GROUP_SHORT, GROUP_SLOT, type CofogNode } from '@/lib/story-shared';
 import {
@@ -65,6 +65,14 @@ export function CofogTreemap({
   const uid = useId();
   const [path, setPath] = useState<string[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const crumbRef = useRef<HTMLSpanElement>(null);
+  const moved = useRef(false);
+
+  // after zooming, keyboard focus would be lost (the button it was on disappears): park it on the
+  // current breadcrumb, so Escape and « Remonter » keep working
+  useEffect(() => {
+    if (moved.current) crumbRef.current?.focus();
+  }, [path]);
 
   const chain = useMemo(() => walk(tree, path), [tree, path]);
   const view = chain[chain.length - 1]!;
@@ -72,11 +80,13 @@ export function CofogTreemap({
   const selected = selectedId ? findById(view, selectedId) : null;
 
   const zoomTo = (id: string) => {
+    moved.current = true;
     const full = pathTo(view, id);
     if (full) setPath((p) => [...p, ...full]);
     setSelectedId(null);
   };
   const crumbTo = (depth: number) => {
+    moved.current = true;
     setPath((p) => p.slice(0, depth));
     setSelectedId(null);
   };
@@ -109,7 +119,12 @@ export function CofogTreemap({
                 </span>
               )}
               {last ? (
-                <span aria-current="location" className="px-1 font-semibold text-ink">
+                <span
+                  ref={crumbRef}
+                  tabIndex={-1}
+                  aria-current="location"
+                  className="px-1 font-semibold text-ink outline-offset-2"
+                >
                   {i === 0 ? rootLabel : (GROUP_SHORT[n.id] ?? n.label)}
                 </span>
               ) : (

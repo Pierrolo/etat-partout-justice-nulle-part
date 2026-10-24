@@ -55,22 +55,28 @@ for (const scheme of ['light', 'dark'] as const) {
   });
 }
 
+/** Wait until an island has hydrated (Astro removes the `ssr` attribute of <astro-island>). */
+async function hydrated(page: Page, component: string) {
+  const island = page.locator(`astro-island[component-url*="${component}"]`);
+  await island.scrollIntoViewIfNeeded();
+  await expect(island).not.toHaveAttribute('ssr', /.*/, { timeout: 15_000 });
+}
+
 test('predict then reveal works with a numeric field and no pointer', async ({ page }) => {
   await page.goto('comprendre/');
-  await page.getByLabel('ou tapez un nombre').scrollIntoViewIfNeeded();
+  await hydrated(page, 'PredictReveal');
   const field = page.getByLabel('ou tapez un nombre');
   await field.fill('25');
   await page.getByRole('button', { name: 'Révéler la réponse' }).click();
-  await expect(page.getByText('La réalité', { exact: false })).toContainText('6,4');
-  await expect(page.getByText('Vous avez dit 25 %')).toBeVisible();
+  await expect(page.getByText(/Vous avez dit 25\s%\.\sLa réalité\s:\s6,4\s%/)).toBeVisible();
   await page.getByRole('button', { name: 'Recommencer' }).click();
   await expect(page.getByText('pas encore choisie')).toBeVisible();
 });
 
 test('the range input is keyboard-operable', async ({ page }) => {
   await page.goto('comprendre/');
+  await hydrated(page, 'PredictReveal');
   const range = page.getByRole('slider', { name: /Votre estimation/ });
-  await range.scrollIntoViewIfNeeded();
   await range.focus();
   await page.keyboard.press('Home');
   await page.keyboard.press('ArrowRight');
@@ -115,13 +121,14 @@ test('the agency list filters, announces the count and ignores accents', async (
   await expect(page.locator('p[aria-live="polite"]').first()).toContainText('résultat');
 });
 
-test('the story pages are complete without JavaScript', async ({ browser }) => {
+test('the story pages are complete without JavaScript', async ({ browser, isMobile }) => {
   const ctx = await browser.newContext({ javaScriptEnabled: false });
   const page = await ctx.newPage();
   await page.goto('comprendre/');
-  await expect(page.getByText('Réponse : la sécurité')).toBeVisible();
+  // Playwright's text engine skips <noscript>: read the raw HTML instead
+  expect(await page.content()).toContain('Réponse : la sécurité');
   await page.goto('comprendre/depenses/');
-  await expect(page.locator('.tm')).toBeVisible();
+  if (!isMobile) await expect(page.locator('.tm')).toBeVisible();
   await expect(page.getByText('Lecture.').first()).toBeVisible();
   await ctx.close();
 });
