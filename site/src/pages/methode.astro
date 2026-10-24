@@ -1,0 +1,116 @@
+---
+import { ENGINE_VERSION } from '@epjn/engine';
+import PageHeader from '@/components/site/PageHeader.astro';
+import Todo from '@/components/site/Todo.astro';
+import { Callout, TierLegend } from '@/components/ui';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const sections = [
+  { id: 'niveaux', label: 'Trois niveaux de preuve' },
+  { id: 'modelise', label: 'Ce qui est modélisé' },
+  { id: 'non-modelise', label: 'Ce qui ne l’est pas' },
+  { id: 'hypotheses', label: 'Registre des hypothèses' },
+  { id: 'sources', label: 'Sources' },
+  { id: 'ecarts', label: 'Écarts avec les simulateurs officiels' },
+  { id: 'journal', label: 'Journal des modifications' },
+];
+---
+
+<BaseLayout
+  title="Méthode et hypothèses"
+  description="Ce que le simulateur calcule, ce qu’il ne calcule pas, ses hypothèses et ses sources."
+>
+  <PageHeader
+    eyebrow="Méthode"
+    title="Méthode et hypothèses"
+    lede="Un simulateur se juge à ses hypothèses. Voici ce qu’il calcule, comment, et ce qu’il laisse de côté."
+  />
+
+  <div class="wrap grid gap-10 lg:grid-cols-[14rem_1fr] lg:gap-16">
+    <nav aria-label="Sur cette page" class="lg:sticky lg:top-6 lg:self-start">
+      <p class="eyebrow mb-3">Sur cette page</p>
+      <ul class="space-y-1 text-sm">
+        {sections.map((s) => (
+          <li>
+            <a
+              href={`#${s.id}`}
+              class="inline-flex min-h-8 items-center text-ink-2 no-underline hover:text-ink hover:underline"
+            >
+              {s.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="prose-epjn min-w-0">
+      <section id="niveaux" aria-labelledby="niveaux-t">
+        <h2 id="niveaux-t" class="mt-0!">
+          Trois niveaux de preuve
+        </h2>
+        <p>
+          Chaque chiffre du site porte l’un de ces trois statuts, avec la même présentation partout.
+          C’est la règle centrale : ne jamais faire passer une promesse pour un texte de loi.
+        </p>
+        <TierLegend columns={1} />
+      </section>
+
+      <section id="modelise" aria-labelledby="modelise-t">
+        <h2 id="modelise-t">Ce qui est modélisé</h2>
+        <!-- TODO(builder): list the mechanisms modelled (CSG/CRDS, IR, AFU, prestations familiales, APL, prime d'activité, RSA…), each linked to its amendment. -->
+        <Todo title="Liste des mécanismes modélisés">
+          À écrire depuis le moteur et les amendements.
+        </Todo>
+      </section>
+
+      <section id="non-modelise" aria-labelledby="non-modelise-t">
+        <h2 id="non-modelise-t">Ce qui ne l’est pas</h2>
+        <Callout tone="note">
+          <p>
+            Tout ce que le simulateur ne sait pas calculer est aussi affiché sur la page de
+            résultat, sous « Ce que le simulateur ne compte pas » — pas seulement ici.
+          </p>
+        </Callout>
+        <!-- TODO(builder): list of limits (taxe foncière, DOM, agriculteurs, santé, garde alternée…) from docs/VISION.md §6 and §9. -->
+        <Todo title="Liste des limites">À écrire (VISION §6 et §9).</Todo>
+      </section>
+
+      <section id="hypotheses" aria-labelledby="hypotheses-t">
+        <h2 id="hypotheses-t">Registre des hypothèses</h2>
+        <p>
+          Là où le texte est muet, nous faisons un choix, nous le numérotons et nous le rendons
+          modifiable quand il compte.
+        </p>
+        <!-- TODO(builder): render the H1…Hn register (docs/VISION.md §6) from a JSON file, with default, rationale, toggle, book page. -->
+        <Todo title="Tableau H1 … Hn">
+          Défaut, justification, bascule possible, renvoi au livre.
+        </Todo>
+      </section>
+
+      <section id="sources" aria-labelledby="sources-t">
+        <h2 id="sources-t">Sources</h2>
+        <!-- TODO(builder): sources list (france-resolution.fr, Insee, Eurostat, DGFiP, Légifrance, CAF) with year and licence. -->
+        <Todo title="Liste des sources">
+          Chaque source : organisme, jeu de données, année, licence, lien.
+        </Todo>
+      </section>
+
+      <section id="ecarts" aria-labelledby="ecarts-t">
+        <h2 id="ecarts-t">Écarts avec les simulateurs officiels</h2>
+        <!-- TODO(builder): published gap table vs OpenFisca / impots.gouv / caf.fr golden cases. -->
+        <Todo title="Table des écarts">
+          Notre baseline comparée aux calculateurs officiels, cas par cas.
+        </Todo>
+      </section>
+
+      <section id="journal" aria-labelledby="journal-t">
+        <h2 id="journal-t">Journal des modifications</h2>
+        <p>
+          Version du moteur de calcul : <code>{ENGINE_VERSION}</code>.
+        </p>
+        <!-- TODO(builder): changelog -->
+        <Todo title="Changelog">Date, version, ce qui a changé et pourquoi.</Todo>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+/** Brand mark: a ring with a dot — « moi », au milieu du tout. Decorative (the name sits beside it). */
+interface Props {
+  size?: number;
+}
+const { size = 28 } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 32 32"
+  aria-hidden="true"
+  focusable="false"
+  class="shrink-0 text-accent"
+>
+  <circle cx="16" cy="16" r="12.75" fill="none" stroke="currentColor" stroke-width="2.5"></circle>
+  <circle cx="16" cy="16" r="4.25" fill="currentColor"></circle>
+</svg>

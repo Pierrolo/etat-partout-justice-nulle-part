@@ -1,0 +1,3960 @@
+{
+  "meta": {
+    "reference_implementation": "scripts/baseline_reference.py (reads research/baseline/parameters.json; run with --check)",
+    "oracle": "OpenFisca-France",
+    "oracle_version": "176.1.3",
+    "oracle_released": "2026-10-23 (PyPI 176.1.3)",
+    "reference_month": "2026-10",
+    "tax_year": 2026,
+    "legislation_note": "State of the law on 24 Oct 2026: SMIC 12.31 EUR/h (1 Jun 2026); RSA/PA/AAH/BMAF revalorised +0.8% on 1 Apr 2026 with exceptional PA bonification increase; APL barème +1.15% on 1 Oct 2026; réduction générale computed on the 1 Jan 2026 SMIC (décret 2026-509); IR barème = LF 2026 (revenus 2025), no 2026-income barème is published yet (PLF 2027 not enacted).",
+    "conventions": [
+      "Monthly amounts at 2026-10; positive numbers for levies and contributions.",
+      "Constant earnings 2024-2026 (steady state) so look-back rules see current income.",
+      "net_pay_before_tax = salaire net 'avant impôt' (net après CSG/CRDS), the base used for RSA/PA.",
+      "RGDU monthly = YTD(2026-10) - YTD(2026-09) because OpenFisca recovers it progressively.",
+      "housing_benefit_* = APL/AL (private rented sector), gross and net of 0.5% CRDS.",
+      "ars_* is the ARS paid in August 2026 (annual figure).",
+      "disposable_income_monthly_steady_state = net pay + net pensions + benefits (net of CRDS, ARS/12) - income tax/12 (+ credits). VAT NOT deducted.",
+      "Single parents: ASF (allocation de soutien familial) is paid by OpenFisca whenever no child support is received (assumed).",
+      "Families with a child under 3 receive the PAJE allocation de base (41.65% BMAF if under ceiling) in the oracle."
+    ],
+    "oracle_adjustments": [
+      "OpenFisca's AGS employer rate parameter is 0.20% (stale); official 2026 rate is 0.25% -> patched to 0.25% through a Reform in this script.",
+      "AT/MP rate set to the 2026 national mean 2.08% (OpenFisca default is 0.70%).",
+      "Company headcount set to 5 (<11 employees, <50): formation 0.55%, FNAL 0.10%, no versement mobilité."
+    ]
+  },
+  "cross_checks_of_the_oracle": {
+    "income_tax_official_examples": [
+      {
+        "label": "Célibataire, RNI 30 000",
+        "rni": 30000,
+        "couple": false,
+        "children": 0,
+        "parent_isole": false,
+        "official_ir_before_decote": 2103.99,
+        "openfisca_ir_before_decote": 2104.09,
+        "difference": 0.1,
+        "note": "service-public examples ignore the décote; OpenFisca rounds to the euro."
+      },
+      {
+        "label": "Couple, RNI 60 000",
+        "rni": 60000,
+        "couple": true,
+        "children": 0,
+        "parent_isole": false,
+        "official_ir_before_decote": 4207.98,
+        "openfisca_ir_before_decote": 4208.18,
+        "difference": 0.2,
+        "note": "service-public examples ignore the décote; OpenFisca rounds to the euro."
+      },
+      {
+        "label": "Couple, RNI 90 000",
+        "rni": 90000,
+        "couple": true,
+        "children": 0,
+        "parent_isole": false,
+        "official_ir_before_decote": 13207.98,
+        "openfisca_ir_before_decote": 13207.98,
+        "difference": 0.0,
+        "note": "service-public examples ignore the décote; OpenFisca rounds to the euro."
+      },
+      {
+        "label": "Couple + 1 enfant, RNI 60 000",
+        "rni": 60000,
+        "couple": true,
+        "children": 1,
+        "parent_isole": false,
+        "official_ir_before_decote": 3410.0,
+        "openfisca_ir_before_decote": 3410.07,
+        "difference": 0.07,
+        "note": "service-public examples ignore the décote; OpenFisca rounds to the euro."
+      },
+      {
+        "label": "Couple + 1 enfant, RNI 90 000 (plafonnement du QF)",
+        "rni": 90000,
+        "couple": true,
+        "children": 1,
+        "parent_isole": false,
+        "official_ir_before_decote": 11400.98,
+        "openfisca_ir_before_decote": 11400.98,
+        "difference": 0.0,
+        "note": "service-public examples ignore the décote; OpenFisca rounds to the euro."
+      },
+      {
+        "label": "Couple + 2 enfants, RNI 60 000",
+        "rni": 60000,
+        "couple": true,
+        "children": 2,
+        "parent_isole": false,
+        "official_ir_before_decote": 2772.0,
+        "openfisca_ir_before_decote": 2772.07,
+        "difference": 0.07,
+        "note": "service-public examples ignore the décote; OpenFisca rounds to the euro."
+      },
+      {
+        "label": "Couple + 2 enfants, RNI 90 000 (plafonnement du QF)",
+        "rni": 90000,
+        "couple": true,
+        "children": 2,
+        "parent_isole": false,
+        "official_ir_before_decote": 9593.98,
+        "openfisca_ir_before_decote": 9593.98,
+        "difference": 0.0,
+        "note": "service-public examples ignore the décote; OpenFisca rounds to the euro."
+      },
+      {
+        "label": "Parent isolé + 1 enfant, RNI 30 000",
+        "rni": 30000,
+        "couple": false,
+        "children": 1,
+        "parent_isole": true,
+        "official_ir_before_decote": 748.0,
+        "openfisca_ir_before_decote": 748.04,
+        "difference": 0.04,
+        "note": "service-public examples ignore the décote; OpenFisca rounds to the euro."
+      },
+      {
+        "label": "Parent isolé + 2 enfants, RNI 30 000",
+        "rni": 30000,
+        "couple": false,
+        "children": 2,
+        "parent_isole": true,
+        "official_ir_before_decote": 110.0,
+        "openfisca_ir_before_decote": 110.04,
+        "difference": 0.04,
+        "note": "service-public examples ignore the décote; OpenFisca rounds to the euro."
+      }
+    ],
+    "caf_simulator_prime_activite_jan_2026": [
+      {
+        "net_salary_input": 700,
+        "official_caf_amount_net_of_crds": 350,
+        "openfisca_amount_net_of_crds": 350.4,
+        "difference": 0.4,
+        "source": "official CAF simulator as reported by MoneyVox, 3 Jul 2026"
+      },
+      {
+        "net_salary_input": 1000,
+        "official_caf_amount_net_of_crds": 306,
+        "openfisca_amount_net_of_crds": 306.22,
+        "difference": 0.22,
+        "source": "official CAF simulator as reported by MoneyVox, 3 Jul 2026"
+      },
+      {
+        "net_salary_input": 1600,
+        "official_caf_amount_net_of_crds": 174,
+        "openfisca_amount_net_of_crds": 174.2,
+        "difference": 0.2,
+        "source": "official CAF simulator as reported by MoneyVox, 3 Jul 2026"
+      },
+      {
+        "net_salary_input": 1800,
+        "official_caf_amount_net_of_crds": 94,
+        "openfisca_amount_net_of_crds": 94.3,
+        "difference": 0.3,
+        "source": "official CAF simulator as reported by MoneyVox, 3 Jul 2026"
+      },
+      {
+        "net_salary_input": 1900,
+        "official_caf_amount_net_of_crds": 54,
+        "openfisca_amount_net_of_crds": 54.35,
+        "difference": 0.35,
+        "source": "official CAF simulator as reported by MoneyVox, 3 Jul 2026"
+      },
+      {
+        "net_salary_input": 2000,
+        "official_caf_amount_net_of_crds": 0,
+        "openfisca_amount_net_of_crds": 0.0,
+        "difference": 0.0,
+        "source": "official CAF simulator as reported by MoneyVox, 3 Jul 2026"
+      }
+    ],
+    "smic_net": {
+      "official_gross": 1867.02,
+      "official_net": 1477.93,
+      "openfisca_net": 1477.93,
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2300"
+    }
+  },
+  "cases": [
+    {
+      "id": "single_smic_z2",
+      "label": "Célibataire, 1 SMIC, loyer 550 zone 2",
+      "tags": [
+        "single",
+        "salaried",
+        "apl"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 550,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 230.88,
+          "ppa_net_of_crds": 229.72,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 16536.49,
+          "rfr": 16536.49,
+          "ir_after_quotient_familial_cap_before_decote": 543.01,
+          "decote": 651.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1707.65,
+        "disposable_income_components_monthly": {
+          "net_pay": 1477.93,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 229.72,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 20475.59
+      }
+    },
+    {
+      "id": "single_smic_z1",
+      "label": "Célibataire, 1 SMIC, loyer 750 zone 1",
+      "tags": [
+        "single",
+        "salaried",
+        "apl"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 750,
+          "zone": 1
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 230.88,
+          "ppa_net_of_crds": 229.72,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 16536.49,
+          "rfr": 16536.49,
+          "ir_after_quotient_familial_cap_before_decote": 543.01,
+          "decote": 651.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1707.65,
+        "disposable_income_components_monthly": {
+          "net_pay": 1477.93,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 229.72,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 20475.59
+      }
+    },
+    {
+      "id": "single_smic_z3",
+      "label": "Célibataire, 1 SMIC, loyer 450 zone 3",
+      "tags": [
+        "single",
+        "salaried",
+        "apl"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 450,
+          "zone": 3
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 230.88,
+          "ppa_net_of_crds": 229.72,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 16536.49,
+          "rfr": 16536.49,
+          "ir_after_quotient_familial_cap_before_decote": 543.01,
+          "decote": 651.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1707.65,
+        "disposable_income_components_monthly": {
+          "net_pay": 1477.93,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 229.72,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 20475.59
+      }
+    },
+    {
+      "id": "single_smic_owner",
+      "label": "Célibataire, 1 SMIC, propriétaire sans loyer",
+      "tags": [
+        "single",
+        "salaried",
+        "forfait_logement"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "proprietaire"
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 154.28,
+          "ppa_net_of_crds": 153.51,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 16536.49,
+          "rfr": 16536.49,
+          "ir_after_quotient_familial_cap_before_decote": 543.01,
+          "decote": 651.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1631.44,
+        "disposable_income_components_monthly": {
+          "net_pay": 1477.93,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 153.51,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 19564.09
+      }
+    },
+    {
+      "id": "single_half_smic_z2",
+      "label": "Célibataire, 0,5 SMIC (mi-temps), loyer 500 zone 2",
+      "tags": [
+        "single",
+        "salaried",
+        "part_time"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 933.51,
+            "work_ratio": 0.5
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 500,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 933.51,
+            "employee_social_contributions": 105.58,
+            "csg_deductible": 62.37,
+            "csg_non_deductible": 22.01,
+            "crds": 4.59,
+            "net_pay_before_tax": 738.96,
+            "net_taxable": 765.56,
+            "employer_contributions_before_rgdu": 400.44,
+            "rgdu_reduction": 350.07,
+            "super_gross_total_labour_cost": 983.89
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 268.13,
+          "ppa_net_of_crds": 266.79,
+          "rsa": 0.0,
+          "housing_benefit_gross": 213.87,
+          "housing_benefit_net_of_crds": 212.8,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 8267.75,
+          "rfr": 8267.75,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1218.55,
+        "disposable_income_components_monthly": {
+          "net_pay": 738.96,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 479.59,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 14754.28
+      }
+    },
+    {
+      "id": "single_1_5smic_z2",
+      "label": "Célibataire, 1,5 SMIC, loyer 650 zone 2",
+      "tags": [
+        "single",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 650,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "employee_social_contributions": 316.74,
+            "csg_deductible": 187.1,
+            "csg_non_deductible": 66.04,
+            "crds": 13.76,
+            "net_pay_before_tax": 2216.89,
+            "net_taxable": 2296.69,
+            "employer_contributions_before_rgdu": 1201.32,
+            "rgdu_reduction": 345.31,
+            "super_gross_total_labour_cost": 3656.55
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 24804.24,
+          "rfr": 24804.24,
+          "ir_after_quotient_familial_cap_before_decote": 1452.47,
+          "decote": 240.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 1212.0,
+          "ir_signed_economic": -1212.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 2115.89,
+        "disposable_income_components_monthly": {
+          "net_pay": 2216.89,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 0.0,
+          "income_tax_signed_over_12": -101.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 25390.71
+      }
+    },
+    {
+      "id": "single_2smic_z1",
+      "label": "Célibataire, 2 SMIC, loyer 900 zone 1",
+      "tags": [
+        "single",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 3734.04,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 900,
+          "zone": 1
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 3734.04,
+            "employee_social_contributions": 422.32,
+            "csg_deductible": 249.47,
+            "csg_non_deductible": 88.05,
+            "crds": 18.34,
+            "net_pay_before_tax": 2955.86,
+            "net_taxable": 3062.25,
+            "employer_contributions_before_rgdu": 1601.77,
+            "rgdu_reduction": 184.46,
+            "super_gross_total_labour_cost": 5151.34
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 33071.99,
+          "rfr": 33071.99,
+          "ir_after_quotient_familial_cap_before_decote": 3025.59,
+          "decote": 0.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 3026.0,
+          "ir_signed_economic": -3026.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 2703.69,
+        "disposable_income_components_monthly": {
+          "net_pay": 2955.86,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 0.0,
+          "income_tax_signed_over_12": -252.17
+        },
+        "openfisca_revenu_disponible_calendar_2026": 32444.29
+      }
+    },
+    {
+      "id": "single_no_income_z2",
+      "label": "Célibataire sans revenu, loyer 450 zone 2 (RSA + APL)",
+      "tags": [
+        "single",
+        "rsa",
+        "apl"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "inactif",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 450,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "inactif"
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 573.49,
+          "housing_benefit_gross": 309.96,
+          "housing_benefit_net_of_crds": 308.41,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 0.0,
+          "rfr": 0.0,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 881.9,
+        "disposable_income_components_monthly": {
+          "net_pay": 0.0,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 881.9,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 10689.44
+      }
+    },
+    {
+      "id": "single_net5k",
+      "label": "Célibataire, brut 6 400 EUR (net ~5 000), loyer 1 200 zone 1",
+      "tags": [
+        "single",
+        "salaried",
+        "high_earner"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 6400.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 1200,
+          "zone": 1
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 6400.0,
+            "employee_social_contributions": 704.31,
+            "csg_deductible": 427.58,
+            "csg_non_deductible": 150.91,
+            "crds": 31.44,
+            "net_pay_before_tax": 5085.75,
+            "net_taxable": 5268.11,
+            "employer_contributions_before_rgdu": 2756.62,
+            "rgdu_reduction": 0.0,
+            "super_gross_total_labour_cost": 9156.62
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 56898.45,
+          "rfr": 56898.45,
+          "ir_after_quotient_familial_cap_before_decote": 10173.52,
+          "decote": 0.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 10174.0,
+          "ir_signed_economic": -10174.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 4237.92,
+        "disposable_income_components_monthly": {
+          "net_pay": 5085.75,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 0.0,
+          "income_tax_signed_over_12": -847.83
+        },
+        "openfisca_revenu_disponible_calendar_2026": 50858.23
+      }
+    },
+    {
+      "id": "single_net10k",
+      "label": "Célibataire, brut 12 800 EUR (net ~10 000), loyer 1 800 zone 1",
+      "tags": [
+        "single",
+        "salaried",
+        "high_earner"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 12800.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 1800,
+          "zone": 1
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 12800.0,
+            "employee_social_contributions": 1360.95,
+            "csg_deductible": 855.17,
+            "csg_non_deductible": 301.82,
+            "crds": 62.88,
+            "net_pay_before_tax": 10219.18,
+            "net_taxable": 10583.88,
+            "employer_contributions_before_rgdu": 5509.65,
+            "rgdu_reduction": 0.0,
+            "super_gross_total_labour_cost": 18309.65
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 114308.77,
+          "rfr": 114308.77,
+          "ir_after_quotient_familial_cap_before_decote": 30667.12,
+          "decote": 0.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 30667.0,
+          "ir_signed_economic": -30667.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 7663.6,
+        "disposable_income_components_monthly": {
+          "net_pay": 10219.18,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 0.0,
+          "income_tax_signed_over_12": -2555.58
+        },
+        "openfisca_revenu_disponible_calendar_2026": 91966.33
+      }
+    },
+    {
+      "id": "couple_nokid_2smic_z2",
+      "label": "Couple sans enfant, 2 x SMIC, loyer 800 zone 2",
+      "tags": [
+        "couple",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 800,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          },
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 142.61,
+          "ppa_net_of_crds": 141.9,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.0,
+          "net_taxable_income_rni": 33072.98,
+          "rfr": 33072.98,
+          "ir_after_quotient_familial_cap_before_decote": 1086.03,
+          "decote": 992.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 94.0,
+          "ir_signed_economic": -94.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 3089.93,
+        "disposable_income_components_monthly": {
+          "net_pay": 2955.86,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 141.9,
+          "income_tax_signed_over_12": -7.83
+        },
+        "openfisca_revenu_disponible_calendar_2026": 37059.27
+      }
+    },
+    {
+      "id": "couple_2kids_1earner_smic",
+      "label": "Couple + 2 enfants (6 et 10 ans), 1 seul salaire à 1 SMIC, loyer 700 zone 2",
+      "tags": [
+        "couple",
+        "kids",
+        "salaried",
+        "apl",
+        "rsa"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "inactif",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          6,
+          10
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 700,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          },
+          {
+            "status": "inactif"
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 590.4,
+          "ppa_net_of_crds": 587.45,
+          "rsa": 0.0,
+          "housing_benefit_gross": 300.41,
+          "housing_benefit_net_of_crds": 298.91,
+          "af_gross": 153.01,
+          "af_net_of_crds": 152.24,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 3.0,
+          "net_taxable_income_rni": 16536.49,
+          "rfr": 16536.49,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 1483.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 858.01,
+          "ars_net_of_crds": 853.72
+        },
+        "disposable_income_monthly_steady_state": 2587.67,
+        "disposable_income_components_monthly": {
+          "net_pay": 1477.93,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 1109.74,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 31340.87
+      }
+    },
+    {
+      "id": "couple_2kids_2smic",
+      "label": "Couple + 2 enfants (6 et 10 ans), 2 x SMIC, loyer 800 zone 2",
+      "tags": [
+        "couple",
+        "kids",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          6,
+          10
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 800,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          },
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 372.57,
+          "ppa_net_of_crds": 370.71,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 153.01,
+          "af_net_of_crds": 152.24,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 3.0,
+          "net_taxable_income_rni": 33072.98,
+          "rfr": 33072.98,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 1483.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 858.01,
+          "ars_net_of_crds": 853.72
+        },
+        "disposable_income_monthly_steady_state": 3549.95,
+        "disposable_income_components_monthly": {
+          "net_pay": 2955.86,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 594.09,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 42566.9
+      }
+    },
+    {
+      "id": "couple_2kids_mid",
+      "label": "Couple + 2 enfants, brut 3 000 + 2 200, loyer 900 zone 2",
+      "tags": [
+        "couple",
+        "kids",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 3000.0,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 2200.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          6,
+          10
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 900,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 3000.0,
+            "employee_social_contributions": 339.3,
+            "csg_deductible": 200.43,
+            "csg_non_deductible": 70.74,
+            "crds": 14.74,
+            "net_pay_before_tax": 2374.79,
+            "net_taxable": 2460.27,
+            "employer_contributions_before_rgdu": 1286.88,
+            "rgdu_reduction": 300.0,
+            "super_gross_total_labour_cost": 3986.88
+          },
+          {
+            "status": "salarie",
+            "gross_monthly": 2200.0,
+            "employee_social_contributions": 248.82,
+            "csg_deductible": 146.98,
+            "csg_non_deductible": 51.88,
+            "crds": 10.81,
+            "net_pay_before_tax": 1741.51,
+            "net_taxable": 1804.2,
+            "employer_contributions_before_rgdu": 943.71,
+            "rgdu_reduction": 538.56,
+            "super_gross_total_labour_cost": 2605.15
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 15.94,
+          "ppa_net_of_crds": 15.86,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 153.01,
+          "af_net_of_crds": 152.24,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 3.0,
+          "net_taxable_income_rni": 46056.61,
+          "rfr": 46056.61,
+          "ir_after_quotient_familial_cap_before_decote": 1238.23,
+          "decote": 923.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 315.0,
+          "ir_signed_economic": -315.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 4258.15,
+        "disposable_income_components_monthly": {
+          "net_pay": 4116.3,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 168.1,
+          "income_tax_signed_over_12": -26.25
+        },
+        "openfisca_revenu_disponible_calendar_2026": 50999.18
+      }
+    },
+    {
+      "id": "couple_2kids_high",
+      "label": "Couple + 2 enfants, brut 6 000 + 4 000, loyer 1 400 zone 1",
+      "tags": [
+        "couple",
+        "kids",
+        "salaried",
+        "af_modulation"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 6000.0,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 4000.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          6,
+          10
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 1400,
+          "zone": 1
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 6000.0,
+            "employee_social_contributions": 663.27,
+            "csg_deductible": 400.86,
+            "csg_non_deductible": 141.48,
+            "crds": 29.48,
+            "net_pay_before_tax": 4764.92,
+            "net_taxable": 4935.87,
+            "employer_contributions_before_rgdu": 2584.56,
+            "rgdu_reduction": 0.0,
+            "super_gross_total_labour_cost": 8584.56
+          },
+          {
+            "status": "salarie",
+            "gross_monthly": 4000.0,
+            "employee_social_contributions": 452.4,
+            "csg_deductible": 267.24,
+            "csg_non_deductible": 94.32,
+            "crds": 19.65,
+            "net_pay_before_tax": 3166.39,
+            "net_taxable": 3280.36,
+            "employer_contributions_before_rgdu": 1715.84,
+            "rgdu_reduction": 158.0,
+            "super_gross_total_labour_cost": 5557.84
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 76.5,
+          "af_net_of_crds": 76.12,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 3.0,
+          "net_taxable_income_rni": 88736.45,
+          "rfr": 88736.45,
+          "ir_after_quotient_familial_cap_before_decote": 9214.92,
+          "decote": 0.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 9215.0,
+          "ir_signed_economic": -9215.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 7239.51,
+        "disposable_income_components_monthly": {
+          "net_pay": 7931.31,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 76.12,
+          "income_tax_signed_over_12": -767.92
+        },
+        "openfisca_revenu_disponible_calendar_2026": 86873.01
+      }
+    },
+    {
+      "id": "couple_2kids_vhigh_af",
+      "label": "Couple + 2 enfants, brut 9 000 + 6 000 (AF divisées par 4), loyer 1 800 zone 1",
+      "tags": [
+        "couple",
+        "kids",
+        "salaried",
+        "af_modulation"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 9000.0,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 6000.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          6,
+          10
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 1800,
+          "zone": 1
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 9000.0,
+            "employee_social_contributions": 971.07,
+            "csg_deductible": 601.29,
+            "csg_non_deductible": 212.22,
+            "crds": 44.21,
+            "net_pay_before_tax": 7171.21,
+            "net_taxable": 7427.64,
+            "employer_contributions_before_rgdu": 3875.04,
+            "rgdu_reduction": 0.0,
+            "super_gross_total_labour_cost": 12875.04
+          },
+          {
+            "status": "salarie",
+            "gross_monthly": 6000.0,
+            "employee_social_contributions": 663.27,
+            "csg_deductible": 400.86,
+            "csg_non_deductible": 141.48,
+            "crds": 29.48,
+            "net_pay_before_tax": 4764.92,
+            "net_taxable": 4935.87,
+            "employer_contributions_before_rgdu": 2584.56,
+            "rgdu_reduction": 0.0,
+            "super_gross_total_labour_cost": 8584.56
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 38.25,
+          "af_net_of_crds": 38.06,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 3.0,
+          "net_taxable_income_rni": 133532.48,
+          "rfr": 133532.48,
+          "ir_after_quotient_familial_cap_before_decote": 22653.72,
+          "decote": 0.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 22654.0,
+          "ir_signed_economic": -22654.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 10086.36,
+        "disposable_income_components_monthly": {
+          "net_pay": 11936.13,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 38.06,
+          "income_tax_signed_over_12": -1887.83
+        },
+        "openfisca_revenu_disponible_calendar_2026": 121041.66
+      }
+    },
+    {
+      "id": "couple_3kids_low",
+      "label": "Couple + 3 enfants (5, 9, 16 ans), 1,5 SMIC + 1 SMIC, loyer 850 zone 2 (CF, AF majoration)",
+      "tags": [
+        "couple",
+        "kids",
+        "cf",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          5,
+          9,
+          16
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 850,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "employee_social_contributions": 316.74,
+            "csg_deductible": 187.1,
+            "csg_non_deductible": 66.04,
+            "crds": 13.76,
+            "net_pay_before_tax": 2216.89,
+            "net_taxable": 2296.69,
+            "employer_contributions_before_rgdu": 1201.32,
+            "rgdu_reduction": 345.31,
+            "super_gross_total_labour_cost": 3656.55
+          },
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 425.57,
+          "af_net_of_crds": 423.44,
+          "cf_gross": 199.15,
+          "cf_net_of_crds": 198.15,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 4.0,
+          "net_taxable_income_rni": 41340.73,
+          "rfr": 41340.73,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 1483.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 897.36,
+          "ars_net_of_crds": 892.88
+        },
+        "disposable_income_monthly_steady_state": 4390.82,
+        "disposable_income_components_monthly": {
+          "net_pay": 3694.82,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 696.0,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 52675.06
+      }
+    },
+    {
+      "id": "couple_3kids_mid_toddler",
+      "label": "Couple + 3 enfants (2, 8, 12 ans), 3 000 + 2 000, loyer 950 zone 2 (CF exclu: enfant < 3 ans)",
+      "tags": [
+        "couple",
+        "kids",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 3000.0,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 2000.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          2,
+          8,
+          12
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 950,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 3000.0,
+            "employee_social_contributions": 339.3,
+            "csg_deductible": 200.43,
+            "csg_non_deductible": 70.74,
+            "crds": 14.74,
+            "net_pay_before_tax": 2374.79,
+            "net_taxable": 2460.27,
+            "employer_contributions_before_rgdu": 1286.88,
+            "rgdu_reduction": 300.0,
+            "super_gross_total_labour_cost": 3986.88
+          },
+          {
+            "status": "salarie",
+            "gross_monthly": 2000.0,
+            "employee_social_contributions": 226.2,
+            "csg_deductible": 133.62,
+            "csg_non_deductible": 47.16,
+            "crds": 9.82,
+            "net_pay_before_tax": 1583.2,
+            "net_taxable": 1640.18,
+            "employer_contributions_before_rgdu": 857.92,
+            "rgdu_reduction": 629.4,
+            "super_gross_total_labour_cost": 2228.52
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 349.06,
+          "af_net_of_crds": 347.31,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 199.15,
+          "paje_base_net_of_crds": 198.16,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 4.0,
+          "net_taxable_income_rni": 44285.39,
+          "rfr": 44285.39,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 1483.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 4503.46,
+        "disposable_income_components_monthly": {
+          "net_pay": 3957.99,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 545.47,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 54028.55
+      }
+    },
+    {
+      "id": "couple_1kid_childcare",
+      "label": "Couple + 1 enfant (4 ans), 3 500 + 3 000, garde hors domicile 3 500 EUR/an (crédit d'impôt)",
+      "tags": [
+        "couple",
+        "kids",
+        "tax_credit"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 3500.0,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 3000.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          4
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 1000,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 3500.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 3500.0,
+            "employee_social_contributions": 395.85,
+            "csg_deductible": 233.84,
+            "csg_non_deductible": 82.53,
+            "crds": 17.19,
+            "net_pay_before_tax": 2770.59,
+            "net_taxable": 2870.31,
+            "employer_contributions_before_rgdu": 1501.36,
+            "rgdu_reduction": 213.85,
+            "super_gross_total_labour_cost": 4787.51
+          },
+          {
+            "status": "salarie",
+            "gross_monthly": 3000.0,
+            "employee_social_contributions": 339.3,
+            "csg_deductible": 200.43,
+            "csg_non_deductible": 70.74,
+            "crds": 14.74,
+            "net_pay_before_tax": 2374.79,
+            "net_taxable": 2460.27,
+            "employer_contributions_before_rgdu": 1286.88,
+            "rgdu_reduction": 300.0,
+            "super_gross_total_labour_cost": 3986.88
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.5,
+          "net_taxable_income_rni": 57571.02,
+          "rfr": 57571.02,
+          "ir_after_quotient_familial_cap_before_decote": 3142.81,
+          "decote": 61.0,
+          "tax_credits_and_reductions": 1750.0,
+          "ir_net_payable": 1332.0,
+          "ir_signed_economic": -1332.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 5034.38,
+        "disposable_income_components_monthly": {
+          "net_pay": 5145.38,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 0.0,
+          "income_tax_signed_over_12": -111.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 60412.61
+      }
+    },
+    {
+      "id": "sp1_no_income",
+      "label": "Parent isolé, 1 enfant (5 ans), sans revenu, isolement récent (RSA majoré), loyer 600 zone 2",
+      "tags": [
+        "single_parent",
+        "rsa",
+        "apl"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "inactif",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          5
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 600,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": true,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "inactif"
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 851.81,
+          "housing_benefit_gross": 433.91,
+          "housing_benefit_net_of_crds": 431.74,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 200.77,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.0,
+          "net_taxable_income_rni": 0.0,
+          "rfr": 0.0,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1484.32,
+        "disposable_income_components_monthly": {
+          "net_pay": 0.0,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 1484.32,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 17970.74
+      }
+    },
+    {
+      "id": "sp1_half_smic",
+      "label": "Parent isolé, 1 enfant (5 ans), 0,5 SMIC, loyer 600 zone 2",
+      "tags": [
+        "single_parent",
+        "salaried",
+        "part_time"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 933.51,
+            "work_ratio": 0.5
+          }
+        ],
+        "children_ages": [
+          5
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 600,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 933.51,
+            "employee_social_contributions": 105.58,
+            "csg_deductible": 62.37,
+            "csg_non_deductible": 22.01,
+            "crds": 4.59,
+            "net_pay_before_tax": 738.96,
+            "net_taxable": 765.56,
+            "employer_contributions_before_rgdu": 400.44,
+            "rgdu_reduction": 350.07,
+            "super_gross_total_labour_cost": 983.89
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 403.09,
+          "ppa_net_of_crds": 401.07,
+          "rsa": 0.0,
+          "housing_benefit_gross": 433.91,
+          "housing_benefit_net_of_crds": 431.74,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 200.77,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.0,
+          "net_taxable_income_rni": 8267.75,
+          "rfr": 8267.75,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1772.54,
+        "disposable_income_components_monthly": {
+          "net_pay": 738.96,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 1033.58,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 21323.59
+      }
+    },
+    {
+      "id": "sp1_smic",
+      "label": "Parent isolé, 1 enfant (5 ans), 1 SMIC, loyer 600 zone 2",
+      "tags": [
+        "single_parent",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          5
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 600,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 289.24,
+          "ppa_net_of_crds": 287.8,
+          "rsa": 0.0,
+          "housing_benefit_gross": 203.93,
+          "housing_benefit_net_of_crds": 202.91,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 200.77,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.0,
+          "net_taxable_income_rni": 16536.49,
+          "rfr": 16536.49,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 2169.41,
+        "disposable_income_components_monthly": {
+          "net_pay": 1477.93,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 691.48,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 26267.4
+      }
+    },
+    {
+      "id": "sp1_1_5smic",
+      "label": "Parent isolé, 1 enfant (5 ans), 1,5 SMIC, loyer 650 zone 2",
+      "tags": [
+        "single_parent",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          5
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 650,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "employee_social_contributions": 316.74,
+            "csg_deductible": 187.1,
+            "csg_non_deductible": 66.04,
+            "crds": 13.76,
+            "net_pay_before_tax": 2216.89,
+            "net_taxable": 2296.69,
+            "employer_contributions_before_rgdu": 1201.32,
+            "rgdu_reduction": 345.31,
+            "super_gross_total_labour_cost": 3656.55
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 200.38,
+          "ppa_net_of_crds": 199.38,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 200.77,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.0,
+          "net_taxable_income_rni": 24804.24,
+          "rfr": 24804.24,
+          "ir_after_quotient_familial_cap_before_decote": 176.47,
+          "decote": 817.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 2617.04,
+        "disposable_income_components_monthly": {
+          "net_pay": 2216.89,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 400.15,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 31085.81
+      }
+    },
+    {
+      "id": "sp2_no_income",
+      "label": "Parent isolé, 2 enfants (4 et 9 ans), sans revenu, loyer 700 zone 2 (RSA non majoré)",
+      "tags": [
+        "single_parent",
+        "rsa",
+        "apl"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "inactif",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          4,
+          9
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 700,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "inactif"
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 611.31,
+          "housing_benefit_gross": 500.5,
+          "housing_benefit_net_of_crds": 498.0,
+          "af_gross": 153.01,
+          "af_net_of_crds": 152.24,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 401.55,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.5,
+          "net_taxable_income_rni": 0.0,
+          "rfr": 0.0,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 429.01,
+          "ars_net_of_crds": 426.86
+        },
+        "disposable_income_monthly_steady_state": 1698.67,
+        "disposable_income_components_monthly": {
+          "net_pay": 0.0,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 1698.67,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 20579.29
+      }
+    },
+    {
+      "id": "sp2_half_smic",
+      "label": "Parent isolé, 2 enfants (4 et 9 ans), 0,5 SMIC, loyer 700 zone 2",
+      "tags": [
+        "single_parent",
+        "salaried",
+        "part_time"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 933.51,
+            "work_ratio": 0.5
+          }
+        ],
+        "children_ages": [
+          4,
+          9
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 700,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 933.51,
+            "employee_social_contributions": 105.58,
+            "csg_deductible": 62.37,
+            "csg_non_deductible": 22.01,
+            "crds": 4.59,
+            "net_pay_before_tax": 738.96,
+            "net_taxable": 765.56,
+            "employer_contributions_before_rgdu": 400.44,
+            "rgdu_reduction": 350.07,
+            "super_gross_total_labour_cost": 983.89
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 297.59,
+          "ppa_net_of_crds": 296.11,
+          "rsa": 0.0,
+          "housing_benefit_gross": 500.5,
+          "housing_benefit_net_of_crds": 498.0,
+          "af_gross": 153.01,
+          "af_net_of_crds": 152.24,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 401.55,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.5,
+          "net_taxable_income_rni": 8267.75,
+          "rfr": 8267.75,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 429.01,
+          "ars_net_of_crds": 426.86
+        },
+        "disposable_income_monthly_steady_state": 2122.43,
+        "disposable_income_components_monthly": {
+          "net_pay": 738.96,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 1383.47,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 25719.48
+      }
+    },
+    {
+      "id": "sp2_smic",
+      "label": "Parent isolé, 2 enfants (4 et 9 ans), 1 SMIC, loyer 700 zone 2",
+      "tags": [
+        "single_parent",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          4,
+          9
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 700,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 183.75,
+          "ppa_net_of_crds": 182.83,
+          "rsa": 0.0,
+          "housing_benefit_gross": 300.41,
+          "housing_benefit_net_of_crds": 298.91,
+          "af_gross": 153.01,
+          "af_net_of_crds": 152.24,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 401.55,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.5,
+          "net_taxable_income_rni": 16536.49,
+          "rfr": 16536.49,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 429.01,
+          "ars_net_of_crds": 426.86
+        },
+        "disposable_income_monthly_steady_state": 2549.03,
+        "disposable_income_components_monthly": {
+          "net_pay": 1477.93,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 1071.1,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 30883.63
+      }
+    },
+    {
+      "id": "sp2_1_5smic",
+      "label": "Parent isolé, 2 enfants (4 et 9 ans), 1,5 SMIC, loyer 750 zone 2",
+      "tags": [
+        "single_parent",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          4,
+          9
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 750,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "employee_social_contributions": 316.74,
+            "csg_deductible": 187.1,
+            "csg_non_deductible": 66.04,
+            "crds": 13.76,
+            "net_pay_before_tax": 2216.89,
+            "net_taxable": 2296.69,
+            "employer_contributions_before_rgdu": 1201.32,
+            "rgdu_reduction": 345.31,
+            "super_gross_total_labour_cost": 3656.55
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 59.83,
+          "ppa_net_of_crds": 59.53,
+          "rsa": 0.0,
+          "housing_benefit_gross": 77.56,
+          "housing_benefit_net_of_crds": 77.17,
+          "af_gross": 153.01,
+          "af_net_of_crds": 152.24,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 401.55,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.5,
+          "net_taxable_income_rni": 24804.24,
+          "rfr": 24804.24,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 429.01,
+          "ars_net_of_crds": 426.86
+        },
+        "disposable_income_monthly_steady_state": 2942.95,
+        "disposable_income_components_monthly": {
+          "net_pay": 2216.89,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 726.06,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 35084.14
+      }
+    },
+    {
+      "id": "sp3_smic_z1",
+      "label": "Parent isolé, 3 enfants (2, 7, 12 ans), 1 SMIC, loyer 850 zone 1",
+      "tags": [
+        "single_parent",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          2,
+          7,
+          12
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 850,
+          "zone": 1
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 171.31,
+          "ppa_net_of_crds": 170.45,
+          "rsa": 0.0,
+          "housing_benefit_gross": 460.54,
+          "housing_benefit_net_of_crds": 458.24,
+          "af_gross": 349.06,
+          "af_net_of_crds": 347.31,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 602.32,
+          "paje_base_gross": 199.15,
+          "paje_base_net_of_crds": 198.16,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 3.5,
+          "net_taxable_income_rni": 16536.49,
+          "rfr": 16536.49,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 881.68,
+          "ars_net_of_crds": 877.27
+        },
+        "disposable_income_monthly_steady_state": 3327.52,
+        "disposable_income_components_monthly": {
+          "net_pay": 1477.93,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 1849.59,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 40198.36
+      }
+    },
+    {
+      "id": "sp3_1_5smic_z3",
+      "label": "Parent isolé, 3 enfants (4, 8, 13 ans), 1,5 SMIC, loyer 650 zone 3",
+      "tags": [
+        "single_parent",
+        "salaried"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          4,
+          8,
+          13
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 650,
+          "zone": 3
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "employee_social_contributions": 316.74,
+            "csg_deductible": 187.1,
+            "csg_non_deductible": 66.04,
+            "crds": 13.76,
+            "net_pay_before_tax": 2216.89,
+            "net_taxable": 2296.69,
+            "employer_contributions_before_rgdu": 1201.32,
+            "rgdu_reduction": 345.31,
+            "super_gross_total_labour_cost": 3656.55
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 181.3,
+          "housing_benefit_net_of_crds": 180.39,
+          "af_gross": 349.06,
+          "af_net_of_crds": 347.31,
+          "cf_gross": 298.75,
+          "cf_net_of_crds": 297.26,
+          "asf_net_of_crds": 602.32,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 3.5,
+          "net_taxable_income_rni": 24804.24,
+          "rfr": 24804.24,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 881.68,
+          "ars_net_of_crds": 877.27
+        },
+        "disposable_income_monthly_steady_state": 3717.28,
+        "disposable_income_components_monthly": {
+          "net_pay": 2216.89,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 1500.39,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 44523.23
+      }
+    },
+    {
+      "id": "retired_single_1200",
+      "label": "Retraité seul, pension brute 1 200 EUR/mois (CSG exonérée), loyer 500 zone 2",
+      "tags": [
+        "retired",
+        "aspa_border"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 70,
+            "status": "retraite",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0,
+            "pension_gross_monthly": 1200.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 500,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "retraite",
+            "pension_gross_monthly": 1200.0,
+            "csg_total": 0.0,
+            "csg_deductible": 0.0,
+            "crds": 0.0,
+            "casa": 0.0,
+            "pension_net_before_tax": 1200.0
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 66.53,
+          "housing_benefit_net_of_crds": 66.2,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 10138.0,
+          "rfr": 10138.0,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1266.2,
+        "disposable_income_components_monthly": {
+          "net_pay": 0.0,
+          "pensions_net": 1200.0,
+          "benefits_net_of_crds": 66.2,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 15162.27
+      }
+    },
+    {
+      "id": "retired_single_1800",
+      "label": "Retraité seul, pension brute 1 800 EUR/mois (CSG taux médian), propriétaire",
+      "tags": [
+        "retired"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 70,
+            "status": "retraite",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0,
+            "pension_gross_monthly": 1800.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "proprietaire"
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "retraite",
+            "pension_gross_monthly": 1800.0,
+            "csg_total": 118.8,
+            "csg_deductible": 75.6,
+            "crds": 9.0,
+            "casa": 5.4,
+            "pension_net_before_tax": 1666.8
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 17212.8,
+          "rfr": 17212.8,
+          "ir_after_quotient_familial_cap_before_decote": 617.41,
+          "decote": 618.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1666.8,
+        "disposable_income_components_monthly": {
+          "net_pay": 0.0,
+          "pensions_net": 1666.8,
+          "benefits_net_of_crds": 0.0,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 20001.6
+      }
+    },
+    {
+      "id": "retired_single_4000",
+      "label": "Retraité seul, pension brute 4 000 EUR/mois (CSG taux plein), propriétaire",
+      "tags": [
+        "retired",
+        "high_earner"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 72,
+            "status": "retraite",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0,
+            "pension_gross_monthly": 4000.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "proprietaire"
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "retraite",
+            "pension_gross_monthly": 4000.0,
+            "csg_total": 332.0,
+            "csg_deductible": 236.0,
+            "crds": 20.0,
+            "casa": 12.0,
+            "pension_net_before_tax": 3636.0
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 40729.0,
+          "rfr": 40729.0,
+          "ir_after_quotient_familial_cap_before_decote": 5322.69,
+          "decote": 0.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 5323.0,
+          "ir_signed_economic": -5323.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 3192.42,
+        "disposable_income_components_monthly": {
+          "net_pay": 0.0,
+          "pensions_net": 3636.0,
+          "benefits_net_of_crds": 0.0,
+          "income_tax_signed_over_12": -443.58
+        },
+        "openfisca_revenu_disponible_calendar_2026": 38309.0
+      }
+    },
+    {
+      "id": "retired_couple_3200",
+      "label": "Couple de retraités, pensions brutes 2 000 + 1 200 EUR/mois, propriétaires",
+      "tags": [
+        "retired",
+        "couple"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 70,
+            "status": "retraite",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0,
+            "pension_gross_monthly": 2000.0
+          },
+          {
+            "age": 68,
+            "status": "retraite",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0,
+            "pension_gross_monthly": 1200.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "proprietaire"
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "retraite",
+            "pension_gross_monthly": 2000.0,
+            "csg_total": 132.0,
+            "csg_deductible": 84.0,
+            "crds": 10.0,
+            "casa": 6.0,
+            "pension_net_before_tax": 1852.0
+          },
+          {
+            "status": "retraite",
+            "pension_gross_monthly": 1200.0,
+            "csg_total": 79.2,
+            "csg_deductible": 50.4,
+            "crds": 6.0,
+            "casa": 3.6,
+            "pension_net_before_tax": 1111.2
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.0,
+          "net_taxable_income_rni": 33108.2,
+          "rfr": 33108.2,
+          "ir_after_quotient_familial_cap_before_decote": 1089.9,
+          "decote": 990.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 100.0,
+          "ir_signed_economic": -100.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 2954.87,
+        "disposable_income_components_monthly": {
+          "net_pay": 0.0,
+          "pensions_net": 2963.2,
+          "benefits_net_of_crds": 0.0,
+          "income_tax_signed_over_12": -8.33
+        },
+        "openfisca_revenu_disponible_calendar_2026": 35458.4
+      }
+    },
+    {
+      "id": "retired_single_900_aspa",
+      "label": "Retraité seul, pension brute 900 EUR/mois (ASPA), loyer 450 zone 3",
+      "tags": [
+        "retired",
+        "aspa"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 75,
+            "status": "retraite",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0,
+            "pension_gross_monthly": 900.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 450,
+          "zone": 3
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "retraite",
+            "pension_gross_monthly": 900.0,
+            "csg_total": 0.0,
+            "csg_deductible": 0.0,
+            "crds": 0.0,
+            "casa": 0.0,
+            "pension_net_before_tax": 900.0
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 150.38,
+          "housing_benefit_net_of_crds": 149.63,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 143.6,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 6898.0,
+          "rfr": 6898.0,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1193.23,
+        "disposable_income_components_monthly": {
+          "net_pay": 0.0,
+          "pensions_net": 900.0,
+          "benefits_net_of_crds": 293.23,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 14288.46
+      }
+    },
+    {
+      "id": "single_0_2smic_z2",
+      "label": "Célibataire, 0,2 SMIC (brut 373,40), loyer 450 zone 2 (RSA + PA cumulés)",
+      "tags": [
+        "single",
+        "salaried",
+        "rsa",
+        "ppa"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 373.4,
+            "work_ratio": 0.2
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 450,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 373.4,
+            "employee_social_contributions": 42.22,
+            "csg_deductible": 24.95,
+            "csg_non_deductible": 8.8,
+            "crds": 1.83,
+            "net_pay_before_tax": 295.59,
+            "net_taxable": 306.23,
+            "employer_contributions_before_rgdu": 160.17,
+            "rgdu_reduction": 140.06,
+            "super_gross_total_labour_cost": 393.51
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 176.91,
+          "ppa_net_of_crds": 176.03,
+          "rsa": 277.89,
+          "housing_benefit_gross": 309.96,
+          "housing_benefit_net_of_crds": 308.41,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 3165.79,
+          "rfr": 3165.79,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1057.92,
+        "disposable_income_components_monthly": {
+          "net_pay": 295.59,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 762.33,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 12801.78
+      }
+    },
+    {
+      "id": "edge_af_degressif",
+      "label": "Couple + 2 enfants (6 et 10 ans), 1 salaire brut 9 065 (revenu net catégoriel ~80 800 : juste au-dessus du plafond AF 79 980)",
+      "tags": [
+        "couple",
+        "kids",
+        "af_modulation",
+        "edge"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 9065.0,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "inactif",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          6,
+          10
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 1500,
+          "zone": 1
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 9065.0,
+            "employee_social_contributions": 977.73,
+            "csg_deductible": 605.63,
+            "csg_non_deductible": 213.75,
+            "crds": 44.53,
+            "net_pay_before_tax": 7223.35,
+            "net_taxable": 7481.64,
+            "employer_contributions_before_rgdu": 3903.0,
+            "rgdu_reduction": 0.0,
+            "super_gross_total_labour_cost": 12968.0
+          },
+          {
+            "status": "inactif"
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 82.91,
+          "af_net_of_crds": 82.49,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 3.0,
+          "net_taxable_income_rni": 80804.84,
+          "rfr": 80804.84,
+          "ir_after_quotient_familial_cap_before_decote": 6835.43,
+          "decote": 0.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 6835.0,
+          "ir_signed_economic": -6835.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 6736.26,
+        "disposable_income_components_monthly": {
+          "net_pay": 7223.35,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 82.49,
+          "income_tax_signed_over_12": -569.58
+        },
+        "openfisca_revenu_disponible_calendar_2026": 80834.7
+      }
+    },
+    {
+      "id": "edge_ars_differentielle",
+      "label": "Parent isolé, 1 enfant (8 ans), brut 3 308 (revenu ~29 300 : juste au-dessus du plafond ARS 28 956)",
+      "tags": [
+        "single_parent",
+        "ars",
+        "edge"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 3308.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          8
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 800,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 3308.0,
+            "employee_social_contributions": 374.13,
+            "csg_deductible": 221.01,
+            "csg_non_deductible": 78.0,
+            "crds": 16.25,
+            "net_pay_before_tax": 2618.61,
+            "net_taxable": 2712.86,
+            "employer_contributions_before_rgdu": 1418.99,
+            "rgdu_reduction": 242.81,
+            "super_gross_total_labour_cost": 4484.18
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 39.09,
+          "ppa_net_of_crds": 38.9,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 200.77,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 2.0,
+          "net_taxable_income_rni": 29299.35,
+          "rfr": 29299.35,
+          "ir_after_quotient_familial_cap_before_decote": 670.93,
+          "decote": 593.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 78.0,
+          "ir_signed_economic": -78.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 85.85,
+          "ars_net_of_crds": 85.42
+        },
+        "disposable_income_monthly_steady_state": 2858.9,
+        "disposable_income_components_monthly": {
+          "net_pay": 2618.61,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 246.79,
+          "income_tax_signed_over_12": -6.5
+        },
+        "openfisca_revenu_disponible_calendar_2026": 34094.57
+      }
+    },
+    {
+      "id": "edge_cf_none",
+      "label": "Couple + 3 enfants (5, 9, 13 ans), brut 3 274 + 3 274 (revenu ~58 000 : au-dessus du plafond CF 54 724)",
+      "tags": [
+        "couple",
+        "kids",
+        "cf",
+        "edge"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 3274.0,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 3274.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          5,
+          9,
+          13
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 1000,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 3274.0,
+            "employee_social_contributions": 370.3,
+            "csg_deductible": 218.74,
+            "csg_non_deductible": 77.2,
+            "crds": 16.08,
+            "net_pay_before_tax": 2591.68,
+            "net_taxable": 2684.96,
+            "employer_contributions_before_rgdu": 1404.39,
+            "rgdu_reduction": 248.17,
+            "super_gross_total_labour_cost": 4430.22
+          },
+          {
+            "status": "salarie",
+            "gross_monthly": 3274.0,
+            "employee_social_contributions": 370.3,
+            "csg_deductible": 218.74,
+            "csg_non_deductible": 77.2,
+            "crds": 16.08,
+            "net_pay_before_tax": 2591.68,
+            "net_taxable": 2684.96,
+            "employer_contributions_before_rgdu": 1404.39,
+            "rgdu_reduction": 248.17,
+            "super_gross_total_labour_cost": 4430.22
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 349.06,
+          "af_net_of_crds": 347.31,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 4.0,
+          "net_taxable_income_rni": 57995.15,
+          "rfr": 57995.15,
+          "ir_after_quotient_familial_cap_before_decote": 1275.47,
+          "decote": 906.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 369.0,
+          "ir_signed_economic": -369.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 5499.92,
+        "disposable_income_components_monthly": {
+          "net_pay": 5183.36,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 347.31,
+          "income_tax_signed_over_12": -30.75
+        },
+        "openfisca_revenu_disponible_calendar_2026": 65990.83
+      }
+    },
+    {
+      "id": "couple_2kids_teens",
+      "label": "Couple + 2 enfants (17 et 15 ans), 1,5 SMIC + 1 SMIC (majoration d'âge AF pour le cadet seulement)",
+      "tags": [
+        "couple",
+        "kids",
+        "af_age_majoration"
+      ],
+      "inputs": {
+        "couple": true,
+        "adults": [
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "work_ratio": 1.0
+          },
+          {
+            "age": 35,
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [
+          17,
+          15
+        ],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 800,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "salarie",
+            "gross_monthly": 2800.53,
+            "employee_social_contributions": 316.74,
+            "csg_deductible": 187.1,
+            "csg_non_deductible": 66.04,
+            "crds": 13.76,
+            "net_pay_before_tax": 2216.89,
+            "net_taxable": 2296.69,
+            "employer_contributions_before_rgdu": 1201.32,
+            "rgdu_reduction": 345.31,
+            "super_gross_total_labour_cost": 3656.55
+          },
+          {
+            "status": "salarie",
+            "gross_monthly": 1867.02,
+            "employee_social_contributions": 211.16,
+            "csg_deductible": 124.74,
+            "csg_non_deductible": 44.02,
+            "crds": 9.17,
+            "net_pay_before_tax": 1477.93,
+            "net_taxable": 1531.12,
+            "employer_contributions_before_rgdu": 800.87,
+            "rgdu_reduction": 700.13,
+            "super_gross_total_labour_cost": 1967.76
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 130.52,
+          "ppa_net_of_crds": 129.87,
+          "rsa": 0.0,
+          "housing_benefit_gross": 0.0,
+          "housing_benefit_net_of_crds": 0.0,
+          "af_gross": 229.52,
+          "af_net_of_crds": 228.37,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 0.0
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 3.0,
+          "net_taxable_income_rni": 41340.73,
+          "rfr": 41340.73,
+          "ir_after_quotient_familial_cap_before_decote": 719.48,
+          "decote": 1157.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 4053.06,
+        "disposable_income_components_monthly": {
+          "net_pay": 3694.82,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 358.24,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 48312.95
+      }
+    },
+    {
+      "id": "single_aah_only",
+      "label": "Adulte handicapé seul (taux d'incapacité 80 %), AAH sans autre revenu, loyer 450 zone 2",
+      "tags": [
+        "aah",
+        "optional"
+      ],
+      "inputs": {
+        "couple": false,
+        "adults": [
+          {
+            "age": 40,
+            "status": "aah",
+            "gross_monthly": 0.0,
+            "work_ratio": 1.0
+          }
+        ],
+        "children_ages": [],
+        "housing": {
+          "status": "locataire",
+          "rent_monthly": 450,
+          "zone": 2
+        },
+        "single_parent_recent_isolation": false,
+        "childcare_expenses_annual_per_child_under6": 0.0,
+        "company": {
+          "size_ge_50": false,
+          "at_mp_rate": null,
+          "versement_mobilite": 0.0
+        }
+      },
+      "outputs": {
+        "adults": [
+          {
+            "status": "aah"
+          }
+        ],
+        "household_monthly": {
+          "ppa_gross": 0.0,
+          "ppa_net_of_crds": 0.0,
+          "rsa": 0.0,
+          "housing_benefit_gross": 309.96,
+          "housing_benefit_net_of_crds": 308.41,
+          "af_gross": 0.0,
+          "af_net_of_crds": 0.0,
+          "cf_gross": 0.0,
+          "cf_net_of_crds": 0.0,
+          "asf_net_of_crds": 0.0,
+          "paje_base_gross": 0.0,
+          "paje_base_net_of_crds": 0.0,
+          "aspa": 0.0,
+          "aah": 1041.59
+        },
+        "tax_annual": {
+          "tax_year": 2026,
+          "parts": 1.0,
+          "net_taxable_income_rni": 0.0,
+          "rfr": 0.0,
+          "ir_after_quotient_familial_cap_before_decote": 0.0,
+          "decote": 897.0,
+          "tax_credits_and_reductions": 0.0,
+          "ir_net_payable": 0.0,
+          "ir_signed_economic": 0.0
+        },
+        "benefits_annual": {
+          "ars_gross_august": 0.0,
+          "ars_net_of_crds": 0.0
+        },
+        "disposable_income_monthly_steady_state": 1350.0,
+        "disposable_income_components_monthly": {
+          "net_pay": 0.0,
+          "pensions_net": 0.0,
+          "benefits_net_of_crds": 1350.0,
+          "income_tax_signed_over_12": 0.0
+        },
+        "openfisca_revenu_disponible_calendar_2026": 17400.3
+      }
+    }
+  ]
+}

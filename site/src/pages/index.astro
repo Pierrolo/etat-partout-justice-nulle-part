@@ -1,0 +1,159 @@
+---
+import Todo from '@/components/site/Todo.astro';
+import { Callout, StatTile, TierLegend } from '@/components/ui';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/site';
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section class="wrap grid items-center gap-10 pt-12 pb-10 sm:pt-20 sm:pb-14 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
+    <div>
+      <p class="eyebrow eyebrow-accent mb-4">
+        Compagnon indépendant du livre « État partout, justice nulle part »
+      </p>
+      <h1 class="display max-w-[16ch] sm:max-w-[18ch]">
+        Ce que le plan changerait pour votre foyer.
+      </h1>
+      <p class="lede mt-6">
+        En moins d’une minute, voyez en euros par mois ce que les propositions du livre changeraient
+        pour vous — chaque chiffre relié à son texte ou à son hypothèse. Puis regardez où va
+        l’argent public.
+      </p>
+      <p class="mt-4 max-w-xl text-[0.9375rem] text-ink-3">
+        Les gagnants comme les perdants : si le plan vous coûtait de l’argent, le simulateur le
+        dirait aussi clairement.
+      </p>
+    </div>
+
+    <!-- Illustration of the result format. Clearly fictional: not a computed result. -->
+    <figure
+      class="card hidden space-y-4 bg-sunken lg:block"
+      aria-label="Exemple de résultat, foyer fictif"
+    >
+      <p class="flex items-center justify-between gap-3">
+        <span class="eyebrow">Exemple de résultat</span>
+        <span class="rounded-full border border-rule-strong px-2 py-0.5 text-xs font-medium text-ink-3">
+          Chiffres fictifs
+        </span>
+      </p>
+      <p class="text-[0.9375rem] text-ink-2">
+        Avec le plan, en régime de croisière, ce foyer fictif disposerait de
+      </p>
+      <p class="flex flex-wrap items-baseline gap-x-3">
+        <span class="stat-number text-gain">+212</span>
+        <span class="font-serif text-2xl text-ink-2">€/mois</span>
+        <span class="text-lg font-semibold text-gain">(+9 %)</span>
+      </p>
+      <figcaption class="border-t border-rule pt-3 text-xs text-ink-3">
+        Illustration du format : chiffres fictifs. Le simulateur calcule le vôtre — gain ou perte.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- THE TWO DOORS -->
+  <section class="wrap" aria-labelledby="doors-title">
+    <h2 id="doors-title" class="sr-only">
+      Par où commencer ?
+    </h2>
+    <div class="grid gap-4 md:grid-cols-2 md:gap-6">
+      <a
+        href={withBase('/simulateur/')}
+        class="card group flex flex-col gap-3 border-accent bg-accent-soft no-underline hover:no-underline"
+        style="border-width: 1.5px"
+      >
+        <span class="eyebrow eyebrow-accent">Simulateur · moins d’une minute</span>
+        <span class="font-serif text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+          Et moi ?
+        </span>
+        <span class="max-w-md text-base text-ink-2">
+          Calculez l’effet du plan sur votre foyer, en euros par mois : six questions, aucune donnée
+          ne quitte votre navigateur.
+        </span>
+        <span class="btn btn-primary mt-2 self-start group-hover:bg-accent-hover">
+          Lancer le simulateur <span aria-hidden="true">→</span>
+        </span>
+      </a>
+      <a
+        href={withBase('/comprendre/')}
+        class="card group flex flex-col gap-3 no-underline hover:border-ink hover:no-underline"
+      >
+        <span class="eyebrow">Tableau de bord · à explorer</span>
+        <span class="font-serif text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+          Comprendre
+        </span>
+        <span class="max-w-md text-base text-ink-2">
+          Dépenses publiques, agences, niches fiscales, calendrier : les données du livre en
+          graphiques lisibles, ramenées à l’échelle d’un foyer.
+        </span>
+        <span class="btn btn-secondary mt-2 self-start">
+          Explorer les données <span aria-hidden="true">→</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- THREE BIG NUMBERS -->
+  <section class="wrap mt-16 sm:mt-24" aria-labelledby="numbers-title">
+    <h2 id="numbers-title" class="max-w-xl text-3xl text-ink">
+      L’ampleur du sujet, en trois chiffres
+    </h2>
+    <p class="mt-3 max-w-xl text-ink-2">
+      Chaque grand nombre est accompagné d’un équivalent à votre échelle, et de sa source.
+    </p>
+    <!-- TODO(builder): replace with figures read from src/data/facts.json (value, unit, source, reframing). -->
+    <ul class="mt-8 grid gap-4 md:grid-cols-3 md:gap-6">
+      <StatTile
+        as="li"
+        label="Dépenses publiques par an"
+        value="1 672"
+        unit="Md€"
+        unitLabel="milliards d’euros"
+        reframe="= TODO(builder) € par foyer et par jour"
+        source={{ label: 'TODO(builder) · facts.json' }}
+      />
+      <StatTile
+        as="li"
+        label="Agences de l’État"
+        value="1 104"
+        unit="agences"
+        reframe="TODO(builder) : équivalent à l’échelle d’un foyer"
+        source={{ label: 'TODO(builder) · facts.json' }}
+      />
+      <StatTile
+        as="li"
+        label="Mots de loi en vigueur"
+        value="49"
+        unit="millions de mots"
+        reframe="TODO(builder) : ≈ … années de lecture"
+        source={{ label: 'TODO(builder) · facts.json' }}
+      />
+    </ul>
+  </section>
+
+  <!-- HOW WE KEEP IT HONEST -->
+  <section class="wrap mt-16 sm:mt-24" aria-labelledby="honest-title">
+    <h2 id="honest-title" class="max-w-xl text-3xl text-ink">
+      Trois niveaux de preuve, toujours visibles
+    </h2>
+    <p class="mt-3 max-w-2xl text-ink-2">
+      Un chiffre écrit dans un texte de loi n’a pas le même statut qu’une promesse, ni qu’un choix
+      de modélisation. Nous les distinguons partout, avec la même grammaire visuelle.
+    </p>
+    <TierLegend className="mt-6" />
+    <Callout tone="note" title="Ce site n’est pas neutre sur un point" className="mt-6 max-w-3xl">
+      <p>
+        Il présente le plan tel que ses auteurs l’ont écrit — c’est précisément son objet. Mais il
+        ne cache jamais un perdant, publie toutes ses hypothèses et liste ce qu’il ne sait pas
+        calculer.
+      </p>
+    </Callout>
+  </section>
+
+  <section class="wrap mt-16">
+    <Todo title="Page d’accueil">
+      Ajouter si utile : exemple de phrase-résultat, aperçu du « Qui gagne, qui perd ? », lien vers
+      la méthode.
+    </Todo>
+  </section>
+</BaseLayout>

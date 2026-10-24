@@ -1,0 +1,34 @@
+---
+import Breadcrumbs from '@/components/site/Breadcrumbs.astro';
+import PageHeader from '@/components/site/PageHeader.astro';
+import Todo from '@/components/site/Todo.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Qui gagne, qui perd ?"
+  description="Le plan appliqué à une quarantaine de foyers types : qui gagne, qui perd, de combien."
+>
+  <PageHeader
+    eyebrow="Simulateur"
+    title="Qui gagne, qui perd ?"
+    lede="Le plan appliqué à une quarantaine de foyers types — les perdants y figurent au même titre que les gagnants."
+  >
+    <Breadcrumbs
+      slot="before"
+      items={[
+        { label: 'Accueil', href: '/' },
+        { label: 'Simulateur', href: '/simulateur/' },
+        { label: 'Qui gagne, qui perd ?' },
+      ]}
+    />
+  </PageHeader>
+  <div class="wrap">
+    <!-- TODO(builder): heatmap (income × family type) precomputed by the engine at build time; diverging palette from chart-theme.ts; € / % toggle; table view. -->
+    <Todo title="Carte de chaleur des cas-types">
+      Foyers types calculés par le moteur au moment du build. Palette divergente (
+      <code>divergingInterpolator</code>), bascule € / %, vue tableau, texte de lecture.
+      Spécification :<code>docs/VISION.md</code> §4.
+    </Todo>
+  </div>
+</BaseLayout>

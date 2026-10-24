@@ -1,0 +1,15 @@
+---
+import Todo from '@/components/site/Todo.astro';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout
+  slug="europe"
+  lede="Dépenses publiques en points de PIB, déficit, revenu médian : la France comparée à ses voisins, avec l’écart converti en euros par foyer et par mois."
+>
+  <!-- TODO(builder): build this page with ChartFrame + PlotFigure (see /styleguide). -->
+  <Todo title="France vs Europe">
+    Graphiques comparatifs avec onglets Graphique · Tableau (modèle OWID). Source Eurostat / Insee
+    épinglée, une année par chiffre.
+  </Todo>
+</DashboardLayout>

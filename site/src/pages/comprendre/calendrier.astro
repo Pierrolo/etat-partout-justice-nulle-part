@@ -1,0 +1,14 @@
+---
+import Todo from '@/components/site/Todo.astro';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout
+  slug="calendrier"
+  lede="La transition 2027 → 2030, mesure par mesure : ce qui change, et quand."
+>
+  <!-- TODO(builder): build this page with ChartFrame + PlotFigure (see /styleguide). -->
+  <Todo title="Frise du calendrier">
+    Frise de toutes les mesures datées (CSG, AFU, APL, TVA…), filtrable, avec équivalent texte.
+  </Todo>
+</DashboardLayout>

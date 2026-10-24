@@ -1,0 +1,93 @@
+---
+/**
+ * Base layout: <html lang="fr">, meta/OG, skip link, independence strip, header, <main>, footer.
+ * No third-party request of any kind: fonts and scripts are self-hosted/bundled.
+ *
+ * Usage:
+ *   <BaseLayout title="Méthode" description="…">
+ *     <PageHeader eyebrow="…" title="…" />
+ *     <section class="wrap">…</section>
+ *   </BaseLayout>
+ */
+import '@/styles/global.css';
+import fraunces from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
+import inter from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import Footer from '@/components/site/Footer.astro';
+import Header from '@/components/site/Header.astro';
+import { SITE, withBase } from '@/lib/site';
+
+interface Props {
+  /** Page title without the site suffix; omit on the landing page. */
+  title?: string;
+  description?: string;
+  /** Adds <meta name="robots" content="noindex">. */
+  noindex?: boolean;
+  /** Absolute-path image under /public used for og:image (needs SITE_URL to be emitted). */
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = SITE.description,
+  noindex = false,
+  ogImage = 'og-default.png',
+} = Astro.props;
+
+const fullTitle = title
+  ? `${title} · ${SITE.titleSuffix}`
+  : `${SITE.name} — le plan, vu depuis votre foyer`;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const ogImageUrl = Astro.site ? new URL(withBase(ogImage), Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14151a" media="(prefers-color-scheme: dark)" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    <link rel="preload" href={fraunces} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={inter} as="font" type="font/woff2" crossorigin />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+
+    <!-- Apply the saved theme before first paint (no flash). localStorage only; never a cookie. -->
+    <script is:inline>
+      try {
+        const saved = localStorage.getItem('epjn-theme');
+        if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
+      } catch {
+        /* storage blocked: fall back to the OS preference */
+      }
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">
+      Aller au contenu principal
+    </a>
+    <Header />
+    <main id="main" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

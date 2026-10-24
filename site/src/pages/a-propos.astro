@@ -1,0 +1,68 @@
+---
+import PageHeader from '@/components/site/PageHeader.astro';
+import Todo from '@/components/site/Todo.astro';
+import { Callout } from '@/components/ui';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE, withBase } from '@/lib/site';
+---
+
+<BaseLayout
+  title="À propos"
+  description="Un outil indépendant, open source, sans traceur : qui le fait, pourquoi, et comment le contacter."
+>
+  <PageHeader
+    eyebrow="À propos"
+    title="Un outil indépendant, ouvert et sans traceur"
+    lede="« Et moi, dans tout ça ? » rend lisible un livre dense. Il n’appartient à personne d’autre qu’à ses lecteurs."
+  />
+
+  <div class="wrap">
+    <div class="prose-epjn">
+      <Callout tone="plan" title="Indépendance">
+        <p>{SITE.independence}</p>
+        <p>
+          Nous ne parlons ni au nom de l’association Résolution, ni au nom des auteurs, ni au nom
+          d’une administration. Nous n’utilisons aucun logo, aucune charte graphique officielle ni
+          aucun élément du Système de design de l’État.
+        </p>
+      </Callout>
+
+      <h2>Ce que fait ce site</h2>
+      <p>
+        Il compagnonne le livre « État partout, justice nulle part » (Barrat, Marle, Mitterrand —
+        Éditions Chronique, 2026). Il montre ce que les propositions du livre changeraient pour un
+        foyer donné, et il met en images les données qui les appuient. Il présente le plan tel que
+        ses auteurs l’ont écrit — sans le défendre ni le combattre — et ne cache pas ceux qui y
+        perdraient.
+      </p>
+
+      <h2>Ce qu’il ne fait pas</h2>
+      <ul>
+        <li>Aucun cookie, aucun traceur, aucune statistique de visite.</li>
+        <li>Aucune requête vers un service tiers : polices et scripts sont servis par ce site.</li>
+        <li>Aucune donnée saisie ne quitte votre navigateur ; le calcul s’y fait entièrement.</li>
+        <li>Aucune intelligence artificielle dans le calcul.</li>
+      </ul>
+
+      <h2>Licence, code et données</h2>
+      <!-- TODO(builder): decide the licence (code + data) and state it here; link the repository. -->
+      <Todo title="Licence et dépôt">
+        Choisir la licence du code et des données, lier le dépôt GitHub, indiquer comment signaler
+        une erreur (issues).
+      </Todo>
+
+      <h2>Crédits</h2>
+      <p>
+        Données : france-resolution.fr, Insee, Eurostat, DGFiP. Polices : Fraunces et Inter, sous
+        licence SIL Open Font License, servies localement.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Pour signaler une erreur ou proposer une amélioration, ouvrez une « issue » sur le dépôt du
+        projet. Les règles de calcul sont décrites dans la{' '}
+        <a href={withBase('/methode/')}>méthode</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

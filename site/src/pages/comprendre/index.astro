@@ -1,0 +1,46 @@
+---
+import PageHeader from '@/components/site/PageHeader.astro';
+import Todo from '@/components/site/Todo.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { COMPRENDRE_PAGES, withBase } from '@/lib/site';
+---
+
+<BaseLayout
+  title="Comprendre"
+  description="Où va l’argent public ? Dépenses, agences, niches fiscales, calendrier : les données du livre en graphiques explorables."
+>
+  <PageHeader
+    eyebrow="Tableau de bord"
+    title="Où va l’argent public ?"
+    lede="Les données du livre, rendues lisibles : à l’échelle de l’État, puis à l’échelle d’un foyer, d’une journée, d’une heure de travail."
+  />
+  <div class="wrap space-y-12">
+    <!-- TODO(builder): short scrolly intro (Scrollama, pixel offsets on mobile, prefers-reduced-motion respected). -->
+    <Todo title="Introduction guidée">
+      Une courte histoire en 4–5 écrans, du général au particulier, puis les pages ci-dessous en
+      libre exploration. Spécification : <code>docs/VISION.md</code> §4.
+    </Todo>
+
+    <section aria-labelledby="pages-title">
+      <h2 id="pages-title" class="mb-6 text-2xl text-ink">
+        Huit angles pour comprendre
+      </h2>
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {COMPRENDRE_PAGES.map((p, i) => (
+          <li>
+            <a
+              href={withBase(p.href)}
+              class="card group flex h-full flex-col gap-2 no-underline hover:border-ink hover:no-underline"
+            >
+              <span class="eyebrow">{String(i + 1).padStart(2, '0')}</span>
+              <span class="font-serif text-xl font-medium leading-snug tracking-tight text-ink group-hover:text-accent">
+                {p.title}
+              </span>
+              <span class="text-[0.9375rem] text-ink-2">{p.teaser}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

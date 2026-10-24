@@ -1,0 +1,15 @@
+---
+import Todo from '@/components/site/Todo.astro';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout
+  slug="niches"
+  lede="Explorez les niches fiscales : cherchez, triez par coût, et repérez celles qui vous concernent."
+>
+  <!-- TODO(builder): build this page with ChartFrame + PlotFigure (see /styleguide). -->
+  <Todo title="Explorateur de niches">
+    Tableau recherchable et triable, filtre « me concerne ? », vue graphique du coût. Accessible au
+    clavier, pagination ou virtualisation.
+  </Todo>
+</DashboardLayout>

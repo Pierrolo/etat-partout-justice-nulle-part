@@ -1,0 +1,21 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  /** Plain-text lede; use the `lede` slot for markup. */
+  lede?: string;
+}
+const { eyebrow, title, lede } = Astro.props;
+---
+
+<header class="wrap pt-10 pb-8 sm:pt-14 sm:pb-10">
+  <slot name="before" />
+  {eyebrow && <p class="eyebrow eyebrow-accent mb-3">{eyebrow}</p>}
+  <h1 class="max-w-[22ch] text-balance text-4xl text-ink sm:max-w-[28ch]">{title}</h1>
+  {(lede || Astro.slots.has('lede')) && (
+    <p class="lede mt-4">
+      {lede}
+      <slot name="lede" />
+    </p>
+  )}
+</header>

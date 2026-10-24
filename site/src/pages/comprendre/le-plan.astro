@@ -1,0 +1,15 @@
+---
+import Todo from '@/components/site/Todo.astro';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout
+  slug="le-plan"
+  lede="Le plan en un seul schéma : d’où viennent les économies, où elles vont — salaire net, épargne — et ce que vaut une heure de travail."
+>
+  <!-- TODO(builder): build this page with ChartFrame + PlotFigure (see /styleguide). -->
+  <Todo title="Sankey du plan">
+    Diagramme de Sankey (d3-sankey) : 236 Md€ → salaire net + épargne ; heure de travail à 63 €
+    (29/11/23). Éléments « annoncés » hachurés.
+  </Todo>
+</DashboardLayout>

@@ -1,0 +1,15 @@
+---
+import Todo from '@/components/site/Todo.astro';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout
+  slug="depenses"
+  lede="Les dépenses publiques par grande fonction, ramenées à votre foyer, à une journée, à une heure de travail."
+>
+  <!-- TODO(builder): build this page with ChartFrame + PlotFigure (see /styleguide). -->
+  <Todo title="Treemap des dépenses">
+    Treemap des fonctions COFOG, bascule total / par foyer / par jour, onglets Graphique · Tableau ·
+    Sources. Chiffres lus dans facts.json.
+  </Todo>
+</DashboardLayout>

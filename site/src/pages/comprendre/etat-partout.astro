@@ -1,0 +1,15 @@
+---
+import Todo from '@/components/site/Todo.astro';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout
+  slug="etat-partout"
+  lede="Ministères, agences, impôts, niches, formulaires CERFA, mots de loi : l’empilement mesuré, et sa croissance."
+>
+  <!-- TODO(builder): build this page with ChartFrame + PlotFigure (see /styleguide). -->
+  <Todo title="L’État partout">
+    Visualisation en unités (pictogrammes) + courbe de croissance. Chaque chiffre issu de
+    facts.json.
+  </Todo>
+</DashboardLayout>

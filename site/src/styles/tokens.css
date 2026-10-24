@@ -1,0 +1,142 @@
+/*
+ * DESIGN TOKENS — « Et moi, dans tout ça ? »
+ *
+ * Single source of truth for colour, type and shape. Everything is a CSS custom property so that
+ * Astro pages, React islands, Tailwind utilities and Observable Plot charts all read the same values.
+ *
+ * THEMING
+ *   Each colour is declared once with `light-dark(<light>, <dark>)`. Which side wins is decided by
+ *   `color-scheme`:  OS preference by default, forced by <html data-theme="light|dark"> (toggle).
+ *   Never write `dark:` utilities or hard-coded hex in components: use the semantic tokens below.
+ *
+ * IDENTITY (docs/VISION.md §8)
+ *   Editorial, calm, factual — a newsroom explainer, not a ministry site and not a campaign tract.
+ *   Paper off-white + deep ink + ONE accent (deep violet, "le plan") + a colour-blind-safe diverging
+ *   pair for polarity (teal-blue = gain, vermilion = loss — never red/green) + neutral greys.
+ *   No DSFR, no Marianne, no blue-white-red. Violet was chosen precisely because it is neither
+ *   "État bleu" nor a party colour, and stays distinct from the gain/loss pair under CVD.
+ *
+ * CONTRAST (WCAG 2.2 AA) — computed by `pnpm --filter @epjn/site contrast`, enforced in
+ * src/lib/contrast.test.ts (112 pairs, both modes). Ratios, light / dark:
+ *   ink       on paper 16.9 / 15.4    on surface 17.9 / 14.2    on sunken 15.6 / 15.9
+ *   ink-2     on paper  8.7 / 10.3    on surface  9.2 /  9.5    on sunken  8.0 / 10.7
+ *   ink-3     on paper  5.9 /  6.7    on surface  6.2 /  6.1    on sunken  5.4 /  6.9   (muted TEXT)
+ *   accent    on paper  8.3 / 10.8    on surface  8.8 /  9.9    on accent-soft 7.4 / 9.0
+ *   on-accent on accent 8.8 / 10.8    (white on violet / near-black on lavender)
+ *   gain      on paper  5.3 /  7.7    on gain-soft  4.8 / 6.0   (text AND marks)
+ *   loss      on paper  5.1 /  7.3    on loss-soft  4.6 / 6.0   (text AND marks)
+ *   rule-strong on paper 3.4 / 3.6    (form-control borders, WCAG 1.4.11 needs ≥ 3 : 1)
+ *   series-1…8, gain, loss on paper/surface ≥ 3.0 : 1 (marks, WCAG 1.4.11)
+ *
+ * CHART PALETTE VALIDATION — scripts from the `dataviz` skill (OKLab ΔE ×100, Machado 2009 CVD):
+ *   categorical light  worst adjacent CVD ΔE 11.8 (≥ 8 target), normal-vision 20.4 (≥ 15 floor), all ≥ 3 : 1
+ *   categorical dark   worst adjacent CVD ΔE 11.5,               normal-vision 19.6, all ≥ 3 : 1
+ *   first three series also validate under `--pairs all` (scatter / small multiples): ΔE 11.8 / 15.1.
+ *   Past 3 series in an all-pairs chart: fold into « Autres » or facet.
+ *   gain/loss/accent trio, all pairs: CVD ΔE 13.7 light / 9.1 dark, normal-vision ≥ 20.
+ *
+ * Hex values are 6-digit on purpose: src/lib/contrast.ts parses this file, and
+ * src/lib/chart-theme.ts mirrors the chart tokens (a test keeps both in sync).
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* ── Surfaces ─────────────────────────────────────────────────────────── */
+  --paper: light-dark(#faf8f4, #14151a); /* page background */
+  --surface: light-dark(#ffffff, #1c1d24); /* cards, inputs, chart plates */
+  --sunken: light-dark(#f2efe8, #101116); /* table heads, code, quiet wells */
+
+  /* ── Ink (text) ───────────────────────────────────────────────────────── */
+  --ink: light-dark(#15171c, #edece7); /* body + headings */
+  --ink-2: light-dark(#434852, #c4c3bc); /* secondary text */
+  --ink-3: light-dark(#5c616c, #9a9ca6); /* muted text (≥ 4.5 : 1 — still real text) */
+
+  /* ── Rules ────────────────────────────────────────────────────────────── */
+  --rule: light-dark(#e2ded3, #2f3039); /* decorative hairlines */
+  --rule-strong: light-dark(#8a867b, #6b6d78); /* control borders (≥ 3 : 1) */
+
+  /* ── The one accent: « le plan » ──────────────────────────────────────── */
+  --accent: light-dark(#602e9d, #d4bcff);
+  --accent-hover: light-dark(#4a2280, #e6d6ff);
+  --accent-soft: light-dark(#f0e8f9, #2a2140);
+  --on-accent: light-dark(#ffffff, #14151a); /* text on solid accent */
+
+  /* ── Polarity: gain (teal-blue) vs loss (vermilion). Never red/green. ── */
+  --gain: light-dark(#00737a, #28bac1);
+  --gain-soft: light-dark(#e1f1f3, #12302f);
+  --loss: light-dark(#bc3f06, #ef8959);
+  --loss-soft: light-dark(#fbe9e0, #3a2118);
+  --on-gain: light-dark(#ffffff, #0b1d1e);
+  --on-loss: light-dark(#ffffff, #2a1209);
+
+  /* ── Tiers of evidence (see TierBadge) ────────────────────────────────── */
+  --tier-law-bg: light-dark(#15171c, #edece7); /* solid: written in the law */
+  --tier-law-fg: light-dark(#faf8f4, #14151a);
+  --tier-announced-bd: light-dark(#434852, #c4c3bc); /* dashed + hatched: announced */
+  --tier-hypothesis-bd: light-dark(#5c616c, #9a9ca6); /* dotted, sunken: our hypothesis */
+  --hatch: light-dark(rgb(21 23 28 / 0.17), rgb(237 236 231 / 0.2)); /* hatch line colour */
+
+  /* ── Focus ────────────────────────────────────────────────────────────── */
+  --focus: var(--accent);
+
+  /* ── Chart chrome ─────────────────────────────────────────────────────── */
+  --chart-grid: light-dark(#e4e0d6, #2c2d35);
+  --chart-axis: light-dark(#b9b5a9, #4a4c57);
+
+  /* ── Chart · categorical (identity). Fixed order, never cycled. ───────── */
+  --series-1: light-dark(#2d6bbb, #4f8ddf); /* blue */
+  --series-2: light-dark(#df662f, #de6a35); /* orange */
+  --series-3: light-dark(#00918b, #00aaa3); /* teal */
+  --series-4: light-dark(#bb8603, #b88715); /* ochre */
+  --series-5: light-dark(#d66098, #d6679a); /* rose */
+  --series-6: light-dark(#6f8f20, #80a236); /* olive */
+  --series-7: light-dark(#7255cf, #8a6ee2); /* violet */
+  --series-8: light-dark(#a0522c, #b66946); /* sienna */
+  --series-other: light-dark(#8a867b, #6b6d78); /* « Autres » */
+
+  /* ── Chart · sequential (magnitude): one hue (blue), light → dark. ────── */
+  --seq-1: light-dark(#e4f0ff, #202f42);
+  --seq-2: light-dark(#b4d1f7, #29456a);
+  --seq-3: light-dark(#87b2eb, #325c94);
+  --seq-4: light-dark(#5c92db, #3e75bd);
+  --seq-5: light-dark(#3473c4, #4f8fe3);
+  --seq-6: light-dark(#0a55a8, #66aaff);
+  --seq-7: light-dark(#003889, #81c6ff);
+
+  /* ── Chart · diverging (polarity): gain arm | neutral | loss arm. ─────── */
+  --div-gain-4: light-dark(#00737a, #58d0d6);
+  --div-gain-3: light-dark(#33a0aa, #35a3a9);
+  --div-gain-2: light-dark(#85c4cc, #2a7a7f);
+  --div-gain-1: light-dark(#c3e0e5, #1f4a4d);
+  --div-mid: light-dark(#ebe8e0, #2c2e37);
+  --div-loss-1: light-dark(#f3cdbb, #5a3426);
+  --div-loss-2: light-dark(#e9a07f, #92522f);
+  --div-loss-3: light-dark(#d36d43, #c9703f);
+  --div-loss-4: light-dark(#bc3f06, #f2956a);
+
+  /* ── Type ─────────────────────────────────────────────────────────────── */
+  /* 'EPJN Narrow Space' supplies U+202F (narrow no-break space), absent from the fontsource subsets. */
+  --ff-serif:
+    'EPJN Narrow Space', 'Fraunces Variable', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --ff-sans:
+    'EPJN Narrow Space', 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --ff-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  /* ── Shape & layout ───────────────────────────────────────────────────── */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 14px;
+  --wrap: 72rem; /* page container */
+  --measure: 40rem; /* comfortable reading column (≈ 68 characters) */
+  --tap: 2.75rem; /* 44 px comfortable touch target (WCAG 2.5.8 needs only 24 px) */
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}

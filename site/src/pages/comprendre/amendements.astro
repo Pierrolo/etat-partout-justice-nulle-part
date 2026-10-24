@@ -1,0 +1,15 @@
+---
+import Todo from '@/components/site/Todo.astro';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout
+  slug="amendements"
+  lede="Les amendements du plan, classés par thème, avec leur texte et leur effet."
+>
+  <!-- TODO(builder): build this page with ChartFrame + PlotFigure (see /styleguide). -->
+  <Todo title="Amendements">
+    Liste recherchable par thème, lien vers le texte source, badge de niveau de preuve « Écrit dans
+    la loi ».
+  </Todo>
+</DashboardLayout>

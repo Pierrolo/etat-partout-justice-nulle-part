@@ -1,0 +1,2015 @@
+{
+  "_meta": {
+    "title": "Baseline French tax-benefit parameters",
+    "legislation": "State of the law on 2026-10-24 (latest available). Mixed effective dates are explicit on each parameter.",
+    "reference_date": "2026-10-24",
+    "income_tax_note": "Barème = loi de finances pour 2026 (loi n° 2026-103 du 19/02/2026) applied to revenus 2025 (impôt payé en 2026). No barème for revenus 2026 exists yet (PLF 2027 not enacted); it is used as the best available proxy for 'current IR'.",
+    "units": "EUR amounts are EUR; *_monthly = EUR per month; *_annual = EUR per year; rates are fractions (0.1 = 10%).",
+    "status_legend": {
+      "official": "read on a government site (service-public, solidarites.gouv.fr, ...)",
+      "official_republished": "official figure republished by a public body or specialist press quoting the legal text",
+      "oracle": "only found in the OpenFisca-France parameter files, which cite the Légifrance text",
+      "derived": "computed from other parameters (see note)"
+    },
+    "oracle": "OpenFisca-France 176.1.3 (PyPI 2026-10-23)",
+    "generated_by": "research/baseline/parameters.json is hand-curated; validated by scripts/openfisca_golden.py + a Python reference implementation (40 golden cases)"
+  },
+  "general": {
+    "smic_hourly_gross": {
+      "value": 12.31,
+      "unit": "EUR/h",
+      "effective_date": "2026-06-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2300 ; arrêté du 22/05/2026 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054126589 ; décret 2025-1228 du 17/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053042520",
+      "status": "official"
+    },
+    "smic_hourly_gross_2026_01_01": {
+      "value": 12.02,
+      "unit": "EUR/h",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2300 ; arrêté du 22/05/2026 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054126589 ; décret 2025-1228 du 17/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053042520",
+      "status": "official",
+      "note": "used (frozen) as the SMIC reference of the réduction générale for the whole of 2026"
+    },
+    "smic_monthly_gross_35h": {
+      "value": 1867.02,
+      "unit": "EUR/month",
+      "effective_date": "2026-06-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2300 ; arrêté du 22/05/2026 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054126589 ; décret 2025-1228 du 17/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053042520",
+      "status": "official",
+      "note": "12.31 x 151.6667"
+    },
+    "smic_monthly_gross_35h_2026_01_01": {
+      "value": 1823.03,
+      "unit": "EUR/month",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2300 ; arrêté du 22/05/2026 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054126589 ; décret 2025-1228 du 17/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053042520",
+      "status": "official"
+    },
+    "smic_monthly_net_indicative": {
+      "value": 1477.93,
+      "unit": "EUR/month",
+      "effective_date": "2026-06-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2300 ; arrêté du 22/05/2026 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054126589 ; décret 2025-1228 du 17/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053042520",
+      "status": "official",
+      "note": "indicative net after employee contributions, CSG, CRDS (golden: reproduced exactly by OpenFisca)"
+    },
+    "legal_monthly_hours": {
+      "value": 151.6667,
+      "unit": "hours/month",
+      "effective_date": "2026-01-01",
+      "source": "Code du travail art. L3121-27 (35h)",
+      "status": "derived",
+      "note": "35 x 52 / 12; OpenFisca uses 151.67"
+    },
+    "annual_hours_smic": {
+      "value": 1820,
+      "unit": "hours/year",
+      "effective_date": "2026-01-01",
+      "source": "convention used by URSSAF/CAF for annual SMIC",
+      "status": "derived",
+      "note": "12 x 151.6667"
+    },
+    "pmss_monthly": {
+      "value": 4005,
+      "unit": "EUR/month",
+      "effective_date": "2026-01-01",
+      "source": "arrêté du 22/12/2025 (JO 23/12/2025) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053143451 ; https://www.centre-inffo.fr/site-droit-formation/plafond-de-la-securite-sociale-fixation-des-montants-pour-2026",
+      "status": "official_republished"
+    },
+    "pmss_annual": {
+      "value": 48060,
+      "unit": "EUR/year",
+      "effective_date": "2026-01-01",
+      "source": "arrêté du 22/12/2025 (JO 23/12/2025) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053143451 ; https://www.centre-inffo.fr/site-droit-formation/plafond-de-la-securite-sociale-fixation-des-montants-pour-2026",
+      "status": "official_republished"
+    },
+    "csg_crds_cap_4_pmss_annual": {
+      "value": 192240,
+      "unit": "EUR/year",
+      "effective_date": "2026-01-01",
+      "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+      "status": "official_republished",
+      "note": "4 x PMSS annual: above, CSG/CRDS base is 100% (no 1.75% abattement)"
+    },
+    "bmaf": {
+      "value": 478.16,
+      "unit": "EUR/month",
+      "effective_date": "2026-04-01",
+      "source": "https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 (BMAF 474,37 -> 478,16, +0,8 %)",
+      "status": "official",
+      "note": "base mensuelle des allocations familiales; +0.8% on 474.37"
+    },
+    "revalorisation_coefficient_2026_04_01": {
+      "value": 1.008,
+      "unit": "ratio",
+      "effective_date": "2026-04-01",
+      "source": "https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 (BMAF 474,37 -> 478,16, +0,8 %)",
+      "status": "official"
+    },
+    "crds_rate": {
+      "value": 0.005,
+      "unit": "rate",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+      "status": "official"
+    }
+  },
+  "salary": {
+    "employee": {
+      "vieillesse_plafonnee": {
+        "value": 0.069,
+        "unit": "rate on tranche A (0..1 PMSS)",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished"
+      },
+      "vieillesse_deplafonnee": {
+        "value": 0.004,
+        "unit": "rate on total gross",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished"
+      },
+      "agirc_arrco_t1": {
+        "value": 0.0315,
+        "unit": "rate on 0..1 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "Agirc-Arrco ANI 17/11/2017, taux 2026 ; employer part 6.01 pts (4.72+1.29) per https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/ ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/regimes_complementaires_retraite_secteur_prive",
+        "status": "official_republished"
+      },
+      "agirc_arrco_t2": {
+        "value": 0.0864,
+        "unit": "rate on 1..8 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "Agirc-Arrco ANI 17/11/2017, taux 2026 ; employer part 6.01 pts (4.72+1.29) per https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/ ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/regimes_complementaires_retraite_secteur_prive",
+        "status": "oracle"
+      },
+      "ceg_t1": {
+        "value": 0.0086,
+        "unit": "rate on 0..1 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "Agirc-Arrco ANI 17/11/2017, taux 2026 ; employer part 6.01 pts (4.72+1.29) per https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/ ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/regimes_complementaires_retraite_secteur_prive",
+        "status": "official_republished"
+      },
+      "ceg_t2": {
+        "value": 0.0108,
+        "unit": "rate on 1..8 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "Agirc-Arrco ANI 17/11/2017, taux 2026 ; employer part 6.01 pts (4.72+1.29) per https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/ ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/regimes_complementaires_retraite_secteur_prive",
+        "status": "official_republished"
+      },
+      "cet": {
+        "value": 0.0014,
+        "unit": "rate on 0..8 PMSS, only if gross > 1 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "Agirc-Arrco ANI 17/11/2017, taux 2026 ; employer part 6.01 pts (4.72+1.29) per https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/ ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/regimes_complementaires_retraite_secteur_prive",
+        "status": "official_republished",
+        "note": "contribution d'équilibre technique (total 0.35%: 0.14 employee / 0.21 employer)"
+      },
+      "apec_cadre": {
+        "value": 0.00024,
+        "unit": "rate on 0..4 PMSS, cadres only (optional)",
+        "effective_date": "2026-01-01",
+        "source": "Agirc-Arrco ANI 17/11/2017, taux 2026 ; employer part 6.01 pts (4.72+1.29) per https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/ ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/regimes_complementaires_retraite_secteur_prive",
+        "status": "oracle"
+      },
+      "maladie_alsace_moselle": {
+        "value": 0.013,
+        "unit": "rate on total gross (Alsace-Moselle only; NOT modeled)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.legisocial.fr/reperes-sociaux/taux-cotisations-sociales-urssaf-2026.html",
+        "status": "official_republished"
+      }
+    },
+    "csg_crds": {
+      "csg_total": {
+        "value": 0.092,
+        "unit": "rate",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+        "status": "official"
+      },
+      "csg_deductible": {
+        "value": 0.068,
+        "unit": "rate",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+        "status": "official"
+      },
+      "csg_non_deductible": {
+        "value": 0.024,
+        "unit": "rate",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+        "status": "official"
+      },
+      "crds": {
+        "value": 0.005,
+        "unit": "rate",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+        "status": "official"
+      },
+      "base_abattement_factor": {
+        "value": 0.9825,
+        "unit": "ratio of gross (1 - 1.75%)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+        "status": "official",
+        "note": "applies up to 4 PMSS annual (192 240 EUR); 100% above"
+      }
+    },
+    "employer": {
+      "maladie": {
+        "value": 0.13,
+        "unit": "rate on total gross",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished",
+        "note": "reduced 7% rate neutralised in 2026 by the RGDU"
+      },
+      "vieillesse_plafonnee": {
+        "value": 0.0855,
+        "unit": "rate on 0..1 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished"
+      },
+      "vieillesse_deplafonnee": {
+        "value": 0.0211,
+        "unit": "rate on total gross",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished",
+        "note": "raised from 2.02% to 2.11%"
+      },
+      "allocations_familiales": {
+        "value": 0.0525,
+        "unit": "rate on total gross",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished",
+        "note": "reduced 3.45% rate neutralised in 2026 by the RGDU"
+      },
+      "at_mp_default": {
+        "value": 0.0208,
+        "unit": "rate on total gross (user-adjustable, 0.7%..5%+)",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 30/12/2025 (tarification AT/MP 2026): taux net moyen national 2,08 % — https://www.howdengroup.com/fr-fr/actualites/taux-atmp-2026-notre-analyse",
+        "status": "official_republished",
+        "note": "national mean net rate 2026 (2.12% in 2025)"
+      },
+      "fnal_lt50": {
+        "value": 0.001,
+        "unit": "rate on 0..1 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished"
+      },
+      "fnal_ge50": {
+        "value": 0.005,
+        "unit": "rate on total gross",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished"
+      },
+      "csa": {
+        "value": 0.003,
+        "unit": "rate on total gross",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished"
+      },
+      "assurance_chomage": {
+        "value": 0.04,
+        "unit": "rate on 0..4 PMSS",
+        "effective_date": "2025-05-01",
+        "source": "https://www.legisocial.fr/reperes-sociaux/taux-cotisations-sociales-urssaf-2026.html ; URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished",
+        "note": "4.05% before 2025-05-01"
+      },
+      "ags": {
+        "value": 0.0025,
+        "unit": "rate on 0..4 PMSS",
+        "effective_date": "2024-07-01",
+        "source": "https://www.weblex.fr/weblex-actualite/ags-maintien-du-taux-au-1er-juillet-2026 ; https://www.legisocial.fr/reperes-sociaux/taux-cotisations-sociales-urssaf-2026.html",
+        "status": "official_republished",
+        "note": "OpenFisca still has 0.20% (stale)"
+      },
+      "agirc_arrco_t1": {
+        "value": 0.0472,
+        "unit": "rate on 0..1 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "Agirc-Arrco ANI 17/11/2017, taux 2026 ; employer part 6.01 pts (4.72+1.29) per https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/ ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/regimes_complementaires_retraite_secteur_prive",
+        "status": "official_republished"
+      },
+      "agirc_arrco_t2": {
+        "value": 0.1295,
+        "unit": "rate on 1..8 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "Agirc-Arrco ANI 17/11/2017, taux 2026 ; employer part 6.01 pts (4.72+1.29) per https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/ ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/regimes_complementaires_retraite_secteur_prive",
+        "status": "oracle"
+      },
+      "ceg_t1": {
+        "value": 0.0129,
+        "unit": "rate on 0..1 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "Agirc-Arrco ANI 17/11/2017, taux 2026 ; employer part 6.01 pts (4.72+1.29) per https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/ ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/regimes_complementaires_retraite_secteur_prive",
+        "status": "official_republished"
+      },
+      "ceg_t2": {
+        "value": 0.0162,
+        "unit": "rate on 1..8 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "Agirc-Arrco ANI 17/11/2017, taux 2026 ; employer part 6.01 pts (4.72+1.29) per https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/ ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/regimes_complementaires_retraite_secteur_prive",
+        "status": "oracle"
+      },
+      "cet": {
+        "value": 0.0021,
+        "unit": "rate on 0..8 PMSS, only if gross > 1 PMSS",
+        "effective_date": "2026-01-01",
+        "source": "Agirc-Arrco ANI 17/11/2017, taux 2026 ; employer part 6.01 pts (4.72+1.29) per https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/ ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/regimes_complementaires_retraite_secteur_prive",
+        "status": "official_republished"
+      },
+      "formation_lt11": {
+        "value": 0.0055,
+        "unit": "rate on total gross",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished"
+      },
+      "formation_ge11": {
+        "value": 0.01,
+        "unit": "rate on total gross",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished"
+      },
+      "taxe_apprentissage": {
+        "value": 0.0068,
+        "unit": "rate on total gross (excl. Alsace-Moselle)",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished"
+      },
+      "contribution_dialogue_social": {
+        "value": 0.00016,
+        "unit": "rate on total gross",
+        "effective_date": "2026-01-01",
+        "source": "URSSAF taux 2026 (régime général) as republished by https://bpifrance-creation.fr/boiteaoutils/cotisations-sociales-du-regime-general-salaries ; https://www.urssaf.fr/accueil/employeur/cotisations/liste-taux-cotisations.html",
+        "status": "official_republished"
+      },
+      "versement_mobilite_default": {
+        "value": 0.0,
+        "unit": "rate on total gross (0 to ~3.2%: Paris/92/94 3.20%, Lyon 1.85%, ...; employers >= 11 employees)",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/autres_taxes_participations_assises_salaires/versement_transport",
+        "status": "oracle",
+        "note": "user-adjustable; 0 by default"
+      }
+    },
+    "rgdu": {
+      "t_min": {
+        "value": 0.02,
+        "unit": "ratio",
+        "effective_date": "2026-01-01",
+        "source": "CSS art. L241-13 https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051285243 ; décret 2025-887 du 04/09/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052194026 ; décret 2025-1446 du 31/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053276542 ; https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/",
+        "status": "official_republished"
+      },
+      "t_delta_lt50": {
+        "value": 0.3781,
+        "unit": "ratio (FNAL 0.10%)",
+        "effective_date": "2026-01-01",
+        "source": "CSS art. L241-13 https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051285243 ; décret 2025-887 du 04/09/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052194026 ; décret 2025-1446 du 31/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053276542 ; https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/",
+        "status": "official_republished",
+        "note": "max coefficient = 0.3981; Eurex early draft said 0.3773 (superseded by décret 2025-1446)"
+      },
+      "t_delta_ge50": {
+        "value": 0.3821,
+        "unit": "ratio (FNAL 0.50%)",
+        "effective_date": "2026-01-01",
+        "source": "CSS art. L241-13 https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051285243 ; décret 2025-887 du 04/09/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052194026 ; décret 2025-1446 du 31/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053276542 ; https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/",
+        "status": "official_republished",
+        "note": "max coefficient = 0.4021"
+      },
+      "power": {
+        "value": 1.75,
+        "unit": "exponent",
+        "effective_date": "2026-01-01",
+        "source": "CSS art. L241-13 https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051285243 ; décret 2025-887 du 04/09/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052194026 ; décret 2025-1446 du 31/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053276542 ; https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/",
+        "status": "official_republished"
+      },
+      "exit_threshold_in_smic": {
+        "value": 3,
+        "unit": "multiple of annual SMIC",
+        "effective_date": "2026-01-01",
+        "source": "CSS art. L241-13 https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051285243 ; décret 2025-887 du 04/09/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052194026 ; décret 2025-1446 du 31/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053276542 ; https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/",
+        "status": "official_republished",
+        "note": "reduction = 0 at/above 3 SMIC (cliff from t_min)"
+      },
+      "smic_reference_hourly": {
+        "value": 12.02,
+        "unit": "EUR/h",
+        "effective_date": "2026-01-01",
+        "source": "décret 2026-509 du 12/06/2026 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054248488 ; CSS D241-7 https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000054252241 ; https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/",
+        "status": "official_republished",
+        "note": "FROZEN for all 2026 despite the SMIC increase of 2026-06-01"
+      },
+      "headcount_threshold": {
+        "value": 50,
+        "unit": "employees",
+        "effective_date": "2026-01-01",
+        "source": "CSS art. L241-13 https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051285243 ; décret 2025-887 du 04/09/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052194026 ; décret 2025-1446 du 31/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053276542 ; https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/",
+        "status": "official_republished"
+      },
+      "coefficient_rounding_decimals": {
+        "value": 4,
+        "unit": "decimals",
+        "effective_date": "2026-01-01",
+        "source": "CSS art. L241-13 https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051285243 ; décret 2025-887 du 04/09/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052194026 ; décret 2025-1446 du 31/12/2025 https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053276542 ; https://www.fntp.fr/reduction-generale-degressive-unique-de-cotisations-patronales-pour-2026/",
+        "status": "official_republished",
+        "note": "second term rounded to 4 decimals (OpenFisca and BOSS)"
+      }
+    }
+  },
+  "income_tax": {
+    "bareme_2026": {
+      "value": [
+        {
+          "from": 0,
+          "rate": 0.0
+        },
+        {
+          "from": 11600,
+          "rate": 0.11
+        },
+        {
+          "from": 29579,
+          "rate": 0.3
+        },
+        {
+          "from": 84577,
+          "rate": 0.41
+        },
+        {
+          "from": 181917,
+          "rate": 0.45
+        }
+      ],
+      "unit": "EUR of taxable income per part; marginal rates",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419 ; loi n° 2026-103 du 19/02/2026 de finances pour 2026, art. 4",
+      "status": "official"
+    },
+    "qf_cap_per_half_part": {
+      "value": 1807,
+      "unit": "EUR per half-part",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419 ; loi n° 2026-103 du 19/02/2026 de finances pour 2026, art. 4 ; BOFiP actualité du 07/04/2026 via https://www.legifiscal.fr/actualites-fiscales/4474-ir-bareme-2026-quotient-familial-decote.html",
+      "status": "official"
+    },
+    "qf_cap_parent_isole_first_child": {
+      "value": 4262,
+      "unit": "EUR (cap on the advantage of the first full part of a parent isolé)",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419 ; loi n° 2026-103 du 19/02/2026 de finances pour 2026, art. 4 ; BOFiP actualité du 07/04/2026 via https://www.legifiscal.fr/actualites-fiscales/4474-ir-bareme-2026-quotient-familial-decote.html",
+      "status": "official"
+    },
+    "qf_cap_seul_ayant_eleve_enfant_5_ans": {
+      "value": 1079,
+      "unit": "EUR (half-part for single people who raised a child alone 5 years; NOT modeled)",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "BOFiP actualité du 07/04/2026 via https://www.legifiscal.fr/actualites-fiscales/4474-ir-bareme-2026-quotient-familial-decote.html",
+      "status": "official_republished"
+    },
+    "decote_single": {
+      "value": 897,
+      "unit": "EUR",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "BOFiP actualité du 07/04/2026 via https://www.legifiscal.fr/actualites-fiscales/4474-ir-bareme-2026-quotient-familial-decote.html",
+      "status": "official_republished",
+      "note": "décote = max(0, 897 - 45.25% x IR); applies if IR < 1 982"
+    },
+    "decote_couple": {
+      "value": 1483,
+      "unit": "EUR",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "BOFiP actualité du 07/04/2026 via https://www.legifiscal.fr/actualites-fiscales/4474-ir-bareme-2026-quotient-familial-decote.html",
+      "status": "official_republished",
+      "note": "applies if IR < 3 277"
+    },
+    "decote_rate": {
+      "value": 0.4525,
+      "unit": "rate",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "BOFiP actualité du 07/04/2026 via https://www.legifiscal.fr/actualites-fiscales/4474-ir-bareme-2026-quotient-familial-decote.html",
+      "status": "official_republished"
+    },
+    "abattement_salaires_rate": {
+      "value": 0.1,
+      "unit": "rate",
+      "effective_date": "2026-01-01",
+      "source": "https://www.weblex.fr/chiffres-cles/deduction-forfaitaire-de-10-pour-frais-professionnels-declaration-2026 ; CGI art. 83 3° ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/deductions/abatpro",
+      "status": "official_republished"
+    },
+    "abattement_salaires_min": {
+      "value": 509,
+      "unit": "EUR per person (capped at the salary)",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "https://www.weblex.fr/chiffres-cles/deduction-forfaitaire-de-10-pour-frais-professionnels-declaration-2026 ; CGI art. 83 3° ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/deductions/abatpro",
+      "status": "official_republished"
+    },
+    "abattement_salaires_max": {
+      "value": 14555,
+      "unit": "EUR per person",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "https://www.weblex.fr/chiffres-cles/deduction-forfaitaire-de-10-pour-frais-professionnels-declaration-2026 ; CGI art. 83 3° ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/deductions/abatpro",
+      "status": "official_republished"
+    },
+    "abattement_pensions_rate": {
+      "value": 0.1,
+      "unit": "rate",
+      "effective_date": "2026-01-01",
+      "source": "CGI art. 158 5 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/deductions/abatpen (+0.9% on 450/4 399 of revenus 2024)",
+      "status": "oracle"
+    },
+    "abattement_pensions_min_per_pension": {
+      "value": 454,
+      "unit": "EUR per pension holder",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "CGI art. 158 5 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/deductions/abatpen (+0.9% on 450/4 399 of revenus 2024)",
+      "status": "oracle"
+    },
+    "abattement_pensions_max_per_household": {
+      "value": 4439,
+      "unit": "EUR per foyer",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "CGI art. 158 5 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/deductions/abatpen (+0.9% on 450/4 399 of revenus 2024)",
+      "status": "oracle"
+    },
+    "abattement_age_65_tier1": {
+      "value": {
+        "rng_max": 17670,
+        "amount": 2822
+      },
+      "unit": "EUR (revenu net global <= rng_max)",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "CGI art. 157 bis https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000047622555 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/abat_rni/contribuable_age_invalide.yaml",
+      "status": "oracle",
+      "note": "applied once per foyer if declarant or spouse >= 65 or disabled (OpenFisca behaviour)"
+    },
+    "abattement_age_65_tier2": {
+      "value": {
+        "rng_max": 28430,
+        "amount": 1411
+      },
+      "unit": "EUR (rng_max_tier1 < revenu net global <= rng_max)",
+      "effective_date": "2026-01-01 (revenus 2025)",
+      "source": "CGI art. 157 bis https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000047622555 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/abat_rni/contribuable_age_invalide.yaml",
+      "status": "oracle"
+    },
+    "parts": {
+      "declarant": {
+        "value": 1,
+        "unit": "parts",
+        "effective_date": "2026-01-01",
+        "source": "CGI art. 194",
+        "status": "official"
+      },
+      "spouse": {
+        "value": 1,
+        "unit": "parts",
+        "effective_date": "2026-01-01",
+        "source": "CGI art. 194",
+        "status": "official"
+      },
+      "child_1_and_2": {
+        "value": 0.5,
+        "unit": "parts each",
+        "effective_date": "2026-01-01",
+        "source": "CGI art. 194",
+        "status": "official"
+      },
+      "child_3_and_more": {
+        "value": 1,
+        "unit": "part each",
+        "effective_date": "2026-01-01",
+        "source": "CGI art. 194",
+        "status": "official"
+      },
+      "parent_isole_bonus": {
+        "value": 0.5,
+        "unit": "parts (case T, no cohabiting partner)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419",
+        "status": "official"
+      }
+    },
+    "garde_enfant_credit_rate": {
+      "value": 0.5,
+      "unit": "rate",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F8",
+      "status": "official"
+    },
+    "garde_enfant_credit_expense_cap": {
+      "value": 3500,
+      "unit": "EUR per child under 6 (1 750 if shared custody)",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F8",
+      "status": "official"
+    },
+    "recouvrement_minimum": {
+      "value": 61,
+      "unit": "EUR (IR below this is not collected)",
+      "effective_date": "2026-01-01",
+      "source": "CGI art. 1657 ; OpenFisca-France 176.1.3 (released 2026-10-23) calcul_impot_revenu/recouvrement",
+      "status": "oracle"
+    },
+    "cehr_single": {
+      "value": [
+        {
+          "from": 0,
+          "rate": 0
+        },
+        {
+          "from": 250000,
+          "rate": 0.03
+        },
+        {
+          "from": 500000,
+          "rate": 0.04
+        }
+      ],
+      "unit": "EUR of RFR; contribution exceptionnelle sur les hauts revenus (optional, NOT in golden cases)",
+      "effective_date": "2026-01-01",
+      "source": "CGI art. 223 sexies ; OpenFisca-France 176.1.3 (released 2026-10-23) contributions_exceptionnelles",
+      "status": "oracle"
+    },
+    "cehr_couple": {
+      "value": [
+        {
+          "from": 0,
+          "rate": 0
+        },
+        {
+          "from": 500000,
+          "rate": 0.03
+        },
+        {
+          "from": 1000000,
+          "rate": 0.04
+        }
+      ],
+      "unit": "EUR of RFR",
+      "effective_date": "2026-01-01",
+      "source": "CGI art. 223 sexies",
+      "status": "oracle"
+    },
+    "cdhr_min_rate": {
+      "value": {
+        "rate": 0.2,
+        "rfr_threshold_single": 250000,
+        "rfr_threshold_couple": 500000
+      },
+      "unit": "minimum effective tax rate on RFR above threshold (contribution différentielle; NOT modeled; irrelevant below 250k EUR)",
+      "effective_date": "2025-01-01",
+      "source": "OpenFisca-France 176.1.3 (released 2026-10-23) contributions_exceptionnelles/contribution_differentielle_hauts_revenus ; CGI art. 224",
+      "status": "oracle"
+    }
+  },
+  "pensions": {
+    "csg_rfr_thresholds_1_part": {
+      "value": {
+        "exempt_up_to": 13048,
+        "reduced_up_to": 17057,
+        "median_up_to": 26472
+      },
+      "unit": "EUR of RFR (year N-2 = 2024) per 1 part",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2 (taux 2026 = RFR 2024)",
+      "status": "official"
+    },
+    "csg_rfr_increment_half_part": {
+      "value": {
+        "exempt_limit": 3484,
+        "reduced_limit": 4555,
+        "median_limit": 7066
+      },
+      "unit": "EUR added to each limit (exempt_up_to / reduced_up_to / median_up_to) per additional half-part of quotient familial (limit = 1-part limit + 2 x (parts - 1) x increment; quarter-part = half the increment, except median limit 3 533)",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+      "status": "official"
+    },
+    "csg_rate_reduced": {
+      "value": 0.038,
+      "unit": "rate (deductible 3.8%)",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+      "status": "official"
+    },
+    "csg_rate_median": {
+      "value": 0.066,
+      "unit": "rate (deductible 4.2%)",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+      "status": "official"
+    },
+    "csg_rate_full": {
+      "value": 0.083,
+      "unit": "rate (deductible 5.9%)",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+      "status": "official"
+    },
+    "csg_deductible_reduced": {
+      "value": 0.038,
+      "unit": "rate",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+      "status": "official"
+    },
+    "csg_deductible_median": {
+      "value": 0.042,
+      "unit": "rate",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+      "status": "official"
+    },
+    "csg_deductible_full": {
+      "value": 0.059,
+      "unit": "rate",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+      "status": "official"
+    },
+    "crds": {
+      "value": 0.005,
+      "unit": "rate (due at reduced, median and full CSG tiers; not when exempt)",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+      "status": "official"
+    },
+    "casa": {
+      "value": 0.003,
+      "unit": "rate (due only at median and full CSG tiers)",
+      "effective_date": "2026-01-01",
+      "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+      "status": "official"
+    },
+    "agirc_arrco_health_contribution": {
+      "value": 0.01,
+      "unit": "rate on complementary pension (NOT modeled; applicability depends on fiscal situation)",
+      "effective_date": "2026-01-01",
+      "source": "https://www.agirc-arrco.fr (circulaires) ; OpenFisca-France 176.1.3 (released 2026-10-23) mmid_ret.avantages_de_retraite.regimes_comp",
+      "status": "oracle"
+    },
+    "revalorisation_base_pensions_2026_01_01": {
+      "value": 0.009,
+      "unit": "rate",
+      "effective_date": "2026-01-01",
+      "source": "LFSS 2026 (loi 2025-1403) / press; informational",
+      "status": "official_republished"
+    }
+  },
+  "self_employed_micro": {
+    "social_rate_sales": {
+      "value": 0.123,
+      "unit": "rate on turnover (vente de marchandises)",
+      "effective_date": "2026-01-01",
+      "source": "décret 2025-943 du 08/09/2025 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/professions_liberales/auto_entrepreneur ; https://propulsebyca.fr/micro-entrepreneur/cotisations-micro-entrepreneur",
+      "status": "oracle"
+    },
+    "social_rate_services_bic": {
+      "value": 0.212,
+      "unit": "rate on turnover (prestations BIC)",
+      "effective_date": "2026-01-01",
+      "source": "décret 2025-943 du 08/09/2025 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/professions_liberales/auto_entrepreneur ; https://propulsebyca.fr/micro-entrepreneur/cotisations-micro-entrepreneur",
+      "status": "oracle"
+    },
+    "social_rate_services_bnc": {
+      "value": 0.256,
+      "unit": "rate on turnover (prestations BNC, SSI)",
+      "effective_date": "2026-01-01",
+      "source": "décret 2025-943 du 08/09/2025 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/professions_liberales/auto_entrepreneur ; https://propulsebyca.fr/micro-entrepreneur/cotisations-micro-entrepreneur",
+      "status": "oracle",
+      "note": "24.6% in 2025; raised by décret 2025-943 (some blogs still quote 24.6%)"
+    },
+    "social_rate_bnc_cipav": {
+      "value": 0.232,
+      "unit": "rate on turnover (professions libérales CIPAV)",
+      "effective_date": "2026-01-01",
+      "source": "décret 2025-943 du 08/09/2025 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/professions_liberales/auto_entrepreneur ; https://propulsebyca.fr/micro-entrepreneur/cotisations-micro-entrepreneur",
+      "status": "oracle"
+    },
+    "formation_pro_sales": {
+      "value": 0.001,
+      "unit": "rate on turnover",
+      "effective_date": "2026-01-01",
+      "source": "décret 2025-943 du 08/09/2025 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/professions_liberales/auto_entrepreneur ; https://propulsebyca.fr/micro-entrepreneur/cotisations-micro-entrepreneur",
+      "status": "oracle"
+    },
+    "formation_pro_services": {
+      "value": 0.002,
+      "unit": "rate on turnover (services commerciaux / libéraux)",
+      "effective_date": "2026-01-01",
+      "source": "décret 2025-943 du 08/09/2025 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/professions_liberales/auto_entrepreneur ; https://propulsebyca.fr/micro-entrepreneur/cotisations-micro-entrepreneur",
+      "status": "oracle"
+    },
+    "formation_pro_artisans": {
+      "value": 0.003,
+      "unit": "rate on turnover",
+      "effective_date": "2026-01-01",
+      "source": "décret 2025-943 du 08/09/2025 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prelevements_sociaux/professions_liberales/auto_entrepreneur ; https://propulsebyca.fr/micro-entrepreneur/cotisations-micro-entrepreneur",
+      "status": "oracle"
+    },
+    "ir_abattement_sales": {
+      "value": 0.71,
+      "unit": "rate (floor 305 EUR)",
+      "effective_date": "2026-01-01",
+      "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/rpns/micro ; CGI art. 50-0, 102 ter",
+      "status": "oracle"
+    },
+    "ir_abattement_services_bic": {
+      "value": 0.5,
+      "unit": "rate (floor 305 EUR)",
+      "effective_date": "2026-01-01",
+      "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/rpns/micro ; CGI art. 50-0, 102 ter",
+      "status": "oracle"
+    },
+    "ir_abattement_bnc": {
+      "value": 0.34,
+      "unit": "rate (floor 305 EUR)",
+      "effective_date": "2026-01-01",
+      "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/rpns/micro ; CGI art. 50-0, 102 ter",
+      "status": "oracle"
+    },
+    "ir_abattement_minimum": {
+      "value": 305,
+      "unit": "EUR",
+      "effective_date": "2026-01-01",
+      "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/rpns/micro ; CGI art. 50-0, 102 ter",
+      "status": "oracle"
+    },
+    "versement_liberatoire_sales": {
+      "value": 0.01,
+      "unit": "rate on turnover (option, RFR N-2 under threshold)",
+      "effective_date": "2026-01-01",
+      "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/rpns/micro ; CGI art. 50-0, 102 ter",
+      "status": "oracle"
+    },
+    "versement_liberatoire_services_bic": {
+      "value": 0.017,
+      "unit": "rate",
+      "effective_date": "2026-01-01",
+      "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/rpns/micro ; CGI art. 50-0, 102 ter",
+      "status": "oracle"
+    },
+    "versement_liberatoire_bnc": {
+      "value": 0.022,
+      "unit": "rate",
+      "effective_date": "2026-01-01",
+      "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/rpns/micro ; CGI art. 50-0, 102 ter",
+      "status": "oracle"
+    },
+    "turnover_ceiling_sales": {
+      "value": 203100,
+      "unit": "EUR/year",
+      "effective_date": "2026-01-01",
+      "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/rpns/micro ; CGI art. 50-0, 102 ter",
+      "status": "oracle",
+      "note": "also 83 600 for services/BNC; sources disagree on triennial update"
+    },
+    "turnover_ceiling_services": {
+      "value": 83600,
+      "unit": "EUR/year",
+      "effective_date": "2026-01-01",
+      "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/impot_revenu/calcul_revenus_imposables/rpns/micro ; CGI art. 50-0, 102 ter",
+      "status": "oracle"
+    }
+  },
+  "benefits": {
+    "prime_activite": {
+      "base_amount_single": {
+        "value": 638.28,
+        "unit": "EUR/month",
+        "effective_date": "2026-04-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official"
+      },
+      "household_factor_2_persons": {
+        "value": 1.5,
+        "unit": "multiple of base",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official",
+        "note": "couple without child or lone adult + 1 child"
+      },
+      "household_factor_3_persons": {
+        "value": 1.8,
+        "unit": "multiple of base",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official"
+      },
+      "household_factor_4_persons": {
+        "value": 2.1,
+        "unit": "multiple of base",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official"
+      },
+      "household_factor_per_additional_person_from_5": {
+        "value": 0.4,
+        "unit": "multiple of base",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official"
+      },
+      "earnings_rate": {
+        "value": 0.5985,
+        "unit": "rate on household net professional income",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official",
+        "note": "61% until end 2025 (reduced in 2025/26)"
+      },
+      "bonification_max_rate": {
+        "value": 0.377,
+        "unit": "ratio of single base amount (-> 240.63 EUR)",
+        "effective_date": "2026-04-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official",
+        "note": "was 0.29101 (184.27 EUR) before 2026-04-01; exceptional increase of the bonification individuelle"
+      },
+      "bonification_max_amount": {
+        "value": 240.63,
+        "unit": "EUR/month per working person",
+        "effective_date": "2026-04-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official",
+        "note": "= round(0.377 x 638.28, 2)"
+      },
+      "bonification_start_hours": {
+        "value": 59,
+        "unit": "multiple of hourly SMIC (-> 726.29 EUR at 12.31)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official"
+      },
+      "bonification_full_hours": {
+        "value": 138,
+        "unit": "multiple of hourly SMIC (-> 1 698.78 EUR at 12.31)",
+        "effective_date": "2026-04-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official",
+        "note": "was 120 before 2026-04-01 (1.15 SMIC now)"
+      },
+      "lone_parent_base_rate": {
+        "value": 1.28412,
+        "unit": "multiple of base (parent isolé / pregnant: forfait majoré)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official"
+      },
+      "lone_parent_per_child_rate": {
+        "value": 0.42804,
+        "unit": "multiple of base per child",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official"
+      },
+      "minimum_paid": {
+        "value": 15,
+        "unit": "EUR/month",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2882 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-222 du 30/03/2026",
+        "status": "official"
+      },
+      "housing_flat_rate_1_person": {
+        "value": 0.12,
+        "unit": "rate x household forfait (see formula)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official",
+        "note": "applies when housing benefit is received (min(APL, forfait)) or owner/free housing"
+      },
+      "housing_flat_rate_2_persons": {
+        "value": 0.16,
+        "unit": "rate",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official"
+      },
+      "housing_flat_rate_3_plus": {
+        "value": 0.165,
+        "unit": "rate",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official"
+      },
+      "crds": {
+        "value": 0.005,
+        "unit": "rate",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+        "status": "official",
+        "note": "PA is paid net of 0.5% CRDS (CAF simulator displays net)"
+      }
+    },
+    "rsa": {
+      "base_amount_single": {
+        "value": 651.69,
+        "unit": "EUR/month",
+        "effective_date": "2026-04-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official"
+      },
+      "household_factor_2_persons": {
+        "value": 1.5,
+        "unit": "multiple of base",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official",
+        "note": "couple: 977.54"
+      },
+      "household_factor_3_persons": {
+        "value": 1.8,
+        "unit": "multiple of base",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official",
+        "note": "1 173.05"
+      },
+      "household_factor_4_persons": {
+        "value": 2.1,
+        "unit": "multiple of base",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official",
+        "note": "1 368.55"
+      },
+      "household_factor_per_additional_person_from_5": {
+        "value": 0.4,
+        "unit": "multiple of base",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official",
+        "note": "260.68"
+      },
+      "lone_parent_base_rate": {
+        "value": 1.28412,
+        "unit": "multiple of base (836.85)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official"
+      },
+      "lone_parent_per_child_rate": {
+        "value": 0.42804,
+        "unit": "multiple of base per child (278.95)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official"
+      },
+      "lone_parent_max_child_age_for_open_ended_majoration": {
+        "value": 3,
+        "unit": "years",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official",
+        "note": "otherwise majoration lasts 12 months within 18 months after separation"
+      },
+      "housing_flat_rate_1_person": {
+        "value": 0.12,
+        "unit": "rate x forfait applicable to the household (78.20)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official"
+      },
+      "housing_flat_rate_2_persons": {
+        "value": 0.16,
+        "unit": "rate (156.41 = 16% x 977.54)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official"
+      },
+      "housing_flat_rate_3_plus": {
+        "value": 0.165,
+        "unit": "rate (193.55 = 16.5% x 1 173.05)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; décret 2026-220 du 30/03/2026",
+        "status": "official"
+      },
+      "minimum_paid": {
+        "value": 6,
+        "unit": "EUR/month",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) rsa_maj.montant_minimum_verse",
+        "status": "oracle"
+      },
+      "min_age": {
+        "value": 25,
+        "unit": "years (no age limit with a child or pregnancy)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19778",
+        "status": "official"
+      }
+    },
+    "housing_apl_private_rented": {
+      "reference_date_note": {
+        "value": "barème revalorised each 1 October on the IRL of Q2",
+        "unit": "text",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone1_single": {
+        "value": 336.97,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone1_couple": {
+        "value": 406.4,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone1_one_child": {
+        "value": 459.32,
+        "unit": "EUR/month (single or couple with 1 dependent)",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone1_per_extra_child": {
+        "value": 66.65,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone2_single": {
+        "value": 293.68,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone2_couple": {
+        "value": 359.47,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone2_one_child": {
+        "value": 404.49,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone2_per_extra_child": {
+        "value": 58.88,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone3_single": {
+        "value": 275.25,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone3_couple": {
+        "value": 333.67,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone3_one_child": {
+        "value": 374.13,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "rent_ceiling_zone3_per_extra_child": {
+        "value": 53.62,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "charges_flat_base": {
+        "value": 61.29,
+        "unit": "EUR/month (single or couple without dependent)",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "charges_flat_per_child": {
+        "value": 13.9,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "p0_minimum_amount": {
+        "value": 40.01,
+        "unit": "EUR/month",
+        "effective_date": "2026-10-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "official"
+      },
+      "p0_rate": {
+        "value": 0.085,
+        "unit": "rate x (L + C)",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "oracle"
+      },
+      "flat_reduction": {
+        "value": 5,
+        "unit": "EUR/month (minoration forfaitaire)",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "oracle"
+      },
+      "minimum_paid_non_conventionne": {
+        "value": 10,
+        "unit": "EUR/month",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "oracle"
+      },
+      "crds": {
+        "value": 0.005,
+        "unit": "rate",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+        "status": "official",
+        "note": "housing benefit is paid net of 0.5% CRDS"
+      },
+      "degressivity_zone1_start": {
+        "value": 3.4,
+        "unit": "multiple of the rent ceiling",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "oracle"
+      },
+      "degressivity_zone1_end": {
+        "value": 4.0,
+        "unit": "multiple of the rent ceiling (aid = 0 beyond)",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "oracle"
+      },
+      "degressivity_zone23_start": {
+        "value": 2.5,
+        "unit": "multiple of the rent ceiling",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "oracle"
+      },
+      "degressivity_zone23_end": {
+        "value": 3.1,
+        "unit": "multiple of the rent ceiling",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "oracle"
+      },
+      "r0_single": {
+        "value": 5235,
+        "unit": "EUR/year",
+        "effective_date": "2025-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle",
+        "note": "NOT revalorised in 2026"
+      },
+      "r0_couple": {
+        "value": 7501,
+        "unit": "EUR/year",
+        "effective_date": "2025-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "r0_1_dependent": {
+        "value": 8947,
+        "unit": "EUR/year",
+        "effective_date": "2025-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "r0_2_dependents": {
+        "value": 9148,
+        "unit": "EUR/year",
+        "effective_date": "2025-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "r0_3_dependents": {
+        "value": 9498,
+        "unit": "EUR/year",
+        "effective_date": "2025-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "r0_4_dependents": {
+        "value": 9851,
+        "unit": "EUR/year",
+        "effective_date": "2025-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "r0_5_dependents": {
+        "value": 10202,
+        "unit": "EUR/year",
+        "effective_date": "2025-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "r0_6_dependents": {
+        "value": 10554,
+        "unit": "EUR/year",
+        "effective_date": "2025-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "r0_per_dependent_beyond_6": {
+        "value": 346,
+        "unit": "EUR/year",
+        "effective_date": "2025-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "tf_single": {
+        "value": 0.0283,
+        "unit": "rate",
+        "effective_date": "2023-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "tf_couple": {
+        "value": 0.0315,
+        "unit": "rate",
+        "effective_date": "2023-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "tf_1_dependent": {
+        "value": 0.027,
+        "unit": "rate",
+        "effective_date": "2023-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "tf_2_dependents": {
+        "value": 0.0238,
+        "unit": "rate",
+        "effective_date": "2023-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "tf_3_dependents": {
+        "value": 0.0201,
+        "unit": "rate",
+        "effective_date": "2023-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "tf_4_dependents": {
+        "value": 0.0185,
+        "unit": "rate",
+        "effective_date": "2023-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "tf_5_dependents": {
+        "value": 0.0179,
+        "unit": "rate",
+        "effective_date": "2023-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "tf_6_dependents": {
+        "value": 0.0173,
+        "unit": "rate",
+        "effective_date": "2023-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "tf_per_dependent_beyond_6": {
+        "value": -0.0006,
+        "unit": "rate",
+        "effective_date": "2023-01-01",
+        "source": "arrêté du 28/12/2025 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000053202812/ (paramètres R0 non revalorisés pour 2026) ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif/formule/pp_particip_perso",
+        "status": "oracle"
+      },
+      "tl_threshold_1": {
+        "value": 0.45,
+        "unit": "ratio rent/reference rent",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "oracle"
+      },
+      "tl_threshold_2": {
+        "value": 0.75,
+        "unit": "ratio rent/reference rent",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "oracle"
+      },
+      "tl_rate_tranche_2": {
+        "value": 0.0045,
+        "unit": "per percentage point of RL between 45% and 75% (TL in % points -> divide by 100)",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "oracle"
+      },
+      "tl_rate_tranche_3": {
+        "value": 0.0068,
+        "unit": "per percentage point of RL above 75%",
+        "effective_date": "2026-01-01",
+        "source": "arrêté du 28/09/2026 (JO 30/09/2026, NOR VLOL2620735A) https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054913928 ; arrêté du 27/09/2019 modifié ; https://kohenavocats.fr/?p=2135268 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/aides_logement/allocations_logement/locatif",
+        "status": "oracle"
+      },
+      "resources_rounding": {
+        "value": 100,
+        "unit": "EUR (resources rounded UP to the next 100)",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) aide_logement_base_ressources",
+        "status": "oracle"
+      }
+    },
+    "family": {
+      "af_rate_2_children": {
+        "value": 0.32,
+        "unit": "BMAF share (total for 2 children)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "official_republished",
+        "note": "153.01 EUR gross at BMAF 478.16 (152.25 net of CRDS shown on service-public)"
+      },
+      "af_rate_3_children": {
+        "value": 0.73,
+        "unit": "BMAF share (total for 3 children)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "derived",
+        "note": "0.32 + 0.41"
+      },
+      "af_rate_each_additional_child": {
+        "value": 0.41,
+        "unit": "BMAF share",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "official_republished"
+      },
+      "af_age_majoration_rate": {
+        "value": 0.16,
+        "unit": "BMAF share per eligible child (76.51 EUR)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "official_republished"
+      },
+      "af_age_majoration_threshold_new": {
+        "value": 18,
+        "unit": "years (children born on/after 2012-03-01)",
+        "effective_date": "2026-03-01",
+        "source": "décret 2026-138 du 27/02/2026 (majoration d'âge portée à 18 ans) ; https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France CHANGELOG 175.x",
+        "status": "official"
+      },
+      "af_age_majoration_threshold_old": {
+        "value": 14,
+        "unit": "years (children born before 2012-03-01)",
+        "effective_date": "2026-03-01",
+        "source": "décret 2026-138 du 27/02/2026 (majoration d'âge portée à 18 ans) ; https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France CHANGELOG 175.x",
+        "status": "official"
+      },
+      "af_no_majoration_for_eldest_of_two": {
+        "value": true,
+        "unit": "rule",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "official"
+      },
+      "af_ceiling_tier1_base": {
+        "value": 66652,
+        "unit": "EUR/year (revenu net catégoriel N-2) + 6 664 per child",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "official_republished",
+        "note": "2 children: 79 980 ; 3: 86 644 ; 4: 93 308"
+      },
+      "af_ceiling_tier2_base": {
+        "value": 93276,
+        "unit": "EUR/year + 6 664 per child",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "official_republished",
+        "note": "2 children: 106 604 ; 3: 113 268 ; 4: 119 932"
+      },
+      "af_ceiling_per_child": {
+        "value": 6664,
+        "unit": "EUR/year per child",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "official_republished"
+      },
+      "af_tier2_factor": {
+        "value": 0.5,
+        "unit": "ratio (income between the two ceilings)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "official"
+      },
+      "af_tier3_factor": {
+        "value": 0.25,
+        "unit": "ratio (income above ceiling 2)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "official"
+      },
+      "af_degressive_complement_months": {
+        "value": 12,
+        "unit": "months of AF: complement = (ceiling + 12 x AF_prev_tier - R) / 12",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "official"
+      },
+      "af_max_child_age": {
+        "value": 20,
+        "unit": "years (exclusive)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/af",
+        "status": "official"
+      },
+      "cf_rate_base": {
+        "value": 0.4165,
+        "unit": "BMAF share (199.15 EUR)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/cf",
+        "status": "official_republished"
+      },
+      "cf_rate_majore": {
+        "value": 0.6248,
+        "unit": "BMAF share (298.76 EUR)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/cf",
+        "status": "official_republished"
+      },
+      "cf_ceiling_base_0_child": {
+        "value": 24853,
+        "unit": "EUR/year (revenu net catégoriel N-2)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/cf",
+        "status": "oracle"
+      },
+      "cf_ceiling_majore_base_0_child": {
+        "value": 12429,
+        "unit": "EUR/year",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/cf",
+        "status": "oracle"
+      },
+      "cf_ceiling_child_1_2_increment": {
+        "value": 0.25,
+        "unit": "x base, each of the first 2 children",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/cf",
+        "status": "oracle"
+      },
+      "cf_ceiling_child_3_plus_increment": {
+        "value": 0.3,
+        "unit": "x base, each child from the 3rd",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/cf",
+        "status": "oracle"
+      },
+      "cf_ceiling_bonus_two_incomes_or_lone_parent": {
+        "value": 9989,
+        "unit": "EUR/year (base ceiling)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/cf",
+        "status": "official_republished"
+      },
+      "cf_ceiling_majore_bonus_two_incomes_or_lone_parent": {
+        "value": 4995,
+        "unit": "EUR/year (majoré ceiling)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/cf",
+        "status": "official_republished"
+      },
+      "cf_min_children": {
+        "value": 3,
+        "unit": "children aged 3 to < 21",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/cf",
+        "status": "official"
+      },
+      "cf_min_child_age": {
+        "value": 3,
+        "unit": "years (all children)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214 ; OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/prestations_generales/cf",
+        "status": "official"
+      },
+      "ars_rate_6_10": {
+        "value": 0.8972,
+        "unit": "BMAF share (429.01 EUR gross)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; OpenFisca-France 176.1.3 (released 2026-10-23) education_presence_parentale/ars",
+        "status": "official_republished",
+        "note": "service-public shows 426.87 = net of 0.5% CRDS"
+      },
+      "ars_rate_11_14": {
+        "value": 0.9467,
+        "unit": "BMAF share (452.67 EUR gross)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; OpenFisca-France 176.1.3 (released 2026-10-23) education_presence_parentale/ars",
+        "status": "official_republished"
+      },
+      "ars_rate_15_18": {
+        "value": 0.9795,
+        "unit": "BMAF share (468.36 EUR gross)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; OpenFisca-France 176.1.3 (released 2026-10-23) education_presence_parentale/ars",
+        "status": "official_republished"
+      },
+      "ars_ceiling_base": {
+        "value": 22274,
+        "unit": "EUR/year (revenu net catégoriel 2024) ; + 30% per child",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; OpenFisca-France 176.1.3 (released 2026-10-23) education_presence_parentale/ars",
+        "status": "official_republished",
+        "note": "1 child 28 956 ; 2: 35 638 ; 3: 42 320 ; +6 682 per additional child"
+      },
+      "ars_ceiling_per_child_increment": {
+        "value": 0.3,
+        "unit": "x base per child",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; OpenFisca-France 176.1.3 (released 2026-10-23) education_presence_parentale/ars",
+        "status": "official_republished"
+      },
+      "ars_minimum_paid": {
+        "value": 15,
+        "unit": "EUR",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) ars.montant_minimum_verse",
+        "status": "oracle"
+      },
+      "ars_payment_month": {
+        "value": "August (>= 18 Aug 2026 metropole)",
+        "unit": "text",
+        "effective_date": "2026-08-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026 ; OpenFisca-France 176.1.3 (released 2026-10-23) education_presence_parentale/ars",
+        "status": "official"
+      },
+      "asf_rate": {
+        "value": 0.422,
+        "unit": "BMAF share per child (201.78 EUR) — parent isolé without child support",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/education_presence_parentale/asf (CSS art. L523-1, D523-1)",
+        "status": "oracle"
+      },
+      "asf_in_rsa_pa_base_rate": {
+        "value": 0.225,
+        "unit": "BMAF share per child counted as a resource in RSA/PA",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/education_presence_parentale/asf (CSS art. L523-1, D523-1)",
+        "status": "oracle"
+      },
+      "asf_minimum_paid": {
+        "value": 15,
+        "unit": "EUR",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/education_presence_parentale/asf (CSS art. L523-1, D523-1)",
+        "status": "oracle"
+      },
+      "paje_base_rate_full": {
+        "value": 0.4165,
+        "unit": "BMAF share per child < 3 (199.15 EUR)",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/petite_enfance/paje (CSS art. L531-1 s.)",
+        "status": "oracle"
+      },
+      "paje_base_rate_partial": {
+        "value": 0.20825,
+        "unit": "BMAF share per child < 3 (99.58 EUR)",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/petite_enfance/paje (CSS art. L531-1 s.)",
+        "status": "oracle"
+      },
+      "paje_ceiling_full_base": {
+        "value": 24853,
+        "unit": "EUR/year (+25% per child (first 2), +30% from 3rd, + 9 989 two incomes/lone parent)",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/petite_enfance/paje (CSS art. L531-1 s.)",
+        "status": "oracle"
+      },
+      "paje_ceiling_partial_base": {
+        "value": 29694,
+        "unit": "EUR/year (same increments, bonus 11 936)",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/petite_enfance/paje (CSS art. L531-1 s.)",
+        "status": "oracle"
+      },
+      "paje_ceiling_bonus_full": {
+        "value": 9989,
+        "unit": "EUR/year",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/petite_enfance/paje (CSS art. L531-1 s.)",
+        "status": "oracle"
+      },
+      "paje_ceiling_bonus_partial": {
+        "value": 11936,
+        "unit": "EUR/year",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) parameters/prestations_sociales/prestations_familiales/petite_enfance/paje (CSS art. L531-1 s.)",
+        "status": "oracle"
+      },
+      "family_benefits_crds": {
+        "value": 0.005,
+        "unit": "rate on AF, CF, ARS, ASF, PAJE (paid net)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2971 ; CSS art. L136-1 / L136-2",
+        "status": "official"
+      }
+    },
+    "aah": {
+      "max_amount": {
+        "value": 1041.59,
+        "unit": "EUR/month",
+        "effective_date": "2026-04-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12242 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026",
+        "status": "official"
+      },
+      "ceiling_annual_single": {
+        "value": 12499,
+        "unit": "EUR/year (= 12 x max amount; +50% per child)",
+        "effective_date": "2026-04-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12242 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026",
+        "status": "official"
+      },
+      "ceiling_per_child_increment": {
+        "value": 0.5,
+        "unit": "x single ceiling",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12242 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026",
+        "status": "oracle"
+      },
+      "earnings_abattement_low_tranche": {
+        "value": 0.8,
+        "unit": "rate on earnings up to 30% of annual gross SMIC",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) aah.travail_ordinaire.abattement_30 (CSS D821-9)",
+        "status": "oracle"
+      },
+      "earnings_abattement_high_tranche": {
+        "value": 0.4,
+        "unit": "rate on earnings above",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) aah.travail_ordinaire.abattement_sup",
+        "status": "oracle"
+      },
+      "earnings_low_tranche_smic_share": {
+        "value": 0.3,
+        "unit": "x annual gross SMIC",
+        "effective_date": "2026-01-01",
+        "source": "OpenFisca-France 176.1.3 (released 2026-10-23) aah.travail_ordinaire.tranche_smic",
+        "status": "oracle"
+      },
+      "deconjugalisation_since": {
+        "value": "2023-10-01",
+        "unit": "date",
+        "effective_date": "2023-10-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12242 ; https://solidarites.gouv.fr/revalorisation-annuelle-des-prestations-sociales-au-1er-avril-2026",
+        "status": "official",
+        "note": "own resources only (couple income ignored) unless conjugalisation is more favourable (not modeled)"
+      }
+    },
+    "aspa": {
+      "max_monthly_single": {
+        "value": 1043.59,
+        "unit": "EUR/month",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16871",
+        "status": "official"
+      },
+      "max_monthly_couple": {
+        "value": 1620.18,
+        "unit": "EUR/month",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16871",
+        "status": "official"
+      },
+      "min_age": {
+        "value": 65,
+        "unit": "years (62 if unfit)",
+        "effective_date": "2026-01-01",
+        "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16871",
+        "status": "official"
+      }
+    }
+  },
+  "vat": {
+    "rate_normal": {
+      "value": 0.2,
+      "unit": "rate",
+      "effective_date": "2014-01-01",
+      "source": "https://entreprendre.service-public.gouv.fr/vosdroits/F31596 ; https://entreprendre.service-public.gouv.fr/vosdroits/F23568 ; CGI art. 278, 278-0 bis, 281 quater",
+      "status": "official"
+    },
+    "rate_intermediate": {
+      "value": 0.1,
+      "unit": "rate",
+      "effective_date": "2014-01-01",
+      "source": "https://entreprendre.service-public.gouv.fr/vosdroits/F31596 ; https://entreprendre.service-public.gouv.fr/vosdroits/F23568 ; CGI art. 278, 278-0 bis, 281 quater",
+      "status": "official"
+    },
+    "rate_reduced": {
+      "value": 0.055,
+      "unit": "rate",
+      "effective_date": "2014-01-01",
+      "source": "https://entreprendre.service-public.gouv.fr/vosdroits/F31596 ; https://entreprendre.service-public.gouv.fr/vosdroits/F23568 ; CGI art. 278, 278-0 bis, 281 quater",
+      "status": "official"
+    },
+    "rate_particular": {
+      "value": 0.021,
+      "unit": "rate (médicaments remboursés, presse)",
+      "effective_date": "2014-01-01",
+      "source": "https://entreprendre.service-public.gouv.fr/vosdroits/F31596 ; https://entreprendre.service-public.gouv.fr/vosdroits/F23568 ; CGI art. 278, 278-0 bis, 281 quater",
+      "status": "official"
+    },
+    "household_spending_by_rate_2016": {
+      "value": {
+        "normal": 0.522,
+        "intermediate": 0.133,
+        "reduced": 0.154,
+        "particular": 0.006,
+        "exempt": 0.185
+      },
+      "unit": "share of household consumption incl. VAT",
+      "effective_date": "2016",
+      "source": "INSEE, Économie et Statistique n° 522-523 (2021), André & Biotteau, https://www.insee.fr/fr/statistiques/fichier/5347200/01-ES522-523_Andre-Biotteau_FR.pdf (Ines 2016)",
+      "status": "official_republished"
+    },
+    "effective_vat_to_consumption_2016": {
+      "value": 0.1073,
+      "unit": "ratio (97 260 M EUR VAT / 906 705 M EUR consumption)",
+      "effective_date": "2016",
+      "source": "INSEE, Économie et Statistique n° 522-523 (2021), André & Biotteau, https://www.insee.fr/fr/statistiques/fichier/5347200/01-ES522-523_Andre-Biotteau_FR.pdf (Ines 2016)",
+      "status": "derived"
+    },
+    "effort_rate_by_decile": {
+      "value": {
+        "D1": 0.125,
+        "D2": 0.095,
+        "D3": 0.0921,
+        "D4": 0.0893,
+        "D5": 0.0864,
+        "D6": 0.0836,
+        "D7": 0.0807,
+        "D8": 0.0779,
+        "D9": 0.075,
+        "D10": 0.047
+      },
+      "unit": "VAT paid / disposable income, by decile of niveau de vie",
+      "effective_date": "structure unchanged since 2014 (estimates on BDF 2011)",
+      "source": "CPO, note n° 6 « La TVA est-elle un impôt juste ? » (sept. 2023) https://www.ccomptes.fr/sites/default/files/2023-10/20230928-TVA-est-elle-impot-juste.pdf, citing B. Boutchenik, rapport particulier CPO (avril 2015, Ines + enquête Budget de famille 2011)",
+      "status": "official_republished",
+      "note": "Published: D1 12.5%, D2 9.5%, D9 7.5%, D10 4.7% (CPO 2015/2023). D3-D8 are LINEAR INTERPOLATIONS between D2 and D9 (the CPO states the ratio 'décroît de 9,5 % à 7,5 %' from D2 to D9). INSEE Ines 2016 (ES 522-523): D1 13.1%, D10 7.4% (different definition of income) => treat as +-1.5 pt uncertainty."
+    },
+    "effort_rate_alt_insee_ines_2016": {
+      "value": {
+        "D1": 0.131,
+        "D10": 0.074
+      },
+      "unit": "VAT / disposable income",
+      "effective_date": "2016",
+      "source": "INSEE, Économie et Statistique n° 522-523 (2021), André & Biotteau, https://www.insee.fr/fr/statistiques/fichier/5347200/01-ES522-523_Andre-Biotteau_FR.pdf (Ines 2016)",
+      "status": "official_republished"
+    },
+    "consumption_share_of_disposable_income": {
+      "value": {
+        "two_lowest_deciles": 0.97,
+        "two_highest_deciles": 0.72
+      },
+      "unit": "share",
+      "effective_date": "2017",
+      "source": "CPO, note n° 6 « La TVA est-elle un impôt juste ? » (sept. 2023) https://www.ccomptes.fr/sites/default/files/2023-10/20230928-TVA-est-elle-impot-juste.pdf, citing B. Boutchenik, rapport particulier CPO (avril 2015, Ines + enquête Budget de famille 2011) citing INSEE Première (sept. 2020)",
+      "status": "official_republished"
+    },
+    "niveau_de_vie_deciles_2023": {
+      "value": {
+        "D1": 13460,
+        "D5": 25760,
+        "D9": 46960
+      },
+      "unit": "EUR/year per consumption unit (metropolitan France, ordinary dwellings)",
+      "effective_date": "2023",
+      "source": "INSEE Première n° 2063 (juil. 2025) / https://www.insee.fr/fr/statistiques/8612538 (niveau de vie 2023)",
+      "status": "official_republished",
+      "note": "only D1/D5/D9 published on the INSEE page"
+    },
+    "niveau_de_vie_deciles_2023_interpolated": {
+      "value": {
+        "D2": 16535,
+        "D3": 19610,
+        "D4": 22685,
+        "D6": 31060,
+        "D7": 36360,
+        "D8": 41660
+      },
+      "unit": "EUR/year per consumption unit (upper bound of each decile)",
+      "effective_date": "2023",
+      "source": "INSEE Première n° 2063 (juil. 2025) / https://www.insee.fr/fr/statistiques/8612538 (niveau de vie 2023)",
+      "status": "derived",
+      "note": "LINEAR interpolation between published D1/D5/D9: use for assignment only, replace by INSEE Filosofi/ERFS deciles if available"
+    },
+    "consumption_units": {
+      "value": {
+        "first_adult": 1.0,
+        "other_person_14_plus": 0.5,
+        "child_under_14": 0.3
+      },
+      "unit": "INSEE UC scale (OECD-modified)",
+      "effective_date": "-",
+      "source": "https://www.insee.fr/fr/metadonnees/definition/c1802",
+      "status": "official"
+    }
+  },
+  "test_tolerances": {
+    "salary_lines_eur_per_month": {
+      "value": 0.08,
+      "unit": "EUR per month",
+      "effective_date": "-",
+      "source": "oracle comparison (scripts/baseline_reference.py --check)",
+      "status": "derived",
+      "note": "net pay, net taxable and employer contributions reproduce OpenFisca to the cent when inputs are identical"
+    },
+    "rgdu_and_super_gross_eur_per_month": {
+      "value": 0.4,
+      "unit": "EUR per month",
+      "effective_date": "-",
+      "source": "oracle comparison",
+      "status": "derived",
+      "note": "OpenFisca uses 151.67 h/month (legal 151.6667): the 4-decimal RGDU coefficient can differ by 1e-4"
+    },
+    "rni_eur_per_year": {
+      "value": 7,
+      "unit": "EUR per year",
+      "effective_date": "-",
+      "source": "oracle comparison",
+      "status": "derived",
+      "note": "OpenFisca rounds salaries to whole euros"
+    },
+    "income_tax_eur_per_year": {
+      "value": 3,
+      "unit": "EUR per year",
+      "effective_date": "-",
+      "source": "oracle comparison",
+      "status": "derived",
+      "note": "OpenFisca rounds tax to whole euros"
+    },
+    "benefits_eur_per_month": {
+      "value": 0.6,
+      "unit": "EUR per month",
+      "effective_date": "-",
+      "source": "oracle comparison",
+      "status": "derived",
+      "note": "APL/PA/RSA/AF/CF/PAJE/ASF/ASPA/AAH; exceptions below"
+    },
+    "af_degressive_complement_eur_per_month": {
+      "value": 7,
+      "unit": "EUR per month",
+      "effective_date": "-",
+      "source": "oracle comparison",
+      "status": "derived",
+      "note": "case edge_af_degressif: reference 84.54 vs oracle 82.91 (oracle N-2 base ~20 EUR higher)"
+    },
+    "pa_when_apl_changed_in_last_3_months_eur_per_month": {
+      "value": 7,
+      "unit": "EUR per month",
+      "effective_date": "-",
+      "source": "oracle comparison",
+      "status": "derived",
+      "note": "case sp2_1_5smic: oracle uses the pre-1-Oct housing aid in its 3-month window"
+    },
+    "disposable_income_eur_per_month": {
+      "value": 8,
+      "unit": "EUR per month",
+      "effective_date": "-",
+      "source": "oracle comparison",
+      "status": "derived",
+      "note": "sum of the above"
+    }
+  }
+}
