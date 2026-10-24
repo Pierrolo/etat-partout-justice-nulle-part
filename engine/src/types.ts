@@ -42,7 +42,8 @@ export interface Child {
   aeeh?: boolean;
   /**
    * Engine extension (optional): the AEEH child holds the CMI « invalidité » (taux ≥ 80 %),
-   * which opens the +6 600 € AFU supplement in the plan. Default: true when `aeeh` is true (hypothesis H15).
+   * which opens the +6 600 € AFU supplement in the plan and the extra ½ part of today's quotient familial.
+   * Only read when `aeeh` is true. Default: false (hypothesis H15 — the AEEH can be granted at 50–79 %).
    */
   cmiInvalidite?: boolean;
 }

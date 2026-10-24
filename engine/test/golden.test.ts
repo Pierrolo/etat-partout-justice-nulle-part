@@ -82,7 +82,10 @@ describe('golden cases (OpenFisca oracle)', () => {
         o.tax_annual.net_taxable_income_rni!,
         TOL.rni,
       ]);
-      rows.push(['parts', t.foyers[0]!.parts, o.tax_annual.parts!, 0.001]);
+      // The oracle households do not declare the CMI « invalidité » (OpenFisca case P), so the engine's ½ part
+      // per CMI holder (aah_80 adult, art. 195 CGI — added by the 2026-10 audit) is taken out of the comparison.
+      const cmiHalfParts = 0.5 * e.nh.adults.filter((a) => a.disability === 'aah_80').length;
+      rows.push(['parts', t.foyers[0]!.parts - cmiHalfParts, o.tax_annual.parts!, 0.001]);
       rows.push([
         'ir_net_signed_abs',
         Math.abs(t.irGross - t.credits),

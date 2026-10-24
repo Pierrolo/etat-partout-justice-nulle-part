@@ -170,7 +170,9 @@ export function normalize(h: Household): NHousehold {
     }
     if (age < 0) age = 0;
     const aeeh = c.aeeh === true;
-    children.push({ age, aeeh, cmiInvalidite: aeeh && c.cmiInvalidite !== false });
+    // H15 (audit 2026-10): the CMI « invalidité » (taux ≥ 80 %) is NOT implied by the AEEH, which can be granted
+    // at 50–79 % ; the +6 600 € AFU supplement needs an explicit `cmiInvalidite: true`.
+    children.push({ age, aeeh, cmiInvalidite: aeeh && c.cmiInvalidite === true });
   }
   if (children.length > 12) {
     w.push('Plus de 12 enfants : seuls les 12 premiers sont simulés.');

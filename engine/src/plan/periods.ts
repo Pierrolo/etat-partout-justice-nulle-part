@@ -5,7 +5,7 @@
  *
  * Dates (research/source-analysis.md §6, research/reform_parameters.json):
  * - CSG/CRDS on earned income: 9,2/0,5 % Jan–Jun 2027, then 7,6 / 6,0 / 4,3 / 2,7 / 1,1 % (CRDS 0,5 %) Jul–Nov,
- *   0 from 1 Dec 2027 (PLFSS am. 1). The deductible share is assumed to fall pro rata (6,8/9,2) — hypothesis.
+ *   0 from 1 Dec 2027 (PLFSS am. 1). Deductible part = min(rate, 6,8 points) (CGI 154 quinquies, untouched).
  * - 10 % pension abattement: gone from IR on 2026 incomes (PLF-P1 am. 1 III 120°, IV.A — inferred) ⇒ every
  *   transition year is computed without it.
  * - Crédits garde d'enfants / emploi à domicile: 2/3 kept for 2027, 1/3 for 2028, 0 from 2029 (am. 1 IV.E);
@@ -15,8 +15,9 @@
  *   −2/3 from 1 Jul 2028, 0 from 1 Jul 2029 (PLF-P2 am. 32); all aides personnelles end 1 Jan 2030.
  * - TVA: reduced rates counted as tax expenditures → 20 % on 1 Jul 2027; other reduced rates → 20 % on
  *   1 Jul 2028; food 10 % (1 Jul 2028), 15 % (1 Jul 2029), 20 % (1 Jul 2030). CEE abrogated 1 Jul 2027.
- * - Pension CSG tier: N-2 RFR ⇒ frozen at today's tier in 2027 and 2028; recomputed with the plan's taxable
- *   income (1 part per adult + ½ per child, art. 194 being abrogated — hypothesis) in 2030 and steady state.
+ * - Pension CSG tier: N-2 RFR ⇒ today's tier in 2027 (RFR 2025); in 2028, RFR 2026 = today's barème without the
+ *   10 % pension abattement; recomputed with the plan's taxable income (1 part per adult + ½ per child, art. 194
+ *   being abrogated — hypothesis H16) in 2030 and steady state.
  */
 import { CSG_NONE, CSG_TODAY, type CsgRates } from '../baseline/salaire.ts';
 import { RATES_TODAY, TVA_NO_SHIFT, type TvaShift } from '../baseline/tva.ts';
@@ -32,7 +33,12 @@ export interface MonthRules {
   afu: boolean;
   tva: TvaShift;
   cee: boolean;
-  pensionTier: 'fixedpoint' | 'frozen';
+  /**
+   * Pension CSG tier: 'fixedpoint' = RFR of the same year's rules (steady state, baseline, 2030 = RFR 2028);
+   * 'frozen' = today's tier (2027 = RFR 2025); 'rfr2026' = RFR of 2026 incomes, i.e. today's barème WITHOUT the
+   * 10 % pension abattement (gone from the IR on 2026 incomes) — used in 2028.
+   */
+  pensionTier: 'fixedpoint' | 'frozen' | 'rfr2026';
 }
 
 export interface YearRules {
@@ -70,9 +76,13 @@ export const BASELINE_RULES: Rules = {
   },
 };
 
+/**
+ * H18: CGI art. 154 quinquies admits the CSG on earned income in deduction « à hauteur de 6,8 points » and no
+ * amendment touches it, so while the rate falls the deductible part is min(rate, 6,8 %) (not a pro rata).
+ */
 function csg2027(month: number): CsgRates {
   const step = pv('plan.csg_activity_2027')[month]!;
-  return { csg: step.csg, csgDed: step.csg * (CSG_TODAY.csgDed / CSG_TODAY.csg), crds: step.crds };
+  return { csg: step.csg, csgDed: Math.min(step.csg, CSG_TODAY.csgDed), crds: step.crds };
 }
 
 function aplFactor(year: number, month: number): number {
@@ -158,7 +168,13 @@ function yearRules(year: 2027 | 2028 | 2030, h: Hypotheses, sw: PlanSwitches): R
           }
         : TVA_NO_SHIFT,
       cee: sw.cee && (year > 2027 || m >= 6),
-      pensionTier: any && year <= 2028 ? 'frozen' : 'fixedpoint',
+      pensionTier: !any
+        ? 'fixedpoint'
+        : year === 2027 || (year === 2028 && !sw.pensionAbattement)
+          ? 'frozen'
+          : year === 2028
+            ? 'rfr2026'
+            : 'fixedpoint',
     });
   }
   const cf = creditsFactor(year);

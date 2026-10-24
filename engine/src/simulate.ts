@@ -201,7 +201,9 @@ function build(c: BuildCtx): ScenarioResult {
     const tierNote = plan
       ? rules.months.every((m) => m.pensionTier === 'frozen')
         ? ' — taux de CSG fixé sur le RFR N-2 (inchangé)'
-        : ' — taux de CSG recalculé sur le revenu imposable du plan (1 part par adulte + ½ par enfant, art. 194 abrogé : hypothèse)'
+        : rules.months.every((m) => m.pensionTier === 'rfr2026')
+          ? ' — taux de CSG fixé sur le RFR 2026 (N-2), calculé sans l’abattement de 10 % sur les pensions'
+          : ' — taux de CSG recalculé sur le revenu imposable du plan (1 part par adulte + ½ par enfant, art. 194 abrogé : hypothèse)'
       : '';
     d.pension_nette = {
       amount: amt,
@@ -219,7 +221,10 @@ function build(c: BuildCtx): ScenarioResult {
         t.foyers.length > 1
           ? `Foyer fiscal ${k + 1} (adulte ${fo.foyer.adults[0]! + 1}${fo.foyer.children.length ? ' + enfants' : ''}) : `
           : '';
-      const ab = fo.ageAbattement > 0 ? ` − abattement 65 ans ${eur0(fo.ageAbattement)}` : '';
+      const ab =
+        fo.ageAbattement > 0
+          ? ` − abattement âge ou invalidité (art. 157 bis) ${eur0(fo.ageAbattement)}`
+          : '';
       const dec = fo.decote > 0 ? ` − décote ${eur0(fo.decote)}` : '';
       return `${lbl}revenu net imposable ${eur0(fo.rnc)}${ab}, ${String(fo.parts).replace('.', ',')} part${fo.parts > 1 ? 's' : ''} → impôt ${eur0(fo.irBeforeDecote)}${dec} = ${eur0(fo.irAfterDecote)}/an`;
     });
@@ -322,8 +327,9 @@ function build(c: BuildCtx): ScenarioResult {
   }
 
   // ---- prestations -----------------------------------------------------------------------------------------
-  const replacedTxt = (what: string) =>
-    `${what} remplacé(e) par l’aide fondamentale (hypothèse H1 « remplacées », annoncé par les auteurs, aucun texte ne l’abroge).`;
+  /** French agreement of the past participle: '' (m. sg.), 'e' (f. sg.), 'es' (f. pl.) */
+  const replacedTxt = (what: string, agr: '' | 'e' | 'es' = '') =>
+    `${what} remplacé${agr} par l’aide fondamentale (hypothèse H1 « remplacées », annoncé par les auteurs, aucun texte ne l’abroge).`;
   const minimaReplaced = plan && allMonths('minima', 'replaced');
   const minimaDiff = plan && anyMonth((m) => m.minima === 'differential');
   const minimaTier: Tier = !plan
@@ -356,7 +362,7 @@ function build(c: BuildCtx): ScenarioResult {
     const p = f.paInfo;
     let formula: string;
     if (nh.nonRecours) formula = nonRecoursTxt;
-    else if (minimaReplaced) formula = replacedTxt('Prime d’activité');
+    else if (minimaReplaced) formula = replacedTxt('Prime d’activité', 'e');
     else if (p)
       formula = `${pre}forfait ${eur(p.forfait)} + bonification ${eur(p.bonification)} + 59,85 % × revenus d’activité ${eur(p.earnings)} − max(revenus + autres ressources ${eur(p.resources)} + forfait logement ${eur(p.fl)} ; forfait) = ${eur(f.pa)}, versée nette de CRDS 0,5 %`;
     else formula = 'Pas de revenus d’activité éligibles.';
@@ -382,8 +388,8 @@ function build(c: BuildCtx): ScenarioResult {
       const avgF = factors.reduce((s, x) => s + x, 0) / factors.length;
       formula =
         avgF === 0
-          ? 'Supprimée : plus de droit nouveau après le 1er juin 2027, droits existants réduits d’un tiers (07/2027), de deux tiers (07/2028), éteints au 1er juillet 2029 ; toutes les aides personnelles au logement abrogées au 1er janvier 2030.'
-          : `${pre}montant de décembre 2026 ${eur((c.baselineCore?.flows.aplGross ?? 0) * (1 - CRDS))} × ${pct(avgF)} en moyenne sur l’année (bail en cours supposé ; −1/3 au 1er juillet 2027, −2/3 au 1er juillet 2028) = ${eur(f.aplGross * (1 - CRDS))}`;
+          ? 'Supprimée : plus de droit nouveau après le 1er juin 2027 ; droits existants réduits d’un tiers (07/2027), de deux tiers (07/2028) et éteints au 1er juillet 2029 dans le parc conventionné, éteints au terme du bail dans le parc privé ; toutes les aides personnelles au logement abrogées au 1er janvier 2030.'
+          : `${pre}montant de décembre 2026 ${eur((c.baselineCore?.flows.aplGross ?? 0) * (1 - CRDS))} × ${pct(avgF)} en moyenne sur l’année (bail en cours ; calendrier du parc conventionné −1/3 au 1er juillet 2027, −2/3 au 1er juillet 2028 ; dans le parc privé l’aide s’arrête au terme du bail, même moyenne pour un bail de 3 ans d’échéance inconnue) = ${eur(f.aplGross * (1 - CRDS))}`;
       sources = [SRC_P2_32_APL];
     } else {
       formula =
@@ -400,12 +406,12 @@ function build(c: BuildCtx): ScenarioResult {
     d.aides_logement = { amount: f.aplGross * (1 - CRDS), formula, sources, tier };
   }
   const familyAbolished = plan && allMonths('family', 'abolished');
-  const famTxt = (what: string, computed: string) => {
+  const famTxt = (what: string, computed: string, agr: '' | 'e' | 'es' = 'e') => {
     if (nh.nonRecours) return nonRecoursTxt;
     if (familyAbolished)
-      return `${what} abrogé(e) au 1er janvier 2028 : l’aide fondamentale « ne se cumule pas avec les prestations familiales ».`;
+      return `${what} abrogé${agr} au 1er janvier 2028 : l’aide fondamentale « ne se cumule pas avec les prestations familiales ».`;
     if (plan && anyMonth((m) => m.family === 'abolished'))
-      return `${pre}${what} versé(e) jusqu’au 31 décembre 2027 puis abrogé(e) : ${computed}`;
+      return `${pre}${what} versé${agr} jusqu’au 31 décembre 2027 puis abrogé${agr} : ${computed}`;
     return computed;
   };
   const famSources = (k: ParamKey) =>
@@ -418,6 +424,7 @@ function build(c: BuildCtx): ScenarioResult {
       f.af > 0
         ? `${kids.filter((k) => k.age < 20).length} enfants de moins de 20 ans, revenu net catégoriel ${eur0(f.rncHousehold)} → ${eur(f.af)}, net de CRDS`
         : 'Moins de deux enfants de moins de 20 ans : pas d’allocations familiales.',
+      'es',
     ),
     sources: famSources('benefits.family.af_rate_2_children'),
     tier: 'law',
@@ -429,6 +436,7 @@ function build(c: BuildCtx): ScenarioResult {
       f.cf > 0
         ? `≥ 3 enfants de 3 à 21 ans, ressources ${eur0(f.rncHousehold)} → ${eur(f.cf)}, net de CRDS`
         : 'Non éligible (au moins 3 enfants, tous âgés de 3 ans ou plus, sous plafond).',
+      '',
     ),
     sources: famSources('benefits.family.cf_rate_base'),
     tier: 'law',
@@ -485,7 +493,7 @@ function build(c: BuildCtx): ScenarioResult {
     else if (nh.nonRecours) formula = nonRecoursTxt;
     else if (minimaReplaced)
       formula =
-        replacedTxt('AAH') +
+        replacedTxt('AAH', 'e') +
         (nh.adults.some((a) => a.disability === 'aah_50_79')
           ? ' Le supplément de 6 600 €/an est réservé aux titulaires de la CMI « invalidité » (taux ≥ 80 %).'
           : '');
@@ -510,7 +518,7 @@ function build(c: BuildCtx): ScenarioResult {
     let formula: string;
     if (!old) formula = 'Aucun adulte de 65 ans ou plus.';
     else if (nh.nonRecours) formula = nonRecoursTxt;
-    else if (minimaReplaced) formula = replacedTxt('ASPA');
+    else if (minimaReplaced) formula = replacedTxt('ASPA', 'e');
     else
       formula =
         f.aspa > 0

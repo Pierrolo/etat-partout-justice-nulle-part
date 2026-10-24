@@ -19,7 +19,7 @@ export interface Adult {
   pension?: { amount: number; basis: 'net' | 'brut'; startYear: number };
   disability: Disability;
 }
-export interface Child { age: number; aeeh?: boolean; cmiInvalidite?: boolean /* added: default true when aeeh (H15) */ }   // 18–24 = rattaché·e / à charge
+export interface Child { age: number; aeeh?: boolean; cmiInvalidite?: boolean /* added: read only when aeeh; DEFAULT FALSE since the audit (H15) */ }   // 18–24 = rattaché·e / à charge
 
 export interface Household {
   adults: [Adult] | [Adult, Adult];
@@ -143,6 +143,20 @@ export const PARAMS_META: { baselineYear: string; planSource: string; engineVers
 - **Periods 2027/2028/2030** are the average month of the calendar year (12 monthly computations averaged; income tax computed once on the year's average taxable income).
 - **Extra exports:** `COMPONENT_IDS`, `COMPONENT_META`, `PERIODS`, `PARAMS` (every parameter with value/unit/effective/source/status), `TIERS`, `ENGINE_VERSION`, types `CasType`, `CurvePoint`, `HourSplit`, `PlanSwitches`.
 - **Invariant scopes.** (5) households without pensions (the pension CSG tiers, kept by the plan, create cliffs for retired members); tested as Δdisposable/Δ(plan net salary of adult 1) ≥ 0,77 at cent precision. (6) holds for gross incomes held constant: tested with pensions typed gross, no CAF override, periods `'steady'` and `2030` (in 2027–2028 the income tax is still the joint barème).
+
+## Audit changes (docs/ENGINE-AUDIT.md, 2026-10) — no signature changed, no field removed
+
+- **`Child.cmiInvalidite` now defaults to `false`** (was `true` when `aeeh`). The AEEH is granted from 50 % of
+  incapacity, the CMI « invalidité » requires 80 %: the +6 600 €/an AFU supplement (and today's extra ½ part) is only
+  applied when the user says so. **UI: when « AEEH » is ticked for a child, offer a second checkbox « titulaire de la
+  carte mobilité inclusion “invalidité” (taux ≥ 80 %) » mapped to `cmiInvalidite: true`.** The URL state already
+  round-trips the field.
+- Baseline IR: ½ part per CMI holder (adult `aah_80`, child with `cmiInvalidite`), art. 157 bis abattement per person
+  aged ≥ 65 or `aah_80` (doubled for a married couple when both qualify). Visible in the `impot_revenu` formula
+  (« abattement âge ou invalidité (art. 157 bis) »).
+- Period 2027: deductible CSG = min(rate, 6,8 points) (H18 is now tier `law`). Period 2028: the pension CSG tier uses
+  the RFR 2026 without the 10 % pension abattement (formula says « RFR 2026 »).
+- Wording of `activeHypotheses` H13, H15, H16, H17, H18 and of the steady-state APL formula refined (French text only).
 
 ## Invariants (tested)
 1. `sum(components.amount) === disposable` (to the cent), both scenarios.

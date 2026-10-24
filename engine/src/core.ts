@@ -44,6 +44,8 @@ export interface Foyer {
   adults: number[];
   couple: boolean;
   children: number[]; // ages
+  /** dependent children holding the CMI « invalidité » (½ part each today) */
+  childrenCmi: number;
   parentIsole: boolean;
   /** foyer that declares the household's childcare / emploi à domicile / dons expenses */
   main: boolean;
@@ -51,12 +53,14 @@ export interface Foyer {
 
 export function foyersOf(nh: NHousehold): Foyer[] {
   const ages = nh.children.map((c) => c.age);
+  const childrenCmi = nh.children.filter((c) => c.cmiInvalidite).length;
   if (nh.adults.length === 1 || nh.married) {
     return [
       {
         adults: nh.adults.map((a) => a.index),
         couple: nh.adults.length === 2,
         children: ages,
+        childrenCmi,
         parentIsole: nh.adults.length === 1 && ages.length > 0,
         main: true,
       },
@@ -64,8 +68,8 @@ export function foyersOf(nh: NHousehold): Foyer[] {
   }
   // unmarried couple: two foyers fiscaux, children attached to the first adult; never « parent isolé » (cohabitation)
   return [
-    { adults: [0], couple: false, children: ages, parentIsole: false, main: true },
-    { adults: [1], couple: false, children: [], parentIsole: false, main: false },
+    { adults: [0], couple: false, children: ages, childrenCmi, parentIsole: false, main: true },
+    { adults: [1], couple: false, children: [], childrenCmi: 0, parentIsole: false, main: false },
   ];
 }
 
@@ -81,6 +85,8 @@ export interface BaselineSnapshot {
   aeeh: number;
   pensionTiers: PensionTier[];
   pensionGross: number[];
+  /** today's annual salary + ARE taxable income per adult (RFR 2026 for the 2028 pension CSG tier) */
+  salTaxY: number[];
 }
 
 export interface MonthFlows {
@@ -150,6 +156,12 @@ export function irBareme(
     nChildren: f.children.length,
     parentIsole: f.parentIsole,
     anyoneAged65: f.adults.some((i) => nh.adults[i]!.age >= 65),
+    // CGI 157 bis: per person aged ≥ 65 or holding the CMI « invalidité » (aah_80), doubled for a couple
+    abattement157bisPersons: f.adults.filter(
+      (i) => nh.adults[i]!.age >= 65 || nh.adults[i]!.disability === 'aah_80',
+    ).length,
+    invalidHalfParts:
+      f.adults.filter((i) => nh.adults[i]!.disability === 'aah_80').length + f.childrenCmi,
     refundableCredits: credits.garde + credits.emploiDomicile,
     reductionDons: credits.dons,
   });
@@ -242,12 +254,18 @@ export function computeMonth(ctx: MonthContext): MonthFlows {
     tiers = [...base.pensionTiers];
     buildPensions();
   } else {
+    // 2028: the CSG rate follows the RFR of 2026 incomes — today's barème and salaries, no 10 % pension abattement
+    const rfr2026 = m.pensionTier === 'rfr2026' && base !== null;
+    const yT: YearRules = rfr2026
+      ? { ir: 'bareme', pensionAbattement: false, fraisPro: true, credits: y.credits }
+      : y;
+    const salT = rfr2026 ? base.salTaxY : salTaxY;
     for (let it = 0; it < 6; it++) {
       buildPensions();
       const next: PensionTier[] = [...tiers];
-      if (y.ir === 'bareme') {
+      if (yT.ir === 'bareme') {
         for (const f of foyers) {
-          const t = irBareme(nh, f, salTaxY, pensTaxY, y);
+          const t = irBareme(nh, f, salT, pensTaxY, yT);
           for (const i of f.adults) next[i] = pensionTierFor(t.rfr, t.parts);
         }
       } else {
@@ -524,6 +542,7 @@ export function runScenario(
       adults: nh.adults.map((a) => a.index),
       couple: false,
       children: nh.children.map((c) => c.age),
+      childrenCmi: 0,
       parentIsole: false,
       main: true,
     };
@@ -566,5 +585,6 @@ export function snapshotOf(core: ScenarioCore): BaselineSnapshot {
     aeeh: f.aeeh,
     pensionTiers: core.pensionTiers,
     pensionGross: f.pens.map((p) => p?.gross ?? 0),
+    salTaxY: [...f.salTaxY],
   };
 }

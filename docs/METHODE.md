@@ -28,7 +28,7 @@ revenu (+ crédits d'impôt) + aide fondamentale. La TVA est estimée à part (�
 | Statuts | privé non-cadre ; cadre (+ APEC) ; fonctionnaire (**approximation**, voir §6) | idem |
 | Chômage | ARE nette déclarée ; CSG 6,2 % + CRDS 0,5 % au-delà du SMIC (écrêtement) | ARE inchangée (H6), imposée à 23 % |
 | Retraite | CSG des pensions par tranche de revenu fiscal (0 / 4,3 / 7,4 / 9,1 %) | CSG maintenue ; tranche recalculée (H16) |
-| Impôt sur le revenu | barème 2026, quotient familial et son plafonnement, décote, abattements 10 % (salaires et pensions), abattement « 65 ans », seuil de recouvrement ; crédits garde d'enfants et emploi à domicile, réduction pour dons | **23 % du revenu net imposable**, sans quotient ni décote ; revenu imposable = salaire net (− 10 % de frais professionnels, H2) + pensions après CSG déductible **sans abattement de 10 %** ; niches supprimées |
+| Impôt sur le revenu | barème 2026, quotient familial et son plafonnement, décote, abattements 10 % (salaires et pensions), abattement « 65 ans ou invalide » (art. 157 bis, par personne, doublé pour un couple), demi-part par titulaire de la CMI « invalidité » (art. 195), seuil de recouvrement ; crédits garde d'enfants et emploi à domicile, réduction pour dons | **23 % du revenu net imposable**, sans quotient ni décote ; revenu imposable = salaire net (− 10 % de frais professionnels, H2) + pensions après CSG déductible **sans abattement de 10 %** ; niches supprimées |
 | Aide fondamentale (AFU) | — | 6 600 €/an par personne majeure, 3 300 €/an par enfant de moins de 18 ans, +6 600 € par titulaire de la carte mobilité inclusion « invalidité », +3 300 € par pension liquidée avant 2028 ; l'excédent sur l'impôt est versé |
 | RSA, prime d'activité | barèmes 2026, forfait logement, majoration parent isolé | remplacés par l'AFU (H1, réglable) |
 | AAH, ASPA | AAH individuelle (abattements sur revenus d'activité), ASPA (seul / couple) | remplacées par l'AFU (H1, réglable) |
@@ -65,12 +65,12 @@ au revenu disponible.
 | H10 | Garde alternée, partage de l'AFU entre parents séparés | Non modélisé (enfants dans un seul ménage) | — | — |
 | H11 | Couples | Aujourd'hui : impôt commun si marié·e/pacsé·e, sinon deux foyers fiscaux (enfants rattachés à l'adulte 1) ; CAF : un seul ménage. Plan : individuel, indépendant du mariage | Loi | — |
 | H12 | AFU non indexée | 6 600 € nominaux appliqués aux revenus 2026 | Loi | — |
-| H13 | Jeunes de 18 à 24 ans | Toute personne majeure reçoit l'AFU adulte (550 €/mois), rattachée ou non | Loi | — |
+| H13 | Jeunes de 18 à 24 ans | Toute personne majeure reçoit l'AFU adulte (550 €/mois) ; le rattachement (art. 196 B) étant abrogé en 2028 (am. 1, 130°), elle forme son propre foyer et reçoit sa propre aide — même total pour le ménage | Loi | — |
 | H14 | Non-recours | Aides perçues si éligible | Hypothèse | Oui : « je ne touche pas ces aides » ; total CAF déclaré |
-| H15 | Enfant bénéficiaire de l'AEEH | Supposé titulaire de la CMI invalidité (+6 600 €/an) | Hypothèse | Oui (champ `cmiInvalidite`) |
-| H16 | Taux de CSG des pensions quand les parts fiscales disparaissent | Revenu imposable du plan, 1 part par adulte + ½ par enfant ; RFR N-2 inchangé en 2027-2028 | Hypothèse | — |
-| H17 | APL pendant la transition | Bail en cours conservé, calendrier des logements conventionnés : −1/3 (juillet 2027), −2/3 (juillet 2028), 0 (juillet 2029). Un bail privé peut s'arrêter plus tôt, à son terme | Hypothèse | — |
-| H18 | Baisse progressive de la CSG en 2027 | La part déductible baisse au prorata (6,8/9,2) | Hypothèse | — |
+| H15 | Enfant bénéficiaire de l'AEEH | **Pas** supposé titulaire de la CMI « invalidité » : l'AEEH peut être versée dès 50 % d'incapacité, la CMI exige 80 %. Si la CMI est déclarée : +6 600 €/an d'AFU, et ½ part aujourd'hui | Hypothèse | Oui (champ `cmiInvalidite`, défaut non) |
+| H16 | Taux de CSG des pensions quand les parts fiscales disparaissent (l'art. L136-8 CSS renvoie aux « parts de quotient familial » de l'art. 194 CGI, abrogé, et n'est pas modifié) | RFR N-2 : taux actuel en 2027 ; en 2028, RFR 2026 calculé sans l'abattement de 10 % sur les pensions ; ensuite revenu imposable du plan, 1 part par adulte + ½ par enfant. Lecture littérale alternative (1 part par foyer) : un couple de retraités passerait souvent au taux plein | Hypothèse | — |
+| H17 | APL pendant la transition | Calendrier des logements conventionnés (am. 32 II) : −1/3 (juillet 2027), −2/3 (juillet 2028), 0 (juillet 2029). Parc privé (am. 32 III) : aide entière jusqu'au terme du bail, sans reconduction, au plus tard le 1er janvier 2030 ; pour un bail de 3 ans d'échéance inconnue (uniforme), la moyenne annuelle est la même (5/6, 1/2, 1/6). Un bail meublé (1 an) s'arrête plus tôt | Hypothèse | — |
+| H18 | Baisse progressive de la CSG en 2027 | Part déductible = min(taux, 6,8 points) : l'art. 154 quinquies CGI (« à hauteur de 6,8 points ») n'est pas modifié | Loi | — |
 
 ## 4. TVA : une estimation lissée
 

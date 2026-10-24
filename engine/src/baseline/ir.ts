@@ -15,12 +15,21 @@ export function bareme(q: number): number {
   return tax;
 }
 
-export function fiscalParts(couple: boolean, nChildren: number, parentIsole: boolean): number {
+/**
+ * Parts of quotient familial (CGI art. 194, 195). `invalidHalfParts` = number of foyer members (declarant, spouse,
+ * dependent children) holding the CMI « invalidité » — each adds ½ part (art. 195 1 d bis, 3 and 5).
+ */
+export function fiscalParts(
+  couple: boolean,
+  nChildren: number,
+  parentIsole: boolean,
+  invalidHalfParts = 0,
+): number {
   let parts = couple ? 2 : 1;
   for (let k = 1; k <= nChildren; k++)
     parts += k <= 2 ? n('income_tax.parts.child_1_and_2') : n('income_tax.parts.child_3_and_more');
   if (parentIsole && !couple && nChildren > 0) parts += n('income_tax.parts.parent_isole_bonus');
-  return parts;
+  return parts + 0.5 * Math.max(0, invalidHalfParts);
 }
 
 /** 10 % deduction on salaries (and ARE): min 509, max 14 555, never above the income. */
@@ -67,6 +76,13 @@ export interface IncomeTaxInput {
   nChildren: number;
   parentIsole: boolean;
   anyoneAged65: boolean;
+  /**
+   * Number of foyer adults meeting the age (≥ 65) or invalidity (CMI « invalidité ») condition of CGI art. 157 bis.
+   * The abattement is per person (doubled for a married couple when both qualify). Default: `anyoneAged65 ? 1 : 0`.
+   */
+  abattement157bisPersons?: number;
+  /** foyer members holding the CMI « invalidité » (½ part each, art. 195). Default 0. */
+  invalidHalfParts?: number;
   /** refundable credits (garde d'enfants, emploi à domicile), annual, already computed */
   refundableCredits: number;
   /** réduction d'impôt pour dons (non refundable), annual, before the cap at the tax */
@@ -90,13 +106,14 @@ export interface IncomeTaxResult {
 
 export function incomeTax(x: IncomeTaxInput): IncomeTaxResult {
   let ageAb = 0;
-  if (x.anyoneAged65) {
+  const persons157 = x.abattement157bisPersons ?? (x.anyoneAged65 ? 1 : 0);
+  if (persons157 > 0) {
     const t1 = pv('income_tax.abattement_age_65_tier1');
     const t2 = pv('income_tax.abattement_age_65_tier2');
-    ageAb = x.rnc <= t1.rng_max ? t1.amount : x.rnc <= t2.rng_max ? t2.amount : 0;
+    ageAb = persons157 * (x.rnc <= t1.rng_max ? t1.amount : x.rnc <= t2.rng_max ? t2.amount : 0);
   }
   const rni = Math.max(0, x.rnc - ageAb);
-  const parts = fiscalParts(x.couple, x.nChildren, x.parentIsole);
+  const parts = fiscalParts(x.couple, x.nChildren, x.parentIsole, x.invalidHalfParts ?? 0);
   const nBase = x.couple ? 2 : 1;
   const ir1 = parts * bareme(rni / parts);
   const ir0 = nBase * bareme(rni / nBase);

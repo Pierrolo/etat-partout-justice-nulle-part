@@ -129,7 +129,8 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
     activeHypotheses.push({
       id: 'H13',
       label: 'Jeunes de 18 à 24 ans',
-      value: 'AFU adulte (550 €/mois) même rattachés au foyer des parents',
+      value:
+        'AFU adulte (550 €/mois) : le rattachement au foyer des parents (art. 196 B) étant abrogé en 2028, la personne majeure reçoit sa propre aide',
       tier: 'law',
     });
   if (nh.adults.some((a) => a.activity === 'chomage'))
@@ -144,30 +145,31 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
       id: 'H15',
       label: 'Enfant AEEH',
       value: nh.children.some((k) => k.aeeh && k.cmiInvalidite)
-        ? 'titulaire de la CMI invalidité (+6 600 €/an)'
-        : 'sans CMI invalidité',
+        ? 'titulaire de la CMI « invalidité » déclarée (+6 600 €/an d’AFU ; ½ part aujourd’hui)'
+        : 'sans CMI « invalidité » déclarée (l’AEEH peut être versée dès 50 % d’incapacité ; avec la CMI, taux ≥ 80 %, le plan ajouterait 6 600 €/an)',
       tier: 'hypothesis',
     });
   if (nh.housing.status === 'locataire' && e.period !== 'steady')
     activeHypotheses.push({
       id: 'H17',
       label: 'APL pendant la transition',
-      value: 'bail en cours conservé : −1/3 (07/2027), −2/3 (07/2028), 0 (07/2029)',
+      value:
+        'calendrier du parc conventionné : −1/3 (07/2027), −2/3 (07/2028), 0 (07/2029) ; dans le parc privé l’aide s’arrête au terme du bail (au plus tard le 1er janvier 2030) — même moyenne pour un bail de 3 ans dont l’échéance est inconnue',
       tier: 'hypothesis',
     });
   if (e.period === 2027 && nh.adults.some((a) => a.salary))
     activeHypotheses.push({
       id: 'H18',
       label: 'Baisse de la CSG en 2027',
-      value: 'part déductible réduite au prorata (6,8/9,2)',
-      tier: 'hypothesis',
+      value: 'part déductible = min(taux, 6,8 points) (art. 154 quinquies CGI, non modifié)',
+      tier: 'law',
     });
   if (nh.adults.some((a) => a.activity === 'retraite'))
     activeHypotheses.push({
       id: 'H16',
       label: 'Taux de CSG des pensions',
       value:
-        'recalculé sur le revenu imposable du plan, 1 part par adulte + ½ par enfant (parts abrogées)',
+        'RFR N-2 : inchangé en 2027 ; en 2028, RFR 2026 sans l’abattement de 10 % ; ensuite revenu imposable du plan avec 1 part par adulte + ½ par enfant (art. 194 abrogé, art. L136-8 CSS non modifié)',
       tier: 'hypothesis',
     });
 
@@ -182,7 +184,7 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
   ];
   if (nh.adults.some((a) => a.salary?.status === 'fonctionnaire'))
     nm.push(
-      'Fonction publique : cotisations approchées (primes supposées = 20 % du brut, taux employeur type CNRACL) ; indemnité compensatrice de CSG, GIPA et supplément familial de traitement non modélisés.',
+      'Fonction publique : cotisations approchées (primes supposées = 20 % du brut ; cotisation employeur retraite CNRACL 37,65 % appliquée à tous — pour l’État, la contribution au CAS Pensions est d’environ 78 % : le coût employeur des fonctionnaires d’État est sous-estimé, sans effet sur le revenu disponible) ; indemnité compensatrice de CSG, GIPA et supplément familial de traitement non modélisés.',
     );
   if (nh.adults.some((a) => a.salary?.status === 'cadre'))
     nm.push(
@@ -206,7 +208,7 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
     );
   if (nh.adults.some((a) => a.disability !== 'none'))
     nm.push(
-      'AAH : couple, ESAT, condition de restriction substantielle (taux 50–79 %), PCH et majoration pour la vie autonome non modélisés ; la CMI invalidité est supposée pour un taux ≥ 80 %.',
+      'AAH : couple, ESAT, condition de restriction substantielle (taux 50–79 %), PCH et majoration pour la vie autonome non modélisés ; la CMI invalidité est supposée pour un taux ≥ 80 % (½ part et abattement de l’art. 157 bis aujourd’hui ; réduction d’impôt complémentaire de l’art. 197 non modélisée).',
     );
   if (nh.housing.status === 'locataire')
     nm.push(

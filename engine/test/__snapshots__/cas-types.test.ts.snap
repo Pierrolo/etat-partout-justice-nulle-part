@@ -165,7 +165,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Seul·e, 1,5 SMIC, locataire 650 € zone 2",
       "plan": 2520,
       "transition": {
-        "2027": 70,
+        "2027": 71,
         "2028": 404,
         "2030": 404,
         "steady": 404,
@@ -193,7 +193,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Seul·e, 2 SMIC, locataire 750 € zone 2",
       "plan": 3176,
       "transition": {
-        "2027": 84,
+        "2027": 88,
         "2028": 472,
         "2030": 472,
         "steady": 472,
@@ -221,7 +221,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Seul·e, 3 SMIC (cadre), locataire 900 € zone 1",
       "plan": 4497,
       "transition": {
-        "2027": 125,
+        "2027": 131,
         "2028": 722,
         "2030": 722,
         "steady": 722,
@@ -249,7 +249,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Seul·e, 5 SMIC (cadre), propriétaire",
       "plan": 7154,
       "transition": {
-        "2027": 203,
+        "2027": 216,
         "2028": 1221,
         "2030": 1221,
         "steady": 1221,
@@ -307,7 +307,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Couple marié, 2 × SMIC, locataire 800 € zone 2",
       "plan": 3726,
       "transition": {
-        "2027": 77,
+        "2027": 79,
         "2028": 636,
         "2030": 636,
         "steady": 636,
@@ -336,7 +336,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Couple marié, 2 SMIC + 1 SMIC, propriétaire (crédit)",
       "plan": 5039,
       "transition": {
-        "2027": 140,
+        "2027": 143,
         "2028": 834,
         "2030": 834,
         "steady": 834,
@@ -364,7 +364,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Couple marié, 5 SMIC (cadre) + sans revenu, propriétaire",
       "plan": 7704,
       "transition": {
-        "2027": 209,
+        "2027": 219,
         "2028": 1197,
         "2030": 1197,
         "steady": 1197,
@@ -392,7 +392,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Couple non marié, 5 SMIC (cadre) + sans revenu, propriétaire",
       "plan": 7704,
       "transition": {
-        "2027": 203,
+        "2027": 216,
         "2028": 1771,
         "2030": 1771,
         "steady": 1771,
@@ -514,7 +514,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Couple, 2 × 2 SMIC, 2 enfants (1, 4) en crèche, propriétaire (crédit)",
       "plan": 6902,
       "transition": {
-        "2027": 118,
+        "2027": 121,
         "2028": 976,
         "2030": 901,
         "steady": 901,
@@ -544,7 +544,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Couple de cadres, 3 + 2 SMIC, 2 enfants (8, 12), propriétaire",
       "plan": 8223,
       "transition": {
-        "2027": 209,
+        "2027": 219,
         "2028": 1367,
         "2030": 1367,
         "steady": 1367,
@@ -573,7 +573,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Couple aisé, 5 + 3 SMIC, 3 enfants (4, 9, 14), emploi à domicile 6 000 €/an",
       "plan": 12476,
       "transition": {
-        "2027": 237,
+        "2027": 253,
         "2028": 1857,
         "2030": 1774,
         "steady": 1774,
@@ -1107,7 +1107,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Adulte handicapé (≥ 80 %), mi-temps au SMIC, locataire 450 € zone 2",
       "plan": 1757,
       "transition": {
-        "2027": -20,
+        "2027": -18,
         "2028": 59,
         "2030": -47,
         "steady": -47,
@@ -1129,27 +1129,27 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
     },
     {
       "baseline": 3898,
-      "delta": 1310,
-      "deltaAfterTva": 1217,
-      "deltaPct": 33.6,
+      "delta": 760,
+      "deltaAfterTva": 667,
+      "deltaPct": 19.5,
       "family": "Handicap",
       "id": "famille-aeeh",
-      "label": "Couple, 1,5 + 1 SMIC, enfant de 8 ans bénéficiaire de l’AEEH",
-      "plan": 5208,
+      "label": "Couple, 1,5 + 1 SMIC, enfant de 8 ans bénéficiaire de l’AEEH (sans CMI invalidité)",
+      "plan": 4658,
       "transition": {
-        "2027": 82,
-        "2028": 1310,
-        "2030": 1310,
-        "steady": 1310,
+        "2027": 85,
+        "2028": 760,
+        "2030": 760,
+        "steady": 760,
       },
       "variants": {
-        "H1_differential": 1310,
-        "H2_off": 1215,
-        "H5_noPassThroughAfterTva": 1310,
+        "H1_differential": 760,
+        "H2_off": 665,
+        "H5_noPassThroughAfterTva": 760,
       },
       "waterfall": {
         "aeeh": -152,
-        "afu": 1925,
+        "afu": 1375,
         "cee": 20,
         "impot_revenu": -816,
         "prime_activite": -92,
@@ -1307,7 +1307,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Fonctionnaire seul·e, 2 000 € net, locataire 650 € zone 2",
       "plan": 2323,
       "transition": {
-        "2027": 35,
+        "2027": 36,
         "2028": 316,
         "2030": 316,
         "steady": 316,
@@ -1336,7 +1336,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Couple d’enseignants, 2 300 + 2 100 € net, 2 enfants (7, 11), propriétaire (crédit)",
       "plan": 5551,
       "transition": {
-        "2027": 136,
+        "2027": 139,
         "2028": 1067,
         "2030": 1067,
         "steady": 1067,
@@ -1365,7 +1365,7 @@ exports[`CAS_TYPES > comparison deltas (snapshot) 1`] = `
       "label": "Cadre du privé seul·e, 4 000 € net, locataire 1 000 € zone 1",
       "plan": 4103,
       "transition": {
-        "2027": 113,
+        "2027": 118,
         "2028": 648,
         "2030": 648,
         "steady": 648,

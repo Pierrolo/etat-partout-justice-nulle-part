@@ -328,7 +328,7 @@ export const CAS_TYPES: CasType[] = [
   {
     id: 'famille-aeeh',
     family: 'Handicap',
-    label: 'Couple, 1,5 + 1 SMIC, enfant de 8 ans bénéficiaire de l’AEEH',
+    label: 'Couple, 1,5 + 1 SMIC, enfant de 8 ans bénéficiaire de l’AEEH (sans CMI invalidité)',
     household: hh([worker(1.5), worker(1)], [{ age: 8, aeeh: true }], rent(800)),
   },
 

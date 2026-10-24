@@ -71,8 +71,8 @@ the cent (invariant 2, property-tested).
 | H12                                 | AFU nominal 6 600 € applied to 2026 incomes                                                    | —                                                                                     |
 | H13                                 | every person ≥ 18 gets the adult AFU                                                           | —                                                                                     |
 | H14                                 | benefits received if eligible; `nonRecours` zeroes them                                        | —                                                                                     |
-| H15                                 | an AEEH child holds the CMI invalidité (+6 600 €) unless `cmiInvalidite: false`                | —                                                                                     |
-| H16                                 | pension CSG tier in the plan: plan taxable income, 1 part per adult + ½ per child              | —                                                                                     |
+| H15                                 | an AEEH child does NOT hold the CMI invalidité unless `cmiInvalidite: true` (+6 600 €, ½ part) | —                                                                                     |
+| H16                                 | pension CSG tier: today's in 2027, RFR 2026 w/o pension abattement in 2028, then plan taxable income, 1 part/adult + ½/child | —                                                                     |
 | H17                                 | transition: existing lease keeps the APL on the conventioned schedule                          | —                                                                                     |
 
 ## How to add or change a parameter
