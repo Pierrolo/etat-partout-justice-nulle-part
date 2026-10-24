@@ -34,8 +34,8 @@
  *     protan / deutan simulation (CVD ΔE ≥ 11, see the dataviz validation below).
  *   Categorical chart palette: 8 slots, fixed order, validated with the `dataviz` skill's validator on
  *     the darkest plate (paper-deep / ink-soft) and on the page ground: lightness band, chroma ≥ 0.10,
- *     adjacent CVD ΔE ≥ 13 (target 8), normal-vision ΔE ≥ 22 (floor 15), every mark ≥ 3 : 1; the first
- *     three also validate under `--pairs all`.
+ *     adjacent CVD ΔE ≥ 13 (target 8), normal-vision ΔE ≥ 25 adjacent and ≥ 11 between ANY two slots (floor
+ *     15 adjacent), every mark ≥ 3 : 1; the first three also validate under `--pairs all`.
  *
  * Hex values are 6-digit on purpose: src/lib/contrast.ts parses this file, and src/lib/chart-theme.ts
  * mirrors the chart tokens (a test keeps both in sync). Do not declare a colour token twice in this file.
@@ -95,8 +95,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url('@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2')
-    format('woff2');
+  src: url('@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2') format('woff2');
   unicode-range:
     U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
     U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -106,8 +105,7 @@
   font-style: normal;
   font-display: swap;
   font-weight: 500;
-  src: url('@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2')
-    format('woff2');
+  src: url('@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2') format('woff2');
   unicode-range:
     U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
     U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -160,7 +158,8 @@
   --tier-announced-bd: light-dark(#323935, #d3d5ce);
   --tier-hypothesis-bd: light-dark(#5c635f, #a3aaa5);
   /* Hatching = signal at 45°, reserved for highlighted zones (README « Motifs »). */
-  --hatch: light-dark(rgb(255 90 31 / 0.78), rgb(255 90 31 / 0.7));
+  --hatch: light-dark(rgb(255 90 31 / 0.5), rgb(255 90 31 / 0.55));
+  --hatch-stroke: var(--signal); /* SVG hatch patterns of the charts (chart-theme.ts hatchFill) */
 
   /* Focus: ink 2 px (paper on the dark scene) — the same token as the accent, by design. */
   --focus: var(--accent);
@@ -173,13 +172,29 @@
      colours), then five hues pushed down to the same sober lightness. */
   --series-1: light-dark(#0b8e7f, #0b9989); /* teal */
   --series-2: light-dark(#d9480f, #f25820); /* signal-orange */
-  --series-3: light-dark(#1d5b92, #2389e2); /* blue */
-  --series-4: light-dark(#937224, #926e10); /* ochre */
-  --series-5: light-dark(#83297e, #b75ab0); /* plum */
-  --series-6: light-dark(#4e6c1e, #79a23a); /* olive */
-  --series-7: light-dark(#7e4ba1, #a883c4); /* violet */
-  --series-8: light-dark(#74670c, #918112); /* bronze */
+  --series-3: light-dark(#3c52b6, #5e73b8); /* indigo */
+  --series-4: light-dark(#43600e, #73a21f); /* pine */
+  --series-5: light-dark(#963c91, #ba5db3); /* plum */
+  --series-6: light-dark(#8c7e2d, #8a7b1d); /* khaki */
+  --series-7: light-dark(#816bd8, #9581ef); /* violet */
+  --series-8: light-dark(#96173a, #c64961); /* wine */
   --series-other: light-dark(#747b77, #7d857f); /* « Autres » */
+
+  /* Text on chart fills (pure white or near-black, whichever contrasts more: ≥ 4,5 : 1). */
+  --on-series-1: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-2: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-3: light-dark(#ffffff, #ffffff);
+  --on-series-4: light-dark(#ffffff, #0b0b0b);
+  --on-series-5: light-dark(#ffffff, #0b0b0b);
+  --on-series-6: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-7: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-8: light-dark(#ffffff, #ffffff);
+  --on-hour-keep: light-dark(#000000, #000000);
+  --on-tint-90: light-dark(#ffffff, #000000);
+  --on-tint-78: light-dark(#ffffff, #000000);
+  --on-tint-66: light-dark(#ffffff, #000000);
+  --on-tint-56: light-dark(#ffffff, #000000);
+  --on-tint-48: light-dark(#000000, #000000);
 
   /* Chart · sequential (magnitude): one hue (teal), light → dark on paper, dark → light on ink. */
   --seq-1: light-dark(#d6e4de, #1c3a35);
@@ -213,7 +228,8 @@
     'EPJN Narrow Space', 'Schibsted Grotesk', 'Helvetica Neue', Arial, system-ui, sans-serif;
   --ff-serif: var(--ff-sans); /* the display face is the same grotesque (README: display = sans) */
   --ff-mono:
-    'EPJN Narrow Space', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+    'EPJN Narrow Space', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas,
+    monospace;
   --ff-label: var(--ff-mono);
   --ff-figure: var(--ff-mono);
   --fs-label: 0.8125rem; /* label: 13 px, 500, 0.08 em, capitals */
@@ -267,6 +283,14 @@
 }
 
 /* ── 3. Signature ───────────────────────────────────────────────────────── */
+/* Registered so that light-dark() is resolved on <html> (the page's scheme) and inherited as a colour: the
+   scene elements below force `color-scheme: dark` on themselves, which would otherwise pick the dark side. */
+@property --scene-bg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #121614;
+}
+
 /* What a token cannot express. Everything here is scoped to the brand: « Éditorial » never sees it. */
 
 :root[data-brand='ci'] {
@@ -326,17 +350,32 @@
   background: var(--signal);
   vertical-align: 0.04em;
 }
-/* Page sections (an h2 outside any card) are numbered, as the form steps are. The number is decoration:
-   the empty alternative text keeps it out of the accessible name of the heading. */
+/* Page sections (an h2 outside any card) are numbered, as the form steps are, and open on a 1,5 px line.
+   The number is decoration: the empty alternative text keeps it out of the accessible name of the heading. */
 :root[data-brand='ci'] main {
   counter-reset: ci-section;
+}
+:root[data-brand='ci'] main > section.wrap:has(> h2:first-child:not(.sr-only)) {
+  position: relative;
+  padding-top: 1.25rem;
+}
+:root[data-brand='ci'] main section:not(.wrap, .card):has(> h2:first-child:not(.sr-only)) {
+  border-top: var(--rule-w) solid var(--line);
+  padding-top: 1.25rem;
+}
+:root[data-brand='ci'] main > section.wrap > h2:first-child:not(.sr-only)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline: var(--gutter);
+  border-top: var(--rule-w) solid var(--line);
 }
 :root[data-brand='ci'] main h2:not(.sr-only, .card h2, [data-no-number])::before {
   counter-increment: ci-section;
   content: counter(ci-section, decimal-leading-zero) ' —';
   content: counter(ci-section, decimal-leading-zero) ' —' / '';
   display: block;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.75rem;
   font-family: var(--ff-label);
   font-size: var(--fs-label);
   font-weight: var(--fw-label);
@@ -366,6 +405,20 @@
 :root[data-brand='ci'] .step-title {
   flex-wrap: wrap;
   row-gap: 0.25rem;
+  font-family: var(--ff-label);
+  font-size: 0.9375rem;
+  font-weight: var(--fw-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+}
+:root[data-brand='ci'] .step-title .step-num {
+  font-size: inherit;
+}
+
+/* Mono figures: the non-breaking space the French number format puts before « € » / « % » is a full
+   monospace cell: close it up so « +115 € » reads as one figure. */
+:root[data-brand='ci'] .stat-number {
+  word-spacing: -0.3em;
 }
 
 /* The single key figure of a view: the signal fill with ink text (README: text on signal = ink). */
@@ -426,4 +479,11 @@
 :root[data-brand='ci'] a {
   transition-timing-function: var(--ease-enter);
   transition-duration: var(--dur-quick);
+}
+
+/* The cas-types heat map bakes its colours into inline styles (editorial ramp + a --tile-*-ci pair for
+   this brand): the brand takes over with CSS, so there is no flash of the other ramp. */
+:root[data-brand='ci'] [style*='--tile-bg-ci'] {
+  background: var(--tile-bg-ci) !important;
+  color: var(--tile-fg-ci) !important;
 }

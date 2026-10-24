@@ -4,8 +4,6 @@
  * Pur TypeScript. Les dates viennent exclusivement du texte des amendements proposés (calendrier.json,
  * chaque événement cite un extrait vérifié) : aucune date n'est calculée ici, aucune horloge n'est lue.
  */
-import { categorical } from './chart-theme';
-import { contrastRatio } from './contrast';
 import { timeOf } from './dates';
 
 /* ── Couloirs (domaines) ────────────────────────────────────────────────── */
@@ -39,13 +37,13 @@ export const LANES: Record<LaneId, LaneMeta> = {
   collectivites: { label: 'Collectivités locales', short: 'Collectivités', color: 6 },
 };
 
-/** Texte sur une pastille de couleur : blanc ou presque noir (les mêmes dans les deux thèmes), selon la luminance. */
+/**
+ * Texte sur une pastille de couleur : blanc ou presque noir selon la luminance du remplissage. Le choix
+ * est un jeton de la marque (`--on-series-n`, vérifié ≥ 4,5 : 1 par contrast.test.ts) : il suit la marque
+ * et le thème sans script.
+ */
 export function onSeries(index: number): string {
-  const pick = (mode: 'light' | 'dark') => {
-    const fill = categorical[mode][index]!;
-    return contrastRatio('#ffffff', fill) >= contrastRatio('#0b0b0b', fill) ? '#ffffff' : '#0b0b0b';
-  };
-  return `light-dark(${pick('light')}, ${pick('dark')})`;
+  return `var(--on-series-${index + 1})`;
 }
 
 /* ── Événements ─────────────────────────────────────────────────────────── */
@@ -119,7 +117,7 @@ export function laneOf(e: Pick<RawEvent, 'domain' | 'label_fr' | 'amendments'>):
     case 'collectivites':
       return 'collectivites';
     default:
-      throw new Error(`calendrier: domaine inconnu « ${e.domain} »`);
+      throw new Error(`calendrier: domaine inconnu « ${e.domain} »`);
   }
 }
 
@@ -364,7 +362,7 @@ export const PANEL_ORDER = {
 
 export function toPanel(raw: RawTrajectory): Panel {
   const cfg = PANEL_CONFIG[raw.id];
-  if (!cfg) throw new Error(`calendrier: pas de configuration de graphique pour « ${raw.id} »`);
+  if (!cfg) throw new Error(`calendrier: pas de configuration de graphique pour « ${raw.id} »`);
   const steps: Step[] = raw.steps.map((s) => {
     const value = s.total_pct ?? s.value;
     if (typeof value !== 'number') throw new Error(`calendrier: palier sans valeur (${raw.id})`);

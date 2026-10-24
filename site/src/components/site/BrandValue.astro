@@ -1,0 +1,14 @@
+---
+/**
+ * A value that differs per brand (a hex code, a contrast ratio, a font name): both are rendered and the
+ * stylesheet shows the one of the active brand (`[data-brand-only]` rule in global.css) — no script, no flash.
+ */
+interface Props {
+  editorial: string;
+  ci: string;
+}
+const { editorial, ci } = Astro.props;
+---
+
+<span data-brand-only="editorial">{editorial}</span>
+<span data-brand-only="ci">{ci}</span>

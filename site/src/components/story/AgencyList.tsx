@@ -10,6 +10,7 @@ import {
   type FateGroup,
 } from '@/lib/etat-shared';
 import { toCsv } from '@/lib/csv';
+import './story.css';
 
 const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
@@ -94,7 +95,7 @@ export function AgencyList({ packed }: { packed: AgencyTuple[] }) {
             id={`${uid}-q`}
             type="search"
             autoComplete="off"
-            placeholder="Ex. : Météo, audiovisuel, logement"
+            placeholder="Ex. : Météo, audiovisuel, logement"
             value={q}
             onChange={(e) => {
               setQ(e.target.value);

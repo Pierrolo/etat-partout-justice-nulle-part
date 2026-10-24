@@ -3,6 +3,7 @@ import type { ChipProps } from '@/lib/facts';
 import { formatInteger } from '@/lib/format';
 import { FATE_LABEL, type FateCount } from '@/lib/etat-shared';
 import { UnitGrid, type UnitSegment } from './UnitGrid';
+import './story.css';
 
 const COLOR = {
   suppression: 'var(--series-1)',
@@ -65,7 +66,7 @@ export function AgencyWaffle({
         segments={segments}
         colsWide={60}
         colsNarrow={32}
-        ariaLabel={`${formatInteger(total)} carrés : ${segments.map((s) => `${formatInteger(s.count)} ${s.label.toLowerCase()}`).join(', ')}`}
+        ariaLabel={`${formatInteger(total)} carrés : ${segments.map((s) => `${formatInteger(s.count)} ${s.label.toLowerCase()}`).join(', ')}`}
       />
     </ChartFrame>
   );

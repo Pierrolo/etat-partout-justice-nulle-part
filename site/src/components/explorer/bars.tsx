@@ -11,12 +11,13 @@
  */
 import type { CSSProperties, ReactNode } from 'react';
 import { cn } from '@/lib/cn';
+import '@/components/story/story.css';
 
 export interface BarSegment {
   value: number;
   /** Couleur CSS (`var(--series-1)`…). */
   color: string;
-  /** Hachuré + contour pointillé : valeur « annoncée », sans texte de loi. */
+  /** Hachuré + contour pointillé : valeur « promise », sans texte précis. */
   hatched?: boolean;
   /** Nom du segment pour le lecteur d'écran (« dont TVA des administrations : 11,9 Md€ »). */
   srLabel?: string;

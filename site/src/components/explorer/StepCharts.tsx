@@ -4,7 +4,7 @@
  *
  * Marques (skill dataviz) : ligne de 2 px à jonctions rondes, repères ≥ 8 px cerclés de la couleur
  * de la surface, grille en filets pleins. Un seul tracé par graphique, donc une seule couleur : celle
- * du plan (accent). Le palier de départ qui n'est pas écrit dans la loi (D33) est en pointillé et
+ * du plan (accent). Le palier de départ qui n'est écrit dans aucun amendement (D33) est en pointillé et
  * creux : jamais présenté comme un chiffre de la loi.
  *
  * Chaque valeur est écrite à côté de son repère ; la lecture détaillée (date, texte, source) suit
@@ -74,9 +74,9 @@ export function describePanel(panel: Panel): string {
     .filter((_, i, a) => i < a.length - 1)
     .map(
       (p) =>
-        `${formatDateFr(p.date)} : ${valueText(panel, p.value)}${p.hypothesis ? ' (point de départ déduit, non écrit dans la loi)' : ''}`,
+        `${formatDateFr(p.date)} : ${valueText(panel, p.value)}${p.hypothesis ? ' (point de départ déduit, écrit dans aucun amendement)' : ''}`,
     );
-  return `${panel.title}, ${panel.measure}. ${parts.join(' ; ')}.`;
+  return `${panel.title}, ${panel.measure}. ${parts.join('\u202F; ')}.`;
 }
 
 export function StepPanel({ panel }: { panel: Panel }) {
@@ -137,7 +137,7 @@ export function StepPanel({ panel }: { panel: Panel }) {
       <div
         role="group"
         tabIndex={0}
-        aria-label={`${panel.title} : ${real.length} paliers. Flèches gauche et droite pour les parcourir.`}
+        aria-label={`${panel.title} : ${real.length} paliers. Flèches gauche et droite pour les parcourir.`}
         aria-describedby={readoutId}
         onKeyDown={onKey}
         onBlur={() => setActive(null)}
@@ -265,7 +265,7 @@ export function StepPanel({ panel }: { panel: Panel }) {
         {cur && curStep ? (
           <>
             <strong className="font-semibold text-ink">
-              {formatDateFr(cur.date < curStep.from ? curStep.from : cur.date)} :{' '}
+              {formatDateFr(cur.date < curStep.from ? curStep.from : cur.date)}&#8239;:{' '}
               {valueText(panel, cur.value)}.
             </strong>{' '}
             {curStep.label}
@@ -310,7 +310,7 @@ export default function StepGrid({ panels, columns = 3 }: { panels: Panel[]; col
               strokeLinecap="round"
             />
           </svg>
-          Pointillé, repère creux : situation actuelle rappelée pour la lecture, déduite et non
+          Pointillé, repère creux : situation actuelle rappelée pour la lecture, déduite et non
           écrite dans l’amendement.
         </p>
       )}

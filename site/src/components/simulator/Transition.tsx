@@ -2,20 +2,24 @@ import { useMemo } from 'react';
 import { Button, ChartFrame } from '@/components/ui';
 import { IconDown, IconUp } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
-import { compare } from '@/lib/engine';
+import { compare, roundForDisplay as displayOf } from '@/lib/engine';
 import type { Comparison, Household, Hypotheses, Period } from '@/lib/engine-types';
-import { formatEuro, formatEuroDelta, formatPercent, roundForDisplay } from '@/lib/format';
-import { DISPLAY_STEP, displayFigures, percentDigits } from '@/lib/sim/result';
+import { formatEuro, formatEuroDelta, roundForDisplay } from '@/lib/format';
+import { withBase } from '@/lib/site';
+import { DISPLAY_STEP, headlinePct, pctText } from '@/lib/sim/result';
 
 const PHOTOS: Period[] = [2027, 2028, 2030, 'steady'];
-const SOURCES = [{ label: 'Calendrier des mesures du plan', tier: 'law' as const }];
+const SOURCES = [
+  { label: 'Calendrier des mesures du plan', href: withBase('/comprendre/calendrier/') },
+];
 
 interface Photo {
   period: Period;
   cmp: Comparison;
   delta: number;
   plan: number;
-  pct: number;
+  /** `null` when today's income is almost nil: shown « — ». */
+  pct: number | null;
   drivers: Array<{ label: string; delta: number }>;
 }
 
@@ -23,9 +27,9 @@ const key = (c: { id: string; personIndex?: number }) => `${c.id}|${c.personInde
 
 function drivers(prev: Comparison | null, cmp: Comparison): Photo['drivers'] {
   if (!prev) {
-    const fig = displayFigures(cmp);
+    const fig = displayOf(cmp);
     return cmp.waterfall
-      .map((w, i) => ({ label: w.label, delta: fig.steps[i] ?? 0 }))
+      .map((w, i) => ({ label: w.label, delta: fig.waterfall[i]?.delta ?? 0 }))
       .filter((d) => d.delta !== 0)
       .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta))
       .slice(0, 2);
@@ -56,13 +60,13 @@ export function Transition({ household, hypotheses, period, onPick }: Transition
     let prev: Comparison | null = null;
     return PHOTOS.map((p) => {
       const cmp = compare(household, { period: p, hypotheses });
-      const fig = displayFigures(cmp);
+      const fig = displayOf(cmp);
       const photo: Photo = {
         period: p,
         cmp,
-        delta: fig.delta,
-        plan: fig.plan,
-        pct: fig.pct,
+        delta: fig.deltaAfterTva,
+        plan: fig.planAfterTva,
+        pct: headlinePct(cmp),
         drivers: drivers(prev, cmp),
       };
       prev = cmp;
@@ -92,8 +96,8 @@ export function Transition({ household, hypotheses, period, onPick }: Transition
 
   return (
     <ChartFrame
-      headingLevel={2}
-      title="La transition en 3 photos"
+      headingLevel={4}
+      title="Année après année, jusqu’au plan complet"
       subtitle="Votre ménage en 2027, en 2028, en 2030, puis avec le plan complet. Même échelle pour les quatre."
       summary={summary}
       sources={SOURCES}
@@ -118,8 +122,7 @@ export function Transition({ household, hypotheses, period, onPick }: Transition
             key: 'pct',
             label: 'Écart (%)',
             numeric: true,
-            format: (v) =>
-              formatPercent(Number(v), { signed: true, decimals: percentDigits(Number(v)) }),
+            format: (v) => pctText(v === null ? null : Number(v)),
           },
         ],
         rows: photos.map((p) => ({
@@ -155,10 +158,7 @@ export function Transition({ household, hypotheses, period, onPick }: Transition
                 {dir !== 'flat' && <Icon size={18} strokeWidth={2} className="shrink-0" />}
                 <span className="num nums-proportional">{formatEuroDelta(p.delta)}</span>
               </p>
-              <p className="-mt-2 text-xs text-ink-3">
-                par mois, avec{' '}
-                {formatPercent(p.pct, { signed: true, decimals: percentDigits(p.pct) })}
-              </p>
+              <p className="-mt-2 text-xs text-ink-3">par mois, avec {pctText(p.pct)}</p>
               <span aria-hidden="true" className="relative block h-3 rounded-full bg-sunken">
                 <span className="absolute inset-y-0 left-1/2 w-px bg-[var(--chart-axis)]" />
                 <span

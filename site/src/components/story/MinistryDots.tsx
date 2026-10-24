@@ -4,16 +4,19 @@ import type { ChipProps } from '@/lib/facts';
 import { formatInteger } from '@/lib/format';
 import type { MinistryDot, MinistryFate } from '@/lib/etat-shared';
 import { prefersReducedMotion } from './useWidth';
+import './story.css';
 
 const FATE: Record<MinistryFate, { label: string; short: string }> = {
   garde: { label: 'Maintenus (un par bloc)', short: 'maintenu' },
-  absorbe: { label: 'Regroupés dans un autre', short: 'regroupé dans un autre' },
+  absorbe: { label: 'Absorbés dans le bloc d’un autre', short: 'absorbé dans le bloc d’un autre' },
   supprime: { label: 'Supprimés sans successeur', short: 'supprimé' },
 };
 
 /**
- * 35 ministères → 7. One dot per ministry; the 28 that disappear fade out (19 outright, 9 merged
- * into another). The fade plays once when the chart appears and is skipped with
+ * 35 ministères → 7. One dot per ministry; those that disappear fade out (supprimés sans successeur, plus
+ * ceux absorbés dans le bloc d’un autre). The wording is always « 16 regroupés en 7 » = 7 maintenus + 9
+ * absorbés: the same arithmetic everywhere (docs: DISCREPANCIES D29). The fade plays once when the chart
+ * appears and is skipped with
  * `prefers-reduced-motion`; without JavaScript the final state is what is drawn.
  */
 export function MinistryDots({
@@ -72,7 +75,7 @@ export function MinistryDots({
       tier="announced"
       title={`${formatInteger(before)} ministères aujourd’hui, ${formatInteger(after)} demain`}
       subtitle="Un point = un ministère ou ministère délégué. Les points estompés disparaissent dans le plan."
-      summary={`Sur ${formatInteger(before)} ministères, ${formatInteger(removedNet)} disparaîtraient en nombre net : ${formatInteger(removedOutright)} sont supprimés sans successeur et ${formatInteger(regrouped)} sont regroupés en ${formatInteger(after)} (donc ${formatInteger(regrouped - after)} de plus s’effacent dans la fusion).`}
+      summary={`Sur ${formatInteger(before)} ministères, ${formatInteger(removedOutright)} sont supprimés sans successeur et ${formatInteger(regrouped)} sont regroupés en ${formatInteger(after)} blocs : ${formatInteger(after)} restent en tête de bloc et ${formatInteger(regrouped - after)} sont absorbés. En nombre net, ${formatInteger(removedNet)} ministères disparaissent.`}
       sources={sources.map((s) => ({ ...s }))}
       table={{
         columns: [
@@ -85,19 +88,19 @@ export function MinistryDots({
           sort: FATE[d.fate].short,
           bloc: blocks.find((b) => b.id === d.block)?.label ?? '',
         })),
-        caption: 'Les 35 ministères et leur sort',
+        caption: `Les ${formatInteger(before)} ministères et leur sort`,
       }}
       csvFileName="ministeres-avant-apres.csv"
       note={
         inferred
-          ? `Le classement en ${formatInteger(after)} blocs est déduit de la mise en page du graphique du livre : le classeur ne l’écrit pas. ${note}`
+          ? `Le classement en ${formatInteger(after)} blocs est déduit de la mise en page du graphique du livre : le classeur ne l’écrit pas. ${note}`
           : note
       }
     >
       <div className="grid gap-6 md:grid-cols-[minmax(0,22rem)_1fr] md:items-center">
         <div
           role="img"
-          aria-label={`${formatInteger(before)} points : ${counts.garde} maintenus, ${counts.absorbe} regroupés, ${counts.supprime} supprimés`}
+          aria-label={`${formatInteger(before)} points : ${counts.garde} maintenus, ${counts.absorbe} regroupés, ${counts.supprime} supprimés`}
           className="mx-auto grid w-full max-w-[22rem] grid-cols-7 gap-2 sm:gap-2.5"
         >
           {dots.map((d, i) => (
@@ -133,6 +136,10 @@ export function MinistryDots({
               </span>
             </li>
           ))}
+          <li className="text-sm text-ink-3">
+            {formatInteger(regrouped)} ministères regroupés en {formatInteger(after)}&#8239;:{' '}
+            {formatInteger(counts.garde)} maintenus + {formatInteger(counts.absorbe)} absorbés.
+          </li>
         </ul>
       </div>
 

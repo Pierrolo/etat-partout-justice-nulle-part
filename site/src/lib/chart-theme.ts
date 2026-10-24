@@ -17,7 +17,7 @@
  */
 import { interpolateRgb, piecewise } from 'd3';
 import type * as PlotNS from '@observablehq/plot';
-import { isBrand, type Brand } from './brands.ts';
+import type { Brand } from './brands.ts';
 import {
   formatCompactEuro,
   formatEuro,
@@ -88,17 +88,17 @@ export const chrome = {
 /**
  * « Call Intelligence » (brand-ci.css) — the same roles, other values. A test keeps them in sync with the
  * CSS. Validation (dataviz skill, scripts/validate_palette.js; plates = the darkest surface of each mode):
- *   categorical light  adjacent CVD ΔE 14.4 (target 8), normal-vision 23.2 (floor 15), all ≥ 3 : 1 on #e4e0d3
- *   categorical dark   adjacent CVD ΔE 13.3,             normal-vision 22.5,            all ≥ 3 : 1 on #262c29
- *   first three slots also pass `--pairs all` in both modes.
+ *   categorical light  adjacent CVD ΔE 14.4 (target 8), normal-vision 25.1 (floor 15), all ≥ 3 : 1 on #e4e0d3
+ *   categorical dark   adjacent CVD ΔE 13.3,             normal-vision 22.8,            all ≥ 3 : 1 on #262c29
+ *   first three slots also pass `--pairs all` in both modes; any two of the 8: normal-vision ΔE ≥ 13.3 / 11.2.
  *   polarity  teal vs signal-orange: lightness differs (OKLCH L .44 / .60 light, .78 / .66 dark), CVD ΔE ≥ 11.
  */
 export const ciPalette = {
   categorical: {
-    light: ['#0b8e7f', '#d9480f', '#1d5b92', '#937224', '#83297e', '#4e6c1e', '#7e4ba1', '#74670c'],
-    dark: ['#0b9989', '#f25820', '#2389e2', '#926e10', '#b75ab0', '#79a23a', '#a883c4', '#918112'],
+    light: ['#0b8e7f', '#d9480f', '#3c52b6', '#43600e', '#963c91', '#8c7e2d', '#816bd8', '#96173a'],
+    dark: ['#0b9989', '#f25820', '#5e73b8', '#73a21f', '#ba5db3', '#8a7b1d', '#9581ef', '#c64961'],
   },
-  names: ['sarcelle', 'orange signal', 'bleu', 'ocre', 'prune', 'olive', 'violet', 'bronze'],
+  names: ['sarcelle', 'orange signal', 'indigo', 'sapin', 'prune', 'kaki', 'violet', 'bordeaux'],
   other: { light: '#747b77', dark: '#7d857f' },
   sequential: {
     light: ['#d6e4de', '#b0cfc5', '#82b3a6', '#559787', '#2f7a6b', '#0f5e55', '#093d37'],
@@ -152,7 +152,11 @@ export function palette(mode: ColorMode, brand: Brand = 'editorial') {
   return {
     categorical: b.categorical[mode],
     sequential: b.sequential[mode],
-    diverging: [...b.diverging[mode].gain, b.diverging[mode].mid, ...b.diverging[mode].loss] as string[],
+    diverging: [
+      ...b.diverging[mode].gain,
+      b.diverging[mode].mid,
+      ...b.diverging[mode].loss,
+    ] as string[],
     gain: b.polarity.gain[mode],
     loss: b.polarity.loss[mode],
     accent: b.accent[mode],
@@ -297,8 +301,9 @@ const SVG_NS = 'http://www.w3.org/2000/svg';
 /**
  * Adds (once) a 45° hatch <pattern> to an SVG and returns the `url(#id)` to use as a `fill`.
  * Tone-on-tone: a 14 % wash of `color` with 1.5 px diagonal strokes of `color` — so the same series
- * hue stays readable and « annoncé » is never signalled by colour alone. Under « Call Intelligence » the
- * strokes are the brand's signal (README: hatching in signal marks the highlighted zone) over the same wash.
+ * hue stays readable and « annoncé » is never signalled by colour alone. A brand may set `--hatch-stroke`
+ * (« Call Intelligence »: the signal, README « hatching in signal marks the highlighted zone ») to recolour
+ * the strokes over the same wash; the variable is read by the browser, so a brand switch needs no re-render.
  * Call after `Plot.plot()` returned the element (patterns resolve lazily), e.g.
  *   const hatch = hatchFill(svg, 'announced-1', css.series[0]!);
  */
@@ -326,7 +331,7 @@ export function hatchFill(svg: SVGSVGElement | HTMLElement, id: string, color: s
     const line = document.createElementNS(SVG_NS, 'rect');
     line.setAttribute('width', '1.5');
     line.setAttribute('height', '7');
-    line.setAttribute('fill', currentBrand() === 'ci' ? 'var(--signal)' : color);
+    line.setAttribute('fill', `var(--hatch-stroke, ${color})`);
     p.append(wash, line);
     defs.append(p);
   }
@@ -334,13 +339,6 @@ export function hatchFill(svg: SVGSVGElement | HTMLElement, id: string, color: s
 }
 
 /* ── Runtime helpers (browser only) ─────────────────────────────────────── */
-
-/** Brand currently applied to the page (`data-brand` on <html>); « editorial » outside a browser. */
-export function currentBrand(): Brand {
-  if (typeof document === 'undefined') return 'editorial';
-  const b = document.documentElement.dataset.brand;
-  return isBrand(b) ? b : 'editorial';
-}
 
 /** Current colour mode: explicit `data-theme`, else the OS preference. */
 export function currentColorMode(): ColorMode {

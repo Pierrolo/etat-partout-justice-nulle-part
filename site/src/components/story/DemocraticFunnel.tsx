@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { ChartFrame } from '@/components/ui/ChartFrame';
 import type { ChipProps } from '@/lib/facts';
-import { formatNumber } from '@/lib/format';
+import { formatNumber, formatPercentPoints } from '@/lib/format';
 
 interface Step {
   label: string;
@@ -70,8 +70,8 @@ function Citizens({
 
 /**
  * « 100 citoyens, 3,45 qui comptent » — an icon funnel: the same 100 citizens at every stage, the
- * ones still represented in colour. Each stage keeps 51 % of the previous one (a construction of
- * the book, not an observed statistic: said in the note).
+ * ones still represented in colour. Each stage keeps a fixed share of the previous one (a construction
+ * of the book, not an observed statistic: said in the note); the share is read from the steps.
  */
 export function DemocraticFunnel({
   steps,
@@ -85,19 +85,21 @@ export function DemocraticFunnel({
   const uid = useId().replace(/:/g, '');
   const first = steps[0]!;
   const last = steps[steps.length - 1]!;
+  const keep = formatPercentPoints((steps[1]!.value / first.value) * 100, { decimals: 0 });
+  const n = formatNumber(first.value);
   return (
     <ChartFrame
       tier="announced"
       title={`Sur ${formatNumber(first.value)} citoyens, ${formatNumber(last.value, { decimals: 2 })} pèsent sur la décision finale`}
-      subtitle="Chaque étape de la chaîne démocratique garde 51 % de la précédente. Chaque silhouette = 1 citoyen sur 100 ; en couleur, ceux qui sont encore représentés."
-      summary={`À chaque étape (${steps.map((s) => s.label.toLowerCase()).join(', ')}), seuls 51 % de l’étape précédente restent représentés : de ${formatNumber(first.value)} citoyens on passe à ${formatNumber(last.value, { decimals: 2 })} au dernier échelon.`}
+      subtitle={`Chaque étape de la chaîne démocratique garde ${keep} de la précédente. Chaque silhouette = 1 citoyen sur ${n} ; en couleur, ceux qui sont encore représentés.`}
+      summary={`À chaque étape (${steps.map((s) => s.label.toLowerCase()).join(', ')}), seuls ${keep} de l’étape précédente restent représentés : de ${formatNumber(first.value)} citoyens on passe à ${formatNumber(last.value, { decimals: 2 })} au dernier échelon.`}
       sources={sources.map((s) => ({ ...s }))}
       table={{
         columns: [
           { key: 'label', label: 'Étape' },
           {
             key: 'value',
-            label: 'Pour 100 citoyens',
+            label: `Pour ${n} citoyens`,
             numeric: true,
             format: (v) => formatNumber(Number(v), { decimals: 2 }),
           },
@@ -126,7 +128,7 @@ export function DemocraticFunnel({
               symbolId={`${uid}-person`}
               clipId={`${uid}-clip-${i}`}
               value={s.value}
-              label={`${s.label} : ${formatNumber(s.value, { decimals: 2 })} citoyens représentés sur 100`}
+              label={`${s.label} : ${formatNumber(s.value, { decimals: 2 })} citoyens représentés sur ${n}`}
             />
             <p className="mt-2 font-serif text-2xl font-medium leading-none text-ink">
               {formatNumber(s.value, { decimals: s.value < 10 ? 2 : s.value % 1 ? 1 : 0 })}

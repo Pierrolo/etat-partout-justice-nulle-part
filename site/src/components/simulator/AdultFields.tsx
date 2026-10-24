@@ -93,9 +93,10 @@ export function AdultFields({
                 <>
                   Les cotisations ne sont pas les mêmes selon le statut. Si vous dirigez une
                   entreprise et recevez une fiche de paie (président·e de SAS, gérant·e minoritaire
-                  de SARL), choisissez « dirigeant·e », <Term id="dirigeant-assimile">assimilé salarié</Term>.
-                  Gérant majoritaire, indépendant et micro-entrepreneur (<Term id="tns">TNS</Term>) :
-                  pas encore pris en compte.
+                  de SARL), choisissez « dirigeant·e »{', '}
+                  <Term id="dirigeant-assimile">assimilé salarié</Term>. Gérant majoritaire,
+                  indépendant et micro-entrepreneur (<Term id="tns">TNS</Term>) : pas encore pris en
+                  compte.
                 </>
               }
               options={STATUSES}
@@ -113,8 +114,8 @@ export function AdultFields({
               <strong>Pas encore couvert.</strong> Le revenu d’un indépendant ou d’un gérant
               majoritaire (cotisations aux indépendants, bénéfices, micro-entreprise) n’est pas
               modélisé : nous ne vous montrerons pas de chiffre qui ne serait pas le vôtre. Si vous
-              êtes en réalité président·e de SAS ou gérant·e minoritaire de SARL, choisissez
-              « dirigeant·e ».
+              êtes en réalité président·e de SAS ou gérant·e minoritaire de SARL, choisissez «
+              dirigeant·e ».
             </p>
           )}
 
@@ -229,17 +230,19 @@ export function AdultFields({
 
       {(a.activity === 'etudiant' || a.activity === 'inactif') && (
         <Hint>
-          Aucun revenu à indiquer pour {you ? 'vous' : 'cette personne'}. Les aides sont calculées
-          à partir de la situation du foyer.
+          Aucun revenu à indiquer pour {you ? 'vous' : 'cette personne'}. Les aides sont calculées à
+          partir de la situation du foyer.
         </Hint>
       )}
 
       <SegmentedControl
-        legend={you ? 'Avez-vous un handicap reconnu ?' : 'Cette personne a-t-elle un handicap reconnu ?'}
+        legend={
+          you ? 'Avez-vous un handicap reconnu ?' : 'Cette personne a-t-elle un handicap reconnu ?'
+        }
         hint={
           <>
-            Allocation aux adultes handicapés (<Term id="aah">AAH</Term>). À partir d’un taux de 80 %,
-            la carte mobilité inclusion « invalidité » (<Term id="cmi">CMI</Term>) ouvre un
+            Allocation aux adultes handicapés (<Term id="aah">AAH</Term>). À partir d’un taux de 80
+            %, la carte mobilité inclusion « invalidité » (<Term id="cmi">CMI</Term>) ouvre un
             supplément prévu par le plan ; pas en dessous.
           </>
         }

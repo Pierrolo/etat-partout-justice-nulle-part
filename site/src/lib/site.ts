@@ -4,16 +4,16 @@
  */
 
 export const SITE = {
-  name: 'Et moi, dans tout ça ?',
+  name: 'Et moi, dans tout ça ?',
   /** Used in <title> suffix. */
-  titleSuffix: 'Et moi, dans tout ça ?',
+  titleSuffix: 'Et moi, dans tout ça ?',
   description:
-    'Compagnon indépendant du livre « État partout, justice nulle part » : voyez ce que le plan changerait pour votre foyer, et où va l’argent public.',
+    'Compagnon indépendant du livre « État partout, justice nulle part » : voyez ce que le plan changerait pour votre foyer, et où va l’argent public.',
   locale: 'fr_FR',
   independence: 'Outil indépendant, non affilié à l’association Résolution ni à l’État.',
   /** Public repository (code, data pipeline, engine, QA reports). */
   repo: 'https://github.com/Pierrolo/etat-partout-justice-nulle-part',
-  dataSources: 'Données : france-resolution.fr, Insee, Eurostat, DGFiP.',
+  dataSources: 'Données : france-resolution.fr, Insee, Eurostat, DGFiP.',
 } as const;
 
 export interface NavItem {
@@ -42,14 +42,14 @@ export const COMPRENDRE_PAGES: DashboardPage[] = [
   {
     slug: 'depenses',
     href: '/comprendre/depenses/',
-    title: 'Où va l’argent public ?',
+    title: 'Où va l’argent public ?',
     teaser: 'Les dépenses publiques par grande fonction, ramenées à votre foyer.',
   },
   {
     slug: 'europe',
     href: '/comprendre/europe/',
     title: 'La France face à l’Europe',
-    teaser: 'Dépenses, déficit, revenu médian : la France comparée à ses voisins.',
+    teaser: 'Dépenses, déficit, revenu médian : la France comparée à ses voisins.',
   },
   {
     slug: 'etat-partout',
@@ -61,19 +61,25 @@ export const COMPRENDRE_PAGES: DashboardPage[] = [
     slug: 'le-plan',
     href: '/comprendre/le-plan/',
     title: 'Le plan en un schéma',
-    teaser: 'D’où viennent les économies, où elles vont : salaire net et épargne.',
+    teaser: 'D’où viennent les économies, où elles vont : salaire net et épargne.',
+  },
+  {
+    slug: 'situations',
+    href: '/comprendre/situations/',
+    title: 'Ce que le plan prévoit pour…',
+    teaser: 'Retraité, locataire, enseignant, entreprise… les 18 situations du livre.',
   },
   {
     slug: 'niches',
     href: '/comprendre/niches/',
-    title: 'Les 465 niches fiscales',
+    title: 'Les niches fiscales',
     teaser: 'Cherchez, triez par coût, repérez celles qui vous concernent.',
   },
   {
     slug: 'agences',
     href: '/comprendre/agences/',
     title: 'Le sort des agences',
-    teaser: 'Que deviennent les agences de l’État ? Une liste consultable.',
+    teaser: 'Que deviennent les agences de l’État ? Une liste consultable.',
   },
   {
     slug: 'calendrier',
@@ -84,7 +90,7 @@ export const COMPRENDRE_PAGES: DashboardPage[] = [
   {
     slug: 'amendements',
     href: '/comprendre/amendements/',
-    title: 'Les 81 amendements',
+    title: 'Les amendements',
     teaser: 'Les textes de loi proposés, classés par sujet et consultables.',
   },
 ];

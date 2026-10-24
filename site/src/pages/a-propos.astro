@@ -49,12 +49,12 @@ const sources = [
 
 <BaseLayout
   title="À propos"
-  description="Un outil indépendant, open source, sans traceur : qui le fait, comment, sous quelle licence, et comment signaler une erreur."
+  description="Un outil indépendant, open source, sans traceur : qui le fait, comment, sous quelle licence, et comment signaler une erreur."
 >
   <PageHeader
     eyebrow="À propos"
     title="Un outil indépendant, ouvert et sans traceur"
-    lede="« Et moi, dans tout ça ? » rend lisible un livre dense. Il n’appartient à personne d’autre qu’à ses lecteurs."
+    lede="« Et moi, dans tout ça ? » rend lisible un livre dense. Il n’appartient à personne d’autre qu’à ses lecteurs."
   />
 
   <div class="wrap grid gap-10 lg:grid-cols-[14rem_1fr] lg:gap-16">
@@ -86,23 +86,23 @@ const sources = [
         </Callout>
         <p>
           Il présente le plan tel que ses auteurs l’ont écrit — sans le défendre ni le combattre —
-          et ne cache pas ceux qui y perdraient. Trois niveaux de preuve restent toujours visibles :
-          « écrit dans la loi » (le texte d’un amendement proposé, qui n’est ni déposé ni adopté), «
-          annoncé par les auteurs » et « hypothèse du simulateur ». Ils sont expliqués dans la{' '}
-          <a href={withBase('/methode/')}>méthode</a>.
+          et ne cache pas ceux qui y perdraient. Trois niveaux de certitude restent toujours
+          visibles : « proposé dans un amendement » (le texte précis d’un amendement rédigé par les
+          auteurs, ni déposé ni voté), « promis par les auteurs » et « notre estimation ». Ils sont
+          expliqués dans la <a href={withBase('/methode/')}>méthode</a>.
         </p>
       </section>
 
       <section id="qui" aria-labelledby="qui-t" class="scroll-mt-20">
         <h2 id="qui-t">Qui fait ce site</h2>
         <p>
-          Un projet indépendant, collectif et ouvert à toute contribution : le copyright est détenu
-          par les « Contributeurs du projet « Et moi, dans tout ça ? » ». Le site ne contient aucune
+          Un projet indépendant, collectif et ouvert à toute contribution : le copyright est détenu
+          par les « Contributeurs du projet « Et moi, dans tout ça ? » ». Le site ne contient aucune
           publicité, ne défend aucun parti et ne demande rien à ses visiteurs.
         </p>
         <p>
-          Il compagnonne le livre « État partout, justice nulle part » (Barrat, Marle, Mitterrand —
-          Éditions Chronique, 2026) : il montre ce que ses propositions changeraient pour un foyer
+          Il compagnonne le livre « État partout, justice nulle part » (Barrat, Marle, Mitterrand —
+          Éditions Chronique, 2026) : il montre ce que ses propositions changeraient pour un foyer
           donné, et il met en images les données qui les appuient.
         </p>
       </section>
@@ -114,7 +114,7 @@ const sources = [
             <strong>Données ouvertes, reconstruites à l’identique.</strong> Les classeurs et les
             textes de Résolution, les statistiques de l’Insee, de la DGFiP et d’Eurostat sont lus
             par un script (<code>pipeline/</code>) qui produit les fichiers de données du site. Il
-            est déterministe : deux exécutions donnent les mêmes octets.
+            est déterministe : deux exécutions donnent les mêmes octets.
           </li>
           <li>
             <strong>Chaque chiffre a une source.</strong> Les nombres affichés viennent d’un fichier
@@ -125,7 +125,7 @@ const sources = [
           <li>
             <strong>Code ouvert.</strong> Le site statique (Astro, React, Observable Plot), le
             moteur de calcul et le pipeline sont publiés sur <a href={REPO}>le dépôt du projet</a>.
-            Le moteur est testé contre des cas de référence ; chaque page publiée passe des tests
+            Le moteur est testé contre des cas de référence ; chaque page publiée passe des tests
             d’accessibilité automatiques.
           </li>
           <li>
@@ -138,18 +138,18 @@ const sources = [
       <section id="licences" aria-labelledby="licences-t" class="scroll-mt-20">
         <h2 id="licences-t">Licences</h2>
         <p>
-          <strong>Le code</strong> est publié sous <strong>licence MIT</strong> :{' '}
-          <a href={`${REPO}/blob/main/LICENSE`}>texte de la licence</a>, copyright « Contributeurs
-          du projet « Et moi, dans tout ça ? » ». Vous pouvez le réutiliser, le modifier et le
+          <strong>Le code</strong> est publié sous <strong>licence MIT</strong>&#8239;:{' '}
+          <a href={`${REPO}/blob/main/LICENSE`}>texte de la licence</a>, copyright « Contributeurs
+          du projet « Et moi, dans tout ça ? » ». Vous pouvez le réutiliser, le modifier et le
           redistribuer, y compris pour un autre usage.
         </p>
         <p>
-          <strong>Les données</strong> ne sont pas à nous : chacune garde les conditions de sa
+          <strong>Les données</strong> ne sont pas à nous : chacune garde les conditions de sa
           source. Chaque fichier de données et chaque graphique nomment la leur.
         </p>
         <div
           role="region"
-          aria-label="Tableau : conditions de réutilisation des sources"
+          aria-label="Tableau : conditions de réutilisation des sources"
           tabindex="0"
           class="my-4 max-w-full overflow-x-auto rounded-md border border-rule bg-surface"
         >
@@ -186,12 +186,12 @@ const sources = [
         <ul>
           <li>Aucun cookie, aucun traceur, aucune statistique de visite.</li>
           <li>
-            Aucune requête vers un service tiers : polices et scripts sont servis par ce site.
+            Aucune requête vers un service tiers : polices et scripts sont servis par ce site.
           </li>
           <li>
             Tout se calcule dans votre navigateur. Ce que vous saisissez dans le simulateur ne
-            quitte jamais votre appareil : l’état d’une simulation se range dans la partie de
-            l’adresse après le « # », que les navigateurs n’envoient pas aux serveurs.
+            quitte jamais votre appareil : l’état d’une simulation se range dans la partie de
+            l’adresse après le « # », que les navigateurs n’envoient pas aux serveurs.
           </li>
           <li>
             Le choix du thème clair ou sombre est mémorisé dans le stockage local de votre
@@ -200,7 +200,7 @@ const sources = [
           <li>
             Le site est un ensemble de fichiers statiques servis par son hébergeur (aujourd’hui
             GitHub Pages). Comme tout hébergeur, il peut conserver des journaux techniques de
-            connexion ; ce projet n’y a pas accès et n’ajoute aucun outil de mesure.
+            connexion ; ce projet n’y a pas accès et n’ajoute aucun outil de mesure.
           </li>
         </ul>
       </section>
@@ -208,11 +208,11 @@ const sources = [
       <section id="accessibilite" aria-labelledby="accessibilite-t" class="scroll-mt-20">
         <h2 id="accessibilite-t">Accessibilité</h2>
         <p>
-          Le site vise le niveau AA des règles WCAG 2.2 : navigation au clavier, contrastes vérifiés
+          Le site vise le niveau AA des règles WCAG 2.2 : navigation au clavier, contrastes vérifiés
           en thème clair et sombre, lecture possible à 320 px de large, chaque graphique accompagné
           d’un résumé en clair et d’un tableau de ses données. Aucune information ne repose sur la
           couleur seule ni sur le survol. Ce n’est pas un engagement légal, mais un objectif suivi
-          par des tests automatiques. Si quelque chose vous bloque, dites-le : c’est un défaut à
+          par des tests automatiques. Si quelque chose vous bloque, dites-le : c’est un défaut à
           corriger.
         </p>
       </section>
@@ -221,7 +221,7 @@ const sources = [
         <h2 id="contact-t">Contact et corrections</h2>
         <p>
           Pour signaler une erreur, un chiffre douteux ou un problème d’accessibilité, ou proposer
-          une amélioration, ouvrez une « issue » sur{' '}
+          une amélioration, ouvrez une « issue » sur{' '}
           <a href={`${REPO}/issues`}>le suivi du dépôt</a>. Indiquez la page et, si possible, la
           source du chiffre contesté. Les règles de calcul sont décrites dans la{' '}
           <a href={withBase('/methode/')}>méthode</a>.

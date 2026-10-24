@@ -2,6 +2,7 @@ import { ChartFrame } from '@/components/ui/ChartFrame';
 import type { ChipProps } from '@/lib/facts';
 import { formatInteger, formatNumber } from '@/lib/format';
 import type { WorkforceRow } from '@/lib/etat-shared';
+import './story.css';
 
 const STATUT_COLOR: Record<string, string> = {
   Fonctionnaires: 'var(--series-1)',
@@ -38,14 +39,14 @@ export function Workforce({
     <ChartFrame
       title={`${formatNumber(totalK / 1000, { decimals: 1 })} millions d’agents publics`}
       subtitle={`Personnes employées au 31 décembre ${year}, en milliers, par fonction publique et par statut.`}
-      summary={`Les trois fonctions publiques emploient ${formatNumber(totalK / 1000, { decimals: 2 })} millions de personnes : ${rows
+      summary={`Les trois fonctions publiques emploient ${formatNumber(totalK / 1000, { decimals: 2 })} millions de personnes : ${rows
         .map(
           (r) =>
             `${formatNumber(r.totalK / 1000, { decimals: 2 })} M pour ${r.label.toLowerCase()}`,
         )
         .join(
           ', ',
-        )}. Les fonctionnaires sont majoritaires partout ; les contractuels pèsent un quart environ.`}
+        )}. Les fonctionnaires sont majoritaires partout ; les contractuels pèsent un quart environ.`}
       sources={sources.map((s) => ({ ...s }))}
       table={{
         columns: [

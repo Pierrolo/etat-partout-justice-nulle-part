@@ -2,18 +2,23 @@ import { useMemo, useState, type CSSProperties } from 'react';
 import { ChartFrame, SegmentedControl } from '@/components/ui';
 import { IconUp, IconDown } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
-import { contrastRatio } from '@/lib/contrast';
 import { hourOfWork } from '@/lib/engine';
 import type { Household, HourSplit, Hypotheses } from '@/lib/engine-types';
 import { formatEuro, formatEuroDelta } from '@/lib/format';
+import { withBase } from '@/lib/site';
 import { useWidth } from './useWidth';
 
 const SOURCES = [
-  { label: 'Moteur de calcul du simulateur', tier: 'law' as const },
-  { label: 'Hypothèses H2 et H5', tier: 'hypothesis' as const },
+  { label: 'Moteur de calcul du simulateur' },
+  {
+    label: 'Hypothèses H2 et H5',
+    tier: 'hypothesis' as const,
+    href: withBase('/methode/#registre'),
+  },
 ];
 
-type PartId = keyof Omit<HourSplit, 'employerCostPerHour'>;
+type PartId =
+  'youKeep' | 'impotRevenu' | 'tva' | 'csgCrds' | 'cotisationsSalariales' | 'cotisationsPatronales';
 
 interface Part {
   id: PartId;
@@ -25,29 +30,15 @@ interface Part {
 }
 
 /**
- * Greys for « what leaves the pay slip »: a mix of the ink and the card surface, in sRGB (CSS and this
- * code mix the same way). Every level is ≥ 3 : 1 against the card in both themes (graphical marks, WCAG
- * 1.4.11), and its text is pure black or white, whichever contrasts more (≥ 4.5 : 1, worst case 4.58).
+ * Greys for « what leaves the pay slip »: a mix of the ink and the card surface, in sRGB. Every level is
+ * ≥ 3 : 1 against the card in both themes (graphical marks, WCAG 1.4.11). Its text colour is a token of
+ * the brand (`--on-tint-<pct>`: pure black or white, whichever contrasts more, ≥ 4.5 : 1 — computed for
+ * each brand's ink and card by chart-theme.test.ts), so it follows the brand with no script.
  */
-const THEME = {
-  ink: { light: '#15171c', dark: '#edece7' },
-  surface: { light: '#ffffff', dark: '#1c1d24' },
-} as const;
-
-function mixHex(a: string, b: string, pctA: number): string {
-  const ch = (h: string, i: number) => parseInt(h.slice(1 + i * 2, 3 + i * 2), 16);
-  const m = (i: number) => Math.round((ch(a, i) * pctA + ch(b, i) * (100 - pctA)) / 100);
-  return `#${[0, 1, 2].map((i) => m(i).toString(16).padStart(2, '0')).join('')}`;
-}
-const bestText = (bg: string) =>
-  contrastRatio(bg, '#ffffff') >= contrastRatio(bg, '#000000') ? '#ffffff' : '#000000';
-
-function tint(pct: number): Pick<Part, 'fill' | 'ink'> {
-  const bgL = mixHex(THEME.ink.light, THEME.surface.light, pct);
-  const bgD = mixHex(THEME.ink.dark, THEME.surface.dark, pct);
+function tint(pct: 90 | 78 | 66 | 56 | 48): Pick<Part, 'fill' | 'ink'> {
   return {
     fill: `color-mix(in srgb, var(--ink) ${pct}%, var(--surface))`,
-    ink: `light-dark(${bestText(bgL)}, ${bestText(bgD)})`,
+    ink: `var(--on-tint-${pct})`,
   };
 }
 
@@ -57,7 +48,7 @@ const PARTS: Part[] = [
     id: 'youKeep',
     label: 'Vous gardez',
     fill: 'var(--series-1)',
-    ink: 'light-dark(#ffffff, #0c1424)',
+    ink: 'var(--on-hour-keep)',
   },
   { id: 'impotRevenu', label: 'Impôt sur le revenu', ...tint(90) },
   { id: 'tva', label: 'TVA', ...tint(78) },
@@ -72,18 +63,21 @@ const delta2 = (v: number) => formatEuroDelta(v, { decimals: 2 });
 export interface HourOfWorkProps {
   household: Household;
   hypotheses: Hypotheses;
-  /** Monthly benefits (today) and benefits + AFU (plan), which live outside the pay slip. */
-  transfers: { baseline: number; plan: number };
+  /** The household headline (€/month, after TVA), so the page can tie this view back to it. */
+  headlineText: string;
 }
 
 /**
- * « Votre heure de travail » — the signature visual. One hour of labour cost, split into what you keep
- * and what goes to each levy, today vs with the plan, both bars on the same scale.
+ * « Votre heure de travail » — one hour of labour cost, split into what you keep and what goes to each
+ * levy, today vs with the plan, both bars on the same scale. Since the engine v1.1 the figures include the
+ * adult's own aide universelle (`youKeepIncludingTransfers`, `netIncomeTaxPerHour`), so this view cannot
+ * contradict the household headline: « vous gardez moins par heure » is never shown next to a gain
+ * that comes from the aide universelle.
  */
-export function HourOfWork({ household, hypotheses, transfers }: HourOfWorkProps) {
+export function HourOfWork({ household, hypotheses, headlineText }: HourOfWorkProps) {
   const salaried = household.adults
     .map((a, i) => ({ a, i }))
-    .filter(({ a }) => a.activity === 'salarie')
+    .filter(({ a }) => a.activity === 'salarie' && a.salary && a.salary.status !== 'tns')
     .map(({ i }) => i);
   const [pick, setPick] = useState<number>(salaried[0] ?? 0);
   const who = salaried.includes(pick) ? pick : (salaried[0] ?? 0);
@@ -94,24 +88,32 @@ export function HourOfWork({ household, hypotheses, transfers }: HourOfWorkProps
   );
 
   if (!data) return null;
-  const { baseline: b, plan: p } = data;
-  const gain = p.youKeep - b.youKeep;
+  const { baseline: b, plan: p, hoursPerMonth } = data;
+  const keepB = b.youKeepIncludingTransfers;
+  const keepP = p.youKeepIncludingTransfers;
+  const gain = keepP - keepB;
   const dir = gain > 0.004 ? 'gain' : gain < -0.004 ? 'loss' : 'flat';
   const cost = Math.max(b.employerCostPerHour, p.employerCostPerHour);
+  const afuMonthly = p.afuPerHour * hoursPerMonth;
+  const stateGives = p.netIncomeTaxPerHour < -0.004;
 
   const summary = (
     <>
       Une heure de travail coûte {euro2(b.employerCostPerHour)} à l’employeur. Aujourd’hui, vous en
-      gardez {euro2(b.youKeep)} ; avec le plan, {euro2(p.youKeep)} ({delta2(gain)} par heure). Le
-      reste va à l’impôt sur le revenu, à la TVA, à la CSG et à la CRDS, et aux cotisations.
+      gardez {euro2(keepB)} ; avec le plan, {euro2(keepP)} une fois l’aide universelle comptée (
+      {delta2(gain)} par heure).{' '}
+      {stateGives
+        ? `L’impôt net de chaque heure devient négatif : l’État vous verse ${euro2(-p.netIncomeTaxPerHour)} par heure travaillée.`
+        : `L’impôt net de chaque heure est de ${euro2(p.netIncomeTaxPerHour)}.`}{' '}
+      Le reste va à l’impôt sur le revenu, à la TVA, à la CSG et à la CRDS, et aux cotisations.
     </>
   );
 
   return (
     <ChartFrame
-      headingLevel={2}
-      title="Votre heure de travail"
-      subtitle="Où va chaque euro payé par votre employeur pour une heure de votre travail, aujourd’hui et avec le plan."
+      headingLevel={4}
+      title="Où va l’argent d’une heure de votre travail"
+      subtitle="Ce que vous gardez de chaque heure, aujourd’hui et avec le plan."
       summary={summary}
       sources={SOURCES}
       csvFileName="votre-heure-de-travail.csv"
@@ -146,9 +148,27 @@ export function HourOfWork({ household, hypotheses, transfers }: HourOfWorkProps
             plan: p[x.id],
             diff: p[x.id] - b[x.id],
           })),
+          {
+            part: 'Aide universelle reçue (par heure)',
+            today: b.afuPerHour,
+            plan: p.afuPerHour,
+            diff: p.afuPerHour - b.afuPerHour,
+          },
+          {
+            part: 'Impôt net par heure (impôt moins aide universelle)',
+            today: b.netIncomeTaxPerHour,
+            plan: p.netIncomeTaxPerHour,
+            diff: p.netIncomeTaxPerHour - b.netIncomeTaxPerHour,
+          },
+          {
+            part: 'Vous gardez, aide universelle comprise',
+            today: keepB,
+            plan: keepP,
+            diff: gain,
+          },
         ],
       }}
-      note="Cette vue concerne une personne salariée. Les aides et l’allocation fondamentale (AFU) sont versées à part : elles n’entrent pas dans une heure de travail, d’où les montants rappelés en dessous des deux chiffres. Dans le plan, l’impôt est celui de 23 % avant AFU."
+      note="Cette vue ne concerne que le salaire d’une personne. Les aides du foyer (prime d’activité, aides au logement…), l’aide universelle des enfants et la TVA ne sont pas rapportées à ses heures : elles comptent dans le résultat du foyer, plus haut."
     >
       <div className="space-y-6">
         {salaried.length > 1 && (
@@ -164,25 +184,21 @@ export function HourOfWork({ household, hypotheses, transfers }: HourOfWorkProps
           />
         )}
 
+        <p data-testid="hour-sentence" className="text-[1.0625rem] leading-relaxed text-ink">
+          Chaque heure de travail vous laissait <strong>{euro2(keepB)}</strong> ; avec le plan, elle
+          vous laisse <strong>{euro2(keepP)}</strong>, parce que l’aide universelle (
+          {formatEuro(afuMonthly)} par mois, versée à chaque adulte quel que soit son salaire) est
+          répartie sur vos heures de travail
+          {stateGives ? ' et dépasse même votre impôt' : ''}. {headlineText}
+        </p>
+
         <div className="grid gap-4 sm:grid-cols-2">
-          <KeepFigure
-            caption="Aujourd’hui, vous gardez"
-            value={euro2(b.youKeep)}
-            foot={
-              transfers.baseline >= 5
-                ? `En plus, hors de cette heure : ${formatEuro(Math.round(transfers.baseline / 5) * 5)} par mois d’aides pour le foyer.`
-                : undefined
-            }
-          />
+          <KeepFigure caption="Aujourd’hui, vous gardez" value={euro2(keepB)} />
           <KeepFigure
             caption="Avec le plan, vous gardez"
-            value={euro2(p.youKeep)}
+            value={euro2(keepP)}
             accent
-            foot={
-              transfers.plan >= 5
-                ? `En plus, hors de cette heure : ${formatEuro(Math.round(transfers.plan / 5) * 5)} par mois d’allocation fondamentale (AFU) et d’aides pour le foyer.`
-                : undefined
-            }
+            foot={`Dont ${euro2(p.afuPerHour)} d’aide universelle par heure.`}
             extra={
               <span
                 className={cn(
@@ -200,7 +216,8 @@ export function HourOfWork({ household, hypotheses, transfers }: HourOfWorkProps
 
         <p className="text-[0.9375rem] text-ink-2">
           Pour une heure de travail, votre employeur paie{' '}
-          <strong className="num text-ink">{euro2(cost)}</strong>. Voici ce que devient cet argent.
+          <strong className="num text-ink">{euro2(cost)}</strong>, avant comme après le plan. Voici
+          où va cet argent (l’aide universelle, versée à part, n’est pas dans ces barres).
         </p>
 
         <div className="space-y-5">
@@ -219,7 +236,7 @@ export function HourOfWork({ household, hypotheses, transfers }: HourOfWorkProps
               >
                 <span
                   aria-hidden="true"
-                  className="size-4 shrink-0 translate-y-0.5 self-start rounded-[4px]"
+                  className="size-4 shrink-0 translate-y-0.5 self-start rounded-[4px] border border-[color-mix(in_srgb,var(--ink)_35%,transparent)]"
                   style={{ background: x.fill }}
                 />
                 <span className="min-w-0 font-semibold text-ink">{x.label}</span>
@@ -246,6 +263,22 @@ export function HourOfWork({ household, hypotheses, transfers }: HourOfWorkProps
             );
           })}
         </ul>
+
+        <dl className="grid gap-x-8 gap-y-2 rounded-md bg-sunken px-4 py-3 text-sm sm:grid-cols-2">
+          <div>
+            <dt className="font-semibold text-ink">Aide universelle reçue, par heure</dt>
+            <dd className="num text-ink-2">
+              {euro2(b.afuPerHour)} → {euro2(p.afuPerHour)}
+            </dd>
+          </div>
+          <div>
+            <dt className="font-semibold text-ink">Impôt net par heure (impôt moins aide)</dt>
+            <dd className="num text-ink-2">
+              {euro2(b.netIncomeTaxPerHour)} → {euro2(p.netIncomeTaxPerHour)}
+              {stateGives ? ' (l’État vous verse)' : ''}
+            </dd>
+          </div>
+        </dl>
       </div>
     </ChartFrame>
   );
@@ -320,6 +353,7 @@ function HourBar({
               minWidth: 0,
               background: x.fill,
               color: x.ink,
+              border: '1px solid color-mix(in srgb, var(--ink) 30%, transparent)',
               borderStartStartRadius: i === 0 ? 8 : 0,
               borderEndStartRadius: i === 0 ? 8 : 0,
               borderStartEndRadius: i === shown.length - 1 ? 8 : 0,

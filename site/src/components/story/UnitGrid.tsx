@@ -78,7 +78,7 @@ export function UnitGrid({
                   <span className="text-[0.9375rem] font-semibold text-ink">{s.label}</span>
                   <span className="text-xs text-ink-3">
                     {s.count / total < 0.01
-                      ? '< 1 %'
+                      ? '< 1 %'
                       : formatPercentPoints((s.count / total) * 100, { decimals: 0 })}
                   </span>
                 </span>

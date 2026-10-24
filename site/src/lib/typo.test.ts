@@ -4,8 +4,12 @@ import { NBSP, NNBSP, typo, typoDeep } from './typo';
 describe('typo', () => {
   it('met une espace fine insécable avant ; : ! ? et dans les guillemets', () => {
     expect(typo('Et moi, dans tout ça ?')).toBe(`Et moi, dans tout ça${NNBSP}?`);
-    expect(typo('Source : le livre ; vraiment !')).toBe(`Source${NNBSP}: le livre${NNBSP}; vraiment${NNBSP}!`);
-    expect(typo('Le « record mondial » est faux')).toBe(`Le «${NNBSP}record mondial${NNBSP}» est faux`);
+    expect(typo('Source : le livre ; vraiment !')).toBe(
+      `Source${NNBSP}: le livre${NNBSP}; vraiment${NNBSP}!`,
+    );
+    expect(typo('Le « record mondial » est faux')).toBe(
+      `Le «${NNBSP}record mondial${NNBSP}» est faux`,
+    );
     expect(typo(`Pourquoi${NBSP}: x`)).toBe(`Pourquoi${NNBSP}: x`);
   });
 

@@ -5,6 +5,7 @@ import type { Column } from '@/lib/csv';
 import type { ChipProps } from '@/lib/facts';
 import { formatEuro, formatNumber, MINUS, NBSP } from '@/lib/format';
 import type { EuroAgg, EuroRow } from '@/lib/story-shared';
+import './story.css';
 
 type Metric = 'dep' | 'solde' | 'rev';
 type IncomeUnit = 'eur' | 'spa';
@@ -47,7 +48,7 @@ function config(metric: Metric, unit: IncomeUnit): Cfg {
     ? {
         title: 'Revenu médian, en euros par an (2024)',
         subtitle:
-          'Revenu disponible médian par équivalent adulte, euros courants : il ne tient pas compte des écarts de prix entre pays.',
+          'Revenu disponible médian par équivalent adulte, euros courants : il ne tient pas compte des écarts de prix entre pays.',
         domain: [0, 55000],
         ticks: [0, 20000, 40000],
         fmt: (v) => formatEuro(v),
@@ -56,7 +57,7 @@ function config(metric: Metric, unit: IncomeUnit): Cfg {
     : {
         title: 'Revenu médian, en pouvoir d’achat (SPA, 2024)',
         subtitle:
-          'Même revenu en « standards de pouvoir d’achat » (SPA) : un euro fictif qui achète la même chose dans tous les pays.',
+          'Même revenu en « standards de pouvoir d’achat » (SPA) : un euro fictif qui achète la même chose dans tous les pays.',
         domain: [0, 40000],
         ticks: [0, 10000, 20000, 30000, 40000],
         fmt: (v) => `${formatNumber(v)}${NBSP}SPA`,
@@ -130,12 +131,12 @@ export function EuropeSection({ rows, ea20, eu27, sources }: EuropeSectionProps)
   const ch = ranked.find((x) => x.r.geo === 'CH');
   const summary =
     metric === 'dep'
-      ? `La France dépense ${cfg.fmt(france.v)} du PIB : ${ordinal(france.rank)} sur ${ranked.length}, derrière ${leader.r.name} (${cfg.fmt(leader.v)}) et ${formatNumber(france.v - ref, { decimals: 1 })} points au-dessus de la zone euro (${cfg.fmt(ref)}).`
+      ? `La France dépense ${cfg.fmt(france.v)} du PIB : ${ordinal(france.rank)} sur ${ranked.length}, derrière ${leader.r.name} (${cfg.fmt(leader.v)}) et ${formatNumber(france.v - ref, { decimals: 1 })} points au-dessus de la zone euro (${cfg.fmt(ref)}).`
       : metric === 'solde'
-        ? `La France affiche un solde de ${cfg.fmt(france.v)} du PIB : ${ordinal(ranked.length - france.rank + 1)} plus mauvais solde sur ${ranked.length} pays, contre ${cfg.fmt(ref)} pour la zone euro.`
+        ? `La France affiche un solde de ${cfg.fmt(france.v)} du PIB : ${ordinal(ranked.length - france.rank + 1)} plus mauvais solde sur ${ranked.length} pays, contre ${cfg.fmt(ref)} pour la zone euro.`
         : `Le revenu médian français est de ${cfg.fmt(france.v)} par an (${ordinal(france.rank)} sur ${ranked.length}), contre ${cfg.fmt(ref)} pour la zone euro.${
             ch
-              ? ` La Suisse atteint ${cfg.fmt(ch.v)}, soit ${formatNumber(ch.v / france.v, { decimals: 1 })} fois la France ${unit === 'eur' ? 'en euros courants : basculez sur « SPA » pour voir l’écart une fois les prix pris en compte' : 'en pouvoir d’achat'}.`
+              ? ` La Suisse atteint ${cfg.fmt(ch.v)}, soit ${formatNumber(ch.v / france.v, { decimals: 1 })} fois la France ${unit === 'eur' ? 'en euros courants : basculez sur « SPA » pour voir l’écart une fois les prix pris en compte' : 'en pouvoir d’achat'}.`
               : ''
           }`;
 
@@ -220,13 +221,13 @@ export function EuropeSection({ rows, ea20, eu27, sources }: EuropeSectionProps)
         table={{
           columns: cols,
           rows: [...rows].sort((a, b) => (b.dep24 ?? -1) - (a.dep24 ?? -1)),
-          caption: 'Comparaison européenne : dépenses, solde, revenu médian',
+          caption: 'Comparaison européenne : dépenses, solde, revenu médian',
         }}
         csvFileName="comparaison-europeenne.csv"
         note={
           <>
-            Zone euro = 20 pays (EA20). Union européenne (27) : {cfg.fmt(eu)}.
-            {missing.length > 0 && <> Données non disponibles pour : {missing.join(', ')}.</>}
+            Zone euro = 20 pays (EA20). Union européenne (27) : {cfg.fmt(eu)}.
+            {missing.length > 0 && <> Données non disponibles pour : {missing.join(', ')}.</>}
           </>
         }
       >
@@ -353,7 +354,7 @@ export function EuropeSection({ rows, ea20, eu27, sources }: EuropeSectionProps)
                 className="absolute top-0 inline-flex -translate-x-1/2 items-center gap-1 whitespace-nowrap font-semibold text-ink"
                 style={{ left: pos(Math.min(0.88, Math.max(0.12, t(ref)))) }}
               >
-                <span className="inline-block h-3 w-0.5 rounded-full bg-ink" /> Zone euro :{' '}
+                <span className="inline-block h-3 w-0.5 rounded-full bg-ink" /> Zone euro :{' '}
                 {cfg.fmt(ref)}
               </span>
               {metric === 'solde' && (
@@ -381,10 +382,10 @@ export function EuropeSection({ rows, ea20, eu27, sources }: EuropeSectionProps)
           aria-live="polite"
           className="mt-3 rounded-md bg-sunken p-3 text-[0.9375rem] text-ink-2 sm:p-4"
         >
-          <span className="font-semibold text-ink">{selected.r.name}</span> : {cfg.fmt(selected.v)},{' '}
-          {ordinal(selected.rank)} sur {ranked.length}.{' '}
+          <span className="font-semibold text-ink">{selected.r.name}</span>&#8239;:{' '}
+          {cfg.fmt(selected.v)}, {ordinal(selected.rank)} sur {ranked.length}.{' '}
           {selected.r.isFrance ? (
-            <>Zone euro : {cfg.fmt(ref)}.</>
+            <>Zone euro : {cfg.fmt(ref)}.</>
           ) : (
             <>
               {diffFr === 0

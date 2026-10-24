@@ -4,17 +4,20 @@ import { ChartFrame } from '@/components/ui';
 import { css, fr, hatchFill } from '@/lib/chart-theme';
 import type { Column } from '@/lib/csv';
 import { formatEuroDelta } from '@/lib/format';
+import { TIER_META } from '@/lib/tiers';
 import { PlotFigure } from './PlotFigure';
 
 /** ILLUSTRATIVE data only — demonstrates the chart style, not a result of the plan. */
+const LAW = TIER_META.law.label;
+const PROMISED = TIER_META.announced.label;
 type Row = { label: string; delta: number; tier: string };
 const rows: Row[] = [
-  { label: 'Salarié·e seul·e au SMIC', delta: 212, tier: 'Écrit dans la loi' },
-  { label: 'Couple, deux salaires, 2 enfants', delta: 148, tier: 'Écrit dans la loi' },
-  { label: 'Retraité·e, pension moyenne', delta: 35, tier: 'Écrit dans la loi' },
-  { label: 'Parent isolé, 1 enfant, locataire', delta: -85, tier: 'Écrit dans la loi' },
-  { label: 'Étudiant·e, aide au logement', delta: -40, tier: 'Écrit dans la loi' },
-  { label: 'Épargne retraite annoncée (CEP)', delta: 300, tier: 'Annoncé par les auteurs' },
+  { label: 'Salarié·e seul·e au SMIC', delta: 212, tier: LAW },
+  { label: 'Couple, deux salaires, 2 enfants', delta: 148, tier: LAW },
+  { label: 'Retraité·e, pension moyenne', delta: 35, tier: LAW },
+  { label: 'Parent isolé, 1 enfant, locataire', delta: -85, tier: LAW },
+  { label: 'Étudiant·e, aide au logement', delta: -40, tier: LAW },
+  { label: 'Épargne retraite annoncée (CEP)', delta: 300, tier: PROMISED },
 ];
 const columns: Column<Row>[] = [
   { key: 'label', label: 'Foyer type (fictif)' },
@@ -27,8 +30,8 @@ const columns: Column<Row>[] = [
   { key: 'tier', label: 'Niveau de preuve' },
 ];
 
-const law = rows.filter((r) => r.tier === 'Écrit dans la loi');
-const announced = rows.filter((r) => r.tier !== 'Écrit dans la loi');
+const law = rows.filter((r) => r.tier === LAW);
+const announced = rows.filter((r) => r.tier !== LAW);
 const gains = law.filter((r) => r.delta >= 0);
 const losses = law.filter((r) => r.delta < 0);
 
@@ -102,7 +105,7 @@ export default function StyleguideChart() {
     <ChartFrame
       title="Écart de revenu disponible par foyer type (exemple fictif)"
       subtitle="Euros par mois, régime de croisière — données d’illustration"
-      summary="Dans cet exemple, trois foyers types sur cinq gagnent entre 35 € et 212 € par mois ; deux perdent, 40 € et 85 € par mois. La barre hachurée est une promesse annoncée, sans texte de loi, montrée à part."
+      summary="Dans cet exemple, trois foyers types sur cinq gagnent entre 35 € et 212 € par mois ; deux perdent, 40 € et 85 € par mois. La barre hachurée est une promesse annoncée, sans texte de loi, montrée à part."
       sources={[
         { label: 'Données fictives pour le guide de style', tier: 'hypothesis' },
         { label: 'Fiche des auteurs (exemple)', tier: 'announced' },
@@ -113,11 +116,11 @@ export default function StyleguideChart() {
         caption: 'Écart de revenu disponible par foyer type (exemple fictif)',
       }}
       csvFileName="exemple-ecart-par-foyer.csv"
-      note="Gain : bleu-vert et signe +. Perte : orange-vermillon et signe −. Annoncé : hachuré, contour pointillé. La couleur n’est jamais le seul signal."
+      note="Gain : bleu-vert et signe +. Perte : orange-vermillon et signe −. Annoncé : hachuré, contour pointillé. La couleur n’est jamais le seul signal."
     >
       <PlotFigure
         options={options}
-        label="Barres horizontales : écart de revenu disponible par foyer type"
+        label="Barres horizontales : écart de revenu disponible par foyer type"
         onRender={onRender}
       />
     </ChartFrame>

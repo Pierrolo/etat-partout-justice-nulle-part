@@ -2,8 +2,8 @@
  * Les 81 amendements : liste recherchable, regroupée par liasse ou par thème.
  *
  * Rappel qui compte : ce sont des TEXTES PROPOSÉS (projets d'amendements rédigés par Résolution),
- * ni déposés ni adoptés. Le niveau « Écrit dans la loi » veut dire « écrit dans le texte de loi
- * proposé ». Chaque carte a une ancre (`#PLF-P1-28`) : la frise, le tableau des niches et les
+ * ni déposés ni adoptés. Le niveau « Proposé dans un amendement » veut dire « texte précis
+ * rédigé par les auteurs, ni déposé ni voté ». Chaque carte a une ancre (`#PLF-P1-28`) : la frise, le tableau des niches et les
  * autres pages y renvoient.
  */
 import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
@@ -77,7 +77,7 @@ function AmCard({
         <p className="text-[0.9375rem] leading-relaxed text-ink-2">{item.summary}</p>
       </div>
       <p className="text-sm text-ink-2">
-        <span className="font-semibold text-ink">Quand : </span>
+        <span className="font-semibold text-ink">Quand : </span>
         {effectText(item)}
       </p>
       {multi && (
@@ -118,7 +118,7 @@ function AmCard({
           </a>
         )}
       </footer>
-      {!showLiasse && <p className="-mt-1 text-xs text-ink-3">Thème : {themeLabel}</p>}
+      {!showLiasse && <p className="-mt-1 text-xs text-ink-3">Thème : {themeLabel}</p>}
     </article>
   );
 }
@@ -172,7 +172,7 @@ export default function AmendementsExplorer({
   const dq = useDeferredValue(ui.q);
   const filtered = useMemo(
     () => filterItems(items, { ...ui, q: dq }, themeLabel),
-    [items, dq, ui.liasses, ui.theme, themeLabel],
+    [items, dq, ui, themeLabel],
   );
   const groups = useMemo(
     () => groupItems(filtered, ui.group, liasses, themes),

@@ -5,16 +5,26 @@
  * Exits 1 if any pair is below its minimum.
  */
 import { readFileSync } from 'node:fs';
-import { BRANDS, evaluate, pairsFor, parseTokens, resolveBrand, type Brand } from '../src/lib/contrast.ts';
+import {
+  BRANDS,
+  evaluate,
+  pairsFor,
+  parseTokens,
+  resolveBrand,
+  type Brand,
+} from '../src/lib/contrast.ts';
 
-const read = (name: string) => readFileSync(new URL(`../src/styles/${name}`, import.meta.url), 'utf8');
+const read = (name: string) =>
+  readFileSync(new URL(`../src/styles/${name}`, import.meta.url), 'utf8');
 const base = parseTokens(read('tokens.css'));
 const overrides: Record<Brand, ReturnType<typeof parseTokens> | undefined> = {
   editorial: undefined,
   ci: parseTokens(read('brand-ci.css')),
 };
 
-const asked = process.argv.slice(2).filter((a): a is Brand => (BRANDS as readonly string[]).includes(a));
+const asked = process.argv
+  .slice(2)
+  .filter((a): a is Brand => (BRANDS as readonly string[]).includes(a));
 const brands = asked.length ? asked : BRANDS;
 let failing = 0;
 

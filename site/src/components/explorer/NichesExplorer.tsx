@@ -58,6 +58,7 @@ import {
 } from '@/lib/niches-model';
 import { FilterChip, Pager, SearchBox } from './controls';
 import { catColor } from './niche-colors';
+import '@/components/story/story.css';
 
 /* ── Props ──────────────────────────────────────────────────────────────── */
 
@@ -242,7 +243,7 @@ const NicheLine = memo(function NicheLine({ row, year, maxCost, links }: RowProp
           )}
         </p>
         <p className="mt-1 text-sm text-ink-3">
-          {row.legal ? <>Réf. : {row.legal}</> : <>Référence légale non précisée</>}
+          {row.legal ? <>Réf. : {row.legal}</> : <>Référence légale non précisée</>}
         </p>
 
         {/* Mobile : « ce que fait le plan » passe sous l'intitulé (la 3e colonne est masquée). */}
@@ -268,9 +269,9 @@ const NicheLine = memo(function NicheLine({ row, year, maxCost, links }: RowProp
             <Detail term="Historique">
               {row.created ? `Créée en ${row.created}` : 'Année de création inconnue'}
               {row.ends !== null &&
-                ` · fait générateur : ${typeof row.ends === 'number' ? `jusqu’en ${row.ends}` : row.ends.toLowerCase()}`}
+                ` · fait générateur : ${typeof row.ends === 'number' ? `jusqu’en ${row.ends}` : row.ends.toLowerCase()}`}
             </Detail>
-            {row.menagesWhy && <Detail term="Pourquoi « ménages »">{row.menagesWhy}</Detail>}
+            {row.menagesWhy && <Detail term="Pourquoi « ménages »">{row.menagesWhy}</Detail>}
             <Detail term="Identifiant">{row.id}</Detail>
           </dl>
         </details>
@@ -430,19 +431,7 @@ export default function NichesExplorer({
     if (all === null) return [] as NicheRow[];
     const s = { ...ui, q: dq };
     return sortRows(filterRows(all, s), s);
-  }, [
-    all,
-    loading,
-    initialRows,
-    dq,
-    ui.cats,
-    ui.taxes,
-    ui.plans,
-    ui.menages,
-    ui.year,
-    ui.sort,
-    ui.dir,
-  ]);
+  }, [all, loading, initialRows, dq, ui]);
 
   const summary: Selection = useMemo(
     () => (all === null ? initialSummary : summarize(filtered, ui.year)),
@@ -472,7 +461,7 @@ export default function NichesExplorer({
 
   const resultText = loading
     ? 'Chargement des niches…'
-    : `${formatInteger(count)} ${plural(count, 'niche', 'niches')} · coût ${ui.year} : ${
+    : `${formatInteger(count)} ${plural(count, 'niche', 'niches')} · coût ${ui.year} : ${
         count - summary.unpriced > 0 ? mdFromMeur(summary.total) : 'aucun chiffré'
       }${summary.unpriced ? ` (hors ${formatInteger(summary.unpriced)} non ${plural(summary.unpriced, 'chiffrée', 'chiffrées')})` : ''}`;
 
@@ -553,7 +542,7 @@ export default function NichesExplorer({
             label="Concerne souvent les ménages"
             checked={ui.menages}
             onChange={(menages) => patch({ menages })}
-            hint={`${formatInteger(facets.menages)} niches que la plupart des foyers rencontrent : emploi à domicile, garde d’enfants, dons, livrets, TVA des travaux…`}
+            hint={`${formatInteger(facets.menages)} niches que la plupart des foyers rencontrent : emploi à domicile, garde d’enfants, dons, livrets, TVA des travaux…`}
             stateLabels={['Oui', 'Non']}
           />
         </div>
@@ -675,8 +664,8 @@ export default function NichesExplorer({
         {copied && (
           <p role="status" className="mb-3 text-sm text-ink-2">
             {copied === 'ok'
-              ? 'Lien copié : il rouvre cette recherche et ces filtres.'
-              : 'Copie impossible ici : copiez l’adresse dans la barre du navigateur, elle contient déjà vos filtres.'}
+              ? 'Lien copié : il rouvre cette recherche et ces filtres.'
+              : 'Copie impossible ici : copiez l’adresse dans la barre du navigateur, elle contient déjà vos filtres.'}
           </p>
         )}
 
@@ -707,7 +696,7 @@ export default function NichesExplorer({
           <div className="overflow-hidden rounded-lg border border-rule bg-surface">
             <table className="data-table w-full table-fixed" data-testid="niches-table">
               <caption className="sr-only">
-                Niches fiscales : {formatInteger(count)} {plural(count, 'résultat', 'résultats')},
+                Niches fiscales : {formatInteger(count)} {plural(count, 'résultat', 'résultats')},
                 triés par {sortLabel}. Page {page} sur {pages}.
               </caption>
               <colgroup>

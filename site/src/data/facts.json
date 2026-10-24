@@ -2489,6 +2489,19 @@
   "value": 33516078,
   "year": 2026
  },
+ "duree_legale_travail_h_an": {
+  "label_fr": "Durée annuelle légale du travail à temps plein",
+  "note": "Convention usuelle de la durée annuelle légale (1 607 h) ; sert aux réexpressions « années à temps plein » du site.",
+  "source": {
+   "kind": "reglementation",
+   "ref": "Légifrance, Code du travail : 35 heures par semaine et journée de solidarité (loi n° 2004-626 du 30 juin 2004), soit 1 607 heures par an",
+   "url": "https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006072050/"
+  },
+  "tier": "donnee",
+  "unit": "heures par an",
+  "value": 1607,
+  "year": 2026
+ },
  "eco236_agences_an1_md": {
   "label_fr": "236 Md€, gain dès l'année 1 : Fermeture des agences non indispensables, dont interventions en logement, culture, écologie, etc.",
   "source": {

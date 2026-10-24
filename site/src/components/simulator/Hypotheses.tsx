@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { SegmentedControl, Switch, TierBadge } from '@/components/ui';
+import { SegmentedControl, Switch, Term, TierBadge } from '@/components/ui';
 import type { Comparison, Hypotheses as Hyp } from '@/lib/engine-types';
 import type { Tier } from '@/lib/tiers';
 import { withBase } from '@/lib/site';
@@ -26,11 +26,19 @@ export function HypothesisControls({ value, onChange, idPrefix = 'hyp' }: Hypoth
       <Row tier="announced">
         <SegmentedControl
           name={`${idPrefix}-h1`}
-          legend="H1 · RSA, prime d’activité, AAH et bourses"
-          hint="Le programme parle de les remplacer par l’allocation fondamentale, mais aucun amendement ne les supprime. Nous les remplaçons par défaut ; vous pouvez voir l’autre lecture."
+          legend="H1 · Le RSA, la prime d’activité, l’AAH et les bourses sont-ils remplacés ?"
+          hint={
+            <>
+              Le programme parle de les remplacer par l’aide universelle (<Term id="afu">AFU</Term>
+              ), mais aucun amendement ne les supprime. Nous les remplaçons par défaut ; vous pouvez
+              voir l’autre lecture (<Term id="differentiel">différentiel</Term>
+              {'). '}
+              <a href={withBase('/methode/#h1')}>Pourquoi ce choix →</a>
+            </>
+          }
           options={[
-            { value: 'replaced', label: 'Remplacés par l’AFU' },
-            { value: 'differential', label: 'Maintenus en différentiel' },
+            { value: 'replaced', label: 'Remplacés par l’aide universelle' },
+            { value: 'differential', label: 'Maintenus, réduits de l’aide universelle' },
           ]}
           value={value.H1_benefits}
           onChange={(H1_benefits) => onChange({ ...value, H1_benefits })}
@@ -39,7 +47,13 @@ export function HypothesisControls({ value, onChange, idPrefix = 'hyp' }: Hypoth
       <Row tier="hypothesis">
         <Switch
           label="H2 · Déduction de 10 % pour frais professionnels"
-          hint="Le texte ne l’abroge pas. Si on la supprime, on retrouve les chiffres cités dans le livre ; l’impôt est alors un peu plus élevé."
+          hint={
+            <>
+              Le texte ne l’abroge pas. Si on la supprime, on retrouve les chiffres cités dans le
+              livre ; l’impôt est alors un peu plus {'élevé. '}
+              <a href={withBase('/methode/#h2')}>Détail →</a>
+            </>
+          }
           checked={value.H2_fraisPro10}
           onChange={(H2_fraisPro10) => onChange({ ...value, H2_fraisPro10 })}
           stateLabels={['Maintenue', 'Supprimée']}
@@ -49,7 +63,12 @@ export function HypothesisControls({ value, onChange, idPrefix = 'hyp' }: Hypoth
         <SegmentedControl
           name={`${idPrefix}-h5`}
           legend="H5 · Part de la hausse de TVA répercutée sur les prix"
-          hint="Les taux réduits de TVA passent à 20 %. Quelle part se retrouve dans les prix que vous payez ?"
+          hint={
+            <>
+              Les taux réduits de <Term id="tva">TVA</Term> passent à 20 %. Quelle part se retrouve
+              dans les prix que vous payez ? <a href={withBase('/methode/#h5')}>Détail →</a>
+            </>
+          }
           options={[
             { value: '0', label: '0 %' },
             { value: '0.5', label: '50 %' },
@@ -78,19 +97,14 @@ export interface HypothesesSectionProps extends HypothesisControlsProps {
 
 export function HypothesesSection({ value, onChange, comparison }: HypothesesSectionProps) {
   return (
-    <section
-      id="hypotheses"
-      aria-labelledby="hyp-title"
-      tabIndex={-1}
-      className="space-y-4 outline-none"
-    >
+    <section id="hypotheses" aria-labelledby="hyp-title" className="space-y-4">
       <header className="max-w-3xl space-y-1.5">
-        <h2
+        <h4
           id="hyp-title"
           className="font-serif text-xl font-medium leading-snug tracking-tight text-ink sm:text-2xl"
         >
-          Hypothèses actives
-        </h2>
+          Les choix que nous avons dû faire
+        </h4>
         <p className="text-[0.9375rem] text-ink-2">
           Là où le texte est muet, nous avons dû choisir. Changez un choix : le résultat se met à
           jour tout de suite.
@@ -104,7 +118,7 @@ export function HypothesesSection({ value, onChange, comparison }: HypothesesSec
         <div className="space-y-4">
           {comparison && (
             <div className="card">
-              <h3 className="mb-3 text-base font-semibold text-ink">Ce que le moteur a retenu</h3>
+              <h5 className="mb-3 text-base font-semibold text-ink">Ce que le moteur a retenu</h5>
               <ul className="space-y-3 text-sm">
                 {comparison.activeHypotheses.map((a) => (
                   <li key={a.id} className="space-y-1">
@@ -127,12 +141,12 @@ export function HypothesesSection({ value, onChange, comparison }: HypothesesSec
 export function NotModelled({ items }: { items: string[] }) {
   return (
     <section aria-labelledby="nm-title" className="card space-y-3">
-      <h2
+      <h4
         id="nm-title"
         className="font-serif text-xl font-medium leading-snug tracking-tight text-ink sm:text-2xl"
       >
         Ce que le simulateur ne compte pas
-      </h2>
+      </h4>
       <p className="text-[0.9375rem] text-ink-2">
         Pour votre foyer, ces points ne sont pas dans le calcul. Ils peuvent changer le résultat,
         dans un sens comme dans l’autre.

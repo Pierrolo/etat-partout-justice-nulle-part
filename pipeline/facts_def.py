@@ -242,6 +242,11 @@ def _d_etat_partout(F: Facts):
     F.wb("droit_mots_reglementaire_2026", G, gc, "X14", "mots", "Mots des textes réglementaires en 2026", 2026, "donnee", nd=0, expect=33516078, **lg)
     F.wb("droit_mots_legislatif_2005", G, gc, "C11", "mots", "Mots des textes législatifs en 2005", 2005, "donnee", nd=0, expect=7045177, **lg)
     F.wb("droit_mots_reglementaire_2005", G, gc, "C14", "mots", "Mots des textes réglementaires en 2005", 2005, "donnee", nd=0, expect=18963617, **lg)
+    # durée légale du travail (sert à convertir des heures de lecture en années à temps plein)
+    F.external("duree_legale_travail_h_an", 1607, "heures par an", "Durée annuelle légale du travail à temps plein", 2026, "reglementation",
+               "Légifrance, Code du travail : 35 heures par semaine et journée de solidarité (loi n° 2004-626 du 30 juin 2004), soit 1 607 heures par an",
+               "https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006072050/",
+               note="Convention usuelle de la durée annuelle légale (1 607 h) ; sert aux réexpressions « années à temps plein » du site.")
     F.calc("droit_mots_2026", ["droit_mots_legislatif_2026", "droit_mots_reglementaire_2026"], lambda a, b: a + b, "mots", "Mots du droit applicable en 2026", 2026,
            "droit_mots_legislatif_2026 + droit_mots_reglementaire_2026", nd=0, note="48,83 millions de mots : le manifeste arrondit à « 49 millions ».")
     F.calc("droit_mots_2005", ["droit_mots_legislatif_2005", "droit_mots_reglementaire_2005"], lambda a, b: a + b, "mots", "Mots du droit applicable en 2005", 2005,

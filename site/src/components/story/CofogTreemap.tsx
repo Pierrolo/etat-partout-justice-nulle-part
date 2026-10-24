@@ -153,7 +153,7 @@ export function CofogTreemap({
       <div
         className="tm"
         role="group"
-        aria-label={`Blocs proportionnels aux dépenses : ${view.label}`}
+        aria-label={`Blocs proportionnels aux dépenses : ${view.label}`}
       >
         {placed.map((p) => {
           const n = p.node;
@@ -232,7 +232,7 @@ export function CofogTreemap({
             </p>
             {readout.inferred && (
               <p className="mt-1 text-xs text-ink-3">
-                Ce poste regroupe des sous-fonctions COFOG rattachées par déduction arithmétique :
+                Ce poste regroupe des sous-fonctions COFOG rattachées par déduction arithmétique :
                 voir l’onglet Sources.
               </p>
             )}
@@ -240,7 +240,7 @@ export function CofogTreemap({
         ) : (
           <p className="text-ink-2">
             <span className="font-semibold text-ink">Touchez un bloc</span> pour son détail dans les
-            quatre unités ; touchez le titre d’un groupe pour zoomer, puis « Remonter » pour
+            quatre unités ; touchez le titre d’un groupe pour zoomer, puis « Remonter » pour
             revenir. La surface est proportionnelle au montant.
           </p>
         )}

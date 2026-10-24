@@ -31,7 +31,10 @@ const MONTHS =
 /** What may follow a punctuation mark that closes a word. */
 const AFTER_PUNCT = '(?:$|[\\s\\u00A0\\u202F»)\\]”’"\'.,—–<])';
 
-const RE_BEFORE_PUNCT = new RegExp(`(?<=[^\\s\\u00A0\\u202F])[ \\u00A0]+(?=[;:!?]${AFTER_PUNCT})`, 'g');
+const RE_BEFORE_PUNCT = new RegExp(
+  `(?<=[^\\s\\u00A0\\u202F])[ \\u00A0]+(?=[;:!?]${AFTER_PUNCT})`,
+  'g',
+);
 const RE_GROUPS = /(?<![\d,.])\d{1,3}(?:[  ]\d{3})+(?!\d)/g;
 const RE_UNIT = /(\d) +(?=(?:Md€|M€|k€|€|%|‰)(?![\p{L}\d]))/gu;
 const RE_FIRST = new RegExp(`(?<![\\d,.h])\\b1(?=[ \\u00A0\\u202F](?:${MONTHS})\\b)`, 'gu');
@@ -44,9 +47,7 @@ export function typo(input: string, opts: TypoOptions = {}): string {
   s = s.replace(/(\p{L})'(?=\p{L})/gu, '$1’');
 
   // Guillemets: « mot » with narrow no-break spaces inside.
-  s = s
-    .replace(/«[   ]+/g, `«${NNBSP}`)
-    .replace(/[   ]+»/g, `${NNBSP}»`);
+  s = s.replace(/«[   ]+/g, `«${NNBSP}`).replace(/[   ]+»/g, `${NNBSP}»`);
 
   // Before ; : ! ? — only when the mark ends a word (so « a ?b », « :hover » stay untouched).
   s = s.replace(RE_BEFORE_PUNCT, NNBSP);

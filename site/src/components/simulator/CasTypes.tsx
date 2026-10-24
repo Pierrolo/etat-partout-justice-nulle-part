@@ -1,36 +1,38 @@
 import { useMemo, useState } from 'react';
-import { Callout, ChartFrame, Disclosure, SegmentedControl, StatTile } from '@/components/ui';
+import { Callout, ChartFrame, Disclosure, SegmentedControl } from '@/components/ui';
 import { IconDown, IconUp } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import { csvDataUri, toCsv } from '@/lib/csv';
-import { compare, DEFAULT_HYPOTHESES, encodeState, CAS_TYPES } from '@/lib/engine';
-import type { Hypotheses, Period } from '@/lib/engine-types';
 import {
-  formatEuro,
-  formatEuroDelta,
-  formatInteger,
-  formatNumber,
-  formatPercent,
-  roundForDisplay,
-} from '@/lib/format';
+  compare,
+  DEFAULT_HYPOTHESES,
+  encodeState,
+  CAS_TYPES,
+  roundForDisplay as displayOf,
+} from '@/lib/engine';
+import type { Hypotheses, Period } from '@/lib/engine-types';
+import { formatEuro, formatEuroDelta, formatNumber, NBSP, roundForDisplay } from '@/lib/format';
 import {
   buildRows,
+  describePattern,
   families,
   INCOME_BUCKETS,
   tileColor,
   tileStyle,
   type CaseRow,
 } from '@/lib/sim/cas-types';
-import { DISPLAY_STEP, PERIODS, percentDigits, periodLabel } from '@/lib/sim/result';
+import { DISPLAY_STEP, PERIODS, pctSpoken, pctText, periodLabel } from '@/lib/sim/result';
 import { withBase } from '@/lib/site';
+import { typo } from '@/lib/typo';
 import { HypothesisControls } from './Hypotheses';
 
 type Unit = 'eur' | 'pct';
 type SortKey = 'order' | 'label' | 'income' | 'baseline' | 'plan' | 'delta' | 'pct';
 
-const SOURCES = [{ label: 'Moteur de calcul du simulateur, foyers types', tier: 'law' as const }];
+const SOURCES = [{ label: 'Moteur de calcul du simulateur, foyers types' }];
 
-const pctText = (r: number) => formatPercent(r, { signed: true, decimals: percentDigits(r) });
+/** Heatmap on wide screens with a pointer that hovers; a list with every label visible everywhere else. */
+const WIDE_HOVER = '[@media(hover:hover)_and_(min-width:64rem)]';
 
 export default function CasTypes() {
   const [period, setPeriod] = useState<Period>('steady');
@@ -42,30 +44,28 @@ export default function CasTypes() {
   });
   const [active, setActive] = useState<string | null>(null);
 
-  const rows = useMemo(() => buildRows(CAS_TYPES, compare, period, hyp), [period, hyp]);
+  const rows = useMemo(
+    () => buildRows(CAS_TYPES, { compare, roundForDisplay: displayOf }, period, hyp),
+    [period, hyp],
+  );
   const fams = useMemo(() => families(rows), [rows]);
   const usedBuckets = useMemo(
     () => INCOME_BUCKETS.filter((b) => rows.some((r) => r.bucket === b.id)),
     [rows],
   );
 
-  const value = (r: CaseRow) => (unit === 'eur' ? r.delta : r.pct);
+  const value = (r: CaseRow) => (unit === 'eur' ? r.delta : (r.pct ?? 0));
   const maxAbs = Math.max(1e-9, ...rows.map((r) => Math.abs(value(r))));
-  const gains = rows.filter((r) => r.delta > 0).length;
-  const losses = rows.filter((r) => r.delta < 0).length;
-  const flat = rows.length - gains - losses;
   const href = (r: CaseRow) =>
     `${withBase('/simulateur/')}#${encodeState(r.cas.household, hyp, period)}`;
-  /** Tile text: the unit « € » is dropped on phones (the legend says « € par mois ») to keep four digits on one line. */
-  const label = (r: CaseRow) =>
-    unit === 'eur' ? (
-      <>
-        {formatNumber(r.delta, { signed: true })}
-        <span className="hidden sm:inline">&nbsp;€</span>
-      </>
-    ) : (
-      pctText(r.pct)
-    );
+  /** The text on a tile: « +560 € » or « +18 % » (« — » when a percentage would be meaningless). */
+  const tileText = (r: CaseRow) =>
+    unit === 'eur' ? `${formatNumber(r.delta, { signed: true })}${NBSP}€` : pctText(r.pct);
+  /** Accessible name = the visible text first (WCAG 2.5.3), then who it is. */
+  const aria = (r: CaseRow) =>
+    `${tileText(r)}, ${r.label}, revenu net ${formatEuro(roundForDisplay(r.income, DISPLAY_STEP))} par mois : ${
+      r.delta === 0 ? 'pas d’écart' : `${formatEuroDelta(r.delta)} par mois, ${pctSpoken(r.pct)}`
+    }. Ouvrir dans le simulateur.`;
 
   const bestRow = rows.reduce((b, r) => (r.delta > b.delta ? r : b), rows[0]!);
   const worstRow = rows.reduce((b, r) => (r.delta < b.delta ? r : b), rows[0]!);
@@ -81,7 +81,8 @@ export default function CasTypes() {
           ? idx.get(a.id)! - idx.get(b.id)!
           : k === 'label'
             ? a.label.localeCompare(b.label, 'fr')
-            : (a[k] as number) - (b[k] as number);
+            : ((a[k] as number | null) ?? Number.NEGATIVE_INFINITY) -
+              ((b[k] as number | null) ?? Number.NEGATIVE_INFINITY);
       return c * dir || idx.get(a.id)! - idx.get(b.id)!;
     });
   }, [rows, sort]);
@@ -111,10 +112,69 @@ export default function CasTypes() {
         baseline: r.baseline,
         plan: r.plan,
         delta: r.delta,
-        pct: Number(r.pct.toFixed(4)),
+        pct: r.pct === null ? '' : Number(r.pct.toFixed(4)),
       })),
     ),
   );
+
+  const pattern = useMemo(() => describePattern(rows), [rows]);
+
+  const tile = (r: CaseRow, kind: 'tile' | 'row') => {
+    const v = value(r);
+    const t = Math.max(-1, Math.min(1, v / maxAbs));
+    const sty = tileStyle(tileColor(t));
+    const Icon = v < 0 ? IconDown : IconUp;
+    const chip = (
+      <span className="num inline-flex items-center gap-0.5 whitespace-nowrap">
+        {r.delta !== 0 && (
+          <Icon size={11} strokeWidth={2.25} className="shrink-0" aria-hidden="true" />
+        )}
+        {tileText(r)}
+      </span>
+    );
+    if (kind === 'tile')
+      return (
+        <a
+          key={r.id}
+          href={href(r)}
+          data-testid="cas-tile"
+          data-delta={r.delta}
+          aria-label={aria(r)}
+          onMouseEnter={() => setActive(r.id)}
+          onFocus={() => setActive(r.id)}
+          onMouseLeave={() => setActive(null)}
+          onBlur={() => setActive(null)}
+          style={sty}
+          className="flex min-h-11 min-w-0 flex-col items-center justify-center rounded-md border border-[color-mix(in_srgb,currentColor_22%,transparent)] px-1 py-1 text-center text-sm font-bold leading-tight no-underline outline-offset-2 hover:border-ink hover:no-underline hover:[color:inherit] focus-visible:outline-3 focus-visible:outline-accent"
+        >
+          {chip}
+        </a>
+      );
+    return (
+      <li key={r.id}>
+        <a
+          href={href(r)}
+          data-testid="cas-tile"
+          data-delta={r.delta}
+          aria-label={aria(r)}
+          className="flex min-h-14 items-center gap-3 rounded-md px-1 py-1.5 no-underline hover:bg-sunken hover:no-underline"
+        >
+          <span
+            style={sty}
+            className="flex min-h-10 w-24 shrink-0 items-center justify-center rounded-md border border-[color-mix(in_srgb,currentColor_22%,transparent)] px-1 text-sm font-bold"
+          >
+            {chip}
+          </span>
+          <span className="min-w-0 text-[0.9375rem] text-ink">
+            <span className="block font-medium">{r.label}</span>
+            <span className="block text-sm text-ink-3">
+              revenu net {formatEuro(roundForDisplay(r.income, DISPLAY_STEP))} par mois
+            </span>
+          </span>
+        </a>
+      </li>
+    );
+  };
 
   return (
     <div className="wrap space-y-8 pb-16">
@@ -126,6 +186,24 @@ export default function CasTypes() {
           perdent.
         </p>
       </Callout>
+
+      <section aria-labelledby="pattern-title" data-testid="pattern" className="card space-y-3">
+        <h2 id="pattern-title" className="font-serif text-xl font-medium text-ink sm:text-2xl">
+          Ce que montrent ces cas types
+        </h2>
+        <ul className="space-y-2.5 text-[1.0625rem] leading-relaxed text-ink">
+          {pattern.map((p) => (
+            <li key={p.key} className="flex gap-2.5">
+              <span aria-hidden="true" className="mt-2.5 size-1.5 shrink-0 rounded-full bg-ink-3" />
+              <span>{p.text}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="text-sm text-ink-3">
+          Avec la période et les hypothèses choisies ci-dessous. Chaque foyer est un exemple : la
+          liste complète est dans la carte et dans le tableau.
+        </p>
+      </section>
 
       {/* one filter row above everything it scopes */}
       <div className="card space-y-4">
@@ -153,52 +231,31 @@ export default function CasTypes() {
         </Disclosure>
       </div>
 
-      <ul className="grid gap-4 sm:grid-cols-3" aria-label="Bilan des foyers types">
-        <StatTile
-          as="li"
-          tone="gain"
-          label="Foyers types qui gagnent"
-          value={formatInteger(gains)}
-          unit={`sur ${formatInteger(rows.length)}`}
-          reframe="Revenu disponible plus élevé qu’aujourd’hui."
-        />
-        <StatTile
-          as="li"
-          tone="loss"
-          label="Foyers types qui perdent"
-          value={formatInteger(losses)}
-          unit={`sur ${formatInteger(rows.length)}`}
-          reframe="Revenu disponible plus bas qu’aujourd’hui."
-        />
-        <StatTile
-          as="li"
-          label="Foyers types sans écart notable"
-          value={formatInteger(flat)}
-          unit={`sur ${formatInteger(rows.length)}`}
-          reframe={`Moins de ${formatEuro(DISPLAY_STEP)} d’écart par mois.`}
-        />
-      </ul>
-
       <ChartFrame
         headingLevel={2}
         title="Qui gagne, qui perd ?"
-        subtitle={`Écart de revenu disponible par foyer type (${period === 'steady' ? 'plan complet' : period}). Chaque case est un foyer : touchez-la pour l’ouvrir dans le simulateur.`}
-        summary={
+        subtitle={`Écart de revenu disponible par foyer type (${period === 'steady' ? 'plan complet' : period}). Chaque case ou chaque ligne est un foyer : touchez-la pour l’ouvrir dans le simulateur.`}
+        summary={typo(
+          `${pattern.map((p) => p.text).join(' ')} Le plus fort gain est pour « ${bestRow.label} » (${formatEuroDelta(bestRow.delta)} par mois), la plus forte perte pour « ${worstRow.label} » (${formatEuroDelta(worstRow.delta)} par mois). Ce sont des cas types, pas une estimation de la population.`,
+        )}
+        sources={SOURCES}
+        note={
           <>
-            Sur {formatInteger(rows.length)} foyers types, {formatInteger(gains)} gagnent,{' '}
-            {formatInteger(losses)} perdent et {formatInteger(flat)} ne changent pas sensiblement.
-            Le plus fort gain est pour « {bestRow.label} » ({formatEuroDelta(bestRow.delta)} par
-            mois), la plus forte perte pour « {worstRow.label} » ({formatEuroDelta(worstRow.delta)}{' '}
-            par mois). Ce sont des cas types, pas une estimation de la population.
+            Revenu net : salaires, pensions et allocation chômage du ménage, avant impôt et avant
+            prestations. Montants arrondis à 5 € près, après impôts, aides et TVA estimée. « — » :
+            pas de pourcentage, parce que le revenu d’aujourd’hui est presque nul.
           </>
         }
-        sources={SOURCES}
-        note="Revenu net : salaires, pensions et allocation chômage du ménage, avant impôt et avant prestations. Montants arrondis à 5 € près."
       >
         <div className="space-y-4">
           <Legend max={maxAbs} unit={unit} />
 
-          <div role="group" aria-label="Carte des foyers types, par famille et niveau de revenu">
+          {/* Wide screen + a pointer that hovers: the heatmap. */}
+          <div
+            role="group"
+            aria-label="Carte des foyers types, par famille et niveau de revenu"
+            className={cn('hidden', `${WIDE_HOVER}:block`)}
+          >
             {/* column headers */}
             <div
               className="grid gap-1.5 pb-1.5 md:grid-cols-[minmax(9rem,13rem)_1fr]"
@@ -214,7 +271,7 @@ export default function CasTypes() {
                 {usedBuckets.map((b) => (
                   <span
                     key={b.id}
-                    className="text-center text-[0.6875rem] font-semibold leading-tight text-ink-3 sm:text-xs"
+                    className="text-center text-xs font-semibold leading-tight text-ink-3"
                   >
                     {b.label}
                   </span>
@@ -245,42 +302,7 @@ export default function CasTypes() {
                               ·
                             </span>
                           ) : (
-                            cell.map((r) => {
-                              const v = value(r);
-                              const t = Math.max(-1, Math.min(1, v / maxAbs));
-                              const sty = tileStyle(tileColor(t));
-                              const Icon = v < 0 ? IconDown : IconUp;
-                              return (
-                                <a
-                                  key={r.id}
-                                  href={href(r)}
-                                  data-testid="cas-tile"
-                                  data-delta={r.delta}
-                                  aria-label={`${r.label}, revenu net ${formatEuro(roundForDisplay(r.income, DISPLAY_STEP))} par mois : ${
-                                    r.delta === 0
-                                      ? 'pas d’écart'
-                                      : `${formatEuroDelta(r.delta)} par mois, ${pctText(r.pct)}`
-                                  }. Ouvrir dans le simulateur.`}
-                                  onMouseEnter={() => setActive(r.id)}
-                                  onFocus={() => setActive(r.id)}
-                                  onMouseLeave={() => setActive(null)}
-                                  onBlur={() => setActive(null)}
-                                  style={sty}
-                                  className="flex min-h-11 min-w-0 flex-col items-center justify-center rounded-md border border-[color-mix(in_srgb,currentColor_22%,transparent)] px-1 py-1 text-center text-[0.8125rem] font-bold leading-tight no-underline outline-offset-2 hover:border-ink hover:no-underline hover:[color:inherit] focus-visible:outline-3 focus-visible:outline-accent sm:text-sm"
-                                >
-                                  <span className="num inline-flex items-center gap-0.5 whitespace-nowrap">
-                                    {r.delta !== 0 && (
-                                      <Icon
-                                        size={11}
-                                        strokeWidth={2.25}
-                                        className="hidden shrink-0 sm:inline"
-                                      />
-                                    )}
-                                    {label(r)}
-                                  </span>
-                                </a>
-                              );
-                            })
+                            cell.map((r) => tile(r, 'tile'))
                           )}
                         </div>
                       );
@@ -289,23 +311,35 @@ export default function CasTypes() {
                 </li>
               ))}
             </ul>
+
+            <p
+              className="mt-4 min-h-[3.25rem] rounded-md bg-sunken px-3.5 py-2.5 text-sm text-ink-2"
+              aria-hidden="true"
+            >
+              {activeRow ? (
+                <>
+                  <span className="font-semibold text-ink">{activeRow.label}</span> · revenu net{' '}
+                  {formatEuro(roundForDisplay(activeRow.income, DISPLAY_STEP))} par mois :{' '}
+                  {formatEuro(activeRow.baseline)} aujourd’hui, {formatEuro(activeRow.plan)} avec le
+                  plan ({formatEuroDelta(activeRow.delta)}).
+                </>
+              ) : (
+                'Survolez ou parcourez une case au clavier pour lire le détail du foyer. Le tableau ci-dessous donne les mêmes chiffres.'
+              )}
+            </p>
           </div>
 
-          <p
-            className="min-h-[3.25rem] rounded-md bg-sunken px-3.5 py-2.5 text-sm text-ink-2"
-            aria-hidden="true"
-          >
-            {activeRow ? (
-              <>
-                <span className="font-semibold text-ink">{activeRow.label}</span> · revenu net{' '}
-                {formatEuro(roundForDisplay(activeRow.income, DISPLAY_STEP))} par mois :{' '}
-                {formatEuro(activeRow.baseline)} aujourd’hui, {formatEuro(activeRow.plan)} avec le
-                plan ({formatEuroDelta(activeRow.delta)}).
-              </>
-            ) : (
-              'Survolez ou parcourez une case au clavier pour lire le détail du foyer. Le tableau ci-dessous donne les mêmes chiffres.'
-            )}
-          </p>
+          {/* Everywhere else (phones, tablets, touch): one line per foyer, its name always visible. */}
+          <div className={`${WIDE_HOVER}:hidden space-y-5`}>
+            {fams.map((f) => (
+              <section key={f} aria-label={f}>
+                <h3 className="border-b border-rule pb-1 text-sm font-semibold text-ink">{f}</h3>
+                <ul className="divide-y divide-rule">
+                  {rows.filter((r) => r.family === f).map((r) => tile(r, 'row'))}
+                </ul>
+              </section>
+            ))}
+          </div>
         </div>
       </ChartFrame>
 
@@ -382,6 +416,9 @@ export default function CasTypes() {
                     )}
                   >
                     {r.delta === 0 ? '—' : pctText(r.pct)}
+                    {r.delta !== 0 && r.pct === null && (
+                      <span className="sr-only"> (variation en pourcentage non calculée)</span>
+                    )}
                   </td>
                 </tr>
               ))}

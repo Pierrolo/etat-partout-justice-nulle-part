@@ -35,6 +35,7 @@ import {
 } from '@/lib/calendrier-model';
 import { formatDateFr, formatDayMonthFr, precisionNote } from '@/lib/dates';
 import { FilterChip } from './controls';
+import '@/components/story/story.css';
 
 export interface CalendrierExplorerProps {
   events: CalEvent[];
@@ -79,7 +80,7 @@ function AmendmentLinks({ event, href }: { event: CalEvent; href: string }) {
   if (list.length <= 3) {
     return (
       <span>
-        {plural(list.length, 'Amendement', 'Amendements')} : {links}
+        {plural(list.length, 'Amendement', 'Amendements')}&#8239;: {links}
       </span>
     );
   }
@@ -130,7 +131,7 @@ function EventCard({
       {showLane && <LaneTag lane={event.lane} className="mb-1" />}
       <p className="font-medium leading-snug text-ink">{event.label}</p>
       <p className="mt-1 text-sm text-ink-2">
-        <span className="font-semibold">Dans l’amendement : </span>
+        <span className="font-semibold">Dans l’amendement : </span>
         {event.subject}
       </p>
       {note && <p className="mt-1 text-sm text-ink-3">{note}</p>}
@@ -153,7 +154,8 @@ function EventCard({
           <IconChevron size={14} className="transition-transform group-open/q:rotate-180" />
         </summary>
         <blockquote className="mt-1 border-s-2 border-rule-strong ps-3 text-sm text-ink-2">
-          « {event.quote} »<footer className="mt-1 text-xs text-ink-3">{event.ref}</footer>
+          «&#8239;{event.quote}&#8239;»
+          <footer className="mt-1 text-xs text-ink-3">{event.ref}</footer>
         </blockquote>
       </details>
     </li>
@@ -228,7 +230,7 @@ function Frise({ markers, jalons, jalonNumber, lanes, selected, onSelect }: Fris
     <div
       ref={host}
       role="group"
-      aria-label={`Frise 2027 à 2030 : ${lanes.length} couloirs, ${formatInteger(total)} mesures. Chaque pastille est un bouton : elle ouvre le détail de la date.`}
+      aria-label={`Frise 2027 à 2030 : ${lanes.length} couloirs, ${formatInteger(total)} mesures. Chaque pastille est un bouton : elle ouvre le détail de la date.`}
       className="relative select-none"
       style={{ height: totalH }}
     >
@@ -263,7 +265,7 @@ function Frise({ markers, jalons, jalonNumber, lanes, selected, onSelect }: Fris
         <div
           key={lane}
           role="group"
-          aria-label={`${LANES[lane].label} : ${mesures(mine.reduce((n, m) => n + m.events.length, 0))} sur ${formatInteger(mine.length)} dates`}
+          aria-label={`${LANES[lane].label} : ${mesures(mine.reduce((n, m) => n + m.events.length, 0))} sur ${formatInteger(mine.length)} dates`}
           className="absolute inset-x-0 border-t border-rule"
           style={{ top, height }}
         >
@@ -291,7 +293,7 @@ function Frise({ markers, jalons, jalonNumber, lanes, selected, onSelect }: Fris
                 key={m.date}
                 type="button"
                 aria-pressed={onlyThis}
-                aria-label={`${formatDateFr(m.date)} — ${LANES[lane].label} : ${mesures(n)}`}
+                aria-label={`${formatDateFr(m.date)} — ${LANES[lane].label} : ${mesures(n)}`}
                 onClick={() => onSelect(m.date, lane)}
                 className="absolute flex cursor-pointer items-center justify-center rounded-full"
                 style={{
@@ -331,7 +333,7 @@ function Frise({ markers, jalons, jalonNumber, lanes, selected, onSelect }: Fris
             key={`flag-${j.date}`}
             type="button"
             aria-pressed={isSel}
-            aria-label={`Date clé ${num} : ${formatDateFr(j.date)}, ${j.title}`}
+            aria-label={`Date clé ${num} : ${formatDateFr(j.date)}, ${j.title}`}
             onClick={() => onSelect(j.date, null)}
             className="num absolute flex cursor-pointer items-center justify-center rounded-full forced-color-adjust-none bg-accent text-[0.8125rem] font-bold text-on-accent"
             style={{
@@ -382,7 +384,8 @@ function DetailPanel({
       className="rounded-lg border border-rule bg-surface p-4 sm:p-5"
     >
       <p role="status" className="sr-only">
-        {formatDateFr(selected.date)} : {mesures(events.length)}, détail affiché sous la frise.
+        {formatDateFr(selected.date)}&#8239;: {mesures(events.length)}, détail affiché sous la
+        frise.
       </p>
       <h3 id="cal-detail-t" className="font-serif text-xl font-medium text-ink">
         {formatDateFr(selected.date)}
@@ -392,7 +395,7 @@ function DetailPanel({
         {group?.jalon ? (
           <>
             <strong className="font-semibold text-ink">
-              Date clé{num ? ` n° ${num}` : ''} : {group.jalon.title}.
+              Date clé{num ? ` n° ${num}` : ''}&#8239;: {group.jalon.title}.
             </strong>{' '}
             {group.jalon.summary}
           </>
@@ -435,12 +438,12 @@ export default function CalendrierExplorer({
     const first = jalonsInFrise(jalons)[0];
     return first ? { date: first.date, lane: null } : null;
   });
-  const lanes = on.length ? LANE_IDS.filter((l) => on.includes(l)) : [...LANE_IDS];
-
-  const visible = useMemo(
-    () => events.filter((e) => lanes.includes(e.lane)),
-    [events, lanes.join('|')],
+  const lanes = useMemo(
+    () => (on.length ? LANE_IDS.filter((l) => on.includes(l)) : [...LANE_IDS]),
+    [on],
   );
+
+  const visible = useMemo(() => events.filter((e) => lanes.includes(e.lane)), [events, lanes]);
   const allGroups = useMemo(() => groupByDate(events, jalons), [events, jalons]);
   const groups = useMemo(() => groupByDate(visible, jalons), [visible, jalons]);
   const markers = useMemo(() => laneMarkers(visible), [visible]);
@@ -512,7 +515,7 @@ export default function CalendrierExplorer({
           La frise, domaine par domaine
         </h3>
         <p className="mb-3 text-[0.9375rem] text-ink-2">
-          Une pastille par date et par domaine ; son chiffre est le nombre de mesures. Les drapeaux
+          Une pastille par date et par domaine ; son chiffre est le nombre de mesures. Les drapeaux
           violets sont les dates clés. Sélectionnez une pastille pour lire les mesures.{' '}
           <a href="#cal-liste-t">Passer la frise et aller à la liste ↓</a>
         </p>
@@ -527,11 +530,11 @@ export default function CalendrierExplorer({
           />
         </div>
         <p className="mt-2 text-sm text-ink-3">
-          Fenêtre : 2027 à 2030.
+          Fenêtre : 2027 à 2030.
           {outsideBefore.length > 0 &&
-            ` Avant : ${mesures(outsideBefore.length)} au ${formatDayMonthFr(outsideBefore[0]!.date)} ${outsideBefore[0]!.date.slice(0, 4)}.`}
+            ` Avant : ${mesures(outsideBefore.length)} au ${formatDayMonthFr(outsideBefore[0]!.date)} ${outsideBefore[0]!.date.slice(0, 4)}.`}
           {outsideAfter.length > 0 &&
-            ` Après : ${mesures(outsideAfter.length)} (${outsideAfter.map((e) => e.date.slice(0, 4)).join(', ')}), dans la liste.`}
+            ` Après : ${mesures(outsideAfter.length)} (${outsideAfter.map((e) => e.date.slice(0, 4)).join(', ')}), dans la liste.`}
         </p>
         {selected && (
           <div className="mt-4">
@@ -573,7 +576,7 @@ export default function CalendrierExplorer({
                   </span>
                   <span className="min-w-0 text-sm">
                     <span className="block font-semibold text-ink">
-                      <span className="sr-only">Date clé {i + 1} : </span>
+                      <span className="sr-only">Date clé {i + 1}&#8239;: </span>
                       {formatDateFr(j.date)}
                     </span>
                     <span className="block text-ink-2">{j.title}</span>
@@ -593,7 +596,7 @@ export default function CalendrierExplorer({
         </h3>
         <p className="mb-4 text-[0.9375rem] text-ink-2">
           Chaque mesure renvoie à son amendement et cite le texte. Les dates viennent exclusivement
-          du texte proposé ; une date « 1er janvier » sans jour écrit est signalée.
+          du texte proposé ; une date « 1er janvier » sans jour écrit est signalée.
         </p>
         {groups.length === 0 ? (
           <p className="card text-ink-2">Aucune mesure dans les domaines choisis.</p>

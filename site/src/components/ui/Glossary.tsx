@@ -1,10 +1,5 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
-import {
-  GLOSSARY_OPEN_EVENT,
-  lookupTerm,
-  placeBubble,
-  termHref,
-} from '@/lib/glossary';
+import { GLOSSARY_OPEN_EVENT, lookupTerm, placeBubble, termHref } from '@/lib/glossary';
 import './glossary.css';
 
 export interface TermProps {

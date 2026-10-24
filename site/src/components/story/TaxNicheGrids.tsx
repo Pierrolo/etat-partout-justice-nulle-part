@@ -26,7 +26,7 @@ export function TaxesGrid({
       tier="announced"
       title={`${formatInteger(total)} impôts et taxes`}
       subtitle="Un carré = un impôt, selon le manifeste. Il n’existe pas de liste publique de ces impôts dans les sources du livre."
-      summary={`Le manifeste compte ${formatInteger(total)} impôts et propose d’en garder ${formatInteger(kept)} (${keptNames}), qui « portent déjà ${formatNumber(share)} % des recettes ». Les lettres aux élus parlent de ${formatInteger(alt)} impôts : les sources ne nomment pas le cinquième.`}
+      summary={`Le manifeste compte ${formatInteger(total)} impôts et propose d’en garder ${formatInteger(kept)} (${keptNames}), qui « portent déjà ${formatNumber(share)} % des recettes ». Les lettres aux élus parlent de ${formatInteger(alt)} impôts : les sources ne nomment pas le cinquième.`}
       sources={sources.map((s) => ({ ...s }))}
       table={{
         columns: [
@@ -44,7 +44,7 @@ export function TaxesGrid({
       <UnitGrid
         colsWide={30}
         colsNarrow={20}
-        ariaLabel={`${formatInteger(total)} carrés : ${formatInteger(kept)} impôts conservés, ${formatInteger(total - kept)} autres`}
+        ariaLabel={`${formatInteger(total)} carrés : ${formatInteger(kept)} impôts conservés, ${formatInteger(total - kept)} autres`}
         segments={[
           {
             id: 'kept',
@@ -88,8 +88,8 @@ export function NichesGrid({
   return (
     <ChartFrame
       title={`${formatInteger(total)} niches fiscales`}
-      subtitle={`Un carré = une niche (dépense fiscale) ou un taux réduit de TVA. Coût en 2024 : ${formatNumber(costTotalMd, { decimals: 1 })} Md€.`}
-      summary={`${formatInteger(common)} niches touchent couramment les ménages (${formatNumber(costCommonMd, { decimals: 1 })} Md€ en 2024) ; les ${formatInteger(others)} autres visent surtout des entreprises ou des cas particuliers. ${formatInteger(vat)} taux réduits de TVA sont comptés à part : seul leur total est publié.`}
+      subtitle={`Un carré = une niche (dépense fiscale) ou un taux réduit de TVA. Coût en 2024 : ${formatNumber(costTotalMd, { decimals: 1 })} Md€.`}
+      summary={`${formatInteger(common)} niches touchent couramment les ménages (${formatNumber(costCommonMd, { decimals: 1 })} Md€ en 2024) ; les ${formatInteger(others)} autres visent surtout des entreprises ou des cas particuliers. ${formatInteger(vat)} taux réduits de TVA sont comptés à part : seul leur total est publié.`}
       sources={sources.map((s) => ({ ...s }))}
       table={{
         columns: [
@@ -106,7 +106,7 @@ export function NichesGrid({
       csvFileName="niches-groupes.csv"
       note={
         <>
-          « Touchent couramment les ménages » : liste éditoriale, plus les niches qui ont au moins
+          « Touchent couramment les ménages » : liste éditoriale, plus les niches qui ont au moins
           un million de bénéficiaires. <a href={explorerHref}>Explorer les niches une à une</a>.
         </>
       }
@@ -114,7 +114,7 @@ export function NichesGrid({
       <UnitGrid
         colsWide={30}
         colsNarrow={20}
-        ariaLabel={`${formatInteger(total)} carrés : ${formatInteger(common)} niches pour les ménages, ${formatInteger(others)} autres, ${formatInteger(vat)} taux réduits de TVA`}
+        ariaLabel={`${formatInteger(total)} carrés : ${formatInteger(common)} niches pour les ménages, ${formatInteger(others)} autres, ${formatInteger(vat)} taux réduits de TVA`}
         segments={[
           {
             id: 'menages',
@@ -128,7 +128,7 @@ export function NichesGrid({
             label: 'Taux réduits de TVA',
             count: vat,
             color: 'var(--series-4)',
-            detail: 'Liste non publiée : seul le total l’est.',
+            detail: 'Liste non publiée : seul le total l’est.',
           },
         ]}
       />

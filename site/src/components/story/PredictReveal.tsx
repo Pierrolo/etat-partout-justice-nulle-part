@@ -58,8 +58,8 @@ export function PredictReveal({
       <div className="space-y-1.5">
         <p className="eyebrow eyebrow-accent">À vous de deviner</p>
         <h3 className="font-serif text-xl font-medium leading-snug tracking-tight text-ink sm:text-2xl">
-          À votre avis, quelle part des dépenses publiques va à la sécurité : police, justice,
-          défense ?
+          À votre avis, quelle part des dépenses publiques va à la sécurité : police, justice,
+          défense ?
         </h3>
         <p className="text-sm text-ink-2">
           Répondez en pourcentage des {formatMdEuro(totalMd)} dépensés en {year}. Aucune réponse
@@ -70,7 +70,7 @@ export function PredictReveal({
       <div className="grid gap-4 sm:grid-cols-[1fr_11rem] sm:items-end">
         <div className="space-y-2">
           <label htmlFor={`${uid}-range`} className="text-[0.9375rem] font-semibold text-ink">
-            Votre estimation :{' '}
+            Votre estimation :{' '}
             {guess === null ? 'pas encore choisie' : formatPercentPoints(guess, { decimals: 0 })}
           </label>
           <input
@@ -150,17 +150,18 @@ export function PredictReveal({
           <div className="space-y-3 rounded-md bg-surface p-4">
             <p className="text-lg font-semibold leading-snug text-ink">
               {guess !== null && <>Vous avez dit {formatPercentPoints(guess, { decimals: 0 })}. </>}
-              La réalité : <span className="text-accent">{truth}</span>.
+              La réalité : <span className="text-accent">{truth}</span>.
             </p>
             {verdict && <p className="text-[0.9375rem] text-ink-2">{verdict}</p>}
             <p className="text-[0.9375rem] leading-relaxed text-ink-2">
-              {truth} de {formatMdEuro(totalMd)}, c’est {formatMdEuro(groupMd)} :{' '}
+              {truth} de {formatMdEuro(totalMd)}, c’est {formatMdEuro(groupMd)}&#8239;:{' '}
               {formatEuro(perYear)} par foyer et par an, soit {formatEuro(perDay, { decimals: 2 })}{' '}
-              par foyer et par jour, sur {formatNumber(foyers / 1e6, { decimals: 1 })} millions de
-              foyers (le dénominateur du livre).
+              par foyer et par jour, sur {formatNumber(foyers / 1e6)} millions de foyers (le chiffre
+              des fiches des auteurs ; voir la Méthode).
             </p>
             <p className="text-[0.9375rem] leading-relaxed text-ink-2">
-              Les auteurs en font un argument : « {quote} ». À vous de juger si c’est peu.
+              Les auteurs en font un argument : «&#8239;{quote}&#8239;». À vous de juger si c’est
+              peu.
             </p>
             <p className="flex flex-wrap items-center gap-2 text-xs text-ink-3">
               <span className="font-semibold">Sources&nbsp;:</span>
@@ -175,7 +176,7 @@ export function PredictReveal({
 
       <noscript>
         <p className="rounded-md bg-surface p-4 text-[0.9375rem] text-ink">
-          Réponse : la sécurité (défense, police, justice) représente {truth} des dépenses
+          Réponse : la sécurité (défense, police, justice) représente {truth} des dépenses
           publiques, soit {formatMdEuro(groupMd)}, ou {formatEuro(perYear)} par foyer et par an.
         </p>
       </noscript>

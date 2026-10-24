@@ -205,3 +205,25 @@
     transform: none !important;
   }
 }
+
+/*
+ * ── Windows High Contrast / forced colours ──────────────────────────────────────────────────────
+ * In `forced-colors: active` the browser repaints every background as the canvas colour, so a bar,
+ * a dot or a tile painted with a background simply disappears (audit M2). Chart marks are drawn with
+ * an inline `background`: keep their authored colours (they are validated against the canvas, and each
+ * mark also carries a text label) and give them a system-colour edge so that shapes stay readable.
+ * Tabs, buttons and text keep the system colours.
+ */
+@media (forced-colors: active) {
+  [style*='background']:not(:focus-visible),
+  .tm-t,
+  .tm-box {
+    forced-color-adjust: none;
+    outline: 1px solid CanvasText;
+    outline-offset: -1px;
+  }
+  .tm-t[aria-pressed='true'] {
+    outline: 3px solid Highlight;
+    outline-offset: -3px;
+  }
+}

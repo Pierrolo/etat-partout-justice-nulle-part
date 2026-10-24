@@ -7,6 +7,7 @@ import {
   type Denominators,
   type UnitKey,
 } from '@/lib/units';
+import './story.css';
 
 /**
  * Phone version of the spending chart: a ranked bar list, grouped by the book's six groups, each

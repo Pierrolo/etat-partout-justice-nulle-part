@@ -45,7 +45,7 @@ describe('calendrier-model: couloirs', () => {
   it('donne à chaque couloir une couleur distincte et un texte lisible dessus', () => {
     const colors = LANE_IDS.map((l) => LANES[l].color);
     expect(new Set(colors).size).toBe(LANE_IDS.length);
-    expect(onSeries(0)).toMatch(/^light-dark\(#[0-9a-f]{6}, #[0-9a-f]{6}\)$/);
+    expect(onSeries(0)).toBe('var(--on-series-1)');
   });
 });
 

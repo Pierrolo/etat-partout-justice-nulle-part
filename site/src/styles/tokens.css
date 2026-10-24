@@ -105,6 +105,23 @@
   --series-8: light-dark(#a0522c, #b66946); /* sienna */
   --series-other: light-dark(#8a867b, #6b6d78); /* « Autres » */
 
+  /* ── Text on chart fills (pure white or near-black, whichever contrasts more: ≥ 4.5 : 1) ───────── */
+  --on-series-1: light-dark(#ffffff, #0b0b0b);
+  --on-series-2: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-3: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-4: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-5: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-6: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-7: light-dark(#ffffff, #0b0b0b);
+  --on-series-8: light-dark(#ffffff, #0b0b0b);
+  --on-hour-keep: light-dark(#ffffff, #0c1424); /* « Vous gardez » segment of the hour of work */
+  /* …and on the greys « ink n % over the card » of the hour of work (chart-theme.test.ts checks them). */
+  --on-tint-90: light-dark(#ffffff, #000000);
+  --on-tint-78: light-dark(#ffffff, #000000);
+  --on-tint-66: light-dark(#ffffff, #000000);
+  --on-tint-56: light-dark(#000000, #000000);
+  --on-tint-48: light-dark(#000000, #000000);
+
   /* ── Chart · sequential (magnitude): one hue (blue), light → dark. ────── */
   --seq-1: light-dark(#e4f0ff, #202f42);
   --seq-2: light-dark(#b4d1f7, #29456a);

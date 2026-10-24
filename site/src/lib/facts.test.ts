@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { chip, conflicts, fact, num, uiTier } from './facts';
+import { chip, conflicts, datasetChip, fact, num, uiTier, workbookPlace } from './facts';
 import { readingTime } from './reading';
 
 describe('facts helper', () => {
@@ -22,6 +22,30 @@ describe('facts helper', () => {
     expect(c.label).toBe('Eurostat');
     expect(c.href).toMatch(/^https:\/\/ec\.europa\.eu/);
     expect(c.year).toBe(2024);
+  });
+  it('names the sheet and the cell of the authors’ workbook in the visible label', () => {
+    expect(chip('actifs_a_restituer_md').label).toBe(
+      'Classeur des auteurs · Input Capitalisation, C10',
+    );
+    // a manual label that already names the sheet only gets the cell
+    expect(chip('actifs_a_restituer_md', { label: 'Classeur, Input Capitalisation' }).label).toBe(
+      'Classeur, Input Capitalisation · C10',
+    );
+    // a third-party statistic keeps its own label unless asked for the workbook place
+    expect(chip('dep_total_2024_md').label).toBe('Insee');
+    expect(chip('dep_total_2024_md', { workbook: true }).label).toMatch(
+      /^Insee \(repris dans le classeur\) · Graph1672Md, [A-Z]+\d+$/,
+    );
+    expect(
+      workbookPlace('Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › C3'),
+    ).toEqual({
+      sheet: 'Refonte fiscalité',
+      cell: 'C3',
+    });
+    expect(workbookPlace('france-resolution.fr › manifeste')).toBeNull();
+    expect(
+      datasetChip({ kind: 'workbook', ref: 'X.xlsx › GraphAgences › H2:I20', url: null }).label,
+    ).toBe('Classeur des auteurs · GraphAgences, H2:I20');
   });
   it('exposes conflicts', () => {
     expect(conflicts('eu_dep_pib_fr_2024_pct').map((c) => c.group)).toContain('record_mondial');

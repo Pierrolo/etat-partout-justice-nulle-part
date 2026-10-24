@@ -40,7 +40,7 @@ Variables d'environnement (build) :
 ## Organisation du dépôt
 
 ```
-engine/     @epjn/engine — moteur de calcul en TypeScript pur (squelette ; voir docs/VISION.md §7)
+engine/     @epjn/engine — moteur de calcul en TypeScript pur (complet, 118 tests ; voir docs/ENGINE-API.md)
 site/       Astro 6 (statique) + îlots React 19 + Tailwind CSS v4
   src/styles/     tokens.css (jetons, clair/sombre) · global.css (Tailwind, polices, base)
   src/lib/        format.ts (formatage français) · chart-theme.ts · tiers.ts · site.ts · contrast.ts · csv.ts
@@ -75,7 +75,7 @@ Code : [MIT](LICENSE) — © Contributeurs du projet « Et moi, dans tout ça ? 
 
 ## Contribuer / signaler une erreur
 
-Ouvrez une _issue_. Les hypothèses du simulateur sont publiées sur la page « Méthode ». Les sections non terminées sont marquées `TODO(builder)` : `grep -rn "TODO(builder)" site/src`.
+Ouvrez une _issue_. Les hypothèses du simulateur sont publiées sur la page « Méthode » (source : `docs/METHODE.md`). Aucune page publiée ne contient de marqueur `TODO` : un test e2e le vérifie.
 
 ---
 

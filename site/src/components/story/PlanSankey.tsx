@@ -8,6 +8,7 @@ import { useId, useMemo, useState } from 'react';
 import { ChartFrame } from '@/components/ui/ChartFrame';
 import { SegmentedControl } from '@/components/ui/SegmentedControl';
 import type { ChipProps } from '@/lib/facts';
+import { TIER_META } from '@/lib/tiers';
 import { formatMdEuro, formatNumber } from '@/lib/format';
 import type { SankeyLink, SankeyNode } from '@/lib/plan-data';
 import { useWidth } from './useWidth';
@@ -30,7 +31,10 @@ const NARROW_NAMES: Record<string, string> = {
 };
 
 const md = (v: number) => formatMdEuro(v, { decimals: v >= 100 ? 0 : 1 });
-const TIER_WORD = { law: 'écrit dans la loi', announced: 'annoncé' } as const;
+const TIER_WORD = {
+  law: TIER_META.law.label.toLowerCase(),
+  announced: TIER_META.announced.label.toLowerCase(),
+} as const;
 
 /** Break a label into lines of at most `max` characters, on spaces. */
 function wrap(text: string, max: number): string[] {
@@ -93,6 +97,8 @@ export function PlanSankey({
         [Math.max(margin.l + 80, width - margin.r), height - margin.b],
       ]);
     return layout({ nodes: ns, links: ls.map((l) => ({ ...l })) });
+    // `margin` and `height` are pure functions of `narrow`.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [horizon, width, narrow, nodes, links]);
 
   const gNodes = view.nodes as Array<D3Node<N, L> & N>;
@@ -129,7 +135,7 @@ export function PlanSankey({
     <div className="space-y-4">
       <div className="card bg-sunken">
         <SegmentedControl<Horizon>
-          legend="Quel horizon ?"
+          legend="Quel horizon ?"
           size="sm"
           value={horizon}
           onChange={(h) => {
@@ -148,13 +154,13 @@ export function PlanSankey({
         title={
           horizon === 'pleine'
             ? `${md(total)} d’économies par an, du budget vers votre salaire et votre épargne`
-            : `Dès la première année : ${md(year1)} d’économies, dont ${md(sn.value)} rendus au salaire net`
+            : `Dès la première année : ${md(year1)} d’économies, dont ${md(sn.value)} rendus au salaire net`
         }
-        subtitle="Milliards d’euros par an. Largeur du ruban = montant. Plein = écrit dans la loi ; hachuré = estimation annoncée par les auteurs."
+        subtitle="Milliards d’euros par an. Largeur du ruban = montant. Plein = proposé dans un amendement ; hachuré = promis par les auteurs."
         summary={
           horizon === 'pleine'
-            ? `Selon les auteurs, cinq grandes économies (structures, subventions, niches, assurance chômage, rendement du patrimoine) atteignent ${md(total)} par an en régime de croisière. ${md(sn.value)} reviennent au salaire net par la fin de la CSG/CRDS sur les revenus d’activité : c’est la partie écrite dans la loi. Le reste, ${md(cap.value)}, alimente une épargne personnelle dont le montant n’est inscrit nulle part.`
-            : `La première année, ${md(year1)} d’économies financent d’abord les ${md(sn.value)} de CSG/CRDS rendus au salaire net ; ${md(year1 - sn.value)} restent pour l’épargne.`
+            ? `Selon les auteurs, cinq grandes économies (structures, subventions, niches, assurance chômage, rendement du patrimoine) atteignent ${md(total)} par an en régime de croisière. ${md(sn.value)} reviennent au salaire net par la fin de la CSG/CRDS sur les revenus d’activité : c’est la partie proposée dans un amendement. Le reste, ${md(cap.value)}, alimente une épargne personnelle dont le montant n’est inscrit nulle part.`
+            : `La première année, ${md(year1)} d’économies financent d’abord les ${md(sn.value)} de CSG/CRDS rendus au salaire net ; ${md(year1 - sn.value)} restent pour l’épargne.`
         }
         sources={sources.map((s) => ({ ...s }))}
         table={{
@@ -171,10 +177,10 @@ export function PlanSankey({
             { key: 'cellule', label: 'Cellule du classeur' },
           ],
           rows: tableRows,
-          caption: 'Flux du schéma du plan : des économies vers le salaire net et l’épargne',
+          caption: 'Flux du schéma du plan : des économies vers le salaire net et l’épargne',
         }}
         csvFileName="plan-sankey-236-md.csv"
-        note="Le classeur n’affecte pas chaque économie à une destination précise : seuls les totaux par destination sont affirmés. Le schéma passe donc par une colonne « calendrier » (année 1, année pleine) plutôt que d’inventer des liens."
+        note="Le classeur n’affecte pas chaque économie à une destination précise : seuls les totaux par destination sont affirmés. Le schéma passe donc par une colonne « calendrier » (année 1, année pleine) plutôt que d’inventer des liens."
       >
         <div ref={ref}>
           <svg
@@ -253,7 +259,7 @@ export function PlanSankey({
                     tabIndex={0}
                     role="button"
                     aria-pressed={isSel}
-                    aria-label={`${n.short} : ${md(n.value ?? 0)} par an, ${TIER_WORD[n.tier]}`}
+                    aria-label={`${n.short} : ${md(n.value ?? 0)} par an, ${TIER_WORD[n.tier]}`}
                     className="cursor-pointer"
                     onClick={() => setSel(isSel ? null : n.id)}
                     onKeyDown={(e) => {
@@ -319,12 +325,12 @@ export function PlanSankey({
           {selNode ? (
             <>
               <p className="font-semibold text-ink">
-                {selNode.label} : {md(selNode.value ?? 0)} par an{' '}
+                {selNode.label}&#8239;: {md(selNode.value ?? 0)} par an{' '}
                 <span className="font-normal text-ink-3">({TIER_WORD[selNode.tier]})</span>
               </p>
               {incoming.length > 0 && (
                 <p className="mt-1">
-                  Reçoit :{' '}
+                  Reçoit :{' '}
                   {incoming.map((l, i) => (
                     <span key={i}>
                       {nodeById.get(idOf(l.source))?.short} {md(l.value)}
@@ -335,7 +341,7 @@ export function PlanSankey({
               )}
               {outgoing.length > 0 && (
                 <p className="mt-1">
-                  Alimente :{' '}
+                  Alimente :{' '}
                   {outgoing.map((l, i) => (
                     <span key={i}>
                       {nodeById.get(idOf(l.target))?.short} {md(l.value)}
@@ -346,7 +352,7 @@ export function PlanSankey({
               )}
               {selNode.id === 'capitalisation' && (
                 <p className="mt-1 text-sm text-ink-3">
-                  Aucun montant n’est inscrit dans l’amendement pour ce compte d’épargne : il serait
+                  Aucun montant n’est inscrit dans l’amendement pour ce compte d’épargne : il serait
                   fixé chaque année par la loi de finances.
                 </p>
               )}
@@ -354,8 +360,8 @@ export function PlanSankey({
           ) : (
             <p>
               <span className="font-semibold text-ink">Touchez un bloc</span> pour voir ce qui entre
-              et ce qui sort. Les rubans hachurés sont des estimations des auteurs ; le ruban plein
-              est écrit dans la loi.
+              et ce qui sort. Les rubans hachurés sont des promesses des auteurs ; le ruban plein
+              est proposé dans un amendement.
             </p>
           )}
         </div>

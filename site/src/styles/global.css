@@ -529,6 +529,12 @@
   }
 }
 
+/* Content that only exists for one brand (BrandValue.astro, /styleguide): the other one is not rendered. */
+:root[data-brand='editorial'] [data-brand-only='ci'],
+:root[data-brand='ci'] [data-brand-only='editorial'] {
+  display: none !important;
+}
+
 /* ── Accessibility modes ────────────────────────────────────────────────── */
 @media (forced-colors: active) {
   .hatch,

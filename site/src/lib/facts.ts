@@ -18,7 +18,15 @@ export type FactTier = 'loi' | 'annonce' | 'donnee' | 'calcul';
 
 export interface FactSource {
   kind:
-    'workbook' | 'amendment' | 'site' | 'insee' | 'eurostat' | 'dgafp' | 'legifrance' | 'calcul';
+    | 'workbook'
+    | 'amendment'
+    | 'site'
+    | 'insee'
+    | 'eurostat'
+    | 'dgafp'
+    | 'legifrance'
+    | 'reglementation'
+    | 'calcul';
   ref: string;
   url: string | null;
   quote?: string;
@@ -81,6 +89,7 @@ const KIND_LABEL: Record<FactSource['kind'], string> = {
   eurostat: 'Eurostat',
   dgafp: 'DGAFP',
   legifrance: 'Légifrance',
+  reglementation: 'Légifrance, Code du travail',
   calcul: 'Calcul du site',
 };
 
@@ -100,15 +109,49 @@ export interface ChipProps {
 }
 
 /**
- * Props for `<SourceChip>` built from a fact: short label by source kind, link, tier, year.
- * Pass `label` to say it your own way (« Insee, comptes nationaux »).
+ * « Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › C3 » → { sheet: « Refonte fiscalité », cell: « C3 » }.
+ * Tous les liens « classeur des auteurs » pointent vers le même fichier : le texte visible doit dire où chercher.
  */
-export function chip(id: FactId, opts: { label?: string; year?: boolean } = {}): ChipProps {
+export function workbookPlace(ref: string | undefined): { sheet: string; cell?: string } | null {
+  if (!ref) return null;
+  const parts = ref.split('›').map((p) => p.trim());
+  const i = parts.findIndex((p) => /\.xlsx$/i.test(p));
+  const sheet = i >= 0 ? parts[i + 1] : undefined;
+  if (!sheet) return null;
+  return { sheet, cell: parts[i + 2] };
+}
+
+/** « Classeur des auteurs · Refonte fiscalité, C3 » : le libellé complète avec l’onglet et la cellule. */
+function withPlace(label: string, ref: string | undefined): string {
+  const place = workbookPlace(ref);
+  if (!place) return label;
+  const sheetShown = label.includes(place.sheet);
+  const text = sheetShown
+    ? (place.cell ?? '')
+    : [place.sheet, place.cell].filter(Boolean).join(', ');
+  return text ? `${label} · ${text}` : label;
+}
+
+/**
+ * Props for `<SourceChip>` built from a fact: short label by source kind, link, tier, year.
+ * Pass `label` to say it your own way (« Insee, comptes nationaux »). When the figure comes from the authors'
+ * workbook, the label names the sheet and the cell (« Classeur des auteurs · Refonte fiscalité, C3 »).
+ * `workbook: true` adds the same place for a third-party statistic that the workbook reproduces.
+ */
+export function chip(
+  id: FactId,
+  opts: { label?: string; year?: boolean; workbook?: boolean } = {},
+): ChipProps {
   const f = fact(id);
   const base = opts.label ?? KIND_LABEL[f.source.kind];
   const derived = f.tier === 'calcul' && !opts.label ? ' (formule en note)' : '';
+  let label = `${base}${derived}`;
+  if (f.source.kind === 'workbook') label = withPlace(label, f.source.ref);
+  else if (opts.workbook && f.source.also?.kind === 'workbook') {
+    label = withPlace(`${label} (repris dans le classeur)`, f.source.also.ref);
+  }
   return {
-    label: `${base}${derived}`,
+    label,
     href: f.source.url ?? undefined,
     tier: uiTier(f.tier),
     year: opts.year === false ? undefined : (f.year ?? undefined),
@@ -121,8 +164,9 @@ export function datasetChip(
   opts: { label?: string; tier?: FactTier; year?: number | string } = {},
 ): ChipProps {
   const kind = source.kind as FactSource['kind'];
+  const base = opts.label ?? KIND_LABEL[kind] ?? source.kind;
   return {
-    label: opts.label ?? KIND_LABEL[kind] ?? source.kind,
+    label: kind === 'workbook' ? withPlace(base, source.ref) : base,
     href: source.url ?? undefined,
     tier: opts.tier ? uiTier(opts.tier) : undefined,
     year: opts.year,

@@ -1,7 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import { contrastRatio } from '@/lib/contrast';
-import { CAS_TYPES, compare, DEFAULT_HYPOTHESES } from '@/lib/engine';
-import { bucketOf, buildRows, families, INCOME_BUCKETS, tileColor } from './cas-types';
+import { CAS_TYPES, compare, DEFAULT_HYPOTHESES, roundForDisplay } from '@/lib/engine';
+import {
+  bucketOf,
+  buildRows,
+  describePattern,
+  families,
+  INCOME_BUCKETS,
+  tileColor,
+} from './cas-types';
+
+const engine = { compare, roundForDisplay };
 
 describe('income buckets', () => {
   it('cover every income exactly once', () => {
@@ -33,13 +42,34 @@ describe('tile colours', () => {
 });
 
 describe('case rows', () => {
+  const rows = buildRows(CAS_TYPES, engine, 'steady', DEFAULT_HYPOTHESES);
+
   it('computes one row per case type with consistent figures', () => {
-    const rows = buildRows(CAS_TYPES, compare, 'steady', DEFAULT_HYPOTHESES);
     expect(rows).toHaveLength(CAS_TYPES.length);
     for (const r of rows) {
       expect(r.plan - r.baseline).toBe(r.delta);
       expect(Number.isFinite(r.income)).toBe(true);
     }
     expect(families(rows).length).toBeGreaterThan(1);
+  });
+
+  it('the young person without income has no percentage (null), never « 0,0 % »', () => {
+    const jeune = rows.find((r) => r.id === 'jeune-22-inactif')!;
+    expect(jeune.pct).toBeNull();
+    expect(jeune.delta).toBeGreaterThan(0);
+    for (const r of rows) if (r.pct !== null) expect(Number.isFinite(r.pct)).toBe(true);
+  });
+});
+
+describe('the pattern in words', () => {
+  const rows = buildRows(CAS_TYPES, engine, 'steady', DEFAULT_HYPOTHESES);
+  const pattern = describePattern(rows);
+
+  it('leads with who loses and what happens to modest incomes, without a « n sur N » counter', () => {
+    expect(pattern.map((p) => p.key)).toEqual(['loss', 'modest', 'ends']);
+    const all = pattern.map((p) => p.text).join(' ');
+    expect(all).toMatch(/perdent/);
+    expect(all).not.toMatch(/\d+ sur \d+/);
+    expect(all).not.toMatch(/0,0\s?%/);
   });
 });

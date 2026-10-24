@@ -184,9 +184,11 @@ export function rehypeMethode(options = {}) {
           const id = label.toLowerCase();
           props.id = id;
           first.children = [
-            el('a', { href: `#${id}`, className: ['h-anchor'], 'aria-label': `Lien vers ${label}` }, [
-              text(label),
-            ]),
+            el(
+              'a',
+              { href: `#${id}`, className: ['h-anchor'], 'aria-label': `Lien vers ${label}` },
+              [text(label)],
+            ),
           ];
           // Visible number stays short; link is the cell content.
         }

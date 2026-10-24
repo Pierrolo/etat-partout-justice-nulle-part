@@ -8,7 +8,10 @@ const path = Astro.url.pathname;
 
 <header class="brand-header border-b border-rule bg-paper">
   <!-- Independence strip: inside the banner landmark so that no content sits outside a region. -->
-  <div class="brand-strip border-b border-rule bg-sunken text-ink-2" data-testid="independence-strip">
+  <div
+    class="brand-strip border-b border-rule bg-sunken text-ink-2"
+    data-testid="independence-strip"
+  >
     <p class="wrap py-2 text-xs leading-snug">
       {SITE.independence}
       <a href={withBase('/a-propos/')} class="whitespace-nowrap font-medium">

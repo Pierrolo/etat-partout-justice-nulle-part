@@ -5,7 +5,9 @@
  */
 import { EuropeSection } from '@/components/story/EuropeSection';
 import { Callout, Disclosure, SourceChip, StatTile } from '@/components/ui';
-import { chip, mdToEuro, millions, num } from '@/lib/facts';
+import { chip, mdToEuro, num } from '@/lib/facts';
+import { FOYERS, FOYERS_LABEL, FOYERS_SHORT } from '@/lib/foyers';
+import { impliedGdpMd } from '@/lib/gdp-gap';
 import {
   formatEuro,
   formatMdEuro,
@@ -18,9 +20,9 @@ import { withBase } from '@/lib/site';
 
 const year = cofogMeta.year;
 const total = num('dep_total_2024_md');
-const foyersN = millions('foyers_implicites_dep_m');
+const foyersN = FOYERS;
+const gdp = impliedGdpMd();
 const perYearBook = num('dep_par_foyer_manifeste_eur');
-const foyersM = (m: number) => formatNumber(m, { decimals: { min: 0, max: 1 } });
 const sharePct = (v: number) => formatPercentPoints(v, { decimals: 1 });
 // ── « Et ailleurs en Europe ? » ──────────────────────────────────────────────
 const eu = europeData();
@@ -44,7 +46,7 @@ const nRanked = eu.rows.filter((r) => r.dep24 !== null).length;
 <section id="europe" aria-labelledby="europe-titre" class="scroll-mt-24 space-y-4">
   <div class="max-w-2xl space-y-2">
     <h2 id="europe-titre" class="text-3xl text-ink">
-      Et ailleurs en Europe ?
+      Et ailleurs en Europe ?
     </h2>
     <p class="text-ink-2">
       Pour juger une dépense, il faut un repère. Voici la France face à ses voisins, en points de
@@ -65,22 +67,21 @@ const nRanked = eu.rows.filter((r) => r.dep24 !== null).length;
       label={`Écart de dépense avec la zone euro, ${year}`}
       value={`+${formatNumber(gapPts, { decimals: 1 })}`}
       unit="points de PIB"
-      reframe={`≈ ${formatEuro(roundForDisplay(gapEuroYear, 50))} par foyer et par an (≈ ${formatEuro(roundForDisplay(gapEuroYear / 12, 10))} par mois), sur ${foyersM(foyersN / 1e6)} M de foyers.`}
+      reframe={`≈ ${formatEuro(roundForDisplay(gapEuroYear, 50))} par foyer et par an (≈ ${formatEuro(roundForDisplay(gapEuroYear / 12, 10))} par mois), sur ${FOYERS_SHORT}.`}
       source={chip('eu_dep_pib_ecart_fr_ea20_2024_pts', {
         label: 'Calcul du site, d’après Eurostat',
       })}
     />
     <div class="card space-y-3 text-[0.9375rem] text-ink-2">
-      <p class="font-semibold text-ink">Comment est calculé cet équivalent ?</p>
+      <p class="font-semibold text-ink">Comment est calculé cet équivalent ?</p>
       <p>
         {formatNumber(gapPts, { decimals: 1 })} points de PIB × PIB {year} (
-        {formatMdEuro(pib / 1e9)}) ÷ {foyersM(foyersN / 1e6)} millions de foyers ={' '}
-        {formatEuro(gapEuroYear)} par foyer et par an. C’est un ordre de grandeur, arrondi pour ne
-        pas affirmer une précision qui n’existe pas.
+        {formatMdEuro(pib / 1e9)}) ÷ {FOYERS_LABEL} = {formatEuro(gapEuroYear)} par foyer et par an.
+        C’est un ordre de grandeur, arrondi pour ne pas affirmer une précision qui n’existe pas.
       </p>
       <p>
         Il mesure la <em>taille</em> de la dépense publique, pas son efficacité ni ce qu’elle
-        finance : certains pays paient une partie de leurs retraites ou de leur santé par des
+        finance : certains pays paient une partie de leurs retraites ou de leur santé par des
         cotisations privées, qui n’entrent pas dans les dépenses publiques.
       </p>
     </div>
@@ -89,44 +90,49 @@ const nRanked = eu.rows.filter((r) => r.dep24 !== null).length;
   <!-- The « record mondial » conflict, shown honestly with both sources -->
   <Callout
     tone="note"
-    title="« Record mondial » : le livre et les données ne disent pas tout à fait la même chose"
+    title="« Record mondial » : le livre et les données ne disent pas tout à fait la même chose"
   >
     <p>
-      Le manifeste écrit que l’État dépense {formatEuro(perYearBook)} par foyer et par an, « record
-      mondial ». Dans les données Eurostat reprises par le classeur du livre lui-même, la Finlande
-      dépasse la France : <strong>{sharePct(fiDep)}</strong> du PIB contre
+      Le manifeste écrit que l’État dépense {formatEuro(perYearBook)} par foyer et par an, « record
+      mondial ». Dans les données Eurostat reprises par le classeur du livre lui-même, la Finlande
+      dépasse la France : <strong>{sharePct(fiDep)}</strong> du PIB contre
       <strong>{sharePct(frDep)}</strong> en {year} ({sharePct(fiDep25)} contre {sharePct(frDep25)}{' '}
       en 2025). La France est {rank}e sur {nRanked} pays, et très au-dessus de la zone euro (
       {sharePct(eaDep)}).
     </p>
     <p class="mt-2 text-sm text-ink-3">
-      Le manifeste ne précise pas la source du « record » : il porte peut-être sur un autre
-      périmètre (monde entier, autre indicateur). Nous ne tranchons pas : voici les deux sources.
+      Le manifeste ne précise pas la source du « record » : il porte peut-être sur un autre
+      périmètre (monde entier, autre indicateur). Nous ne tranchons pas : voici les deux sources.
     </p>
     <p class="mt-3 flex flex-wrap items-center gap-2">
       <SourceChip
-        {...chip('dep_par_foyer_manifeste_eur', { label: 'Manifeste : « record mondial »' })}
+        {...chip('dep_par_foyer_manifeste_eur', { label: 'Manifeste : « record mondial »' })}
       />
       <SourceChip
-        {...chip('eu_dep_pib_fr_2024_pct', { label: 'Eurostat : Finlande 1re, France 2e' })}
+        {...chip('eu_dep_pib_fr_2024_pct', { label: 'Eurostat : Finlande 1re, France 2e' })}
       />
     </p>
   </Callout>
 
   <Disclosure
-    summary={`Pourquoi ${sharePct(frDep)} ici et ${sharePct(insee)} ailleurs sur le site ?`}
+    summary={`Pourquoi ${sharePct(frDep)} ici et ${sharePct(insee)} ailleurs sur le site ?`}
   >
     <p>
       Eurostat donne {sharePct(frDep)} du PIB pour la France en {year}. En rapportant le total des
       dépenses de l’Insee ({formatMdEuro(total)}) au PIB {year} du classeur (
-      {formatMdEuro(pib / 1e9)}), on obtient {sharePct(insee)}. Les sources ne disent pas d’où vient
-      l’écart (périmètre ou millésime du PIB). Cette page utilise Eurostat pour comparer les pays
-      entre eux, et l’Insee pour répartir la dépense française.
+      {formatMdEuro(pib / 1e9)}), on obtient {sharePct(insee)}.{' '}
+      <strong>La dépense est la même : l’écart vient du PIB.</strong> Pour obtenir {sharePct(frDep)}
+      avec {formatMdEuro(total)}, il faudrait un PIB d’environ{' '}
+      {formatMdEuro(gdp.implied, { decimals: 0 })}, soit {formatMdEuro(gdp.gap, { decimals: 0 })} de
+      plus que celui du classeur (cellule C3 de la feuille « Refonte fiscalité »), dont le millésime
+      ou le périmètre n’est pas précisé. Cette page utilise Eurostat pour comparer les pays entre
+      eux, et l’Insee pour répartir la dépense française.
+      <a href={withBase('/methode/#pib-57')}>Le détail dans la Méthode</a>.
     </p>
   </Disclosure>
 
   <p class="text-sm text-ink-3">
-    Pour la suite :{' '}
+    Pour la suite :{' '}
     <a href={withBase('/comprendre/etat-partout/')}>l’empilement de l’État en images</a>
     ou <a href={withBase('/comprendre/le-plan/')}>le plan en un schéma</a>.
   </p>

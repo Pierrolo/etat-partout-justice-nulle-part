@@ -1,5 +1,11 @@
 ---
-import { BRANDS, BRAND_LABEL, BRAND_QUERY_PARAM, BRAND_STORAGE_KEY, BRAND_THEME_COLOR } from '@/lib/brand';
+import {
+  BRANDS,
+  BRAND_LABEL,
+  BRAND_QUERY_PARAM,
+  BRAND_STORAGE_KEY,
+  BRAND_THEME_COLOR,
+} from '@/lib/brand';
 
 interface Props {
   /** Distinguishes several controls on one page (radio `name`, ids). */
@@ -25,22 +31,20 @@ const { id = 'brand', class: className } = Astro.props;
 >
   <legend class="eyebrow mb-2 p-0">Apparence</legend>
   <div class="inline-flex flex-wrap gap-2">
-    {
-      BRANDS.map((b) => (
-        <label class="relative cursor-pointer">
-          <input
-            type="radio"
-            name={`${id}-choice`}
-            value={b}
-            class="peer sr-only"
-            checked={b === 'editorial'}
-          />
-          <span class="flex min-h-11 items-center justify-center rounded-md border-[1.5px] border-rule-strong bg-field px-3.5 text-sm font-semibold text-ink transition-colors hover:border-ink peer-checked:border-accent peer-checked:bg-accent peer-checked:text-on-accent peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent">
-            {BRAND_LABEL[b]}
-          </span>
-        </label>
-      ))
-    }
+    {BRANDS.map((b) => (
+      <label class="relative cursor-pointer">
+        <input
+          type="radio"
+          name={`${id}-choice`}
+          value={b}
+          class="peer sr-only"
+          checked={b === 'editorial'}
+        />
+        <span class="flex min-h-11 items-center justify-center rounded-md border-[1.5px] border-rule-strong bg-field px-3.5 text-sm font-semibold text-ink transition-colors hover:border-ink peer-checked:border-accent peer-checked:bg-accent peer-checked:text-on-accent peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent">
+          {BRAND_LABEL[b]}
+        </span>
+      </label>
+    ))}
   </div>
 </fieldset>
 

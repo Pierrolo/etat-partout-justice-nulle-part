@@ -1,9 +1,10 @@
 import { Fragment, useMemo, useState } from 'react';
 import { SegmentedControl, TierBadge } from '@/components/ui';
 import { cn } from '@/lib/cn';
-import type { Comparison, ComponentGroup } from '@/lib/engine-types';
+import type { ComponentGroup, Tier } from '@/lib/engine-types';
 import { formatEuro, formatEuroDelta } from '@/lib/format';
-import { displayFigures, GROUP_LABEL, GROUP_ORDER } from '@/lib/sim/result';
+import { GROUP_LABEL, GROUP_ORDER } from '@/lib/sim/result';
+import type { ResultData } from '@/lib/sim/state';
 
 const tone = (v: number) => (v > 0 ? 'text-gain' : v < 0 ? 'text-loss' : 'text-ink-3');
 
@@ -20,30 +21,27 @@ function Fold({ before, after }: { before: string; after: string }) {
 
 /**
  * « Aujourd’hui » vs « Avec le plan », every component, monthly or annual.
- * Shown amounts come from `displayFigures`: rounded to 5 € per month so that the rows add up exactly
- * to the totals and to the headline. The annual view is 12 × the monthly one (never re-rounded).
- * Indirect taxes (TVA…) come last, after a « avant impôts indirects » subtotal, like the engine's
- * `disposable` / `disposableAfterTva`: the final total is the one the headline sentence announces.
+ * Every amount comes from the engine's `roundForDisplay`: rounded to 5 € per month so that the rows add up
+ * exactly to the totals and to the headline. The annual view is 12 × the monthly one (never re-rounded).
+ * Indirect taxes (TVA…) come last, after a « avant impôts indirects » subtotal.
  */
-export function CompareTable({ comparison }: { comparison: Comparison }) {
+export function CompareTable({ data }: { data: ResultData }) {
   const [annual, setAnnual] = useState(false);
-  const fig = useMemo(() => displayFigures(comparison), [comparison]);
+  const { comparison, display } = data;
   const k = annual ? 12 : 1;
   const unit = annual ? 'par an' : 'par mois';
   const money = (v: number) => formatEuro(v * k);
   const delta = (v: number) => (v === 0 ? '—' : formatEuroDelta(v * k));
 
+  const tierOf = useMemo(
+    () => new Map(comparison.plan.components.map((c) => [c.id, c.tier as Tier])),
+    [comparison],
+  );
   const groups = GROUP_ORDER.map((g) => ({
     group: g as ComponentGroup,
-    rows: fig.rows.filter((r) => r.group === g),
+    rows: display.lines.filter((r) => r.group === g),
   })).filter((g) => g.rows.length > 0);
-
   const hasIndirect = groups.some((g) => g.group === 'impots_indirects');
-  const sum = (key: 'beforeShown' | 'afterShown', pred: (g: ComponentGroup) => boolean) =>
-    fig.rows.filter((r) => pred(r.group)).reduce((s, r) => s + r[key], 0);
-  const direct = (g: ComponentGroup) => g !== 'impots_indirects';
-  const subBefore = sum('beforeShown', direct);
-  const subAfter = sum('afterShown', direct);
 
   const totalRow = (label: string, before: number, after: number, strong: boolean, key: string) => (
     <tr key={key} className={cn(strong && 'border-t-2 border-ink')}>
@@ -85,12 +83,12 @@ export function CompareTable({ comparison }: { comparison: Comparison }) {
     <section aria-labelledby="table-title" className="card space-y-4">
       <header className="flex flex-wrap items-start justify-between gap-x-6 gap-y-3">
         <div className="space-y-1.5">
-          <h2
+          <h3
             id="table-title"
             className="font-serif text-xl font-medium leading-snug tracking-tight text-ink sm:text-2xl"
           >
-            Aujourd’hui et avec le plan, côte à côte
-          </h2>
+            Le tableau, aujourd’hui et avec le plan
+          </h3>
           <p className="text-[0.9375rem] text-ink-2">
             Chaque composante de votre revenu disponible, {unit}, pour l’ensemble du ménage.
           </p>
@@ -141,8 +139,8 @@ export function CompareTable({ comparison }: { comparison: Comparison }) {
                 <tbody>
                   {totalRow(
                     'Revenu disponible avant impôts indirects',
-                    subBefore,
-                    subAfter,
+                    display.baseline,
+                    display.plan,
                     false,
                     'sub',
                   )}
@@ -158,39 +156,37 @@ export function CompareTable({ comparison }: { comparison: Comparison }) {
                     {GROUP_LABEL[group]}
                   </th>
                 </tr>
-                {rows.map((r) => (
-                  <tr key={r.key}>
-                    <th scope="row" className="font-medium text-ink">
-                      {r.label}
-                      {r.tierAfter !== 'law' && r.deltaShown !== 0 && (
-                        <TierBadge
-                          tier={r.tierAfter}
-                          short
-                          size="sm"
-                          className="ms-2 align-middle"
-                        />
-                      )}
-                      <Fold before={money(r.beforeShown)} after={money(r.afterShown)} />
-                    </th>
-                    <td data-numeric="" className="hidden text-ink-2 sm:table-cell">
-                      {money(r.beforeShown)}
-                    </td>
-                    <td data-numeric="" className="hidden font-medium text-ink sm:table-cell">
-                      {money(r.afterShown)}
-                    </td>
-                    <td data-numeric="" className={cn('font-bold', tone(r.deltaShown))}>
-                      {delta(r.deltaShown)}
-                    </td>
-                  </tr>
-                ))}
+                {rows.map((r) => {
+                  const tier = tierOf.get(r.id) ?? 'law';
+                  return (
+                    <tr key={r.id}>
+                      <th scope="row" className="font-medium text-ink">
+                        {r.label}
+                        {tier !== 'law' && r.delta !== 0 && (
+                          <TierBadge tier={tier} short size="sm" className="ms-2 align-middle" />
+                        )}
+                        <Fold before={money(r.before)} after={money(r.after)} />
+                      </th>
+                      <td data-numeric="" className="hidden text-ink-2 sm:table-cell">
+                        {money(r.before)}
+                      </td>
+                      <td data-numeric="" className="hidden font-medium text-ink sm:table-cell">
+                        {money(r.after)}
+                      </td>
+                      <td data-numeric="" className={cn('font-bold', tone(r.delta))}>
+                        {delta(r.delta)}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </Fragment>
           ))}
           <tfoot>
             {totalRow(
               hasIndirect ? 'Revenu disponible après TVA estimée' : 'Revenu disponible',
-              fig.baseline,
-              fig.plan,
+              display.baselineAfterTva,
+              display.planAfterTva,
               true,
               'total',
             )}

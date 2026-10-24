@@ -42,19 +42,19 @@ const tvaSteps = [
 ];
 const written = [
   {
-    text: `Fin de la CSG et de la CRDS sur les revenus d’activité : ${formatMdEuro(num('csg_cout_annee_pleine_md_loi'))} par an en année pleine, ${formatMdEuro(num('csg_cout_2027_md_loi'))} dès 2027.`,
+    text: `Fin de la CSG et de la CRDS sur les revenus d’activité : ${formatMdEuro(num('csg_cout_annee_pleine_md_loi'))} par an en année pleine, ${formatMdEuro(num('csg_cout_2027_md_loi'))} dès 2027.`,
     chip: chip('csg_cout_annee_pleine_md_loi', { label: 'Amendement PLFSS n° 1' }),
   },
   {
-    text: `Aide fondamentale universelle dès ${afuYear} : ${formatEuro(num('afu_adulte_eur_an'))} par an et par adulte (${formatEuro(num('afu_adulte_eur_mois'))} par mois), ${formatEuro(num('afu_enfant_eur_an'))} par enfant à charge.`,
+    text: `Aide fondamentale universelle dès ${afuYear} : ${formatEuro(num('afu_adulte_eur_an'))} par an et par adulte (${formatEuro(num('afu_adulte_eur_mois'))} par mois), ${formatEuro(num('afu_enfant_eur_an'))} par enfant à charge.`,
     chip: chip('afu_adulte_eur_an', { label: 'Amendement PLF-P1 n° 28' }),
   },
   {
-    text: `Impôt sur le revenu à taux unique de ${formatPercentPoints(num('ir_taux_unique_pct'), { decimals: 0 })} ; impôt sur les sociétés à ${formatPercentPoints(num('is_taux_unique_pct'), { decimals: 0 })}.`,
+    text: `Impôt sur le revenu à taux unique de ${formatPercentPoints(num('ir_taux_unique_pct'), { decimals: 0 })} ; impôt sur les sociétés à ${formatPercentPoints(num('is_taux_unique_pct'), { decimals: 0 })}.`,
     chip: chip('ir_taux_unique_pct', { label: 'Amendements PLF-P1' }),
   },
   {
-    text: `TVA sur l’alimentation : ${tvaSteps.map((s) => `${formatPercentPoints(s.pct, { decimals: 0 })} en ${s.year}`).join(', puis ')}.`,
+    text: `TVA sur l’alimentation : ${tvaSteps.map((s) => `${formatPercentPoints(s.pct, { decimals: 0 })} en ${s.year}`).join(', puis ')}.`,
     chip: chip('tva_alimentation_palier_1_pct', { label: 'Amendements PLF-P1', year: false }),
   },
   {
@@ -68,11 +68,11 @@ const written = [
 ];
 const announced = [
   {
-    text: `${formatMdEuro(total)} d’économies par an : des estimations des auteurs (classeur), pas des montants votés.`,
+    text: `${formatMdEuro(total)} d’économies par an : des estimations des auteurs (classeur), pas des montants votés.`,
     chip: chip('eco236_total_md', { label: 'Classeur des auteurs' }),
   },
   {
-    text: `Compte d’épargne retraite : « ${formatEuro(num('restitution_epargne_manifeste_eur_mois'))} par mois d’ici trois ans ». Montant inscrit dans l’amendement : ${formatEuro(num('cep_montant_loi_eur'))} ; il serait fixé chaque année par la loi de finances.`,
+    text: `Compte d’épargne retraite : « ${formatEuro(num('restitution_epargne_manifeste_eur_mois'))} par mois d’ici trois ans ». Montant inscrit dans l’amendement : ${formatEuro(num('cep_montant_loi_eur'))} ; il serait fixé chaque année par la loi de finances.`,
     chip: chip('restitution_epargne_manifeste_eur_mois', { label: 'Manifeste' }),
   },
   {
@@ -80,11 +80,11 @@ const announced = [
     chip: chip('actifs_manifeste_md', { label: 'Manifeste' }),
   },
   {
-    text: `Indemnisation du chômage ramenée de ${formatNumber(num('chomage_duree_avant_mois'))} à ${formatNumber(num('chomage_duree_apres_mois'))} mois : annoncé, sans texte de loi.`,
+    text: `Indemnisation du chômage ramenée de ${formatNumber(num('chomage_duree_avant_mois'))} à ${formatNumber(num('chomage_duree_apres_mois'))} mois : annoncé, sans texte de loi.`,
     chip: chip('chomage_duree_apres_mois', { label: 'Fiche des auteurs' }),
   },
   {
-    text: `« ${formatEuro(num('restitution_totale_manifeste_eur_mois'))} par mois rendus aux travailleurs » (${formatEuro(csgManifesteMois)} de salaire net et ${formatEuro(num('restitution_epargne_manifeste_eur_mois'))} d’épargne) : non vérifiable à partir des classeurs.`,
+    text: `« ${formatEuro(num('restitution_totale_manifeste_eur_mois'))} par mois rendus aux travailleurs » (${formatEuro(csgManifesteMois)} de salaire net et ${formatEuro(num('restitution_epargne_manifeste_eur_mois'))} d’épargne) : non vérifiable à partir des classeurs.`,
     chip: chip('restitution_totale_manifeste_eur_mois', { label: 'Manifeste' }),
   },
 ];
@@ -92,7 +92,7 @@ const announced = [
 
 <DashboardLayout
   slug="le-plan"
-  lede={`Le plan en un seul schéma : d’où viennent ${formatMdEuro(total)} d’économies par an, où ils vont (salaire net, épargne), et ce qui est écrit dans la loi plutôt qu’annoncé.`}
+  lede={`Le plan en un seul schéma : d’où viennent ${formatMdEuro(total)} d’économies par an, où ils vont (salaire net, épargne), et ce qui est proposé dans un amendement plutôt que promis.`}
 >
   <section aria-labelledby="schema-titre" class="space-y-4">
     <div class="max-w-2xl space-y-2">
@@ -100,10 +100,10 @@ const announced = [
         Le schéma
       </h2>
       <p class="text-ink-2">
-        Les auteurs proposent de réduire la dépense publique et de « rendre » l’argent aux Français,
-        de deux façons : en supprimant la CSG et la CRDS sur les salaires (le salaire net augmente),
-        et en alimentant une épargne personnelle. Voici ce schéma, avec la part écrite dans la loi
-        et celle qui reste une estimation.
+        Les auteurs proposent de réduire la dépense publique et de « rendre » l’argent aux Français,
+        de deux façons : en supprimant la CSG et la CRDS sur les salaires (le salaire net augmente),
+        et en alimentant une épargne personnelle. Voici ce schéma, avec la part proposée dans un
+        amendement et celle qui reste une estimation.
       </p>
     </div>
     <PlanSankey
@@ -114,7 +114,10 @@ const announced = [
       total={sk.total}
       year1={sk.year1}
     />
-    <Callout tone="note" title="Trois façons de compter « 236 milliards »">
+    <Callout
+      tone="note"
+      title={`Trois façons de compter « ${formatNumber(total, { decimals: 0 })} milliards »`}
+    >
       <p>
         Selon la ligne et la feuille du classeur, le total vaut{' '}
         {nf3(rec.totaux.annexe_manuscrit_colonne_C)} Md€ (colonne C),{' '}
@@ -123,15 +126,15 @@ const announced = [
         {nf3(rec.totaux.destinations_classeur_114_46_plus_121_749)} Md€ (somme des deux
         destinations). Les trois s’arrondissent à {formatNumber(total, { decimals: 0 })}. De même,
         le gain de la première année est de {nf3(sk.year1)} Md€ dans l’annexe et de{' '}
-        {formatNumber(sk.year1Flux, { decimals: 1 })} Md€ dans la feuille « Flux ».
+        {formatNumber(sk.year1Flux, { decimals: 1 })} Md€ dans la feuille « Flux ».
       </p>
       <p class="mt-2 text-sm text-ink-3">
         Ce schéma utilise uniquement l’annexe. Le classeur contient un second schéma, légèrement
-        différent ; nous ne les mélangeons jamais.
+        différent ; nous ne les mélangeons jamais.
       </p>
       <p class="mt-3 flex flex-wrap items-center gap-2">
-        <SourceChip {...chip('eco236_total_md', { label: 'Total : colonne C' })} />
-        <SourceChip {...chip('plan_gain_annee_1_flux_md', { label: 'Année 1 : feuille Flux' })} />
+        <SourceChip {...chip('eco236_total_md', { label: 'Total : colonne C' })} />
+        <SourceChip {...chip('plan_gain_annee_1_flux_md', { label: 'Année 1 : feuille Flux' })} />
       </p>
     </Callout>
   </section>
@@ -143,7 +146,7 @@ const announced = [
         Votre heure de travail
       </h2>
       <p class="text-ink-2">
-        Une heure de travail crée de la valeur : combien va à l’État, au capital, au salarié ? Voici
+        Une heure de travail crée de la valeur : combien va à l’État, au capital, au salarié ? Voici
         le découpage moyen des auteurs, aujourd’hui.
       </p>
     </div>
@@ -161,11 +164,11 @@ const announced = [
           <TierBadge tier="announced" size="sm" short />
         </p>
         <p class="font-serif text-xl font-medium leading-snug tracking-tight text-ink sm:text-2xl">
-          Pas de découpage publié : un seul changement est chiffré.
+          Pas de découpage publié : un seul changement est chiffré.
         </p>
         <p class="text-[0.9375rem] leading-relaxed text-ink-2">
-          Les auteurs ne publient pas de version « avec le plan » de ces{' '}
-          {formatEuro(num('va_heure_total_eur'))}. Ce qu’ils chiffrent : la fin de la CSG et de la
+          Les auteurs ne publient pas de version « avec le plan » de ces{' '}
+          {formatEuro(num('va_heure_total_eur'))}. Ce qu’ils chiffrent : la fin de la CSG et de la
           CRDS ajouterait <strong class="text-gain">{formatEuro(csgMois)} par mois</strong> au
           salaire net médian de {formatEuro(netMedian)}, soit{' '}
           <strong class="text-gain">{formatNumber(csgPct, { decimals: 1, signed: true })} %</strong>
@@ -197,7 +200,7 @@ const announced = [
         Au fil de la vie
       </h2>
       <p class="text-ink-2">
-        Le graphique des auteurs « Solidarité nationale au cours de la vie » montre ce qu’une
+        Le graphique des auteurs « Solidarité nationale au cours de la vie » montre ce qu’une
         personne recevrait de la naissance à {formatNumber(life.ageMax)} ans. Nous y séparons ce qui
         a une base légale de ce qui n’en a pas.
       </p>
@@ -217,7 +220,7 @@ const announced = [
         Ce qui est écrit, ce qui est annoncé
       </h2>
       <p class="text-ink-2">
-        La même ligne sépare tout le site : un chiffre inscrit dans un amendement n’a pas le statut
+        La même ligne sépare tout le site : un chiffre inscrit dans un amendement n’a pas le statut
         d’une promesse. Voici les deux listes pour ce plan.
       </p>
     </div>
@@ -245,13 +248,13 @@ const announced = [
         </ul>
       </div>
     </div>
-    <Disclosure summary="Comment lire ces deux colonnes ?" variant="card">
+    <Disclosure summary="Comment lire ces deux colonnes ?" variant="card">
       <p>
-        « Écrit dans la loi » : le chiffre figure dans le texte d’un amendement déposé par les
-        auteurs ; il s’appliquerait tel quel s’il était voté. « Annoncé » : avancé dans le
-        manifeste, les fiches ou les classeurs, sans texte de loi. Le simulateur montre ces
-        promesses à part, hors de votre revenu disponible.{' '}
-        <a href={withBase('/methode/')}>Méthode et hypothèses</a>.
+        « Proposé dans un amendement » : le chiffre figure dans le texte précis d’un amendement
+        rédigé par les auteurs, ni déposé ni voté ; il s’appliquerait tel quel s’il était adopté.
+        « Promis par les auteurs » : avancé dans le manifeste, les fiches ou les classeurs, sans
+        texte précis. Le simulateur montre les promesses sans montant à part, hors de votre revenu
+        disponible. <a href={withBase('/methode/')}>Méthode et hypothèses</a>.
       </p>
     </Disclosure>
   </section>

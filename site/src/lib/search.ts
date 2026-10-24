@@ -8,6 +8,7 @@ export function normalize(input: string): string {
   return input
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
+    .replace(/[\u00A0\u202F]/g, ' ')
     .replace(/[’‘`´]/g, "'")
     .replace(/œ/gi, 'oe')
     .replace(/æ/gi, 'ae')

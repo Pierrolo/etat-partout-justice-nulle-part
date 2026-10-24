@@ -148,9 +148,7 @@ export function headlineSentence(c: Comparison, d: DisplayComparison, period: Pe
 export function announcement(c: Comparison, d: DisplayComparison): string {
   const h = buildHeadline(c, d);
   if (h.direction === 'flat') return 'Résultat mis à jour : pas de différence notable.';
-  return typo(
-    `Résultat mis à jour : ${h.amount}${h.pct === null ? '' : ` (${h.percent})`}.`,
-  );
+  return typo(`Résultat mis à jour : ${h.amount}${h.pct === null ? '' : ` (${h.percent})`}.`);
 }
 
 /** Text of the native share sheet / clipboard message. */
@@ -237,6 +235,25 @@ export function barBox(bridge: Bridge, from: number, to: number): { left: number
   return { left: ((a - lo) / total) * 100, width: Math.max(((b - a) / total) * 100, 0.8) };
 }
 
+/**
+ * « Nice » axis ticks (1, 2, 5 × 10ⁿ steps) between `start` and `stop`, about `count` of them. A few lines
+ * instead of d3's `ticks`: importing the `d3` barrel pulls the whole library (selection, transitions…) into
+ * the page's first JavaScript for one function.
+ */
+export function niceTicks(start: number, stop: number, count: number): number[] {
+  if (!(stop > start) || count < 1) return [start];
+  const raw = (stop - start) / count;
+  const power = Math.floor(Math.log10(raw));
+  const err = raw / 10 ** power;
+  const step =
+    (err >= Math.sqrt(50) ? 10 : err >= Math.sqrt(10) ? 5 : err >= Math.sqrt(2) ? 2 : 1) *
+    10 ** power;
+  const out: number[] = [];
+  for (let t = Math.ceil(start / step) * step; t <= stop + step * 1e-9; t += step)
+    out.push(Number((Math.round(t / step) * step).toFixed(12)));
+  return out;
+}
+
 export function zeroLeft(bridge: Bridge): number {
   const span = bridge.max - bridge.min || 1;
   const pad = span * 0.04;
@@ -279,4 +296,3 @@ export function certaintyParts(certainty: string): { intro: string; items: strin
   const items = m[2]!.split(/\s;\s/).filter(Boolean);
   return { intro: m[1]!.replace(/\s*Avec le plan$/, '').trim(), items };
 }
-

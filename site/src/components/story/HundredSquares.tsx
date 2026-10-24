@@ -34,9 +34,9 @@ export function HundredSquares({
 
   return (
     <ChartFrame
-      title="Si l’argent public était 100 €"
-      subtitle={`Une case = 1 € sur 100 € de dépenses publiques en ${year}, par grande fonction.`}
-      summary={`Sur 100 € dépensés, ${formatNumber((top.value / tree.value) * 100, { decimals: 0 })} € vont à « ${GROUP_SHORT[top.id] ?? top.label} » (${(top.children ?? []).map((p) => p.label.toLowerCase()).join(', ')})${
+      title="Si l’argent public était 100 €"
+      subtitle={`Une case = 1 € sur 100 € de dépenses publiques en ${year}, par grande fonction.`}
+      summary={`Sur 100 € dépensés, ${formatNumber((top.value / tree.value) * 100, { decimals: 0 })} € vont à « ${GROUP_SHORT[top.id] ?? top.label} » (${(top.children ?? []).map((p) => p.label.toLowerCase()).join(', ')})${
         secu
           ? ` et ${formatNumber((secu.value / tree.value) * 100, { decimals: 1 })} € à la sécurité (défense, police, justice)`
           : ''
@@ -47,22 +47,22 @@ export function HundredSquares({
           { key: 'groupe', label: 'Fonction' },
           {
             key: 'euros_pour_100',
-            label: 'Pour 100 €',
+            label: 'Pour 100 €',
             numeric: true,
             format: (v) => formatEuro(Number(v), { decimals: 1 }),
           },
           { key: 'cases', label: 'Cases', numeric: true },
         ],
         rows,
-        caption: 'Répartition de 100 € de dépenses publiques par fonction',
+        caption: 'Répartition de 100 € de dépenses publiques par fonction',
       }}
       csvFileName="depenses-publiques-pour-100-euros.csv"
-      note="Cases arrondies à l’entier par la méthode du plus fort reste, pour faire exactement 100 ; la légende donne la part exacte."
+      note="Cases arrondies à l’entier par la méthode du plus fort reste, pour faire exactement 100 ; la légende donne la part exacte."
     >
       <div className="grid gap-6 sm:grid-cols-[minmax(0,20rem)_1fr] sm:items-center">
         <div
           role="img"
-          aria-label={`100 cases : ${groups.map((g, i) => `${alloc[i]!.squares} pour ${GROUP_SHORT[g.id] ?? g.label}`).join(', ')}`}
+          aria-label={`100 cases : ${groups.map((g, i) => `${alloc[i]!.squares} pour ${GROUP_SHORT[g.id] ?? g.label}`).join(', ')}`}
           className="unit-squares mx-auto w-full max-w-[20rem]"
           style={{ gridTemplateColumns: 'repeat(10, 1fr)' }}
           onMouseLeave={() => setActive(null)}

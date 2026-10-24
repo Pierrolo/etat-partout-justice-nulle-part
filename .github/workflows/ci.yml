@@ -40,13 +40,17 @@ jobs:
       - name: Unit tests (engine + site)
         run: pnpm test
 
+      # Data pipeline: stdlib only. Fails if site/src/data differs from a fresh build (hand edit, drift).
+      - name: Pipeline is reproducible and valid
+        run: python3 -I pipeline/build.py --check
+
       - name: Build
         run: pnpm build
 
       - name: Install Chromium for Playwright
         run: pnpm --filter @epjn/site exec playwright install --with-deps chromium
 
-      - name: End-to-end (smoke, axe, zero third-party requests)
+      - name: End-to-end (smoke, axe, typography, no TODO, zero third-party requests)
         run: pnpm test:e2e
 
       - name: Upload Playwright report
@@ -54,5 +58,31 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
+          path: site/playwright-report/
+          retention-days: 7
+
+  # Same build and e2e under the production base path (/<repo>/): a raw href="/…" or fetch('/data/…') only breaks there.
+  e2e-base-path:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      BASE_PATH: /etat-partout-justice-nulle-part/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm --filter @epjn/site exec playwright install --with-deps chromium
+      - name: End-to-end under the production base path
+        run: pnpm test:e2e
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-base-path
           path: site/playwright-report/
           retention-days: 7

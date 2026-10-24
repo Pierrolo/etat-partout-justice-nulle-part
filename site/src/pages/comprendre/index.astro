@@ -6,7 +6,9 @@ import { PredictReveal } from '@/components/story/PredictReveal';
 import { SourceChip } from '@/components/ui';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { agencyFates, lawWords, ministries } from '@/lib/etat-data';
-import { chip, fact, millions, num } from '@/lib/facts';
+import { chip, fact, num } from '@/lib/facts';
+import { FOYERS, FOYERS_LABEL, perFoyerDay, perFoyerYear } from '@/lib/foyers';
+import { nichesEquation } from '@/lib/niches-wording';
 import {
   formatEuro,
   formatInteger,
@@ -23,8 +25,8 @@ import { line, scaleLinear } from 'd3';
 // ── 1. Dépenses ─────────────────────────────────────────────────────────────
 const tree = cofogTree();
 const total = num('dep_total_2024_md');
-const foyers = millions('foyers_implicites_dep_m');
-const perDay = num('dep_par_foyer_jour_eur');
+const foyers = FOYERS;
+const perDay = perFoyerDay(total);
 const groups = [...(tree.children ?? [])].sort((a, b) => b.value - a.value);
 const year = fact('dep_total_2024_md').year ?? 2024;
 
@@ -83,18 +85,17 @@ const sparkLaw =
 
 // ── 6. Le plan ──────────────────────────────────────────────────────────────
 const plan = num('eco236_total_md');
-const planDay = num('eco236_par_foyer_jour_eur');
-const foyers236 = num('foyers_implicites_236_m');
+const planDay = perFoyerDay(num('eco236_total_md'));
 ---
 
 <BaseLayout
   title="Comprendre"
-  description="Où va l’argent public ? Une histoire en six chiffres, puis les pages pour explorer : dépenses, État, plan, niches, calendrier, amendements."
+  description="Où va l’argent public ? Une histoire en six chiffres, puis les pages pour explorer : dépenses, État, plan, niches, calendrier, amendements."
 >
   <PageHeader
     eyebrow="Tableau de bord"
     title="L’argent public en six chiffres"
-    lede="Six chiffres pour se faire une idée, du plus grand au plus proche de vous. Chacun est relié à sa source ; chaque désaccord entre sources est montré. Puis les pages pour explorer."
+    lede="Six chiffres pour se faire une idée, du plus grand au plus proche de vous. Chacun est relié à sa source ; chaque désaccord entre sources est montré. Puis les pages pour explorer."
   />
 
   <div class="wrap">
@@ -124,15 +125,14 @@ const foyers236 = num('foyers_implicites_236_m');
           <p class="max-w-xl text-lg text-ink-2">
             C’est ce que les administrations publiques (État, collectivités, Sécurité sociale) ont
             dépensé en
-            {year}. Ramené à un foyer :{' '}
+            {year}. Ramené à un foyer :{' '}
             <strong class="text-ink">{formatEuro(perDay)} par jour</strong>
-            (sur {formatNumber(foyers / 1e6, { decimals: 1 })} millions de foyers : le dénominateur
-            du livre).
+            (sur {FOYERS_LABEL}, le chiffre des fiches des auteurs).
           </p>
           <div
             class="max-w-2xl space-y-2"
             role="img"
-            aria-label={`Répartition de 100 € de dépenses : ${groups.map((g) => `${formatNumber((g.value / total) * 100, { decimals: 0 })} € ${GROUP_SHORT[g.id]}`).join(', ')}`}
+            aria-label={`Répartition de 100 € de dépenses : ${groups.map((g) => `${formatNumber((g.value / total) * 100, { decimals: 0 })} € ${GROUP_SHORT[g.id]}`).join(', ')}`}
           >
             <div class="flex gap-0.5" aria-hidden="true">
               {groups.map((g, i) => (
@@ -232,7 +232,7 @@ const foyers236 = num('foyers_implicites_236_m');
           <div
             class="max-w-2xl space-y-2"
             role="img"
-            aria-label={`Sort des ${agencesTotal} agences : ${fates.map((f) => `${f.n} ${fateName[f.id]}`).join(', ')}`}
+            aria-label={`Sort des ${agencesTotal} agences : ${fates.map((f) => `${f.n} ${fateName[f.id]}`).join(', ')}`}
           >
             <div class="flex gap-0.5" aria-hidden="true">
               {fates.map((f, i) => (
@@ -289,19 +289,19 @@ const foyers236 = num('foyers_implicites_236_m');
             <span class="stat-number text-ink" data-count={niches} data-decimals="0">
               {formatInteger(niches)}
             </span>
-            <span class="font-serif text-2xl text-ink-2 sm:text-3xl">niches fiscales</span>
+            <span class="font-serif text-2xl text-ink-2 sm:text-3xl">niches et taux réduits</span>
           </p>
           <p class="max-w-xl text-lg text-ink-2">
-            Des réductions, exonérations et taux réduits :{' '}
-            {formatMdEuro(num('niches_total_md'), { decimals: 1 })} par an, soit environ{' '}
-            {formatEuro(roundForDisplay(num('niches_total_par_foyer_eur'), 50))} par foyer (sur{' '}
-            {formatNumber(foyers236, { decimals: 1 })} millions de foyers). Les auteurs comptent
-            aussi {formatInteger(impots)} impôts et taxes.
+            {nichesEquation(num('niches_nombre'), nichesTva, niches)}. Des réductions, exonérations
+            et taux réduits : {formatMdEuro(num('niches_total_md'), { decimals: 1 })} par an, soit
+            environ {formatEuro(roundForDisplay(perFoyerYear(num('niches_total_md')), 50))} par
+            foyer (sur {FOYERS_LABEL}). Les auteurs comptent aussi {formatInteger(impots)} impôts et
+            taxes.
           </p>
           <div
             class="max-w-2xl"
             role="img"
-            aria-label={`${niches} carrés : ${nichesMenages} niches pour les ménages, ${nichesOthers} autres, ${nichesTva} taux réduits de TVA`}
+            aria-label={`${niches} carrés : ${nichesMenages} niches pour les ménages, ${nichesOthers} autres, ${nichesTva} taux réduits de TVA`}
           >
             <div class="unit-grid" style="--cols-n: 36; --cols-w: 54" aria-hidden="true">
               {Array.from({ length: nichesMenages }, () => (
@@ -345,7 +345,7 @@ const foyers236 = num('foyers_implicites_236_m');
               {...chip('niches_total_nombre', { label: 'PLF 2026, annexe Dépenses fiscales' })}
             />
             <a href={withBase('/comprendre/niches/')} class="text-sm font-semibold">
-              Chercher « ma » niche →
+              Chercher « ma » niche →
             </a>
           </p>
         </div>
@@ -374,11 +374,11 @@ const foyers236 = num('foyers_implicites_236_m');
             <span class="font-serif text-2xl text-ink-2 sm:text-3xl">millions de mots de loi</span>
           </p>
           <p class="max-w-xl text-lg text-ink-2">
-            Lois et règlements en vigueur : près de{' '}
+            Lois et règlements en vigueur : près de{' '}
             {formatPercentPoints(num('droit_mots_croissance_pct'), { decimals: 0 })} de plus qu’en
             2005. Les lire tous prendrait plus de {formatNumber(Math.floor(lecture.fullTimeYears))}{' '}
             ans à temps plein ({formatInteger(READING_HYPOTHESES.wordsPerMinute)} mots par minute,{' '}
-            {formatInteger(READING_HYPOTHESES.fullTimeHoursPerYear)} heures de travail par an :
+            {formatInteger(READING_HYPOTHESES.fullTimeHoursPerYear)} heures de travail par an :
             hypothèses du site).
           </p>
           <figure
@@ -389,7 +389,7 @@ const foyers236 = num('foyers_implicites_236_m');
               viewBox={`0 0 ${W} ${H}`}
               class="block h-auto w-full overflow-visible"
               role="img"
-              aria-label={`Courbe : de ${formatNumber(law.years[0]!.total / 1e6, { decimals: 0 })} à ${formatNumber(mots / 1e6, { decimals: 0 })} millions de mots`}
+              aria-label={`Courbe : de ${formatNumber(law.years[0]!.total / 1e6, { decimals: 0 })} à ${formatNumber(mots / 1e6, { decimals: 0 })} millions de mots`}
             >
               <path
                 d={sparkLaw}
@@ -455,10 +455,9 @@ const foyers236 = num('foyers_implicites_236_m');
             <span class="font-serif text-2xl text-ink-2 sm:text-3xl">Md€ d’économies par an</span>
           </p>
           <p class="max-w-xl text-lg text-ink-2">
-            Selon les auteurs : c’est l’économie visée, à « rendre » aux Français. Ramenée à un
-            foyer, {formatEuro(planDay)} par jour (sur {formatNumber(foyers236, { decimals: 1 })}{' '}
-            millions de foyers : un autre dénominateur que l’étape 1). Où vont-ils ? D’abord dans
-            votre salaire net. Une heure de travail aujourd’hui :
+            Selon les auteurs : c’est l’économie visée, à « rendre » aux Français. Ramenée à un
+            foyer, {formatEuro(planDay)} par jour (sur {FOYERS_LABEL}, comme à l’étape 1). Où
+            vont-ils ? D’abord dans votre salaire net. Une heure de travail aujourd’hui :
           </p>
           <div class="card max-w-xl">
             <HourBar />
@@ -468,7 +467,7 @@ const foyers236 = num('foyers_implicites_236_m');
               Le plan en un schéma →
             </a>
             <a href={withBase('/simulateur/')} class="btn btn-primary btn-sm">
-              Et pour mon foyer ?
+              Et pour mon foyer ?
             </a>
           </p>
         </div>

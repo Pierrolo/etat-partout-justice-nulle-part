@@ -16,7 +16,7 @@ const view = (p: EarningsPoint, afterTva: boolean) => ({
 import { formatEuro, formatEuroDelta, formatPercent, roundForDisplay } from '@/lib/format';
 import { DISPLAY_STEP } from '@/lib/sim/result';
 
-const SOURCES = [{ label: 'Moteur de calcul du simulateur', tier: 'law' as const }];
+const SOURCES = [{ label: 'Moteur de calcul du simulateur' }];
 
 /** x axis shared by both charts: few, compact ticks on a phone so labels never collide. */
 function xAxis(narrow: boolean, maxNet: number) {
@@ -224,9 +224,9 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
   if (!salaried) {
     return (
       <section aria-labelledby="curve-title" className="card space-y-2">
-        <h2 id="curve-title" className="font-serif text-xl font-medium text-ink sm:text-2xl">
-          Si je gagnais plus ?
-        </h2>
+        <h4 id="curve-title" className="font-serif text-xl font-medium text-ink sm:text-2xl">
+          Votre revenu selon votre salaire
+        </h4>
         <p className="text-[0.9375rem] text-ink-2">
           Cette courbe montre l’effet d’un salaire plus élevé. Elle n’est pas proposée quand la
           première personne du foyer est retraitée : une pension n’est pas un salaire.
@@ -281,8 +281,8 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
   return (
     <div className="space-y-4">
       <ChartFrame
-        headingLevel={2}
-        title="Si je gagnais plus ?"
+        headingLevel={4}
+        title="Votre revenu selon votre salaire"
         subtitle="Revenu disponible du ménage selon le salaire net du premier adulte, aujourd’hui et avec le plan complet."
         summary={summary}
         sources={SOURCES}
@@ -331,11 +331,18 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
             aria-label="Légende"
           >
             <li className="flex items-center gap-2">
-              <span aria-hidden="true" className="inline-block h-0.5 w-7 bg-ink-3" /> Aujourd’hui
+              <span
+                aria-hidden="true"
+                className="inline-block h-0.5 w-7 border-t-2 border-ink-3 bg-ink-3"
+              />{' '}
+              Aujourd’hui
             </li>
             <li className="flex items-center gap-2">
-              <span aria-hidden="true" className="inline-block h-[3px] w-7 bg-accent" /> Avec le
-              plan
+              <span
+                aria-hidden="true"
+                className="inline-block h-[3px] w-7 border-t-[3px] border-accent bg-accent"
+              />{' '}
+              Avec le plan
             </li>
             <li className="flex items-center gap-2">
               <span
@@ -381,7 +388,7 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
 
       {expert && (
         <ChartFrame
-          headingLevel={3}
+          headingLevel={4}
           title="Sur un euro gagné en plus, combien reste-t-il ?"
           subtitle="Part de chaque euro de salaire net supplémentaire qui disparaît (impôt, cotisations, aides perdues)."
           summary={

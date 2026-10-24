@@ -9,6 +9,7 @@ import { BarLegend } from './bars';
 import { IconChevron } from '@/components/ui/icons';
 import { formatCompactEuro, formatInteger, formatPercentPoints } from '@/lib/format';
 import { formatDateFr } from '@/lib/dates';
+import '@/components/story/story.css';
 
 export interface CreditProgramme {
   name: string;
@@ -88,8 +89,8 @@ export default function CreditsChart({
       <BarLegend
         label="Légende"
         items={[
-          { label: 'Crédits de paiement (CP) : ce que l’État décaisse', color: CP },
-          { label: 'Autorisations d’engagement (AE) : ce qu’il peut promettre', color: AE },
+          { label: 'Crédits de paiement (CP) : ce que l’État décaisse', color: CP },
+          { label: 'Autorisations d’engagement (AE) : ce qu’il peut promettre', color: AE },
         ]}
       />
       <ol
@@ -136,10 +137,10 @@ export default function CreditsChart({
                     ))}
                   </ul>
                   <p className="text-sm text-ink-2">
-                    <span className="font-semibold text-ink">Effet : </span>
+                    <span className="font-semibold text-ink">Effet : </span>
                     {m.effets.map((e, k) => (
                       <span key={k}>
-                        {k > 0 && ' ; '}
+                        {k > 0 && '\u202F; '}
                         {formatDateFr(e.date)} ({e.appliesTo})
                       </span>
                     ))}

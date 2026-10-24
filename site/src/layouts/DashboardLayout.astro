@@ -13,25 +13,27 @@ import BaseLayout from './BaseLayout.astro';
 
 interface Props {
   slug: string;
+  /** Overrides the registry title (h1 and <title>) when it carries a figure read from facts.json. */
+  title?: string;
   /** One or two sentences under the title. */
   lede?: string;
   /** Meta description (defaults to the registry teaser). */
   description?: string;
 }
 
-const { slug, lede, description } = Astro.props;
+const { slug, title, lede, description } = Astro.props;
 const page = COMPRENDRE_PAGES.find((p) => p.slug === slug);
 if (!page) throw new Error(`DashboardLayout: unknown slug "${slug}" (add it to COMPRENDRE_PAGES)`);
 ---
 
-<BaseLayout title={page.title} description={description ?? page.teaser}>
-  <PageHeader eyebrow="Comprendre" title={page.title} lede={lede ?? page.teaser}>
+<BaseLayout title={title ?? page.title} description={description ?? page.teaser}>
+  <PageHeader eyebrow="Comprendre" title={title ?? page.title} lede={lede ?? page.teaser}>
     <Breadcrumbs
       slot="before"
       items={[
         { label: 'Accueil', href: '/' },
         { label: 'Comprendre', href: '/comprendre/' },
-        { label: page.title },
+        { label: title ?? page.title },
       ]}
     />
   </PageHeader>

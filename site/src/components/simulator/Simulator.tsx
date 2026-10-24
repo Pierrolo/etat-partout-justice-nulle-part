@@ -1,81 +1,30 @@
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-  useSyncExternalStore,
-  type ReactNode,
-} from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Button, Callout } from '@/components/ui';
-import { compare, decodeState, DEFAULT_HYPOTHESES, encodeState, PARAMS_META } from '@/lib/engine';
-import type { Comparison, Household, Hypotheses, Period } from '@/lib/engine-types';
-import { buildHeadline, headlineSentence, transfersOf } from '@/lib/sim/result';
+import { cn } from '@/lib/cn';
+import type { Hypotheses, Period } from '@/lib/engine-types';
 import {
-  defaultFormState,
+  DEFAULT_HYP,
+  emptyFormState,
   formToHousehold,
   hasExtras,
   householdToForm,
+  missingLabels,
+  stepOfError,
+  STEPS,
   type FormState,
+  type StepId,
 } from '@/lib/sim/form';
-import { CompareTable } from './CompareTable';
-import { EarningsCurve } from './EarningsCurve';
-import { Headline } from './Headline';
-import { HourOfWork } from './HourOfWork';
-import { HypothesesSection, NotModelled } from './Hypotheses';
-import { InputForm, type StepId } from './InputForm';
-import { ShareButton } from './ShareButton';
-import { Transition } from './Transition';
-import { Unquantified } from './Unquantified';
-import { Waterfall } from './Waterfall';
-import { cn } from '@/lib/cn';
-import { periodLong } from '@/lib/sim/result';
-import { withBase } from '@/lib/site';
+import { useEngine } from '@/lib/sim/engine-lazy';
+import { announcement, buildHeadline } from '@/lib/sim/result';
+import { computeResult, sameState, type Committed } from '@/lib/sim/state';
+import { EmptyResult, SideCard } from './Hero';
+import { InputForm } from './InputForm';
+import { focusField } from './focus';
+import { type MoreHandle } from './MoreSections';
+import { ResultView } from './ResultView';
 
 const DEBOUNCE_MS = 250;
 const STATE_HASH = /^#?v\d+\./;
-
-const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
-
-const PHONE_QUERY = '(max-width: 639.98px)';
-function subscribePhone(cb: () => void) {
-  const mq = window.matchMedia(PHONE_QUERY);
-  mq.addEventListener('change', cb);
-  return () => mq.removeEventListener('change', cb);
-}
-/** True below 640 px: the stepper layout, where the detailed result is hidden while answering. */
-function usePhone(): boolean {
-  return useSyncExternalStore(
-    subscribePhone,
-    () => window.matchMedia(PHONE_QUERY).matches,
-    () => false,
-  );
-}
-
-interface Committed {
-  household: Household;
-  hyp: Hypotheses;
-  period: Period;
-}
-
-type Computed = { comparison: Comparison; error: null } | { comparison: null; error: string };
-
-function compute(c: Committed): Computed {
-  try {
-    return {
-      comparison: compare(c.household, { period: c.period, hypotheses: c.hyp }),
-      error: null,
-    };
-  } catch (e) {
-    return { comparison: null, error: e instanceof Error ? e.message : 'Erreur de calcul' };
-  }
-}
-
-const sameState = (a: Committed, b: Committed) =>
-  a.hyp === b.hyp &&
-  a.period === b.period &&
-  JSON.stringify(a.household) === JSON.stringify(b.household);
 
 function scrollToId(id: string) {
   const el = document.getElementById(id);
@@ -85,108 +34,156 @@ function scrollToId(id: string) {
   el.focus({ preventScroll: true });
 }
 
+/** Clears the flag set by the inline script of the page (it hides the pre-rendered form behind a notice). */
+function releaseSharedGuard() {
+  document.documentElement.removeAttribute('data-sim-hash');
+}
+
 /**
- * The simulator island: form (stepper on phones) → live headline → detailed result.
+ * The simulator island: questions (stepper on phones) → result in three layers.
  *
- *  - Every input is controlled; the engine only runs on the DEBOUNCED, VALIDATED household.
- *  - State lives in the URL hash (`#v1.<base64url>`): restored on load / hashchange, written with
- *    `history.replaceState` after the first interaction. Never in the query string, never sent anywhere.
- *  - On the server and on the first client render the default household is used (no hydration mismatch);
- *    a layout effect restores the hash before the first paint.
+ *  - Nothing is pre-answered, and NO result is shown until every required question is answered: while the
+ *    form is incomplete the result area says what is missing (never a stale or default figure).
+ *  - Every input is controlled; the engine only runs on the DEBOUNCED, VALIDATED household. The engine is
+ *    a lazily loaded chunk (`useEngine`): the questions need none of it.
+ *  - State lives in the URL hash (`#v1.<base64url>`): restored on load / hashchange (through the same form
+ *    validation as typed answers), written with `history.replaceState` after the first interaction. Never in
+ *    the query string, never sent anywhere. Sharing builds the link from the CURRENT valid answers.
  */
 export default function Simulator() {
-  const [form, setFormRaw] = useState<FormState>(defaultFormState);
-  const [hyp, setHypRaw] = useState<Hypotheses>(DEFAULT_HYPOTHESES);
+  const engine = useEngine();
+  const [form, setFormRaw] = useState<FormState>(emptyFormState);
+  const [hyp, setHypRaw] = useState<Hypotheses>(DEFAULT_HYP);
   const [period, setPeriodRaw] = useState<Period>('steady');
   const [step, setStep] = useState(0);
   const [mobileView, setMobileView] = useState<'form' | 'result'>('form');
   const [affinerOpen, setAffinerOpen] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
   const [hashNotice, setHashNotice] = useState<string | null>(null);
-  const [headlineVisible, setHeadlineVisible] = useState(true);
+  const [shared, setShared] = useState(false);
+  const [heroAbove, setHeroAbove] = useState(false);
+  const [announce, setAnnounce] = useState('');
   const touched = useRef(false);
-  const phone = usePhone();
+  const heroNode = useRef<HTMLDivElement | null>(null);
+  const moreRef = useRef<MoreHandle | null>(null);
 
-  const setForm = useCallback((u: (f: FormState) => FormState) => {
+  const edited = useCallback(() => {
     touched.current = true;
-    setFormRaw(u);
+    setShared(false);
   }, []);
-  const setHyp = useCallback((h: Hypotheses) => {
-    touched.current = true;
-    setHypRaw(h);
-  }, []);
-  const setPeriod = useCallback((p: Period) => {
-    touched.current = true;
-    setPeriodRaw(p);
-  }, []);
-
-  const parsed = useMemo(() => formToHousehold(form), [form]);
-
-  const [committed, setCommitted] = useState<Committed>(() => ({
-    household: formToHousehold(defaultFormState()).household!,
-    hyp: DEFAULT_HYPOTHESES,
-    period: 'steady',
-  }));
-  const computed = useMemo(() => compute(committed), [committed]);
-  const comparison = computed.comparison;
-
-  // Debounce: only valid households reach the engine; invalid ones keep the previous result on screen.
-  useEffect(() => {
-    const household = parsed.household;
-    if (!household) return;
-    const next: Committed = { household, hyp, period };
-    if (sameState(next, committed)) return;
-    const t = setTimeout(() => setCommitted(next), DEBOUNCE_MS);
-    return () => clearTimeout(t);
-  }, [parsed.household, hyp, period, committed]);
-
-  const invalid = parsed.household === null;
-  const stale = useMemo(
-    () => invalid || !sameState({ household: parsed.household!, hyp, period }, committed),
-    [invalid, parsed.household, hyp, period, committed],
+  const setForm = useCallback(
+    (u: (f: FormState) => FormState) => {
+      edited();
+      setFormRaw(u);
+    },
+    [edited],
+  );
+  const setHyp = useCallback(
+    (h: Hypotheses) => {
+      edited();
+      setHypRaw(h);
+    },
+    [edited],
+  );
+  const setPeriod = useCallback(
+    (p: Period) => {
+      edited();
+      setPeriodRaw(p);
+    },
+    [edited],
   );
 
-  /* ── URL hash ─────────────────────────────────────────────────────────── */
-  const latest = useRef(committed);
-  latest.current = committed;
+  const parsed = useMemo(() => formToHousehold(form), [form]);
+  /** The valid answers right now (not yet debounced); `null` while a required answer is missing. */
+  const current = useMemo<Committed | null>(
+    () => (parsed.household ? { household: parsed.household, hyp, period } : null),
+    [parsed.household, hyp, period],
+  );
 
+  const [committed, setCommitted] = useState<Committed | null>(null);
+
+  // Debounce valid states; an incomplete form clears the result at once (no stale figure on screen).
+  useEffect(() => {
+    if (!current) {
+      setCommitted(null);
+      return;
+    }
+    if (committed && sameState(current, committed)) return;
+    const t = setTimeout(() => setCommitted(current), committed ? DEBOUNCE_MS : 0);
+    return () => clearTimeout(t);
+  }, [current, committed]);
+
+  const computed = useMemo(
+    () => (engine && committed ? computeResult(engine, committed) : null),
+    [engine, committed],
+  );
+  const data = computed && computed.error === null ? computed : null;
+  const stale = !!(current && committed && !sameState(current, committed));
+  const computing = current !== null && data === null && computed?.error === undefined;
+
+  // One short polite announcement per recomputation (the long sentence stays static text).
+  useEffect(() => {
+    setAnnounce(data ? announcement(data.comparison, data.display) : '');
+  }, [data]);
+
+  /* ── URL hash ─────────────────────────────────────────────────────────── */
+  const latest = useRef({ current, committed });
+  latest.current = { current, committed };
+
+  /** The link for the CURRENT valid answers — never a stale or last-committed state. */
   const buildUrl = useCallback(() => {
-    const c = latest.current;
-    const hash = encodeState(c.household, c.hyp, c.period);
-    return `${location.origin}${location.pathname}#${hash}`;
-  }, []);
+    const c = latest.current.current ?? latest.current.committed;
+    if (!c || !engine) return `${location.origin}${location.pathname}`;
+    return `${location.origin}${location.pathname}#${engine.encodeState(c.household, c.hyp, c.period)}`;
+  }, [engine]);
+
+  const applyHash = useCallback(
+    (hash: string): boolean => {
+      if (!engine || !STATE_HASH.test(hash)) return false; // an in-page anchor such as #main: not ours
+      const decoded = engine.decodeState(hash.replace(/^#/, ''));
+      const fail = () => {
+        setHashNotice('Ce lien ne semble pas complet : nous avons repris un formulaire vide.');
+        return true;
+      };
+      if (!decoded) return fail();
+      // The decoded household goes through the same validation as typed answers.
+      const f = householdToForm(decoded.household);
+      const check = formToHousehold(f);
+      if (!check.household) return fail();
+      setFormRaw(f);
+      setHypRaw(decoded.hypotheses);
+      setPeriodRaw(decoded.period);
+      setCommitted({ household: check.household, hyp: decoded.hypotheses, period: decoded.period });
+      setAffinerOpen(hasExtras(f));
+      setMobileView('result');
+      setStep(0);
+      setHashNotice(null);
+      setShared(true);
+      touched.current = true;
+      return true;
+    },
+    [engine],
+  );
+
+  // First application of a shared link, once the engine chunk is there.
+  const appliedFirst = useRef(false);
+  useEffect(() => {
+    if (!engine || appliedFirst.current) return;
+    appliedFirst.current = true;
+    const had = applyHash(window.location.hash);
+    releaseSharedGuard();
+    if (had && window.innerWidth >= 640) requestAnimationFrame(() => scrollToId('resultat'));
+  }, [engine, applyHash]);
 
   const writeHash = useCallback(() => {
-    const c = latest.current;
+    const c = latest.current.committed;
+    if (!c || !engine) return;
     history.replaceState(
       null,
       '',
-      `${location.pathname}${location.search}#${encodeState(c.household, c.hyp, c.period)}`,
+      `${location.pathname}${location.search}#${engine.encodeState(c.household, c.hyp, c.period)}`,
     );
-  }, []);
-
-  const applyHash = useCallback((hash: string): boolean => {
-    if (!STATE_HASH.test(hash)) return false; // an in-page anchor such as #main: not ours
-    const decoded = decodeState(hash.replace(/^#/, ''));
-    if (!decoded) {
-      setHashNotice('Ce lien ne semble pas complet : nous avons repris les valeurs de départ.');
-      return true;
-    }
-    const f = householdToForm(decoded.household);
-    setFormRaw(f);
-    setHypRaw(decoded.hypotheses);
-    setPeriodRaw(decoded.period);
-    setCommitted({ household: decoded.household, hyp: decoded.hypotheses, period: decoded.period });
-    setAffinerOpen(hasExtras(f));
-    setMobileView('result');
-    setStep(0);
-    setHashNotice(null);
-    touched.current = true;
-    return true;
-  }, []);
-
-  useIsoLayoutEffect(() => {
-    applyHash(window.location.hash);
-  }, [applyHash]);
+  }, [engine]);
 
   useEffect(() => {
     const onHash = () => {
@@ -200,63 +197,115 @@ export default function Simulator() {
   }, [applyHash, writeHash]);
 
   useEffect(() => {
-    if (touched.current) writeHash();
+    if (touched.current && committed) writeHash();
   }, [committed, writeHash]);
 
-  /* ── Layout state ─────────────────────────────────────────────────────── */
-  const steps = useMemo<StepId[]>(
-    () => ['foyer', 'adult0', ...(form.couple ? (['adult1'] as const) : []), 'logement', 'aides'],
-    [form.couple],
-  );
-  const stepIndex = Math.min(step, steps.length - 1);
-
-  const heroRef = useRef<HTMLDivElement>(null);
+  /* ── Layout ───────────────────────────────────────────────────────────── */
+  const heroRef = useCallback((node: HTMLDivElement | null) => {
+    heroNode.current = node;
+  }, []);
   useEffect(() => {
-    const el = heroRef.current;
-    if (!el || typeof IntersectionObserver === 'undefined') return;
-    const io = new IntersectionObserver(([e]) => e && setHeadlineVisible(e.isIntersecting));
+    const el = heroNode.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setHeroAbove(false);
+      return;
+    }
+    const io = new IntersectionObserver(([e]) => {
+      if (e) setHeroAbove(!e.isIntersecting && e.boundingClientRect.top < 0);
+    });
     io.observe(el);
     return () => io.disconnect();
+  }, [data, mobileView]);
+
+  // Lets the page hide its title block on a phone once the result is open (see simulateur/index.astro).
+  useEffect(() => {
+    const root = document.documentElement;
+    root.setAttribute('data-sim-view', mobileView);
+    return () => root.removeAttribute('data-sim-view');
   }, [mobileView]);
 
-  const seeDetail = useCallback(() => {
-    setMobileView('result');
-    // wait for the result zone to be displayed on phones
-    requestAnimationFrame(() => scrollToId('detail'));
+  const barVisible = !!data && !data.comparison.unsupported && heroAbove;
+  // WCAG 2.4.11: a focused control is never hidden behind the compact result bar.
+  useEffect(() => {
+    if (!barVisible) return;
+    const root = document.documentElement;
+    const previous = root.style.scrollPaddingBottom;
+    root.style.scrollPaddingBottom = '6rem';
+    return () => {
+      root.style.scrollPaddingBottom = previous;
+    };
+  }, [barVisible]);
+
+  const editAnswers = useCallback((target?: StepId) => {
+    setMobileView('form');
+    setStep(target ? Math.max(0, STEPS.indexOf(target)) : 0);
+    requestAnimationFrame(() => {
+      if (target && window.innerWidth >= 640) {
+        document
+          .querySelector<HTMLElement>(`[data-step="${target}"]`)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else scrollToId('situation');
+    });
   }, []);
-  const editAnswers = useCallback(() => {
+  const seeResult = useCallback(() => {
+    setMobileView('result');
+    requestAnimationFrame(() => scrollToId('resultat'));
+  }, []);
+  const requestFocus = useCallback((key: string) => {
+    setMobileView('form');
+    setStep(STEPS.indexOf(stepOfError(key)));
+    requestAnimationFrame(() => requestAnimationFrame(() => focusField(key)));
+  }, []);
+  const restart = useCallback(() => {
+    touched.current = false;
+    setFormRaw(emptyFormState());
+    setHypRaw(DEFAULT_HYP);
+    setPeriodRaw('steady');
+    setCommitted(null);
+    setShared(false);
+    setShowErrors(false);
+    setHashNotice(null);
     setMobileView('form');
     setStep(0);
-    requestAnimationFrame(() => scrollToId('situation'));
+    history.replaceState(null, '', `${location.pathname}${location.search}`);
+    window.scrollTo({ top: 0 });
   }, []);
 
-  const headline = comparison ? buildHeadline(comparison) : null;
-  const hypothesesCount = comparison?.activeHypotheses.length ?? 4;
+  const missing = useMemo(
+    () =>
+      Object.keys(parsed.errors).flatMap((key) => {
+        const label = missingLabels({ [key]: parsed.errors[key]! })[0]!;
+        return [{ key, label }];
+      }),
+    [parsed.errors],
+  );
+  const uniqueMissing = missing.filter((m, i, a) => a.findIndex((x) => x.label === m.label) === i);
 
-  const headlineProps = {
-    comparison,
-    period: committed.period,
-    stale,
-    invalid,
-    getUrl: buildUrl,
-    onSeeDetail: seeDetail,
-    onSeeHypotheses: () => {
-      setMobileView('result');
-      requestAnimationFrame(() => scrollToId('hypotheses'));
-    },
-    onResetPeriod: () => setPeriod('steady'),
-    hypothesesCount,
-  } as const;
+  const unsupported = !!data?.comparison.unsupported;
+  const sideHeadline = data && !unsupported ? buildHeadline(data.comparison, data.display) : null;
+
+  const resultEmpty = (
+    <EmptyResult
+      missing={uniqueMissing}
+      computing={computing}
+      onFocusField={requestFocus}
+      className="lg:hidden"
+    />
+  );
 
   return (
     <div className="wrap pb-24 lg:pb-16">
-      <div className="space-y-4 pb-6">
-        {hashNotice && (
+      <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {announce}
+      </p>
+
+      {hashNotice && (
+        <div className="pb-6">
           <Callout tone="note" title="Lien incomplet">
             <p>{hashNotice}</p>
           </Callout>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:items-start lg:gap-10">
         {/* ── Questions ─────────────────────────────────────────────────── */}
@@ -269,144 +318,113 @@ export default function Simulator() {
             form={form}
             setForm={setForm}
             errors={parsed.errors}
-            steps={steps}
-            step={stepIndex}
+            showErrors={showErrors}
+            onReveal={() => setShowErrors(true)}
+            step={step}
             onStep={setStep}
-            onFinish={seeDetail}
+            onFinish={seeResult}
             affinerOpen={affinerOpen}
           />
+          {/* below the large breakpoint the sidebar is absent: say what is missing right under the form */}
+          {!data && mobileView === 'form' && (
+            <div className="mt-5 max-sm:hidden lg:hidden">{resultEmpty}</div>
+          )}
         </div>
 
         {/* ── Live result (desktop sidebar) ─────────────────────────────── */}
         <aside aria-label="Résultat en direct" className="hidden lg:sticky lg:top-4 lg:block">
-          <Headline variant="side" {...headlineProps} />
+          {data && unsupported ? (
+            <EmptyResultUnsupported />
+          ) : data ? (
+            <SideCard
+              data={data}
+              period={committed?.period ?? period}
+              stale={stale}
+              onSeeDetail={() => scrollToId('resultat')}
+            />
+          ) : (
+            <EmptyResult
+              missing={uniqueMissing}
+              computing={computing}
+              onFocusField={requestFocus}
+            />
+          )}
         </aside>
       </div>
 
-      {/* ── Detailed result ─────────────────────────────────────────────── */}
+      {/* ── The result: layer 1 « en clair », layer 2 « le détail », layer 3 « pour aller plus loin » ── */}
       <div
-        id="detail"
+        id="resultat"
         tabIndex={-1}
         className={cn(
-          'mt-6 space-y-8 outline-none sm:mt-12 lg:mt-14',
+          'mt-6 outline-none sm:mt-12 lg:mt-14',
           mobileView === 'form' && 'max-sm:hidden',
+          !data && 'lg:hidden',
         )}
       >
-        <div ref={heroRef} className="space-y-3 lg:hidden">
-          <Button variant="ghost" size="sm" className="sm:hidden" onClick={editAnswers}>
-            ← Modifier mes réponses
-          </Button>
-          <Headline variant="hero" {...headlineProps} />
-        </div>
-
-        {comparison ? (
-          <div className={cn('space-y-8 transition-opacity duration-200', stale && 'opacity-70')}>
-            {comparison.warnings.length > 0 && (
-              <Callout tone="note" title="À savoir sur ce calcul">
-                <ul className="list-disc space-y-1 ps-5">
-                  {comparison.warnings.map((w) => (
-                    <li key={w}>{w}</li>
-                  ))}
-                </ul>
-              </Callout>
-            )}
-
-            <Waterfall comparison={comparison} periodLabel={periodLong(committed.period)} />
-            <HourOfWork
-              household={committed.household}
-              hypotheses={committed.hyp}
-              transfers={{
-                baseline: transfersOf(comparison.baseline),
-                plan: transfersOf(comparison.plan),
-              }}
-            />
-            <CompareTable comparison={comparison} />
-            <Unquantified
-              promises={comparison.unquantified.promises}
-              losses={comparison.unquantified.losses}
-            />
-            <Transition
-              household={committed.household}
-              hypotheses={committed.hyp}
-              period={committed.period}
-              onPick={(p) => {
-                setPeriod(p);
-                scrollToId('detail');
-              }}
-            />
-            <EarningsCurve
-              household={committed.household}
-              hypotheses={committed.hyp}
-              comparison={comparison}
-            />
-            <HypothesesSection value={hyp} onChange={setHyp} comparison={comparison} />
-            <NotModelled items={comparison.notModelled} />
-            <ShareSection getUrl={buildUrl}>
-              Moteur de calcul, version {PARAMS_META.engineVersion}. {PARAMS_META.baselineYear}.
-            </ShareSection>
-          </div>
-        ) : (
-          <Callout
-            tone="note"
-            title={computed.error ? 'Le calcul a échoué' : 'En attente de vos réponses'}
-          >
+        {data && committed ? (
+          <ResultView
+            data={data}
+            household={committed.household}
+            hyp={committed.hyp}
+            period={committed.period}
+            stale={stale}
+            shared={shared}
+            getUrl={buildUrl}
+            engineVersion={engine!.PARAMS_META.engineVersion}
+            baselineYear={engine!.PARAMS_META.baselineYear}
+            onEdit={editAnswers}
+            onRestart={restart}
+            onHyp={setHyp}
+            onPickPeriod={(p) => {
+              setPeriod(p);
+              scrollToId('resultat');
+            }}
+            heroRef={heroRef}
+            moreRef={moreRef}
+          />
+        ) : computed?.error ? (
+          <Callout tone="note" title="Le calcul a échoué">
             <p>
-              {computed.error
-                ? 'Une erreur est survenue pendant le calcul. Modifiez une réponse ou rechargez la page.'
-                : 'Complétez les champs signalés pour voir le détail.'}
+              Une erreur est survenue pendant le calcul. Modifiez une réponse ou rechargez la page.
             </p>
           </Callout>
-        )}
+        ) : mobileView === 'result' ? (
+          <div className="space-y-4">
+            <Button variant="ghost" size="sm" onClick={() => editAnswers()} className="sm:hidden">
+              ← Modifier mes réponses
+            </Button>
+            <EmptyResult
+              missing={uniqueMissing}
+              computing={computing}
+              onFocusField={requestFocus}
+            />
+          </div>
+        ) : null}
       </div>
 
-      {/* ── Compact live result (phones / tablets) ──────────────────────── */}
-      {headline && comparison && !headlineVisible && (
+      {/* ── Compact result bar (phones / tablets), only once the headline has scrolled away ── */}
+      {barVisible && sideHeadline && (
         <div
           data-testid="live-bar"
           className="fixed inset-x-0 bottom-0 z-40 border-t border-rule-strong bg-surface/95 px-4 py-2.5 shadow-[0_-4px_16px_rgb(0_0_0/0.08)] backdrop-blur lg:hidden"
         >
           <div className="mx-auto flex max-w-[var(--wrap)] items-center justify-between gap-3">
-            {/* On a phone, while answering, the full headline is not on screen: this bar is then the
-                one polite live region (never two at once). */}
-            <div
-              aria-live={phone && mobileView === 'form' ? 'polite' : undefined}
-              aria-atomic="true"
-              className="min-w-0 text-sm text-ink-2"
-            >
-              {phone && mobileView === 'form' && (
-                <span className="sr-only" data-testid="headline-sentence">
-                  {headlineSentence(comparison, committed.period)}
-                </span>
-              )}
-              <p aria-hidden={phone && mobileView === 'form' ? 'true' : undefined}>
-                <span className="block text-xs text-ink-3">Selon nos hypothèses</span>
-                <span
-                  className={cn(
-                    'num text-lg font-bold',
-                    headline.direction === 'gain' && 'text-gain',
-                    headline.direction === 'loss' && 'text-loss',
-                    headline.direction === 'flat' && 'text-ink',
-                  )}
-                >
-                  {headline.direction === 'flat' ? '≈ 0 €/mois' : headline.amount}
-                </span>{' '}
-                {headline.direction !== 'flat' && (
-                  <span className="text-ink-2">({headline.percent})</span>
+            <p className="min-w-0 text-sm text-ink-2">
+              <span className="block text-xs text-ink-3">{sideHeadline.basis}</span>
+              <span
+                className={cn(
+                  'num text-lg font-bold',
+                  sideHeadline.direction === 'gain' && 'text-gain',
+                  sideHeadline.direction === 'loss' && 'text-loss',
+                  sideHeadline.direction === 'flat' && 'text-ink',
                 )}
-              </p>
-            </div>
-            {mobileView === 'result' ? (
-              <Button size="sm" variant="secondary" onClick={editAnswers} className="sm:hidden">
-                Modifier
-              </Button>
-            ) : null}
-            <Button
-              size="sm"
-              variant="primary"
-              onClick={seeDetail}
-              className={cn(mobileView === 'result' && 'max-sm:hidden')}
-            >
-              Voir le détail
+              >
+                {sideHeadline.direction === 'flat' ? '≈ 0 €/mois' : sideHeadline.amount}
+              </span>
+            </p>
+            <Button size="sm" variant="secondary" onClick={() => editAnswers()}>
+              Modifier mes réponses
             </Button>
           </div>
         </div>
@@ -415,28 +433,16 @@ export default function Simulator() {
   );
 }
 
-function ShareSection({ getUrl, children }: { getUrl: () => string; children: ReactNode }) {
+/** Sidebar text when the household is outside the model: no figure, an explanation. */
+function EmptyResultUnsupported() {
   return (
-    <section
-      aria-labelledby="share-title"
-      className="card flex flex-wrap items-center justify-between gap-4"
-    >
-      <div className="min-w-0 max-w-xl space-y-1">
-        <h2 id="share-title" className="font-serif text-xl font-medium text-ink">
-          Partager ce résultat
-        </h2>
-        <p className="text-sm text-ink-2">
-          Le lien contient votre situation dans son adresse (après le « # »). Rien n’est envoyé à un
-          serveur : seule la personne qui ouvre le lien la verra.
-        </p>
-        <p className="text-xs text-ink-3">{children}</p>
-        <p className="pt-1 text-sm">
-          <a href={withBase('/simulateur/cas-types/')}>
-            Voir comment le plan touche d’autres foyers : qui gagne, qui perd ? →
-          </a>
-        </p>
-      </div>
-      <ShareButton getUrl={getUrl} variant="primary" />
-    </section>
+    <div data-testid="side-unsupported" className="card space-y-2">
+      <h2 className="eyebrow eyebrow-accent">Votre résultat</h2>
+      <p className="font-serif text-xl font-medium text-ink">Pas encore couvert</p>
+      <p className="text-[0.9375rem] text-ink-2">
+        Le revenu d’un indépendant ou d’un gérant majoritaire n’est pas modélisé : aucun chiffre
+        n’est affiché plutôt qu’un chiffre qui ne serait pas le vôtre.
+      </p>
+    </div>
   );
 }

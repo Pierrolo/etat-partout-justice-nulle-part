@@ -1,16 +1,31 @@
-import { ticks } from 'd3';
 import { useId, useMemo, useState, type CSSProperties } from 'react';
 import { Button, ChartFrame, SourceChip, TierBadge } from '@/components/ui';
 import { IconChevron, IconDown, IconUp } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
-import type { Comparison, Tier } from '@/lib/engine-types';
+import type { Tier } from '@/lib/engine-types';
 import { formatEuro, formatEuroDelta } from '@/lib/format';
+import { barBox, buildBridge, niceTicks, shownSteps, zeroLeft } from '@/lib/sim/result';
+import type { ResultData } from '@/lib/sim/state';
+import { withBase } from '@/lib/site';
 import { TIER_META } from '@/lib/tiers';
-import { barBox, buildBridge, displayFigures, zeroLeft } from '@/lib/sim/result';
+import { useWidth } from './useWidth';
 
-const SOURCES = [{ label: 'Moteur de calcul du simulateur', tier: 'law' as const }];
+/** The engine is not a source of law: neutral chip, and the tier of each line says how sure it is. */
+function sources() {
+  return [
+    { label: 'Moteur de calcul du simulateur' },
+    {
+      label: 'Hypothèses du simulateur',
+      tier: 'hypothesis' as const,
+      href: withBase('/methode/#registre'),
+    },
+  ];
+}
 
-/** Fill for a bar: solid (law), hatched + dashed outline (announced), dotted outline (hypothesis). */
+/**
+ * Fill for a bar: solid (amendment), hatched + dashed outline (promised), dotted outline (estimate).
+ * Every mark carries a border so it stays visible in forced-colors mode (where fills are repainted).
+ */
 function barStyle(tier: Tier, positive: boolean): CSSProperties {
   const c = positive ? 'var(--gain-mark)' : 'var(--loss-mark)';
   if (tier === 'announced')
@@ -24,35 +39,46 @@ function barStyle(tier: Tier, positive: boolean): CSSProperties {
       backgroundColor: `color-mix(in oklab, ${c} 38%, transparent)`,
       border: `2px dotted ${c}`,
     };
-  return { backgroundColor: c };
+  return { backgroundColor: c, border: `1.5px solid ${c}` };
 }
 
 const GRID =
-  'grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 gap-y-2 sm:grid-cols-[minmax(10rem,15rem)_minmax(0,1fr)_8.25rem]';
+  'grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 gap-y-2 lg:grid-cols-[minmax(10rem,15rem)_minmax(0,1fr)_8.25rem]';
+
+/** Axis labels never closer than this many px (the 820 px tablet case: « aujourd’hui » over « −200 € »). */
+const MIN_TICK_GAP = 72;
 
 export interface WaterfallProps {
-  comparison: Comparison;
-  /** Moves the cursor of the page: used to wire « Détailler cette année ». */
+  data: ResultData;
   periodLabel: string;
 }
 
-export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
+export function Waterfall({ data, periodLabel }: WaterfallProps) {
   const uid = useId();
-  const fig = useMemo(() => displayFigures(comparison), [comparison]);
-  const steps = useMemo(
-    () =>
-      comparison.waterfall.map((w, i) => ({ ...w, key: `${w.id}#${i}`, shown: fig.steps[i] ?? 0 })),
-    [comparison, fig],
-  );
+  const { comparison, display } = data;
+  const steps = useMemo(() => shownSteps(comparison, display), [comparison, display]);
   const bridge = useMemo(() => buildBridge(steps.map((s) => ({ ...s, delta: s.shown }))), [steps]);
   const [open, setOpen] = useState<Set<string>>(new Set());
   const allOpen = steps.length > 0 && open.size === steps.length;
+  const [axisRef, axisWidth] = useWidth<HTMLDivElement>();
 
   const axis = useMemo(() => {
-    const raw = ticks(bridge.min, bridge.max, 4).filter((t) => t >= bridge.min && t <= bridge.max);
-    return raw.map((t) => ({ t, left: barBox(bridge, t, t).left }));
-  }, [bridge]);
+    const px = axisWidth || 320;
+    const count = Math.max(2, Math.min(8, Math.floor(px / 90)));
+    const raw = niceTicks(bridge.min, bridge.max, count).filter(
+      (t) => t >= bridge.min && t <= bridge.max,
+    );
+    const all = raw.map((t) => ({ t, left: barBox(bridge, t, t).left }));
+    // keep a label only if it sits far enough from the previous kept one
+    const kept: typeof all = [];
+    for (const a of all) {
+      const prev = kept[kept.length - 1];
+      if (!prev || ((a.left - prev.left) / 100) * px >= MIN_TICK_GAP) kept.push(a);
+    }
+    return kept;
+  }, [bridge, axisWidth]);
   const zero = zeroLeft(bridge);
+  const final = barBox(bridge, 0, bridge.total);
 
   const toggle = (id: string) =>
     setOpen((s) => {
@@ -72,8 +98,8 @@ export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
   );
   const summary = (
     <>
-      Votre revenu disponible passe de {formatEuro(fig.baseline)} à {formatEuro(fig.plan)} par mois
-      ({formatEuroDelta(fig.delta)}).{' '}
+      Votre revenu disponible passe de {formatEuro(display.baselineAfterTva)} à{' '}
+      {formatEuro(display.planAfterTva)} par mois ({formatEuroDelta(display.deltaAfterTva)}).{' '}
       {best
         ? `La plus forte hausse vient de « ${best.label} » (${formatEuroDelta(best.shown)}). `
         : 'Aucune ligne n’augmente pour ce foyer. '}
@@ -85,11 +111,11 @@ export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
 
   return (
     <ChartFrame
-      headingLevel={2}
+      headingLevel={3}
       title="Ce qui change, ligne par ligne"
-      subtitle={`Du revenu disponible d’aujourd’hui à celui avec le plan — ${periodLabel.toLowerCase()}. Touchez une ligne pour voir le calcul.`}
+      subtitle={`De votre revenu d’aujourd’hui à celui avec le plan (${periodLabel.toLowerCase()}). Touchez une ligne pour voir le calcul.`}
       summary={summary}
-      sources={SOURCES}
+      sources={sources()}
       csvFileName="cascade-avant-apres.csv"
       table={{
         caption: 'Écart de revenu disponible par ligne, en euros par mois',
@@ -101,7 +127,7 @@ export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
             numeric: true,
             format: (v) => formatEuroDelta(Number(v)),
           },
-          { key: 'tier', label: 'Niveau de preuve' },
+          { key: 'tier', label: 'Niveau de certitude' },
           { key: 'before', label: 'Calcul aujourd’hui' },
           { key: 'after', label: 'Calcul avec le plan' },
         ],
@@ -113,7 +139,7 @@ export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
           after: s.formulaAfter,
         })),
       }}
-      note="Les montants sont arrondis à 5 € près ; les écarts s’additionnent exactement au résultat. Les lignes hachurées sont annoncées par les auteurs sans texte de loi ; les lignes pointillées reposent sur une hypothèse du simulateur."
+      note="Montants arrondis à 5 € près ; les écarts s’additionnent exactement au résultat. Lignes hachurées : promises par les auteurs sans texte précis. Lignes pointillées : notre estimation."
     >
       <div className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
@@ -141,21 +167,32 @@ export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
           )}
         </div>
 
-        {/* axis: scale in € relative to today's income */}
+        {/* axis: scale in € relative to today's income. Its own row; labels are thinned to fit the track. */}
         <div className={cn(GRID, 'items-end')} aria-hidden="true">
-          <span className="hidden sm:block" />
-          <div className="relative col-span-2 h-5 text-xs text-ink-3 sm:col-span-1 sm:col-start-2">
+          <span className="hidden lg:block" />
+          <div
+            ref={axisRef}
+            data-testid="waterfall-axis"
+            className="relative col-span-2 h-5 overflow-hidden text-xs text-ink-3 lg:col-span-1 lg:col-start-2"
+          >
             {axis.map(({ t, left }) => (
               <span
                 key={t}
-                className="num absolute -translate-x-1/2 whitespace-nowrap"
-                style={{ left: `${left}%` }}
+                className="num absolute whitespace-nowrap"
+                style={{
+                  left: `${left}%`,
+                  transform: `translateX(${left < 8 ? '0%' : left > 90 ? '-100%' : '-50%'})`,
+                }}
               >
-                {t === 0 ? 'aujourd’hui' : formatEuroDelta(t)}
+                {t === 0 ? '0' : formatEuroDelta(t)}
               </span>
             ))}
           </div>
         </div>
+        <p className="-mt-2 text-xs text-ink-3" aria-hidden="true">
+          0 = votre revenu disponible d’aujourd’hui ; chaque barre ajoute ou retire de l’argent à
+          partir de là.
+        </p>
 
         <ol className="border-t border-rule">
           {steps.map((s, i) => {
@@ -173,7 +210,7 @@ export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
                   onClick={() => toggle(s.key)}
                   className={cn(
                     GRID,
-                    'w-full cursor-pointer items-center rounded-sm py-3 text-start hover:bg-sunken/60',
+                    'w-full cursor-pointer items-center rounded-sm py-2.5 text-start hover:bg-sunken/60 lg:py-3',
                   )}
                 >
                   <span className="col-start-1 row-start-1 min-w-0 text-[0.9375rem] font-medium text-ink">
@@ -185,7 +222,7 @@ export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
                   <Track
                     axis={axis}
                     zero={zero}
-                    className="col-span-2 row-start-2 sm:col-span-1 sm:col-start-2 sm:row-start-1"
+                    className="col-span-2 row-start-2 lg:col-span-1 lg:col-start-2 lg:row-start-1"
                   >
                     <span
                       className="absolute top-1/2 h-4 -translate-y-1/2 rounded-[4px]"
@@ -196,7 +233,7 @@ export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
                       }}
                     />
                   </Track>
-                  <span className="col-start-2 row-start-1 flex items-center justify-end gap-2 sm:col-start-3">
+                  <span className="col-start-2 row-start-1 flex items-center justify-end gap-2 lg:col-start-3">
                     <span
                       className={cn(
                         'num inline-flex items-center gap-1 text-base font-bold',
@@ -223,7 +260,7 @@ export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
                 <div
                   id={panel}
                   hidden={!isOpen}
-                  className="mb-3 space-y-3 rounded-md bg-sunken/60 p-4 text-sm text-ink-2 sm:ms-0"
+                  className="mb-3 space-y-3 rounded-md bg-sunken/60 p-4 text-sm text-ink-2"
                 >
                   <dl className="grid gap-3 sm:grid-cols-2">
                     <div>
@@ -241,8 +278,8 @@ export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
                   </dl>
                   <div className="flex flex-wrap items-center gap-2">
                     <TierBadge tier={s.tier} size="sm" />
-                    {s.sources.map((src, i) => (
-                      <SourceChip key={i} label={src.label} href={src.url} />
+                    {s.sources.map((src, k) => (
+                      <SourceChip key={k} label={src.label} href={src.url} />
                     ))}
                   </div>
                 </div>
@@ -262,35 +299,18 @@ export function Waterfall({ comparison, periodLabel }: WaterfallProps) {
             <Track
               axis={axis}
               zero={zero}
-              className="col-span-2 row-start-2 sm:col-span-1 sm:col-start-2 sm:row-start-1"
+              className="col-span-2 row-start-2 lg:col-span-1 lg:col-start-2 lg:row-start-1"
             >
               <span
-                className="absolute top-1/2 h-4 -translate-y-1/2 rounded-[4px] bg-accent"
-                style={{
-                  left: `${barBox(bridge, 0, bridge.total).left}%`,
-                  width: `${barBox(bridge, 0, bridge.total).width}%`,
-                }}
+                className="absolute top-1/2 h-4 -translate-y-1/2 rounded-[4px] border-[1.5px] border-accent bg-accent"
+                style={{ left: `${final.left}%`, width: `${final.width}%` }}
               />
             </Track>
-            <span className="num col-start-2 row-start-1 text-end font-serif text-xl font-medium text-ink sm:col-start-3">
-              {formatEuro(fig.plan)}
+            <span className="num col-start-2 row-start-1 text-end font-serif text-xl font-medium text-ink lg:col-start-3">
+              {formatEuro(display.planAfterTva)}
             </span>
           </li>
         </ol>
-        <p className="text-sm text-ink-2">
-          <span className="font-semibold text-ink">Aujourd’hui :</span> {formatEuro(fig.baseline)}{' '}
-          par mois. <span className="font-semibold text-ink">Avec le plan :</span>{' '}
-          {formatEuro(fig.plan)} par mois, soit{' '}
-          <span
-            className={cn(
-              'font-semibold',
-              fig.delta > 0 ? 'text-gain' : fig.delta < 0 ? 'text-loss' : 'text-ink',
-            )}
-          >
-            {formatEuroDelta(fig.delta)}
-          </span>
-          .
-        </p>
       </div>
     </ChartFrame>
   );
@@ -308,7 +328,7 @@ function Track({
   children: React.ReactNode;
 }) {
   return (
-    <span aria-hidden="true" className={cn('relative block h-7', className)}>
+    <span aria-hidden="true" className={cn('relative block h-6 lg:h-7', className)}>
       {axis
         .filter((a) => a.t !== 0)
         .map((a) => (
@@ -330,7 +350,7 @@ function Track({
 function Key({ tier }: { tier: Tier }) {
   const swatch: CSSProperties =
     tier === 'law'
-      ? { backgroundColor: 'var(--ink-2)' }
+      ? { backgroundColor: 'var(--ink-2)', border: '1.5px solid var(--ink-2)' }
       : tier === 'announced'
         ? {
             backgroundImage:
@@ -344,7 +364,8 @@ function Key({ tier }: { tier: Tier }) {
   return (
     <li className="flex items-center gap-1.5">
       <span aria-hidden="true" className="inline-block h-3 w-6 rounded-[3px]" style={swatch} />
-      {TIER_META[tier].label}
+      <span className="sm:hidden">{TIER_META[tier].short}</span>
+      <span className="hidden sm:inline">{TIER_META[tier].label}</span>
     </li>
   );
 }

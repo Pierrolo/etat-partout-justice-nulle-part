@@ -170,11 +170,11 @@ export function InputForm({
               sectionRefs.current[id] = el;
             }}
             tabIndex={-1}
-            className="flex items-center gap-3 font-serif text-xl font-medium text-ink outline-none sm:text-2xl"
+            className="step-title flex items-center gap-3 font-serif text-xl font-medium text-ink outline-none sm:text-2xl"
           >
             <span
               aria-hidden="true"
-              className="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent-soft font-sans text-sm font-bold text-accent"
+              className="step-num flex size-7 shrink-0 items-center justify-center rounded-full bg-accent-soft font-sans text-sm font-bold text-accent"
             >
               {n}
             </span>
@@ -186,7 +186,8 @@ export function InputForm({
     </section>
   );
 
-  const owner = form.housing.status === 'proprietaire' || form.housing.status === 'proprietaire_credit';
+  const owner =
+    form.housing.status === 'proprietaire' || form.housing.status === 'proprietaire_credit';
 
   return (
     <div className="space-y-5">
@@ -267,7 +268,8 @@ export function InputForm({
                         label="Enfant handicapé (AEEH)"
                         hint={
                           <>
-                            Allocation d’éducation de l’enfant handicapé (<Term id="aeeh">AEEH</Term>
+                            Allocation d’éducation de l’enfant handicapé (
+                            <Term id="aeeh">AEEH</Term>
                             ).
                           </>
                         }
@@ -514,7 +516,9 @@ export function InputForm({
                     { value: '3', label: <ZoneLabel text="Zone 3" /> },
                     { value: 'inconnue', label: <ZoneLabel text="Je ne sais pas" /> },
                   ]}
-                  value={form.housing.zone === null ? null : (`${form.housing.zone}` as `${ZoneAnswer}`)}
+                  value={
+                    form.housing.zone === null ? null : (`${form.housing.zone}` as `${ZoneAnswer}`)
+                  }
                   onChange={(z) =>
                     set({
                       housing: {
@@ -538,10 +542,11 @@ export function InputForm({
         'Vos aides',
         <>
           <p className="text-[0.9375rem] text-ink-2">
-            Vous n’avez rien à saisir : nous calculons pour vous le{' '}
-            <Term id="rsa">RSA</Term>, la <Term id="prime-activite">prime d’activité</Term>, les
-            aides au logement et les allocations familiales. Dans le résultat, vous verrez la
-            liste de ces aides, avec la raison quand l’une d’elles est à 0 €.
+            Vous n’avez rien à saisir : nous calculons pour vous le <Term id="rsa">RSA</Term>
+            {', la '}
+            <Term id="prime-activite">prime d’activité</Term>, les aides au logement et les
+            allocations familiales. Dans le résultat, vous verrez la liste de ces aides, avec la
+            raison quand l’une d’elles est à 0 €.
           </p>
           <Checkbox
             label="Je ne touche pas ces aides"
@@ -681,7 +686,11 @@ function Refine({
       {salaried.map((i) => (
         <SegmentedControl
           key={i}
-          legend={couple ? `Temps de travail ${i === 0 ? 'de votre part' : 'de votre conjoint·e'}` : 'Temps de travail'}
+          legend={
+            couple
+              ? `Temps de travail ${i === 0 ? 'de votre part' : 'de votre conjoint·e'}`
+              : 'Temps de travail'
+          }
           hint="Votre salaire reste celui que vous indiquez : cette information sert surtout à calculer votre heure de travail."
           options={[...WORK_RATIOS]}
           value={ratioKey(form.adults[i]!.workRatio)}
@@ -692,7 +701,11 @@ function Refine({
         <div key={i} data-field={`adult${i}.pensionYear`}>
           <NumberInput
             id={`a${i}-pension-year`}
-            label={couple ? `Année de départ à la retraite ${i === 0 ? '(vous)' : '(votre conjoint·e)'}` : 'Année de départ à la retraite'}
+            label={
+              couple
+                ? `Année de départ à la retraite ${i === 0 ? '(vous)' : '(votre conjoint·e)'}`
+                : 'Année de départ à la retraite'
+            }
             hint="Laissez vide si vous êtes déjà à la retraite. Le plan traite différemment les retraites qui ne commenceraient qu’à partir du 1er janvier 2028."
             value={form.adults[i]!.pensionStartYear}
             onChange={(pensionStartYear) => patchAdult(i, { pensionStartYear })}

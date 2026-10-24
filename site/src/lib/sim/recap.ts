@@ -148,7 +148,9 @@ export function buildRecap(h: Household): RecapGroup[] {
   const aides: string[] = [];
   if (h.benefits.nonRecours) aides.push('ne touche pas les aides auxquelles elle a droit');
   else if (h.benefits.cafOverrideMonthly !== undefined)
-    aides.push(`total versé par la CAF indiqué : ${formatEuro(h.benefits.cafOverrideMonthly)} par mois`);
+    aides.push(
+      `total versé par la CAF indiqué : ${formatEuro(h.benefits.cafOverrideMonthly)} par mois`,
+    );
   else aides.push('aides calculées par le simulateur');
   const e = h.extras;
   if (e?.emploiDomicileAnnual !== undefined)

@@ -18,12 +18,48 @@ function walk(dir: string, out: string[] = []): string[] {
 describe('glossaire', () => {
   it('couvre les sigles demandés (identifiants ou alias)', () => {
     const required = [
-      'afu', 'csg', 'crds', 'rsa', 'prime-activite', 'apl', 'af', 'cf', 'ars', 'asf', 'paje', 'cmg',
-      'aah', 'aeeh', 'aspa', 'cee', 'tva', 'quotient-familial', 'decote', 'revenu-disponible',
-      'revenu-net-imposable', 'foyer-fiscal', 'menage', 'zone-1', 'zone-2', 'zone-3',
-      'taux-marginal', 'niche-fiscale', 'plf', 'plfss', 'amendement', 'liasse', 'cofog', 'cep',
-      'compte-education', 'bouclier-sanitaire', 'cotisations', 'cout-employeur', 'cnracl',
-      'fonctionnaire', 'dirigeant-assimile', 'tns',
+      'afu',
+      'csg',
+      'crds',
+      'rsa',
+      'prime-activite',
+      'apl',
+      'af',
+      'cf',
+      'ars',
+      'asf',
+      'paje',
+      'cmg',
+      'aah',
+      'aeeh',
+      'aspa',
+      'cee',
+      'tva',
+      'quotient-familial',
+      'decote',
+      'revenu-disponible',
+      'revenu-net-imposable',
+      'foyer-fiscal',
+      'menage',
+      'zone-1',
+      'zone-2',
+      'zone-3',
+      'taux-marginal',
+      'niche-fiscale',
+      'plf',
+      'plfss',
+      'amendement',
+      'liasse',
+      'cofog',
+      'cep',
+      'compte-education',
+      'bouclier-sanitaire',
+      'cotisations',
+      'cout-employeur',
+      'cnracl',
+      'fonctionnaire',
+      'dirigeant-assimile',
+      'tns',
     ];
     for (const id of required) expect(lookupTerm(id), id).toBeDefined();
   });
@@ -44,7 +80,9 @@ describe('glossaire', () => {
     for (const [id, v] of Object.entries(raw as Record<string, unknown>)) {
       if (id.startsWith('_')) continue;
       for (const key of [id, ...((v as { aliases?: string[] }).aliases ?? [])]) {
-        expect(seen.has(key), `« ${key} » défini deux fois (${seen.get(key)} et ${id})`).toBe(false);
+        expect(seen.has(key), `« ${key} » défini deux fois (${seen.get(key)} et ${id})`).toBe(
+          false,
+        );
         seen.set(key, id);
       }
     }

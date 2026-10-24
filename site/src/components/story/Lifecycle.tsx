@@ -3,6 +3,7 @@ import { useId, useMemo, useState } from 'react';
 import { ChartFrame } from '@/components/ui/ChartFrame';
 import { SegmentedControl } from '@/components/ui/SegmentedControl';
 import type { ChipProps } from '@/lib/facts';
+import { TIER_META } from '@/lib/tiers';
 import { formatEuro, formatInteger } from '@/lib/format';
 import type { LifeRow, LifeSeries, LifeSeriesId } from '@/lib/plan-data';
 import { useWidth } from './useWidth';
@@ -96,6 +97,8 @@ export function Lifecycle({
       );
     }
     return out;
+    // `ids` is rebuilt on every render from the same `on` selection: its content (joined) is the real dependency.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rows, ids.join()]);
 
   const areaGen = area<{ age: number; y0: number; y1: number }>()
@@ -123,7 +126,7 @@ export function Lifecycle({
     <div className="space-y-4">
       <div className="card bg-sunken">
         <SegmentedControl<Mode>
-          legend="Pour quelle personne ?"
+          legend="Pour quelle personne ?"
           size="sm"
           value={mode}
           onChange={setMode}
@@ -137,8 +140,8 @@ export function Lifecycle({
       <ChartFrame
         headingLevel={2}
         title="Ce que le plan verserait à une personne, de 0 à 85 ans"
-        subtitle="Euros par an et par personne, empilés par dispositif. Plein = écrit dans la loi ; hachuré = annoncé par les auteurs, sans texte de loi."
-        summary={`Une personne sans handicap recevrait ${formatEuro(sum(birth))} par an à la naissance, dont ${formatEuro(birth.aide_fondamentale)} écrits dans la loi (l’aide fondamentale de l’enfant) ; dès ${adultAge} ans, ${formatEuro(sum(adult))} par an, dont ${formatEuro(adult.aide_fondamentale)} dans la loi ; dès ${retireAge} ans, ${formatEuro(sum(retired))} par an, avec une part contributive de retraite annoncée. Tout ce qui est hachuré repose sur des promesses non chiffrées dans les textes.`}
+        subtitle="Euros par an et par personne, empilés par dispositif. Plein = proposé dans un amendement ; hachuré = promis par les auteurs, sans texte précis."
+        summary={`Une personne sans handicap recevrait ${formatEuro(sum(birth))} par an à la naissance, dont ${formatEuro(birth.aide_fondamentale)} proposés dans un amendement (l’aide fondamentale de l’enfant) ; dès ${adultAge} ans, ${formatEuro(sum(adult))} par an, dont ${formatEuro(adult.aide_fondamentale)} dans un amendement ; dès ${retireAge} ans, ${formatEuro(sum(retired))} par an, avec une part contributive de retraite promise. Tout ce qui est hachuré repose sur des promesses non chiffrées dans les textes.`}
         sources={sources.map((s) => ({ ...s }))}
         table={{
           columns: [
@@ -166,7 +169,7 @@ export function Lifecycle({
           caption: 'Montants annuels par âge et par dispositif',
         }}
         csvFileName="plan-cycle-de-vie.csv"
-        note={`Les deux séries « épargne retraite personnelle » du classeur (${formatEuro(retired.epargne_retraite_serie_1 ?? 0)} et ${formatEuro(retired.epargne_retraite_serie_2 ?? 0)} par an dès ${retireAge} ans) ne sont pas tracées : leur sens, stock ou flux, n’est pas documenté. Elles figurent dans le tableau. L’aide fondamentale de l’enfant cesse l’année de ses ${adultAge} ans ; le compte éducation court un an de plus.`}
+        note={`Les deux séries « épargne retraite personnelle » du classeur (${formatEuro(retired.epargne_retraite_serie_1 ?? 0)} et ${formatEuro(retired.epargne_retraite_serie_2 ?? 0)} par an dès ${retireAge} ans) ne sont pas tracées : leur sens, stock ou flux, n’est pas documenté. Elles figurent dans le tableau. L’aide fondamentale de l’enfant cesse l’année de ses ${adultAge} ans ; le compte éducation court un an de plus.`}
       >
         <ul className="mb-3 flex flex-wrap gap-x-5 gap-y-2" aria-label="Légende">
           {ids.map((id) => {
@@ -185,7 +188,9 @@ export function Lifecycle({
                 </svg>
                 <span>
                   <span className="font-semibold text-ink">{SHORT[id]}</span>{' '}
-                  <span className="text-ink-3">· {t === 'law' ? 'loi' : 'annoncé'}</span>
+                  <span className="text-ink-3">
+                    · {t === 'law' ? TIER_META.law.short : TIER_META.announced.short}
+                  </span>
                 </span>
               </li>
             );
@@ -195,7 +200,7 @@ export function Lifecycle({
         <div ref={ref}>
           <svg
             role="img"
-            aria-label="Aires empilées : montants annuels versés selon l’âge, de 0 à 85 ans"
+            aria-label="Aires empilées : montants annuels versés selon l’âge, de 0 à 85 ans"
             width={width}
             height={height}
             viewBox={`0 0 ${width} ${height}`}
@@ -300,26 +305,28 @@ export function Lifecycle({
             className="rounded-md bg-sunken p-3 text-[0.9375rem] text-ink-2 sm:p-4"
           >
             <p className="font-semibold text-ink">
-              À {age} {age > 1 ? 'ans' : 'an'} : {formatEuro(curTotal)} par an
+              À {age} {age > 1 ? 'ans' : 'an'}&#8239;: {formatEuro(curTotal)} par an
             </p>
             <p className="mt-0.5">
               {parts.map((id, i) => (
                 <span key={id}>
                   {SHORT[id]} {formatEuro(cur[id])}{' '}
-                  <span className="text-ink-3">({tierOf(id) === 'law' ? 'loi' : 'annoncé'})</span>
+                  <span className="text-ink-3">
+                    ({tierOf(id) === 'law' ? TIER_META.law.short : TIER_META.announced.short})
+                  </span>
                   {i < parts.length - 1 ? ' + ' : '.'}
                 </span>
               ))}
             </p>
             {announcedOnly > 0 && (
               <p className="mt-1 text-sm text-ink-3">
-                Dont {formatEuro(announcedOnly)} annoncés, sans texte de loi.
+                Dont {formatEuro(announcedOnly)} promis, sans texte précis.
               </p>
             )}
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor={`${uid}-age`} className="text-sm font-semibold text-ink">
-              Âge affiché : {age} ans
+              Âge affiché : {age} ans
             </label>
             <input
               id={`${uid}-age`}
@@ -329,7 +336,7 @@ export function Lifecycle({
               step={1}
               value={age}
               onChange={(e) => setAge(Number(e.target.value))}
-              aria-valuetext={`${age} ans : ${formatEuro(curTotal)} par an`}
+              aria-valuetext={`${age} ans : ${formatEuro(curTotal)} par an`}
               className="h-11 w-full accent-[var(--accent)]"
             />
           </div>

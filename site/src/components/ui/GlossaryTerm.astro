@@ -23,28 +23,26 @@ store.glossCount = (store.glossCount ?? 0) + 1;
 const uid = `gloss-${id}-${store.glossCount}`;
 ---
 
-{
-  entry ? (
-    <span class="gloss" data-gloss={entry.id}>
-      <button
-        type="button"
-        class="gloss-btn"
-        aria-expanded="false"
-        aria-controls={uid}
-        data-term={entry.term}
-        data-definition={entry.definition}
-        data-href={href}
-        title={`${entry.term}\u202F: ${entry.definition}`}
-      >
-        <slot />
-        <span class="sr-only"> (définition)</span>
-      </button>
-      <span id={uid} class="gloss-live" role="status" />
-    </span>
-  ) : (
-    <slot />
-  )
-}
+{entry ? (
+  <span class="gloss" data-gloss={entry.id}>
+    <button
+      type="button"
+      class="gloss-btn"
+      aria-expanded="false"
+      aria-controls={uid}
+      data-term={entry.term}
+      data-definition={entry.definition}
+      data-href={href}
+      title={`${entry.term}\u202F: ${entry.definition}`}
+    >
+      <slot />
+      <span class="sr-only"> (définition)</span>
+    </button>
+    <span id={uid} class="gloss-live" role="status" />
+  </span>
+) : (
+  <slot />
+)}
 
 <script>
   import { initGlossary } from '@/lib/glossary-client';

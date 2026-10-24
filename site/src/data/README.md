@@ -1,6 +1,6 @@
 # Données du site (`site/src/data/`)
 
-Ces fichiers JSON sont **générés** par `pipeline/build.py` (Python 3, bibliothèque standard seulement). Ne pas les modifier à la main : relancer le pipeline.
+Ces fichiers JSON sont **générés** par `pipeline/build.py` (seule exception, écrite à la main : `glossaire.json`, les définitions des sigles du site) (Python 3, bibliothèque standard seulement). Ne pas les modifier à la main : relancer le pipeline.
 
 ```sh
 python3 -I pipeline/build.py              # reconstruit les 12 fichiers + manifest.json, puis valide

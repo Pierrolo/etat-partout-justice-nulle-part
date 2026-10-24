@@ -129,14 +129,14 @@ export function DepensesExplorer({
             ? denominatorNotes.foyer
             : unit === 'habitant-an'
               ? denominatorNotes.habitant
-              : `Montant national des administrations publiques en ${year} : ${formatMdEuro(tree.value)}.`}
+              : `Montant national des administrations publiques en ${year} : ${formatMdEuro(tree.value)}.`}
         </p>
       </div>
 
       <ChartFrame
-        title={`Où vont les ${formatMdEuro(tree.value)} de dépenses publiques ?`}
-        subtitle={`Surface proportionnelle au montant, ${year} · unité : ${UNIT_SHORT[unit]}. Six groupes du livre, puis leurs postes, puis les fonctions COFOG de l’Insee.`}
-        summary={`« ${GROUP_SHORT[top.id] ?? top.label} » pèse ${formatPercentPoints((top.value / tree.value) * 100, { decimals: 0 })} de la dépense (${formatMdEuro(top.value)}).${
+        title={`Où vont les ${formatMdEuro(tree.value)} de dépenses publiques ?`}
+        subtitle={`Surface proportionnelle au montant, ${year} · unité : ${UNIT_SHORT[unit]}. Six groupes du livre, puis leurs postes, puis les fonctions COFOG de l’Insee.`}
+        summary={`« ${GROUP_SHORT[top.id] ?? top.label} » pèse ${formatPercentPoints((top.value / tree.value) * 100, { decimals: 0 })} de la dépense (${formatMdEuro(top.value)}).${
           secu
             ? ` La sécurité — défense, police, justice — en représente ${formatPercentPoints((secu.value / tree.value) * 100, { decimals: 1 })}.`
             : ''
@@ -170,7 +170,7 @@ export function DepensesExplorer({
                 <DataTable
                   columns={columns}
                   rows={rows}
-                  caption={`Dépenses publiques ${year} par fonction : montants dans les quatre unités`}
+                  caption={`Dépenses publiques ${year} par fonction : montants dans les quatre unités`}
                   className="max-h-[32rem] overflow-y-auto [&_thead_th]:sticky [&_thead_th]:top-0"
                 />
               ),

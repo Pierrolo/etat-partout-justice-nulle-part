@@ -55,9 +55,9 @@ export const timeOf = (iso: string): number => utc(iso).getTime();
 export function precisionNote(precision: string): string | null {
   switch (precision) {
     case 'annee':
-      return 'Année sans jour précis : le 1er janvier est retenu par convention.';
+      return 'Année sans jour précis : le 1er janvier est retenu par convention.';
     case 'approx':
-      return 'Point de départ non daté dans le texte (« lendemain de la publication de la loi »).';
+      return 'Point de départ non daté dans le texte (« lendemain de la publication de la loi »).';
     default:
       return null;
   }

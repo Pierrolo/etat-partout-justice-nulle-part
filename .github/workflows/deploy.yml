@@ -1,7 +1,10 @@
 name: Deploy to GitHub Pages
 
+# Deploys only after the CI workflow succeeded on main (lint, typecheck, unit, pipeline check, build, e2e).
 on:
-  push:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
     branches: [main]
   workflow_dispatch:
 
@@ -19,23 +22,33 @@ env:
 
 jobs:
   build:
+    # Manual runs are allowed; automatic ones need a green CI on the commit being deployed.
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          # the commit CI validated, not whatever main became since
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm typecheck
-      - run: pnpm test
+      - name: Site origin, lower-cased (GitHub owners are case-insensitive, canonical URLs are not)
+        run: echo "SITE_URL=https://${GITHUB_REPOSITORY_OWNER,,}.github.io" >> "$GITHUB_ENV"
       - name: Build (served from /<repo>/ on GitHub Pages)
         run: pnpm build
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
-          SITE_URL: https://${{ github.repository_owner }}.github.io
+      - name: Check canonical, sitemap and robots
+        run: |
+          grep -q 'rel="canonical" href="'"$SITE_URL"'/' site/dist/index.html
+          test -f site/dist/sitemap-index.xml
+          ! grep -q styleguide site/dist/sitemap-0.xml
+          grep -q '^Sitemap: ' site/dist/robots.txt
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site/dist

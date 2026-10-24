@@ -44,6 +44,7 @@ const others = all.filter((d) => !(FEATURED_DISCREPANCIES as readonly string[]).
 const foyers = foyerDenominators();
 const gdp = impliedGdpMd();
 const pct = (v: number) => formatPercentPoints(v, { decimals: 2 });
+const pct1 = (v: number) => formatPercentPoints(v, { decimals: 1 });
 ---
 
 <BaseLayout
@@ -59,13 +60,13 @@ const pct = (v: number) => formatPercentPoints(v, { decimals: 2 });
   <div class="wrap pb-6">
     <p class="text-sm text-ink-3">
       Moteur de calcul, version <strong class="text-ink">{ENGINE_VERSION}</strong>. Le code, les
-      données et les paramètres sont publics :
+      données et les paramètres sont publics :
       <a href={SITE.repo}>dépôt du projet</a>.
     </p>
     <h2 class="mt-8 text-xl text-ink">Comment lire les étiquettes</h2>
     <p class="mt-2 mb-4 max-w-2xl text-ink-2">
       Chaque chiffre du site porte l’un de ces trois statuts, avec la même présentation partout.
-      C’est la règle centrale : ne jamais faire passer une promesse pour un texte voté.
+      C’est la règle centrale : ne jamais faire passer une promesse pour un texte voté.
     </p>
     <TierLegend />
   </div>
@@ -73,37 +74,35 @@ const pct = (v: number) => formatPercentPoints(v, { decimals: 2 });
   <div class="wrap grid gap-8 lg:grid-cols-[14rem_1fr] lg:gap-16">
     <div class="lg:sticky lg:top-6 lg:self-start">
       <details class="rounded-md border border-rule bg-surface px-4 lg:hidden">
-        <summary class="min-h-11 cursor-pointer py-3 font-semibold text-ink">Sur cette page</summary>
+        <summary class="min-h-11 cursor-pointer py-3 font-semibold text-ink">
+          Sur cette page
+        </summary>
         <ul class="space-y-1 pb-3 text-sm">
-          {
-            toc.map((s) => (
-              <li>
-                <a
-                  href={`#${s.id}`}
-                  class="inline-flex min-h-8 items-center text-ink-2 no-underline hover:text-ink hover:underline"
-                >
-                  {s.label}
-                </a>
-              </li>
-            ))
-          }
+          {toc.map((s) => (
+            <li>
+              <a
+                href={`#${s.id}`}
+                class="inline-flex min-h-8 items-center text-ink-2 no-underline hover:text-ink hover:underline"
+              >
+                {s.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </details>
       <nav aria-label="Sur cette page" class="hidden lg:block">
         <p class="eyebrow mb-3">Sur cette page</p>
         <ul class="space-y-1 text-sm">
-          {
-            toc.map((s) => (
-              <li>
-                <a
-                  href={`#${s.id}`}
-                  class="inline-flex min-h-8 items-center text-ink-2 no-underline hover:text-ink hover:underline"
-                >
-                  {s.label}
-                </a>
-              </li>
-            ))
-          }
+          {toc.map((s) => (
+            <li>
+              <a
+                href={`#${s.id}`}
+                class="inline-flex min-h-8 items-center text-ink-2 no-underline hover:text-ink hover:underline"
+              >
+                {s.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
     </div>
@@ -112,69 +111,102 @@ const pct = (v: number) => formatPercentPoints(v, { decimals: 2 });
       <Fragment set:html={before} />
 
       <!-- Écarts entre sources : « par foyer » d’abord (le plus trompeur), puis le reste -->
-      <h3 id="foyers">Les quatre « foyers » du livre</h3>
+      <h3 id="foyers">Les quatre « foyers » du livre</h3>
       <p>
-        Le livre ne définit pas son « foyer » : il en emploie quatre selon la page. Un montant « par
-        foyer » n’a donc de sens qu’avec son dénominateur, et deux montants « par foyer » de sources
+        Le livre ne définit pas son « foyer » : il en emploie quatre selon la page. Un montant « par
+        foyer » n’a donc de sens qu’avec son dénominateur, et deux montants « par foyer » de sources
         différentes ne se comparent pas.
       </p>
-      <div class="table-scroll" role="region" aria-label="Tableau : les dénominateurs par foyer" tabindex="0">
+      <div
+        class="table-scroll"
+        role="region"
+        aria-label="Tableau : les dénominateurs par foyer"
+        tabindex="0"
+      >
         <table class="data-table methode-table">
           <thead>
             <tr>
               <th scope="col">Où le livre l’emploie</th>
-              <th scope="col" data-numeric>Foyers (millions)</th>
+              <th scope="col" data-numeric>
+                Foyers (millions)
+              </th>
               <th scope="col">D’où vient ce nombre</th>
             </tr>
           </thead>
           <tbody>
-            {
-              foyers.map((r) => (
-                <tr>
-                  <td>
-                    {typo(r.usage)}
-                    {r.isDefault && (
-                      <>
-                        {' '}
-                        <strong>(retenu par le site)</strong>
-                      </>
-                    )}
-                  </td>
-                  <td data-numeric>{formatNumber(r.millions, { decimals: { min: 0, max: 3 } })}</td>
-                  <td>{typo(r.origin)}</td>
-                </tr>
-              ))
-            }
+            {foyers.map((r) => (
+              <tr>
+                <td>
+                  {typo(r.usage)}
+                  {r.isDefault && (
+                    <>
+                      {' '}
+                      <strong>(retenu par le site)</strong>
+                    </>
+                  )}
+                </td>
+                <td data-numeric>{formatNumber(r.millions, { decimals: { min: 0, max: 3 } })}</td>
+                <td>{typo(r.origin)}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
       <p>
-        <strong>Le site retient un seul dénominateur : {FOYERS_LABEL}.</strong> C’est le seul des
-        quatre que les auteurs écrivent tel quel (dans leurs fiches), il est aussi celui de « 600 Md€,
-        soit 20 000 € par foyer », et il correspond à l’unité du simulateur, le ménage. Les trois
-        autres sont déduits ou mesurent autre chose : un foyer fiscal n’est pas un ménage. Les
-        montants « par foyer » écrits par les auteurs eux-mêmes (par exemple {formatEuro(num('dep_par_foyer_manifeste_eur'))}
-        par an pour les dépenses publiques) restent leurs chiffres, avec leur dénominateur ci-dessus.
+        <strong>Le site retient un seul dénominateur : {FOYERS_LABEL}.</strong> C’est le seul des
+        quatre que les auteurs écrivent tel quel (dans leurs fiches), il est aussi celui de «&#8239;
+        {formatMdEuro(num('actifs_manifeste_md'))}, soit{' '}
+        {formatEuro(num('actifs_par_foyer_manifeste_eur'))} par foyer », et il correspond à l’unité
+        du simulateur, le ménage. Les trois autres sont déduits ou mesurent autre chose : un foyer
+        fiscal n’est pas un ménage. Les montants « par foyer » écrits par les auteurs eux-mêmes (par
+        exemple {formatEuro(num('dep_par_foyer_manifeste_eur'))}
+        par an pour les dépenses publiques) restent leurs chiffres, avec leur dénominateur
+        ci-dessus.
       </p>
 
-      <h3 id="pib-57">57,0 % ou 57,3 % du PIB ?</h3>
+      <h3 id="pib-57">
+        {pct1(num('eu_dep_pib_fr_2024_pct'))} ou {pct1(num('dep_pib_insee_calc_pct'))} du PIB ?
+      </h3>
       <p>
         Eurostat donne {pct(num('eu_dep_pib_fr_2024_pct'))} du PIB pour les dépenses publiques de la
-        France en 2024. En rapportant le total de l’Insee ({formatMdEuro(num('dep_total_2024_md'))}) au
-        PIB 2024 du classeur des auteurs ({formatMdEuro(gdp.workbook)}, feuille « Refonte fiscalité »,
-        cellule C3), on obtient {pct(num('dep_pib_insee_calc_pct'))}. <strong>La dépense est la même :
-        l’écart vient du PIB.</strong> Pour obtenir {pct(num('eu_dep_pib_fr_2024_pct'))} avec
-        {formatMdEuro(num('dep_total_2024_md'))}, il faudrait un PIB d’environ {formatMdEuro(gdp.implied, { decimals: 0 })},
-        soit {formatMdEuro(gdp.gap, { decimals: 0 })} ({formatNumber(gdp.gapPct, { decimals: 1 })} %) de plus que celui du
-        classeur. Le classeur ne précise pas le millésime ou le périmètre de son PIB ; nous n’avons
-        pas la table qui l’expliquerait. Le site utilise Eurostat pour comparer les pays, et
-        l’Insee pour répartir la dépense française.
+        France en 2024. En rapportant le total de l’Insee ({formatMdEuro(num('dep_total_2024_md'))})
+        au PIB 2024 du classeur des auteurs ({formatMdEuro(gdp.workbook)}, feuille « Refonte
+        fiscalité », cellule C3), on obtient {pct(num('dep_pib_insee_calc_pct'))}.{' '}
+        <strong>La dépense est la même : l’écart vient du PIB.</strong> Pour obtenir{' '}
+        {pct(num('eu_dep_pib_fr_2024_pct'))} avec
+        {formatMdEuro(num('dep_total_2024_md'))}, il faudrait un PIB d’environ{' '}
+        {formatMdEuro(gdp.implied, { decimals: 0 })}, soit {formatMdEuro(gdp.gap, { decimals: 0 })}{' '}
+        ({formatNumber(gdp.gapPct, { decimals: 1 })} %) de plus que celui du classeur. Le classeur
+        ne précise pas le millésime ou le périmètre de son PIB ; nous n’avons pas la table qui
+        l’expliquerait. Le site utilise Eurostat pour comparer les pays, et l’Insee pour répartir la
+        dépense française.
       </p>
 
       <h3 id="ecarts">Les écarts les plus visibles</h3>
       <ul class="space-y-3">
-        {
-          featured.map((d) => (
+        {featured.map((d) => (
+          <li id={d.code.toLowerCase()}>
+            <strong>
+              {d.code} · {d.title}
+            </strong>
+            <br />
+            {d.constat}
+            {d.interpretation && (
+              <>
+                {' '}
+                <span class="text-ink-2">{d.interpretation}</span>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <details class="mt-6 rounded-md border border-rule bg-surface px-4 py-1">
+        <summary class="min-h-11 cursor-pointer py-3 font-semibold text-ink">
+          Tous les autres écarts ({others.length})
+        </summary>
+        <ul class="space-y-3 pt-2 pb-3 text-[0.9375rem]">
+          {others.map((d) => (
             <li id={d.code.toLowerCase()}>
               <strong>
                 {d.code} · {d.title}
@@ -188,41 +220,16 @@ const pct = (v: number) => formatPercentPoints(v, { decimals: 2 });
                 </>
               )}
             </li>
-          ))
-        }
-      </ul>
-
-      <details class="mt-6 rounded-md border border-rule bg-surface px-4 py-1">
-        <summary class="min-h-11 cursor-pointer py-3 font-semibold text-ink">
-          Tous les autres écarts ({others.length})
-        </summary>
-        <ul class="space-y-3 pt-2 pb-3 text-[0.9375rem]">
-          {
-            others.map((d) => (
-              <li id={d.code.toLowerCase()}>
-                <strong>
-                  {d.code} · {d.title}
-                </strong>
-                <br />
-                {d.constat}
-                {d.interpretation && (
-                  <>
-                    {' '}
-                    <span class="text-ink-2">{d.interpretation}</span>
-                  </>
-                )}
-              </li>
-            ))
-          }
+          ))}
         </ul>
       </details>
 
       <Callout tone="note" className="mt-8">
         <p>
-          Une erreur, un écart que nous n’avons pas vu ? Les sources, les données et le moteur sont
-          publics : <a href={`${SITE.repo}/issues`}>signalez-le sur le dépôt</a>. Retour au
+          Une erreur, un écart que nous n’avons pas vu ? Les sources, les données et le moteur sont
+          publics : <a href={`${SITE.repo}/issues`}>signalez-le sur le dépôt</a>. Retour au
           <a href={withBase('/simulateur/')}>simulateur</a> ou aux
-          <a href={withBase('/comprendre/')}>pages « Comprendre »</a>.
+          <a href={withBase('/comprendre/')}>pages « Comprendre »</a>.
         </p>
       </Callout>
 
@@ -264,10 +271,6 @@ const pct = (v: number) => formatPercentPoints(v, { decimals: 2 });
   .methode-doc .methode-table td {
     vertical-align: top;
     line-height: 1.45;
-  }
-  .methode-doc .methode-table th:first-child,
-  .methode-doc .methode-table td:first-child {
-    white-space: nowrap;
   }
   .methode-doc .methode-table tr:target {
     background: var(--accent-soft);

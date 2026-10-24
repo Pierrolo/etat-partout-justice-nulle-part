@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { rehypeMethode } from './src/lib/rehype-methode.mjs';
 import { typoJson } from './src/lib/vite-typo-json.mjs';
@@ -27,7 +28,8 @@ export default defineConfig({
   trailingSlash: 'always',
   compressHTML: true,
   devToolbar: { enabled: false },
-  integrations: [react()],
+  // Sitemap only exists when SITE_URL is set (production). The styleguide is a noindex showcase: not listed.
+  integrations: [react(), sitemap({ filter: (page) => !page.includes('/styleguide') })],
   // docs/METHODE.md is rendered by pages/methode.astro: anchors, typography, glossary, scrollable tables.
   markdown: {
     smartypants: false,

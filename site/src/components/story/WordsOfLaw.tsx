@@ -76,7 +76,7 @@ export function WordsOfLaw({
     <ChartFrame
       title={`${M(last.total)} de mots de droit en ${last.year}, contre ${M(first.total)} en ${first.year}`}
       subtitle="Millions de mots du droit applicable (textes législatifs et réglementaires de Légifrance), 2005–2026."
-      summary={`Le volume de droit applicable a augmenté de ${formatPercentPoints(growthPct, { decimals: 0 })} en vingt et un ans, de ${M(first.total)} à ${M(last.total)} de mots. Les lois seules sont passées de ${M(first.legislatif)} à ${M(last.legislatif)}. La série des règlements présente deux ruptures (2010 et 2012) dont la cause n’est pas documentée : lisez la tendance, pas ces deux années.`}
+      summary={`Le volume de droit applicable a augmenté de ${formatPercentPoints(growthPct, { decimals: 0 })} en vingt et un ans, de ${M(first.total)} à ${M(last.total)} de mots. Les lois seules sont passées de ${M(first.legislatif)} à ${M(last.legislatif)}. La série des règlements présente deux ruptures (2010 et 2012) dont la cause n’est pas documentée : lisez la tendance, pas ces deux années.`}
       sources={sources.map((s) => ({ ...s }))}
       table={{
         columns: [
@@ -104,7 +104,7 @@ export function WordsOfLaw({
         caption: 'Mots du droit applicable par année',
       }}
       csvFileName="mots-de-loi-2005-2026.csv"
-      note={`Ruptures de série : ${breakNote.replace(/ ; à signaler.*$/, '.')}`}
+      note={`Ruptures de série : ${breakNote.replace(/ ; à signaler.*$/, '.')}`}
     >
       <div ref={ref} className="select-none">
         <svg
@@ -232,8 +232,8 @@ export function WordsOfLaw({
 
       <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
         <p aria-live="polite" className="rounded-md bg-sunken p-3 text-[0.9375rem] text-ink-2">
-          <span className="font-semibold text-ink">{cur.year}</span> : {M(cur.total)} au total —
-          règlements {M(cur.reglementaire)}, lois {M(cur.legislatif)}.
+          <span className="font-semibold text-ink">{cur.year}</span>&#8239;: {M(cur.total)} au total
+          — règlements {M(cur.reglementaire)}, lois {M(cur.legislatif)}.
           {atBreak.length > 0 && (
             <span className="font-medium text-ink">
               {' '}
@@ -248,7 +248,7 @@ export function WordsOfLaw({
         </p>
         <div className="flex flex-col gap-1">
           <label htmlFor={`${uid}-yr`} className="text-sm font-semibold text-ink">
-            Année affichée : {cur.year}
+            Année affichée : {cur.year}
           </label>
           <input
             id={`${uid}-yr`}
@@ -258,7 +258,7 @@ export function WordsOfLaw({
             step={1}
             value={cur.year}
             onChange={(e) => setYr(Number(e.target.value))}
-            aria-valuetext={`${cur.year} : ${M(cur.total)} de mots`}
+            aria-valuetext={`${cur.year} : ${M(cur.total)} de mots`}
             className="h-11 w-full min-w-48 accent-[var(--accent)]"
           />
         </div>

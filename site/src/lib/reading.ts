@@ -5,11 +5,13 @@
  *   durée de lecture (h)  = mots ÷ vitesse de lecture (mots/min) ÷ 60
  *   années à temps plein  = durée de lecture (h) ÷ durée annuelle légale du travail (h/an)
  */
+import { num } from '@/lib/facts';
+
 export const READING_HYPOTHESES = {
-  /** Silent reading of an ordinary text: about 250 words a minute (hypothèse du site). */
+  /** Silent reading of an ordinary text: about 250 words a minute (hypothèse du site, pas un fait). */
   wordsPerMinute: 250,
-  /** Durée annuelle légale du travail en France : 1 607 heures (hypothèse du site). */
-  fullTimeHoursPerYear: 1607,
+  /** Durée annuelle légale du travail à temps plein : fact `duree_legale_travail_h_an` (1 607 h, Légifrance). */
+  fullTimeHoursPerYear: num('duree_legale_travail_h_an'),
 } as const;
 
 export interface ReadingTime {

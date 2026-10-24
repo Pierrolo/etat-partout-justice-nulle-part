@@ -6,6 +6,7 @@
 import { useId, type ReactNode } from 'react';
 import { IconCheck, IconClose } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
+import '@/components/story/story.css';
 
 /* ── Recherche ──────────────────────────────────────────────────────────── */
 

@@ -32,7 +32,7 @@ export const LIMITS = {
   cafMax: 10_000,
   childSupportMax: 5_000,
   childcareCostMax: 5_000,
-  pensionYear: { min: 1970, max: 2026 },
+  pensionYear: { min: 1970, max: 2040 },
   moneyAnnualMax: 1_000_000,
 } as const;
 

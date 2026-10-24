@@ -19,7 +19,8 @@ import {
   type RawLiasse,
   type RawTheme,
 } from '@/lib/amendements-model';
-import { chip, millions, num } from '@/lib/facts';
+import { chip, num } from '@/lib/facts';
+import { FOYERS_SHORT, perFoyerYear } from '@/lib/foyers';
 import {
   formatCompactEuro,
   formatInteger,
@@ -27,7 +28,6 @@ import {
   formatNumber,
   formatPercentPoints,
   NBSP,
-  reframe,
 } from '@/lib/format';
 import { withBase } from '@/lib/site';
 
@@ -58,8 +58,9 @@ const cpMd = num('credits_retires_cp_md');
 const aeMd = num('credits_retires_ae_md');
 const nMissions = num('credits_retires_amendements_nombre');
 const nProgrammes = credits.meta.totals.n_programmes;
-const households = millions('foyers_implicites_236_m');
-const perHousehold = reframe({ annualTotal: cpMd * 1e9, households }).perHouseholdYear;
+const perHousehold = perFoyerYear(cpMd);
+const aplExpose = num('apl_economie_2027_expose_md');
+const aplEtatB = num('apl_etat_b_cp_md');
 const top2 = sorted.slice(0, 2);
 const top2Share = top2.reduce((n, m) => n + m.cpSharePct, 0);
 const pct = (v: number) => formatPercentPoints(v, { decimals: { min: 0, max: 1 } });
@@ -80,20 +81,22 @@ const calendrierHref = withBase('/comprendre/calendrier/');
 
 <DashboardLayout
   slug="amendements"
-  lede={`Les ${total} amendements que l’association Résolution a rédigés pour traduire le plan en texte de loi : cherchez un sujet, lisez ce que chacun prévoit, et à partir de quand.`}
+  title={`Les ${total} amendements`}
+  lede={`Les ${total} amendements que l’association Résolution a rédigés pour traduire le plan en texte de loi : cherchez un sujet, lisez ce que chacun prévoit, et à partir de quand.`}
 >
   <Callout tone="plan" title="Des textes proposés, pas des lois votées">
     <p>
       Ce sont des <strong>projets d’amendements</strong> rédigés par l’association Résolution et
-      datés du {liasses[0]!.date} : ils ne sont <strong>ni déposés, ni adoptés</strong>. Rien ici
-      n’est en vigueur. Leur texte est pourtant la seule description précise des paramètres du plan
-      : c’est pourquoi le simulateur s’appuie sur eux.
+      datés du {liasses[0]!.date}&#8239;: ils ne sont <strong>ni déposés, ni adoptés</strong>. Rien
+      ici n’est en vigueur. Leur texte est pourtant la seule description précise des paramètres du
+      plan : c’est pourquoi le simulateur s’appuie sur eux.
     </p>
     <p class="flex flex-wrap items-center gap-x-2 gap-y-1">
       <TierBadge tier="law" size="sm" />
       <span>
-        veut dire « <strong>écrit dans le texte de loi proposé</strong> » : un chiffre ou une date
-        qu’on peut lire mot pour mot dans l’amendement. Cela ne veut pas dire « en vigueur ».
+        veut dire «&#8239;<strong>texte précis rédigé par les auteurs, ni déposé ni voté</strong>
+        &#8239;» : un chiffre ou une date qu’on peut lire mot pour mot dans l’amendement. Cela ne
+        veut pas dire « en vigueur ».
       </span>
     </p>
   </Callout>
@@ -104,7 +107,7 @@ const calendrierHref = withBase('/comprendre/calendrier/');
         Lire les amendements
       </h2>
       <p class="text-ink-2">
-        Une « liasse » est un paquet d’amendements rédigés pour un même projet de loi : la première
+        Une « liasse » est un paquet d’amendements rédigés pour un même projet de loi : la première
         et la seconde partie du projet de loi de finances 2027 (PLF), et le projet de loi de
         financement de la Sécurité sociale (PLFSS). Chaque carte renvoie au texte (PDF, à la bonne
         page).
@@ -129,7 +132,7 @@ const calendrierHref = withBase('/comprendre/calendrier/');
         Les crédits que le plan retirerait du budget de l’État
       </h2>
       <p class="text-ink-2">
-        {formatInteger(nMissions)} amendements de la seconde partie (l’« état B ») retirent chacun
+        {formatInteger(nMissions)} amendements de la seconde partie (l’« état B ») retirent chacun
         des crédits à une mission du budget 2027. Les voici, de la plus touchée à la moins touchée.
         Ce sont des crédits proposés à la suppression, pas des économies constatées.
       </p>
@@ -141,7 +144,7 @@ const calendrierHref = withBase('/comprendre/calendrier/');
         value={formatNumber(cpMd, { decimals: 1 })}
         unit="Md€"
         unitLabel="milliards d’euros"
-        reframe={`≈ ${formatNumber(Math.round(perHousehold / 10) * 10)}${NBSP}€ par foyer et par an, sur ${formatNumber(households / 1e6, { decimals: 1 })} M de foyers (calcul du site)`}
+        reframe={`≈ ${formatNumber(Math.round(perHousehold / 10) * 10)}${NBSP}€ par foyer et par an, sur ${FOYERS_SHORT} (calcul du site)`}
         tier="law"
         source={chip('credits_retires_cp_md', { label: `Amendements PLF-P2 n° 1 à ${nMissions}` })}
       />
@@ -151,7 +154,7 @@ const calendrierHref = withBase('/comprendre/calendrier/');
         value={formatNumber(aeMd, { decimals: 1 })}
         unit="Md€"
         unitLabel="milliards d’euros"
-        reframe="Ce que l’État pourrait promettre de payer, ici ou plus tard : toujours au moins égal aux paiements de l’année."
+        reframe="Ce que l’État pourrait promettre de payer, ici ou plus tard : toujours au moins égal aux paiements de l’année."
         tier="law"
         source={chip('credits_retires_ae_md', { label: `Amendements PLF-P2 n° 1 à ${nMissions}` })}
       />
@@ -209,7 +212,7 @@ const calendrierHref = withBase('/comprendre/calendrier/');
         rows: creditRows,
       }}
       csvFileName="credits-retires-par-mission.csv"
-      note="Effet : 1er janvier 2027 pour les personnes morales, 1er juillet 2027 pour les personnes physiques (demi-exercice). Dans le détail d’une mission, chaque programme est tracé à l’échelle de son plus gros programme. L’exposé de l’amendement n° 32 chiffre l’économie 2027 de l’aide au logement à 5,4 Md€, l’état B retire 8,1 Md€ de crédits de paiement : les deux chiffres sont conservés (écart D19)."
+      note={`Effet : 1er janvier 2027 pour les personnes morales, 1er juillet 2027 pour les personnes physiques (demi-exercice). Dans le détail d’une mission, chaque programme est tracé à l’échelle de son plus gros programme. L’exposé de l’amendement n° 32 chiffre l’économie 2027 de l’aide au logement à ${formatMdEuro(aplExpose, { decimals: 1 })}, l’état B retire ${formatMdEuro(aplEtatB, { decimals: 1 })} de crédits de paiement : les deux chiffres sont conservés (écart D19).`}
     >
       <CreditsChart missions={missions} amendementsHref={amendementsHref} />
     </ChartFrame>

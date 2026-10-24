@@ -121,6 +121,11 @@ export const PAIRS: Pair[] = [
     graphic(`--series-${n}`, '--paper', `Categorical series ${n} on paper`),
     graphic(`--series-${n}`, '--surface', `Categorical series ${n} on card`),
   ]),
+  // Text printed ON a chart fill
+  ...[1, 2, 3, 4, 5, 6, 7, 8].map((n) =>
+    text(`--on-series-${n}`, `--series-${n}`, `Label on categorical series ${n}`),
+  ),
+  text('--on-hour-keep', '--series-1', 'Label on the « Vous gardez » segment'),
   graphic('--gain-mark', '--paper', 'Diverging gain pole (mark) on paper'),
   graphic('--loss-mark', '--paper', 'Diverging loss pole (mark) on paper'),
   graphic('--gain-mark', '--surface', 'Diverging gain pole (mark) on card'),

@@ -79,7 +79,7 @@ export const TAX_META: Record<TaxId, { label: string; raw: string }> = {
   is: { label: 'Impôt sur les sociétés', raw: 'Impôt sur les sociétés' },
   tva: { label: 'TVA', raw: 'Taxe sur la valeur ajoutée' },
   accises: { label: 'Accises sur l’énergie', raw: 'Accise sur les énergies' },
-  droits: { label: 'Droits d’enregistrement', raw: "Droits d'enregistrement et de timbre" },
+  droits: { label: 'Droits d’enregistrement', raw: 'Droits d’enregistrement et de timbre' },
   locaux: { label: 'Impôts locaux', raw: 'Impôts locaux' },
   'autres-droits': { label: 'Autres droits', raw: 'Autres droits' },
   'autres-directs': { label: 'Autres impôts directs', raw: 'Autres impôts directs' },
@@ -127,13 +127,13 @@ export const PLAN_META: Record<
     label: 'Refondue (outre-mer)',
     short: 'Outre-mer',
     detail:
-      'Régime à part pour les collectivités d’outre-mer : refondu, non supprimé (« flux OM » dans le classeur).',
+      'Régime à part pour les collectivités d’outre-mer : refondu, non supprimé (« flux OM » dans le classeur).',
     raw: 'Flux OM',
   },
   eteinte: {
     label: 'Déjà éteinte',
     short: 'Déjà éteinte',
-    detail: 'Le fait générateur est éteint fin 2025 ou avant : il n’y a rien à supprimer.',
+    detail: 'Le fait générateur est éteint fin 2025 ou avant : il n’y a rien à supprimer.',
     raw: null,
   },
 };
@@ -255,7 +255,7 @@ export function whenOf(row: Pick<NicheRow, 'plan' | 'tax' | 'cat' | 'id'>): When
         anchor: '2028-01-01',
       };
     case 'outre-mer':
-      return { text: 'Pas de date : régime refondu à part', anchor: null };
+      return { text: 'Pas de date : régime refondu à part', anchor: null };
     case 'eteinte':
       return { text: 'Rien à supprimer', anchor: null };
     case 'supprimee':
@@ -293,7 +293,7 @@ export function flagOf(row: NicheRow, year: CostYear): CostFlag | null {
 
 /** Libellé court d'un coût manquant (jamais « 0 »). */
 export const FLAG_LABEL: Record<CostFlag, string> = {
-  epsilon: 'moins de 0,5 M€, non calculé',
+  epsilon: 'moins de 0,5 M€, non calculé',
   nc: 'non calculé',
   aucun_effet: 'aucun effet budgétaire',
 };

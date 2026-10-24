@@ -25,7 +25,7 @@ from amend import LIASSES, all_amendments, quote_in_amendment  # noqa: E402
 from lib import OUT_DIR, ROOT, SHEET_TITLES, WORKBOOKS, Sheet, fr, load_reform_params, quote_in, rp  # noqa: E402
 
 TIERS = {"loi", "annonce", "donnee", "calcul"}
-KINDS = {"workbook", "amendment", "site", "insee", "eurostat", "dgafp", "legifrance", "calcul"}
+KINDS = {"workbook", "amendment", "site", "insee", "eurostat", "dgafp", "legifrance", "reglementation", "calcul"}
 TOL = 1e-6
 
 

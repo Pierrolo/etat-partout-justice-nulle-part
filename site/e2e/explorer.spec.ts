@@ -34,9 +34,7 @@ test.describe('/comprendre/niches', () => {
     const box = page.getByRole('searchbox', { name: 'Rechercher une niche' });
     await box.fill('CREDIT impot recherche');
     await expect(summary(page)).toContainText(/^\d+ niches?/);
-    await expect(rows(page).first()).toContainText(
-      'Crédit d’impôt en faveur de la recherche'.replace('’', "'"),
-    );
+    await expect(rows(page).first()).toContainText('Crédit d’impôt en faveur de la recherche');
     const accented = await summary(page).innerText();
     await box.fill('Crédit d’impôt recherche');
     await expect(summary(page)).toHaveText(accented);
@@ -85,9 +83,7 @@ test.describe('/comprendre/niches', () => {
   }) => {
     const cost = page.getByRole('columnheader', { name: /^Coût 2024/ });
     await expect(cost).toHaveAttribute('aria-sort', 'descending');
-    await expect(rows(page).first()).toContainText(
-      'Crédit d’impôt en faveur de la recherche'.replace('’', "'"),
-    );
+    await expect(rows(page).first()).toContainText('Crédit d’impôt en faveur de la recherche');
     await cost.getByRole('button').click();
     await expect(cost).toHaveAttribute('aria-sort', 'ascending');
     await expect(rows(page).first()).not.toContainText('en faveur de la recherche');
@@ -136,7 +132,7 @@ test.describe('/comprendre/niches', () => {
     const lines = csv.trim().split(/\r?\n/);
     expect(lines).toHaveLength(1 + 3);
     expect(lines[0]).toContain('cout_2024_meur');
-    expect(csv).toContain("Crédit d'impôt pour frais de garde");
+    expect(csv).toContain('Crédit d’impôt pour frais de garde');
   });
 
   test('chaque ligne a sa référence légale, son effet et un lien vers l’amendement', async ({
@@ -162,7 +158,9 @@ test.describe('/comprendre/amendements', () => {
   test('dit clairement que ce sont des textes proposés, pas des lois', async ({ page }) => {
     await expect(page.getByText('Des textes proposés, pas des lois votées')).toBeVisible();
     await expect(page.getByText(/ni déposés, ni adoptés/)).toBeVisible();
-    await expect(page.getByText(/écrit dans le texte de loi proposé/i).first()).toBeVisible();
+    await expect(
+      page.getByText(/texte précis rédigé par les auteurs, ni déposé ni voté/i).first(),
+    ).toBeVisible();
     await expect(summary(page)).toContainText('81 amendements');
   });
 
@@ -173,7 +171,7 @@ test.describe('/comprendre/amendements', () => {
     const card = page.locator('article#PLF-P1-2');
     await expect(card).toBeVisible();
     await expect(card).toContainText('Titres-restaurant');
-    await expect(card.getByText('Écrit dans la loi')).toBeVisible();
+    await expect(card.getByText('Proposé dans un amendement')).toBeVisible();
     await expect(card.getByRole('link', { name: /Lire le texte/ })).toHaveAttribute(
       'href',
       /Liasse_PLF_P1\.pdf#page=\d+/,
@@ -270,9 +268,9 @@ test.describe('/comprendre/calendrier', () => {
     await hydrated(page, 'StepCharts'); // îlot « client:visible » : prêt une fois le graphique à l'écran
     await csg.focus();
     await page.keyboard.press('Home');
-    await expect(page.getByText(/1er janvier 2027 : 9,7 pt/)).toBeVisible();
+    await expect(page.getByText(/1er janvier 2027\s: 9,7\spt/)).toBeVisible();
     await page.keyboard.press('ArrowRight');
-    await expect(page.getByText(/1er juillet 2027 : 8,1 pt/)).toBeVisible();
+    await expect(page.getByText(/1er juillet 2027\s: 8,1\spt/)).toBeVisible();
   });
 });
 

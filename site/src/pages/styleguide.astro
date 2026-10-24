@@ -5,6 +5,8 @@
  * Contrast ratios are computed at build time from src/styles/tokens.css.
  */
 import StyleguideChart from '@/components/charts/StyleguideChart';
+import BrandSwitch from '@/components/site/BrandSwitch.astro';
+import BrandValue from '@/components/site/BrandValue.astro';
 import PageHeader from '@/components/site/PageHeader.astro';
 import {
   Button,
@@ -17,8 +19,8 @@ import {
 } from '@/components/ui';
 import { FormDemo, TabsDemo } from '@/components/ui/StyleguideDemos';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { categoricalNames } from '@/lib/chart-theme';
-import { contrastRatio, parseTokens } from '@/lib/contrast';
+import { brandColors, categoricalNames } from '@/lib/chart-theme';
+import { contrastRatio, parseTokens, resolveBrand } from '@/lib/contrast';
 import {
   formatCompactEuro,
   formatEuro,
@@ -32,16 +34,41 @@ import {
   reframeSentence,
   roundForDisplay,
 } from '@/lib/format';
+import brandCiCss from '@/styles/brand-ci.css?raw';
 import tokensCss from '@/styles/tokens.css?raw';
 
+// The tokens of each brand (tokens.css = « Éditorial »; brand-ci.css overrides them for « Call Intelligence »).
 const tokens = parseTokens(tokensCss);
-const ratio = (fg: string, bg: string) => ({
-  light: contrastRatio(tokens.light[fg]!, tokens.light[bg]!),
-  dark: contrastRatio(tokens.dark[fg]!, tokens.dark[bg]!),
+const ciTokens = resolveBrand(tokens, parseTokens(brandCiCss));
+const ratio = (fg: string, bg: string, map = tokens) => ({
+  light: contrastRatio(map.light[fg]!, map.light[bg]!),
+  dark: contrastRatio(map.dark[fg]!, map.dark[bg]!),
 });
 const fmt = (n: number) => n.toFixed(1).replace('.', ',');
+/** « #aaaaaa / #bbbbbb » (light / dark) of a token, for one brand. */
+const hexPair = (t: string, map = tokens) => `${map.light[t] ?? '—'} / ${map.dark[t] ?? '—'}`;
+/** « 5,4 / 7,7 » ratios of a pair, « — » when a token does not exist in the brand. */
+const ratioText = (fg: string, bg: string, map = tokens) =>
+  map.light[fg] && map.light[bg] && map.dark[fg] && map.dark[bg]
+    ? `${fmt(ratio(fg, bg, map).light)} / ${fmt(ratio(fg, bg, map).dark)}`
+    : '—';
+const ciNames = brandColors('ci').names;
+// A readable subset of the guaranteed pairs, side by side (the full list: `pnpm --filter @epjn/site contrast`).
+const keyPairs: Array<[string, string, string]> = [
+  ['--ink', '--paper', 'Texte courant sur la page'],
+  ['--ink-3', '--surface', 'Texte discret sur une carte'],
+  ['--accent', '--paper', 'Liens, « le plan »'],
+  ['--gain', '--paper', 'Gain (texte)'],
+  ['--loss', '--paper', 'Perte (texte)'],
+  ['--gain-mark', '--surface', 'Gain (barre, trait) sur une carte'],
+  ['--loss-mark', '--surface', 'Perte (barre, trait) sur une carte'],
+  ['--on-accent', '--accent', 'Libellé sur une pastille « accent »'],
+  ['--on-signal', '--signal', 'Libellé sur le signal (bouton, chiffre clé)'],
+  ['--rule-strong', '--field-bg', 'Bordure d’un champ (≥ 3 : 1)'],
+];
 
 const toc = [
+  ['apparence', 'Apparence'],
   ['couleurs', 'Couleurs'],
   ['typographie', 'Typographie'],
   ['niveaux', 'Niveaux de preuve'],
@@ -61,9 +88,9 @@ const inks = [
   ['--ink-3', 'Encre 3', 'Texte discret (reste du vrai texte)'],
 ] as const;
 const colorTokens = [
-  ['--accent', 'Accent « le plan »', 'Liens, actions, « avec le plan »', '--paper'],
-  ['--gain', 'Gain', 'Bleu-vert : hausse', '--paper'],
-  ['--loss', 'Perte', 'Orange-vermillon : baisse', '--paper'],
+  ['--accent', 'Accent « le plan »', 'Liens, actions, « avec le plan »', '--paper'],
+  ['--gain', 'Gain', 'Bleu-vert : hausse', '--paper'],
+  ['--loss', 'Perte', 'Orange-vermillon : baisse', '--paper'],
 ] as const;
 const seq = [1, 2, 3, 4, 5, 6, 7];
 const div = [
@@ -96,20 +123,20 @@ const formatRows: Array<[string, string]> = [
   ['formatInteger(49_000_000)', formatInteger(49_000_000)],
   ['formatNumber(3.14159, { decimals: 2 })', formatNumber(3.14159, { decimals: 2 })],
   ['roundForDisplay(212.4)  // évite la fausse précision', formatEuro(roundForDisplay(212.4))],
-  ['parseFrenchNumber("1 234,5 €")', String(parseFrenchNumber('1 234,5 €'))],
+  ['parseFrenchNumber("1 234,5 €")', String(parseFrenchNumber('1 234,5 €'))],
   ['reframeSentence(reframe({ annualTotal: 1.672e12, households: 30e6 }))', reframeSentence(r)],
 ];
 ---
 
 <BaseLayout
   title="Guide de style"
-  description="Documentation vivante du système de design : couleurs, typographie, composants."
+  description="Documentation vivante du système de design : couleurs, typographie, composants."
   noindex
 >
   <PageHeader
     eyebrow="Guide de style · usage interne"
     title="Le système de design, en vrai"
-    lede="Tous les composants et jetons du site, tels qu’ils s’affichent. Copiez d’ici : n’inventez pas de couleur, de taille ni de composant."
+    lede="Tous les composants et jetons du site, tels qu’ils s’affichent. Copiez d’ici : n’inventez pas de couleur, de taille ni de composant."
   />
 
   <div class="wrap space-y-20">
@@ -125,18 +152,121 @@ const formatRows: Array<[string, string]> = [
       </ul>
     </nav>
 
+    <!-- ───────────────────────── APPARENCE ───────────────────────── -->
+    <section id="apparence" aria-labelledby="apparence-t" class="space-y-6">
+      <div>
+        <h2 id="apparence-t" class="text-3xl">
+          Apparence : deux identités
+        </h2>
+        <p class="mt-2 max-w-2xl text-ink-2">
+          Le site sait porter deux identités visuelles, construites sur les <em>mêmes</em> jetons :
+          <strong>Éditorial</strong> (Fraunces + Inter, accent violet, par défaut) et
+          <strong>Call Intelligence</strong> (Schibsted Grotesk + JetBrains Mono, papier / encre et
+          un seul accent chaud, le signal). Aucun composant ne connaît la marque : tous lisent les
+          jetons. Le choix se fait ici ou en pied de page, il est mémorisé dans ce navigateur (
+          <code>localStorage</code>, aucun cookie) ; <code>?brand=ci</code> dans l’adresse le force,
+          et la variable de build <code>PUBLIC_BRAND=ci</code> change la marque par défaut.
+        </p>
+      </div>
+
+      <BrandSwitch id="styleguide-brand" />
+
+      <div
+        class="overflow-x-auto"
+        tabindex="0"
+        role="region"
+        aria-label="Contrastes clés des deux marques"
+      >
+        <table class="data-table min-w-[40rem]">
+          <caption>
+            Contrastes WCAG des paires clés, clair / sombre. Toutes les paires du système sont
+            vérifiées pour chaque marque (<code>pnpm --filter @epjn/site contrast</code>).
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Paire</th>
+              <th scope="col" data-numeric>
+                Éditorial
+              </th>
+              <th scope="col" data-numeric>
+                Call Intelligence
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {keyPairs.map(([fg, bg, use]) => (
+              <tr>
+                <th scope="row" class="font-medium">
+                  {use}
+                  <span class="block font-mono text-xs font-normal text-ink-3">
+                    {fg.slice(2)} sur {bg.slice(2)}
+                  </span>
+                </th>
+                <td data-numeric>{ratioText(fg, bg)}</td>
+                <td data-numeric>{ratioText(fg, bg, ciTokens)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <dl class="grid gap-x-8 gap-y-3 text-sm sm:grid-cols-[10rem_1fr]">
+        <dt class="font-semibold text-ink">Accent</dt>
+        <dd class="text-ink-2">
+          Éditorial : violet profond (« le plan »). Call Intelligence :{' '}
+          <strong>le plan est tracé en encre</strong>&#8239;; l’unique accent chaud, le{' '}
+          <strong>signal</strong> (<code>#ff5a1f</code>), ne sert qu’à des aplats et des traits —
+          action principale, chiffre clé, repère de navigation, hachures — jamais à du texte sur le
+          papier (2,8 : 1). Texte sur le signal : toujours l’encre.
+        </dd>
+        <dt class="font-semibold text-ink">Gain et perte</dt>
+        <dd class="text-ink-2">
+          Éditorial : bleu-vert / vermillon. Call Intelligence : <strong>teal</strong> de la marque
+          pour le gain, <strong>orange dérivé du signal</strong> pour la perte (une variante sombre
+          pour le texte, une variante plus claire pour les marques). Les deux se distinguent aussi
+          par la <em>clarté</em>, jamais seulement par la teinte, et par le signe, la flèche et les
+          mots.
+        </dd>
+        <dt class="font-semibold text-ink">Typographie</dt>
+        <dd class="text-ink-2">
+          Éditorial : Fraunces (titres, grands chiffres) + Inter. Call Intelligence : Schibsted
+          Grotesk (tout le texte, titres alignés à gauche) + JetBrains Mono pour les étiquettes en
+          capitales numérotées (« 01 — VOTRE FOYER ») et les chiffres clés.
+        </dd>
+        <dt class="font-semibold text-ink">Formes</dt>
+        <dd class="text-ink-2">
+          Éditorial : rayons de 4, 8 et 14 px, cartes cernées d’un filet. Call Intelligence : angles
+          droits par défaut, 4 px pour les cartes et les boutons, pastilles pour les étiquettes ;
+          cartes en aplat « paper-deep » sans cadre, filets de 1,5 px, aucune ombre, aucun dégradé.
+        </dd>
+        <dt class="font-semibold text-ink">Hachures</dt>
+        <dd class="text-ink-2">
+          « Promis, sans texte précis » : hachures et contour tireté dans les deux marques ; sous
+          Call Intelligence elles sont tracées en signal à 45°, réservées à la zone mise en avant.
+        </dd>
+      </dl>
+    </section>
+
     <!-- ───────────────────────── COULEURS ───────────────────────── -->
     <section id="couleurs" aria-labelledby="couleurs-t" class="space-y-10">
       <div>
         <h2 id="couleurs-t" class="text-3xl">
           Couleurs
         </h2>
-        <p class="mt-2 max-w-2xl text-ink-2">
-          Papier crème, encre profonde, <strong>un seul accent</strong> (violet profond, « le plan
-          »), une paire divergente sûre pour le daltonisme (bleu-vert = gain, orange-vermillon =
+        <p class="mt-2 max-w-2xl text-ink-2" data-brand-only="editorial">
+          Papier crème, encre profonde, <strong>un seul accent</strong> (violet profond, « le plan
+           »), une paire divergente sûre pour le daltonisme (bleu-vert = gain, orange-vermillon =
           perte — jamais rouge/vert) et des gris neutres. Thème clair et sombre via{' '}
-          <code>light-dark()</code> : basculez avec le bouton en haut de page. Ratios de contraste :
-          clair / sombre.
+          <code>light-dark()</code>&#8239;: basculez avec le bouton en haut de page. Ratios de
+          contraste : clair / sombre.
+        </p>
+        <p class="mt-2 max-w-2xl text-ink-2" data-brand-only="ci">
+          Deux fonds (<code>paper</code> clair, <code>ink</code> sombre),{' '}
+          <strong>un seul accent chaud</strong> (<code>signal</code>), le teal en second plan, des
+          neutres chauds. Le thème sombre est dérivé du clair comme le fait la marque pour ses
+          scènes sombres : fond encre, surfaces <code>ink-soft</code>, texte papier, texte
+          secondaire <code>muted-dark</code>. Thème clair et sombre via <code>light-dark()</code>
+          &#8239;: basculez avec le bouton en haut de page. Ratios de contraste : clair / sombre.
         </p>
       </div>
 
@@ -149,7 +279,7 @@ const formatRows: Array<[string, string]> = [
               <div class="bg-surface p-3 text-sm">
                 <p class="font-semibold text-ink">{s.slice(2)}</p>
                 <p class="font-mono text-xs text-ink-3">
-                  {tokens.light[s]} / {tokens.dark[s]}
+                  <BrandValue editorial={hexPair(s)} ci={hexPair(s, ciTokens)} />
                 </p>
               </div>
             </li>
@@ -163,10 +293,14 @@ const formatRows: Array<[string, string]> = [
               </p>
               <p class="mt-1 text-sm text-ink-2">{use}</p>
               <p class="mt-2 font-mono text-xs text-ink-3">
-                {tokens.light[t]} / {tokens.dark[t]}
+                <BrandValue editorial={hexPair(t)} ci={hexPair(t, ciTokens)} />
               </p>
               <p class="mt-1 text-xs text-ink-3">
-                Sur papier : {fmt(ratio(t, '--paper').light)} / {fmt(ratio(t, '--paper').dark)}
+                Sur papier :{' '}
+                <BrandValue
+                  editorial={ratioText(t, '--paper')}
+                  ci={ratioText(t, '--paper', ciTokens)}
+                />
               </p>
             </li>
           ))}
@@ -183,10 +317,11 @@ const formatRows: Array<[string, string]> = [
                 <p class="font-semibold text-ink">{name}</p>
                 <p class="text-ink-2">{use}</p>
                 <p class="font-mono text-xs text-ink-3">
-                  {tokens.light[t]} / {tokens.dark[t]}
+                  <BrandValue editorial={hexPair(t)} ci={hexPair(t, ciTokens)} />
                 </p>
                 <p class="text-xs text-ink-3">
-                  Sur papier : {fmt(ratio(t, bg).light)} / {fmt(ratio(t, bg).dark)}
+                  Sur papier :{' '}
+                  <BrandValue editorial={ratioText(t, bg)} ci={ratioText(t, bg, ciTokens)} />
                 </p>
               </div>
             </li>
@@ -197,19 +332,26 @@ const formatRows: Array<[string, string]> = [
       <div>
         <h3 class="mb-1 text-lg">Graphiques · catégoriel (identité)</h3>
         <p class="mb-3 max-w-2xl text-sm text-ink-2">
-          Huit teintes, ordre fixe, jamais cyclées. Au-delà de huit : « Autres ». Validé (ΔE OKLab,
-          simulation protanopie/deutéranopie) : voisins ≥ 11,5 en daltonisme, ≥ 19 en vision normale
-          ; chaque teinte ≥ 3 : 1 sur le papier. Trois premières séries sûres en nuage de points.
+          Huit teintes, ordre fixe, jamais cyclées. Au-delà de huit : « Autres ». Validé (ΔE OKLab,
+          simulation protanopie/deutéranopie) :
+          <BrandValue
+            editorial="voisins ≥ 11,5 en daltonisme, ≥ 19 en vision normale ; chaque teinte ≥ 3 : 1 sur le papier."
+            ci="voisins ≥ 13,3 en daltonisme, ≥ 22,8 en vision normale (≥ 11 entre deux teintes quelconques) ; chaque teinte ≥ 3 : 1 sur le papier et sur la carte."
+          />
+          Trois premières séries sûres en nuage de points.
         </p>
         <ul class="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8">
           {categoricalNames.map((name, i) => (
             <li class="rounded-md border border-rule bg-surface p-2">
               <div class="h-10 rounded-sm" style={`background: var(--series-${i + 1})`} />
               <p class="mt-1.5 text-xs font-semibold text-ink">
-                {i + 1}. {name}
+                {i + 1}. <BrandValue editorial={name} ci={ciNames[i] ?? name} />
               </p>
               <p class="font-mono text-[0.6875rem] text-ink-3">
-                {tokens.light[`--series-${i + 1}`]}
+                <BrandValue
+                  editorial={tokens.light[`--series-${i + 1}`] ?? ''}
+                  ci={ciTokens.light[`--series-${i + 1}`] ?? ''}
+                />
               </p>
             </li>
           ))}
@@ -245,10 +387,11 @@ const formatRows: Array<[string, string]> = [
       </div>
 
       <div>
-        <h3 class="mb-1 text-lg">Traitements « annoncé, sans texte de loi »</h3>
+        <h3 class="mb-1 text-lg">Traitements « promis, sans texte précis »</h3>
         <p class="mb-3 max-w-2xl text-sm text-ink-2">
-          Hachures à 135° (classes <code>hatch</code>, <code>hatch-fine</code>) et contour en tirets
-          : jamais décoratifs, réservés à ce qui n’est pas écrit dans la loi.
+          Hachures à 45° (classes <code>hatch</code>, <code>hatch-fine</code>),{' '}
+          <BrandValue editorial="ton sur ton" ci="tracées en signal" />, et contour en tirets :
+          jamais décoratifs, réservés à ce qui n’est pas proposé dans un amendement.
         </p>
         <div class="grid gap-3 sm:grid-cols-3">
           <div class="hatch rounded-md border-[1.5px] border-dashed border-[var(--tier-announced-bd)] bg-surface p-4 text-sm text-ink">
@@ -258,7 +401,7 @@ const formatRows: Array<[string, string]> = [
             <code>hatch-fine</code> (badges)
           </div>
           <div class="rounded-md border-[1.5px] border-dotted border-[var(--tier-hypothesis-bd)] bg-sunken p-4 text-sm text-ink">
-            Hypothèse : fond creux, contour pointillé
+            Hypothèse : fond creux, contour pointillé
           </div>
         </div>
       </div>
@@ -270,11 +413,19 @@ const formatRows: Array<[string, string]> = [
         <h2 id="typo-t" class="text-3xl">
           Typographie
         </h2>
-        <p class="mt-2 max-w-2xl text-ink-2">
+        <p class="mt-2 max-w-2xl text-ink-2" data-brand-only="editorial">
           <strong>Fraunces</strong> (empattement à axe optique) pour les titres et les grands
-          chiffres ;<strong>Inter</strong> pour l’interface et le texte. Polices servies localement,
-          sous-ensemble latin. Les grands chiffres isolés restent proportionnels ; les colonnes de
+          chiffres ;<strong>Inter</strong> pour l’interface et le texte. Polices servies localement,
+          sous-ensemble latin. Les grands chiffres isolés restent proportionnels ; les colonnes de
           montants utilisent
+          <code>num</code> (chiffres tabulaires).
+        </p>
+        <p class="mt-2 max-w-2xl text-ink-2" data-brand-only="ci">
+          <strong>Schibsted Grotesk</strong> pour tout le texte et les titres (gras, serrés, alignés
+          à gauche) ; <strong>JetBrains Mono</strong> pour les étiquettes en capitales (« 01 — VOTRE
+          FOYER ») et les chiffres clés. Polices servies localement, sous-ensemble latin, chargées
+          seulement quand cette marque est affichée ; l’espace fine insécable des milliers vient
+          d’une police de 324 octets. Les colonnes de montants utilisent
           <code>num</code> (chiffres tabulaires).
         </p>
       </div>
@@ -286,7 +437,7 @@ const formatRows: Array<[string, string]> = [
         </div>
         <div>
           <p class="eyebrow mb-1">h1 — titre de page (font-serif text-4xl)</p>
-          <p class="font-serif text-4xl font-medium tracking-tight">Où va l’argent public ?</p>
+          <p class="font-serif text-4xl font-medium tracking-tight">Où va l’argent public ?</p>
         </div>
         <div>
           <p class="eyebrow mb-1">h2 — section</p>
@@ -320,7 +471,7 @@ const formatRows: Array<[string, string]> = [
         <div>
           <p class="eyebrow mb-1">.stat-number — grand chiffre (serif, proportionnel)</p>
           <p class="stat-number">
-            1 672 <span class="font-serif text-2xl text-ink-2">Md€</span>
+            1 672 <span class="font-serif text-2xl text-ink-2">Md€</span>
           </p>
         </div>
         <div class="max-w-md">
@@ -343,7 +494,7 @@ const formatRows: Array<[string, string]> = [
               </tr>
               <tr>
                 <th scope="row" class="font-medium">
-                  Impôt à 23 %
+                  Impôt à 23 %
                 </th>
                 <td data-numeric>{formatEuroDelta(-1087)}</td>
               </tr>
@@ -366,9 +517,11 @@ const formatRows: Array<[string, string]> = [
           Niveaux de preuve
         </h2>
         <p class="mt-2 max-w-2xl text-ink-2">
-          Trois statuts, trois grammaires visuelles : <strong>plein</strong> (écrit dans la loi),
-          <strong>hachuré et tireté</strong> (annoncé), <strong>pointillé creux</strong>{' '}
-          (hypothèse). Icône + texte + bordure : la couleur ne porte jamais seule l’information.
+          Trois statuts, trois grammaires visuelles : <strong>plein</strong> (proposé dans un
+          amendement),
+          <strong>hachuré et tireté</strong> (promis par les auteurs),{' '}
+          <strong>pointillé creux</strong> (notre estimation). Icône + texte + bordure : la couleur
+          ne porte jamais seule l’information.
         </p>
       </div>
       <TierLegend />
@@ -393,8 +546,8 @@ const formatRows: Array<[string, string]> = [
           Chiffres et sources
         </h2>
         <p class="mt-2 max-w-2xl text-ink-2">
-          <code>StatTile</code> : un grand chiffre n’est jamais seul — il a une unité lisible à voix
-          haute, un équivalent à l’échelle humaine et une source.
+          <code>StatTile</code>&#8239;: un grand chiffre n’est jamais seul — il a une unité lisible
+          à voix haute, un équivalent à l’échelle humaine et une source.
         </p>
       </div>
       <ul class="grid gap-4 md:grid-cols-3">
@@ -424,7 +577,7 @@ const formatRows: Array<[string, string]> = [
           unit="€/mois"
           unitLabel="euros par mois"
           tone="loss"
-          reframe={`soit ${formatPercent(-0.04, { signed: true })} : dit aussi clairement qu’un gain`}
+          reframe={`soit ${formatPercent(-0.04, { signed: true })} : dit aussi clairement qu’un gain`}
           source={{ label: 'Hypothèse H1 · AFU remplace le RSA', tier: 'hypothesis' }}
         />
       </ul>
@@ -436,7 +589,7 @@ const formatRows: Array<[string, string]> = [
           unitLabel="euros par mois"
           tone="accent"
           tier="announced"
-          reframe="Montant annoncé, hors revenu disponible : 0 € par défaut dans le texte."
+          reframe="Montant annoncé, hors revenu disponible : 0 € par défaut dans le texte."
           source={{ label: 'Fiche des auteurs', tier: 'announced' }}
         />
         <div class="card space-y-3">
@@ -448,7 +601,7 @@ const formatRows: Array<[string, string]> = [
             <SourceChip label="Manifeste, p. 41" tier="announced" />
             <SourceChip label="Hypothèse H2" tier="hypothesis" />
             <SourceChip label="Insee, comptes nationaux" year={2024} href="https://example.org/" />
-            <SourceChip label="Tableur « Dépenses », cellule B12" />
+            <SourceChip label="Tableur « Dépenses », cellule B12" />
           </div>
         </div>
       </div>
@@ -461,37 +614,37 @@ const formatRows: Array<[string, string]> = [
       </h2>
       <div class="grid gap-4 md:grid-cols-2">
         <Callout tone="note" title="Note">
-          <p>Information neutre : définition, précision de méthode.</p>
+          <p>Information neutre : définition, précision de méthode.</p>
         </Callout>
         <Callout tone="plan" title="Le plan">
           <p>Ce que prévoit le plan, tel que ses auteurs l’ont écrit.</p>
         </Callout>
         <Callout tone="gain" title="Vous gagneriez">
-          <p>Un foyer qui gagne : +212 € par mois.</p>
+          <p>Un foyer qui gagne : +212 € par mois.</p>
         </Callout>
         <Callout tone="loss" title="Vous perdriez">
-          <p>Un foyer qui perd : −85 € par mois. Même importance que les gains.</p>
+          <p>Un foyer qui perd : −85 € par mois. Même importance que les gains.</p>
         </Callout>
       </div>
       <Callout tone="announced" title="Hors revenu disponible">
         <p>
-          Promesses sans montant légal : compte épargne (300 € par mois annoncés), restitution du
-          patrimoine, compte éducation. « Montant fixé chaque année par la loi de finances ; 0 € par
-          défaut dans le texte. »
+          Promesses sans montant légal : compte épargne (300 € par mois annoncés), restitution du
+          patrimoine, compte éducation. « Montant fixé chaque année par la loi de finances ; 0 € par
+          défaut dans le texte. »
         </p>
       </Callout>
       <div class="max-w-2xl">
         <Disclosure summary="Voir le calcul" meta="3 lignes">
           <p>
-            Salaire net après suppression de la CSG et de la CRDS : 1 850 € × 1,0 = 1 850 €. Chaque
+            Salaire net après suppression de la CSG et de la CRDS : 1 850 € × 1,0 = 1 850 €. Chaque
             ligne renvoie à sa source.
           </p>
         </Disclosure>
-        <Disclosure summary="Et si je loue depuis avant juin 2027 ?">
-          <p>Le bail en cours est pris en compte : voir la transition de l’aide au logement.</p>
+        <Disclosure summary="Et si je loue depuis avant juin 2027 ?">
+          <p>Le bail en cours est pris en compte : voir la transition de l’aide au logement.</p>
         </Disclosure>
         <Disclosure summary="Variante en carte" variant="card" defaultOpen className="mt-4">
-          <p>Un dépliant encadré, ouvert par défaut. Natif : clavier et lecteurs d’écran inclus.</p>
+          <p>Un dépliant encadré, ouvert par défaut. Natif : clavier et lecteurs d’écran inclus.</p>
         </Disclosure>
       </div>
     </section>
@@ -504,9 +657,9 @@ const formatRows: Array<[string, string]> = [
         </h2>
         <p class="mt-2 max-w-2xl text-ink-2">
           <code>NumberInput</code> (texte + <code>inputmode="decimal"</code>, jamais
-          <code>type="number"</code>) accepte « 1 850,50 », « 1850.5 » ou « 2 500 € ».
+          <code>type="number"</code>) accepte « 1 850,50 », « 1850.5 » ou « 2 500 € ».
           <code>SegmentedControl</code> repose sur de vrais boutons radio. <code>Stepper</code>{' '}
-          compte les enfants ; <code>StepIndicator</code> suit la progression sur mobile.
+          compte les enfants ; <code>StepIndicator</code> suit la progression sur mobile.
         </p>
       </div>
       <div class="card">
@@ -521,7 +674,7 @@ const formatRows: Array<[string, string]> = [
           Onglets
         </h2>
         <p class="mt-2 max-w-2xl text-ink-2">
-          Modèle OWID : Graphique · Tableau · Sources. Flèches, Début, Fin au clavier.
+          Modèle OWID : Graphique · Tableau · Sources. Flèches, Début, Fin au clavier.
         </p>
       </div>
       <div class="card">
@@ -536,9 +689,9 @@ const formatRows: Array<[string, string]> = [
           Graphiques
         </h2>
         <p class="mt-2 max-w-2xl text-ink-2">
-          <code>ChartFrame</code> + <code>PlotFigure</code> (Observable Plot) : titre, sous-titre,
-          graphique, lecture en clair, source, « Voir les données », CSV. Marques fines, grille
-          discrète, étiquettes directes sélectives, signe explicite. Palette et formateurs :
+          <code>ChartFrame</code> + <code>PlotFigure</code> (Observable Plot) : titre, sous-titre,
+          graphique, lecture en clair, source, « Voir les données », CSV. Marques fines, grille
+          discrète, étiquettes directes sélectives, signe explicite. Palette et formateurs :
           <code>@/lib/chart-theme</code>.
         </p>
       </div>
@@ -552,9 +705,9 @@ const formatRows: Array<[string, string]> = [
           Formatage français
         </h2>
         <p class="mt-2 max-w-2xl text-ink-2">
-          Tout nombre affiché passe par <code>@/lib/format</code> : espace fine insécable (U+202F)
-          pour les milliers, espace insécable avant € et %, virgule décimale, vrai signe moins
-          (U+2212).
+          Tout nombre affiché passe par <code>@/lib/format</code>&#8239;: espace fine insécable
+          (U+202F) pour les milliers, espace insécable avant € et %, virgule décimale, vrai signe
+          moins (U+2212).
         </p>
       </div>
       <div

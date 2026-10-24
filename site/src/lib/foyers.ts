@@ -16,11 +16,11 @@
  * attribués aux auteurs, avec leur propre dénominateur, sur la page Méthode seulement. Ne jamais
  * comparer deux montants « par foyer » de sources différentes.
  */
-import { millions } from '@/lib/facts';
+import { num } from '@/lib/facts';
 import { formatNumber } from '@/lib/format';
 
 /** Nombre de foyers retenu, en unités. */
-export const FOYERS = millions('fiche_pop_foyers');
+export const FOYERS = num('fiche_pop_foyers');
 /** Même nombre, en millions. */
 export const FOYERS_M = FOYERS / 1e6;
 
@@ -35,4 +35,4 @@ export const FOYERS_LABEL = `${formatNumber(FOYERS_M)} millions de foyers`;
 /** Version courte pour les tuiles : « 30 M de foyers ». */
 export const FOYERS_SHORT = `${formatNumber(FOYERS_M)} M de foyers`;
 /** Phrase de note de bas de page, partout où un « par foyer » apparaît. */
-export const FOYERS_NOTE = `Par foyer : montant national ÷ ${FOYERS_LABEL}, le chiffre des fiches des auteurs. Les autres dénominateurs du livre sont détaillés dans la Méthode.`;
+export const FOYERS_NOTE = `Par foyer : montant national ÷ ${FOYERS_LABEL}, le chiffre des fiches des auteurs. Les autres dénominateurs du livre sont détaillés dans la Méthode.`;

@@ -2,6 +2,7 @@ import { cn } from '@/lib/cn';
 import { chip, num } from '@/lib/facts';
 import { formatEuro, formatPercentPoints } from '@/lib/format';
 import { SourceChip } from '@/components/ui/SourceChip';
+import './story.css';
 
 /**
  * « Votre heure de travail » — the signature visual (docs/VISION.md §1): the value created by one
@@ -63,7 +64,7 @@ export interface HourBarProps {
 export function HourBar({ className, headline = true, size = 'md' }: HourBarProps) {
   const p = parts();
   const total = num('va_heure_total_eur');
-  const sentence = `Sur une heure de travail, ${formatEuro(total)} de valeur ajoutée : ${p
+  const sentence = `Sur une heure de travail, ${formatEuro(total)} de valeur ajoutée : ${p
     .map((x) => `${formatEuro(x.euros)} ${x.text}`)
     .join(', ')}.`;
 

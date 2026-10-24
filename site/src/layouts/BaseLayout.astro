@@ -17,7 +17,12 @@ import schibsted700 from '@fontsource/schibsted-grotesk/files/schibsted-grotesk-
 import jetbrains500 from '@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2?url';
 import Footer from '@/components/site/Footer.astro';
 import Header from '@/components/site/Header.astro';
-import { BRAND_QUERY_PARAM, BRAND_STORAGE_KEY, BRAND_THEME_COLOR, DEFAULT_BRAND } from '@/lib/brand';
+import {
+  BRAND_QUERY_PARAM,
+  BRAND_STORAGE_KEY,
+  BRAND_THEME_COLOR,
+  DEFAULT_BRAND,
+} from '@/lib/brand';
 import { SITE, withBase } from '@/lib/site';
 
 interface Props {
@@ -43,10 +48,11 @@ const fullTitle = title
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 const ogImageUrl = Astro.site ? new URL(withBase(ogImage), Astro.site).href : undefined;
 
-// Brands (see lib/brand.ts). Fonts of the brand in use are preloaded; the inline script below swaps the
-// preloads when the saved / requested brand differs from the build-time default. All other font files
-// are only fetched when a glyph needs them (unused @font-face costs nothing).
+// Brands (see lib/brand.ts). The inline script below picks the brand and preloads ITS fonts; every other
+// font file is only fetched when a glyph needs it (an unused @font-face costs nothing).
 const brandFonts = { editorial: [fraunces, inter], ci: [schibsted400, schibsted700, jetbrains500] };
+// Without JavaScript the brand is the build-time default: preload its two main fonts.
+const noscriptFonts = brandFonts[DEFAULT_BRAND];
 const brandBoot = {
   fallback: DEFAULT_BRAND,
   storageKey: BRAND_STORAGE_KEY,
@@ -78,18 +84,12 @@ const brandBoot = {
     />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
-    {
-      brandFonts[DEFAULT_BRAND].map((href) => (
-        <link
-          rel="preload"
-          href={href}
-          as="font"
-          type="font/woff2"
-          crossorigin
-          data-brand-font={DEFAULT_BRAND}
-        />
-      ))
-    }
+    <!-- Font preloads of the brand in use are added by the inline script below (a static <link> would be
+         fetched by the browser's preload scanner even for a brand that is then not displayed). -->
+    <noscript>
+      <link rel="preload" href={noscriptFonts[0]} as="font" type="font/woff2" crossorigin />
+      <link rel="preload" href={noscriptFonts[1]} as="font" type="font/woff2" crossorigin />
+    </noscript>
     {canonical && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
@@ -134,13 +134,9 @@ const brandBoot = {
           /* storage or URL API unavailable: keep the build-time default */
         }
         root.dataset.brand = brand;
-        if (brand === boot.fallback) return;
-        // Not the default brand: its meta colours and font preloads replace the default's.
+        // Meta colours and font preloads of the brand in use.
         document.querySelectorAll('meta[data-brand-theme]').forEach(function (m) {
           m.setAttribute('content', boot.themeColor[brand][m.getAttribute('data-brand-theme')]);
-        });
-        document.querySelectorAll('link[data-brand-font]').forEach(function (l) {
-          l.remove();
         });
         boot.fonts[brand].forEach(function (href) {
           var l = document.createElement('link');
@@ -149,7 +145,6 @@ const brandBoot = {
           l.type = 'font/woff2';
           l.crossOrigin = 'anonymous';
           l.href = href;
-          l.setAttribute('data-brand-font', brand);
           document.head.appendChild(l);
         });
       })();
