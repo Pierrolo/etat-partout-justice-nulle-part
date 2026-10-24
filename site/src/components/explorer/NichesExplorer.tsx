@@ -574,8 +574,7 @@ export default function NichesExplorer({
             <span>
               Plus de filtres
               <span className="font-normal text-ink-3">
-                {' '}
-                : impôt, effet du plan, année du coût
+                &#8239;: impôt, effet du plan, année du coût
                 {moreFilters > 0 && ` · ${moreFilters} actif${moreFilters > 1 ? 's' : ''}`}
               </span>
             </span>

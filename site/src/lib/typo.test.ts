@@ -13,6 +13,12 @@ describe('typo', () => {
     expect(typo(`Pourquoi${NBSP}: x`)).toBe(`Pourquoi${NNBSP}: x`);
   });
 
+  it('une espace en tête de texte après un élément ou une expression précède bien la marque', () => {
+    expect(typo(' : la législation', { afterInline: true })).toBe(`${NNBSP}: la législation`);
+    expect(typo(' : la législation')).toBe(' : la législation');
+    expect(typo(' :hover', { afterInline: true })).toBe(' :hover');
+  });
+
   it('ne touche ni au code, ni aux URLs, ni aux ternaires sans espace avant', () => {
     expect(typo('https://exemple.fr/a?b=1&c=2')).toBe('https://exemple.fr/a?b=1&c=2');
     expect(typo('a:hover')).toBe('a:hover');

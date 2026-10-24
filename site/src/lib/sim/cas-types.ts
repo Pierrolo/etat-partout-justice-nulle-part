@@ -89,15 +89,16 @@ export function buildRows(
     );
     return {
       id: cas.id,
-      label: cas.label,
-      family: cas.family,
+      // Engine strings: French typography at render time (the engine keeps plain spaces).
+      label: typo(cas.label),
+      family: typo(cas.family),
       income,
       bucket: bucketOf(income).id,
       baseline: fig.baselineAfterTva,
       plan: fig.planAfterTva,
       delta: fig.deltaAfterTva,
       pct: headlinePct(c),
-      top: biggest?.label ?? '—',
+      top: typo(biggest?.label ?? '—'),
       cas,
     };
   });

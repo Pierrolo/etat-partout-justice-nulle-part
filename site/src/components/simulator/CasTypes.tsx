@@ -164,9 +164,9 @@ export default function CasTypes() {
             className="flex min-h-10 w-24 shrink-0 items-center justify-center rounded-md border border-[color-mix(in_srgb,currentColor_22%,transparent)] px-1 text-sm font-bold"
           >
             {chip}
-          </span>
+          </span>{' '}
           <span className="min-w-0 text-[0.9375rem] text-ink">
-            <span className="block font-medium">{r.label}</span>
+            <span className="block font-medium">{r.label}</span>{' '}
             <span className="block text-sm text-ink-3">
               revenu net {formatEuro(roundForDisplay(r.income, DISPLAY_STEP))} par mois
             </span>
@@ -362,7 +362,8 @@ export default function CasTypes() {
           role="region"
           aria-label="Tableau : foyers types, revenu disponible aujourd’hui et avec le plan"
           tabIndex={0}
-          className="max-w-full overflow-x-auto rounded-md border border-rule bg-surface"
+          // `relative`: the sr-only cells are absolutely positioned and would otherwise escape the scroller (page scroll at 320 px)
+          className="relative max-w-full overflow-x-auto rounded-md border border-rule bg-surface"
         >
           <table className="data-table min-w-[44rem]">
             <caption className="sr-only">

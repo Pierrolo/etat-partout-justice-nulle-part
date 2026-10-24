@@ -132,7 +132,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
           <div
             class="max-w-2xl space-y-2"
             role="img"
-            aria-label={`Répartition de 100 € de dépenses : ${groups.map((g) => `${formatNumber((g.value / total) * 100, { decimals: 0 })} € ${GROUP_SHORT[g.id]}`).join(', ')}`}
+            aria-label={`Répartition de 100 € de dépenses : ${groups.map((g) => `${formatNumber((g.value / total) * 100, { decimals: 0 })} € ${GROUP_SHORT[g.id]}`).join(', ')}`}
           >
             <div class="flex gap-0.5" aria-hidden="true">
               {groups.map((g, i) => (

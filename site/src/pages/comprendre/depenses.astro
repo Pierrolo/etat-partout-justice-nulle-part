@@ -105,7 +105,7 @@ const sharePct = (v: number) => formatPercentPoints(v, { decimals: 1 });
         label="Part du PIB, comparaison européenne"
         value={formatNumber(frDep, { decimals: 1 })}
         unit="% du PIB"
-        reframe={`${rank}e sur ${nRanked} pays ; zone euro : ${formatNumber(eaDep, { decimals: 1 })} %.`}
+        reframe={`${rank}e sur ${nRanked} pays ; zone euro : ${formatNumber(eaDep, { decimals: 1 })} %.`}
         source={chip('eu_dep_pib_fr_2024_pct', { label: 'Eurostat' })}
       />
     </ul>

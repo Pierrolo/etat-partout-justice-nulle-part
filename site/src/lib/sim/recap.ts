@@ -42,7 +42,7 @@ function adultText(a: Adult): string {
     else {
       const ratio =
         a.salary.workRatio !== undefined && a.salary.workRatio < 1
-          ? `, à ${Math.round(a.salary.workRatio * 100)} %`
+          ? `, à ${Math.round(a.salary.workRatio * 100)} %`
           : '';
       parts.push(
         `${status}, ${formatEuro(a.salary.amount)} ${a.salary.basis === 'net' ? 'net' : 'brut'} par mois${ratio}`,

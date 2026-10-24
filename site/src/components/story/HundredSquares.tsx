@@ -36,9 +36,9 @@ export function HundredSquares({
     <ChartFrame
       title="Si l’argent public était 100 €"
       subtitle={`Une case = 1 € sur 100 € de dépenses publiques en ${year}, par grande fonction.`}
-      summary={`Sur 100 € dépensés, ${formatNumber((top.value / tree.value) * 100, { decimals: 0 })} € vont à « ${GROUP_SHORT[top.id] ?? top.label} » (${(top.children ?? []).map((p) => p.label.toLowerCase()).join(', ')})${
+      summary={`Sur 100 € dépensés, ${formatNumber((top.value / tree.value) * 100, { decimals: 0 })} € vont à « ${GROUP_SHORT[top.id] ?? top.label} » (${(top.children ?? []).map((p) => p.label.toLowerCase()).join(', ')})${
         secu
-          ? ` et ${formatNumber((secu.value / tree.value) * 100, { decimals: 1 })} € à la sécurité (défense, police, justice)`
+          ? ` et ${formatNumber((secu.value / tree.value) * 100, { decimals: 1 })} € à la sécurité (défense, police, justice)`
           : ''
       }.`}
       sources={sources.map((s) => ({ ...s }))}

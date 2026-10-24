@@ -52,6 +52,8 @@ function fixRaw(raw, kind) {
   if (kind === 'jsxtext') {
     // In JSX / Astro text a line break is just a space: « mot\n  : » and « «\n mot » must not strand the mark.
     t = t.replace(/(?<=\S)[ \t]*\r?\n[ \t]*(?=[;:!?](?:[ \t\r\n»)]|$))/g, ' ');
+    // « 80\n %»: a line break between a number and its unit is just a space too.
+    t = t.replace(/(?<=\d)[ \t]*\r?\n[ \t]*(?=(?:Md€|M€|k€|€|%|‰)(?![\p{L}\d]))/gu, ' ');
     t = t.replace(/«[ \t]*\r?\n[ \t]*/g, '« ').replace(/[ \t]*\r?\n[ \t]*»/g, ' »');
     // An entity at the edge was already fixed: do not touch it.
     t = t.replace(/^&#8239;|^&nbsp;/, (e) => (e === '&nbsp;' ? ' ' : ' '));
@@ -59,6 +61,8 @@ function fixRaw(raw, kind) {
   }
   // A chunk that starts with « :  » follows an expression: the word before the space is outside this span.
   if (kind !== 'string') t = t.replace(/^[ ]+(?=[;:!?](?:[   \n»)]|$))/, ' ');
+  // Same for a unit: « {n} Md€ », « {n} % » — the number is in the expression before this chunk.
+  if (kind !== 'string') t = t.replace(/^ +(?=(?:Md€|M€|k€|€|%|‰)(?![\p{L}\d]))/u, '\u00A0');
   t = typo(t);
   return kind === 'jsxtext' ? edgeEntities(t) : t;
 }

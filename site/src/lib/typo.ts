@@ -23,6 +23,11 @@ export interface TypoOptions {
   spaceBeforePercent?: boolean;
   /** « ADEME - Agence » → « ADEME – Agence ». Datasets only. */
   enDash?: boolean;
+  /**
+   * The text starts right after an inline element or expression (« <strong>Note</strong> : … »): the word
+   * before a leading « ; : ! ? » is outside `input`, so a leading space is still a space before the mark.
+   */
+  afterInline?: boolean;
 }
 
 const MONTHS =
@@ -41,7 +46,9 @@ const RE_FIRST = new RegExp(`(?<![\\d,.h])\\b1(?=[ \\u00A0\\u202F](?:${MONTHS})\
 
 export function typo(input: string, opts: TypoOptions = {}): string {
   if (!input) return input;
-  let s = input;
+  // A letter stands for the word that precedes the text (it is never rewritten, and is dropped at the end).
+  const lead = opts.afterInline ? 'x' : '';
+  let s = lead + input;
 
   // Typographic apostrophe between two letters (l'État → l’État).
   s = s.replace(/(\p{L})'(?=\p{L})/gu, '$1’');
@@ -63,7 +70,7 @@ export function typo(input: string, opts: TypoOptions = {}): string {
   s = s.replace(RE_FIRST, '1er');
 
   if (opts.enDash) s = s.replace(/(?<=\S) - (?=\S)/g, ' – ');
-  return s;
+  return lead ? s.slice(lead.length) : s;
 }
 
 /** Deep-map every string of a JSON-like value through `typo` (datasets, build time). */

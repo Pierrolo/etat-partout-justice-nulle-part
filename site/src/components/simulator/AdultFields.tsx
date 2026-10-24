@@ -241,8 +241,8 @@ export function AdultFields({
         }
         hint={
           <>
-            Allocation aux adultes handicapés (<Term id="aah">AAH</Term>). À partir d’un taux de 80
-            %, la carte mobilité inclusion « invalidité » (<Term id="cmi">CMI</Term>) ouvre un
+            Allocation aux adultes handicapés (<Term id="aah">AAH</Term>). À partir d’un taux de
+            80 %, la carte mobilité inclusion « invalidité » (<Term id="cmi">CMI</Term>) ouvre un
             supplément prévu par le plan ; pas en dessous.
           </>
         }

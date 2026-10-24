@@ -142,7 +142,10 @@ export function rehypeMethode(options = {}) {
 
     const walk = (node, parent, index, inSkip) => {
       if (node.type === 'text') {
-        const value = typo(node.value);
+        // « **Note** : … »: the text node starts after an element, the word before « : » is outside it.
+        const value = typo(node.value, {
+          afterInline: index > 0 && parent.children[index - 1]?.type === 'element',
+        });
         if (inSkip) {
           node.value = value;
           return;

@@ -126,7 +126,8 @@ test('the story pages are complete without JavaScript', async ({ browser, isMobi
   const page = await ctx.newPage();
   await page.goto('comprendre/');
   // Playwright's text engine skips <noscript>: read the raw HTML instead
-  expect(await page.content()).toContain('Réponse : la sécurité');
+  // « Réponse : » carries a narrow no-break space before the colon (French typography)
+  expect(await page.content()).toContain('Réponse\u202f: la sécurité');
   await page.goto('comprendre/depenses/');
   if (!isMobile) await expect(page.locator('.tm')).toBeVisible();
   await expect(page.getByText('Lecture.').first()).toBeVisible();

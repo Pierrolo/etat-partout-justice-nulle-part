@@ -120,13 +120,13 @@ const announced = [
     >
       <p>
         Selon la ligne et la feuille du classeur, le total vaut{' '}
-        {nf3(rec.totaux.annexe_manuscrit_colonne_C)} Md€ (colonne C),{' '}
-        {nf3(rec.totaux.annexe_manuscrit_E_plus_F)} Md€ (années 1 et pleine additionnées, ce schéma)
-        ou
-        {nf3(rec.totaux.destinations_classeur_114_46_plus_121_749)} Md€ (somme des deux
+        {nf3(rec.totaux.annexe_manuscrit_colonne_C)}&nbsp;Md€ (colonne C),{' '}
+        {nf3(rec.totaux.annexe_manuscrit_E_plus_F)}&nbsp;Md€ (années 1 et pleine additionnées, ce
+        schéma) ou
+        {nf3(rec.totaux.destinations_classeur_114_46_plus_121_749)}&nbsp;Md€ (somme des deux
         destinations). Les trois s’arrondissent à {formatNumber(total, { decimals: 0 })}. De même,
-        le gain de la première année est de {nf3(sk.year1)} Md€ dans l’annexe et de{' '}
-        {formatNumber(sk.year1Flux, { decimals: 1 })} Md€ dans la feuille « Flux ».
+        le gain de la première année est de {nf3(sk.year1)}&nbsp;Md€ dans l’annexe et de{' '}
+        {formatNumber(sk.year1Flux, { decimals: 1 })}&nbsp;Md€ dans la feuille « Flux ».
       </p>
       <p class="mt-2 text-sm text-ink-3">
         Ce schéma utilise uniquement l’annexe. Le classeur contient un second schéma, légèrement
@@ -171,7 +171,9 @@ const announced = [
           {formatEuro(num('va_heure_total_eur'))}. Ce qu’ils chiffrent : la fin de la CSG et de la
           CRDS ajouterait <strong class="text-gain">{formatEuro(csgMois)} par mois</strong> au
           salaire net médian de {formatEuro(netMedian)}, soit{' '}
-          <strong class="text-gain">{formatNumber(csgPct, { decimals: 1, signed: true })} %</strong>
+          <strong class="text-gain">
+            {formatNumber(csgPct, { decimals: 1, signed: true })}&nbsp;%
+          </strong>
           .
         </p>
         <p class="rounded-md bg-sunken p-3 text-sm leading-relaxed text-ink-2">
