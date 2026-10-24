@@ -1,8 +1,32 @@
 ---
-import Todo from '@/components/site/Todo.astro';
+import { HourBar } from '@/components/story/HourBar';
 import { Callout, StatTile, TierLegend } from '@/components/ui';
+import { TierBadge } from '@/components/ui/TierBadge';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { chip, num } from '@/lib/facts';
+import { formatEuro, formatInteger, formatNumber, roundForDisplay } from '@/lib/format';
+import { READING_HYPOTHESES, readingTime } from '@/lib/reading';
 import { withBase } from '@/lib/site';
+
+// ── The three big numbers, all read from facts.json ───────────────────────────
+const depTotal = num('dep_total_2024_md');
+const perDay = num('dep_par_foyer_jour_eur');
+const foyersDep = num('foyers_implicites_dep_m');
+const agencesAvant = num('agences_etat_avant');
+const agencesFermees = num('agences_fermees');
+const agencesApres = num('agences_etat_apres');
+const agencesParFoyer = num('agences_par_foyer_eur');
+const foyers236 = num('foyers_implicites_236_m');
+const mots = num('droit_mots_2026');
+const lecture = readingTime(mots);
+const denominators = [
+  num('fiche_pop_foyers') / 1e6,
+  num('foyers_implicites_236_m'),
+  num('foyers_implicites_dep_m'),
+  num('foyers_fiscaux_loi_m'),
+]
+  .map((m) => `${formatNumber(m, { decimals: { min: 0, max: 1 } })} M`)
+  .join(', ');
 ---
 
 <BaseLayout>
@@ -26,29 +50,22 @@ import { withBase } from '@/lib/site';
       </p>
     </div>
 
-    <!-- Illustration of the result format. Clearly fictional: not a computed result. -->
-    <figure
-      class="card hidden space-y-4 bg-sunken lg:block"
-      aria-label="Exemple de résultat, foyer fictif"
-    >
-      <p class="flex items-center justify-between gap-3">
-        <span class="eyebrow">Exemple de résultat</span>
-        <span class="rounded-full border border-rule-strong px-2 py-0.5 text-xs font-medium text-ink-3">
-          Chiffres fictifs
-        </span>
+    <!-- Signature visual « Votre heure de travail » — generic (average worker) version, static, sourced. -->
+    <div class="card space-y-5 bg-surface" data-teaser="heure-de-travail">
+      <p class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <span class="eyebrow eyebrow-accent">Votre heure de travail</span>
+        <TierBadge tier="announced" size="sm" short />
       </p>
-      <p class="text-[0.9375rem] text-ink-2">
-        Avec le plan, en régime de croisière, ce foyer fictif disposerait de
+      <HourBar />
+      <p class="text-[0.9375rem] leading-relaxed text-ink-2">
+        Selon les auteurs, c’est ce que l’État prélève sur la valeur créée par une heure d’un
+        travailleur moyen. Calcul des auteurs, sans source externe indiquée.
       </p>
-      <p class="flex flex-wrap items-baseline gap-x-3">
-        <span class="stat-number text-gain">+212</span>
-        <span class="font-serif text-2xl text-ink-2">€/mois</span>
-        <span class="text-lg font-semibold text-gain">(+9 %)</span>
-      </p>
-      <figcaption class="border-t border-rule pt-3 text-xs text-ink-3">
-        Illustration du format : chiffres fictifs. Le simulateur calcule le vôtre — gain ou perte.
-      </figcaption>
-    </figure>
+      <a href={withBase('/simulateur/')} class="btn btn-primary w-full justify-between sm:w-auto">
+        <span>Et avec le plan ? Calculez-le pour votre paie</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
   </section>
 
   <!-- THE TWO DOORS -->
@@ -101,34 +118,42 @@ import { withBase } from '@/lib/site';
     <p class="mt-3 max-w-xl text-ink-2">
       Chaque grand nombre est accompagné d’un équivalent à votre échelle, et de sa source.
     </p>
-    <!-- TODO(builder): replace with figures read from src/data/facts.json (value, unit, source, reframing). -->
     <ul class="mt-8 grid gap-4 md:grid-cols-3 md:gap-6">
       <StatTile
         as="li"
-        label="Dépenses publiques par an"
-        value="1 672"
+        label="Dépenses publiques en 2024"
+        value={formatNumber(depTotal)}
         unit="Md€"
         unitLabel="milliards d’euros"
-        reframe="= TODO(builder) € par foyer et par jour"
-        source={{ label: 'TODO(builder) · facts.json' }}
+        reframe={`= ${formatEuro(perDay)} par foyer et par jour, sur ${formatNumber(foyersDep, { decimals: 1 })} M de foyers (le dénominateur implicite du livre).`}
+        source={chip('dep_total_2024_md', { label: 'Insee, comptes nationaux' })}
       />
       <StatTile
         as="li"
-        label="Agences de l’État"
-        value="1 104"
+        label="Agences d’État aujourd’hui"
+        value={formatInteger(agencesAvant)}
         unit="agences"
-        reframe="TODO(builder) : équivalent à l’échelle d’un foyer"
-        source={{ label: 'TODO(builder) · facts.json' }}
+        reframe={`Le plan en fermerait ${formatInteger(agencesFermees)} et en garderait ${formatInteger(agencesApres)}. Selon les auteurs, les agences non indispensables coûtent ${formatEuro(agencesParFoyer)} par foyer et par an (sur ${formatNumber(foyers236, { decimals: 1 })} M de foyers).`}
+        tier="announced"
+        source={chip('agences_etat_avant', { label: 'Classeur des auteurs, GraphAgences' })}
       />
       <StatTile
         as="li"
-        label="Mots de loi en vigueur"
-        value="49"
+        label="Mots de loi et de règlement en vigueur"
+        value={formatNumber(mots / 1e6)}
         unit="millions de mots"
-        reframe="TODO(builder) : ≈ … années de lecture"
-        source={{ label: 'TODO(builder) · facts.json' }}
+        reframe={`≈ ${formatNumber(roundForDisplay(lecture.hours, 10))} heures de lecture : plus de ${formatNumber(Math.floor(lecture.fullTimeYears))} ans à temps plein pour tout lire.`}
+        source={chip('droit_mots_2026', { label: 'Légifrance, décompte des auteurs' })}
       />
     </ul>
+    <p class="mt-4 max-w-3xl text-sm text-ink-3">
+      Les « par foyer » changent selon la source : le livre emploie plusieurs dénominateurs (
+      {denominators} de foyers), chacun indiqué à côté du chiffre. Ne les comparez pas entre eux.
+      Temps de lecture : {formatInteger(READING_HYPOTHESES.wordsPerMinute)}
+      mots par minute et {formatInteger(READING_HYPOTHESES.fullTimeHoursPerYear)} heures de travail
+      par an (hypothèses du site, pas du livre).{' '}
+      <a href={withBase('/comprendre/')}>Tout explorer</a>.
+    </p>
   </section>
 
   <!-- HOW WE KEEP IT HONEST -->
@@ -150,10 +175,14 @@ import { withBase } from '@/lib/site';
     </Callout>
   </section>
 
-  <section class="wrap mt-16">
-    <Todo title="Page d’accueil">
-      Ajouter si utile : exemple de phrase-résultat, aperçu du « Qui gagne, qui perd ? », lien vers
-      la méthode.
-    </Todo>
+  <section class="wrap mt-16 pb-4" aria-labelledby="more-title">
+    <h2 id="more-title" class="sr-only">
+      Pour aller plus loin
+    </h2>
+    <p class="max-w-2xl text-ink-2">
+      Sources, hypothèses et limites du simulateur sont détaillées dans
+      <a href={withBase('/methode/')}>la page Méthode</a>. Les chiffres du livre qui se contredisent
+      sont montrés côte à côte, jamais corrigés en silence.
+    </p>
   </section>
 </BaseLayout>

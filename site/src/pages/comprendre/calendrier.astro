@@ -1,14 +1,243 @@
 ---
-import Todo from '@/components/site/Todo.astro';
+/**
+ * /comprendre/calendrier — « La transition 2027 → 2030 ».
+ * Frise et liste : îlot CalendrierExplorer. Trajectoires : petits multiples en escalier (StepGrid).
+ * Les dates viennent exclusivement du texte des amendements proposés (calendrier.json) ; aucune
+ * horloge n'est lue : pas de marqueur « aujourd'hui », la page est identique à chaque build.
+ */
+import CalendrierExplorer from '@/components/explorer/CalendrierExplorer';
+import StepGrid from '@/components/explorer/StepCharts';
+import { Callout, ChartFrame, StatTile, TierBadge } from '@/components/ui';
+import amendements from '@/data/amendements.json';
+import calendrier from '@/data/calendrier.json';
 import DashboardLayout from '@/layouts/DashboardLayout.astro';
+import {
+  PANEL_ORDER,
+  groupByDate,
+  toEvents,
+  toJalons,
+  toPanel,
+  type Panel,
+  type RawEvent,
+  type RawJalon,
+  type RawTrajectory,
+} from '@/lib/calendrier-model';
+import { formatDateFr } from '@/lib/dates';
+import { formatInteger, formatNumber, formatPercentPoints } from '@/lib/format';
+import { withBase } from '@/lib/site';
+
+const events = toEvents(calendrier.events as unknown as RawEvent[]);
+const jalons = toJalons(calendrier.jalons as unknown as RawJalon[]);
+const raw = calendrier.trajectoires as unknown as RawTrajectory[];
+const panel = (id: string): Panel => toPanel(raw.find((t) => t.id === id)!);
+
+const byYear = calendrier.meta.counts.events_par_annee as Record<string, number>;
+const amendementsHref = withBase('/comprendre/amendements/');
+
+/* ── Trajectoires ─────────────────────────────────────────────────────── */
+const taux = PANEL_ORDER.taux.map(panel);
+const part = PANEL_ORDER.part.map(panel);
+const csg = panel('csg_crds_activite_2027');
+const tva = panel('tva_alimentation');
+const emplois = panel('emplois_etat_plafond');
+const pct = (v: number) => formatPercentPoints(v, { decimals: { min: 0, max: 1 } });
+const num1 = (v: number) => formatNumber(v, { decimals: { min: 0, max: 1 } });
+
+const zeroDate = (p: Panel) => p.steps.find((s) => s.value === 0)?.from ?? '';
+const zeros = part
+  .map((p) => ({ title: p.title, date: zeroDate(p) }))
+  .sort((a, b) => a.date.localeCompare(b.date));
+
+function sourcesOf(panels: Panel[]) {
+  const seen = new Map<string, { label: string; href: string; tier: 'law' }>();
+  for (const p of panels) {
+    for (const s of p.steps) {
+      for (const src of s.sources) {
+        const key = `${src.liasse}-${src.number}`;
+        if (!seen.has(key)) {
+          seen.set(key, {
+            label: `Amendement ${src.liasse} n° ${src.number}`,
+            href: src.url,
+            tier: 'law',
+          });
+        }
+      }
+    }
+  }
+  return [...seen.values()];
+}
+
+function rowsOf(panels: Panel[]) {
+  return panels.flatMap((p) =>
+    p.steps.map((s) => {
+      const extra = p.extra?.find((e) => e.from === s.from);
+      return {
+        graphique: p.title,
+        depuis: s.from,
+        valeur: s.value,
+        unite: p.measure,
+        detail: extra ? `CSG ${num1(extra.csg)} + CRDS ${num1(extra.crds)}` : '',
+        palier: s.label,
+        deduit: s.hypothesis ? 'oui' : 'non',
+      };
+    }),
+  );
+}
+const columns = [
+  { key: 'graphique', label: 'Trajectoire' },
+  { key: 'depuis', label: 'À partir du' },
+  {
+    key: 'valeur',
+    label: 'Valeur',
+    numeric: true,
+    format: (v: unknown) => formatNumber(Number(v), { decimals: { min: 0, max: 2 } }),
+  },
+  { key: 'unite', label: 'Unité' },
+  { key: 'detail', label: 'Détail' },
+  { key: 'palier', label: 'Palier' },
+  { key: 'deduit', label: 'Départ déduit' },
+] as const;
+
+const autresTva = raw.find((t) => t.id === 'tva_autres_taux_reduits')!.steps[0]!;
+const annonces = calendrier.annonces_sans_date;
+const conditions = calendrier.meta.conditions;
+const busiest = groupByDate(events, jalons)
+  .map((g) => ({ date: g.date, n: g.events.length, jalon: g.jalon }))
+  .sort((a, b) => b.n - a.n)[0]!;
 ---
 
 <DashboardLayout
   slug="calendrier"
-  lede="La transition 2027 → 2030, mesure par mesure : ce qui change, et quand."
+  lede="Impôts, CSG, aides au logement, TVA, agences : chaque mesure du plan a une date écrite dans le texte proposé. Voici la transition, de 2027 à 2030, domaine par domaine."
 >
-  <!-- TODO(builder): build this page with ChartFrame + PlotFigure (see /styleguide). -->
-  <Todo title="Frise du calendrier">
-    Frise de toutes les mesures datées (CSG, AFU, APL, TVA…), filtrable, avec équivalent texte.
-  </Todo>
+  <Callout tone="note" title="Des dates de texte proposé, pas de loi en vigueur">
+    <p>
+      Ces dates viennent des {formatInteger(amendements.meta.counts.total)} amendements rédigés par
+      l’association Résolution (octobre 2026) : ils ne sont ni déposés ni adoptés. « Écrit dans la
+      loi » veut dire « écrit dans le texte de loi proposé ». Pour la frise, une date « 1er janvier
+      » sans jour écrit dans le texte est signalée comme telle.
+    </p>
+  </Callout>
+
+  <section aria-labelledby="cles-t" class="space-y-6">
+    <h2 id="cles-t" class="sr-only">
+      Les chiffres clés
+    </h2>
+    <ul class="grid gap-4 md:grid-cols-3">
+      <StatTile
+        as="li"
+        label="Mesures datées dans le texte proposé"
+        value={formatInteger(events.length)}
+        reframe={`dont ${formatInteger(byYear['2027'] ?? 0)} dès 2027 : la première année concentre l’essentiel du calendrier.`}
+        source={{ label: 'Amendements PLF-P1, PLF-P2, PLFSS', href: amendementsHref, tier: 'law' }}
+      />
+      <StatTile
+        as="li"
+        label="Dates clés"
+        value={formatInteger(jalons.length)}
+        reframe={`Du ${formatDateFr(jalons[0]!.date)} au ${formatDateFr(jalons[jalons.length - 2]!.date)} pour la transition ; un dernier palier en ${jalons[jalons.length - 1]!.date.slice(0, 4)} (majoration de pension).`}
+        source={{ label: 'Calendrier des amendements', href: amendementsHref, tier: 'law' }}
+      />
+      <StatTile
+        as="li"
+        label={`Mesures prévues le ${formatDateFr(busiest.date)}, la date la plus chargée`}
+        value={formatInteger(busiest.n)}
+        reframe={busiest.jalon ? `« ${busiest.jalon.title} »` : undefined}
+        source={{ label: 'Calendrier des amendements', href: amendementsHref, tier: 'law' }}
+      />
+    </ul>
+  </section>
+
+  <section aria-labelledby="frise-t" class="space-y-6">
+    <h2 id="frise-t" class="max-w-3xl text-2xl sm:text-3xl">
+      Chaque mesure, à sa date
+    </h2>
+    <CalendrierExplorer
+      client:load
+      events={events}
+      jalons={jalons}
+      amendementsHref={amendementsHref}
+    />
+  </section>
+
+  <section aria-labelledby="traj-t" class="space-y-6">
+    <div class="max-w-3xl space-y-2">
+      <h2 id="traj-t" class="text-2xl sm:text-3xl">
+        Les trajectoires, marche par marche
+      </h2>
+      <p class="text-ink-2">
+        Plusieurs mesures ne tombent pas d’un coup : elles descendent par paliers. Un petit
+        graphique par trajectoire, avec la valeur de chaque marche et sa date.
+      </p>
+    </div>
+
+    <ChartFrame
+      title="Trois rythmes : CSG et CRDS, TVA de l’alimentation, emplois de l’État"
+      subtitle="Chaque graphique a sa propre unité ; les axes ne se comparent pas entre eux. Touchez un repère, ou parcourez-les aux flèches, pour lire sa date et son texte."
+      tier="law"
+      summary={`La CSG et la CRDS sur les revenus d’activité passent de ${num1(csg.steps[0]!.value)} points à zéro le ${formatDateFr(csg.steps[csg.steps.length - 1]!.from)}, par marches mensuelles de ${num1(csg.steps[0]!.value - csg.steps[1]!.value)} point environ à partir de juillet 2027. La TVA de l’alimentation monte de ${pct(tva.steps[0]!.value)} à ${pct(tva.steps[1]!.value)} en juillet 2028, ${pct(tva.steps[2]!.value)} en 2029 et ${pct(tva.steps[3]!.value)} en juillet 2030. Les ${formatInteger(emplois.steps[1]!.value)} emplois d’État supprimés le sont à moitié dès le second semestre 2027 (${formatInteger(emplois.steps[0]!.value)}), en totalité en 2028.`}
+      sources={sourcesOf(taux)}
+      table={{
+        caption: 'Paliers datés : CSG/CRDS, TVA de l’alimentation, emplois de l’État',
+        columns: [...columns],
+        rows: rowsOf(taux),
+      }}
+      csvFileName="calendrier-trajectoires-taux-emplois.csv"
+      note={`La part de CRDS (${num1(csg.extra?.[1]?.crds ?? 0)} point) est déduite par soustraction des taux écrits dans l’amendement PLFSS n° 1 : elle est exacte mais non écrite telle quelle (écart D33). Les autres taux réduits de TVA passent à ${pct(autresTva.value!)} le ${formatDateFr(autresTva.from)}.`}
+    >
+      <StepGrid client:visible panels={taux} columns={3} />
+    </ChartFrame>
+
+    <ChartFrame
+      title="Six avantages et dotations qui s’éteignent par tiers"
+      subtitle="Part restante de l’avantage actuel, en % — même axe pour les six graphiques. Touchez un repère, ou parcourez-les aux flèches, pour lire sa date et son texte."
+      tier="law"
+      summary={`Chaque graphique descend par tiers puis s’éteint : ${zeros.map((z) => `${z.title.toLowerCase()} le ${formatDateFr(z.date)}`).join(' ; ')}. Les dons sont les premiers à disparaître (${formatDateFr(zeros[0]!.date)}), la taxe sur les salaires les derniers.`}
+      sources={sourcesOf(part)}
+      table={{
+        caption: 'Paliers datés des six avantages et dotations qui s’éteignent par tiers',
+        columns: [...columns],
+        rows: rowsOf(part),
+      }}
+      csvFileName="calendrier-trajectoires-par-tiers.csv"
+      note="Les parts de 66,67 % et 33,33 % sont les deux tiers et le tiers restants, calculés à partir de « réduit d’un tiers » et « de deux tiers » du texte. Le palier de départ à 100 %, quand il est en pointillé, rappelle la situation actuelle : il n’est pas écrit dans l’amendement."
+    >
+      <StepGrid client:visible panels={part} columns={3} />
+    </ChartFrame>
+  </section>
+
+  <section aria-labelledby="annonces-t" class="space-y-5">
+    <div class="max-w-3xl space-y-2">
+      <h2 id="annonces-t" class="text-2xl sm:text-3xl">
+        Les promesses sans date dans la loi
+      </h2>
+      <p class="text-ink-2">
+        Les auteurs annoncent aussi des effets que les amendements ne datent pas, ou ne chiffrent
+        pas. Ils ne figurent pas sur la frise : ce sont des annonces, pas du texte de loi.
+      </p>
+    </div>
+    <ul class="grid gap-3 md:grid-cols-2">
+      {annonces.map((a) => (
+        <li class="hatch flex flex-col gap-2 rounded-md border-[1.5px] border-dashed border-[var(--tier-announced-bd)] bg-surface p-4">
+          <p class="flex flex-wrap items-center gap-2">
+            <TierBadge tier="announced" size="sm" />
+            <span class="text-sm font-semibold text-ink-2">Horizon : {a.horizon_fr}</span>
+          </p>
+          <p class="text-[0.9375rem] text-ink">{a.label_fr}</p>
+          <p class="text-sm">
+            <a href={a.source.url} target="_blank" rel="noopener noreferrer">
+              {a.source.ref}
+            </a>
+          </p>
+        </li>
+      ))}
+    </ul>
+    <Callout tone="note" title="Deux mesures dépendent d’une condition">
+      <ul class="list-disc space-y-1 ps-5">
+        {conditions.map((c) => (
+          <li>{c}</li>
+        ))}
+      </ul>
+    </Callout>
+  </section>
 </DashboardLayout>

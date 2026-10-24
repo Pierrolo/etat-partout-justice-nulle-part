@@ -15,6 +15,8 @@ export interface SegmentedControlProps<T extends string> {
   value: T;
   onChange: (value: T) => void;
   name?: string;
+  /** Plain-language help under the legend; wired with aria-describedby. */
+  hint?: ReactNode;
   /** Options share the full width equally (good for 2–3 short choices on phones). */
   fullWidth?: boolean;
   size?: 'md' | 'sm';
@@ -32,19 +34,29 @@ export function SegmentedControl<T extends string>({
   value,
   onChange,
   name,
+  hint,
   fullWidth = false,
   size = 'md',
   className,
 }: SegmentedControlProps<T>) {
   const uid = useId();
   const group = name ?? `${uid}-seg`;
+  const hintId = `${uid}-hint`;
   return (
-    <fieldset className={cn('min-w-0', className)}>
+    <fieldset className={cn('min-w-0', className)} aria-describedby={hint ? hintId : undefined}>
       <legend
-        className={cn('mb-2 text-[0.9375rem] font-semibold text-ink', hideLegend && 'sr-only')}
+        className={cn(
+          'text-[0.9375rem] font-semibold text-ink',
+          hideLegend ? 'sr-only' : hint ? 'mb-0.5' : 'mb-2',
+        )}
       >
         {legend}
       </legend>
+      {hint && (
+        <p id={hintId} className="mb-2 text-sm text-ink-3">
+          {hint}
+        </p>
+      )}
       <div className={cn('flex flex-wrap gap-2', fullWidth && 'grid grid-flow-col auto-cols-fr')}>
         {options.map((o) => (
           <label key={o.value} className={cn('relative block', o.disabled && 'opacity-50')}>

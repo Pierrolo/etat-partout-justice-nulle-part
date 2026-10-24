@@ -1,5 +1,6 @@
 /** Design-system primitives. Import from '@/components/ui'. See /styleguide for live examples. */
 export { Button } from './Button';
+export { Checkbox, type CheckboxProps } from './Checkbox';
 export { Callout, type CalloutProps, type CalloutTone } from './Callout';
 export { ChartFrame, type ChartFrameProps } from './ChartFrame';
 export { DataTable, type DataTableProps } from './DataTable';
@@ -15,3 +16,4 @@ export { StatTile, type StatTileProps } from './StatTile';
 export { Stepper, StepIndicator, type StepperProps, type StepIndicatorProps } from './Stepper';
 export { Tabs, type TabItem, type TabsProps } from './Tabs';
 export { TierBadge, TierLegend, type TierBadgeProps } from './TierBadge';
+export { Switch, type SwitchProps } from './Switch';

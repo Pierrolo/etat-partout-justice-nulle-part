@@ -1,15 +1,279 @@
 ---
-import Todo from '@/components/site/Todo.astro';
+import AgenciesBlock from '@/components/story/AgenciesBlock.astro';
+import { DemocraticFunnel } from '@/components/story/DemocraticFunnel';
+import { MinistryDots } from '@/components/story/MinistryDots';
+import { NichesGrid, TaxesGrid } from '@/components/story/TaxNicheGrids';
+import { WordsOfLaw } from '@/components/story/WordsOfLaw';
+import { Workforce } from '@/components/story/Workforce';
+import { Callout, Disclosure, StatTile } from '@/components/ui';
 import DashboardLayout from '@/layouts/DashboardLayout.astro';
+import { agencyMeta, democraticChain, lawWords, ministries, workforce } from '@/lib/etat-data';
+import { chip, conflicts, datasetChip, fact, num } from '@/lib/facts';
+import {
+  formatEuro,
+  formatInteger,
+  formatNumber,
+  formatPercentPoints,
+  roundForDisplay,
+} from '@/lib/format';
+import { READING_HYPOTHESES, readingTime } from '@/lib/reading';
+import { withBase } from '@/lib/site';
+
+// ── Ministères ──────────────────────────────────────────────────────────────
+const min = ministries();
+const minSources = [
+  datasetChip(min.source, { label: 'Classeur des auteurs, GraphAgences', tier: 'annonce' }),
+];
+
+const foyers236 = num('foyers_implicites_236_m');
+
+// ── Impôts, niches ──────────────────────────────────────────────────────────
+const impots = num('impots_nombre_manifeste');
+const impotsCibles = num('impots_cibles_manifeste');
+const impotsAlt = num('impots_cibles_lettres');
+const impots75 = num('impots_75pct_recettes_manifeste');
+const keptNames = (fact('impots_cibles_manifeste').label_fr.split(' : ')[1] ?? '')
+  .replace(/[»«]/g, '')
+  .trim();
+const niches = num('niches_total_nombre');
+const nichesMenages = num('niches_menages_communes_nombre');
+const nichesRecensees = num('niches_nombre');
+const nichesTva = num('niches_tva_hors_niches_nombre');
+const impotConflict = conflicts('impots_cibles_manifeste')[0]?.note ?? '';
+const impotSources = [
+  chip('impots_nombre_manifeste', { label: 'france-resolution.fr, manifeste' }),
+];
+const nicheSources = [
+  chip('niches_total_nombre', { label: 'PLF 2026, annexe Dépenses fiscales' }),
+  chip('niches_menages_communes_nombre', { label: 'Classement du site' }),
+];
+
+// ── Mots de loi ─────────────────────────────────────────────────────────────
+const law = lawWords();
+const mots = num('droit_mots_2026');
+const lecture = readingTime(mots);
+const lawSources = [
+  datasetChip(law.source, { label: 'Légifrance, via le classeur des auteurs', tier: 'donnee' }),
+];
+const legif2005 = num('droit_mots_legislatif_2005');
+const legif2026 = num('droit_mots_legislatif_2026');
+
+// ── Effectifs ───────────────────────────────────────────────────────────────
+const wf = workforce();
+const wfSources = [chip('fp_effectifs_2023_k', { label: 'DGAFP, rapport annuel 2025' })];
+const postesFermes = num('postes_publics_fermes_manifeste');
+
+// ── Chaîne démocratique ─────────────────────────────────────────────────────
+const chain = democraticChain();
+const chainSources = [
+  datasetChip(chain.source, { label: 'Classeur des auteurs, Graph51pc', tier: 'annonce' }),
+];
 ---
 
 <DashboardLayout
   slug="etat-partout"
-  lede="Ministères, agences, impôts, niches, formulaires CERFA, mots de loi : l’empilement mesuré, et sa croissance."
+  lede="Ministères, agences, impôts, niches, mots de loi : l’empilement, mesuré. Ici, un carré, un point ou un trait représente une unité réelle."
 >
-  <!-- TODO(builder): build this page with ChartFrame + PlotFigure (see /styleguide). -->
-  <Todo title="L’État partout">
-    Visualisation en unités (pictogrammes) + courbe de croissance. Chaque chiffre issu de
-    facts.json.
-  </Todo>
+  <p class="max-w-2xl text-ink-2">
+    Le livre soutient que l’État s’est étendu partout, au point de ne plus faire correctement
+    l’essentiel. Cette page présente ses chiffres un par un, avec leur source, et signale quand deux
+    sources divergent.
+  </p>
+
+  <!-- 1. Ministères -->
+  <section aria-labelledby="min-titre" class="space-y-4">
+    <h2 id="min-titre" class="max-w-xl text-3xl text-ink">
+      {formatInteger(min.before)} ministères, puis {formatInteger(min.after)}
+    </h2>
+    <MinistryDots
+      client:visible={{ rootMargin: '300px' }}
+      dots={min.dots}
+      blocks={min.blocks}
+      before={min.before}
+      after={min.after}
+      removedNet={min.removedNet}
+      removedOutright={min.removedOutright}
+      regrouped={min.regrouped}
+      inferred={min.inferred}
+      note={min.reconciliation}
+      sources={minSources}
+    />
+  </section>
+
+  <AgenciesBlock />
+
+  <!-- 3. Impôts et niches -->
+  <section aria-labelledby="imp-titre" class="space-y-4">
+    <div class="max-w-2xl space-y-2">
+      <h2 id="imp-titre" class="text-3xl text-ink">
+        {formatInteger(impots)} impôts, {formatInteger(niches)} niches
+      </h2>
+      <p class="text-ink-2">
+        Les auteurs comptent {formatInteger(impots)} impôts et taxes. Une « niche » est un avantage
+        fiscal (réduction, exonération, taux réduit) : le dernier recensement en compte{' '}
+        {formatInteger(niches)}.
+      </p>
+    </div>
+    <div class="grid gap-6 lg:grid-cols-2">
+      <TaxesGrid
+        client:visible={{ rootMargin: '300px' }}
+        total={impots}
+        kept={impotsCibles}
+        keptNames={keptNames}
+        share={impots75}
+        alt={impotsAlt}
+        sources={impotSources}
+      />
+      <NichesGrid
+        client:visible={{ rootMargin: '300px' }}
+        common={nichesMenages}
+        others={nichesRecensees - nichesMenages}
+        vat={nichesTva}
+        total={niches}
+        costCommonMd={num('niches_menages_communes_cout_2024_md')}
+        costTotalMd={num('niches_total_md')}
+        sources={nicheSources}
+        explorerHref={withBase('/comprendre/niches/')}
+      />
+    </div>
+    <Callout tone="note" title={`Quatre impôts ou ${formatInteger(impotsAlt)} ?`}>
+      <p>{impotConflict}</p>
+    </Callout>
+    <ul class="grid gap-4 md:grid-cols-3">
+      <StatTile
+        as="li"
+        tier="announced"
+        label="Formulaires CERFA"
+        value={formatInteger(num('cerfa_nombre_manifeste'))}
+        reframe="Ordre de grandeur donné par le manifeste, sans jeu de données."
+        source={chip('cerfa_nombre_manifeste', { label: 'france-resolution.fr, manifeste' })}
+      />
+      <StatTile
+        as="li"
+        tier="announced"
+        label="Pour calculer un taux de charges sociales"
+        value={formatNumber(num('charges_sociales_combinaisons_manifeste'), { decimals: 1 })}
+        unit="milliard de combinaisons"
+        reframe="Selon le manifeste ; non vérifiable avec les données publiées."
+        source={chip('charges_sociales_combinaisons_manifeste', {
+          label: 'france-resolution.fr, manifeste',
+        })}
+      />
+      <StatTile
+        as="li"
+        label="Niches : coût en 2024"
+        value={formatNumber(num('niches_total_md'), { decimals: 1 })}
+        unit="Md€"
+        unitLabel="milliards d’euros"
+        reframe={`≈ ${formatEuro(roundForDisplay(num('niches_total_par_foyer_eur'), 50))} par foyer et par an, sur ${formatNumber(foyers236, { decimals: 1 })} M de foyers.`}
+        source={chip('niches_total_md', { label: 'PLF 2026, annexe Dépenses fiscales' })}
+      />
+    </ul>
+  </section>
+
+  <!-- 4. Mots de loi -->
+  <section aria-labelledby="mots-titre" class="space-y-4">
+    <div class="max-w-2xl space-y-2">
+      <h2 id="mots-titre" class="text-3xl text-ink">
+        {formatNumber(mots / 1e6, { decimals: 0 })} millions de mots de loi
+      </h2>
+      <p class="text-ink-2">
+        Lois et règlements en vigueur, comptés en mots. Les lois seules sont passées de{' '}
+        {formatNumber(legif2005 / 1e6, { decimals: 1 })} à
+        {formatNumber(legif2026 / 1e6, { decimals: 1 })} millions de mots : cette série est la plus
+        fiable, car elle ne présente pas de rupture.
+      </p>
+    </div>
+    <WordsOfLaw
+      client:visible={{ rootMargin: '300px' }}
+      years={law.years}
+      breaks={law.breaks}
+      breakNote={law.breakNote}
+      growthPct={num('droit_mots_croissance_pct')}
+      sources={lawSources}
+    />
+    <div class="grid gap-4 lg:grid-cols-[1fr_1.4fr] lg:gap-6">
+      <StatTile
+        label="Temps pour tout lire"
+        value={formatNumber(lecture.fullTimeYears, { decimals: 1 })}
+        unit="ans à temps plein"
+        reframe={`≈ ${formatInteger(roundForDisplay(lecture.hours, 10))} heures de lecture.`}
+        tier="hypothesis"
+        source={chip('droit_mots_2026', { label: 'Calcul du site, d’après Légifrance' })}
+      />
+      <div class="card space-y-2 text-[0.9375rem] text-ink-2">
+        <p class="font-semibold text-ink">Le calcul, à la vue de tous</p>
+        <p>
+          {formatInteger(mots)} mots ÷ {formatInteger(READING_HYPOTHESES.wordsPerMinute)} mots par
+          minute ÷ 60 ={formatInteger(roundForDisplay(lecture.hours, 1))} heures. Puis ÷{' '}
+          {formatInteger(READING_HYPOTHESES.fullTimeHoursPerYear)}
+          heures de travail par an (durée légale annuelle) ={' '}
+          {formatNumber(lecture.fullTimeYears, { decimals: 1 })} ans.
+        </p>
+        <p class="text-sm text-ink-3">
+          Ces deux hypothèses (vitesse de lecture, durée du travail) sont les nôtres, pas celles du
+          livre : changez-les et le résultat change proportionnellement. On ne lit pas un texte de
+          loi à la vitesse d’un roman ; seul l’ordre de grandeur compte.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Effectifs -->
+  <section aria-labelledby="eff-titre" class="space-y-4">
+    <div class="max-w-2xl space-y-2">
+      <h2 id="eff-titre" class="text-3xl text-ink">
+        {formatNumber(wf.totalK / 1000, { decimals: 1 })} millions d’agents publics
+      </h2>
+      <p class="text-ink-2">
+        État, collectivités, hôpitaux : trois fonctions publiques, plusieurs statuts. Le plan
+        annonce la fermeture de {formatInteger(postesFermes)} postes, soit environ
+        {formatPercentPoints((postesFermes / (wf.totalK * 1000)) * 100, { decimals: 0 })} des
+        effectifs, avec, d’après l’amendement qui l’organise,{' '}
+        {formatPercentPoints(num('indemnite_sortie_taux_pct'), { decimals: 0 })} du traitement
+        conservé pendant {formatInteger(num('indemnite_sortie_duree_max_ans'))} ans au plus pour les
+        agents concernés.
+      </p>
+    </div>
+    <Workforce
+      client:visible={{ rootMargin: '300px' }}
+      rows={wf.rows}
+      totalK={wf.totalK}
+      year={wf.year}
+      sources={wfSources}
+    />
+  </section>
+
+  <!-- 6. Chaîne démocratique -->
+  <section aria-labelledby="dem-titre" class="space-y-4">
+    <div class="max-w-2xl space-y-2">
+      <h2 id="dem-titre" class="text-3xl text-ink">
+        De 100 citoyens à{' '}
+        {formatNumber(chain.steps[chain.steps.length - 1]!.value, { decimals: 2 })}
+      </h2>
+      <p class="text-ink-2">
+        Plus il y a d’échelons entre un citoyen et la décision, moins sa voix compte. Le livre le
+        résume par une chaîne où chaque étape garde 51 % de la précédente. C’est un raisonnement
+        arithmétique des auteurs, pas une statistique mesurée.
+      </p>
+    </div>
+    <DemocraticFunnel
+      client:visible={{ rootMargin: '300px' }}
+      steps={chain.steps}
+      rule={chain.rule}
+      sources={chainSources}
+    />
+  </section>
+
+  <Disclosure summary="D’où viennent ces chiffres, et lesquels sont fragiles ?" variant="card">
+    <ul class="list-disc space-y-1.5 ps-5 marker:text-ink-3">
+      <li>{agencyMeta.tierNote}</li>
+      {agencyMeta.notes.map((n) => (
+        <li>{n}</li>
+      ))}
+      <li>
+        Les ministères regroupés en {formatInteger(min.after)} blocs : {min.note}
+      </li>
+    </ul>
+  </Disclosure>
 </DashboardLayout>

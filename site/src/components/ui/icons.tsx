@@ -106,3 +106,24 @@ export const IconMoon = (p: IconProps) => (
     <path d="M13.25 9.6A5.75 5.75 0 0 1 6.4 2.75a5.75 5.75 0 1 0 6.85 6.85z" />
   </Svg>
 );
+export const IconCheck = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="m3 8.5 3.25 3.25L13 4.75" />
+  </Svg>
+);
+export const IconCopy = (p: IconProps) => (
+  <Svg {...p}>
+    <rect x="5.5" y="5.5" width="8" height="8" rx="1.5" />
+    <path d="M10.5 5.5v-2a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2" />
+  </Svg>
+);
+export const IconClose = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="m4 4 8 8M12 4l-8 8" />
+  </Svg>
+);
+export const IconArrowDown = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M8 3v10M4 9l4 4 4-4" />
+  </Svg>
+);

@@ -1,0 +1,207 @@
+/*
+ * Story components — shared CSS. Imported by the React components that need it (Vite bundles it
+ * into the page). Colours are the semantic tokens of styles/tokens.css only.
+ */
+
+/* ── Treemap (CofogTreemap): HTML tiles placed in % — wide screens only (phones get CofogBars) ── */
+.tm {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1000 / 560;
+  contain: layout;
+}
+.tm-box,
+.tm-hd,
+.tm-t {
+  position: absolute;
+  left: calc(var(--x) + 1px);
+  top: calc(var(--y) + 1px);
+  width: calc(var(--w) - 2px);
+  height: calc(var(--h) - 2px);
+  box-sizing: border-box;
+}
+.tm-box {
+  background: color-mix(in oklab, var(--c) 13%, var(--surface));
+  border-top: 3px solid var(--c);
+  border-radius: 2px 2px 4px 4px;
+  pointer-events: none;
+}
+.tm-hd {
+  height: 26px;
+  top: calc(var(--y) + 4px);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  text-align: start;
+  color: var(--ink);
+  border-radius: 2px;
+}
+.tm-hd[data-drill='true'] {
+  cursor: zoom-in;
+}
+.tm-hd[data-drill='true']:hover {
+  background: color-mix(in oklab, var(--c) 18%, transparent);
+}
+.tm-hd .tm-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8125rem;
+  font-weight: 650;
+}
+.tm-hd .tm-val {
+  flex: none;
+  margin-inline-start: auto;
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.tm-t {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  overflow: hidden;
+  padding: 0.375rem 0.5rem;
+  background: color-mix(in oklab, var(--c) 30%, var(--surface));
+  border: 0;
+  border-radius: 3px;
+  font: inherit;
+  text-align: start;
+  color: var(--ink);
+  cursor: pointer;
+  line-height: 1.2;
+}
+.tm-t[data-drill='true'] {
+  cursor: zoom-in;
+}
+.tm-t:hover {
+  background: color-mix(in oklab, var(--c) 42%, var(--surface));
+}
+.tm-t[aria-pressed='true'] {
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+.tm-t:focus-visible,
+.tm-hd:focus-visible {
+  z-index: 3;
+  outline-offset: -3px;
+}
+.tm-t .tm-name {
+  font-size: 0.8125rem;
+  font-weight: 650;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+.tm-t .tm-val {
+  font-size: 0.75rem;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.tm-t[data-label='0'] .tm-name,
+.tm-t[data-value='0'] .tm-val {
+  display: none;
+}
+
+/* ── Scroll-story reveal (HubStory): content is final by default; JS arms it, then reveals ──── */
+.story[data-armed='true'] .story-reveal:not([data-seen='true']) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.story .story-reveal {
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .story[data-armed='true'] .story-reveal:not([data-seen='true']) {
+    opacity: 1;
+    transform: none;
+  }
+  .story .story-reveal {
+    transition: none;
+  }
+}
+
+/* Unit squares (waffles): crisp edges, 2 px surface gap */
+.unit-squares {
+  display: grid;
+  gap: 2px;
+}
+.unit-squares > i {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 2px;
+}
+
+/* UnitGrid: a block of unit squares, column count differs on phones */
+.unit-grid {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(var(--cols-n), 1fr);
+}
+@media (min-width: 40rem) {
+  .unit-grid {
+    gap: 2px;
+    grid-template-columns: repeat(var(--cols-w), 1fr);
+  }
+}
+.unit-grid > i {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 1px;
+  transition: opacity 150ms;
+}
+@media (min-width: 40rem) {
+  .unit-grid > i {
+    border-radius: 2px;
+  }
+}
+/* colour per segment (set as --c0… on the grid) and isolation of one segment */
+.unit-grid > i {
+  background: var(--c0);
+}
+.unit-grid > i[data-c='1'] {
+  background: var(--c1);
+}
+.unit-grid > i[data-c='2'] {
+  background: var(--c2);
+}
+.unit-grid > i[data-c='3'] {
+  background: var(--c3);
+}
+.unit-grid > i[data-c='4'] {
+  background: var(--c4);
+}
+.unit-grid[data-active='0'] > i:not([data-c='0']),
+.unit-grid[data-active='1'] > i:not([data-c='1']),
+.unit-grid[data-active='2'] > i:not([data-c='2']),
+.unit-grid[data-active='3'] > i:not([data-c='3']),
+.unit-grid[data-active='4'] > i:not([data-c='4']) {
+  opacity: 0.16;
+}
+/* « annoncé » squares: the colour is kept, a light diagonal hatch is laid over it */
+.unit-grid > i[data-hatched] {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgb(255 255 255 / 0.55) 0 1px,
+    transparent 1px 3.5px
+  );
+}
+
+@media print {
+  .story .story-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

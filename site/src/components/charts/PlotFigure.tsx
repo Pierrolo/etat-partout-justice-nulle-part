@@ -2,6 +2,19 @@ import * as Plot from '@observablehq/plot';
 import { useEffect, useRef, useState } from 'react';
 import { plotCss, plotDefaults } from '@/lib/chart-theme';
 
+/**
+ * Plot puts `aria-label="line"`, `"dot"`, `"tip"`… on the <g> of every mark. A label on a role-less
+ * element is prohibited ARIA (axe: aria-prohibited-attr) and says nothing useful: the chart is described
+ * by the <svg> label and by the ChartFrame summary + table. Axis / grid groups keep theirs (the theme's
+ * CSS selects on them).
+ */
+function stripMarkLabels(root: Element) {
+  root.querySelectorAll('g[aria-label]').forEach((g) => {
+    if (!/(grid|axis|tick|label)$/.test(g.getAttribute('aria-label') ?? ''))
+      g.removeAttribute('aria-label');
+  });
+}
+
 export interface PlotFigureProps {
   /**
    * Plot options, or a function of the available width (px) — use the function form to adapt
@@ -63,6 +76,7 @@ export function PlotFigure({
     style.textContent = plotCss;
     chart.prepend(style);
     el.replaceChildren(chart);
+    stripMarkLabels(chart);
     onRender?.(chart);
     return () => chart.remove();
   }, [options, width, label, description, height, onRender]);

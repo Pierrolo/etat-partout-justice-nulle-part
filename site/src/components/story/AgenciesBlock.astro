@@ -1,0 +1,70 @@
+---
+/** « Le sort des agences » — shared by /comprendre/etat-partout (section) and /comprendre/agences. */
+import { AgencyList } from '@/components/story/AgencyList';
+import { AgencyWaffle } from '@/components/story/AgencyWaffle';
+import { Callout, SourceChip } from '@/components/ui';
+import { agencyFates, agencyMeta, agencyRows } from '@/lib/etat-data';
+import { packAgencies } from '@/lib/etat-shared';
+import { chip, conflicts, num } from '@/lib/facts';
+import { formatEuro, formatInteger, formatNumber } from '@/lib/format';
+
+// ── Agences ─────────────────────────────────────────────────────────────────
+const fates = agencyFates();
+const rows = agencyRows();
+const agencesTotal = num('agences_etat_avant');
+const lawList = num('agences_dissoutes_loi');
+const lawDate = new Intl.DateTimeFormat('fr-FR', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(new Date(`${agencyMeta.lawList.date}T00:00:00Z`));
+const agenceSources = [
+  chip('agences_etat_avant', { label: 'Classeur des auteurs, Synthèse agences' }),
+  chip('agences_dissoutes_loi', { label: 'Amendement PLF-P2 n° 25 (liste de dissolution)' }),
+];
+const agenceConflict = conflicts('agences_dissoutes_loi')[0]?.note ?? '';
+const agencesLocales = num('agences_locales');
+const agencesParFoyer = num('agences_par_foyer_eur');
+const foyers236 = num('foyers_implicites_236_m');
+---
+
+<!-- 2. Agences -->
+<section aria-labelledby="ag-titre" class="space-y-4">
+  <div class="max-w-2xl space-y-2">
+    <h2 id="ag-titre" class="text-3xl text-ink">
+      {formatInteger(agencesTotal)} agences, un carré chacune
+    </h2>
+    <p class="text-ink-2">
+      Agences, opérateurs, autorités indépendantes, commissions : les auteurs en ont recensé
+      {formatInteger(agencesTotal)} au niveau de l’État. Selon eux, celles qui ne sont pas
+      indispensables coûtent environ {formatEuro(agencesParFoyer)} par foyer et par an (sur{' '}
+      {formatNumber(foyers236, { decimals: 1 })} M de foyers). On compte en plus{' '}
+      {formatInteger(agencesLocales)} organismes locaux, que le plan ne traite pas ici.
+    </p>
+  </div>
+  <AgencyWaffle
+    client:visible={{ rootMargin: '300px' }}
+    fates={fates}
+    sources={agenceSources}
+    lawCount={lawList}
+    lawDate={lawDate}
+  />
+  <Callout
+    tone="note"
+    title={`Fermer ${formatInteger(num('agences_fermees'))} agences, dissoudre ${formatInteger(lawList)} entités : deux listes différentes`}
+  >
+    <p>{agenceConflict}</p>
+    <p class="mt-2 flex flex-wrap items-center gap-2">
+      <SourceChip {...chip('agences_fermees', { label: 'Classeur des auteurs : fermetures' })} />
+      <SourceChip {...chip('agences_dissoutes_loi', { label: 'Amendement PLF-P2 n° 25' })} />
+    </p>
+  </Callout>
+  <AgencyList client:visible={{ rootMargin: '300px' }} packed={packAgencies(rows)} />
+  <noscript>
+    <p class="text-sm text-ink-3">
+      La recherche dans la liste demande JavaScript. Les données sont dans le classeur « Synthèse
+      ETP et agences » des auteurs, cité ci-dessus.
+    </p>
+  </noscript>
+</section>

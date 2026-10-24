@@ -1,46 +1,578 @@
 ---
+import '@/components/story/story.css';
 import PageHeader from '@/components/site/PageHeader.astro';
-import Todo from '@/components/site/Todo.astro';
+import { HourBar } from '@/components/story/HourBar';
+import { PredictReveal } from '@/components/story/PredictReveal';
+import { SourceChip } from '@/components/ui';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { agencyFates, lawWords, ministries } from '@/lib/etat-data';
+import { chip, fact, millions, num } from '@/lib/facts';
+import {
+  formatEuro,
+  formatInteger,
+  formatMdEuro,
+  formatNumber,
+  formatPercentPoints,
+  roundForDisplay,
+} from '@/lib/format';
+import { READING_HYPOTHESES, readingTime } from '@/lib/reading';
 import { COMPRENDRE_PAGES, withBase } from '@/lib/site';
+import { GROUP_SHORT, GROUP_SLOT, cofogTree } from '@/lib/story-data';
+import { line, scaleLinear } from 'd3';
+
+// ── 1. Dépenses ─────────────────────────────────────────────────────────────
+const tree = cofogTree();
+const total = num('dep_total_2024_md');
+const foyers = millions('foyers_implicites_dep_m');
+const perDay = num('dep_par_foyer_jour_eur');
+const groups = [...(tree.children ?? [])].sort((a, b) => b.value - a.value);
+const year = fact('dep_total_2024_md').year ?? 2024;
+
+// ── 2. Prédiction ───────────────────────────────────────────────────────────
+const truthPct = num('dep_part_securite_pct');
+const secuMd = num('dep_groupe_securite_2024_md');
+const quote = fact('dep_part_regalien_manifeste_pct')
+  .label_fr.replace(/[«»]/g, '')
+  .replace(/'/g, '’')
+  .trim();
+
+// ── 3. Agences, ministères ──────────────────────────────────────────────────
+const fates = agencyFates();
+const min = ministries();
+const fateColor = {
+  suppression: 'var(--series-1)',
+  cession: 'var(--series-4)',
+  internalisation: 'var(--series-3)',
+  autonomie: 'var(--series-other)',
+} as const;
+const fateName = {
+  suppression: 'supprimées',
+  cession: 'cédées',
+  internalisation: 'internalisées',
+  autonomie: 'autonomes',
+} as const;
+const agencesTotal = num('agences_etat_avant');
+
+// ── 4. Niches, impôts ───────────────────────────────────────────────────────
+const niches = num('niches_total_nombre');
+const nichesMenages = num('niches_menages_communes_nombre');
+const nichesTva = num('niches_tva_hors_niches_nombre');
+const nichesOthers = num('niches_nombre') - nichesMenages;
+const impots = num('impots_nombre_manifeste');
+
+// ── 5. Mots de loi ──────────────────────────────────────────────────────────
+const law = lawWords();
+const mots = num('droit_mots_2026');
+const lecture = readingTime(mots);
+const W = 320;
+const H = 90;
+const sx = scaleLinear()
+  .domain([law.years[0]!.year, law.years[law.years.length - 1]!.year])
+  .range([2, W - 2]);
+const sy = scaleLinear()
+  .domain([0, mots * 1.05])
+  .range([H - 2, 4]);
+const sparkPath =
+  line<(typeof law.years)[number]>()
+    .x((d) => sx(d.year))
+    .y((d) => sy(d.total))(law.years) ?? '';
+const sparkLaw =
+  line<(typeof law.years)[number]>()
+    .x((d) => sx(d.year))
+    .y((d) => sy(d.legislatif))(law.years) ?? '';
+
+// ── 6. Le plan ──────────────────────────────────────────────────────────────
+const plan = num('eco236_total_md');
+const planDay = num('eco236_par_foyer_jour_eur');
+const foyers236 = num('foyers_implicites_236_m');
 ---
 
 <BaseLayout
   title="Comprendre"
-  description="Où va l’argent public ? Dépenses, agences, niches fiscales, calendrier : les données du livre en graphiques explorables."
+  description="Où va l’argent public ? Une histoire en six chiffres, puis les pages pour explorer : dépenses, État, plan, niches, calendrier, amendements."
 >
   <PageHeader
-    eyebrow="Tableau de bord"
+    eyebrow="Comprendre"
     title="Où va l’argent public ?"
-    lede="Les données du livre, rendues lisibles : à l’échelle de l’État, puis à l’échelle d’un foyer, d’une journée, d’une heure de travail."
+    lede="Six chiffres pour se faire une idée, du plus grand au plus proche de vous. Chacun est relié à sa source ; chaque désaccord entre sources est montré. Puis les pages pour explorer."
   />
-  <div class="wrap space-y-12">
-    <!-- TODO(builder): short scrolly intro (Scrollama, pixel offsets on mobile, prefers-reduced-motion respected). -->
-    <Todo title="Introduction guidée">
-      Une courte histoire en 4–5 écrans, du général au particulier, puis les pages ci-dessous en
-      libre exploration. Spécification : <code>docs/VISION.md</code> §4.
-    </Todo>
 
-    <section aria-labelledby="pages-title">
-      <h2 id="pages-title" class="mb-6 text-2xl text-ink">
-        Huit angles pour comprendre
-      </h2>
-      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {COMPRENDRE_PAGES.map((p, i) => (
-          <li>
-            <a
-              href={withBase(p.href)}
-              class="card group flex h-full flex-col gap-2 no-underline hover:border-ink hover:no-underline"
-            >
-              <span class="eyebrow">{String(i + 1).padStart(2, '0')}</span>
-              <span class="font-serif text-xl font-medium leading-snug tracking-tight text-ink group-hover:text-accent">
-                {p.title}
-              </span>
-              <span class="text-[0.9375rem] text-ink-2">{p.teaser}</span>
+  <div class="wrap">
+    <ol class="story relative space-y-14 sm:space-y-20" data-story>
+      <!-- ─── 1. 1 672 Md€ ─── -->
+      <li
+        class="story-step grid gap-5 md:grid-cols-[3.5rem_1fr] md:gap-8"
+        data-step
+        aria-labelledby="s1"
+      >
+        <span class="hidden md:block" aria-hidden="true">
+          <span class="story-dot sticky top-24 grid size-10 place-items-center rounded-full border-[1.5px] border-rule-strong bg-surface font-serif text-lg text-ink-2">
+            1
+          </span>
+        </span>
+        <div class="story-reveal space-y-5">
+          <p class="eyebrow">Étape 1 · le total</p>
+          <h2 id="s1" class="sr-only">
+            1. Le total des dépenses publiques
+          </h2>
+          <p class="flex flex-wrap items-baseline gap-x-3">
+            <span class="stat-number text-ink" data-count={total} data-decimals="0">
+              {formatNumber(total)}
+            </span>
+            <span class="font-serif text-2xl text-ink-2 sm:text-3xl">Md€</span>
+          </p>
+          <p class="max-w-xl text-lg text-ink-2">
+            C’est ce que les administrations publiques (État, collectivités, Sécurité sociale) ont
+            dépensé en
+            {year}. Ramené à un foyer :{' '}
+            <strong class="text-ink">{formatEuro(perDay)} par jour</strong>
+            (sur {formatNumber(foyers / 1e6, { decimals: 1 })} millions de foyers : le dénominateur
+            du livre).
+          </p>
+          <div
+            class="max-w-2xl space-y-2"
+            role="img"
+            aria-label={`Répartition de 100 € de dépenses : ${groups.map((g) => `${formatNumber((g.value / total) * 100, { decimals: 0 })} € ${GROUP_SHORT[g.id]}`).join(', ')}`}
+          >
+            <div class="flex gap-0.5" aria-hidden="true">
+              {groups.map((g, i) => (
+                <span
+                  class:list={[
+                    'h-10',
+                    i === 0 && 'rounded-s-[4px]',
+                    i === groups.length - 1 && 'rounded-e-[4px]',
+                  ]}
+                  style={`flex: ${g.value} 1 0; background: var(--series-${(GROUP_SLOT[g.id] ?? 7) + 1})`}
+                />
+              ))}
+            </div>
+            <ul class="flex flex-wrap gap-x-4 gap-y-1 text-[0.8125rem] text-ink-2">
+              {groups.map((g) => (
+                <li class="flex items-center gap-1.5">
+                  <span
+                    class="inline-block size-2.5 rounded-[3px]"
+                    style={`background: var(--series-${(GROUP_SLOT[g.id] ?? 7) + 1})`}
+                  ></span>
+                  <span class="font-semibold text-ink">
+                    {formatPercentPoints((g.value / total) * 100, {
+                      decimals: g.value / total < 0.1 ? 1 : 0,
+                    })}
+                  </span>
+                  {GROUP_SHORT[g.id]}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p class="flex flex-wrap items-center gap-2 text-xs text-ink-3">
+            <SourceChip {...chip('dep_total_2024_md', { label: 'Insee, comptes nationaux' })} />
+            <a href={withBase('/comprendre/depenses/')} class="text-sm font-semibold">
+              Explorer la dépense, bloc par bloc →
             </a>
-          </li>
-        ))}
-      </ul>
-    </section>
+          </p>
+        </div>
+      </li>
+
+      <!-- ─── 2. Devinez ─── -->
+      <li
+        class="story-step grid gap-5 md:grid-cols-[3.5rem_1fr] md:gap-8"
+        data-step
+        aria-labelledby="s2"
+      >
+        <span class="hidden md:block" aria-hidden="true">
+          <span class="story-dot sticky top-24 grid size-10 place-items-center rounded-full border-[1.5px] border-rule-strong bg-surface font-serif text-lg text-ink-2">
+            2
+          </span>
+        </span>
+        <div class="story-reveal max-w-3xl space-y-4">
+          <p class="eyebrow">Étape 2 · à vous</p>
+          <h2 id="s2" class="sr-only">
+            2. Devinez la part de la sécurité
+          </h2>
+          <PredictReveal
+            client:visible={{ rootMargin: '300px' }}
+            truthPct={truthPct}
+            totalMd={total}
+            groupMd={secuMd}
+            foyers={foyers}
+            quote={quote}
+            year={year}
+            sources={[chip('dep_part_securite_pct', { label: 'Insee, calcul du site' })]}
+            quoteSource={chip('dep_part_regalien_manifeste_pct', { label: 'Manifeste' })}
+          />
+        </div>
+      </li>
+
+      <!-- ─── 3. Agences ─── -->
+      <li
+        class="story-step grid gap-5 md:grid-cols-[3.5rem_1fr] md:gap-8"
+        data-step
+        aria-labelledby="s3"
+      >
+        <span class="hidden md:block" aria-hidden="true">
+          <span class="story-dot sticky top-24 grid size-10 place-items-center rounded-full border-[1.5px] border-rule-strong bg-surface font-serif text-lg text-ink-2">
+            3
+          </span>
+        </span>
+        <div class="story-reveal space-y-5">
+          <p class="eyebrow">Étape 3 · l’empilement</p>
+          <h2 id="s3" class="sr-only">
+            3. Agences et ministères
+          </h2>
+          <p class="flex flex-wrap items-baseline gap-x-3">
+            <span class="stat-number text-ink" data-count={agencesTotal} data-decimals="0">
+              {formatInteger(agencesTotal)}
+            </span>
+            <span class="font-serif text-2xl text-ink-2 sm:text-3xl">agences d’État</span>
+          </p>
+          <p class="max-w-xl text-lg text-ink-2">
+            Opérateurs, autorités, commissions… sans compter {formatInteger(min.before)} ministères.
+            Selon les auteurs, le plan garderait {formatInteger(min.after)} ministères et{' '}
+            {formatInteger(fates.find((f) => f.id === 'autonomie')!.n)} agences autonomes.
+          </p>
+          <div
+            class="max-w-2xl space-y-2"
+            role="img"
+            aria-label={`Sort des ${agencesTotal} agences : ${fates.map((f) => `${f.n} ${fateName[f.id]}`).join(', ')}`}
+          >
+            <div class="flex gap-0.5" aria-hidden="true">
+              {fates.map((f, i) => (
+                <span
+                  class:list={[
+                    'h-10',
+                    i === 0 && 'rounded-s-[4px]',
+                    i === fates.length - 1 && 'rounded-e-[4px]',
+                  ]}
+                  style={`flex: ${f.n} 1 0; background: ${fateColor[f.id]}`}
+                />
+              ))}
+            </div>
+            <ul class="flex flex-wrap gap-x-4 gap-y-1 text-[0.8125rem] text-ink-2">
+              {fates.map((f) => (
+                <li class="flex items-center gap-1.5">
+                  <span
+                    class="inline-block size-2.5 rounded-[3px]"
+                    style={`background: ${fateColor[f.id]}`}
+                  ></span>
+                  <span class="font-semibold text-ink">{formatInteger(f.n)}</span> {fateName[f.id]}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p class="flex flex-wrap items-center gap-2 text-xs text-ink-3">
+            <SourceChip
+              {...chip('agences_etat_avant', { label: 'Classeur des auteurs, GraphAgences' })}
+            />
+            <a href={withBase('/comprendre/etat-partout/')} class="text-sm font-semibold">
+              Voir chaque agence →
+            </a>
+          </p>
+        </div>
+      </li>
+
+      <!-- ─── 4. Niches ─── -->
+      <li
+        class="story-step grid gap-5 md:grid-cols-[3.5rem_1fr] md:gap-8"
+        data-step
+        aria-labelledby="s4"
+      >
+        <span class="hidden md:block" aria-hidden="true">
+          <span class="story-dot sticky top-24 grid size-10 place-items-center rounded-full border-[1.5px] border-rule-strong bg-surface font-serif text-lg text-ink-2">
+            4
+          </span>
+        </span>
+        <div class="story-reveal space-y-5">
+          <p class="eyebrow">Étape 4 · la fiscalité</p>
+          <h2 id="s4" class="sr-only">
+            4. Niches fiscales et impôts
+          </h2>
+          <p class="flex flex-wrap items-baseline gap-x-3">
+            <span class="stat-number text-ink" data-count={niches} data-decimals="0">
+              {formatInteger(niches)}
+            </span>
+            <span class="font-serif text-2xl text-ink-2 sm:text-3xl">niches fiscales</span>
+          </p>
+          <p class="max-w-xl text-lg text-ink-2">
+            Des réductions, exonérations et taux réduits :{' '}
+            {formatMdEuro(num('niches_total_md'), { decimals: 1 })} par an, soit environ{' '}
+            {formatEuro(roundForDisplay(num('niches_total_par_foyer_eur'), 50))} par foyer (sur{' '}
+            {formatNumber(foyers236, { decimals: 1 })} millions de foyers). Les auteurs comptent
+            aussi {formatInteger(impots)} impôts et taxes.
+          </p>
+          <div
+            class="max-w-2xl"
+            role="img"
+            aria-label={`${niches} carrés : ${nichesMenages} niches pour les ménages, ${nichesOthers} autres, ${nichesTva} taux réduits de TVA`}
+          >
+            <div class="unit-grid" style="--cols-n: 36; --cols-w: 54" aria-hidden="true">
+              {Array.from({ length: nichesMenages }, () => (
+                <i style="background: var(--series-1)" />
+              ))}
+              {Array.from({ length: nichesOthers }, () => (
+                <i style="background: var(--series-other)" />
+              ))}
+              {Array.from({ length: nichesTva }, () => (
+                <i style="background: var(--series-4)" />
+              ))}
+            </div>
+            <ul class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[0.8125rem] text-ink-2">
+              <li class="flex items-center gap-1.5">
+                <span
+                  class="inline-block size-2.5 rounded-[3px]"
+                  style="background: var(--series-1)"
+                ></span>
+                <span class="font-semibold text-ink">{formatInteger(nichesMenages)}</span> touchent
+                couramment les ménages
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span
+                  class="inline-block size-2.5 rounded-[3px]"
+                  style="background: var(--series-other)"
+                ></span>
+                <span class="font-semibold text-ink">{formatInteger(nichesOthers)}</span> autres
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span
+                  class="inline-block size-2.5 rounded-[3px]"
+                  style="background: var(--series-4)"
+                ></span>
+                <span class="font-semibold text-ink">{formatInteger(nichesTva)}</span> taux réduits
+                de TVA
+              </li>
+            </ul>
+          </div>
+          <p class="flex flex-wrap items-center gap-2 text-xs text-ink-3">
+            <SourceChip
+              {...chip('niches_total_nombre', { label: 'PLF 2026, annexe Dépenses fiscales' })}
+            />
+            <a href={withBase('/comprendre/niches/')} class="text-sm font-semibold">
+              Chercher « ma » niche →
+            </a>
+          </p>
+        </div>
+      </li>
+
+      <!-- ─── 5. Mots de loi ─── -->
+      <li
+        class="story-step grid gap-5 md:grid-cols-[3.5rem_1fr] md:gap-8"
+        data-step
+        aria-labelledby="s5"
+      >
+        <span class="hidden md:block" aria-hidden="true">
+          <span class="story-dot sticky top-24 grid size-10 place-items-center rounded-full border-[1.5px] border-rule-strong bg-surface font-serif text-lg text-ink-2">
+            5
+          </span>
+        </span>
+        <div class="story-reveal space-y-5">
+          <p class="eyebrow">Étape 5 · le droit</p>
+          <h2 id="s5" class="sr-only">
+            5. Les mots de loi
+          </h2>
+          <p class="flex flex-wrap items-baseline gap-x-3">
+            <span class="stat-number text-ink" data-count={mots / 1e6} data-decimals="0">
+              {formatNumber(mots / 1e6)}
+            </span>
+            <span class="font-serif text-2xl text-ink-2 sm:text-3xl">millions de mots de loi</span>
+          </p>
+          <p class="max-w-xl text-lg text-ink-2">
+            Lois et règlements en vigueur : près de{' '}
+            {formatPercentPoints(num('droit_mots_croissance_pct'), { decimals: 0 })} de plus qu’en
+            2005. Les lire tous prendrait plus de {formatNumber(Math.floor(lecture.fullTimeYears))}{' '}
+            ans à temps plein ({formatInteger(READING_HYPOTHESES.wordsPerMinute)} mots par minute,{' '}
+            {formatInteger(READING_HYPOTHESES.fullTimeHoursPerYear)} heures de travail par an :
+            hypothèses du site).
+          </p>
+          <figure
+            class="max-w-md"
+            aria-label={`Nombre de mots de droit, de ${law.years[0]!.year} à ${law.years[law.years.length - 1]!.year}`}
+          >
+            <svg
+              viewBox={`0 0 ${W} ${H}`}
+              class="block h-auto w-full overflow-visible"
+              role="img"
+              aria-label={`Courbe : de ${formatNumber(law.years[0]!.total / 1e6, { decimals: 0 })} à ${formatNumber(mots / 1e6, { decimals: 0 })} millions de mots`}
+            >
+              <path
+                d={sparkLaw}
+                fill="none"
+                stroke="var(--series-1)"
+                stroke-width="2"
+                stroke-linejoin="round"
+                vector-effect="non-scaling-stroke"
+              />
+              <path
+                d={sparkPath}
+                fill="none"
+                stroke="var(--ink)"
+                stroke-width="2.5"
+                stroke-linejoin="round"
+                vector-effect="non-scaling-stroke"
+              />
+            </svg>
+            <figcaption class="mt-1 flex justify-between text-xs text-ink-3">
+              <span>
+                {law.years[0]!.year} · {formatNumber(law.years[0]!.total / 1e6, { decimals: 0 })} M
+              </span>
+              <span>
+                {law.years[law.years.length - 1]!.year} ·{' '}
+                {formatNumber(mots / 1e6, { decimals: 0 })} M
+              </span>
+            </figcaption>
+          </figure>
+          <p class="flex flex-wrap items-center gap-2 text-xs text-ink-3">
+            <SourceChip
+              {...chip('droit_mots_2026', { label: 'Légifrance, décompte des auteurs' })}
+            />
+            <a
+              href={withBase('/comprendre/etat-partout/#mots-titre')}
+              class="text-sm font-semibold"
+            >
+              Voir la courbe et ses ruptures →
+            </a>
+          </p>
+        </div>
+      </li>
+
+      <!-- ─── 6. Le plan ─── -->
+      <li
+        class="story-step grid gap-5 md:grid-cols-[3.5rem_1fr] md:gap-8"
+        data-step
+        aria-labelledby="s6"
+      >
+        <span class="hidden md:block" aria-hidden="true">
+          <span class="story-dot sticky top-24 grid size-10 place-items-center rounded-full border-[1.5px] border-rule-strong bg-surface font-serif text-lg text-ink-2">
+            6
+          </span>
+        </span>
+        <div class="story-reveal space-y-5">
+          <p class="eyebrow">Étape 6 · la proposition</p>
+          <h2 id="s6" class="sr-only">
+            6. Ce que le plan propose
+          </h2>
+          <p class="flex flex-wrap items-baseline gap-x-3">
+            <span class="stat-number text-accent" data-count={plan} data-decimals="0">
+              {formatNumber(plan, { decimals: 0 })}
+            </span>
+            <span class="font-serif text-2xl text-ink-2 sm:text-3xl">Md€ d’économies par an</span>
+          </p>
+          <p class="max-w-xl text-lg text-ink-2">
+            Selon les auteurs : c’est l’économie visée, à « rendre » aux Français. Ramenée à un
+            foyer, {formatEuro(planDay)} par jour (sur {formatNumber(foyers236, { decimals: 1 })}{' '}
+            millions de foyers : un autre dénominateur que l’étape 1). Où vont-ils ? D’abord dans
+            votre salaire net. Une heure de travail aujourd’hui :
+          </p>
+          <div class="card max-w-xl">
+            <HourBar />
+          </div>
+          <p class="flex flex-wrap items-center gap-3 text-sm">
+            <a href={withBase('/comprendre/le-plan/')} class="font-semibold">
+              Le plan en un schéma →
+            </a>
+            <a href={withBase('/simulateur/')} class="btn btn-primary btn-sm">
+              Et pour mon foyer ?
+            </a>
+          </p>
+        </div>
+      </li>
+    </ol>
   </div>
+
+  <!-- ─── Pages ─── -->
+  <section class="wrap mt-20" aria-labelledby="pages-title">
+    <h2 id="pages-title" class="mb-2 text-3xl text-ink">
+      Explorer page par page
+    </h2>
+    <p class="mb-6 max-w-2xl text-ink-2">
+      Chaque page détaille un angle avec un tableau et un téléchargement des données.
+    </p>
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {COMPRENDRE_PAGES.map((p, i) => (
+        <li>
+          <a
+            href={withBase(p.href)}
+            class="card group flex h-full flex-col gap-2 no-underline hover:border-ink hover:no-underline"
+          >
+            <span class="eyebrow">{String(i + 1).padStart(2, '0')}</span>
+            <span class="font-serif text-xl font-medium leading-snug tracking-tight text-ink group-hover:text-accent">
+              {p.title}
+            </span>
+            <span class="text-[0.9375rem] text-ink-2">{p.teaser}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
 </BaseLayout>
+
+<script>
+  import { formatNumber } from '@/lib/format';
+
+  /**
+   * Progressive enhancement of the story. Without this script, or with `prefers-reduced-motion`,
+   * every step is already in its final state (see story.css). With it: each step fades in as it
+   * enters the viewport, its big number counts up once, and the left rail follows the active step.
+   */
+  const root = document.querySelector<HTMLElement>('[data-story]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (root && 'IntersectionObserver' in window) {
+    const steps = [...root.querySelectorAll<HTMLElement>('[data-step]')];
+    if (!reduce) root.setAttribute('data-armed', 'true');
+
+    const countUp = (el: HTMLElement) => {
+      const target = Number(el.dataset.count);
+      const decimals = Number(el.dataset.decimals ?? 0);
+      if (!Number.isFinite(target) || reduce) return;
+      const start = performance.now();
+      const dur = 900;
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - start) / dur);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = formatNumber(target * eased, { decimals });
+        if (t < 1) requestAnimationFrame(tick);
+        else el.textContent = formatNumber(target, { decimals });
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const reveal = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const step = e.target as HTMLElement;
+          step
+            .querySelectorAll<HTMLElement>('.story-reveal')
+            .forEach((el) => el.setAttribute('data-seen', 'true'));
+          step.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
+            if (!el.dataset.counted) {
+              el.dataset.counted = '1';
+              countUp(el);
+            }
+          });
+          reveal.unobserve(step);
+        }
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 },
+    );
+    steps.forEach((s) => reveal.observe(s));
+
+    // active step → left rail dot
+    const active = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          const dot = (e.target as HTMLElement).querySelector<HTMLElement>('.story-dot');
+          if (!dot) continue;
+          dot.dataset.active = e.isIntersecting ? 'true' : 'false';
+        }
+      },
+      { rootMargin: '-40% 0px -45% 0px' },
+    );
+    steps.forEach((s) => active.observe(s));
+  }
+</script>
+
+<style is:global>
+  .story-dot[data-active='true'] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+</style>

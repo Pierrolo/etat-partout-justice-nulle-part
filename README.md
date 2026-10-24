@@ -46,6 +46,7 @@ site/       Astro 6 (statique) + îlots React 19 + Tailwind CSS v4
   src/lib/        format.ts (formatage français) · chart-theme.ts · tiers.ts · site.ts · contrast.ts · csv.ts
   src/components/ui/      primitives accessibles (StatTile, ChartFrame, NumberInput…)
   src/components/charts/  PlotFigure (Observable Plot) + exemple
+  src/components/explorer/ explorateurs de /comprendre : niches, calendrier, amendements (barres HTML, frise, petits multiples)
   src/components/site/    en-tête, pied de page, bascule de thème, Todo…
   src/layouts/    BaseLayout, DashboardLayout
   src/pages/      pages (voir /styleguide pour le système de design en vrai)
@@ -67,6 +68,10 @@ data/ research/ scripts/ docs/   matériaux de départ, recherche, spécificatio
 - **Graphiques** : `src/lib/chart-theme.ts` (palettes validées, réglages Observable Plot, formateurs français) + `ChartFrame` (résumé en clair, tableau, CSV, source).
 
 Règle : pas de couleur, de taille ni de composant inventés dans une page — étendre les jetons.
+
+## Licence
+
+Code : [MIT](LICENSE) — © Contributeurs du projet « Et moi, dans tout ça ? ». Les données de tiers gardent leurs conditions (classeurs et amendements de Résolution : aucune licence indiquée, cités avec attribution ; Insee et DGFiP : Licence Ouverte 2.0 ; Eurostat : CC BY 4.0) — voir la page « À propos » du site.
 
 ## Contribuer / signaler une erreur
 

@@ -1,6 +1,6 @@
 ---
 import PageHeader from '@/components/site/PageHeader.astro';
-import Todo from '@/components/site/Todo.astro';
+import Simulator from '@/components/simulator/Simulator';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { withBase } from '@/lib/site';
 ---
@@ -10,23 +10,15 @@ import { withBase } from '@/lib/site';
   description="Calculez ce que le plan changerait pour votre foyer, en euros par mois, avec chaque chiffre relié à sa source."
 >
   <PageHeader
+    compact
     eyebrow="Simulateur"
     title="Et moi, dans tout ça ?"
     lede="Quelques questions sur votre foyer, et vous voyez l’effet du plan en euros par mois — avec le détail de chaque ligne."
   />
-  <div class="wrap space-y-6">
-    <!-- TODO(builder): simulator island (client:load). State lives in the URL hash (#v1.<base64url>), never in a query string. -->
-    <Todo title="Simulateur express → résultat → détails">
-      <p>
-        Formulaire express (≤ 6 questions, stepper sur mobile) · phrase-résultat · cascade
-        avant/après · tableau « Aujourd’hui / Avec le plan » · panneau « Hors revenu disponible » ·
-        calendrier personnel 2027 → 2030 · « Si je gagnais plus ? » · hypothèses actives · partage.
-        Spécification : <code>docs/VISION.md</code> §5. Briques : <code>@/components/ui</code>{' '}
-        (NumberInput, SegmentedControl, Stepper, StepIndicator, ChartFrame…).
-      </p>
-    </Todo>
+  <Simulator client:load />
+  <div class="wrap mt-12">
     <p class="text-sm">
-      <a href={withBase('/simulateur/cas-types/')}>Qui gagne, qui perd ? Voir 40 foyers types →</a>
+      <a href={withBase('/simulateur/cas-types/')}>Qui gagne, qui perd ? Voir des foyers types →</a>
     </p>
   </div>
 </BaseLayout>

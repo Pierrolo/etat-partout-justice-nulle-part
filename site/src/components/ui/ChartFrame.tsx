@@ -26,6 +26,11 @@ export interface ChartFrameProps<Row extends Record<string, Cell>> {
   table?: { columns: Column<Row>[]; rows: Row[]; caption?: string };
   /** CSV file name (default derived from the title). */
   csvFileName?: string;
+  /**
+   * `'none'` keeps the CSV download but hides the « Voir les données » dépliant — for charts that
+   * already carry their own Graphique · Tableau · Sources tabs (the table must then live in the tabs).
+   */
+  tableView?: 'disclosure' | 'none';
   /** Tier of the whole chart (e.g. `announced` for a chart that only shows authors' promises). */
   tier?: Tier;
   /** Footnote: method, caveats, definitions. */
@@ -55,6 +60,7 @@ export function ChartFrame<Row extends Record<string, Cell>>({
   sources,
   table,
   csvFileName,
+  tableView = 'disclosure',
   tier,
   note,
   className,
@@ -108,7 +114,7 @@ export function ChartFrame<Row extends Record<string, Cell>>({
         )}
       </footer>
 
-      {table && (
+      {table && tableView === 'disclosure' && (
         <Disclosure
           summary="Voir les données"
           meta={`${table.rows.length} lignes`}

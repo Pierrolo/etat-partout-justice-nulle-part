@@ -1,15 +1,16 @@
 ---
-import Todo from '@/components/site/Todo.astro';
+import EuropeBlock from '@/components/story/EuropeBlock.astro';
 import DashboardLayout from '@/layouts/DashboardLayout.astro';
+import { num } from '@/lib/facts';
+import { formatNumber } from '@/lib/format';
+
+const fr = num('eu_dep_pib_fr_2024_pct');
+const ea = num('eu_dep_pib_ea20_2024_pct');
 ---
 
 <DashboardLayout
   slug="europe"
-  lede="Dépenses publiques en points de PIB, déficit, revenu médian : la France comparée à ses voisins, avec l’écart converti en euros par foyer et par mois."
+  lede={`Dépenses publiques en points de PIB (${formatNumber(fr, { decimals: 1 })} % pour la France, ${formatNumber(ea, { decimals: 1 })} % pour la zone euro), déficit, revenu médian : la France comparée à ses voisins, avec l’écart converti en euros par foyer.`}
 >
-  <!-- TODO(builder): build this page with ChartFrame + PlotFigure (see /styleguide). -->
-  <Todo title="France vs Europe">
-    Graphiques comparatifs avec onglets Graphique · Tableau (modèle OWID). Source Eurostat / Insee
-    épinglée, une année par chiffre.
-  </Todo>
+  <EuropeBlock />
 </DashboardLayout>

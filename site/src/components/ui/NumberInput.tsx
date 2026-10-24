@@ -1,4 +1,11 @@
-import { useId, useState, type ChangeEvent, type KeyboardEvent, type ReactNode } from 'react';
+import {
+  useId,
+  useState,
+  type ChangeEvent,
+  type FocusEvent,
+  type KeyboardEvent,
+  type ReactNode,
+} from 'react';
 import { cn } from '@/lib/cn';
 import { formatNumber, parseFrenchNumber } from '@/lib/format';
 
@@ -24,6 +31,8 @@ export interface NumberInputProps {
   required?: boolean;
   disabled?: boolean;
   className?: string;
+  /** Classes of the bordered field only (e.g. `w-48`), so the label and hint keep the full width. */
+  fieldClassName?: string;
 }
 
 const clamp = (n: number, min?: number, max?: number) =>
@@ -56,6 +65,7 @@ export function NumberInput({
   required,
   disabled,
   className,
+  fieldClassName,
 }: NumberInputProps) {
   const uid = useId();
   const inputId = id ?? `${uid}-input`;
@@ -91,8 +101,11 @@ export function NumberInput({
     if (n !== null) onChange(round(n, decimals));
   };
 
-  const handleFocus = () => {
-    setDraft(value === null ? '' : String(round(value, decimals)).replace('.', ','));
+  // Keep the text exactly as displayed (grouping included) so the DOM value does not change under the
+  // caret on focus, then select it: typing replaces the whole number, like a native field.
+  const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
+    setDraft(shown);
+    e.currentTarget.select();
   };
 
   const handleBlur = () => {
@@ -136,6 +149,7 @@ export function NumberInput({
           'flex min-h-12 items-center rounded-md border-[1.5px] bg-surface px-3 focus-within:outline-3 focus-within:outline-offset-2 focus-within:outline-accent',
           message ? 'border-loss' : 'border-rule-strong',
           disabled && 'opacity-60',
+          fieldClassName,
         )}
       >
         <input

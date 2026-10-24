@@ -4,16 +4,27 @@ interface Props {
   title: string;
   /** Plain-text lede; use the `lede` slot for markup. */
   lede?: string;
+  /** Tighter spacing and smaller title, for tool pages where the content must start above the fold. */
+  compact?: boolean;
 }
-const { eyebrow, title, lede } = Astro.props;
+const { eyebrow, title, lede, compact = false } = Astro.props;
 ---
 
-<header class="wrap pt-10 pb-8 sm:pt-14 sm:pb-10">
+<header
+  class:list={['wrap', compact ? 'pt-6 pb-5 sm:pt-8 sm:pb-6' : 'pt-10 pb-8 sm:pt-14 sm:pb-10']}
+>
   <slot name="before" />
   {eyebrow && <p class="eyebrow eyebrow-accent mb-3">{eyebrow}</p>}
-  <h1 class="max-w-[22ch] text-balance text-4xl text-ink sm:max-w-[28ch]">{title}</h1>
+  <h1
+    class:list={[
+      'text-balance text-ink',
+      compact ? 'text-3xl sm:text-4xl' : 'max-w-[22ch] text-4xl sm:max-w-[28ch]',
+    ]}
+  >
+    {title}
+  </h1>
   {(lede || Astro.slots.has('lede')) && (
-    <p class="lede mt-4">
+    <p class:list={['lede', compact ? 'mt-2 max-w-2xl' : 'mt-4']}>
       {lede}
       <slot name="lede" />
     </p>

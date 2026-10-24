@@ -64,7 +64,7 @@ export const COMPRENDRE_PAGES: DashboardPage[] = [
   {
     slug: 'niches',
     href: '/comprendre/niches/',
-    title: 'Explorer les niches fiscales',
+    title: 'Les 465 niches fiscales',
     teaser: 'Cherchez, triez par coût, repérez celles qui vous concernent.',
   },
   {
@@ -82,7 +82,7 @@ export const COMPRENDRE_PAGES: DashboardPage[] = [
   {
     slug: 'amendements',
     href: '/comprendre/amendements/',
-    title: 'Les amendements, par thème',
+    title: 'Les 81 amendements',
     teaser: 'Les textes de loi proposés, classés par sujet et consultables.',
   },
 ];

@@ -1,15 +1,165 @@
 ---
-import Todo from '@/components/site/Todo.astro';
+import { DepensesExplorer } from '@/components/story/DepensesExplorer';
+import EuropeBlock from '@/components/story/EuropeBlock.astro';
+import { HundredSquares } from '@/components/story/HundredSquares';
+import { StatTile } from '@/components/ui';
 import DashboardLayout from '@/layouts/DashboardLayout.astro';
+import { chip, conflicts, datasetChip, fact, millions, num } from '@/lib/facts';
+import { formatEuro, formatMdEuro, formatNumber, formatPercentPoints } from '@/lib/format';
+import { cofogMeta, cofogTree, europeData } from '@/lib/story-data';
+
+// ── Every number below is read from facts.json or from the datasets built by pipeline/ ─────
+const tree = cofogTree();
+const total = num('dep_total_2024_md');
+const year = cofogMeta.year;
+const den = { foyers: millions('foyers_implicites_dep_m'), habitants: num('fiche_pop_citoyens') };
+const perDay = num('dep_par_foyer_jour_eur');
+const perMonth = num('dep_par_foyer_mois_eur');
+const perYearBook = num('dep_par_foyer_manifeste_eur');
+const foyersM = (m: number) => formatNumber(m, { decimals: { min: 0, max: 1 } });
+
+const otherFoyers = [
+  `${foyersM(num('fiche_pop_foyers') / 1e6)} M (fiches)`,
+  `${foyersM(num('foyers_implicites_236_m'))} M (tableau des économies)`,
+  `${foyersM(num('foyers_fiscaux_loi_m'))} M de foyers fiscaux (exposé de l’amendement PLF-P1 n° 28)`,
+];
+const denominatorNotes = {
+  foyer: `Montant national ÷ ${foyersM(den.foyers / 1e6)} millions de foyers : le nombre implicite du chiffre du livre « ${formatEuro(perYearBook)} par foyer et par an » (${formatMdEuro(total)} ÷ ${formatEuro(perYearBook)}). Ne comparez pas ces « par foyer » avec ceux d’une autre page : le livre emploie d’autres dénominateurs (${otherFoyers.join(' ; ')}).`,
+  habitant: `Montant national ÷ ${foyersM(den.habitants / 1e6)} millions de personnes : le nombre de citoyens donné en tête de la fiche « Citoyen » du livre (annoncé, non vérifié par une statistique).`,
+};
+
+const sourcesChart = [
+  chip('dep_total_2024_md', { label: 'Insee, comptes nationaux (tableau 3.301)' }),
+  datasetChip(cofogMeta.source.workbook, {
+    label: 'Classeur des auteurs, Graph1672Md',
+    tier: 'annonce',
+  }),
+];
+
+const sourceItems = [
+  {
+    chip: chip('dep_total_2024_md', { label: 'Insee, comptes nationaux (tableau 3.301)' }),
+    text: `Dépenses des administrations publiques par fonction (COFOG), ${year} : ${formatMdEuro(total)} au total.`,
+  },
+  {
+    chip: datasetChip(cofogMeta.source.workbook, {
+      label: 'Classeur des auteurs, Graph1672Md',
+      tier: 'annonce',
+    }),
+    text: 'Regroupement des fonctions en six groupes et seize postes : celui du graphique du livre.',
+  },
+  {
+    chip: chip('dep_par_foyer_manifeste_eur', { label: 'france-resolution.fr, manifeste' }),
+    text: `Dénominateur « par foyer » : ${foyersM(den.foyers / 1e6)} millions de foyers, déduit de « ${fact('dep_par_foyer_manifeste_eur').source.quote ?? ''} ». Le manifeste ne dit pas quelle définition du foyer il emploie.`,
+  },
+  {
+    chip: chip('fiche_pop_citoyens', { label: 'france-resolution.fr, fiche « Citoyen »' }),
+    text: `Dénominateur « par habitant » : ${foyersM(den.habitants / 1e6)} millions de personnes.`,
+  },
+];
+const gaps = [
+  cofogMeta.checks.note,
+  ...cofogMeta.notes.filter((n) => !n.startsWith('« Défense')),
+  conflicts('foyers_implicites_dep_m')[0]?.note ?? '',
+].filter(Boolean);
+
+const sourcesSquares = [
+  chip('dep_total_2024_md', { label: 'Insee, comptes nationaux (tableau 3.301)' }),
+];
+
+const secu = num('dep_part_securite_pct');
+const eu = europeData();
+const nRanked = eu.rows.filter((r) => r.dep24 !== null).length;
+const rank = num('eu_dep_rang_fr_2024');
+const frDep = num('eu_dep_pib_fr_2024_pct');
+const eaDep = num('eu_dep_pib_ea20_2024_pct');
+const sharePct = (v: number) => formatPercentPoints(v, { decimals: 1 });
 ---
 
 <DashboardLayout
   slug="depenses"
-  lede="Les dépenses publiques par grande fonction, ramenées à votre foyer, à une journée, à une heure de travail."
+  lede={`En ${year}, les administrations publiques ont dépensé ${formatMdEuro(total)} : ${formatEuro(perDay)} par foyer et par jour, ou ${formatEuro(perMonth)} par mois. Voyez à quoi sert cet argent, dans l’unité de votre choix.`}
 >
-  <!-- TODO(builder): build this page with ChartFrame + PlotFigure (see /styleguide). -->
-  <Todo title="Treemap des dépenses">
-    Treemap des fonctions COFOG, bascule total / par foyer / par jour, onglets Graphique · Tableau ·
-    Sources. Chiffres lus dans facts.json.
-  </Todo>
+  <!-- Headline numbers -->
+  <section aria-labelledby="chiffres-titre">
+    <h2 id="chiffres-titre" class="sr-only">
+      Les chiffres clés
+    </h2>
+    <ul class="grid gap-4 md:grid-cols-3 md:gap-6">
+      <StatTile
+        as="li"
+        label={`Dépenses publiques en ${year}`}
+        value={formatNumber(total)}
+        unit="Md€"
+        unitLabel="milliards d’euros"
+        reframe={`= ${formatEuro(perDay)} par foyer et par jour, sur ${foyersM(den.foyers / 1e6)} M de foyers.`}
+        source={chip('dep_total_2024_md', { label: 'Insee, comptes nationaux' })}
+      />
+      <StatTile
+        as="li"
+        label="Par foyer et par an, selon le livre"
+        value={formatNumber(perYearBook)}
+        unit="€"
+        tier="announced"
+        reframe={`= ${formatEuro(perMonth)} par mois. Le manifeste ajoute « record mondial » : voir plus bas.`}
+        source={chip('dep_par_foyer_manifeste_eur', { label: 'france-resolution.fr, manifeste' })}
+      />
+      <StatTile
+        as="li"
+        label="Part du PIB, comparaison européenne"
+        value={formatNumber(frDep, { decimals: 1 })}
+        unit="% du PIB"
+        reframe={`${rank}e sur ${nRanked} pays ; zone euro : ${formatNumber(eaDep, { decimals: 1 })} %.`}
+        source={chip('eu_dep_pib_fr_2024_pct', { label: 'Eurostat' })}
+      />
+    </ul>
+  </section>
+
+  <!-- The treemap -->
+  <section aria-labelledby="carte-titre" class="space-y-4">
+    <div class="max-w-2xl space-y-2">
+      <h2 id="carte-titre" class="text-3xl text-ink">
+        Où va l’argent public ?
+      </h2>
+      <p class="text-ink-2">
+        Chaque bloc est une fonction de l’État, des collectivités et de la Sécurité sociale. Plus il
+        est grand, plus l’argent est important. Choisissez l’unité : un montant national est
+        difficile à se représenter, ramené à un foyer et à une journée il le devient.
+      </p>
+    </div>
+    <DepensesExplorer
+      client:visible={{ rootMargin: '400px' }}
+      tree={tree}
+      den={den}
+      denominatorNotes={denominatorNotes}
+      sources={sourcesChart}
+      sourceItems={sourceItems}
+      gaps={gaps}
+      year={year}
+    />
+  </section>
+
+  <!-- 100 € -->
+  <section aria-labelledby="cent-titre" class="space-y-4">
+    <div class="max-w-2xl space-y-2">
+      <h2 id="cent-titre" class="text-3xl text-ink">
+        Si l’argent public était 100 €
+      </h2>
+      <p class="text-ink-2">
+        Les auteurs insistent sur un chiffre : défense, police et justice ne reçoivent que
+        <strong>{sharePct(secu)}</strong> de la dépense, soit {formatEuro(secu, { decimals: 1 })}{' '}
+        sur 100 € (le manifeste arrondit à{' '}
+        {formatPercentPoints(num('dep_part_regalien_manifeste_pct'), { decimals: 0 })}). Trouvez-les
+        dans la grille.
+      </p>
+    </div>
+    <HundredSquares
+      client:visible={{ rootMargin: '400px' }}
+      tree={tree}
+      sources={sourcesSquares}
+      year={year}
+    />
+  </section>
+
+  <EuropeBlock />
 </DashboardLayout>
