@@ -1,0 +1,141 @@
+{
+  "_meta": {
+    "purpose": "Machine-readable extract of the quantified, legally-worded parameters of the Résolution plan (book 'État partout, justice nulle part', Éditions Chronique, 9 Oct 2026). Every value is copied from the sources named in 'source'. Nothing here is invented; 'status' says how solid each item is. See research/source-analysis.md for context, quotes and caveats.",
+    "retrieved": "2026-10-24",
+    "site": "https://france-resolution.fr",
+    "legal_vehicles": {
+      "PLF2027_part1": "data/raw/amendements/Liasse_PLF_P1.pdf (34 amendments, 19 Oct 2026, against PLF 2027 n° 3210)",
+      "PLF2027_part2": "data/raw/amendements/Liasse_PLF_P2.pdf (39 amendments)",
+      "PLFSS2027": "data/raw/amendements/Liasse_PLFSS.pdf (8 amendments, against PLFSS 2027 n° 3211)"
+    },
+    "status_legend": {
+      "legal_text": "Exact parameter written in an amendment dispositif",
+      "site_claim": "Number stated on france-resolution.fr (manifeste / fiche) with no legal text",
+      "workbook": "Number found in the Résolution xlsx workbooks",
+      "inferred": "Derived by the analyst from the above; flagged"
+    }
+  },
+  "income_tax_and_fundamental_aid": {
+    "effective": "IR due on 2028 incomes; monthly AFU instalments from 1 Jan 2028",
+    "source": "Liasse_PLF_P1 amendment 28 (article 2 PLF2027); workbook 'Synthèse Graphiques' sheets GraphIR/GraphAFU; 'Synthèse Chiffres' sheet 'Refonte fiscalité'",
+    "status": "legal_text",
+    "flat_rate_on_net_taxable_income": 0.23,
+    "rate_estimated_in_workbook_before_rounding": 0.2273699542692758,
+    "afu_per_adult_per_year_eur": 6600,
+    "afu_per_adult_per_month_eur": 550,
+    "afu_per_dependent_child_per_year_eur": 3300,
+    "afu_per_dependent_child_per_month_eur": 275,
+    "child_age_rule": "dependent child within art. 196 CGI 'jusqu'à l'année au cours de laquelle elle atteint l'âge de dix-huit ans'",
+    "afu_supplement_invalidity_per_year_eur": 6600,
+    "afu_supplement_invalidity_condition": "per foyer member holding the 'carte mobilité inclusion' mention 'invalidité' (art. L.241-3 CASF)",
+    "afu_supplement_pension_per_year_eur": 3300,
+    "afu_supplement_pension_condition": "per foyer member with a retirement pension liquidated before 1 Jan 2028; applies until IR on 2051 incomes",
+    "formula": "IR = 0.23 * revenu_net_imposable - AFU ; if AFU > tax the excess is paid out (negative tax)",
+    "quotient_familial_and_decote": "abolished (IR on 2028 incomes)",
+    "not_cumulable_with": ["prestations familiales", "action sociale des CAF"],
+    "break_even_income_single_adult_eur_per_year": 28695.65,
+    "break_even_note": "= 6600/0.23; amendment says 'en deçà de 28 700 € pour une personne seule'",
+    "validation_cases_single_adult": [
+      {"taxable_income_eur_per_year": 0, "tax_eur": 0, "afu_eur": 6600, "disposable_after_tax_eur": 6600, "net_transfer_from_administration_eur": 6600},
+      {"taxable_income_eur_per_year": 8000, "tax_eur": -1840, "afu_eur": 6600, "disposable_after_tax_eur": 12760, "net_transfer_from_administration_eur": 4760},
+      {"taxable_income_eur_per_year": 21000, "tax_eur": -4830, "afu_eur": 6600, "disposable_after_tax_eur": 22770, "net_transfer_from_administration_eur": 1770},
+      {"taxable_income_eur_per_year": 34000, "tax_eur": -7820, "afu_eur": 6600, "disposable_after_tax_eur": 32780, "net_transfer_from_administration_eur": -1220},
+      {"taxable_income_eur_per_year": 48000, "tax_eur": -11040, "afu_eur": 6600, "disposable_after_tax_eur": 43560, "net_transfer_from_administration_eur": -4440}
+    ],
+    "validation_cases_note": "From workbook 'Synthèse Graphiques Résolution_0910.xlsx', sheet GraphIR rows 26-30 (formula in cells: =-D28*0.23; =SUM(C27:C29)). Series also given for incomes 0..72000 step 1000.",
+    "population_basis_workbook": {
+      "population_fiscale_2025_M": 63.4, "adults_M": 50.4, "children_M": 13.04,
+      "population_recensee_2025_M": 68.6, "adults_recensed_M": 54.5, "children_recensed_M": 14.1,
+      "adult_disabled_AAH_M": 1.24, "child_disabled_AEEH_M": 0.435,
+      "afu_gross_cost_Md_per_year": 402.006,
+      "expenditure_merged_into_afu_Md_per_year": 135.34564,
+      "merged_breakdown_Md": {"fiscal_hors_quotient": 21.6, "niches_flechees": 12.6, "solde_niches_sociales_supprimees": 9.0, "budgetaire_aides_sociales_RSA_PA_AAH_etc": 31.8, "social_total": 81.94564, "aides_CNAF_y_c_discretionnaires": 40.9, "charges_gestion_CNAF": 0.84564, "ASPA_ASV": 4.1, "aides_sociales_locales": 36.1},
+      "ir_total_brut_Md": 114.3, "ir_average_rate_reference": 0.07322
+    }
+  },
+  "csg_crdS_on_earned_income": {
+    "source": "Liasse_PLFSS amendment 1; workbook 'Synthèse Chiffres' sheet 'CSG-CRDS'",
+    "status": "legal_text",
+    "current_total_points_on_activity_income": 9.7,
+    "components": {"CSG_activity_rate_pct": 9.2, "CRDS_pct": 0.5},
+    "monthly_trajectory_2027": [
+      {"month": "2027-01..06", "csg_pct": 9.2, "crds_pct": 0.5, "total_pct": 9.7, "note": "no rate moves in H1 2027 (set-up semester)"},
+      {"month": "2027-07", "csg_pct": 7.6, "crds_pct": 0.5, "total_pct": 8.1},
+      {"month": "2027-08", "csg_pct": 6.0, "crds_pct": 0.5, "total_pct": 6.5},
+      {"month": "2027-09", "csg_pct": 4.3, "crds_pct": 0.5, "total_pct": 4.8},
+      {"month": "2027-10", "csg_pct": 2.7, "crds_pct": 0.5, "total_pct": 3.2},
+      {"month": "2027-11", "csg_pct": 1.1, "crds_pct": 0.5, "total_pct": 1.6},
+      {"month": "2027-12 onward", "csg_pct": 0.0, "crds_pct": 0.0, "total_pct": 0.0, "note": "both contributions cease on earned income from 1 Dec 2027"}
+    ],
+    "csg_remains_on": "pensions, allocations chômage, indemnités journalières (rates unchanged); capital income handled by the 30% flat levy (PLF amendment 20)",
+    "budget_cost_Md": {"full_year_from_2028": 114, "year_2027": 33, "workbook_2024_data_CSG_plus_CRDS_activity": 114.46, "workbook_CSG_only": 108.56, "workbook_one_point_of_CSG": 11.8},
+    "funded_by": "all PLF savings (main) + abrogation of social-contribution exemptions (9 Md€ returned to net pay)",
+    "worker_gain_formula_inferred": "monthly_gain = gross_monthly * 0.9825 * 0.097 (matches workbook: 1801.8*0.9825*0.097 = 171.716)",
+    "formula_status": "inferred",
+    "worker_gain_examples_workbook": [
+      {"case": "SMIC 2025", "gross_monthly": 1801.8, "net_monthly": 1426.3, "gain_monthly": 171.716, "gain_pct_of_net": 0.1204, "gain_annual": 2060.59},
+      {"case": "SMIC 01/2026", "gross_monthly": 1823, "net_monthly": 1443, "gain_monthly": 173.736, "gain_pct_of_net": 0.1204, "gain_annual": 2084.84},
+      {"case": "SMIC 06/2026", "gross_monthly": 1867, "net_monthly": 1478, "gain_monthly": 177.930, "gain_pct_of_net": 0.1204, "gain_annual": 2135.16},
+      {"case": "net médian", "net_monthly": 2190, "gain_monthly": 275.076, "gain_pct_of_net": 0.1256, "gain_annual": 3300.91},
+      {"case": "net moyen (brut moyen 3602)", "gross_monthly": 3602, "net_monthly": 2733, "gain_monthly": 343.280, "gain_pct_of_net": 0.1256, "gain_annual": 4119.36}
+    ],
+    "site_claims_to_reconcile": {"manifeste": "300 euros par mois restitués dès la première année, soit 13 % de salaire net en plus", "fiche_travailleur": "+13 % ... au salaire médian. 180 euros de plus par mois au SMIC."}
+  },
+  "employer_side_contribution_changes": {
+    "source": "Liasse_PLFSS amendment 1 (IV) and 3",
+    "status": "legal_text",
+    "exemptions_of_social_contributions_abrogated": "all derogations to common-law base/rate on earned income cease from 1 Jul 2027 (24 provisions abrogated) except: professional expense reimbursements (L.136-11 I al.2), affiliation/redevable/fait générateur rules, and general reductions applying to all employers without sector/purpose condition (incl. L.241-13)",
+    "phase_outs": {"L241-10_and_L741-16_exonerations": "reduced by 1/3 from 1 Jul 2027, 2/3 from 1 Jan 2028, abrogated from 1 Jan 2029"},
+    "return_to_net_pay_Md": 9,
+    "taxe_sur_les_salaires": {"current_yield_Md": 17.9, "rates_pct": [4.25, 8.5, 13.6], "reduction": {"2028": "-1/3", "2029": "-2/3"}, "abrogated": "1 Jan 2030", "payers": "employers not charging VAT (hospitals, clinics, banks, insurers, associations, health professions)"}
+  },
+  "personal_savings_account_CEP": {
+    "source": "Liasse_PLF_P1 amendment 27 and 20; site fiches/manifeste; workbook 'Input Capitalisation'",
+    "effective": "1 Jan 2028; first payments due for year 2028",
+    "status": "legal_text_structure_only_amounts_left_to_yearly_finance_law",
+    "restitution_payment": "= earned income of the year * rate fixed each year by finance law (rate is ZERO if not voted)",
+    "wealth_payment": "= global amount fixed each year by finance law / number of account holders at 1 Jan (same for all; ZERO if not voted)",
+    "lock": "restitution compartment (held by Caisse des dépôts) unavailable until legal pension age (art. L.161-17-2 CSS) or earlier pension liquidation, then delivered as lifetime annuity; enters the estate at death",
+    "tax_on_withdrawal": "30% flat on the taxable fraction of withdrawals, base indexed to CPI excl. tobacco; restitution payments are not taxable income",
+    "site_claims": {"monthly_into_account_eur": 300, "horizon": "within three years (manifeste: 'd'ici trois ans')", "patrimoine_rendu_per_foyer_eur": 20000, "patrimoine_public_rendu_Md": 600, "yield_per_foyer_eur_per_year": 600, "workbook_total_assets_to_return_Md": 606.9726658769481, "workbook_assumed_net_yield": 0.03, "workbook_net_annual_yield_Md": 18.20917997630844, "workbook_assets_breakdown_Md": {"participations_financieres": 201.915, "patrimoine_foncier_public": 200.19537197902662, "logements_publics": 51.96, "parc_social": 152.90229389792154}},
+    "workbook_flows_to_capitalisation_Md": {"assets_to_value_and_transfer": 121.74917997630843, "flux_economise": 103.54, "budget_savings_full_year": 38.5, "local_savings_full_year": 20.1, "chomage_transformation": 30, "year1_leftover_after_CSG": 14.94, "unemployment_spending_base": 37.1},
+    "lifecycle_chart_workbook": "GraphAFU: AFU 3300 (age 0-17) then 6600 (18+); compte éducation 6600/yr age 0-18; disability part 6600 age 0-63; 'part contributive de retraite' 6600 age 64+; 'rendement du patrimoine restitué' 264 €/yr all ages; 'épargne retraite personnelle' 20064 and 6600 age 64+ (meaning of 20064 not documented)"
+  },
+  "health_ceiling_bouclier_sanitaire": {
+    "source": "Liasse_PLFSS amendment 4; fiche patient",
+    "status": "legal_text",
+    "effective": "1 Jan 2028 and only if AFU enters into force",
+    "ceiling_rate_of_resources": 0.05,
+    "resources_definition": "foyer fiscal: earned income (L.136-1-1) + replacement income (L.136-1) + cash benefits, MINUS income tax due for the year",
+    "floor": "5% x annual AFU amount (= 330 € if AFU = 6600)",
+    "covered": "sum of participations (L.160-13 I,II,III) + forfait journalier (L.174-4) left to the insured within the calendar year; above the ceiling the insurer pays",
+    "complementary_insurers": "may not cover more than half of what remains with the insured below the ceiling",
+    "adjustment": "rate can be changed by LFSS; absent a vote it self-corrects so that health insurance spending does not increase",
+    "replaces": "ALD (3°,4°,10° of L.160-14) for conditions recognised from 1 Jan 2028; people already recognised keep it",
+    "site_only": "fiche patient: 'un reste à charge de 10 % par acte apparaît' (no legal text in the liasses); '300 € par an de frais de gestion en moins'"
+  },
+  "vat": {
+    "source": "Liasse_PLF_P1 amendment 21; amendment 1 (D)",
+    "status": "legal_text",
+    "normal_rate_pct": 20,
+    "intermediate_10_to_20": "1 Jul 2028",
+    "reduced_5_5_and_super_reduced_2_1_to_20": "1 Jul 2028, except goods of L.213-159/L.213-166 (food, per exposé) and services leading to them: 10% from 1 Jul 2028, 15% from 1 Jul 2029, 20% from 1 Jul 2030",
+    "overseas_rates": "unchanged",
+    "derogatory_rates_counted_as_tax_expenditures": "abolished from 1 Jul 2027 (amendment 1 IV.D)",
+    "yield": "constant (revenue-neutral fusion per exposé)",
+    "cpo_estimate_Md_2021": {"reduced_rates_total": 30, "water_and_food": 20}
+  },
+  "property_and_capital_taxes": {
+    "source": "Liasse_PLF_P1 amendments 19, 20, 29",
+    "status": "legal_text",
+    "transfer_duties": {"effective": "1 Jan 2027", "rule": "nothing below 10,000 € base; 1% on 10,000-100,000 €; 3% above 100,000 €; assessed per act and per taxpayer, base includes transfers from same person in prior 15 years; paid by the seller/heir (parties may agree otherwise); credited as acompte against the capital-gain tax", "examples": {"apartment_200000_today_buyer_pays_eur": 10000, "apartment_200000_tomorrow_seller_pays_eur": 3900}, "today_rates_cited": "3.80% departmental (up to 4.50%) + 1.20% communal; succession rates 5%-60% by kinship", "abolished": "departmental, communal, regional shares and all succession/donation allowances"},
+    "capital_gains": {"flat_rate": 0.30, "replaces": "12.8%/19% IR + 17.2% social contributions (30% on securities, 36.2% on real estate)", "real_gain": "acquisition price indexed on CPI excl. tobacco; no holding-period abatements/exemptions; surtaxe >50,000 € abolished", "effective": "real estate and movables 1 Jan 2027; securities/CEP 1 Jan 2028", "example": "bought 200,000, sold 260,000, prices +10% => real gain 40,000 => tax 12,000 => 8,100 to pay after crediting 3,900"},
+    "taxe_fonciere_unique": {"effective": "tax year 2028", "base": "market rental value (INSEE tariff per m2 by category and sector, from last 3 years of rents)", "municipal_rate_range_pct": [10, 30], "note": "at 10% a dwelling pays roughly today's taxe foncière incl. ordures ménagères (exposé)", "default_2028_rate": "local 2027 product (+ 2026 additional DMTO tax) / total market rental value, clipped to [10%,30%]", "equalisation_fund": "each metropolitan commune pays 2% of total rental values + 2% of product; communes ranked in 3 population-equal terciles by revenue per capita; lowest tercile receives 2/3, middle 1/3", "abolished": ["taxe d'habitation on secondary residences", "IFI (art. 964-977 CGI)", "TEOM (art. 1520)", "taxe d'aménagement (1635 quater A)", "other local land taxes listed in amendment 29 III"]}
+  },
+  "corporate_tax": {"source": "Liasse_PLF_P1 amendment 23", "status": "legal_text", "single_rate_pct": 27, "effective": "financial years opened from 1 Jul 2027", "current_headline_rate_cited_pct": 25, "decree_adjustment": "±2 points max when PO/GDP (INSEE last closed year) differs from 2026 level (minor if above, major if below)", "implicit_rates_cited": {"SME_pct": 21.4, "large_pct": 14.3, "year": 2022}},
+  "unemployment_insurance": {"source": "site fiche personne-sans-emploi; workbook 'Synthèse Chiffres' Annexe Manuscrit; PLF2 amendment 23", "status": "site_claim", "indemnisation_duration_months_before": 13, "indemnisation_duration_months_after": 6, "after_6_months": "personal account fed monthly by the unemployment contributions; unused balance stays yours", "savings_Md_per_year": 30, "legal_text_in_liasses": "none for the 13->6 months rule or the account; only the 10% France Travail contribution is abrogated (PLF2 #23; 5.3 Md€ in régime, 1.5 Md€ in 2027)"},
+  "public_employment_exit": {"source": "Liasse_PLF_P2 amendments 24 and 26", "status": "legal_text", "effective": "1 Jul 2027", "jobs_closed_full_year": 61400, "etpt_ceiling_cut_2027": 30698, "etpt_ceiling_state_2027_total": 2002052, "indemnity_rate_of_base": 0.70, "base": "gross indiciary salary of last step held in grade + share of recurring primes (decree; <= 1/4 of salary, decreasing from category C to A; zero if no decree)", "duration_years_by_seniority": [{"service_years": "<2", "years": 1}, {"service_years": "2 to <5", "years": 2}, {"service_years": "5 to <10", "years": 3}, {"service_years": "10 to <15", "years": 4}, {"service_years": "15 to <20", "years": 5}, {"service_years": "20 to <25", "years": 6}, {"service_years": ">=25", "years": 7}], "cumulable_with_private_activity": "fully, no cap", "stops_at": "retirement age / full-rate pension entitlement / death", "offers": "CDI offers; 1st refusal keeps full indemnity; 2nd halves the rate; 3rd = loss", "site_claims": {"postes_fermes": 580000, "keep_70pct_up_to_years": 7}},
+  "housing_aids": {"source": "Liasse_PLF_P2 amendments 29, 32, 34; site fiche locataire", "status": "legal_text", "APL_new_claims": "no right for requests filed from 1 Jun 2027; right opened by a request filed from 1 Jan 2027 is paid at most 12 months at the amount fixed at opening", "APL_conventioned_housing_existing_rights": "capped at Dec 2026 amount; -1/3 from 1 Jul 2027; -2/3 from 1 Jul 2028; ends 1 Jul 2029 or on move", "APL_other_housing_existing_rights": "ends at lease term (or loan contract) and at the latest 1 Jan 2030", "APL_all_abolished": "1 Jan 2030", "first_year_saving_Md": 5.4, "chèque_énergie": "abrogated 1 Jan 2027 (0.6 Md€)", "new_social_housing_state_aid": "none from 1 Jan 2027", "parc_social": "site: offered for sale in 3 years; net asset ~340 Md€; 4.5 M dwellings (fiche locataire)"},
+  "aggregate_savings_workbook_Md_per_year": {"source": "Synthèse Chiffres 'Annexe Manuscrit'; donnees.html table", "total": 236.05466666666666, "per_foyer_eur": 8000, "gain_year1_Md": 127.35216666666668, "gain_additional_full_year_Md": 108.91167997630845},
+  "macro_targets_workbook": {"PO_rate_2024": 0.4287133120997294, "PO_rate_target": 0.3632844823452858, "GDP_2024_Md": 2919.9, "PO_2024_Md": 1251.8, "PO_target_Md": 1060.75436}
+}
