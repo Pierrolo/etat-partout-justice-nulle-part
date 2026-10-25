@@ -76,7 +76,9 @@ test('the closing summary keeps the guesses', async ({ page }) => {
   }
   await expect(page.getByTestId('questionnaire-bilan')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Où vous en étiez' })).toBeVisible();
-  await expect(page.getByTestId('questionnaire-bilan').getByText(/proche(s)? de la référence/)).toBeVisible();
+  await expect(
+    page.getByTestId('questionnaire-bilan').getByText(/proche(s)? de la référence/),
+  ).toBeVisible();
 });
 
 test('the answers are in the page without JavaScript', async ({ browser }) => {

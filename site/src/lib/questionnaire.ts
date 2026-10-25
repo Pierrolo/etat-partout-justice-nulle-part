@@ -365,7 +365,9 @@ export function questionnaire(): Question[] {
     closeAbs: 250,
     marker: 'annonce',
     answerLead: 'Le décompte',
-    body: [`${formatInteger(num('cerfa_nombre_manifeste'))} formulaires, dans la même phrase que les impôts et les niches.`],
+    body: [
+      `${formatInteger(num('cerfa_nombre_manifeste'))} formulaires, dans la même phrase que les impôts et les niches.`,
+    ],
     caveat: {
       tone: 'announced',
       title: 'Annonce',

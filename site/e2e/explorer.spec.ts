@@ -158,7 +158,9 @@ test.describe('/comprendre/amendements', () => {
   test('dit clairement que ce sont des textes proposés, pas des lois', async ({ page }) => {
     await expect(page.getByText('Amendements rédigés, en attente de dépôt')).toBeVisible();
     await expect(page.getByText(/attendent d’être déposés, puis votés/)).toBeVisible();
-    await expect(page.getByText(/texte rédigé, en attente de dépôt et de vote/i).first()).toBeVisible();
+    await expect(
+      page.getByText(/texte rédigé, en attente de dépôt et de vote/i).first(),
+    ).toBeVisible();
     await expect(summary(page)).toContainText('81 amendements');
   });
 

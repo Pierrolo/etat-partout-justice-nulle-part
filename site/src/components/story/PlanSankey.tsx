@@ -360,8 +360,8 @@ export function PlanSankey({
           ) : (
             <p>
               <span className="font-semibold text-ink">Touchez un bloc</span> pour voir ce qui entre
-              et ce qui sort. Les rubans hachurés sont des annonces ; le ruban plein
-              est proposé dans un amendement.
+              et ce qui sort. Les rubans hachurés sont des annonces ; le ruban plein est proposé
+              dans un amendement.
             </p>
           )}
         </div>

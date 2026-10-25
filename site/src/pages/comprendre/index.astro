@@ -92,10 +92,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
   title="Comprendre"
   description="Où va l’argent public ? Une histoire en six chiffres, puis les pages pour explorer : dépenses, État, plan, niches, calendrier, amendements."
 >
-  <PageHeader
-    eyebrow="Tableau de bord"
-    title="L’argent public en six chiffres"
-  />
+  <PageHeader eyebrow="Tableau de bord" title="L’argent public en six chiffres" />
 
   <div class="wrap">
     <ol class="story relative space-y-14 sm:space-y-20" data-story>
@@ -299,8 +296,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
             {nichesEquation(num('niches_nombre'), nichesTva, niches)}. Des réductions, exonérations
             et taux réduits : {formatMdEuro(num('niches_total_md'), { decimals: 1 })} par an, soit
             environ {formatEuro(roundForDisplay(perFoyerYear(num('niches_total_md')), 50))} par
-            foyer (sur {FOYERS_LABEL}). On compte aussi {formatInteger(impots)} impôts et
-            taxes.
+            foyer (sur {FOYERS_LABEL}). On compte aussi {formatInteger(impots)} impôts et taxes.
           </p>
           <div
             class="max-w-2xl"
@@ -423,9 +419,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
             </figcaption>
           </figure>
           <p class="flex flex-wrap items-center gap-2 text-xs text-ink-3">
-            <SourceChip
-              {...chip('droit_mots_2026', { label: 'Légifrance, décompte' })}
-            />
+            <SourceChip {...chip('droit_mots_2026', { label: 'Légifrance, décompte' })} />
             <a
               href={withBase('/comprendre/etat-partout/#mots-titre')}
               class="text-sm font-semibold"
@@ -459,9 +453,9 @@ const planDay = perFoyerDay(num('eco236_total_md'));
             <span class="font-serif text-2xl text-ink-2 sm:text-3xl">Md€ d’économies par an</span>
           </p>
           <p class="max-w-xl text-lg text-ink-2">
-            C’est l’économie visée, à « rendre » aux Français. Ramenée à un
-            foyer, {formatEuro(planDay)} par jour (sur {FOYERS_LABEL}, comme à l’étape 1). Où
-            vont-ils ? D’abord dans votre salaire net. Une heure de travail aujourd’hui :
+            C’est l’économie visée, à « rendre » aux Français. Ramenée à un foyer,{' '}
+            {formatEuro(planDay)} par jour (sur {FOYERS_LABEL}, comme à l’étape 1). Où vont-ils ?
+            D’abord dans votre salaire net. Une heure de travail aujourd’hui :
           </p>
           <div class="card max-w-xl">
             <HourBar />

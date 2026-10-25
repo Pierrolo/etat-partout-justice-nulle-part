@@ -122,9 +122,7 @@ const totalsItems: BarItem[] = [
     id: 'm143',
     label: `« ${md1(md143)} de niches supprimées »`,
     sub: 'Annonce de la fiche Contribuable : périmètre non détaillé, il inclurait des niches sociales',
-    segments: [
-      { value: md143, color: css.accent, hatched: true, srLabel: 'annoncé' },
-    ],
+    segments: [{ value: md143, color: css.accent, hatched: true, srLabel: 'annoncé' }],
     valueText: md1(md143),
   },
 ];
@@ -338,8 +336,7 @@ const links = {
           «&#8239;{md1(md143)} de niches supprimées, dont {md1(md52)} vous reviennent » est une
           annonce de la fiche Contribuable. D’après nos recoupements, ce périmètre additionne niches
           fiscales, niches sociales et « autre gisement » de la feuille « Flux ». Ce total vient de
-          ce recoupement. Il inclut des niches sociales, en plus des{' '}
-          {num('niches_total_nombre')}.
+          ce recoupement. Il inclut des niches sociales, en plus des {num('niches_total_nombre')}.
         </p>
       </Callout>
     </div>
@@ -539,9 +536,9 @@ const links = {
     <Disclosure summary="D’où viennent les coûts ?" variant="plain">
       <p>
         De l’annexe « Dépenses fiscales » du PLF 2026 (Évaluation des voies et moyens, tome II),
-        reprise dans le classeur publié. 2024 est le coût réalisé ; 2025 et 2026
-        sont des prévisions. La fiabilité du chiffrage (« très bonne », « bonne », « ordre de
-        grandeur ») est indiquée niche par niche dans « Détails ».
+        reprise dans le classeur publié. 2024 est le coût réalisé ; 2025 et 2026 sont des
+        prévisions. La fiabilité du chiffrage (« très bonne », « bonne », « ordre de grandeur ») est
+        indiquée niche par niche dans « Détails ».
       </p>
     </Disclosure>
   </section>

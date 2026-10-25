@@ -61,9 +61,8 @@ export function H1Readings({
           Ce chiffre dépend d’un choix
         </h3>
         <p className="text-[0.9375rem] text-ink-2">
-          Le plan annonce que l’aide universelle remplace certaines aides, mais aucun
-          amendement ne les supprime. Pour votre foyer, les deux lectures ne donnent pas le même
-          résultat :
+          Le plan annonce que l’aide universelle remplace certaines aides, mais aucun amendement ne
+          les supprime. Pour votre foyer, les deux lectures ne donnent pas le même résultat :
         </p>
       </header>
       <ul className="grid gap-3 md:grid-cols-2">

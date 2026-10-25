@@ -7,8 +7,7 @@ export const SITE = {
   name: 'Et moi, dans tout ça ?',
   /** Used in <title> suffix. */
   titleSuffix: 'Et moi, dans tout ça ?',
-  description:
-    'Voyez ce que le plan changerait pour votre foyer, et où va l’argent public.',
+  description: 'Voyez ce que le plan changerait pour votre foyer, et où va l’argent public.',
   locale: 'fr_FR',
   independence: 'Outil indépendant de l’association Résolution et de l’État.',
   /** Public repository (code, data pipeline, engine, QA reports). */

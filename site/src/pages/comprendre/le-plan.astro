@@ -100,9 +100,9 @@ const announced = [
         Le schéma
       </h2>
       <p class="text-ink-2">
-        Le plan propose de réduire la dépense publique et de « rendre » l’argent aux Français,
-        de deux façons : en supprimant la CSG et la CRDS sur les salaires (le salaire net augmente),
-        et en alimentant une épargne personnelle. Voici ce schéma, avec la part proposée dans un
+        Le plan propose de réduire la dépense publique et de « rendre » l’argent aux Français, de
+        deux façons : en supprimant la CSG et la CRDS sur les salaires (le salaire net augmente), et
+        en alimentant une épargne personnelle. Voici ce schéma, avec la part proposée dans un
         amendement et celle qui reste une estimation.
       </p>
     </div>
@@ -167,10 +167,10 @@ const announced = [
           Pas de découpage publié : un seul changement est chiffré.
         </p>
         <p class="text-[0.9375rem] leading-relaxed text-ink-2">
-          Il n’existe pas de version « avec le plan » de ces{' '}
-          {formatEuro(num('va_heure_total_eur'))}. Ce qu’ils chiffrent : la fin de la CSG et de la
-          CRDS ajouterait <strong class="text-gain">{formatEuro(csgMois)} par mois</strong> au
-          salaire net médian de {formatEuro(netMedian)}, soit{' '}
+          Il n’existe pas de version « avec le plan » de ces {formatEuro(num('va_heure_total_eur'))}
+          . Ce qu’ils chiffrent : la fin de la CSG et de la CRDS ajouterait{' '}
+          <strong class="text-gain">{formatEuro(csgMois)} par mois</strong> au salaire net médian de{' '}
+          {formatEuro(netMedian)}, soit{' '}
           <strong class="text-gain">
             {formatNumber(csgPct, { decimals: 1, signed: true })}&nbsp;%
           </strong>
@@ -202,9 +202,9 @@ const announced = [
         Au fil de la vie
       </h2>
       <p class="text-ink-2">
-        Le graphique « Solidarité nationale au cours de la vie » montre ce qu’une
-        personne recevrait de la naissance à {formatNumber(life.ageMax)} ans. Nous y séparons ce qui
-        a une base légale de ce qui n’en a pas.
+        Le graphique « Solidarité nationale au cours de la vie » montre ce qu’une personne recevrait
+        de la naissance à {formatNumber(life.ageMax)} ans. Nous y séparons ce qui a une base légale
+        de ce qui n’en a pas.
       </p>
     </div>
     <Lifecycle
@@ -253,10 +253,10 @@ const announced = [
     <Disclosure summary="Comment lire ces deux colonnes ?" variant="card">
       <p>
         « Proposé dans un amendement » : le chiffre figure dans un amendement rédigé, en attente de
-        dépôt et de vote. Il s’appliquerait tel quel une fois adopté.
-        « Annoncé » : avancé dans les fiches ou les chiffrages, sans
-        texte précis. Le simulateur montre les promesses sans montant à part, hors de votre revenu
-        disponible. <a href={withBase('/methode/')}>Méthode et hypothèses</a>.
+        dépôt et de vote. Il s’appliquerait tel quel une fois adopté. « Annoncé » : avancé dans les
+        fiches ou les chiffrages, sans texte précis. Le simulateur montre les promesses sans montant
+        à part, hors de votre revenu disponible.{' '}
+        <a href={withBase('/methode/')}>Méthode et hypothèses</a>.
       </p>
     </Disclosure>
   </section>

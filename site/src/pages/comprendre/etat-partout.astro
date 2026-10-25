@@ -40,9 +40,7 @@ const nichesMenages = num('niches_menages_communes_nombre');
 const nichesRecensees = num('niches_nombre');
 const nichesTva = num('niches_tva_hors_niches_nombre');
 const impotConflict = conflicts('impots_cibles_manifeste')[0]?.note ?? '';
-const impotSources = [
-  chip('impots_nombre_manifeste', { label: 'france-resolution.fr' }),
-];
+const impotSources = [chip('impots_nombre_manifeste', { label: 'france-resolution.fr' })];
 const nicheSources = [
   chip('niches_total_nombre', { label: 'PLF 2026, annexe Dépenses fiscales' }),
   chip('niches_menages_communes_nombre', { label: 'Classement du site' }),
@@ -70,10 +68,7 @@ const chainSources = [
 ];
 ---
 
-<DashboardLayout
-  slug="etat-partout"
-  lede="Ministères, agences, impôts, niches, mots de loi."
->
+<DashboardLayout slug="etat-partout" lede="Ministères, agences, impôts, niches, mots de loi.">
   <p class="max-w-2xl text-ink-2">
     Le plan part de l’idée que l’État s’est étendu partout, au point de ne plus faire correctement
     l’essentiel. Cette page présente ses chiffres un par un, avec leur source, et signale quand deux
@@ -109,8 +104,8 @@ const chainSources = [
         {formatInteger(impots)} impôts, {formatInteger(niches)} niches et taux réduits
       </h2>
       <p class="text-ink-2">
-        On compte {formatInteger(impots)} impôts et taxes. Une « niche » est un avantage
-        fiscal (réduction, exonération, taux réduit). Le dernier recensement en compte{' '}
+        On compte {formatInteger(impots)} impôts et taxes. Une « niche » est un avantage fiscal
+        (réduction, exonération, taux réduit). Le dernier recensement en compte{' '}
         {formatInteger(nichesRecensees)}, auxquelles s’ajoutent {formatInteger(nichesTva)} taux
         réduits de TVA que le recensement ne compte pas comme niches :{' '}
         {nichesEquation(nichesRecensees, nichesTva, niches)}.

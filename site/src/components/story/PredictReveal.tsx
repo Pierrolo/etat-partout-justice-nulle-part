@@ -160,8 +160,7 @@ export function PredictReveal({
               des fiches ; voir la Méthode).
             </p>
             <p className="text-[0.9375rem] leading-relaxed text-ink-2">
-              Le plan en fait un argument : «&#8239;{quote}&#8239;». À vous de juger si c’est
-              peu.
+              Le plan en fait un argument : «&#8239;{quote}&#8239;». À vous de juger si c’est peu.
             </p>
             <p className="flex flex-wrap items-center gap-2 text-xs text-ink-3">
               <span className="font-semibold">Sources&nbsp;:</span>
