@@ -26,6 +26,6 @@ export { PARAMS } from './params/index.ts';
 export const PARAMS_META = {
   baselineYear: 'Législation 2026 (état du droit au 24 octobre 2026 ; barème IR LF 2026)',
   planSource:
-    'Amendements Résolution au PLF 2027 (1re et 2de parties) et au PLFSS 2027, 19 octobre 2026 ; fiches et manifeste france-resolution.fr ; classeurs « Synthèse » des auteurs',
+    'Amendements Résolution au PLF 2027 (1re et 2de parties) et au PLFSS 2027, 19 octobre 2026 ; fiches france-resolution.fr ; classeurs « Synthèse »',
   engineVersion: ENGINE_VERSION,
 } as const;

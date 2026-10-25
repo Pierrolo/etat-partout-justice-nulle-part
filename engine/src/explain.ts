@@ -106,7 +106,7 @@ function phrase(e: Evaluated, w: WaterfallStep): string {
 
 const TIER_TXT: Record<Tier, string> = {
   law: 'écrit dans les amendements proposés (pas encore votés)',
-  announced: 'annoncé par les auteurs, sans texte de loi',
+  announced: 'annoncé, sans texte de loi',
   hypothesis: 'estimé par le simulateur',
 };
 

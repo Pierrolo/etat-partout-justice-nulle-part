@@ -50,7 +50,7 @@ export function HypothesisControls({ value, onChange, idPrefix = 'hyp' }: Hypoth
           hint={
             <>
               Le texte ne l’abroge pas. Si on la supprime, on retrouve les chiffres cités dans le
-              livre ; l’impôt est alors un peu plus {'élevé. '}
+              plan ; l’impôt est alors un peu plus {'élevé. '}
               <a href={withBase('/methode/#h2')}>Détail →</a>
             </>
           }

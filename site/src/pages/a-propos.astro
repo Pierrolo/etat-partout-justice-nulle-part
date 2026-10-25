@@ -20,7 +20,7 @@ const sections = [
 /** Conditions de réutilisation de chaque famille de sources (voir aussi site/src/data/README.md). */
 const sources = [
   {
-    who: 'Association Résolution — france-resolution.fr (classeurs de données, amendements, fiches, manifeste)',
+    who: 'Association Résolution — france-resolution.fr (chiffrages, amendements, fiches)',
     terms: 'Aucune licence indiquée par la source',
     use: 'Citées avec attribution, liens vers la source, aucun logo ni aucune charte reprise. Si vous êtes l’auteur d’un contenu et souhaitez un retrait ou une correction, ouvrez une issue.',
   },
@@ -54,7 +54,6 @@ const sources = [
   <PageHeader
     eyebrow="À propos"
     title="Un outil indépendant, ouvert et sans traceur"
-    lede="« Et moi, dans tout ça ? » rend lisible un livre dense. Il n’appartient à personne d’autre qu’à ses lecteurs."
   />
 
   <div class="wrap grid gap-10 lg:grid-cols-[14rem_1fr] lg:gap-16">
@@ -78,18 +77,15 @@ const sources = [
         </h2>
         <Callout tone="plan" title="Outil indépendant">
           <p>
-            {SITE.independence} Ce site n’est affilié ni à l’association Résolution, ni aux auteurs
-            du livre (Barrat, Marle, Mitterrand), ni à leur éditeur, ni à une administration. Il ne
-            parle en leur nom à aucun titre. Il n’utilise aucun logo, aucune charte graphique
-            officielle et aucun élément du Système de design de l’État.
+            {SITE.independence} Il parle en son nom. Logos, chartes officielles et Système de design
+            de l’État restent dehors.
           </p>
         </Callout>
         <p>
-          Il présente le plan tel que ses auteurs l’ont écrit — sans le défendre ni le combattre —
-          et ne cache pas ceux qui y perdraient. Trois niveaux de certitude restent toujours
-          visibles : « proposé dans un amendement » (le texte précis d’un amendement rédigé par les
-          auteurs, ni déposé ni voté), « promis par les auteurs » et « notre estimation ». Ils sont
-          expliqués dans la <a href={withBase('/methode/')}>méthode</a>.
+          Il présente le plan tel qu’il est écrit. Les perdants restent visibles. Trois statuts
+          accompagnent les chiffres : « proposé dans un amendement » (texte rédigé, en attente de
+          dépôt et de vote), « annoncé » et « notre estimation ». La
+          <a href={withBase('/methode/')}>méthode</a> les détaille.
         </p>
       </section>
 
@@ -101,9 +97,7 @@ const sources = [
           publicité, ne défend aucun parti et ne demande rien à ses visiteurs.
         </p>
         <p>
-          Il compagnonne le livre « État partout, justice nulle part » (Barrat, Marle, Mitterrand —
-          Éditions Chronique, 2026) : il montre ce que ses propositions changeraient pour un foyer
-          donné, et il met en images les données qui les appuient.
+          Il montre ce que le plan changerait pour un foyer donné, et il met en images les données qui l’appuient.
         </p>
       </section>
 
@@ -210,9 +204,9 @@ const sources = [
         <p>
           Le site vise le niveau AA des règles WCAG 2.2 : navigation au clavier, contrastes vérifiés
           en thème clair et sombre, lecture possible à 320 px de large, chaque graphique accompagné
-          d’un résumé en clair et d’un tableau de ses données. Aucune information ne repose sur la
-          couleur seule ni sur le survol. Ce n’est pas un engagement légal, mais un objectif suivi
-          par des tests automatiques. Si quelque chose vous bloque, dites-le : c’est un défaut à
+          d’un résumé en clair et d’un tableau de ses données. L’information reste lisible sans la
+          couleur seule et sans le survol. Des tests automatiques suivent cet objectif. Si quelque
+          chose vous bloque, dites-le : c’est un défaut à
           corriger.
         </p>
       </section>

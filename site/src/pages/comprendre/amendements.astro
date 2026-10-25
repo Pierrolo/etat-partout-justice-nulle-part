@@ -82,21 +82,19 @@ const calendrierHref = withBase('/comprendre/calendrier/');
 <DashboardLayout
   slug="amendements"
   title={`Les ${total} amendements`}
-  lede={`Les ${total} amendements que l’association Résolution a rédigés pour traduire le plan en texte de loi : cherchez un sujet, lisez ce que chacun prévoit, et à partir de quand.`}
+  lede={`Les ${total} amendements rédigés par l’association Résolution pour le plan, avec la date de chacun.`}
 >
-  <Callout tone="plan" title="Des textes proposés, pas des lois votées">
+  <Callout tone="plan" title="Amendements rédigés, en attente de dépôt">
     <p>
-      Ce sont des <strong>projets d’amendements</strong> rédigés par l’association Résolution et
-      datés du {liasses[0]!.date}&#8239;: ils ne sont <strong>ni déposés, ni adoptés</strong>. Rien
-      ici n’est en vigueur. Leur texte est pourtant la seule description précise des paramètres du
-      plan : c’est pourquoi le simulateur s’appuie sur eux.
+      L’association Résolution a rédigé ces projets d’amendements, datés du {liasses[0]!.date}. Ils
+      attendent d’être déposés, puis votés. Le simulateur s’appuie sur leur texte, qui décrit les
+      paramètres du plan.
     </p>
     <p class="flex flex-wrap items-center gap-x-2 gap-y-1">
       <TierBadge tier="law" size="sm" />
       <span>
-        veut dire «&#8239;<strong>texte précis rédigé par les auteurs, ni déposé ni voté</strong>
-        &#8239;» : un chiffre ou une date qu’on peut lire mot pour mot dans l’amendement. Cela ne
-        veut pas dire « en vigueur ».
+        veut dire «&#8239;<strong>texte rédigé, en attente de dépôt et de vote</strong>
+        &#8239;» : un chiffre ou une date qu’on lit mot pour mot dans l’amendement.
       </span>
     </p>
   </Callout>
@@ -134,7 +132,7 @@ const calendrierHref = withBase('/comprendre/calendrier/');
       <p class="text-ink-2">
         {formatInteger(nMissions)} amendements de la seconde partie (l’« état B ») retirent chacun
         des crédits à une mission du budget 2027. Les voici, de la plus touchée à la moins touchée.
-        Ce sont des crédits proposés à la suppression, pas des économies constatées.
+        Ce sont des crédits que les amendements proposent de retirer.
       </p>
     </div>
     <ul class="grid gap-4 md:grid-cols-3">

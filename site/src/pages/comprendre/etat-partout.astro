@@ -24,7 +24,7 @@ import { withBase } from '@/lib/site';
 // ── Ministères ──────────────────────────────────────────────────────────────
 const min = ministries();
 const minSources = [
-  datasetChip(min.source, { label: 'Classeur des auteurs, GraphAgences', tier: 'annonce' }),
+  datasetChip(min.source, { label: 'Chiffrage publié, GraphAgences', tier: 'annonce' }),
 ];
 
 // ── Impôts, niches ──────────────────────────────────────────────────────────
@@ -41,7 +41,7 @@ const nichesRecensees = num('niches_nombre');
 const nichesTva = num('niches_tva_hors_niches_nombre');
 const impotConflict = conflicts('impots_cibles_manifeste')[0]?.note ?? '';
 const impotSources = [
-  chip('impots_nombre_manifeste', { label: 'france-resolution.fr, manifeste' }),
+  chip('impots_nombre_manifeste', { label: 'france-resolution.fr' }),
 ];
 const nicheSources = [
   chip('niches_total_nombre', { label: 'PLF 2026, annexe Dépenses fiscales' }),
@@ -53,7 +53,7 @@ const law = lawWords();
 const mots = num('droit_mots_2026');
 const lecture = readingTime(mots);
 const lawSources = [
-  datasetChip(law.source, { label: 'Légifrance, via le classeur des auteurs', tier: 'donnee' }),
+  datasetChip(law.source, { label: 'Légifrance, via le chiffrage publié', tier: 'donnee' }),
 ];
 const legif2005 = num('droit_mots_legislatif_2005');
 const legif2026 = num('droit_mots_legislatif_2026');
@@ -66,16 +66,16 @@ const postesFermes = num('postes_publics_fermes_manifeste');
 // ── Chaîne démocratique ─────────────────────────────────────────────────────
 const chain = democraticChain();
 const chainSources = [
-  datasetChip(chain.source, { label: 'Classeur des auteurs, Graph51pc', tier: 'annonce' }),
+  datasetChip(chain.source, { label: 'Chiffrage publié, Graph51pc', tier: 'annonce' }),
 ];
 ---
 
 <DashboardLayout
   slug="etat-partout"
-  lede="Ministères, agences, impôts, niches, mots de loi : l’empilement, mesuré. Ici, un carré, un point ou un trait représente une unité réelle."
+  lede="Ministères, agences, impôts, niches, mots de loi."
 >
   <p class="max-w-2xl text-ink-2">
-    Le livre soutient que l’État s’est étendu partout, au point de ne plus faire correctement
+    Le plan part de l’idée que l’État s’est étendu partout, au point de ne plus faire correctement
     l’essentiel. Cette page présente ses chiffres un par un, avec leur source, et signale quand deux
     sources divergent.
   </p>
@@ -109,7 +109,7 @@ const chainSources = [
         {formatInteger(impots)} impôts, {formatInteger(niches)} niches et taux réduits
       </h2>
       <p class="text-ink-2">
-        Les auteurs comptent {formatInteger(impots)} impôts et taxes. Une « niche » est un avantage
+        On compte {formatInteger(impots)} impôts et taxes. Une « niche » est un avantage
         fiscal (réduction, exonération, taux réduit). Le dernier recensement en compte{' '}
         {formatInteger(nichesRecensees)}, auxquelles s’ajoutent {formatInteger(nichesTva)} taux
         réduits de TVA que le recensement ne compte pas comme niches :{' '}
@@ -147,8 +147,8 @@ const chainSources = [
         tier="announced"
         label="Formulaires CERFA"
         value={formatInteger(num('cerfa_nombre_manifeste'))}
-        reframe="Ordre de grandeur donné par le manifeste, sans jeu de données."
-        source={chip('cerfa_nombre_manifeste', { label: 'france-resolution.fr, manifeste' })}
+        reframe="Ordre de grandeur annoncé, sans jeu de données."
+        source={chip('cerfa_nombre_manifeste', { label: 'france-resolution.fr' })}
       />
       <StatTile
         as="li"
@@ -156,9 +156,9 @@ const chainSources = [
         label="Pour calculer un taux de charges sociales"
         value={formatNumber(num('charges_sociales_combinaisons_manifeste'), { decimals: 1 })}
         unit="milliard de combinaisons"
-        reframe="Selon le manifeste ; non vérifiable avec les données publiées."
+        reframe="Annoncé ; non vérifiable avec les données publiées."
         source={chip('charges_sociales_combinaisons_manifeste', {
-          label: 'france-resolution.fr, manifeste',
+          label: 'france-resolution.fr',
         })}
       />
       <StatTile
@@ -213,9 +213,9 @@ const chainSources = [
           {formatNumber(lecture.fullTimeYears, { decimals: 1 })} ans.
         </p>
         <p class="text-sm text-ink-3">
-          Ces deux hypothèses (vitesse de lecture, durée du travail) sont les nôtres, pas celles du
-          livre : changez-les et le résultat change proportionnellement. On ne lit pas un texte de
-          loi à la vitesse d’un roman ; seul l’ordre de grandeur compte.
+          Ces deux hypothèses (vitesse de lecture, durée du travail) sont les nôtres. Changez-les et
+          le résultat change dans la même proportion. Un texte de loi se lit plus lentement qu’un
+          roman : l’ordre de grandeur suffit.
         </p>
       </div>
     </div>
@@ -254,10 +254,10 @@ const chainSources = [
         {formatNumber(chain.steps[chain.steps.length - 1]!.value, { decimals: 2 })}
       </h2>
       <p class="text-ink-2">
-        Plus il y a d’échelons entre un citoyen et la décision, moins sa voix compte. Le livre le
+        Plus il y a d’échelons entre un citoyen et la décision, moins sa voix compte. Le plan le
         résume par une chaîne où chaque étape garde{' '}
         {formatPercentPoints(num('representation_elu_direct_pct'), { decimals: 0 })} de la
-        précédente. C’est un raisonnement arithmétique des auteurs, pas une statistique mesurée.
+        précédente. Le plan en fait une chaîne arithmétique.
       </p>
     </div>
     <DemocraticFunnel

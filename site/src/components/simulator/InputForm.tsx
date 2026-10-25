@@ -218,7 +218,7 @@ export function InputForm({
             <div data-field="foyer.married">
               <SegmentedControl
                 legend="Êtes-vous marié·e ou pacsé·e ?"
-                hint="Mariés ou pacsés, vous payez l’impôt d’aujourd’hui ensemble ; sinon, chacun le sien. Cela change donc le point de départ, pas le plan : avec le plan, l’impôt est individuel."
+                hint="Mariés ou pacsés, vous payez l’impôt d’aujourd’hui ensemble ; sinon, chacun le sien. Cela change le point de départ. Avec le plan, l’impôt est individuel."
                 options={[
                   { value: 'oui', label: 'Oui' },
                   { value: 'non', label: 'Non' },

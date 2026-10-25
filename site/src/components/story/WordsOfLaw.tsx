@@ -76,7 +76,7 @@ export function WordsOfLaw({
     <ChartFrame
       title={`${M(last.total)} de mots de droit en ${last.year}, contre ${M(first.total)} en ${first.year}`}
       subtitle="Millions de mots du droit applicable (textes législatifs et réglementaires de Légifrance), 2005–2026."
-      summary={`Le volume de droit applicable a augmenté de ${formatPercentPoints(growthPct, { decimals: 0 })} en vingt et un ans, de ${M(first.total)} à ${M(last.total)} de mots. Les lois seules sont passées de ${M(first.legislatif)} à ${M(last.legislatif)}. La série des règlements présente deux ruptures (2010 et 2012) dont la cause n’est pas documentée : lisez la tendance, pas ces deux années.`}
+      summary={`Le volume de droit applicable a augmenté de ${formatPercentPoints(growthPct, { decimals: 0 })} en vingt et un ans, de ${M(first.total)} à ${M(last.total)} de mots. Les lois seules sont passées de ${M(first.legislatif)} à ${M(last.legislatif)}. La série des règlements a deux ruptures, en 2010 et en 2012, sans cause documentée. La tendance se lit sur l’ensemble.`}
       sources={sources.map((s) => ({ ...s }))}
       table={{
         columns: [

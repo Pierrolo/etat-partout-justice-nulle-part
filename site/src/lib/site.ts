@@ -8,9 +8,9 @@ export const SITE = {
   /** Used in <title> suffix. */
   titleSuffix: 'Et moi, dans tout ça ?',
   description:
-    'Compagnon indépendant du livre « État partout, justice nulle part » : voyez ce que le plan changerait pour votre foyer, et où va l’argent public.',
+    'Voyez ce que le plan changerait pour votre foyer, et où va l’argent public.',
   locale: 'fr_FR',
-  independence: 'Outil indépendant, non affilié à l’association Résolution ni à l’État.',
+  independence: 'Outil indépendant de l’association Résolution et de l’État.',
   /** Public repository (code, data pipeline, engine, QA reports). */
   repo: 'https://github.com/Pierrolo/etat-partout-justice-nulle-part',
   dataSources: 'Données : france-resolution.fr, Insee, Eurostat, DGFiP.',
@@ -68,7 +68,7 @@ export const COMPRENDRE_PAGES: DashboardPage[] = [
     slug: 'situations',
     href: '/comprendre/situations/',
     title: 'Ce que le plan prévoit pour…',
-    teaser: 'Retraité, locataire, enseignant, entreprise… les 18 situations du livre.',
+    teaser: 'Retraité, locataire, enseignant, entreprise… les 18 situations du plan.',
   },
   {
     slug: 'niches',

@@ -93,7 +93,7 @@ export function MinistryDots({
       csvFileName="ministeres-avant-apres.csv"
       note={
         inferred
-          ? `Le classement en ${formatInteger(after)} blocs est déduit de la mise en page du graphique du livre : le classeur ne l’écrit pas. ${note}`
+          ? `Le classement en ${formatInteger(after)} blocs est déduit de la mise en page du graphique : le classeur ne l’écrit pas. ${note}`
           : note
       }
     >

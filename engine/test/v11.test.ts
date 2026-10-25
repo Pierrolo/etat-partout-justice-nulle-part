@@ -213,7 +213,7 @@ describe('3. plain-language summary', () => {
     expect(s.why).toMatch(/^Votre gain vient surtout de l’aide universelle de 550 € par adulte/);
     expect(s.why).toContain('la hausse de votre impôt sur le revenu');
     expect(s.certainty).toContain('écrit dans les amendements proposés (pas encore votés)');
-    expect(s.certainty).toContain('annoncé par les auteurs');
+    expect(s.certainty).toContain('annoncé, sans texte de loi');
   });
   it('a loser: « votre perte vient surtout de … »', () => {
     expect(compare(cas('aah50-seul')).summary.why).toMatch(

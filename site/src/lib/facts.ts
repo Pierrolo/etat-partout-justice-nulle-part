@@ -82,7 +82,7 @@ export function conflicts(id: FactId): FactConflict[] {
 /* ── Provenance chips ──────────────────────────────────────────────────── */
 
 const KIND_LABEL: Record<FactSource['kind'], string> = {
-  workbook: 'Classeur des auteurs',
+  workbook: 'Chiffrage publié',
   amendment: 'Amendement',
   site: 'france-resolution.fr',
   insee: 'Insee',
@@ -110,7 +110,7 @@ export interface ChipProps {
 
 /**
  * « Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › C3 » → { sheet: « Refonte fiscalité », cell: « C3 » }.
- * Tous les liens « classeur des auteurs » pointent vers le même fichier : le texte visible doit dire où chercher.
+ * Tous les liens « chiffrage publié » pointent vers le même fichier : le texte visible doit dire où chercher.
  */
 export function workbookPlace(ref: string | undefined): { sheet: string; cell?: string } | null {
   if (!ref) return null;
@@ -121,7 +121,7 @@ export function workbookPlace(ref: string | undefined): { sheet: string; cell?: 
   return { sheet, cell: parts[i + 2] };
 }
 
-/** « Classeur des auteurs · Refonte fiscalité, C3 » : le libellé complète avec l’onglet et la cellule. */
+/** « Chiffrage publié · Refonte fiscalité, C3 » : le libellé complète avec l’onglet et la cellule. */
 function withPlace(label: string, ref: string | undefined): string {
   const place = workbookPlace(ref);
   if (!place) return label;
@@ -135,7 +135,7 @@ function withPlace(label: string, ref: string | undefined): string {
 /**
  * Props for `<SourceChip>` built from a fact: short label by source kind, link, tier, year.
  * Pass `label` to say it your own way (« Insee, comptes nationaux »). When the figure comes from the authors'
- * workbook, the label names the sheet and the cell (« Classeur des auteurs · Refonte fiscalité, C3 »).
+ * workbook, the label names the sheet and the cell (« Chiffrage publié · Refonte fiscalité, C3 »).
  * `workbook: true` adds the same place for a third-party statistic that the workbook reproduces.
  */
 export function chip(
@@ -148,7 +148,7 @@ export function chip(
   let label = `${base}${derived}`;
   if (f.source.kind === 'workbook') label = withPlace(label, f.source.ref);
   else if (opts.workbook && f.source.also?.kind === 'workbook') {
-    label = withPlace(`${label} (repris dans le classeur)`, f.source.also.ref);
+    label = withPlace(`${label} (repris dans le chiffrage)`, f.source.also.ref);
   }
   return {
     label,

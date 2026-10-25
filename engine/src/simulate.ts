@@ -336,7 +336,7 @@ function build(c: BuildCtx): ScenarioResult {
   // ---- prestations -----------------------------------------------------------------------------------------
   /** French agreement of the past participle: '' (m. sg.), 'e' (f. sg.), 'es' (f. pl.) */
   const replacedTxt = (what: string, agr: '' | 'e' | 'es' = '') =>
-    `${what} remplacé${agr} par l’aide fondamentale (hypothèse H1 « remplacées », annoncé par les auteurs, aucun texte ne l’abroge).`;
+    `${what} remplacé${agr} par l’aide fondamentale (hypothèse H1 « remplacées », annoncé, aucun texte ne l’abroge).`;
   const minimaReplaced = plan && allMonths('minima', 'replaced');
   const minimaDiff = plan && anyMonth((m) => m.minima === 'differential');
   const minimaTier: Tier = !plan

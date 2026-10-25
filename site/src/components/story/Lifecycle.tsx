@@ -140,7 +140,7 @@ export function Lifecycle({
       <ChartFrame
         headingLevel={2}
         title="Ce que le plan verserait à une personne, de 0 à 85 ans"
-        subtitle="Euros par an et par personne, empilés par dispositif. Plein = proposé dans un amendement ; hachuré = promis par les auteurs, sans texte précis."
+        subtitle="Euros par an et par personne, empilés par dispositif. Plein = proposé dans un amendement ; hachuré = annoncé, sans texte précis."
         summary={`Une personne sans handicap recevrait ${formatEuro(sum(birth))} par an à la naissance, dont ${formatEuro(birth.aide_fondamentale)} proposés dans un amendement (l’aide fondamentale de l’enfant) ; dès ${adultAge} ans, ${formatEuro(sum(adult))} par an, dont ${formatEuro(adult.aide_fondamentale)} dans un amendement ; dès ${retireAge} ans, ${formatEuro(sum(retired))} par an, avec une part contributive de retraite promise. Tout ce qui est hachuré repose sur des promesses non chiffrées dans les textes.`}
         sources={sources.map((s) => ({ ...s }))}
         table={{

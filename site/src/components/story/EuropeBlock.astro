@@ -77,12 +77,12 @@ const nRanked = eu.rows.filter((r) => r.dep24 !== null).length;
       <p>
         {formatNumber(gapPts, { decimals: 1 })} points de PIB × PIB {year} (
         {formatMdEuro(pib / 1e9)}) ÷ {FOYERS_LABEL} = {formatEuro(gapEuroYear)} par foyer et par an.
-        C’est un ordre de grandeur, arrondi pour ne pas affirmer une précision qui n’existe pas.
+        C’est un ordre de grandeur.
       </p>
       <p>
-        Il mesure la <em>taille</em> de la dépense publique, pas son efficacité ni ce qu’elle
-        finance : certains pays paient une partie de leurs retraites ou de leur santé par des
-        cotisations privées, qui n’entrent pas dans les dépenses publiques.
+        Il mesure la <em>taille</em> de la dépense publique. Certains pays paient une partie de
+        leurs retraites ou de leur santé par des cotisations privées, qui restent en dehors de ce
+        total.
       </p>
     </div>
   </div>
@@ -90,23 +90,23 @@ const nRanked = eu.rows.filter((r) => r.dep24 !== null).length;
   <!-- The « record mondial » conflict, shown honestly with both sources -->
   <Callout
     tone="note"
-    title="« Record mondial » : le livre et les données ne disent pas tout à fait la même chose"
+    title="« Record mondial » : l’annonce et les données ne disent pas tout à fait la même chose"
   >
     <p>
-      Le manifeste écrit que l’État dépense {formatEuro(perYearBook)} par foyer et par an, « record
-      mondial ». Dans les données Eurostat reprises par le classeur du livre lui-même, la Finlande
+      L’annonce dit que l’État dépense {formatEuro(perYearBook)} par foyer et par an, « record
+      mondial ». Dans les données Eurostat reprises par le chiffrage publié lui-même, la Finlande
       dépasse la France : <strong>{sharePct(fiDep)}</strong> du PIB contre
       <strong>{sharePct(frDep)}</strong> en {year} ({sharePct(fiDep25)} contre {sharePct(frDep25)}{' '}
       en 2025). La France est {rank}e sur {nRanked} pays, et très au-dessus de la zone euro (
       {sharePct(eaDep)}).
     </p>
     <p class="mt-2 text-sm text-ink-3">
-      Le manifeste ne précise pas la source du « record » : il porte peut-être sur un autre
+      L’annonce ne précise pas la source du « record » : il porte peut-être sur un autre
       périmètre (monde entier, autre indicateur). Nous ne tranchons pas : voici les deux sources.
     </p>
     <p class="mt-3 flex flex-wrap items-center gap-2">
       <SourceChip
-        {...chip('dep_par_foyer_manifeste_eur', { label: 'Manifeste : « record mondial »' })}
+        {...chip('dep_par_foyer_manifeste_eur', { label: 'Annonce : « record mondial »' })}
       />
       <SourceChip
         {...chip('eu_dep_pib_fr_2024_pct', { label: 'Eurostat : Finlande 1re, France 2e' })}

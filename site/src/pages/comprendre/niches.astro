@@ -123,7 +123,7 @@ const totalsItems: BarItem[] = [
     label: `« ${md1(md143)} de niches supprimées »`,
     sub: 'Annonce de la fiche Contribuable : périmètre non détaillé, il inclurait des niches sociales',
     segments: [
-      { value: md143, color: css.accent, hatched: true, srLabel: 'annoncé par les auteurs' },
+      { value: md143, color: css.accent, hatched: true, srLabel: 'annoncé' },
     ],
     valueText: md1(md143),
   },
@@ -196,7 +196,7 @@ const links = {
 <DashboardLayout
   slug="niches"
   title={`Les ${n465} niches fiscales`}
-  lede={`${n465} avantages fiscaux ont un coût pour l’État. Combien pèsent-ils vraiment, lesquels vous concernent, et que deviendraient-ils dans le plan ? Cherchez, triez par coût, filtrez. Avec les taux réduits de TVA, le manifeste en compte plus : ${equation}.`}
+  lede={`${n465} avantages fiscaux ont un coût pour l’État. Avec les taux réduits de TVA, le total annoncé en compte plus : ${equation}.`}
 >
   <section aria-labelledby="chiffres-t" class="space-y-6">
     <h2 id="chiffres-t" class="sr-only">
@@ -237,7 +237,7 @@ const links = {
         unit={`sur ${formatInteger(all2024.count)}`}
         reframe={`« Non calculé » (${formatInteger(nNc)}), « moins de 0,5 M€ » (${formatInteger(nEps)}) ou « aucun effet budgétaire » (${formatInteger(nNoEffect)}). Aucune n’entre dans les totaux.`}
         source={{
-          label: 'Classeur des auteurs, feuille « Chiffrages »',
+          label: 'Chiffrage publié, feuille « Chiffrages »',
           href: String(niches.meta.source.url),
           year: 2024,
         }}
@@ -260,10 +260,10 @@ const links = {
     <ChartFrame
       title="Quatre totaux pour « les niches », quatre périmètres"
       subtitle="Milliards d’euros, coût 2024"
-      summary={`Le total de ce site est de ${md1(md465)} : les ${n465} niches du classeur, coût réalisé en 2024. Y ajouter la TVA des administrations publiques donne ${md1(mdApu)}, puis les ${nTva21} taux réduits de TVA ${md1(md486)}. Le chiffre de ${md1(md143)} est une annonce des auteurs, dont le périmètre n’est pas détaillé.`}
+      summary={`Le total de ce site est de ${md1(md465)} : les ${n465} niches du classeur, coût réalisé en 2024. Y ajouter la TVA des administrations publiques donne ${md1(mdApu)}, puis les ${nTva21} taux réduits de TVA ${md1(md486)}. Le chiffre de ${md1(md143)} est une annonce, dont le périmètre n’est pas détaillé.`}
       sources={[
         chip('niches_cout_2024_md'),
-        chip('niches_total_md', { label: `Classeur, ${nTotal} niches et taux réduits` }),
+        chip('niches_total_md', { label: `Chiffrage, ${nTotal} niches et taux réduits` }),
         chip('fiche_niches_supprimees_md', { label: 'Fiche Contribuable' }),
       ]}
       table={{
@@ -337,8 +337,8 @@ const links = {
         <p>
           «&#8239;{md1(md143)} de niches supprimées, dont {md1(md52)} vous reviennent » est une
           annonce de la fiche Contribuable. D’après nos recoupements, ce périmètre additionne niches
-          fiscales, niches sociales et « autre gisement » de la feuille « Flux ». C’est une
-          inférence, pas une donnée : il inclut des niches sociales, qui ne sont pas parmi les{' '}
+          fiscales, niches sociales et « autre gisement » de la feuille « Flux ». Ce total vient de
+          ce recoupement. Il inclut des niches sociales, en plus des{' '}
           {num('niches_total_nombre')}.
         </p>
       </Callout>
@@ -432,7 +432,7 @@ const links = {
         summary={`${formatInteger(pSupp.count)} niches sur ${formatInteger(all2024.count)} seraient supprimées, aux dates fixées par l’amendement n° 1 (${formatMdEuro(pSupp.total / 1000)} de coût en 2024). ${formatInteger(pDead.count)} sont déjà éteintes : le plan n’a rien à y supprimer.`}
         sources={[
           {
-            label: 'Classeur des auteurs, feuille « Chiffrages Résolution »',
+            label: 'Chiffrage publié, feuille « Chiffrages Résolution »',
             href: String(niches.meta.source.url),
             tier: 'announced',
           },
@@ -454,7 +454,7 @@ const links = {
           rows: planRows,
         }}
         csvFileName="niches-effet-du-plan-2024.csv"
-        note="Le texte de l’amendement n° 1 abroge les avantages article par article ; le rapprochement de chaque niche du classeur avec ces articles est celui des auteurs, pas le nôtre."
+        note="Le texte de l’amendement n° 1 abroge les avantages article par article. Le rapprochement de chaque niche du chiffrage avec ces articles vient du plan."
       >
         <BarRows
           label="Coût 2024 des niches selon ce que prévoit le plan"
@@ -477,14 +477,13 @@ const links = {
         plan, triez par coût. L’adresse de la page garde vos filtres : vous pouvez la partager.
       </p>
     </div>
-    <Callout tone="announced" title="« Ce que prévoit le plan » : le classement des auteurs">
+    <Callout tone="announced" title="« Ce que prévoit le plan » : le classement annoncé">
       <p>
         L’amendement n° 1 supprime les avantages fiscaux par article de code. Le classement de
-        chaque niche (supprimée, en trois ans, intégrée à l’aide fondamentale…) vient du classeur
-        des auteurs, pas d’un texte précis : il est donc « promis par les auteurs », pas « proposé
-        dans un amendement ». Les niches « supprimées » n’ont pas de date publiée une à une : nous
-        indiquons le cas général de l’amendement selon l’impôt (les dons et l’épargne ont leur
-        propre calendrier), jamais une date plus précise que la source.
+        chaque niche (supprimée, en trois ans, intégrée à l’aide fondamentale…) vient du chiffrage,
+        d’où le statut « annoncé ». Les niches « supprimées » suivent la date générale de
+        l’amendement selon l’impôt. Les dons et l’épargne ont leur propre calendrier. La date
+        affichée reste celle de la source.
       </p>
     </Callout>
     <noscript>
@@ -540,7 +539,7 @@ const links = {
     <Disclosure summary="D’où viennent les coûts ?" variant="plain">
       <p>
         De l’annexe « Dépenses fiscales » du PLF 2026 (Évaluation des voies et moyens, tome II),
-        reprise dans le classeur publié par les auteurs. 2024 est le coût réalisé ; 2025 et 2026
+        reprise dans le classeur publié. 2024 est le coût réalisé ; 2025 et 2026
         sont des prévisions. La fiabilité du chiffrage (« très bonne », « bonne », « ordre de
         grandeur ») est indiquée niche par niche dans « Détails ».
       </p>

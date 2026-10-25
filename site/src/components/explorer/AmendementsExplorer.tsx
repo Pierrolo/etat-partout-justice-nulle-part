@@ -3,7 +3,7 @@
  *
  * Rappel qui compte : ce sont des TEXTES PROPOSÉS (projets d'amendements rédigés par Résolution),
  * ni déposés ni adoptés. Le niveau « Proposé dans un amendement » veut dire « texte précis
- * rédigé par les auteurs, ni déposé ni voté ». Chaque carte a une ancre (`#PLF-P1-28`) : la frise, le tableau des niches et les
+ * proposé dans les amendements, ni déposé ni voté ». Chaque carte a une ancre (`#PLF-P1-28`) : la frise, le tableau des niches et les
  * autres pages y renvoient.
  */
 import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';

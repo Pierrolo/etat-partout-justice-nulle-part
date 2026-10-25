@@ -30,7 +30,7 @@ p.sub{font:400 30px/1.35 I,sans-serif;color:#434852;margin-top:24px;max-width:90
   <div class="brand"><svg width="48" height="48" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12.75" fill="none" stroke="#602e9d" stroke-width="2.5"/><circle cx="16" cy="16" r="4.25" fill="#602e9d"/></svg>Et moi, dans tout ça ?</div>
   <div><h1>Ce que le plan changerait pour votre foyer.</h1>
   <p class="sub">Simulateur et tableau de bord indépendants, pour comprendre le livre « État partout, justice nulle part ».</p></div>
-  <div class="foot">Outil indépendant, non affilié à l’association Résolution ni à l’État. Sans cookie, sans traceur.</div>
+  <div class="foot">Outil indépendant de l’association Résolution et de l’État. Sans cookie, sans traceur.</div>
 </div>`;
 
 const dir = mkdtempSync(join(tmpdir(), 'epjn-og-'));

@@ -108,7 +108,7 @@ export default function StyleguideChart() {
       summary="Dans cet exemple, trois foyers types sur cinq gagnent entre 35 € et 212 € par mois ; deux perdent, 40 € et 85 € par mois. La barre hachurée est une promesse annoncée, sans texte de loi, montrée à part."
       sources={[
         { label: 'Données fictives pour le guide de style', tier: 'hypothesis' },
-        { label: 'Fiche des auteurs (exemple)', tier: 'announced' },
+        { label: 'Fiche (exemple)', tier: 'announced' },
       ]}
       table={{
         columns,

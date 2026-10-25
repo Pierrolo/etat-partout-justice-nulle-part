@@ -7,7 +7,7 @@ const ICONS = { law: IconLaw, announced: IconAnnounced, hypothesis: IconHypothes
 /**
  * Visual grammar of the three tiers — never colour alone: shape of the border, fill and icon differ.
  *   law         « Proposé dans un amendement »  solid ink fill, solid border, page icon
- *   announced   « Promis par les auteurs »      hatched fill, dashed border, dashed-circle icon
+ *   announced   « Annoncé »      hatched fill, dashed border, dashed-circle icon
  *   hypothesis  « Notre estimation »            sunken fill, dotted border, « ≈ » icon
  * Words come from `TIER_META` (lib/tiers.ts).
  */
@@ -19,7 +19,7 @@ export const tierBadgeClasses: Record<Tier, string> = {
 
 export interface TierBadgeProps {
   tier: Tier;
-  /** `short` uses the compact label (« Amendement proposé », « Promis », « Estimation »). */
+  /** `short` uses the compact label (« Amendement proposé », « Annoncé », « Estimation »). */
   short?: boolean;
   size?: 'sm' | 'md';
   className?: string;

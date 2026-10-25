@@ -157,10 +157,10 @@ export function PredictReveal({
               {truth} de {formatMdEuro(totalMd)}, c’est {formatMdEuro(groupMd)}&#8239;:{' '}
               {formatEuro(perYear)} par foyer et par an, soit {formatEuro(perDay, { decimals: 2 })}{' '}
               par foyer et par jour, sur {formatNumber(foyers / 1e6)} millions de foyers (le chiffre
-              des fiches des auteurs ; voir la Méthode).
+              des fiches ; voir la Méthode).
             </p>
             <p className="text-[0.9375rem] leading-relaxed text-ink-2">
-              Les auteurs en font un argument : «&#8239;{quote}&#8239;». À vous de juger si c’est
+              Le plan en fait un argument : «&#8239;{quote}&#8239;». À vous de juger si c’est
               peu.
             </p>
             <p className="flex flex-wrap items-center gap-2 text-xs text-ink-3">

@@ -135,7 +135,7 @@ export function DepensesExplorer({
 
       <ChartFrame
         title={`Où vont les ${formatMdEuro(tree.value)} de dépenses publiques ?`}
-        subtitle={`Surface proportionnelle au montant, ${year} · unité : ${UNIT_SHORT[unit]}. Six groupes du livre, puis leurs postes, puis les fonctions COFOG de l’Insee.`}
+        subtitle={`Surface proportionnelle au montant, ${year} · unité : ${UNIT_SHORT[unit]}. Six groupes, puis leurs postes, puis les fonctions COFOG de l’Insee.`}
         summary={`« ${GROUP_SHORT[top.id] ?? top.label} » pèse ${formatPercentPoints((top.value / tree.value) * 100, { decimals: 0 })} de la dépense (${formatMdEuro(top.value)}).${
           secu
             ? ` La sécurité — défense, police, justice — en représente ${formatPercentPoints((secu.value / tree.value) * 100, { decimals: 1 })}.`

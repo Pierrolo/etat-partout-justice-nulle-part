@@ -52,7 +52,7 @@ test.describe('/methode', () => {
     }
     const main = page.locator('main');
     await expect(main).toContainText('Proposé dans un amendement');
-    await expect(main).toContainText('Promis par les auteurs');
+    await expect(main).toContainText('Annoncé');
     await expect(main).toContainText('Notre estimation');
     // the gap with OpenFisca, the not-modelled list and the conflicts between sources are there
     await expect(page.locator('#openfisca ~ div table').first()).toBeVisible();
@@ -105,8 +105,8 @@ test.describe('landing', () => {
     await page.goto('');
     const card = page.locator('[data-teaser="heure-de-travail"]');
     await expect(card.getByTestId('hour-caveat')).toBeVisible();
-    await expect(card.getByTestId('hour-caveat')).toContainText('Calcul des auteurs');
-    await expect(card).toContainText('Promis');
+    await expect(card.getByTestId('hour-caveat')).toContainText('Ordre de grandeur annoncé');
+    await expect(card).toContainText('Annoncé');
   });
 
   test('says which promises are counted and which are shown apart, with the new vocabulary', async ({

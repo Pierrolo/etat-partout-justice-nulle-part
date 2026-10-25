@@ -93,8 +93,7 @@ export function Questionnaire({ questions }: { questions: Question[] }) {
             Où vous en étiez
           </h2>
           <p className="max-w-2xl text-[0.9375rem] leading-relaxed text-ink-2">
-            {bilanSentence(closes, total)} Là où le chiffre est une annonce des auteurs, le libellé
-            le dit. Le détail est dans Comprendre.
+            {bilanSentence(closes, total)}
           </p>
         </div>
         <ol className="space-y-3">

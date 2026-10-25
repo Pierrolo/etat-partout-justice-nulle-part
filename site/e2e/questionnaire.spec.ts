@@ -11,8 +11,9 @@ test('a guess on the security share reveals the sourced figure', async ({ page }
   await expect(page.getByRole('heading', { level: 1 })).toContainText('où va l’argent public');
   const slider = page.getByRole('slider');
   await slider.fill('40');
+  await expect(page.getByText(/Votre estimation[\s\u202f]*:\s*40/)).toBeVisible();
   await page.getByRole('button', { name: 'Révéler la réponse' }).click();
-  await expect(page.getByTestId('questionnaire').getByText(/Le calcul\s*:/)).toBeVisible();
+  await expect(page.getByTestId('questionnaire').getByText(/Le calcul/)).toBeVisible();
   await expect(
     page
       .getByTestId('questionnaire')
@@ -75,7 +76,7 @@ test('the closing summary keeps the guesses', async ({ page }) => {
   }
   await expect(page.getByTestId('questionnaire-bilan')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Où vous en étiez' })).toBeVisible();
-  await expect(page.getByText(/proches? de la référence/)).toBeVisible();
+  await expect(page.getByTestId('questionnaire-bilan').getByText(/proche(s)? de la référence/)).toBeVisible();
 });
 
 test('the answers are in the page without JavaScript', async ({ browser }) => {
@@ -86,5 +87,4 @@ test('the answers are in the page without JavaScript', async ({ browser }) => {
   expect(html).toContain('Réponse\u202f:');
   expect(html).toContain('Finlande');
   expect(html).not.toContain('Call Intelligence');
-  await ctx.close();
 });

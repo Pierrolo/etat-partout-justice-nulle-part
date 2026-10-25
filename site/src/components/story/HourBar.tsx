@@ -125,7 +125,7 @@ export function HourBar({ className, headline = true, size = 'md' }: HourBarProp
       <figcaption className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs text-ink-3">
         <span className="font-semibold">Source&nbsp;:</span>
         <SourceChip
-          {...chip('va_heure_total_eur', { label: 'Classeur des auteurs, onglet GraphVA' })}
+          {...chip('va_heure_total_eur', { label: 'Chiffrage publié, onglet GraphVA' })}
         />
       </figcaption>
     </figure>

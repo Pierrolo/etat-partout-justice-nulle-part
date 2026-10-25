@@ -77,7 +77,7 @@ export function AgencyList({ packed }: { packed: AgencyTuple[] }) {
           Chercher une agence
         </h3>
         <p className="mt-1 text-[0.9375rem] text-ink-2">
-          Les {formatInteger(rows.length)} lignes nommées dans le classeur des auteurs. Certaines
+          Les {formatInteger(rows.length)} lignes nommées dans le chiffrage publié. Certaines
           lignes regroupent plusieurs entités.
         </p>
       </div>

@@ -29,7 +29,7 @@ export function EmployerPanel({ owner }: { owner: boolean }) {
           {owner
             ? 'Vous dirigez une entreprise : voici ce que le plan change, pour vous comme employeur et pour un salarié à temps plein. '
             : 'Si vous employez du personnel : voici ce que le plan change pour un salarié à temps plein, et pour vous comme employeur. '}
-          Indiquez sa paie : le calcul porte sur son salaire, pas sur la situation de son foyer.
+          Indiquez sa paie : le calcul porte sur son salaire.
         </p>
       </header>
       <div className="grid gap-5 sm:grid-cols-2">

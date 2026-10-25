@@ -156,10 +156,10 @@ export function PlanSankey({
             ? `${md(total)} d’économies par an, du budget vers votre salaire et votre épargne`
             : `Dès la première année : ${md(year1)} d’économies, dont ${md(sn.value)} rendus au salaire net`
         }
-        subtitle="Milliards d’euros par an. Largeur du ruban = montant. Plein = proposé dans un amendement ; hachuré = promis par les auteurs."
+        subtitle="Milliards d’euros par an. Largeur du ruban = montant. Plein = proposé dans un amendement ; hachuré = annoncé."
         summary={
           horizon === 'pleine'
-            ? `Selon les auteurs, cinq grandes économies (structures, subventions, niches, assurance chômage, rendement du patrimoine) atteignent ${md(total)} par an en régime de croisière. ${md(sn.value)} reviennent au salaire net par la fin de la CSG/CRDS sur les revenus d’activité : c’est la partie proposée dans un amendement. Le reste, ${md(cap.value)}, alimente une épargne personnelle dont le montant n’est inscrit nulle part.`
+            ? `cinq grandes économies (structures, subventions, niches, assurance chômage, rendement du patrimoine) atteignent ${md(total)} par an en régime de croisière. ${md(sn.value)} reviennent au salaire net par la fin de la CSG/CRDS sur les revenus d’activité : c’est la partie proposée dans un amendement. Le reste, ${md(cap.value)}, alimente une épargne personnelle dont le montant n’est inscrit nulle part.`
             : `La première année, ${md(year1)} d’économies financent d’abord les ${md(sn.value)} de CSG/CRDS rendus au salaire net ; ${md(year1 - sn.value)} restent pour l’épargne.`
         }
         sources={sources.map((s) => ({ ...s }))}
@@ -174,13 +174,13 @@ export function PlanSankey({
               format: (v) => formatNumber(Number(v), { decimals: 2 }),
             },
             { key: 'niveau', label: 'Niveau de preuve' },
-            { key: 'cellule', label: 'Cellule du classeur' },
+            { key: 'cellule', label: 'Cellule du chiffrage' },
           ],
           rows: tableRows,
           caption: 'Flux du schéma du plan : des économies vers le salaire net et l’épargne',
         }}
         csvFileName="plan-sankey-236-md.csv"
-        note="Le classeur n’affecte pas chaque économie à une destination précise : seuls les totaux par destination sont affirmés. Le schéma passe donc par une colonne « calendrier » (année 1, année pleine) plutôt que d’inventer des liens."
+        note="Le chiffrage donne les totaux par destination. Le schéma passe par une colonne « calendrier » (année 1, année pleine), sans inventer un lien économie par économie."
       >
         <div ref={ref}>
           <svg
@@ -360,7 +360,7 @@ export function PlanSankey({
           ) : (
             <p>
               <span className="font-semibold text-ink">Touchez un bloc</span> pour voir ce qui entre
-              et ce qui sort. Les rubans hachurés sont des promesses des auteurs ; le ruban plein
+              et ce qui sort. Les rubans hachurés sont des annonces ; le ruban plein
               est proposé dans un amendement.
             </p>
           )}

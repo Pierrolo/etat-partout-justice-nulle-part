@@ -103,7 +103,7 @@ const CATALOGUE: Entry[] = [
       tier: 'announced',
       title: 'Loyers en baisse',
       detail:
-        '« +25 % d’offre locative privée » et fin de l’APL qui « cesse de pousser les prix » : les auteurs annoncent une baisse des loyers, non chiffrée par ménage.',
+        '« +25 % d’offre locative privée » et fin de l’APL qui « cesse de pousser les prix » : le plan annonce une baisse des loyers, non chiffrée par ménage.',
       sources: [fiche('locataire', 'Locataire')],
     },
   },
@@ -115,8 +115,8 @@ const CATALOGUE: Entry[] = [
       tier: 'law',
       title: 'Frais de notaire : 1 % / 3 % payés par le vendeur',
       detail:
-        'Barème unique au 1er janvier 2027 : rien sous 10 000 €, 1 % de 10 000 à 100 000 €, 3 % au-delà, à la charge de celui qui réalise la plus-value. Exemple des auteurs : appartement de 200 000 € → 3 900 € payés par le vendeur, au lieu d’environ 10 000 € par l’acheteur aujourd’hui.',
-      amountHint: '−6 100 € sur un achat à 200 000 € (exemple des auteurs)',
+        'Barème unique au 1er janvier 2027 : rien sous 10 000 €, 1 % de 10 000 à 100 000 €, 3 % au-delà, à la charge de celui qui réalise la plus-value. Exemple donné : appartement de 200 000 € → 3 900 € payés par le vendeur, au lieu d’environ 10 000 € par l’acheteur aujourd’hui.',
+      amountHint: '−6 100 € sur un achat à 200 000 € (exemple donné)',
       sources: [SRC_AM19_DMTO, fiche('locataire', 'Locataire')],
     },
   },
@@ -153,7 +153,7 @@ const CATALOGUE: Entry[] = [
       tier: 'announced',
       title: 'Taxes spécifiques supprimées dans les prix',
       detail:
-        '57 taxes affectées et 21 taxes d’État supprimées ; les auteurs annoncent que les produits faits en France deviennent « plus abordables » et une « inflation faciale inférieure à 2 % ». Seule la fin des certificats d’économies d’énergie est estimée ici.',
+        '57 taxes affectées et 21 taxes d’État supprimées ; le plan annonce que les produits faits en France deviennent « plus abordables » et une « inflation faciale inférieure à 2 % ». Seule la fin des certificats d’économies d’énergie est estimée ici.',
       sources: [fiche('consommateur', 'Consommateur'), fiche('citoyen', 'Citoyen'), PLF_P1],
     },
   },
@@ -165,7 +165,7 @@ const CATALOGUE: Entry[] = [
       tier: 'announced',
       title: '« 9 Md€ rendus au salaire net » (fin des exonérations patronales)',
       detail:
-        'Les auteurs affirment que la suppression des exonérations de cotisations et de la taxe sur les salaires « va au salarié, non à l’entreprise ». Le simulateur ne suppose aucune hausse de salaire brut (H4).',
+        'Le plan affirme que la suppression des exonérations de cotisations et de la taxe sur les salaires « va au salarié, non à l’entreprise ». Le simulateur ne suppose aucune hausse de salaire brut (H4).',
       sources: [fiche('entreprise', 'Entreprise'), MANIFESTE],
     },
   },
@@ -208,7 +208,7 @@ const CATALOGUE: Entry[] = [
         tier: 'announced',
         title: 'Indemnisation chômage limitée à six mois',
         detail:
-          'Les auteurs annoncent que l’indemnisation « passe de treize à six mois » (la durée maximale actuelle est de 18 mois selon l’âge). Aucun texte juridique. Le simulateur garde le montant mensuel de l’ARE inchangé (H6).',
+          'Le plan annonce que l’indemnisation « passe de treize à six mois » (la durée maximale actuelle est de 18 mois selon l’âge). Aucun texte juridique. Le simulateur garde le montant mensuel de l’ARE inchangé (H6).',
         amountHint:
           are > 0
             ? `à partir du 7e mois d’indemnisation : ARE = 0, soit −${eur0(are)}/mois`
@@ -306,7 +306,7 @@ const CATALOGUE: Entry[] = [
       tier: 'law',
       title: 'Taxe foncière unique : montant inconnu',
       detail:
-        'À partir de 2028 : base = valeur locative de marché (tarifs INSEE à créer), taux communal entre 10 et 30 %. Les auteurs écrivent qu’« à 10 %, un logement acquitte à peu près la taxe foncière d’aujourd’hui ». Non chiffrable aujourd’hui (H8).',
+        'À partir de 2028 : base = valeur locative de marché (tarifs INSEE à créer), taux communal entre 10 et 30 %. « à 10 %, un logement acquitte à peu près la taxe foncière d’aujourd’hui ». Non chiffrable aujourd’hui (H8).',
       sources: [SRC_AM29_TF],
     },
   },
@@ -330,7 +330,7 @@ const CATALOGUE: Entry[] = [
       tier: 'announced',
       title: '580 000 postes publics fermés, fin du statut (indemnité de 70 % jusqu’à 7 ans)',
       detail:
-        'Les auteurs annoncent 580 000 postes publics fermés et la fin du statut de la fonction publique (droit du travail commun). Si votre poste est supprimé, l’amendement prévoit une indemnité de 70 % du traitement indiciaire pendant 1 à 7 ans selon l’ancienneté (voir « promesses ») : une baisse d’au moins 30 % de votre traitement pendant cette période, puis plus rien.',
+        'Le plan annonce 580 000 postes publics fermés et la fin du statut de la fonction publique (droit du travail commun). Si votre poste est supprimé, l’amendement prévoit une indemnité de 70 % du traitement indiciaire pendant 1 à 7 ans selon l’ancienneté (voir « promesses ») : une baisse d’au moins 30 % de votre traitement pendant cette période, puis plus rien.',
       sources: [MANIFESTE, fiche('agent-public-indispensable', 'Agent public indispensable')],
     },
   },
@@ -356,7 +356,7 @@ const CATALOGUE: Entry[] = [
       title:
         'Droits liés au RSA : complémentaire santé solidaire, tarifs sociaux, aides locales, prime de Noël',
       detail:
-        'Les aides sociales locales (36 Md€) sont « fusionnées » dans l’AFU selon les classeurs des auteurs ; les droits connexes au RSA ne sont pas modélisés.',
+        'Les aides sociales locales (36 Md€) sont « fusionnées » dans l’AFU selon les chiffrages ; les droits connexes au RSA ne sont pas modélisés.',
       sources: [
         {
           label:

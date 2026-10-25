@@ -1,7 +1,7 @@
 ---
 /**
  * /comprendre/situations — « Ce que le plan prévoit pour… » : les 18 fiches du livre, regroupées comme
- * dans le livre, mot pour mot. Niveau « Promis par les auteurs » : des promesses, pas des calculs ni des
+ * dans le livre, mot pour mot. Niveau « Annoncé » : des promesses, pas des calculs ni des
  * textes votés. Une ancre par situation (#retraite, #enseignant, #entreprise…) pour que le simulateur
  * renvoie un profil vers sa fiche.
  */
@@ -18,16 +18,15 @@ const count = groups.reduce((n, g) => n + g.situations.length, 0);
 
 <DashboardLayout
   slug="situations"
-  lede={`Les ${count} situations du livre, telles que les auteurs les décrivent : ce que le plan donne à chacun, et ce qu’il retire. Les textes sont repris mot pour mot.`}
+  lede={`Les ${count} situations : ce que le plan donne à chacun, et ce qu’il retire. Les textes sont repris mot pour mot.`}
 >
-  <Callout tone="announced" title="Des promesses, pas un calcul" icon={null}>
+  <Callout tone="announced" title="Textes des fiches" icon={null}>
     <p class="mb-2">
       <TierBadge tier="announced" />
     </p>
     <p>
-      Tout ce qui suit vient des fiches publiées par les auteurs. Ce sont des affirmations, sans
-      texte précis pour la plupart : quand un amendement existe, il est indiqué sous la fiche. Pour
-      savoir ce que le plan changerait <em>pour votre foyer</em>, en euros, utilisez
+      Tout ce qui suit vient des fiches. Quand un amendement existe, il est indiqué sous la fiche. Pour
+      un montant en euros sur votre foyer, utilisez
       <a href={withBase('/simulateur/')}>le simulateur</a>.
     </p>
   </Callout>
@@ -149,7 +148,7 @@ const count = groups.reduce((n, g) => n + g.situations.length, 0);
                   ))}
                 </ul>
                 <p class="mt-1 text-sm text-ink-3">
-                  Ces amendements sont rédigés mais ni déposés ni votés.
+                  Ces amendements sont rédigés. Ils attendent d’être déposés, puis votés.
                 </p>
               </div>
             )}

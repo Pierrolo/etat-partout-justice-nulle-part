@@ -168,7 +168,7 @@ export function HourOfWork({ household, hypotheses, headlineText }: HourOfWorkPr
           },
         ],
       }}
-      note="Cette vue ne concerne que le salaire d’une personne. Les aides du foyer (prime d’activité, aides au logement…), l’aide universelle des enfants et la TVA ne sont pas rapportées à ses heures : elles comptent dans le résultat du foyer, plus haut."
+      note="Cette vue porte sur le salaire d’une personne. Les aides du foyer (prime d’activité, aides au logement…), l’aide universelle des enfants et la TVA sont dans le résultat du foyer, plus haut."
     >
       <div className="space-y-6">
         {salaried.length > 1 && (

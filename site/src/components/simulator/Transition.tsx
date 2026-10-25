@@ -89,7 +89,7 @@ export function Transition({ household, hypotheses, period, onPick }: Transition
       ))}
       .{' '}
       {signs.has(-1) && signs.has(1)
-        ? 'Le chemin n’est pas régulier : le signe de l’écart change selon l’année.'
+        ? 'Le signe de l’écart change selon l’année.'
         : 'Les mesures arrivant par étapes, l’écart évolue d’année en année.'}
     </>
   );

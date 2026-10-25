@@ -49,12 +49,12 @@ const pct1 = (v: number) => formatPercentPoints(v, { decimals: 1 });
 
 <BaseLayout
   title="Méthode et hypothèses"
-  description="Ce que le simulateur calcule et ne calcule pas, ses hypothèses numérotées, son écart avec OpenFisca, et les endroits où les sources du livre se contredisent."
+  description="Hypothèses du simulateur, écart avec OpenFisca, et les endroits où les sources se contredisent."
 >
   <PageHeader
     eyebrow="Méthode"
     title="Méthode et hypothèses"
-    lede="Un simulateur se juge à ses hypothèses. Voici ce qu’il calcule, comment, ce qu’il laisse de côté, et où les sources du livre se contredisent."
+    lede="Les hypothèses du simulateur, ce qu’il calcule, et les endroits où les sources se contredisent."
   />
 
   <div class="wrap pb-6">
@@ -111,9 +111,9 @@ const pct1 = (v: number) => formatPercentPoints(v, { decimals: 1 });
       <Fragment set:html={before} />
 
       <!-- Écarts entre sources : « par foyer » d’abord (le plus trompeur), puis le reste -->
-      <h3 id="foyers">Les quatre « foyers » du livre</h3>
+      <h3 id="foyers">Les quatre façons de compter un foyer</h3>
       <p>
-        Le livre ne définit pas son « foyer » : il en emploie quatre selon la page. Un montant « par
+        Le « foyer » n’est pas défini une seule fois : quatre dénominateurs coexistent selon la page. Un montant « par
         foyer » n’a donc de sens qu’avec son dénominateur, et deux montants « par foyer » de sources
         différentes ne se comparent pas.
       </p>
@@ -126,7 +126,7 @@ const pct1 = (v: number) => formatPercentPoints(v, { decimals: 1 });
         <table class="data-table methode-table">
           <thead>
             <tr>
-              <th scope="col">Où le livre l’emploie</th>
+              <th scope="col">Où ce nombre est employé</th>
               <th scope="col" data-numeric>
                 Foyers (millions)
               </th>
@@ -153,15 +153,13 @@ const pct1 = (v: number) => formatPercentPoints(v, { decimals: 1 });
         </table>
       </div>
       <p>
-        <strong>Le site retient un seul dénominateur : {FOYERS_LABEL}.</strong> C’est le seul des
-        quatre que les auteurs écrivent tel quel (dans leurs fiches), il est aussi celui de «&#8239;
-        {formatMdEuro(num('actifs_manifeste_md'))}, soit{' '}
-        {formatEuro(num('actifs_par_foyer_manifeste_eur'))} par foyer », et il correspond à l’unité
-        du simulateur, le ménage. Les trois autres sont déduits ou mesurent autre chose : un foyer
-        fiscal n’est pas un ménage. Les montants « par foyer » écrits par les auteurs eux-mêmes (par
-        exemple {formatEuro(num('dep_par_foyer_manifeste_eur'))}
-        par an pour les dépenses publiques) restent leurs chiffres, avec leur dénominateur
-        ci-dessus.
+        <strong>Le site retient un seul dénominateur : {FOYERS_LABEL}.</strong> Il est écrit dans
+        les fiches. C’est aussi celui de «&#8239;{formatMdEuro(num('actifs_manifeste_md'))}, soit{' '}
+        {formatEuro(num('actifs_par_foyer_manifeste_eur'))} par foyer&#8239;», et l’unité du
+        simulateur, le ménage. Les trois autres sont déduits, ou comptent autre chose : le foyer
+        fiscal regroupe une déclaration, le ménage un logement. Les montants « par foyer » annoncés
+        tels quels (par exemple {formatEuro(num('dep_par_foyer_manifeste_eur'))}
+        par an pour les dépenses publiques) gardent le dénominateur du tableau.
       </p>
 
       <h3 id="pib-57">
@@ -170,7 +168,7 @@ const pct1 = (v: number) => formatPercentPoints(v, { decimals: 1 });
       <p>
         Eurostat donne {pct(num('eu_dep_pib_fr_2024_pct'))} du PIB pour les dépenses publiques de la
         France en 2024. En rapportant le total de l’Insee ({formatMdEuro(num('dep_total_2024_md'))})
-        au PIB 2024 du classeur des auteurs ({formatMdEuro(gdp.workbook)}, feuille « Refonte
+        au PIB 2024 du chiffrage publié ({formatMdEuro(gdp.workbook)}, feuille « Refonte
         fiscalité », cellule C3), on obtient {pct(num('dep_pib_insee_calc_pct'))}.{' '}
         <strong>La dépense est la même : l’écart vient du PIB.</strong> Pour obtenir{' '}
         {pct(num('eu_dep_pib_fr_2024_pct'))} avec

@@ -156,11 +156,9 @@ test.describe('/comprendre/amendements', () => {
   const summary = (page: Page) => page.getByTestId('amendements-summary');
 
   test('dit clairement que ce sont des textes proposés, pas des lois', async ({ page }) => {
-    await expect(page.getByText('Des textes proposés, pas des lois votées')).toBeVisible();
-    await expect(page.getByText(/ni déposés, ni adoptés/)).toBeVisible();
-    await expect(
-      page.getByText(/texte précis rédigé par les auteurs, ni déposé ni voté/i).first(),
-    ).toBeVisible();
+    await expect(page.getByText('Amendements rédigés, en attente de dépôt')).toBeVisible();
+    await expect(page.getByText(/attendent d’être déposés, puis votés/)).toBeVisible();
+    await expect(page.getByText(/texte rédigé, en attente de dépôt et de vote/i).first()).toBeVisible();
     await expect(summary(page)).toContainText('81 amendements');
   });
 
@@ -278,7 +276,7 @@ test.describe('/a-propos', () => {
   test('indépendance, licence MIT, sources, vie privée et contact', async ({ page }) => {
     await page.goto('a-propos/');
     const main = page.locator('main');
-    await expect(main).toContainText('non affilié');
+    await expect(main).toContainText('indépendant de l’association Résolution');
     await expect(main).toContainText('licence MIT');
     await expect(main).toContainText('Licence Ouverte');
     await expect(main).toContainText('CC BY 4.0');

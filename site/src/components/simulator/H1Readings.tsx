@@ -14,7 +14,7 @@ const READING: Record<Reading, { title: string; text: React.ReactNode }> = {
     text: (
       <>
         Le RSA, la prime d’activité et l’AAH disparaissent : l’<Term id="afu">AFU</Term> les
-        remplace, comme le disent les auteurs.
+        remplace, comme le dit le plan.
       </>
     ),
   },
@@ -61,7 +61,7 @@ export function H1Readings({
           Ce chiffre dépend d’un choix
         </h3>
         <p className="text-[0.9375rem] text-ink-2">
-          Les auteurs annoncent que l’aide universelle remplace certaines aides, mais aucun
+          Le plan annonce que l’aide universelle remplace certaines aides, mais aucun
           amendement ne les supprime. Pour votre foyer, les deux lectures ne donnent pas le même
           résultat :
         </p>

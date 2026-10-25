@@ -575,7 +575,7 @@ test.describe('cas-types', () => {
   test('leads with the pattern in words and the caveat, not with a « 37 sur 47 » counter', async ({
     page,
   }) => {
-    await expect(page.getByText('Des cas types, pas la population')).toBeVisible();
+    await expect(page.getByText('Des exemples de foyers')).toBeVisible();
     await expect(page.getByText(/Ce n.est pas un échantillon représentatif/)).toBeVisible();
     await expect(page.getByTestId('pattern')).toContainText('perdent');
     const text = await body(page);

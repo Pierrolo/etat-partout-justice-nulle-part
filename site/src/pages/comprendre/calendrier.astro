@@ -110,11 +110,11 @@ const busiest = groupByDate(events, jalons)
   slug="calendrier"
   lede="Impôts, CSG, aides au logement, TVA, agences : chaque mesure du plan a une date écrite dans le texte proposé. Voici la transition, de 2027 à 2030, domaine par domaine."
 >
-  <Callout tone="note" title="Des dates de texte proposé, pas de loi en vigueur">
+  <Callout tone="note" title="Dates écrites dans les amendements">
     <p>
       Ces dates viennent des {formatInteger(amendements.meta.counts.total)} amendements rédigés par
-      l’association Résolution (octobre 2026) : ils ne sont ni déposés ni votés. « Proposé dans un
-      amendement » veut dire « écrit dans le texte précis d’un amendement ». Pour la frise, une date
+      l’association Résolution (octobre 2026). Ils attendent d’être déposés, puis votés. « Proposé dans un
+      amendement » veut dire « écrit dans le texte d’un amendement ». Pour la frise, une date
       « 1er janvier  » sans jour écrit dans le texte est signalée comme telle.
     </p>
   </Callout>
@@ -212,8 +212,8 @@ const busiest = groupByDate(events, jalons)
         Les promesses sans date dans un amendement
       </h2>
       <p class="text-ink-2">
-        Les auteurs annoncent aussi des effets que les amendements ne datent pas, ou ne chiffrent
-        pas. Ils ne figurent pas sur la frise : ce sont des promesses, pas des amendements.
+        Le plan annonce aussi des effets que les amendements laissent sans date, ou sans montant.
+        Ils sont listés ici, à côté de la frise.
       </p>
     </div>
     <ul class="grid gap-3 md:grid-cols-2">

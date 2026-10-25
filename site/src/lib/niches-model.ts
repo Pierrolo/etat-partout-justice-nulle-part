@@ -90,7 +90,7 @@ const TAX_BY_RAW = Object.fromEntries(TAX_IDS.map((id) => [TAX_META[id].raw, id]
   TaxId
 >;
 
-/** Ce que le plan fait de la niche, d'après la colonne « Suppression » du classeur des auteurs. */
+/** Ce que le plan fait de la niche, d'après la colonne « Suppression » du chiffrage publié. */
 export const PLAN_IDS = [
   'supprimee',
   'trois-ans',

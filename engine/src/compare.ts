@@ -91,7 +91,7 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
       label: 'Déduction de 10 % pour frais professionnels',
       value: hyp.H2_fraisPro10
         ? 'maintenue (0,793 € gardé par euro)'
-        : 'supprimée (lecture des auteurs : 0,77 €)',
+        : 'supprimée (lecture du plan : 0,77 €)',
       tier: 'hypothesis',
     },
     {

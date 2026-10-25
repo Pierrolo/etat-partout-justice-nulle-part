@@ -17,7 +17,7 @@ const agencesTotal = num('agences_etat_avant');
 const lawList = num('agences_dissoutes_loi');
 const lawDate = formatDateFr(agencyMeta.lawList.date);
 const agenceSources = [
-  chip('agences_etat_avant', { label: 'Classeur des auteurs, Synthèse agences' }),
+  chip('agences_etat_avant', { label: 'Chiffrage publié, Synthèse agences' }),
   chip('agences_dissoutes_loi', { label: 'Amendement PLF-P2 n° 25 (liste de dissolution)' }),
 ];
 const agenceConflict = conflicts('agences_dissoutes_loi')[0]?.note ?? '';
@@ -32,8 +32,8 @@ const agencesParFoyer = perFoyerYear(num('eco236_agences_md'));
       {formatInteger(agencesTotal)} agences, un carré chacune
     </h2>
     <p class="text-ink-2">
-      Agences, opérateurs, autorités indépendantes, commissions : les auteurs en ont recensé
-      {formatInteger(agencesTotal)} au niveau de l’État. Selon eux, celles qui ne sont pas
+      Agences, opérateurs, autorités indépendantes, commissions : le décompte en recense
+      {formatInteger(agencesTotal)} au niveau de l’État. Celles qui ne sont pas
       indispensables coûtent environ {formatEuro(roundForDisplay(agencesParFoyer, 10))} par foyer et
       par an (sur {FOYERS_SHORT}). On compte en plus {formatInteger(agencesLocales)} organismes
       locaux, que le plan ne traite pas ici.
@@ -52,7 +52,7 @@ const agencesParFoyer = perFoyerYear(num('eco236_agences_md'));
   >
     <p>{agenceConflict}</p>
     <p class="mt-2 flex flex-wrap items-center gap-2">
-      <SourceChip {...chip('agences_fermees', { label: 'Classeur des auteurs : fermetures' })} />
+      <SourceChip {...chip('agences_fermees', { label: 'Chiffrage publié : fermetures' })} />
       <SourceChip {...chip('agences_dissoutes_loi', { label: 'Amendement PLF-P2 n° 25' })} />
     </p>
   </Callout>
@@ -60,7 +60,7 @@ const agencesParFoyer = perFoyerYear(num('eco236_agences_md'));
   <noscript>
     <p class="text-sm text-ink-3">
       La recherche dans la liste demande JavaScript. Les données sont dans le classeur « Synthèse
-      ETP et agences » des auteurs, cité ci-dessus.
+      ETP et agences », cité ci-dessus.
     </p>
   </noscript>
 </section>

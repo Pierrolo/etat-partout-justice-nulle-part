@@ -20,14 +20,14 @@ const perYearBook = num('dep_par_foyer_manifeste_eur');
 const foyersM = (m: number) => formatNumber(m, { decimals: { min: 0, max: 1 } });
 
 const denominatorNotes = {
-  foyer: `Montant national ÷ ${FOYERS_LABEL}, le chiffre écrit dans les fiches des auteurs. Le livre emploie d’autres dénominateurs « par foyer » : ils sont comparés dans la page Méthode, et ne se comparent pas entre eux.`,
-  habitant: `Montant national ÷ ${foyersM(den.habitants / 1e6)} millions de personnes : le nombre de citoyens donné en tête de la fiche « Citoyen » du livre (annoncé, non vérifié par une statistique).`,
+  foyer: `Montant national ÷ ${FOYERS_LABEL}, le chiffre écrit dans les fiches. D’autres dénominateurs « par foyer » existent : ils sont comparés dans la page Méthode, et ne se comparent pas entre eux.`,
+  habitant: `Montant national ÷ ${foyersM(den.habitants / 1e6)} millions de personnes : le nombre de citoyens donné en tête de la fiche « Citoyen » (annoncé, non vérifié par une statistique).`,
 };
 
 const sourcesChart = [
   chip('dep_total_2024_md', { label: 'Insee, comptes nationaux (tableau 3.301)' }),
   datasetChip(cofogMeta.source.workbook, {
-    label: 'Classeur des auteurs, Graph1672Md',
+    label: 'Chiffrage publié, Graph1672Md',
     tier: 'annonce',
   }),
 ];
@@ -39,14 +39,14 @@ const sourceItems = [
   },
   {
     chip: datasetChip(cofogMeta.source.workbook, {
-      label: 'Classeur des auteurs, Graph1672Md',
+      label: 'Chiffrage publié, Graph1672Md',
       tier: 'annonce',
     }),
-    text: 'Regroupement des fonctions en six groupes et seize postes : celui du graphique du livre.',
+    text: 'Regroupement des fonctions en six groupes et seize postes : celui du graphique.',
   },
   {
     chip: chip('fiche_pop_foyers', { label: 'france-resolution.fr, fiches' }),
-    text: `Dénominateur « par foyer » : ${FOYERS_LABEL}, chiffre écrit dans les fiches « Foyer » et « Contribuable ». Le manifeste écrit « ${formatEuro(perYearBook)} par foyer et par an » avec un autre nombre de foyers, déduit : les quatre dénominateurs du livre sont comparés dans la page Méthode.`,
+    text: `Dénominateur « par foyer » : ${FOYERS_LABEL}, chiffre écrit dans les fiches « Foyer » et « Contribuable ». L’annonce écrit « ${formatEuro(perYearBook)} par foyer et par an » avec un autre nombre de foyers, déduit : les quatre dénominateurs sont comparés dans la page Méthode.`,
   },
   {
     chip: chip('fiche_pop_citoyens', { label: 'france-resolution.fr, fiche « Citoyen »' }),
@@ -56,7 +56,7 @@ const sourceItems = [
 const gaps = [
   cofogMeta.checks.note,
   ...cofogMeta.notes.filter((n) => !n.startsWith('« Défense')),
-  `Le livre emploie plusieurs dénominateurs « par foyer » : le site retient ${FOYERS_LABEL} partout, et détaille les autres dans la page Méthode.`,
+  `Plusieurs dénominateurs « par foyer » coexistent : le site retient ${FOYERS_LABEL} partout, et détaille les autres dans la page Méthode.`,
 ].filter(Boolean);
 
 const sourcesSquares = [
@@ -74,7 +74,7 @@ const sharePct = (v: number) => formatPercentPoints(v, { decimals: 1 });
 
 <DashboardLayout
   slug="depenses"
-  lede={`En ${year}, les administrations publiques ont dépensé ${formatMdEuro(total)} : ${formatEuro(perDay)} par foyer et par jour, ou ${formatEuro(perMonth)} par mois. Voyez à quoi sert cet argent, dans l’unité de votre choix.`}
+  lede={`En ${year}, les administrations publiques ont dépensé ${formatMdEuro(total)} : ${formatEuro(perDay)} par foyer et par jour, ou ${formatEuro(perMonth)} par mois.`}
 >
   <!-- Headline numbers -->
   <section aria-labelledby="chiffres-titre">
@@ -93,12 +93,12 @@ const sharePct = (v: number) => formatPercentPoints(v, { decimals: 1 });
       />
       <StatTile
         as="li"
-        label="Par foyer et par an, selon le livre"
+        label="Par foyer et par an"
         value={formatNumber(perYearBook)}
         unit="€"
         tier="announced"
-        reframe={`= ${formatEuro(perYearBook / 12)} par mois, avec le dénominateur des auteurs (voir la Méthode). Le manifeste ajoute « record mondial » : voir plus bas.`}
-        source={chip('dep_par_foyer_manifeste_eur', { label: 'france-resolution.fr, manifeste' })}
+        reframe={`= ${formatEuro(perYearBook / 12)} par mois, avec un autre dénominateur (voir la Méthode). L’annonce ajoute « record mondial » : voir plus bas.`}
+        source={chip('dep_par_foyer_manifeste_eur', { label: 'france-resolution.fr' })}
       />
       <StatTile
         as="li"
@@ -142,9 +142,9 @@ const sharePct = (v: number) => formatPercentPoints(v, { decimals: 1 });
         Si l’argent public était 100 €
       </h2>
       <p class="text-ink-2">
-        Les auteurs insistent sur un chiffre : défense, police et justice ne reçoivent que
+        Un chiffre revient : défense, police et justice ne reçoivent que
         <strong>{sharePct(secu)}</strong> de la dépense, soit {formatEuro(secu, { decimals: 1 })}{' '}
-        sur 100 € (le manifeste arrondit à{' '}
+        sur 100 € (l’annonce arrondit à{' '}
         {formatPercentPoints(num('dep_part_regalien_manifeste_pct'), { decimals: 0 })}). Trouvez-les
         dans la grille.
       </p>

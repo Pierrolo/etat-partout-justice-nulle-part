@@ -7,7 +7,7 @@
 export const TIERS = ['law', 'announced', 'hypothesis'] as const;
 /**
  * - `law`        « Écrit dans la loi » — amendment text (or current law for the baseline).
- * - `announced`  « Annoncé par les auteurs » — fiches / manifesto / workbook, no legal text.
+ * - `announced`  « Annoncé » — fiches / manifesto / workbook, no legal text.
  * - `hypothesis` « Hypothèse du simulateur » — our choice where the text is silent.
  */
 export type Tier = (typeof TIERS)[number];

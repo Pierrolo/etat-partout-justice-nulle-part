@@ -86,7 +86,7 @@ export function foyerDenominators(): FoyerRow[] {
     {
       id: 'fiche_pop_foyers',
       usage: `Fiches « Foyer » et « Contribuable » ; « ${formatMdEuro(num('actifs_manifeste_md'))}, soit ${formatEuro(num('actifs_par_foyer_manifeste_eur'))} par foyer »`,
-      origin: 'Chiffre écrit par les auteurs dans leurs fiches',
+      origin: 'Chiffre écrit dans les fiches',
     },
     {
       id: 'foyers_implicites_236_m',
@@ -95,7 +95,7 @@ export function foyerDenominators(): FoyerRow[] {
     },
     {
       id: 'foyers_implicites_dep_m',
-      usage: `« ${formatEuro(num('dep_par_foyer_manifeste_eur'))} par foyer et par an » (dépenses publiques, manifeste)`,
+      usage: `« ${formatEuro(num('dep_par_foyer_manifeste_eur'))} par foyer et par an » (dépenses publiques, annoncé)`,
       origin: `${md('dep_total_2024_md')} ÷ ${formatEuro(num('dep_par_foyer_manifeste_eur'))} : déduit par le site`,
     },
     {

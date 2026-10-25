@@ -1,6 +1,6 @@
 /**
  * « Ce que le plan prévoit pour… » : les 18 situations des fiches du livre (fiches.json), regroupées
- * comme dans le livre. Le texte des fiches est repris mot pour mot (niveau « Promis par les auteurs ») ;
+ * comme dans le livre. Le texte des fiches est repris mot pour mot (niveau « Annoncé ») ;
  * le seul apport éditorial de cette page est la liste des amendements qui concernent chaque situation.
  *
  * Ancres : chaque situation a l’ancre `#<slug>` sur `/comprendre/situations/` (`#retraite`,

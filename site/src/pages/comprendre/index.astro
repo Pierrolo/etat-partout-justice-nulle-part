@@ -95,7 +95,6 @@ const planDay = perFoyerDay(num('eco236_total_md'));
   <PageHeader
     eyebrow="Tableau de bord"
     title="L’argent public en six chiffres"
-    lede="Six chiffres pour se faire une idée, du plus grand au plus proche de vous. Chacun est relié à sa source ; chaque désaccord entre sources est montré. Puis les pages pour explorer."
   />
 
   <div class="wrap">
@@ -127,7 +126,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
             dépensé en
             {year}. Ramené à un foyer :{' '}
             <strong class="text-ink">{formatEuro(perDay)} par jour</strong>
-            (sur {FOYERS_LABEL}, le chiffre des fiches des auteurs).
+            (sur {FOYERS_LABEL}, le chiffre des fiches).
           </p>
           <div
             class="max-w-2xl space-y-2"
@@ -197,7 +196,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
             quote={quote}
             year={year}
             sources={[chip('dep_part_securite_pct', { label: 'Insee, calcul du site' })]}
-            quoteSource={chip('dep_part_regalien_manifeste_pct', { label: 'Manifeste' })}
+            quoteSource={chip('dep_part_regalien_manifeste_pct', { label: 'Annonce' })}
           />
           <p>
             <a href={withBase('/questionnaire/')} class="text-sm font-semibold">
@@ -231,7 +230,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
           </p>
           <p class="max-w-xl text-lg text-ink-2">
             Opérateurs, autorités, commissions… sans compter {formatInteger(min.before)} ministères.
-            Selon les auteurs, le plan garderait {formatInteger(min.after)} ministères et{' '}
+            le plan garderait {formatInteger(min.after)} ministères et{' '}
             {formatInteger(fates.find((f) => f.id === 'autonomie')!.n)} agences autonomes.
           </p>
           <div
@@ -265,7 +264,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
           </div>
           <p class="flex flex-wrap items-center gap-2 text-xs text-ink-3">
             <SourceChip
-              {...chip('agences_etat_avant', { label: 'Classeur des auteurs, GraphAgences' })}
+              {...chip('agences_etat_avant', { label: 'Chiffrage publié, GraphAgences' })}
             />
             <a href={withBase('/comprendre/etat-partout/')} class="text-sm font-semibold">
               Voir chaque agence →
@@ -300,7 +299,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
             {nichesEquation(num('niches_nombre'), nichesTva, niches)}. Des réductions, exonérations
             et taux réduits : {formatMdEuro(num('niches_total_md'), { decimals: 1 })} par an, soit
             environ {formatEuro(roundForDisplay(perFoyerYear(num('niches_total_md')), 50))} par
-            foyer (sur {FOYERS_LABEL}). Les auteurs comptent aussi {formatInteger(impots)} impôts et
+            foyer (sur {FOYERS_LABEL}). On compte aussi {formatInteger(impots)} impôts et
             taxes.
           </p>
           <div
@@ -425,7 +424,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
           </figure>
           <p class="flex flex-wrap items-center gap-2 text-xs text-ink-3">
             <SourceChip
-              {...chip('droit_mots_2026', { label: 'Légifrance, décompte des auteurs' })}
+              {...chip('droit_mots_2026', { label: 'Légifrance, décompte' })}
             />
             <a
               href={withBase('/comprendre/etat-partout/#mots-titre')}
@@ -460,7 +459,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
             <span class="font-serif text-2xl text-ink-2 sm:text-3xl">Md€ d’économies par an</span>
           </p>
           <p class="max-w-xl text-lg text-ink-2">
-            Selon les auteurs : c’est l’économie visée, à « rendre » aux Français. Ramenée à un
+            C’est l’économie visée, à « rendre » aux Français. Ramenée à un
             foyer, {formatEuro(planDay)} par jour (sur {FOYERS_LABEL}, comme à l’étape 1). Où
             vont-ils ? D’abord dans votre salaire net. Une heure de travail aujourd’hui :
           </p>

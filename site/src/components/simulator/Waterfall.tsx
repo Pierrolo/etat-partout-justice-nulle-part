@@ -139,7 +139,7 @@ export function Waterfall({ data, periodLabel }: WaterfallProps) {
           after: s.formulaAfter,
         })),
       }}
-      note="Montants arrondis à 5 € près ; les écarts s’additionnent exactement au résultat. Lignes hachurées : promises par les auteurs sans texte précis. Lignes pointillées : notre estimation."
+      note="Montants arrondis à 5 € près ; les écarts s’additionnent exactement au résultat. Lignes hachurées : annoncées, sans texte précis. Lignes pointillées : notre estimation."
     >
       <div className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">

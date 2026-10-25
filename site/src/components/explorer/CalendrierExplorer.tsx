@@ -400,7 +400,7 @@ function DetailPanel({
             {group.jalon.summary}
           </>
         ) : (
-          'Cette date n’est pas une date clé du calendrier.'
+          'Jour du calendrier, en dehors des dates clés.'
         )}
       </p>
       <p className="mt-2 text-sm font-semibold text-ink">

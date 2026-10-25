@@ -7,7 +7,7 @@
  * text was voted, so the words now say what the authors actually did.
  *
  *   law         solid      « Proposé dans un amendement »  (text written by the authors, not tabled, not voted)
- *   announced   hatched    « Promis par les auteurs »      (fiches / manifeste / tableurs, no precise text)
+ *   announced   hatched    « Annoncé »      (fiches / manifeste / tableurs, no precise text)
  *   hypothesis  dotted     « Notre estimation »            (our choice where the text is silent)
  *
  * Simulator outputs carry no tier of their own: each line carries the tier of the rule that drives it.
@@ -22,7 +22,7 @@ export interface TierMeta {
   label: string;
   /** Short label for tight spaces (table cells, chart legends, source chips). */
   short: string;
-  /** Parenthetical, lower-case clarification, to follow the label (« texte précis rédigé par les auteurs… »). */
+  /** Parenthetical, lower-case clarification, to follow the label (« texte précis proposé dans les amendements… »). */
   explanation: string;
   /** One or two plain-French sentences explaining what the tier means for the reader. */
   description: string;
@@ -32,16 +32,16 @@ export const TIER_META: Record<Tier, TierMeta> = {
   law: {
     label: 'Proposé dans un amendement',
     short: 'Amendement proposé',
-    explanation: 'texte précis rédigé par les auteurs, ni déposé ni voté',
+    explanation: 'texte rédigé, en attente de dépôt et de vote',
     description:
-      'Texte précis rédigé par les auteurs, ni déposé ni voté. Il s’appliquerait tel quel si l’amendement était adopté.',
+      'Texte rédigé dans un amendement. Il s’appliquerait tel quel une fois déposé et adopté.',
   },
   announced: {
-    label: 'Promis par les auteurs',
-    short: 'Promis',
+    label: 'Annoncé',
+    short: 'Annoncé',
     explanation: 'annoncé, sans texte précis',
     description:
-      'Annoncé par les auteurs (fiches, manifeste, classeurs) mais sans texte précis. Quand il n’y a pas de montant, c’est montré à part, hors revenu disponible.',
+      'Chiffre ou promesse du plan, sans texte d’amendement. Quand il n’y a pas de montant, c’est montré à part, hors revenu disponible.',
   },
   hypothesis: {
     label: 'Notre estimation',

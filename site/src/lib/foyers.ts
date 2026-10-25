@@ -3,7 +3,7 @@
  *
  * Le livre emploie quatre « foyers » différents (30 / 29,5 / 31 M de foyers, et 40,2 M de foyers
  * fiscaux, voir /methode#foyers). Tout ré-échelonnement « par foyer » fait par le site utilise
- * UN SEUL dénominateur : les **30 millions de foyers** que les auteurs écrivent dans leurs fiches
+ * UN SEUL dénominateur : les **30 millions de foyers** que dans leurs fiches
  * (fact `fiche_pop_foyers`).
  *
  * Pourquoi celui-là :
@@ -35,4 +35,4 @@ export const FOYERS_LABEL = `${formatNumber(FOYERS_M)} millions de foyers`;
 /** Version courte pour les tuiles : « 30 M de foyers ». */
 export const FOYERS_SHORT = `${formatNumber(FOYERS_M)} M de foyers`;
 /** Phrase de note de bas de page, partout où un « par foyer » apparaît. */
-export const FOYERS_NOTE = `Par foyer : montant national ÷ ${FOYERS_LABEL}, le chiffre des fiches des auteurs. Les autres dénominateurs du livre sont détaillés dans la Méthode.`;
+export const FOYERS_NOTE = `Par foyer : montant national ÷ ${FOYERS_LABEL}, le chiffre des fiches. Les autres dénominateurs sont détaillés dans la Méthode.`;

@@ -28,15 +28,11 @@ const nSituations = fiches.meta.count;
   <section class="wrap grid items-start gap-8 pt-8 pb-10 sm:pt-16 sm:pb-14 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
     <div>
       <p class="eyebrow eyebrow-accent mb-3">
-        Compagnon indépendant du livre « État partout, justice nulle part »
+        Ce que le plan changerait pour vous
       </p>
       <h1 class="display max-w-[16ch] sm:max-w-[18ch]">
         Qu’est-ce que le plan changerait pour vous ?
       </h1>
-      <p class="lede mt-4 sm:mt-6">
-        Répondez à quelques questions, sans compte ni inscription. Vous voyez, en euros par mois, ce
-        que les propositions du livre changeraient pour votre foyer, en bien comme en mal.
-      </p>
       <p class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
         <a href={withBase('/simulateur/')} class="btn btn-primary" data-testid="hero-cta">
           <span>Calculer pour mon foyer</span>
@@ -50,8 +46,7 @@ const nSituations = fiches.meta.count;
         </a>
       </p>
       <p class="mt-3 max-w-xl text-sm text-ink-3">
-        Moins d’une minute. Rien n’est envoyé : tout se calcule dans votre navigateur. Si le plan
-        vous coûtait de l’argent, le simulateur le dirait aussi clairement.
+        Si le plan vous coûtait de l’argent, le simulateur le dirait aussi clairement.
       </p>
     </div>
 
@@ -65,12 +60,12 @@ const nSituations = fiches.meta.count;
         class="rounded-md border border-dashed border-[var(--tier-announced-bd)] px-3 py-2 text-[0.9375rem] font-medium text-ink"
         data-testid="hour-caveat"
       >
-        Calcul des auteurs, sans source externe : un ordre de grandeur annoncé, pas une mesure.
+        Ordre de grandeur annoncé. L’onglet ne cite pas de source externe.
       </p>
       <HourBar />
       <p class="text-[0.9375rem] leading-relaxed text-ink-2">
-        Selon les auteurs, c’est ce que l’État prélève sur la valeur créée par une heure d’un
-        travailleur moyen. Pour votre propre paie, c’est le simulateur qui calcule.
+        La part qui revient à l’État sur une heure de travail moyen. Pour votre paie, le
+        simulateur calcule.
       </p>
     </div>
   </section>
@@ -103,7 +98,7 @@ const nSituations = fiches.meta.count;
         <span class="eyebrow">{nSituations} situations</span>
         <span class="font-serif text-3xl font-medium tracking-tight text-ink">Ma situation</span>
         <span class="text-base text-ink-2">
-          Retraité, locataire, enseignant, chef d’entreprise… ce que le livre promet, et ce qu’il
+          Retraité, locataire, enseignant, chef d’entreprise… ce que le plan promet, et ce qu’il
           retire, pour chacun.
         </span>
         <span class="btn btn-secondary mt-2 self-start">
@@ -117,7 +112,7 @@ const nSituations = fiches.meta.count;
         <span class="eyebrow">Tableau de bord · à explorer</span>
         <span class="font-serif text-3xl font-medium tracking-tight text-ink">Comprendre</span>
         <span class="text-base text-ink-2">
-          Dépenses publiques, agences, niches fiscales, calendrier : les données du livre en
+          Dépenses publiques, agences, niches fiscales, calendrier : les données en
           graphiques lisibles, ramenées à l’échelle d’un foyer.
         </span>
         <span class="btn btn-secondary mt-2 self-start">
@@ -151,9 +146,9 @@ const nSituations = fiches.meta.count;
         label="Agences d’État aujourd’hui"
         value={formatInteger(agencesAvant)}
         unit="agences"
-        reframe={`Le plan en fermerait ${formatInteger(agencesFermees)} et en garderait ${formatInteger(agencesApres)}. Selon les auteurs, fermer les agences non indispensables économiserait environ ${formatEuro(roundForDisplay(agencesParFoyer, 10))} par foyer et par an (sur ${FOYERS_SHORT}).`}
+        reframe={`Le plan en fermerait ${formatInteger(agencesFermees)} et en garderait ${formatInteger(agencesApres)}. Fermer les agences non indispensables économiserait environ ${formatEuro(roundForDisplay(agencesParFoyer, 10))} par foyer et par an (sur ${FOYERS_SHORT}).`}
         tier="announced"
-        source={chip('agences_etat_avant', { label: 'Classeur des auteurs' })}
+        source={chip('agences_etat_avant', { label: 'Chiffrage publié' })}
       />
       <StatTile
         as="li"
@@ -161,7 +156,7 @@ const nSituations = fiches.meta.count;
         value={formatNumber(mots / 1e6)}
         unit="millions de mots"
         reframe={`≈ ${formatNumber(roundForDisplay(lecture.hours, 10))} heures de lecture : plus de ${formatNumber(Math.floor(lecture.fullTimeYears))} ans à temps plein pour tout lire.`}
-        source={chip('droit_mots_2026', { label: 'Légifrance, décompte des auteurs' })}
+        source={chip('droit_mots_2026', { label: 'Légifrance, décompte' })}
       />
     </ul>
     <p class="mt-4 max-w-3xl text-sm text-ink-3">
@@ -169,7 +164,7 @@ const nSituations = fiches.meta.count;
       <a href={withBase('/methode/#foyers')}>Pourquoi ce choix</a>. Temps de lecture :{' '}
       {formatInteger(READING_HYPOTHESES.wordsPerMinute)}
       mots par minute et {formatInteger(READING_HYPOTHESES.fullTimeHoursPerYear)} heures de travail
-      par an (hypothèses du site, pas du livre).
+      par an (hypothèses du site).
     </p>
   </section>
 
@@ -179,9 +174,8 @@ const nSituations = fiches.meta.count;
       Ce qui est écrit, ce qui est promis, ce que nous estimons
     </h2>
     <p class="mt-3 max-w-2xl text-ink-2">
-      Un texte précis rédigé par les auteurs n’a pas le même statut qu’une promesse, ni qu’un choix
-      de calcul. Nous les distinguons partout, avec la même présentation. Aucun de ces textes n’a
-      été voté.
+      Chaque chiffre porte l’un de ces trois statuts. Les amendements sont rédigés et attendent
+      d’être déposés, puis votés.
     </p>
     <TierLegend className="mt-6" />
     <Callout
@@ -194,20 +188,19 @@ const nSituations = fiches.meta.count;
         remplacement du <GlossaryTerm id="rsa">RSA</GlossaryTerm>, de la{' '}
         <GlossaryTerm id="prime-activite">prime d’activité</GlossaryTerm>
         et de l’<GlossaryTerm id="aah">AAH</GlossaryTerm> par l’
-        <GlossaryTerm id="afu">AFU</GlossaryTerm>, que les auteurs promettent (« à la place de
+        <GlossaryTerm id="afu">AFU</GlossaryTerm>, que le plan promet (« à la place de
         toutes les aides »). Vous pouvez désactiver ce remplacement dans le simulateur.
       </p>
       <p>
-        <strong>Montré à part, jamais additionné :</strong> les promesses sans montant (compte
+        <strong>Montré à part, en dehors du total :</strong> les promesses sans montant (compte
         d’épargne, patrimoine rendu, compte éducation) et les pertes que le simulateur ne sait pas
         chiffrer.
       </p>
     </Callout>
-    <Callout tone="note" title="Ce site n’est pas neutre sur un point" className="mt-4 max-w-3xl">
+    <Callout tone="note" title="Le plan, tel qu’il est écrit" className="mt-4 max-w-3xl">
       <p>
-        Il présente le plan tel que ses auteurs l’ont écrit — c’est précisément son objet. Mais il
-        ne cache jamais un perdant, publie toutes ses hypothèses et liste ce qu’il ne sait pas
-        calculer.
+        Les perdants restent sur la page, avec les hypothèses et la liste de ce que le calcul
+        laisse de côté.
       </p>
     </Callout>
   </section>
@@ -218,8 +211,8 @@ const nSituations = fiches.meta.count;
     </h2>
     <p class="max-w-2xl text-ink-2">
       Sources, hypothèses et limites du simulateur sont détaillées dans
-      <a href={withBase('/methode/')}>la page Méthode</a>. Les chiffres du livre qui se contredisent
-      sont montrés côte à côte, jamais corrigés en silence.
+      <a href={withBase('/methode/')}>la page Méthode</a>. Les chiffres qui se contredisent
+      restent côte à côte.
     </p>
   </section>
 </BaseLayout>

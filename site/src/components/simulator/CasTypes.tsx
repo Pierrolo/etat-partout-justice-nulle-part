@@ -178,11 +178,10 @@ export default function CasTypes() {
 
   return (
     <div className="wrap space-y-8 pb-16">
-      <Callout tone="announced" title="Des cas types, pas la population">
+      <Callout tone="announced" title="Des exemples de foyers">
         <p>
-          Ces foyers sont des exemples choisis pour illustrer des situations courantes. Ce n’est pas
-          un échantillon représentatif : nous ne savons pas combien de foyers se trouvent dans
-          chaque situation. On ne peut donc pas en déduire la part des ménages qui gagnent ou
+          Ces foyers illustrent des situations courantes. Le nombre de foyers dans chaque situation
+          est inconnu, donc ces exemples ne donnent pas la part des ménages qui gagnent ou qui
           perdent.
         </p>
       </Callout>
@@ -236,7 +235,7 @@ export default function CasTypes() {
         title="Qui gagne, qui perd ?"
         subtitle={`Écart de revenu disponible par foyer type (${period === 'steady' ? 'plan complet' : period}). Chaque case ou chaque ligne est un foyer : touchez-la pour l’ouvrir dans le simulateur.`}
         summary={typo(
-          `${pattern.map((p) => p.text).join(' ')} Le plus fort gain est pour « ${bestRow.label} » (${formatEuroDelta(bestRow.delta)} par mois), la plus forte perte pour « ${worstRow.label} » (${formatEuroDelta(worstRow.delta)} par mois). Ce sont des cas types, pas une estimation de la population.`,
+          `${pattern.map((p) => p.text).join(' ')} Le plus fort gain est pour « ${bestRow.label} » (${formatEuroDelta(bestRow.delta)} par mois), la plus forte perte pour « ${worstRow.label} » (${formatEuroDelta(worstRow.delta)} par mois). Exemples de foyers.`,
         )}
         sources={SOURCES}
         note={
