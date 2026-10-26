@@ -1,0 +1,701 @@
+---
+/**
+ * /styleguide — living documentation of the design system (noindex).
+ * Everything here is rendered with the real components and tokens; copy from here.
+ * Contrast ratios are computed at build time from src/styles/tokens.css.
+ */
+import StyleguideChart from '@/components/charts/StyleguideChart';
+import PageHeader from '@/components/site/PageHeader.astro';
+import {
+  Button,
+  Callout,
+  Disclosure,
+  SourceChip,
+  StatTile,
+  TierBadge,
+  TierLegend,
+} from '@/components/ui';
+import { FormDemo, TabsDemo } from '@/components/ui/StyleguideDemos';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { categoricalNames } from '@/lib/chart-theme';
+import { contrastRatio, parseTokens, resolveLook } from '@/lib/contrast';
+import {
+  formatCompactEuro,
+  formatEuro,
+  formatEuroDelta,
+  formatEuroPer,
+  formatInteger,
+  formatNumber,
+  formatPercent,
+  parseFrenchNumber,
+  reframe,
+  reframeSentence,
+  roundForDisplay,
+} from '@/lib/format';
+import brandCiCss from '@/styles/brand-ci.css?raw';
+import tokensCss from '@/styles/tokens.css?raw';
+
+// Tokens in force on the site: tokens.css, overridden by brand-ci.css (data-brand="ci").
+const tokens = resolveLook(parseTokens(tokensCss), parseTokens(brandCiCss));
+const ratio = (fg: string, bg: string, map = tokens) => ({
+  light: contrastRatio(map.light[fg]!, map.light[bg]!),
+  dark: contrastRatio(map.dark[fg]!, map.dark[bg]!),
+});
+const fmt = (n: number) => n.toFixed(1).replace('.', ',');
+/** « #aaaaaa / #bbbbbb » (light / dark) of a token. */
+const hexPair = (t: string, map = tokens) => `${map.light[t] ?? '—'} / ${map.dark[t] ?? '—'}`;
+/** « 5,4 / 7,7 » ratios of a pair, « — » when a token does not exist. */
+const ratioText = (fg: string, bg: string, map = tokens) =>
+  map.light[fg] && map.light[bg] && map.dark[fg] && map.dark[bg]
+    ? `${fmt(ratio(fg, bg, map).light)} / ${fmt(ratio(fg, bg, map).dark)}`
+    : '—';
+// A readable subset of the guaranteed pairs, side by side (the full list: `pnpm --filter @epjn/site contrast`).
+const keyPairs: Array<[string, string, string]> = [
+  ['--ink', '--paper', 'Texte courant sur la page'],
+  ['--ink-3', '--surface', 'Texte discret sur une carte'],
+  ['--accent', '--paper', 'Liens, « le plan »'],
+  ['--gain', '--paper', 'Gain (texte)'],
+  ['--loss', '--paper', 'Perte (texte)'],
+  ['--gain-mark', '--surface', 'Gain (barre, trait) sur une carte'],
+  ['--loss-mark', '--surface', 'Perte (barre, trait) sur une carte'],
+  ['--on-accent', '--accent', 'Libellé sur une pastille « accent »'],
+  ['--on-signal', '--signal', 'Libellé sur le signal (bouton, chiffre clé)'],
+  ['--rule-strong', '--field-bg', 'Bordure d’un champ (≥ 3 : 1)'],
+];
+
+const toc = [
+  ['apparence', 'Apparence'],
+  ['couleurs', 'Couleurs'],
+  ['typographie', 'Typographie'],
+  ['niveaux', 'Niveaux de preuve'],
+  ['chiffres', 'Chiffres et sources'],
+  ['encadres', 'Encadrés et dépliants'],
+  ['formulaires', 'Formulaires'],
+  ['onglets', 'Onglets'],
+  ['graphiques', 'Graphiques'],
+  ['format', 'Formatage français'],
+  ['boutons', 'Boutons'],
+] as const;
+
+const surfaces = ['--paper', '--surface', '--sunken'] as const;
+const inks = [
+  ['--ink', 'Encre', 'Texte courant, titres'],
+  ['--ink-2', 'Encre 2', 'Texte secondaire'],
+  ['--ink-3', 'Encre 3', 'Texte discret (reste du vrai texte)'],
+] as const;
+const colorTokens = [
+  ['--accent', 'Accent « le plan »', 'Liens, actions, « avec le plan »', '--paper'],
+  ['--gain', 'Gain', 'Bleu-vert : hausse', '--paper'],
+  ['--loss', 'Perte', 'Orange-vermillon : baisse', '--paper'],
+] as const;
+const seq = [1, 2, 3, 4, 5, 6, 7];
+const div = [
+  '--div-loss-4',
+  '--div-loss-3',
+  '--div-loss-2',
+  '--div-loss-1',
+  '--div-mid',
+  '--div-gain-1',
+  '--div-gain-2',
+  '--div-gain-3',
+  '--div-gain-4',
+];
+
+const ex = {
+  households: 30_000_000,
+};
+const r = reframe({ annualTotal: 1.672e12, households: ex.households });
+
+const formatRows: Array<[string, string]> = [
+  ['formatEuro(1234.56)', formatEuro(1234.56)],
+  ['formatEuro(1234.5, { decimals: 2 })', formatEuro(1234.5, { decimals: 2 })],
+  ['formatEuroDelta(212)', formatEuroDelta(212)],
+  ['formatEuroDelta(-85)', formatEuroDelta(-85)],
+  ['formatEuroPer(212, "mois", { signed: true })', formatEuroPer(212, 'mois', { signed: true })],
+  ['formatPercent(0.09, { signed: true })', formatPercent(0.09, { signed: true })],
+  ['formatPercent(0.571, { decimals: 1 })', formatPercent(0.571, { decimals: 1 })],
+  ['formatCompactEuro(1.672e12)', formatCompactEuro(1.672e12)],
+  ['formatCompactEuro(236e9, { long: true })', formatCompactEuro(236e9, { long: true })],
+  ['formatInteger(49_000_000)', formatInteger(49_000_000)],
+  ['formatNumber(3.14159, { decimals: 2 })', formatNumber(3.14159, { decimals: 2 })],
+  ['roundForDisplay(212.4)  // évite la fausse précision', formatEuro(roundForDisplay(212.4))],
+  ['parseFrenchNumber("1 234,5 €")', String(parseFrenchNumber('1 234,5 €'))],
+  ['reframeSentence(reframe({ annualTotal: 1.672e12, households: 30e6 }))', reframeSentence(r)],
+];
+---
+
+<BaseLayout
+  title="Guide de style"
+  description="Documentation vivante du système de design : couleurs, typographie, composants."
+  noindex
+>
+  <PageHeader
+    eyebrow="Guide de style · usage interne"
+    title="Le système de design, en vrai"
+    lede="Tous les composants et jetons du site, tels qu’ils s’affichent. Copiez d’ici : n’inventez pas de couleur, de taille ni de composant."
+  />
+
+  <div class="wrap space-y-20">
+    <nav aria-label="Sections du guide" class="-mt-4">
+      <ul class="flex flex-wrap gap-x-5 gap-y-1 text-sm">
+        {toc.map(([id, label]) => (
+          <li>
+            <a href={`#${id}`} class="inline-flex min-h-8 items-center">
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- ───────────────────────── APPARENCE ───────────────────────── -->
+    <section id="apparence" aria-labelledby="apparence-t" class="space-y-6">
+      <div>
+        <h2 id="apparence-t" class="text-3xl">
+          Apparence
+        </h2>
+        <p class="mt-2 max-w-2xl text-ink-2">
+          Une seule identité, construite sur les jetons. Schibsted Grotesk pour le texte et les
+          titres, JetBrains Mono pour les étiquettes et les chiffres clés, papier et encre, un seul
+          accent chaud (le signal). Le thème clair ou sombre se règle en haut de page. Aucun
+          composant ne connaît la marque : tous lisent les jetons.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto" tabindex="0" role="region" aria-label="Contrastes clés">
+        <table class="data-table min-w-[28rem]">
+          <caption>
+            Contrastes WCAG des paires clés, clair / sombre. Toutes les paires du système sont
+            vérifiées (<code>pnpm --filter @epjn/site contrast</code>).
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Paire</th>
+              <th scope="col" data-numeric>
+                Contraste
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {keyPairs.map(([fg, bg, use]) => (
+              <tr>
+                <th scope="row" class="font-medium">
+                  {use}
+                  <span class="block font-mono text-xs font-normal text-ink-3">
+                    {fg.slice(2)} sur {bg.slice(2)}
+                  </span>
+                </th>
+                <td data-numeric>{ratioText(fg, bg)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <dl class="grid gap-x-8 gap-y-3 text-sm sm:grid-cols-[10rem_1fr]">
+        <dt class="font-semibold text-ink">Accent</dt>
+        <dd class="text-ink-2">
+          Le plan est tracé en encre. L’unique accent chaud, le <strong>signal</strong> (
+          <code>#ff5a1f</code>
+          ), ne sert qu’à des aplats et des traits — action principale, chiffre clé, repère de
+          navigation, hachures — jamais à du texte sur le papier (2,8 : 1). Texte sur le signal :
+          toujours l’encre.
+        </dd>
+        <dt class="font-semibold text-ink">Gain et perte</dt>
+        <dd class="text-ink-2">
+          <strong>Teal</strong> pour le gain, <strong>orange dérivé du signal</strong> pour la perte
+          (une variante sombre pour le texte, une variante plus claire pour les marques). Les deux
+          se distinguent aussi par la <em>clarté</em>, jamais seulement par la teinte, et par le
+          signe, la flèche et les mots.
+        </dd>
+        <dt class="font-semibold text-ink">Typographie</dt>
+        <dd class="text-ink-2">
+          Schibsted Grotesk (tout le texte, titres alignés à gauche) et JetBrains Mono pour les
+          étiquettes en capitales numérotées (« 01 — VOTRE FOYER ») et les chiffres clés.
+        </dd>
+        <dt class="font-semibold text-ink">Formes</dt>
+        <dd class="text-ink-2">
+          Angles droits par défaut, 4 px pour les cartes et les boutons, pastilles pour les
+          étiquettes ; cartes en aplat « paper-deep » sans cadre, filets de 1,5 px, aucune ombre,
+          aucun dégradé.
+        </dd>
+        <dt class="font-semibold text-ink">Hachures</dt>
+        <dd class="text-ink-2">
+          « Annoncé, sans texte précis » : hachures et contour tireté, tracés en signal à 45°,
+          réservés à la zone mise en avant.
+        </dd>
+      </dl>
+    </section>
+
+    <!-- ───────────────────────── COULEURS ───────────────────────── -->
+    <section id="couleurs" aria-labelledby="couleurs-t" class="space-y-10">
+      <div>
+        <h2 id="couleurs-t" class="text-3xl">
+          Couleurs
+        </h2>
+        <p class="mt-2 max-w-2xl text-ink-2">
+          Deux fonds (<code>paper</code> clair, <code>ink</code> sombre),{' '}
+          <strong>un seul accent chaud</strong> (<code>signal</code>), le teal en second plan, des
+          neutres chauds. Le thème sombre est dérivé du clair : fond encre, surfaces{' '}
+          <code>ink-soft</code>, texte papier, texte secondaire <code>muted-dark</code>. Thème clair
+          et sombre via <code>light-dark()</code>
+          &#8239;: basculez avec le bouton en haut de page. Ratios de contraste : clair / sombre.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="mb-3 text-lg">Surfaces et encres</h3>
+        <ul class="grid gap-3 sm:grid-cols-3">
+          {surfaces.map((s) => (
+            <li class="overflow-hidden rounded-lg border border-rule">
+              <div class="h-16" style={`background: var(${s})`} />
+              <div class="bg-surface p-3 text-sm">
+                <p class="font-semibold text-ink">{s.slice(2)}</p>
+                <p class="font-mono text-xs text-ink-3">{hexPair(s)}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <ul class="mt-3 grid gap-3 sm:grid-cols-3">
+          {inks.map(([t, name, use]) => (
+            <li class="rounded-lg border border-rule bg-surface p-4">
+              <p class="font-serif text-2xl" style={`color: var(${t})`}>
+                Aa {name}
+              </p>
+              <p class="mt-1 text-sm text-ink-2">{use}</p>
+              <p class="mt-2 font-mono text-xs text-ink-3">{hexPair(t)}</p>
+              <p class="mt-1 text-xs text-ink-3">Sur papier : {ratioText(t, '--paper')}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="mb-3 text-lg">Accent et polarité</h3>
+        <ul class="grid gap-3 sm:grid-cols-3">
+          {colorTokens.map(([t, name, use, bg]) => (
+            <li class="overflow-hidden rounded-lg border border-rule">
+              <div class="h-16" style={`background: var(${t})`} />
+              <div class="space-y-1 bg-surface p-3 text-sm">
+                <p class="font-semibold text-ink">{name}</p>
+                <p class="text-ink-2">{use}</p>
+                <p class="font-mono text-xs text-ink-3">{hexPair(t)}</p>
+                <p class="text-xs text-ink-3">Sur papier : {ratioText(t, bg)}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="mb-1 text-lg">Graphiques · catégoriel (identité)</h3>
+        <p class="mb-3 max-w-2xl text-sm text-ink-2">
+          Huit teintes, ordre fixe, jamais cyclées. Au-delà de huit : « Autres ». Validé (ΔE OKLab,
+          simulation protanopie/deutéranopie) : voisins ≥ 13,3 en daltonisme, ≥ 22,8 en vision
+          normale (≥ 11 entre deux teintes quelconques) ; chaque teinte ≥ 3 : 1 sur le papier et sur
+          la carte. Trois premières séries sûres en nuage de points.
+        </p>
+        <ul class="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8">
+          {categoricalNames.map((name, i) => (
+            <li class="rounded-md border border-rule bg-surface p-2">
+              <div class="h-10 rounded-sm" style={`background: var(--series-${i + 1})`} />
+              <p class="mt-1.5 text-xs font-semibold text-ink">
+                {i + 1}. {name}
+              </p>
+              <p class="font-mono text-[0.6875rem] text-ink-3">
+                {tokens.light[`--series-${i + 1}`] ?? ''}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2">
+        <div>
+          <h3 class="mb-1 text-lg">Séquentiel (grandeur)</h3>
+          <p class="mb-3 text-sm text-ink-2">Une teinte, clair → foncé (inversé en sombre).</p>
+          <ul class="flex overflow-hidden rounded-md border border-rule">
+            {seq.map((n) => (
+              <li class="h-12 flex-1" style={`background: var(--seq-${n})`} />
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="mb-1 text-lg">Divergent (polarité)</h3>
+          <p class="mb-3 text-sm text-ink-2">
+            Perte | neutre | gain. Même nombre de pas de chaque côté.
+          </p>
+          <ul class="flex overflow-hidden rounded-md border border-rule">
+            {div.map((t) => (
+              <li class="h-12 flex-1" style={`background: var(${t})`} />
+            ))}
+          </ul>
+          <div class="mt-1 flex justify-between text-xs text-ink-3">
+            <span>− perte</span>
+            <span>0</span>
+            <span>gain +</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="mb-1 text-lg">Traitements « promis, sans texte précis »</h3>
+        <p class="mb-3 max-w-2xl text-sm text-ink-2">
+          Hachures à 45° (classes <code>hatch</code>, <code>hatch-fine</code>), tracées en signal,
+          et contour en tirets : jamais décoratifs, réservés à ce qui n’est pas proposé dans un
+          amendement.
+        </p>
+        <div class="grid gap-3 sm:grid-cols-3">
+          <div class="hatch rounded-md border-[1.5px] border-dashed border-[var(--tier-announced-bd)] bg-surface p-4 text-sm text-ink">
+            <code>hatch</code> + contour tireté
+          </div>
+          <div class="hatch-fine rounded-md border-[1.5px] border-dashed border-[var(--tier-announced-bd)] bg-surface p-4 text-sm text-ink">
+            <code>hatch-fine</code> (badges)
+          </div>
+          <div class="rounded-md border-[1.5px] border-dotted border-[var(--tier-hypothesis-bd)] bg-sunken p-4 text-sm text-ink">
+            Hypothèse : fond creux, contour pointillé
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── TYPOGRAPHIE ───────────────────────── -->
+    <section id="typographie" aria-labelledby="typo-t" class="space-y-8">
+      <div>
+        <h2 id="typo-t" class="text-3xl">
+          Typographie
+        </h2>
+        <p class="mt-2 max-w-2xl text-ink-2">
+          <strong>Schibsted Grotesk</strong> pour tout le texte et les titres (gras, serrés, alignés
+          à gauche) ; <strong>JetBrains Mono</strong> pour les étiquettes en capitales (« 01 — VOTRE
+          FOYER ») et les chiffres clés. Polices servies localement, sous-ensemble latin. L’espace
+          fine insécable des milliers vient d’une police de 324 octets. Les colonnes de montants
+          utilisent
+          <code>num</code> (chiffres tabulaires).
+        </p>
+      </div>
+
+      <div class="space-y-6 rounded-lg border border-rule bg-surface p-5 sm:p-8">
+        <div>
+          <p class="eyebrow mb-1">.display — accroche</p>
+          <p class="display">Ce que le plan changerait.</p>
+        </div>
+        <div>
+          <p class="eyebrow mb-1">h1 — titre de page (font-serif text-4xl)</p>
+          <p class="font-serif text-4xl font-medium tracking-tight">Où va l’argent public ?</p>
+        </div>
+        <div>
+          <p class="eyebrow mb-1">h2 — section</p>
+          <h2 class="text-3xl">Trois niveaux de preuve</h2>
+        </div>
+        <div>
+          <p class="eyebrow mb-1">h3 — sous-section</p>
+          <h3 class="text-xl">Ce que le simulateur ne compte pas</h3>
+        </div>
+        <div>
+          <p class="eyebrow mb-1">.lede — chapô</p>
+          <p class="lede">
+            En moins d’une minute, voyez en euros par mois ce que le plan changeraient pour votre
+            foyer.
+          </p>
+        </div>
+        <div class="prose-epjn">
+          <p class="eyebrow mb-1">.prose-epjn — texte courant (mesure ≈ 68 caractères)</p>
+          <p>
+            Là où le texte de loi est muet, nous faisons un choix, nous le numérotons et nous le
+            rendons modifiable quand il compte. Voir le{' '}
+            <a href="#typographie">registre des hypothèses</a>, les{' '}
+            <abbr title="Contribution sociale généralisée">CSG</abbr> et la
+            <em>flat tax</em>.
+          </p>
+          <ul>
+            <li>Une liste à puces sobre.</li>
+            <li>Avec des marqueurs en encre discrète.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="eyebrow mb-1">.stat-number — grand chiffre (serif, proportionnel)</p>
+          <p class="stat-number">
+            1 672 <span class="font-serif text-2xl text-ink-2">Md€</span>
+          </p>
+        </div>
+        <div class="max-w-md">
+          <p class="eyebrow mb-1">.num — montants en colonne (tabulaires, alignés à droite)</p>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Poste</th>
+                <th scope="col" data-numeric>
+                  €/mois
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="font-medium">
+                  Salaire net
+                </th>
+                <td data-numeric>{formatEuroDelta(212)}</td>
+              </tr>
+              <tr>
+                <th scope="row" class="font-medium">
+                  Impôt à 23 %
+                </th>
+                <td data-numeric>{formatEuroDelta(-1087)}</td>
+              </tr>
+              <tr>
+                <th scope="row" class="font-medium">
+                  Allocation
+                </th>
+                <td data-numeric>{formatEuroDelta(8)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── NIVEAUX ───────────────────────── -->
+    <section id="niveaux" aria-labelledby="niveaux-t" class="space-y-6">
+      <div>
+        <h2 id="niveaux-t" class="text-3xl">
+          Niveaux de preuve
+        </h2>
+        <p class="mt-2 max-w-2xl text-ink-2">
+          Trois statuts, trois grammaires visuelles : <strong>plein</strong> (proposé dans un
+          amendement),
+          <strong>hachuré et tireté</strong> (annoncé), <strong>pointillé creux</strong> (notre
+          estimation). Icône + texte + bordure : la couleur ne porte jamais seule l’information.
+        </p>
+      </div>
+      <TierLegend />
+      <div class="flex flex-wrap items-center gap-3">
+        <TierBadge tier="law" size="sm" />
+        <TierBadge tier="announced" size="sm" />
+        <TierBadge tier="hypothesis" size="sm" />
+        <span class="text-sm text-ink-3">
+          taille <code>sm</code>
+        </span>
+        <TierBadge tier="law" short />
+        <TierBadge tier="announced" short />
+        <TierBadge tier="hypothesis" short />
+        <span class="text-sm text-ink-3">libellé court</span>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── CHIFFRES ───────────────────────── -->
+    <section id="chiffres" aria-labelledby="chiffres-t" class="space-y-6">
+      <div>
+        <h2 id="chiffres-t" class="text-3xl">
+          Chiffres et sources
+        </h2>
+        <p class="mt-2 max-w-2xl text-ink-2">
+          <code>StatTile</code>&#8239;: un grand chiffre n’est jamais seul — il a une unité lisible
+          à voix haute, un équivalent à l’échelle humaine et une source.
+        </p>
+      </div>
+      <ul class="grid gap-4 md:grid-cols-3">
+        <StatTile
+          as="li"
+          label="Dépenses publiques par an"
+          value="1 672"
+          unit="Md€"
+          unitLabel="milliards d’euros"
+          reframe={reframeSentence(r)}
+          source={{ label: 'Exemple · facts.json', year: 2024 }}
+        />
+        <StatTile
+          as="li"
+          label="Effet du plan sur ce foyer"
+          value={formatEuroDelta(212).replace(/ €$/, '')}
+          unit="€/mois"
+          unitLabel="euros par mois"
+          tone="gain"
+          reframe={`soit ${formatPercent(0.09, { signed: true })} de revenu disponible`}
+          source={{ label: 'Amendement PLF-P1 n° 28', tier: 'law', href: '#chiffres' }}
+        />
+        <StatTile
+          as="li"
+          label="Ce foyer perdrait"
+          value={formatEuroDelta(-85).replace(/ €$/, '')}
+          unit="€/mois"
+          unitLabel="euros par mois"
+          tone="loss"
+          reframe={`soit ${formatPercent(-0.04, { signed: true })} : dit aussi clairement qu’un gain`}
+          source={{ label: 'Hypothèse H1 · AFU remplace le RSA', tier: 'hypothesis' }}
+        />
+      </ul>
+      <div class="grid gap-4 md:grid-cols-2">
+        <StatTile
+          label="Compte épargne annoncé (CEP)"
+          value="300"
+          unit="€/mois"
+          unitLabel="euros par mois"
+          tone="accent"
+          tier="announced"
+          reframe="Montant annoncé, hors revenu disponible : 0 € par défaut dans le texte."
+          source={{ label: 'Fiche', tier: 'announced' }}
+        />
+        <div class="card space-y-3">
+          <p class="text-sm font-medium text-ink-2">
+            <code>SourceChip</code> — variantes
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <SourceChip label="Amendement PLF-P1 n° 28" tier="law" href="https://example.org/" />
+            <SourceChip label="Manifeste, p. 41" tier="announced" />
+            <SourceChip label="Hypothèse H2" tier="hypothesis" />
+            <SourceChip label="Insee, comptes nationaux" year={2024} href="https://example.org/" />
+            <SourceChip label="Tableur « Dépenses », cellule B12" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── ENCADRÉS ───────────────────────── -->
+    <section id="encadres" aria-labelledby="encadres-t" class="space-y-6">
+      <h2 id="encadres-t" class="text-3xl">
+        Encadrés et dépliants
+      </h2>
+      <div class="grid gap-4 md:grid-cols-2">
+        <Callout tone="note" title="Note">
+          <p>Information neutre : définition, précision de méthode.</p>
+        </Callout>
+        <Callout tone="plan" title="Le plan">
+          <p>Ce que prévoit le plan, tel qu’il est écrit.</p>
+        </Callout>
+        <Callout tone="gain" title="Vous gagneriez">
+          <p>Un foyer qui gagne : +212 € par mois.</p>
+        </Callout>
+        <Callout tone="loss" title="Vous perdriez">
+          <p>Un foyer qui perd : −85 € par mois. Même importance que les gains.</p>
+        </Callout>
+      </div>
+      <Callout tone="announced" title="Hors revenu disponible">
+        <p>
+          Promesses sans montant légal : compte épargne (300 € par mois annoncés), restitution du
+          patrimoine, compte éducation. « Montant fixé chaque année par la loi de finances ; 0 € par
+          défaut dans le texte. »
+        </p>
+      </Callout>
+      <div class="max-w-2xl">
+        <Disclosure summary="Voir le calcul" meta="3 lignes">
+          <p>
+            Salaire net après suppression de la CSG et de la CRDS : 1 850 € × 1,0 = 1 850 €. Chaque
+            ligne renvoie à sa source.
+          </p>
+        </Disclosure>
+        <Disclosure summary="Et si je loue depuis avant juin 2027 ?">
+          <p>Le bail en cours est pris en compte : voir la transition de l’aide au logement.</p>
+        </Disclosure>
+        <Disclosure summary="Variante en carte" variant="card" defaultOpen className="mt-4">
+          <p>Un dépliant encadré, ouvert par défaut. Natif : clavier et lecteurs d’écran inclus.</p>
+        </Disclosure>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── FORMULAIRES ───────────────────────── -->
+    <section id="formulaires" aria-labelledby="form-t" class="space-y-6">
+      <div>
+        <h2 id="form-t" class="text-3xl">
+          Formulaires
+        </h2>
+        <p class="mt-2 max-w-2xl text-ink-2">
+          <code>NumberInput</code> (texte + <code>inputmode="decimal"</code>, jamais
+          <code>type="number"</code>) accepte « 1 850,50 », « 1850.5 » ou « 2 500 € ».
+          <code>SegmentedControl</code> repose sur de vrais boutons radio. <code>Stepper</code>{' '}
+          compte les enfants ; <code>StepIndicator</code> suit la progression sur mobile.
+        </p>
+      </div>
+      <div class="card">
+        <FormDemo client:load />
+      </div>
+    </section>
+
+    <!-- ───────────────────────── ONGLETS ───────────────────────── -->
+    <section id="onglets" aria-labelledby="tabs-t" class="space-y-6">
+      <div>
+        <h2 id="tabs-t" class="text-3xl">
+          Onglets
+        </h2>
+        <p class="mt-2 max-w-2xl text-ink-2">
+          Modèle OWID : Graphique · Tableau · Sources. Flèches, Début, Fin au clavier.
+        </p>
+      </div>
+      <div class="card">
+        <TabsDemo client:load />
+      </div>
+    </section>
+
+    <!-- ───────────────────────── GRAPHIQUES ───────────────────────── -->
+    <section id="graphiques" aria-labelledby="graph-t" class="space-y-6">
+      <div>
+        <h2 id="graph-t" class="text-3xl">
+          Graphiques
+        </h2>
+        <p class="mt-2 max-w-2xl text-ink-2">
+          <code>ChartFrame</code> + <code>PlotFigure</code> (Observable Plot) : titre, sous-titre,
+          graphique, lecture en clair, source, « Voir les données », CSV. Marques fines, grille
+          discrète, étiquettes directes sélectives, signe explicite. Palette et formateurs :
+          <code>@/lib/chart-theme</code>.
+        </p>
+      </div>
+      <StyleguideChart client:visible />
+    </section>
+
+    <!-- ───────────────────────── FORMAT ───────────────────────── -->
+    <section id="format" aria-labelledby="format-t" class="space-y-6">
+      <div>
+        <h2 id="format-t" class="text-3xl">
+          Formatage français
+        </h2>
+        <p class="mt-2 max-w-2xl text-ink-2">
+          Tout nombre affiché passe par <code>@/lib/format</code>&#8239;: espace fine insécable
+          (U+202F) pour les milliers, espace insécable avant € et %, virgule décimale, vrai signe
+          moins (U+2212).
+        </p>
+      </div>
+      <div
+        class="max-w-3xl overflow-x-auto rounded-lg border border-rule bg-surface"
+        role="region"
+        aria-label="Exemples de formatage"
+        tabindex="0"
+      >
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Appel</th>
+              <th scope="col">Résultat</th>
+            </tr>
+          </thead>
+          <tbody>
+            {formatRows.map(([call, out]) => (
+              <tr>
+                <th scope="row" class="font-mono text-xs font-normal text-ink-2">
+                  {call}
+                </th>
+                <td class="font-medium text-ink">{out}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── BOUTONS ───────────────────────── -->
+    <section id="boutons" aria-labelledby="btn-t" class="space-y-6">
+      <h2 id="btn-t" class="text-3xl">
+        Boutons
+      </h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <Button>Primaire</Button>
+        <Button variant="secondary">Secondaire</Button>
+        <Button variant="ghost">Discret</Button>
+        <Button size="sm" variant="secondary">
+          Petit
+        </Button>
+        <Button href="#boutons">Lien-bouton</Button>
+        <Button disabled>Désactivé</Button>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

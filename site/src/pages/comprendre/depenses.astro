@@ -1,0 +1,161 @@
+---
+import { DepensesExplorer } from '@/components/story/DepensesExplorer';
+import EuropeBlock from '@/components/story/EuropeBlock.astro';
+import { HundredSquares } from '@/components/story/HundredSquares';
+import { StatTile } from '@/components/ui';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
+import { chip, datasetChip, num } from '@/lib/facts';
+import { FOYERS, FOYERS_LABEL, FOYERS_SHORT, perFoyerDay, perFoyerMonth } from '@/lib/foyers';
+import { formatEuro, formatMdEuro, formatNumber, formatPercentPoints } from '@/lib/format';
+import { cofogMeta, cofogTree, europeData } from '@/lib/story-data';
+
+// ── Every number below is read from facts.json or from the datasets built by pipeline/ ─────
+const tree = cofogTree();
+const total = num('dep_total_2024_md');
+const year = cofogMeta.year;
+const den = { foyers: FOYERS, habitants: num('fiche_pop_citoyens') };
+const perDay = perFoyerDay(total);
+const perMonth = perFoyerMonth(total);
+const perYearBook = num('dep_par_foyer_manifeste_eur');
+const foyersM = (m: number) => formatNumber(m, { decimals: { min: 0, max: 1 } });
+
+const denominatorNotes = {
+  foyer: `Montant national ÷ ${FOYERS_LABEL}, le chiffre écrit dans les fiches. D’autres dénominateurs « par foyer » existent : ils sont comparés dans la page Méthode, et ne se comparent pas entre eux.`,
+  habitant: `Montant national ÷ ${foyersM(den.habitants / 1e6)} millions de personnes : le nombre de citoyens donné en tête de la fiche « Citoyen » (annoncé, non vérifié par une statistique).`,
+};
+
+const sourcesChart = [
+  chip('dep_total_2024_md', { label: 'Insee, comptes nationaux (tableau 3.301)' }),
+  datasetChip(cofogMeta.source.workbook, {
+    label: 'Chiffrage publié, Graph1672Md',
+    tier: 'annonce',
+  }),
+];
+
+const sourceItems = [
+  {
+    chip: chip('dep_total_2024_md', { label: 'Insee, comptes nationaux (tableau 3.301)' }),
+    text: `Dépenses des administrations publiques par fonction (COFOG), ${year} : ${formatMdEuro(total)} au total.`,
+  },
+  {
+    chip: datasetChip(cofogMeta.source.workbook, {
+      label: 'Chiffrage publié, Graph1672Md',
+      tier: 'annonce',
+    }),
+    text: 'Regroupement des fonctions en six groupes et seize postes : celui du graphique.',
+  },
+  {
+    chip: chip('fiche_pop_foyers', { label: 'france-resolution.fr, fiches' }),
+    text: `Dénominateur « par foyer » : ${FOYERS_LABEL}, chiffre écrit dans les fiches « Foyer » et « Contribuable ». L’annonce écrit « ${formatEuro(perYearBook)} par foyer et par an » avec un autre nombre de foyers, déduit : les quatre dénominateurs sont comparés dans la page Méthode.`,
+  },
+  {
+    chip: chip('fiche_pop_citoyens', { label: 'france-resolution.fr, fiche « Citoyen »' }),
+    text: `Dénominateur « par habitant » : ${foyersM(den.habitants / 1e6)} millions de personnes.`,
+  },
+];
+const gaps = [
+  cofogMeta.checks.note,
+  ...cofogMeta.notes.filter((n) => !n.startsWith('« Défense')),
+  `Plusieurs dénominateurs « par foyer » coexistent : le site retient ${FOYERS_LABEL} partout, et détaille les autres dans la page Méthode.`,
+].filter(Boolean);
+
+const sourcesSquares = [
+  chip('dep_total_2024_md', { label: 'Insee, comptes nationaux (tableau 3.301)' }),
+];
+
+const secu = num('dep_part_securite_pct');
+const eu = europeData();
+const nRanked = eu.rows.filter((r) => r.dep24 !== null).length;
+const rank = num('eu_dep_rang_fr_2024');
+const frDep = num('eu_dep_pib_fr_2024_pct');
+const eaDep = num('eu_dep_pib_ea20_2024_pct');
+const sharePct = (v: number) => formatPercentPoints(v, { decimals: 1 });
+---
+
+<DashboardLayout
+  slug="depenses"
+  lede={`En ${year}, les administrations publiques ont dépensé ${formatMdEuro(total)} : ${formatEuro(perDay)} par foyer et par jour, ou ${formatEuro(perMonth)} par mois.`}
+>
+  <!-- Headline numbers -->
+  <section aria-labelledby="chiffres-titre">
+    <h2 id="chiffres-titre" class="sr-only">
+      Les chiffres clés
+    </h2>
+    <ul class="grid gap-4 md:grid-cols-3 md:gap-6">
+      <StatTile
+        as="li"
+        label={`Dépenses publiques en ${year}`}
+        value={formatNumber(total)}
+        unit="Md€"
+        unitLabel="milliards d’euros"
+        reframe={`= ${formatEuro(perDay)} par foyer et par jour, sur ${FOYERS_SHORT}.`}
+        source={chip('dep_total_2024_md', { label: 'Insee, comptes nationaux' })}
+      />
+      <StatTile
+        as="li"
+        label="Par foyer et par an"
+        value={formatNumber(perYearBook)}
+        unit="€"
+        tier="announced"
+        reframe={`= ${formatEuro(perYearBook / 12)} par mois, avec un autre dénominateur (voir la Méthode). L’annonce ajoute « record mondial » : voir plus bas.`}
+        source={chip('dep_par_foyer_manifeste_eur', { label: 'france-resolution.fr' })}
+      />
+      <StatTile
+        as="li"
+        label="Part du PIB, comparaison européenne"
+        value={formatNumber(frDep, { decimals: 1 })}
+        unit="% du PIB"
+        reframe={`${rank}e sur ${nRanked} pays ; zone euro : ${formatNumber(eaDep, { decimals: 1 })} %.`}
+        source={chip('eu_dep_pib_fr_2024_pct', { label: 'Eurostat' })}
+      />
+    </ul>
+  </section>
+
+  <!-- The treemap -->
+  <section aria-labelledby="carte-titre" class="space-y-4">
+    <div class="max-w-2xl space-y-2">
+      <h2 id="carte-titre" class="text-3xl text-ink">
+        Où va l’argent public ?
+      </h2>
+      <p class="text-ink-2">
+        Chaque bloc est une fonction de l’État, des collectivités et de la Sécurité sociale. Plus il
+        est grand, plus l’argent est important. Choisissez l’unité : un montant national est
+        difficile à se représenter, ramené à un foyer et à une journée il le devient.
+      </p>
+    </div>
+    <DepensesExplorer
+      client:visible={{ rootMargin: '400px' }}
+      tree={tree}
+      den={den}
+      denominatorNotes={denominatorNotes}
+      sources={sourcesChart}
+      sourceItems={sourceItems}
+      gaps={gaps}
+      year={year}
+    />
+  </section>
+
+  <!-- 100 € -->
+  <section aria-labelledby="cent-titre" class="space-y-4">
+    <div class="max-w-2xl space-y-2">
+      <h2 id="cent-titre" class="text-3xl text-ink">
+        Si l’argent public était 100 €
+      </h2>
+      <p class="text-ink-2">
+        Un chiffre revient : défense, police et justice ne reçoivent que
+        <strong>{sharePct(secu)}</strong> de la dépense, soit {formatEuro(secu, { decimals: 1 })}{' '}
+        sur 100 € (l’annonce arrondit à{' '}
+        {formatPercentPoints(num('dep_part_regalien_manifeste_pct'), { decimals: 0 })}). Trouvez-les
+        dans la grille.
+      </p>
+    </div>
+    <HundredSquares
+      client:visible={{ rootMargin: '400px' }}
+      tree={tree}
+      sources={sourcesSquares}
+      year={year}
+    />
+  </section>
+
+  <EuropeBlock />
+</DashboardLayout>

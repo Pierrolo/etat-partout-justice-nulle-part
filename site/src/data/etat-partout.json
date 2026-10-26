@@ -1,0 +1,2062 @@
+{
+ "agences": {
+  "autonomie": 303,
+  "cession": 78,
+  "etat_apres": 303,
+  "etat_avant": 1104,
+  "fermees": 746,
+  "internalisation": 55,
+  "locales": 23264,
+  "matrice": [
+   {
+    "autorite_independante": 5,
+    "cession": 78,
+    "epic_enseignement": 258,
+    "epic_musee": 40,
+    "id": "agences_etat",
+    "internalisation": 55,
+    "label_fr": "Agences Etat",
+    "row": 5,
+    "suppression": 668,
+    "total": 1104
+   },
+   {
+    "autorite_independante": 0,
+    "cession": 15,
+    "epic_enseignement": 226,
+    "epic_musee": 36,
+    "id": "operateurs_plf",
+    "internalisation": 34,
+    "label_fr": "Opérateurs (PLF)",
+    "row": 6,
+    "suppression": 123,
+    "total": 434
+   },
+   {
+    "autorite_independante": 0,
+    "cession": 63,
+    "epic_enseignement": 32,
+    "epic_musee": 4,
+    "id": "organismes_hors_plf",
+    "internalisation": 12,
+    "label_fr": "Organismes hors PLF",
+    "row": 7,
+    "suppression": 217,
+    "total": 328
+   },
+   {
+    "autorite_independante": 5,
+    "cession": 0,
+    "epic_enseignement": 0,
+    "epic_musee": 0,
+    "id": "autorites_independantes",
+    "internalisation": 9,
+    "label_fr": "Autorités indépendantes",
+    "row": 8,
+    "suppression": 10,
+    "total": 24
+   },
+   {
+    "autorite_independante": 0,
+    "cession": 0,
+    "epic_enseignement": 0,
+    "epic_musee": 0,
+    "id": "commissions",
+    "internalisation": 0,
+    "label_fr": "Commissions",
+    "row": 9,
+    "suppression": 318,
+    "total": 318
+   },
+   {
+    "autorite_independante": 0,
+    "cession": 347,
+    "epic_enseignement": 9140,
+    "epic_musee": 0,
+    "id": "agences_locales",
+    "internalisation": 296,
+    "label_fr": "Agences locales",
+    "row": 10,
+    "suppression": 13481,
+    "total": 23264
+   },
+   {
+    "autorite_independante": 0,
+    "cession": 347,
+    "epic_enseignement": 9140,
+    "epic_musee": 0,
+    "id": "organismes_hors_plf_locaux",
+    "internalisation": 296,
+    "label_fr": "Organismes hors PLF",
+    "row": 11,
+    "suppression": 13481,
+    "total": 23264
+   },
+   {
+    "autorite_independante": 5,
+    "cession": 425,
+    "epic_enseignement": 9398,
+    "epic_musee": 40,
+    "id": "total_agences",
+    "internalisation": 351,
+    "label_fr": "Total agences",
+    "row": 12,
+    "suppression": 14149,
+    "total": 24368
+   }
+  ],
+  "note": "Agences d'État 1 104 = opérateurs PLF 434 + organismes hors PLF 328 + autorités indépendantes 24 + commissions 318. La ligne « Organismes hors PLF » sous « Agences locales » répète les 23 264 agences locales (même nombre) : ne pas la sommer deux fois. Détail dans agences.json.",
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse ETP et agences Résolution_0910.xlsx › Synthèse agences R › C5:J12",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20ETP%20et%20agences%20R%C3%A9solution_0910.xlsx"
+  },
+  "suppression": 668,
+  "total_avec_locales": 24368
+ },
+ "effectifs_publics": {
+  "collectivites": [
+   {
+    "id": "communes",
+    "label_fr": "Communes",
+    "milliers": 1028.952
+   },
+   {
+    "id": "etab_communaux_interco",
+    "label_fr": "Établissements communaux et intercommunaux",
+    "milliers": 508.447
+   },
+   {
+    "id": "departements",
+    "label_fr": "Départements (y c. établissements départementaux)",
+    "milliers": 357.936
+   },
+   {
+    "id": "regions",
+    "label_fr": "Régions",
+    "milliers": 98.855
+   }
+  ],
+  "etat": [
+   {
+    "id": "securite",
+    "label_fr": "Sécurité (armées, intérieur, justice…)",
+    "milliers": 679.027
+   },
+   {
+    "id": "enseignants",
+    "label_fr": "Enseignants",
+    "milliers": 896.597
+   },
+   {
+    "id": "non_regaliens",
+    "label_fr": "Ministères non régaliens",
+    "milliers": 445.634
+   },
+   {
+    "id": "agences",
+    "label_fr": "Agences (opérateurs)",
+    "milliers": 548.979
+   }
+  ],
+  "etat_note": "GraphETP : 2 570,237 k = ministères (2 021,258) + opérateurs/EPA (548,979), regroupés par le livre en Sécurité / Enseignants / non régaliens / Agences.",
+  "hopitaux": [
+   {
+    "id": "fph",
+    "label_fr": "Caisses et établissements de santé (FPH)",
+    "milliers": 1239.435
+   }
+  ],
+  "par_statut": {
+   "autres": 378.899,
+   "contractuels": 1358.476,
+   "fonctionnaires": 3753.124,
+   "militaires": 313.363
+  },
+  "par_versant": {
+   "fpe": {
+    "label_fr": "Fonction publique de l'État",
+    "par_statut": [
+     {
+      "cell": "C9",
+      "milliers": 1504.471,
+      "statut": "Fonctionnaires"
+     },
+     {
+      "cell": "C10",
+      "milliers": 582.699,
+      "statut": "Contractuels"
+     },
+     {
+      "cell": "C11",
+      "milliers": 313.363,
+      "statut": "Militaires"
+     },
+     {
+      "cell": "C12",
+      "milliers": 169.704,
+      "statut": "Autres catégories et statuts"
+     }
+    ],
+    "total_cell": "C13",
+    "total_milliers": 2570.237
+   },
+   "fph": {
+    "label_fr": "Fonction publique hospitalière",
+    "par_statut": [
+     {
+      "cell": "C18",
+      "milliers": 826.624,
+      "statut": "Fonctionnaires"
+     },
+     {
+      "cell": "C19",
+      "milliers": 265.618,
+      "statut": "Contractuels"
+     },
+     {
+      "cell": "C20",
+      "milliers": 147.193,
+      "statut": "Autres catégories et statuts"
+     }
+    ],
+    "total_cell": "C21",
+    "total_milliers": 1239.435
+   },
+   "fpt": {
+    "label_fr": "Fonction publique territoriale",
+    "par_statut": [
+     {
+      "cell": "C14",
+      "milliers": 1422.029,
+      "statut": "Fonctionnaires"
+     },
+     {
+      "cell": "C15",
+      "milliers": 510.159,
+      "statut": "Contractuels"
+     },
+     {
+      "cell": "C16",
+      "milliers": 62.002,
+      "statut": "Autres catégories et statuts"
+     }
+    ],
+    "total_cell": "C17",
+    "total_milliers": 1994.19
+   }
+  },
+  "postes_fermes": {
+   "apuc": 151000,
+   "cells": {
+    "apuc": "J3",
+    "apul": "J43",
+    "etat": "J38",
+    "france_travail": "J6",
+    "total_apu": "J2"
+   },
+   "check_apuc_plus_apul": 579500,
+   "check_apuc_plus_apul_vs_total": -500,
+   "check_note": "151 000 (APUC) + 428 500 (APUL) = 579 500, soit 500 de moins que les 580 000 du manifeste et de la cellule J2 : arrondi de l'objectif de 580 000.",
+   "collectivites_apul": 428500,
+   "etat_apuc_hors_operateurs": 61400,
+   "france_travail": 47880,
+   "restants_si_580000_fermes_milliers": 5223.862,
+   "source": {
+    "kind": "workbook",
+    "ref": "Synthèse Chiffres Résolution_0910.xlsx › Détail Economies › I2:J43",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+   },
+   "total_apu": 580000
+  },
+  "source": {
+   "kind": "dgafp",
+   "ref": "DGAFP, Rapport annuel sur l'état de la fonction publique, édition 2025 — repris dans Synthèse ETP et agences Résolution_0910.xlsx › Synthèse ETP › A3:C21 et Synthèse Graphiques Résolution_0910.xlsx › GraphETP › A27:C35",
+   "url": "https://www.fonction-publique.gouv.fr/toutes-les-publications/rapport-annuel-sur-letat-de-la-fonction-publique-edition-2025",
+   "workbook": {
+    "kind": "workbook",
+    "ref": "Synthèse ETP et agences Résolution_0910.xlsx › Synthèse ETP › C4:C21",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20ETP%20et%20agences%20R%C3%A9solution_0910.xlsx"
+   }
+  },
+  "tier": "donnee",
+  "total_milliers": 5803.862,
+  "unit": "milliers de personnes (effectifs physiques au 31 décembre)",
+  "year": 2023
+ },
+ "impots": {
+  "recettes_2024": {
+   "children_note": "Les lignes « dont » ne partitionnent pas toujours le poste parent (ex. taxes sur la consommation : 105,1 Md€ contre 105,7 Md€ de détail, car le poste est « corrigé du bouclier tarifaire électricité » dans le classeur) ; écarts documentés ci-dessus.",
+   "children_sums_check": {
+    "Droits de mutation": {
+     "children_sum_md": 37.9,
+     "gap_md": 0,
+     "parent_md": 37.9
+    },
+    "Taxes sur la consommation": {
+     "children_sum_md": 105.7,
+     "gap_md": 0.6,
+     "parent_md": 105.1
+    },
+    "Taxes sur la main d'œuvre": {
+     "children_sum_md": 8.8,
+     "gap_md": -49.2,
+     "parent_md": 58
+    }
+   },
+   "colonnes": {
+    "gisement_md": "Gisement à supprimer",
+    "hausses_equilibre_md": "Hausses d'équilibre (IS à 27 points ; taxe foncière)",
+    "montant_2024_md": "Montant 2024 (Insee 3.217, extraits)",
+    "niches_restituees_md": "Niches restituées",
+    "solde_brut_a_restituer_md": "Solde brut à restituer post CSG",
+    "somme_niches_md": "Somme niches",
+    "taxes_a_supprimer_md": "Taxes à supprimer (négatif = recette supprimée)"
+   },
+   "insee_ref": "https://www.insee.fr/fr/statistiques/8988845?sommaire=8988934",
+   "pib_2024_md": 2919.9,
+   "po_2024_md": 1251.8,
+   "po_cible_md": 1060.75436,
+   "po_pib_2024_pct": 42.871331,
+   "po_pib_cible_pct": 36.328448,
+   "source": {
+    "kind": "workbook",
+    "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › B13:K42",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+   },
+   "table": [
+    {
+     "gisement_md": 33,
+     "hausses_equilibre_md": null,
+     "id": "taxe_01",
+     "label_fr": "TVA",
+     "level": 1,
+     "montant_2024_md": 206.3,
+     "niches_restituees_md": 19.9,
+     "parent_id": null,
+     "row": 15,
+     "sheet_cell": "B15",
+     "solde_brut_a_restituer_md": 9.9,
+     "somme_niches_md": 52.9,
+     "taxes_a_supprimer_md": null
+    },
+    {
+     "gisement_md": 1.8,
+     "hausses_equilibre_md": null,
+     "id": "taxe_02",
+     "label_fr": "Taxes sur la consommation",
+     "level": 1,
+     "montant_2024_md": 105.1,
+     "niches_restituees_md": 7.7,
+     "parent_id": null,
+     "row": 16,
+     "sheet_cell": "B16",
+     "solde_brut_a_restituer_md": 3.9,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -26.1
+    },
+    {
+     "gisement_md": 1.8,
+     "hausses_equilibre_md": null,
+     "id": "taxe_03",
+     "label_fr": "dont énergie",
+     "level": 2,
+     "montant_2024_md": 43.7,
+     "niches_restituees_md": 4.4,
+     "parent_id": "taxe_02",
+     "row": 17,
+     "sheet_cell": "B17",
+     "solde_brut_a_restituer_md": 2.2,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -8
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_04",
+     "label_fr": "dont alcool, tabac, jeux",
+     "level": 2,
+     "montant_2024_md": 25.6,
+     "niches_restituees_md": null,
+     "parent_id": "taxe_02",
+     "row": 18,
+     "sheet_cell": "B18",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -0.3
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_05",
+     "label_fr": "dont assurances",
+     "level": 2,
+     "montant_2024_md": 19.2,
+     "niches_restituees_md": null,
+     "parent_id": "taxe_02",
+     "row": 19,
+     "sheet_cell": "B19",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": null
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_06",
+     "label_fr": "dont redevances sur l'eau",
+     "level": 2,
+     "montant_2024_md": 2.2,
+     "niches_restituees_md": null,
+     "parent_id": "taxe_02",
+     "row": 20,
+     "sheet_cell": "B20",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -2.2
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_07",
+     "label_fr": "dont services de transports",
+     "level": 2,
+     "montant_2024_md": 1.9,
+     "niches_restituees_md": null,
+     "parent_id": "taxe_02",
+     "row": 21,
+     "sheet_cell": "B21",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -1.9
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_08",
+     "label_fr": "dont véhicules",
+     "level": 2,
+     "montant_2024_md": 3.1,
+     "niches_restituees_md": 3.3,
+     "parent_id": "taxe_02",
+     "row": 22,
+     "sheet_cell": "B22",
+     "solde_brut_a_restituer_md": 1.7,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -6.4
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_09",
+     "label_fr": "dont numérique, spectacles",
+     "level": 2,
+     "montant_2024_md": 1.8,
+     "niches_restituees_md": null,
+     "parent_id": "taxe_02",
+     "row": 23,
+     "sheet_cell": "B23",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -1.8
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_10",
+     "label_fr": "dont autres taxes sur les produits",
+     "level": 2,
+     "montant_2024_md": 4.5,
+     "niches_restituees_md": null,
+     "parent_id": "taxe_02",
+     "row": 24,
+     "sheet_cell": "B24",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -4.5
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_11",
+     "label_fr": "dont taxe de séjour",
+     "level": 2,
+     "montant_2024_md": 1.1,
+     "niches_restituees_md": null,
+     "parent_id": "taxe_02",
+     "row": 25,
+     "sheet_cell": "B25",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": null
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_12",
+     "label_fr": "dont taxe pollution",
+     "level": 2,
+     "montant_2024_md": 1,
+     "niches_restituees_md": null,
+     "parent_id": "taxe_02",
+     "row": 26,
+     "sheet_cell": "B26",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -1
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_13",
+     "label_fr": "dont outre-mer",
+     "level": 2,
+     "montant_2024_md": 1.6,
+     "niches_restituees_md": null,
+     "parent_id": "taxe_02",
+     "row": 27,
+     "sheet_cell": "B27",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": null
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_14",
+     "label_fr": "Taxes sur la main d'œuvre",
+     "level": 1,
+     "montant_2024_md": 58,
+     "niches_restituees_md": null,
+     "parent_id": null,
+     "row": 29,
+     "sheet_cell": "B29",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -48
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_15",
+     "label_fr": "dont forfaits de cotisation",
+     "level": 2,
+     "montant_2024_md": 8.8,
+     "niches_restituees_md": null,
+     "parent_id": "taxe_14",
+     "row": 30,
+     "sheet_cell": "B30",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": null
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_16",
+     "label_fr": "IR net",
+     "level": 1,
+     "montant_2024_md": 87.3,
+     "niches_restituees_md": 27,
+     "parent_id": null,
+     "row": 32,
+     "sheet_cell": "B32",
+     "solde_brut_a_restituer_md": 7.2,
+     "somme_niches_md": 27,
+     "taxes_a_supprimer_md": null
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": 25.69,
+     "id": "taxe_17",
+     "label_fr": "IS net",
+     "level": 1,
+     "montant_2024_md": 57.4,
+     "niches_restituees_md": 16,
+     "parent_id": null,
+     "row": 34,
+     "sheet_cell": "B34",
+     "solde_brut_a_restituer_md": 7.8,
+     "somme_niches_md": 16,
+     "taxes_a_supprimer_md": null
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_18",
+     "label_fr": "Taxes sur chiffre d'affaires et bénéfices",
+     "level": 1,
+     "montant_2024_md": 10.3,
+     "niches_restituees_md": null,
+     "parent_id": null,
+     "row": 35,
+     "sheet_cell": "B35",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -10.3
+    },
+    {
+     "gisement_md": 0.3,
+     "hausses_equilibre_md": 42.06,
+     "id": "taxe_19",
+     "label_fr": "Taxe foncière",
+     "level": 1,
+     "montant_2024_md": 42.9,
+     "niches_restituees_md": 0.8,
+     "parent_id": null,
+     "row": 37,
+     "sheet_cell": "B37",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": 1.1,
+     "taxes_a_supprimer_md": null
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_20",
+     "label_fr": "Autres taxes sur les ménages",
+     "level": 1,
+     "montant_2024_md": 6.5,
+     "niches_restituees_md": 0.2,
+     "parent_id": null,
+     "row": 38,
+     "sheet_cell": "B38",
+     "solde_brut_a_restituer_md": 0.1,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -6.7
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_21",
+     "label_fr": "Autres taxes sur les entreprises",
+     "level": 1,
+     "montant_2024_md": 13.2,
+     "niches_restituees_md": 0.3,
+     "parent_id": null,
+     "row": 39,
+     "sheet_cell": "B39",
+     "solde_brut_a_restituer_md": 0.2,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -13.5
+    },
+    {
+     "gisement_md": 5,
+     "hausses_equilibre_md": null,
+     "id": "taxe_22",
+     "label_fr": "Droits de mutation",
+     "level": 1,
+     "montant_2024_md": 37.9,
+     "niches_restituees_md": 0.5,
+     "parent_id": null,
+     "row": 40,
+     "sheet_cell": "B40",
+     "solde_brut_a_restituer_md": 0.1,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -32.45
+    },
+    {
+     "gisement_md": null,
+     "hausses_equilibre_md": null,
+     "id": "taxe_23",
+     "label_fr": "à titre onéreux",
+     "level": 2,
+     "montant_2024_md": 17.1,
+     "niches_restituees_md": null,
+     "parent_id": "taxe_22",
+     "row": 41,
+     "sheet_cell": "B41",
+     "solde_brut_a_restituer_md": null,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -12.05
+    },
+    {
+     "gisement_md": 5,
+     "hausses_equilibre_md": null,
+     "id": "taxe_24",
+     "label_fr": "à titre gratuit",
+     "level": 2,
+     "montant_2024_md": 20.8,
+     "niches_restituees_md": 0.5,
+     "parent_id": "taxe_22",
+     "row": 42,
+     "sheet_cell": "B42",
+     "solde_brut_a_restituer_md": 0.1,
+     "somme_niches_md": null,
+     "taxes_a_supprimer_md": -20.4
+    }
+   ],
+   "total_md": 624.9,
+   "unit": "Md€",
+   "year": 2024
+  },
+  "taxes_affectees": {
+   "note": "Taxes affectées à des opérateurs « non indispensables » (PLF 2026, V&M tome I annexe 2).",
+   "source": {
+    "kind": "workbook",
+    "ref": "PLF 2026_V&M tome I - Annexe 2 - Taxes affectees_0910.xls › Synthèse TA › C7:G15",
+    "url": "https://france-resolution.fr/donnees/PLF%202026_V%26M%20tome%20I%20-%20Annexe%202%20-%20Taxes%20affectees_0910.xls"
+   },
+   "table": [
+    {
+     "cell": "C8:G8",
+     "depense_totale_md": 11.25,
+     "economie_1_an_md": 3.375,
+     "economie_apres_1_an_md": 6.75,
+     "economie_md": 10.125,
+     "label_fr": "FR Compétences"
+    },
+    {
+     "cell": "C9:G9",
+     "depense_totale_md": 3.042,
+     "economie_1_an_md": 0.716,
+     "economie_apres_1_an_md": 0,
+     "economie_md": 0.716,
+     "label_fr": "AFITF"
+    },
+    {
+     "cell": "C10:G10",
+     "depense_totale_md": 2.317,
+     "economie_1_an_md": 0.695,
+     "economie_apres_1_an_md": 1.39,
+     "economie_md": 2.085,
+     "label_fr": "Agences de l'eau"
+    },
+    {
+     "cell": "C11:G11",
+     "depense_totale_md": 1.91,
+     "economie_1_an_md": 0.637,
+     "economie_apres_1_an_md": 1.273,
+     "economie_md": 1.91,
+     "label_fr": "Action Logement"
+    },
+    {
+     "cell": "C12:G12",
+     "depense_totale_md": 0.889,
+     "economie_1_an_md": 0.75,
+     "economie_apres_1_an_md": 0,
+     "economie_md": 0.75,
+     "label_fr": "subventions culturelles (CNC, etc.)"
+    },
+    {
+     "cell": "C13:G13",
+     "depense_totale_md": 0.846,
+     "economie_1_an_md": 0.55,
+     "economie_apres_1_an_md": 0,
+     "economie_md": 0.55,
+     "label_fr": "chambres de commerce (CCI, etc.)"
+    },
+    {
+     "cell": "C14:G14",
+     "depense_totale_md": 0.31,
+     "economie_1_an_md": 0.264,
+     "economie_apres_1_an_md": 0,
+     "economie_md": 0.264,
+     "label_fr": "établissements publics fonciers"
+    },
+    {
+     "cell": "C15:G15",
+     "depense_totale_md": 0.7,
+     "economie_1_an_md": 0.2,
+     "economie_apres_1_an_md": 0.21,
+     "economie_md": 0.41,
+     "label_fr": "Anah"
+    }
+   ],
+   "unit": "Md€",
+   "year": 2026
+  }
+ },
+ "meta": {
+  "notes": [
+   "Aucun jeu de données n'existe pour les « 2 000 CERFA » ni pour les « 438 impôts » : seuls les chiffres du manifeste sont repris (tier annonce) ; la ventilation des recettes 2024 par impôt vient de l'onglet « Refonte fiscalité »."
+  ],
+  "tier_legend": {
+   "annonce": "affirmation ou calcul des auteurs, sans texte de loi",
+   "calcul": "dérivé par le pipeline",
+   "donnee": "statistique publiée (Insee, Eurostat, DGAFP, Légifrance, PLF)"
+  },
+  "title_fr": "L'État partout : ministères, agences, impôts, niches, formulaires, mots de loi, agents publics"
+ },
+ "ministeres": {
+  "apres": 7,
+  "avant": 35,
+  "detail": [
+   {
+    "cell": "A51",
+    "group_id": null,
+    "label_fr": "Ministère délégué chargé de la Citoyenneté",
+    "status": "supprime"
+   },
+   {
+    "cell": "A52",
+    "group_id": null,
+    "label_fr": "Ministère délégué chargé des Relations avec le Parlement",
+    "status": "supprime"
+   },
+   {
+    "cell": "A53",
+    "group_id": null,
+    "label_fr": "Ministère délégué chargé de l'Égalité entre les femmes et les hommes et de la Lutte contre les discriminations",
+    "status": "supprime"
+   },
+   {
+    "cell": "A54",
+    "group_id": null,
+    "label_fr": "Ministère de la Transition écologique, de la Biodiversité et des Négociations internationales sur le climat et la nature",
+    "status": "supprime"
+   },
+   {
+    "cell": "A55",
+    "group_id": null,
+    "label_fr": "Ministère délégué chargé de la Mer et de la Pêche",
+    "status": "supprime"
+   },
+   {
+    "cell": "A56",
+    "group_id": null,
+    "label_fr": "Ministère délégué chargé de la Transition écologique",
+    "status": "supprime"
+   },
+   {
+    "cell": "A57",
+    "group_id": null,
+    "label_fr": "Ministère délégué, porte-parole du Gouvernement auprès du Premier ministre, chargé de l'Énergie",
+    "status": "supprime"
+   },
+   {
+    "cell": "A58",
+    "group_id": null,
+    "label_fr": "Ministère délégué chargé de l'Industrie",
+    "status": "supprime"
+   },
+   {
+    "cell": "A59",
+    "group_id": null,
+    "label_fr": "Ministère délégué chargé de l’Intelligence artificielle et du Numérique",
+    "status": "supprime"
+   },
+   {
+    "cell": "A60",
+    "group_id": null,
+    "label_fr": "Ministère des Petites et moyennes entreprises, du Commerce, de l’Artisanat et du Tourisme et du Pouvoir d’achat",
+    "status": "supprime"
+   },
+   {
+    "cell": "A61",
+    "group_id": null,
+    "label_fr": "Ministère de l’Agriculture, de l’Agro-alimentaire et de la Souveraineté alimentaire",
+    "status": "supprime"
+   },
+   {
+    "cell": "A62",
+    "group_id": null,
+    "label_fr": "Ministère délégué chargé du Commerce extérieur et de l'Attractivité",
+    "status": "supprime"
+   },
+   {
+    "cell": "A63",
+    "group_id": null,
+    "label_fr": "Ministère de la Culture",
+    "status": "supprime"
+   },
+   {
+    "cell": "A64",
+    "group_id": null,
+    "label_fr": "Ministère des Outre-mer",
+    "status": "supprime"
+   },
+   {
+    "cell": "A65",
+    "group_id": null,
+    "label_fr": "Ministère de l'Aménagement du territoire et de la Décentralisation",
+    "status": "supprime"
+   },
+   {
+    "cell": "A66",
+    "group_id": null,
+    "label_fr": "Ministère délégué chargé de la Ruralité",
+    "status": "supprime"
+   },
+   {
+    "cell": "A67",
+    "group_id": null,
+    "label_fr": "Ministère des Sports, de la Jeunesse et de la Vie associative",
+    "status": "supprime"
+   },
+   {
+    "cell": "A68",
+    "group_id": null,
+    "label_fr": "Ministère des Transports",
+    "status": "supprime"
+   },
+   {
+    "cell": "A69",
+    "group_id": null,
+    "label_fr": "Ministère de la Ville et du Logement",
+    "status": "supprime"
+   },
+   {
+    "cell": "H51",
+    "group_id": "defense",
+    "is_first_of_group": true,
+    "label_fr": "Ministère des Armées et des Anciens combattants",
+    "status": "regroupe"
+   },
+   {
+    "cell": "H52",
+    "group_id": "defense",
+    "is_first_of_group": false,
+    "label_fr": "Ministère délégué auprès de la ministre des Armées et des Anciens combattants",
+    "status": "regroupe"
+   },
+   {
+    "cell": "I53",
+    "group_id": "interieur",
+    "is_first_of_group": true,
+    "label_fr": "Ministère de l'Intérieur",
+    "status": "regroupe"
+   },
+   {
+    "cell": "I54",
+    "group_id": "interieur",
+    "is_first_of_group": false,
+    "label_fr": "Ministère délégué auprès du ministre de l'Intérieur",
+    "status": "regroupe"
+   },
+   {
+    "cell": "H55",
+    "group_id": "justice",
+    "is_first_of_group": true,
+    "label_fr": "Ministère de la Justice",
+    "status": "regroupe"
+   },
+   {
+    "cell": "I56",
+    "group_id": "action_exterieure",
+    "is_first_of_group": true,
+    "label_fr": "Ministère de l'Europe et des Affaires étrangères",
+    "status": "regroupe"
+   },
+   {
+    "cell": "I57",
+    "group_id": "action_exterieure",
+    "is_first_of_group": false,
+    "label_fr": "Ministère délégué chargé de l’Europe",
+    "status": "regroupe"
+   },
+   {
+    "cell": "I58",
+    "group_id": "action_exterieure",
+    "is_first_of_group": false,
+    "label_fr": "Ministère délégué chargé de la Francophonie, des Partenariats internationaux et des Français de l’étranger",
+    "status": "regroupe"
+   },
+   {
+    "cell": "H59",
+    "group_id": "finances_publiques",
+    "is_first_of_group": true,
+    "label_fr": "Ministère de l’Économie, des Finances et de la Souveraineté industrielle, énergétique et numérique",
+    "status": "regroupe"
+   },
+   {
+    "cell": "H60",
+    "group_id": "finances_publiques",
+    "is_first_of_group": false,
+    "label_fr": "Ministère de l’Action et des Comptes publics",
+    "status": "regroupe"
+   },
+   {
+    "cell": "I61",
+    "group_id": "solidarite",
+    "is_first_of_group": true,
+    "label_fr": "Ministère du Travail et des Solidarités",
+    "status": "regroupe"
+   },
+   {
+    "cell": "I62",
+    "group_id": "solidarite",
+    "is_first_of_group": false,
+    "label_fr": "Ministère de la Santé, des Familles, de l’Autonomie et des Personnes handicapées",
+    "status": "regroupe"
+   },
+   {
+    "cell": "I63",
+    "group_id": "solidarite",
+    "is_first_of_group": false,
+    "label_fr": "Ministère délégué chargé de l’Autonomie et des Personnes handicapées",
+    "status": "regroupe"
+   },
+   {
+    "cell": "H64",
+    "group_id": "enseignement",
+    "is_first_of_group": true,
+    "label_fr": "Ministère de l'Éducation nationale",
+    "status": "regroupe"
+   },
+   {
+    "cell": "H65",
+    "group_id": "enseignement",
+    "is_first_of_group": false,
+    "label_fr": "Ministère délégué chargé de l'Enseignement, et de la Formation professionnels et de l’Apprentissage",
+    "status": "regroupe"
+   },
+   {
+    "cell": "H66",
+    "group_id": "enseignement",
+    "is_first_of_group": false,
+    "label_fr": "Ministère de l’Enseignement supérieur, de la Recherche et de l’Espace",
+    "status": "regroupe"
+   }
+  ],
+  "groupes_maintenus": [
+   {
+    "id": "defense",
+    "label_fr": "Défense",
+    "ministeres": [
+     {
+      "cell": "H51",
+      "label_fr": "Ministère des Armées et des Anciens combattants"
+     },
+     {
+      "cell": "H52",
+      "label_fr": "Ministère délégué auprès de la ministre des Armées et des Anciens combattants"
+     }
+    ],
+    "n_ministeres_regroupes": 2
+   },
+   {
+    "id": "interieur",
+    "label_fr": "Intérieur (Sécurités)",
+    "ministeres": [
+     {
+      "cell": "I53",
+      "label_fr": "Ministère de l'Intérieur"
+     },
+     {
+      "cell": "I54",
+      "label_fr": "Ministère délégué auprès du ministre de l'Intérieur"
+     }
+    ],
+    "n_ministeres_regroupes": 2
+   },
+   {
+    "id": "justice",
+    "label_fr": "Justice",
+    "ministeres": [
+     {
+      "cell": "H55",
+      "label_fr": "Ministère de la Justice"
+     }
+    ],
+    "n_ministeres_regroupes": 1
+   },
+   {
+    "id": "action_exterieure",
+    "label_fr": "Action extérieure",
+    "ministeres": [
+     {
+      "cell": "I56",
+      "label_fr": "Ministère de l'Europe et des Affaires étrangères"
+     },
+     {
+      "cell": "I57",
+      "label_fr": "Ministère délégué chargé de l’Europe"
+     },
+     {
+      "cell": "I58",
+      "label_fr": "Ministère délégué chargé de la Francophonie, des Partenariats internationaux et des Français de l’étranger"
+     }
+    ],
+    "n_ministeres_regroupes": 3
+   },
+   {
+    "id": "finances_publiques",
+    "label_fr": "Économie, finances et comptes publics",
+    "ministeres": [
+     {
+      "cell": "H59",
+      "label_fr": "Ministère de l’Économie, des Finances et de la Souveraineté industrielle, énergétique et numérique"
+     },
+     {
+      "cell": "H60",
+      "label_fr": "Ministère de l’Action et des Comptes publics"
+     }
+    ],
+    "n_ministeres_regroupes": 2
+   },
+   {
+    "id": "solidarite",
+    "label_fr": "Solidarité, travail, santé",
+    "ministeres": [
+     {
+      "cell": "I61",
+      "label_fr": "Ministère du Travail et des Solidarités"
+     },
+     {
+      "cell": "I62",
+      "label_fr": "Ministère de la Santé, des Familles, de l’Autonomie et des Personnes handicapées"
+     },
+     {
+      "cell": "I63",
+      "label_fr": "Ministère délégué chargé de l’Autonomie et des Personnes handicapées"
+     }
+    ],
+    "n_ministeres_regroupes": 3
+   },
+   {
+    "id": "enseignement",
+    "label_fr": "Enseignement",
+    "ministeres": [
+     {
+      "cell": "H64",
+      "label_fr": "Ministère de l'Éducation nationale"
+     },
+     {
+      "cell": "H65",
+      "label_fr": "Ministère délégué chargé de l'Enseignement, et de la Formation professionnels et de l’Apprentissage"
+     },
+     {
+      "cell": "H66",
+      "label_fr": "Ministère de l’Enseignement supérieur, de la Recherche et de l’Espace"
+     }
+    ],
+    "n_ministeres_regroupes": 3
+   }
+  ],
+  "grouping_inferred": true,
+  "grouping_note": "Les 16 ministères maintenus sont rangés dans deux colonnes alternées du graphique du livre (colonnes H et I de GraphAgences) ; chaque bloc de lignes consécutives dans une même colonne forme un des 7 ministères. Le classement en 7 blocs, et leur nom (ordre identique à celui de l'amendement PLF-P2 n° 27), est déduit de cette mise en page : le classeur ne l'écrit pas.",
+  "reconciliation": "35 ministères = 19 supprimés sans successeur + 16 regroupés en 7 ; 35 − 7 = 28 « supprimés » en nombre net = 19 + (16 − 7).",
+  "regroupes_dans_les_sept": 16,
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphAgences › A47:I69",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+  },
+  "supprimes_integralement": 19,
+  "supprimes_net": 28
+ },
+ "mots_de_loi": {
+  "codes": [
+   {
+    "code_fr": "Code de la construction et de l'habitat",
+    "right_axis_in_book_chart": true,
+    "values": [
+     {
+      "words": 365991,
+      "year": 2005
+     },
+     {
+      "words": 382071,
+      "year": 2006
+     },
+     {
+      "words": 408169,
+      "year": 2007
+     },
+     {
+      "words": 422548,
+      "year": 2008
+     },
+     {
+      "words": 424304,
+      "year": 2009
+     },
+     {
+      "words": 465751,
+      "year": 2010
+     },
+     {
+      "words": 480757,
+      "year": 2011
+     },
+     {
+      "words": 488546,
+      "year": 2012
+     },
+     {
+      "words": 494762,
+      "year": 2013
+     },
+     {
+      "words": 502937,
+      "year": 2014
+     },
+     {
+      "words": 556677,
+      "year": 2015
+     },
+     {
+      "words": 571361,
+      "year": 2016
+     },
+     {
+      "words": 601212,
+      "year": 2017
+     },
+     {
+      "words": 621185,
+      "year": 2018
+     },
+     {
+      "words": 635469,
+      "year": 2019
+     },
+     {
+      "words": 672661,
+      "year": 2020
+     },
+     {
+      "words": 680748,
+      "year": 2021
+     },
+     {
+      "words": 710299,
+      "year": 2022
+     },
+     {
+      "words": 721418,
+      "year": 2023
+     },
+     {
+      "words": 746210,
+      "year": 2024
+     },
+     {
+      "words": 762550,
+      "year": 2025
+     },
+     {
+      "words": 768631,
+      "year": 2026
+     }
+    ]
+   },
+   {
+    "code_fr": "Code de l'environnement",
+    "right_axis_in_book_chart": true,
+    "values": [
+     {
+      "words": 261154,
+      "year": 2005
+     },
+     {
+      "words": 272988,
+      "year": 2006
+     },
+     {
+      "words": 307901,
+      "year": 2007
+     },
+     {
+      "words": 573084,
+      "year": 2008
+     },
+     {
+      "words": 591058,
+      "year": 2009
+     },
+     {
+      "words": 597104,
+      "year": 2010
+     },
+     {
+      "words": 654450,
+      "year": 2011
+     },
+     {
+      "words": 712017,
+      "year": 2012
+     },
+     {
+      "words": 789860,
+      "year": 2013
+     },
+     {
+      "words": 797906,
+      "year": 2014
+     },
+     {
+      "words": 805693,
+      "year": 2015
+     },
+     {
+      "words": 846684,
+      "year": 2016
+     },
+     {
+      "words": 877388,
+      "year": 2017
+     },
+     {
+      "words": 920455,
+      "year": 2018
+     },
+     {
+      "words": 925933,
+      "year": 2019
+     },
+     {
+      "words": 974019,
+      "year": 2020
+     },
+     {
+      "words": 1018715,
+      "year": 2021
+     },
+     {
+      "words": 1068402,
+      "year": 2022
+     },
+     {
+      "words": 1097267,
+      "year": 2023
+     },
+     {
+      "words": 1119001,
+      "year": 2024
+     },
+     {
+      "words": 1161860,
+      "year": 2025
+     },
+     {
+      "words": 1179074,
+      "year": 2026
+     }
+    ]
+   },
+   {
+    "code_fr": "Code de l'urbanisme",
+    "right_axis_in_book_chart": false,
+    "values": [
+     {
+      "words": 197735,
+      "year": 2005
+     },
+     {
+      "words": 209559,
+      "year": 2006
+     },
+     {
+      "words": 213061,
+      "year": 2007
+     },
+     {
+      "words": 185827,
+      "year": 2008
+     },
+     {
+      "words": 186415,
+      "year": 2009
+     },
+     {
+      "words": 191360,
+      "year": 2010
+     },
+     {
+      "words": 209302,
+      "year": 2011
+     },
+     {
+      "words": 221164,
+      "year": 2012
+     },
+     {
+      "words": 228137,
+      "year": 2013
+     },
+     {
+      "words": 234223,
+      "year": 2014
+     },
+     {
+      "words": 244238,
+      "year": 2015
+     },
+     {
+      "words": 240631,
+      "year": 2016
+     },
+     {
+      "words": 241674,
+      "year": 2017
+     },
+     {
+      "words": 251187,
+      "year": 2018
+     },
+     {
+      "words": 259990,
+      "year": 2019
+     },
+     {
+      "words": 264662,
+      "year": 2020
+     },
+     {
+      "words": 265210,
+      "year": 2021
+     },
+     {
+      "words": 283377,
+      "year": 2022
+     },
+     {
+      "words": 287447,
+      "year": 2023
+     },
+     {
+      "words": 295393,
+      "year": 2024
+     },
+     {
+      "words": 307285,
+      "year": 2025
+     },
+     {
+      "words": 313941,
+      "year": 2026
+     }
+    ]
+   },
+   {
+    "code_fr": "Code général des collectivités territoriales",
+    "right_axis_in_book_chart": false,
+    "values": [
+     {
+      "words": 425309,
+      "year": 2005
+     },
+     {
+      "words": 444931,
+      "year": 2006
+     },
+     {
+      "words": 452493,
+      "year": 2007
+     },
+     {
+      "words": 588704,
+      "year": 2008
+     },
+     {
+      "words": 624130,
+      "year": 2009
+     },
+     {
+      "words": 637997,
+      "year": 2010
+     },
+     {
+      "words": 665359,
+      "year": 2011
+     },
+     {
+      "words": 649442,
+      "year": 2012
+     },
+     {
+      "words": 657838,
+      "year": 2013
+     },
+     {
+      "words": 655368,
+      "year": 2014
+     },
+     {
+      "words": 704626,
+      "year": 2015
+     },
+     {
+      "words": 839770,
+      "year": 2016
+     },
+     {
+      "words": 855117,
+      "year": 2017
+     },
+     {
+      "words": 888610,
+      "year": 2018
+     },
+     {
+      "words": 892591,
+      "year": 2019
+     },
+     {
+      "words": 914891,
+      "year": 2020
+     },
+     {
+      "words": 935238,
+      "year": 2021
+     },
+     {
+      "words": 952285,
+      "year": 2022
+     },
+     {
+      "words": 963549,
+      "year": 2023
+     },
+     {
+      "words": 967314,
+      "year": 2024
+     },
+     {
+      "words": 973732,
+      "year": 2025
+     },
+     {
+      "words": 940509,
+      "year": 2026
+     }
+    ]
+   }
+  ],
+  "growth": {
+   "growth_pct": 87.8,
+   "multiple": 1.878,
+   "target_manifeste": "diviser au moins par 10 (annonce, sans jalon chiffré)",
+   "total_2005": 26008794,
+   "total_2026": 48834443
+  },
+  "series": [
+   {
+    "legislatif_codifie": 3906557,
+    "legislatif_non_codifie": 3138620,
+    "legislatif_total": 7045177,
+    "reglementaire_codifie": 5034424,
+    "reglementaire_non_codifie": 13929193,
+    "reglementaire_total": 18963617,
+    "total": 26008794,
+    "total_millions": 26.009,
+    "year": 2005
+   },
+   {
+    "legislatif_codifie": 4103292,
+    "legislatif_non_codifie": 3282086,
+    "legislatif_total": 7385378,
+    "reglementaire_codifie": 5650291,
+    "reglementaire_non_codifie": 13895908,
+    "reglementaire_total": 19546199,
+    "total": 26931577,
+    "total_millions": 26.932,
+    "year": 2006
+   },
+   {
+    "legislatif_codifie": 4347715,
+    "legislatif_non_codifie": 3391653,
+    "legislatif_total": 7739368,
+    "reglementaire_codifie": 6078330,
+    "reglementaire_non_codifie": 14017862,
+    "reglementaire_total": 20096192,
+    "total": 27835560,
+    "total_millions": 27.836,
+    "year": 2007
+   },
+   {
+    "legislatif_codifie": 4662566,
+    "legislatif_non_codifie": 3294778,
+    "legislatif_total": 7957344,
+    "reglementaire_codifie": 6917007,
+    "reglementaire_non_codifie": 13665269,
+    "reglementaire_total": 20582276,
+    "total": 28539620,
+    "total_millions": 28.54,
+    "year": 2008
+   },
+   {
+    "legislatif_codifie": 4691186,
+    "legislatif_non_codifie": 3419512,
+    "legislatif_total": 8110698,
+    "reglementaire_codifie": 7426743,
+    "reglementaire_non_codifie": 14080410,
+    "reglementaire_total": 21507153,
+    "total": 29617851,
+    "total_millions": 29.618,
+    "year": 2009
+   },
+   {
+    "legislatif_codifie": 4856730,
+    "legislatif_non_codifie": 3675468,
+    "legislatif_total": 8532198,
+    "reglementaire_codifie": 7746366,
+    "reglementaire_non_codifie": 20885213,
+    "reglementaire_total": 28631579,
+    "total": 37163777,
+    "total_millions": 37.164,
+    "year": 2010
+   },
+   {
+    "legislatif_codifie": 5171260,
+    "legislatif_non_codifie": 3754016,
+    "legislatif_total": 8925276,
+    "reglementaire_codifie": 7987634,
+    "reglementaire_non_codifie": 21588753,
+    "reglementaire_total": 29576387,
+    "total": 38501663,
+    "total_millions": 38.502,
+    "year": 2011
+   },
+   {
+    "legislatif_codifie": 5416188,
+    "legislatif_non_codifie": 3871924,
+    "legislatif_total": 9288112,
+    "reglementaire_codifie": 8421967,
+    "reglementaire_non_codifie": 15755853,
+    "reglementaire_total": 24177820,
+    "total": 33465932,
+    "total_millions": 33.466,
+    "year": 2012
+   },
+   {
+    "legislatif_codifie": 5599956,
+    "legislatif_non_codifie": 3927703,
+    "legislatif_total": 9527659,
+    "reglementaire_codifie": 8628844,
+    "reglementaire_non_codifie": 16039419,
+    "reglementaire_total": 24668263,
+    "total": 34195922,
+    "total_millions": 34.196,
+    "year": 2013
+   },
+   {
+    "legislatif_codifie": 5736453,
+    "legislatif_non_codifie": 4241395,
+    "legislatif_total": 9977848,
+    "reglementaire_codifie": 8971889,
+    "reglementaire_non_codifie": 16053973,
+    "reglementaire_total": 25025862,
+    "total": 35003710,
+    "total_millions": 35.004,
+    "year": 2014
+   },
+   {
+    "legislatif_codifie": 6070727,
+    "legislatif_non_codifie": 4468859,
+    "legislatif_total": 10539586,
+    "reglementaire_codifie": 9476305,
+    "reglementaire_non_codifie": 16362848,
+    "reglementaire_total": 25839153,
+    "total": 36378739,
+    "total_millions": 36.379,
+    "year": 2015
+   },
+   {
+    "legislatif_codifie": 6433839,
+    "legislatif_non_codifie": 4667282,
+    "legislatif_total": 11101121,
+    "reglementaire_codifie": 9859329,
+    "reglementaire_non_codifie": 16556181,
+    "reglementaire_total": 26415510,
+    "total": 37516631,
+    "total_millions": 37.517,
+    "year": 2016
+   },
+   {
+    "legislatif_codifie": 6764020,
+    "legislatif_non_codifie": 4912672,
+    "legislatif_total": 11676692,
+    "reglementaire_codifie": 10418400,
+    "reglementaire_non_codifie": 16899030,
+    "reglementaire_total": 27317430,
+    "total": 38994122,
+    "total_millions": 38.994,
+    "year": 2017
+   },
+   {
+    "legislatif_codifie": 6984197,
+    "legislatif_non_codifie": 4949807,
+    "legislatif_total": 11934004,
+    "reglementaire_codifie": 10789768,
+    "reglementaire_non_codifie": 17277497,
+    "reglementaire_total": 28067265,
+    "total": 40001269,
+    "total_millions": 40.001,
+    "year": 2018
+   },
+   {
+    "legislatif_codifie": 7209358,
+    "legislatif_non_codifie": 5139331,
+    "legislatif_total": 12348689,
+    "reglementaire_codifie": 10980268,
+    "reglementaire_non_codifie": 17327276,
+    "reglementaire_total": 28307544,
+    "total": 40656233,
+    "total_millions": 40.656,
+    "year": 2019
+   },
+   {
+    "legislatif_codifie": 7521933,
+    "legislatif_non_codifie": 5343099,
+    "legislatif_total": 12865032,
+    "reglementaire_codifie": 11337126,
+    "reglementaire_non_codifie": 17619968,
+    "reglementaire_total": 28957094,
+    "total": 41822126,
+    "total_millions": 41.822,
+    "year": 2020
+   },
+   {
+    "legislatif_codifie": 7682567,
+    "legislatif_non_codifie": 5636897,
+    "legislatif_total": 13319464,
+    "reglementaire_codifie": 11604543,
+    "reglementaire_non_codifie": 18126534,
+    "reglementaire_total": 29731077,
+    "total": 43050541,
+    "total_millions": 43.051,
+    "year": 2021
+   },
+   {
+    "legislatif_codifie": 8130555,
+    "legislatif_non_codifie": 5741391,
+    "legislatif_total": 13871946,
+    "reglementaire_codifie": 12100280,
+    "reglementaire_non_codifie": 18595332,
+    "reglementaire_total": 30695612,
+    "total": 44567558,
+    "total_millions": 44.568,
+    "year": 2022
+   },
+   {
+    "legislatif_codifie": 8431663,
+    "legislatif_non_codifie": 5797924,
+    "legislatif_total": 14229587,
+    "reglementaire_codifie": 12513672,
+    "reglementaire_non_codifie": 18899975,
+    "reglementaire_total": 31413647,
+    "total": 45643234,
+    "total_millions": 45.643,
+    "year": 2023
+   },
+   {
+    "legislatif_codifie": 8701932,
+    "legislatif_non_codifie": 6045452,
+    "legislatif_total": 14747384,
+    "reglementaire_codifie": 12888483,
+    "reglementaire_non_codifie": 19157890,
+    "reglementaire_total": 32046373,
+    "total": 46793757,
+    "total_millions": 46.794,
+    "year": 2024
+   },
+   {
+    "legislatif_codifie": 8817950,
+    "legislatif_non_codifie": 6097292,
+    "legislatif_total": 14915242,
+    "reglementaire_codifie": 13297602,
+    "reglementaire_non_codifie": 19536652,
+    "reglementaire_total": 32834254,
+    "total": 47749496,
+    "total_millions": 47.749,
+    "year": 2025
+   },
+   {
+    "legislatif_codifie": 8975195,
+    "legislatif_non_codifie": 6343170,
+    "legislatif_total": 15318365,
+    "reglementaire_codifie": 13755770,
+    "reglementaire_non_codifie": 19760308,
+    "reglementaire_total": 33516078,
+    "total": 48834443,
+    "total_millions": 48.834,
+    "year": 2026
+   }
+  ],
+  "series_break_flags": [
+   {
+    "change_pct": 48.3,
+    "from": 14080410,
+    "series": "reglementaire_non_codifie",
+    "to": 20885213,
+    "year": 2010
+   },
+   {
+    "change_pct": -27,
+    "from": 21588753,
+    "series": "reglementaire_non_codifie",
+    "to": 15755853,
+    "year": 2012
+   }
+  ],
+  "series_break_note": "Rupture probable dans la série « réglementaire non codifié » en 2010-2011 (≈14 M → 20,9 M → 21,6 M puis retour à 15,8 M en 2012) : non expliquée par la source (Légifrance) ni par le classeur ; à signaler en note de graphique plutôt qu'à corriger.",
+  "source": {
+   "kind": "legifrance",
+   "ref": "Légifrance, statistiques de la norme — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphCodes › C2:X14",
+   "url": "https://www.legifrance.gouv.fr/contenu/menu/autour-de-la-loi/legislatif-et-reglementaire/statistiques-de-la-norme",
+   "workbook": {
+    "kind": "workbook",
+    "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphCodes › C2:X14",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+   }
+  },
+  "tier": "donnee",
+  "total_2026_check": {
+   "legislatif": 15318365,
+   "manifeste_49_millions": "48,834 M de mots arrondis en « 49 millions »",
+   "reglementaire": 33516078,
+   "total": 48834443
+  },
+  "unit": "mots",
+  "years": [
+   2005,
+   2026
+  ]
+ },
+ "niches": {
+  "cout_2024_avec_tva_toutes_apu_md": 101.321,
+  "cout_2024_md": 89.406,
+  "detail": "Voir niches.json (465 niches une à une).",
+  "fait_generateur_eteint": {
+   "cout_md": 3.775,
+   "nombre": 47
+  },
+  "fait_generateur_eteint_fin_2025": {
+   "cout_md": 1.299,
+   "nombre": 35
+  },
+  "nombre_recensees_plf2026": 465,
+  "source": {
+   "kind": "workbook",
+   "ref": "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Synthèse › B4:D14",
+   "url": "https://france-resolution.fr/donnees/PLF%202026_V%26M%20tome%20II%20-%20Annexe%203%20-%20Depenses%20fiscales%20-%200910.xls"
+  },
+  "taux_reduits_tva_hors_niches": {
+   "cout_md": 33.382,
+   "nombre": 21
+  },
+  "total_niches_et_taux_reduits": {
+   "cout_md": 134.703,
+   "nombre": 486
+  },
+  "unit": "Md€",
+  "year": 2024
+ },
+ "representation_democratique": {
+  "rule": "Chaque étape = 51 % de la précédente (100 → 51 → 26,01 → 13,27 → 6,77 → 3,45) : la chaîne est une construction du livre (calcul de Résolution), pas une statistique observée.",
+  "source": {
+   "kind": "workbook",
+   "ref": "Synthèse Graphiques Résolution_0910.xlsx › Graph51pc › C25:H26",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+  },
+  "steps": [
+   {
+    "cell": "C26",
+    "label_fr": "Citoyens",
+    "pct_of_previous": null,
+    "step": 0,
+    "value": 100
+   },
+   {
+    "cell": "D26",
+    "label_fr": "Élu direct",
+    "pct_of_previous": 51,
+    "step": 1,
+    "value": 51
+   },
+   {
+    "cell": "E26",
+    "label_fr": "Assemblée",
+    "pct_of_previous": 51,
+    "step": 2,
+    "value": 26.01
+   },
+   {
+    "cell": "F26",
+    "label_fr": "Commission",
+    "pct_of_previous": 51,
+    "step": 3,
+    "value": 13.2651
+   },
+   {
+    "cell": "G26",
+    "label_fr": "Conseil",
+    "pct_of_previous": 51,
+    "step": 4,
+    "value": 6.765201
+   },
+   {
+    "cell": "H26",
+    "label_fr": "Comité",
+    "pct_of_previous": 51,
+    "step": 5,
+    "value": 3.450253
+   }
+  ],
+  "tier": "annonce",
+  "unit": "pour 100 citoyens"
+ },
+ "revendications_manifeste": [
+  {
+   "conflict_group": null,
+   "id": "impots_nombre",
+   "label_fr": "Nombre d'impôts en France (affirmé par le manifeste)",
+   "source": {
+    "kind": "site",
+    "quote": "438 impôts",
+    "ref": "france-resolution.fr › manifeste",
+    "url": "https://france-resolution.fr/manifeste.html"
+   },
+   "tier": "annonce",
+   "unit": "impôts",
+   "value": 438
+  },
+  {
+   "conflict_group": null,
+   "id": "niches_nombre",
+   "label_fr": "Nombre de niches fiscales (manifeste)",
+   "source": {
+    "kind": "site",
+    "quote": "486 niches fiscales",
+    "ref": "france-resolution.fr › manifeste",
+    "url": "https://france-resolution.fr/manifeste.html"
+   },
+   "tier": "annonce",
+   "unit": "niches",
+   "value": 486
+  },
+  {
+   "conflict_group": null,
+   "id": "cerfa_nombre",
+   "label_fr": "Nombre de formulaires CERFA (manifeste ; ordre de grandeur, aucun jeu de données)",
+   "source": {
+    "kind": "site",
+    "quote": "2 000 CERFA",
+    "ref": "france-resolution.fr › manifeste",
+    "url": "https://france-resolution.fr/manifeste.html"
+   },
+   "tier": "annonce",
+   "unit": "formulaires",
+   "value": 2000
+  },
+  {
+   "conflict_group": null,
+   "id": "combinaisons_charges",
+   "label_fr": "Combinaisons pour calculer un taux de charges sociales (manifeste)",
+   "source": {
+    "kind": "site",
+    "quote": "1,7 milliard de combinaisons pour calculer un taux de charges sociales",
+    "ref": "france-resolution.fr › manifeste",
+    "url": "https://france-resolution.fr/manifeste.html"
+   },
+   "tier": "annonce",
+   "unit": "milliards de combinaisons",
+   "value": 1.7
+  },
+  {
+   "conflict_group": null,
+   "id": "ministeres_apres",
+   "label_fr": "« 7 ministères au lieu de 35 » (manifeste)",
+   "source": {
+    "kind": "site",
+    "quote": "7 ministères au lieu de 35",
+    "ref": "france-resolution.fr › manifeste",
+    "url": "https://france-resolution.fr/manifeste.html"
+   },
+   "tier": "annonce",
+   "unit": "ministères",
+   "value": 7
+  },
+  {
+   "conflict_group": null,
+   "id": "agences_apres",
+   "label_fr": "« 303 agences nationales au lieu de 1 104 » (manifeste)",
+   "source": {
+    "kind": "site",
+    "quote": "303 agences nationales au lieu de 1 104",
+    "ref": "france-resolution.fr › manifeste",
+    "url": "https://france-resolution.fr/manifeste.html"
+   },
+   "tier": "annonce",
+   "unit": "agences",
+   "value": 303
+  },
+  {
+   "conflict_group": null,
+   "id": "echelons_territoriaux_apres",
+   "label_fr": "Échelons territoriaux après réforme : « 2 échelons au lieu de 5 » (lettres aux élus)",
+   "source": {
+    "kind": "site",
+    "quote": "2 échelons territoriaux au lieu de 5",
+    "ref": "france-resolution.fr › lettre type au député (idem maire, sénateur)",
+    "url": "https://france-resolution.fr/ecrire.html"
+   },
+   "tier": "annonce",
+   "unit": "échelons",
+   "value": 2
+  },
+  {
+   "conflict_group": "nb_impots_cibles",
+   "id": "impots_cibles_manifeste",
+   "label_fr": "Impôts cibles dans le manifeste : « Quatre impôts » (TVA, revenu, sociétés, foncier)",
+   "source": {
+    "kind": "site",
+    "quote": "Quatre impôts pour fusionner toute la fiscalité",
+    "ref": "france-resolution.fr › manifeste",
+    "url": "https://france-resolution.fr/manifeste.html"
+   },
+   "tier": "annonce",
+   "unit": "impôts",
+   "value": 4
+  },
+  {
+   "conflict_group": "nb_impots_cibles",
+   "id": "impots_cibles_lettres",
+   "label_fr": "Impôts cibles dans les lettres aux élus : « 5 impôts au lieu de 438 »",
+   "source": {
+    "kind": "site",
+    "quote": "5 impôts au lieu de 438",
+    "ref": "france-resolution.fr › lettre type au député (idem maire, sénateur)",
+    "url": "https://france-resolution.fr/ecrire.html"
+   },
+   "tier": "annonce",
+   "unit": "impôts",
+   "value": 5
+  },
+  {
+   "conflict_group": null,
+   "id": "postes_publics_fermes",
+   "label_fr": "Postes publics fermés (manifeste)",
+   "source": {
+    "kind": "site",
+    "quote": "580 000 postes publics fermés",
+    "ref": "france-resolution.fr › manifeste",
+    "url": "https://france-resolution.fr/manifeste.html"
+   },
+   "tier": "annonce",
+   "unit": "postes",
+   "value": 580000
+  },
+  {
+   "conflict_group": null,
+   "id": "mots_droit",
+   "label_fr": "Mots du droit applicable (manifeste)",
+   "source": {
+    "kind": "site",
+    "quote": "49 millions de mots du droit applicable",
+    "ref": "france-resolution.fr › manifeste",
+    "url": "https://france-resolution.fr/manifeste.html"
+   },
+   "tier": "annonce",
+   "unit": "mots",
+   "value": 49000000
+  },
+  {
+   "conflict_group": null,
+   "id": "hausse_travailleurs_lettres",
+   "label_fr": "« augmenter tous les travailleurs de 25 % d'ici trois ans » (lettres aux élus)",
+   "source": {
+    "kind": "site",
+    "quote": "augmenter tous les travailleurs de 25 % d’ici trois ans",
+    "ref": "france-resolution.fr › lettre type au député (idem maire, sénateur)",
+    "url": "https://france-resolution.fr/ecrire.html"
+   },
+   "tier": "annonce",
+   "unit": "%",
+   "value": 25
+  }
+ ]
+}

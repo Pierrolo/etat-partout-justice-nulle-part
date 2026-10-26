@@ -1,0 +1,218 @@
+---
+import { HourBar } from '@/components/story/HourBar';
+import { Callout, StatTile, TierLegend } from '@/components/ui';
+import GlossaryTerm from '@/components/ui/GlossaryTerm.astro';
+import { TierBadge } from '@/components/ui/TierBadge';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import fiches from '@/data/fiches.json';
+import { chip, num } from '@/lib/facts';
+import { FOYERS_NOTE, FOYERS_SHORT, perFoyerDay, perFoyerYear } from '@/lib/foyers';
+import { formatEuro, formatInteger, formatNumber, roundForDisplay } from '@/lib/format';
+import { READING_HYPOTHESES, readingTime } from '@/lib/reading';
+import { withBase } from '@/lib/site';
+
+// ── The three big numbers, all read from facts.json ───────────────────────────
+const depTotal = num('dep_total_2024_md');
+const perDay = perFoyerDay(depTotal);
+const agencesAvant = num('agences_etat_avant');
+const agencesFermees = num('agences_fermees');
+const agencesApres = num('agences_etat_apres');
+const agencesParFoyer = perFoyerYear(num('eco236_agences_md'));
+const mots = num('droit_mots_2026');
+const lecture = readingTime(mots);
+const nSituations = fiches.meta.count;
+---
+
+<BaseLayout>
+  <!-- HERO — on a phone, the call to action is visible without scrolling -->
+  <section class="wrap grid items-start gap-8 pt-8 pb-10 sm:pt-16 sm:pb-14 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
+    <div>
+      <p class="eyebrow eyebrow-accent mb-3">Ce que le plan changerait pour vous</p>
+      <h1 class="display max-w-[16ch] sm:max-w-[18ch]">
+        Qu’est-ce que le plan changerait pour vous ?
+      </h1>
+      <p class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+        <a href={withBase('/simulateur/')} class="btn btn-primary" data-testid="hero-cta">
+          <span>Calculer pour mon foyer</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <a href={withBase('/questionnaire/')} class="text-[0.9375rem] font-medium">
+          Tester vos ordres de grandeur
+        </a>
+        <a href={withBase('/comprendre/')} class="text-[0.9375rem] font-medium">
+          Ou comprendre d’abord où va l’argent public
+        </a>
+      </p>
+      <p class="mt-3 max-w-xl text-sm text-ink-3">
+        Moins d’une minute. Tout se calcule dans votre navigateur : rien n’est envoyé. Si le plan
+        vous coûtait de l’argent, le simulateur le dirait aussi clairement.
+      </p>
+    </div>
+
+    <!-- Signature visual « Votre heure de travail » — generic (average worker) version, static, sourced. -->
+    <div class="card space-y-4 bg-surface" data-teaser="heure-de-travail">
+      <p class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <span class="eyebrow eyebrow-accent">Votre heure de travail</span>
+        <TierBadge tier="announced" size="sm" short />
+      </p>
+      <p
+        class="rounded-md border border-dashed border-[var(--tier-announced-bd)] px-3 py-2 text-[0.9375rem] font-medium text-ink"
+        data-testid="hour-caveat"
+      >
+        Ordre de grandeur annoncé : le chiffrage publié ne cite pas de source externe pour ce
+        partage.
+      </p>
+      <HourBar />
+      <p class="text-[0.9375rem] leading-relaxed text-ink-2">
+        Selon le chiffrage du plan, voici la part qui revient à l’État sur une heure de travail
+        moyenne. Pour votre paie, le simulateur calcule.
+      </p>
+    </div>
+  </section>
+
+  <!-- THE THREE DOORS -->
+  <section class="wrap" aria-labelledby="doors-title">
+    <h2 id="doors-title" class="sr-only">
+      Par où commencer ?
+    </h2>
+    <div class="grid gap-4 md:grid-cols-3 md:gap-6">
+      <a
+        href={withBase('/simulateur/')}
+        class="card group flex flex-col gap-3 border-accent bg-accent-soft no-underline hover:no-underline"
+        style="border-width: 1.5px"
+      >
+        <span class="eyebrow eyebrow-accent">Simulateur · moins d’une minute</span>
+        <span class="font-serif text-3xl font-medium tracking-tight text-ink">Et moi ?</span>
+        <span class="text-base text-ink-2">
+          Le plan appliqué à votre foyer, en euros par mois : quelques questions, aucune donnée ne
+          quitte votre navigateur.
+        </span>
+        <span class="btn btn-primary mt-2 self-start group-hover:bg-accent-hover">
+          Lancer le simulateur <span aria-hidden="true">→</span>
+        </span>
+      </a>
+      <a
+        href={withBase('/comprendre/situations/')}
+        class="card group flex flex-col gap-3 no-underline hover:border-ink hover:no-underline"
+      >
+        <span class="eyebrow">{nSituations} situations</span>
+        <span class="font-serif text-3xl font-medium tracking-tight text-ink">Ma situation</span>
+        <span class="text-base text-ink-2">
+          Retraité, locataire, enseignant, chef d’entreprise… ce que le plan promet, et ce qu’il
+          retire, pour chacun.
+        </span>
+        <span class="btn btn-secondary mt-2 self-start">
+          Voir les situations <span aria-hidden="true">→</span>
+        </span>
+      </a>
+      <a
+        href={withBase('/comprendre/')}
+        class="card group flex flex-col gap-3 no-underline hover:border-ink hover:no-underline"
+      >
+        <span class="eyebrow">Tableau de bord · à explorer</span>
+        <span class="font-serif text-3xl font-medium tracking-tight text-ink">Comprendre</span>
+        <span class="text-base text-ink-2">
+          Dépenses publiques, agences, niches fiscales, calendrier : les données en graphiques
+          lisibles, ramenées à l’échelle d’un foyer.
+        </span>
+        <span class="btn btn-secondary mt-2 self-start">
+          Explorer les données <span aria-hidden="true">→</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- THREE BIG NUMBERS -->
+  <section class="wrap mt-16 sm:mt-24" aria-labelledby="numbers-title">
+    <h2 id="numbers-title" class="max-w-xl text-3xl text-ink">
+      L’ampleur du sujet, en trois chiffres
+    </h2>
+    <p class="mt-3 max-w-xl text-ink-2">
+      Chaque grand nombre est accompagné d’un équivalent à votre échelle, et de sa source.
+    </p>
+    <ul class="mt-8 grid gap-4 md:grid-cols-3 md:gap-6">
+      <StatTile
+        as="li"
+        keyFigure
+        label="Dépenses publiques en 2024"
+        value={formatNumber(depTotal)}
+        unit="Md€"
+        unitLabel="milliards d’euros"
+        reframe={`= ${formatEuro(perDay)} par foyer et par jour, sur ${FOYERS_SHORT}.`}
+        source={chip('dep_total_2024_md', { label: 'Insee, comptes nationaux' })}
+      />
+      <StatTile
+        as="li"
+        label="Agences d’État aujourd’hui"
+        value={formatInteger(agencesAvant)}
+        unit="agences"
+        reframe={`Le plan en fermerait ${formatInteger(agencesFermees)} et en garderait ${formatInteger(agencesApres)}. Il chiffre à environ ${formatEuro(roundForDisplay(agencesParFoyer, 10))} par foyer et par an (sur ${FOYERS_SHORT}) l’économie de la fermeture des agences non indispensables.`}
+        tier="announced"
+        source={chip('agences_etat_avant', { label: 'Chiffrage publié' })}
+      />
+      <StatTile
+        as="li"
+        label="Mots de loi et de règlement en vigueur"
+        value={formatNumber(mots / 1e6)}
+        unit="millions de mots"
+        reframe={`≈ ${formatNumber(roundForDisplay(lecture.hours, 10))} heures de lecture : plus de ${formatNumber(Math.floor(lecture.fullTimeYears))} ans à temps plein pour tout lire.`}
+        source={chip('droit_mots_2026', { label: 'Légifrance, décompte' })}
+      />
+    </ul>
+    <p class="mt-4 max-w-3xl text-sm text-ink-3">
+      {FOYERS_NOTE}
+      <a href={withBase('/methode/#foyers')}>Pourquoi ce choix</a>. Temps de lecture :{' '}
+      {formatInteger(READING_HYPOTHESES.wordsPerMinute)}
+      mots par minute et {formatInteger(READING_HYPOTHESES.fullTimeHoursPerYear)} heures de travail
+      par an (hypothèses du site).
+    </p>
+  </section>
+
+  <!-- HOW WE KEEP IT HONEST -->
+  <section class="wrap mt-16 sm:mt-24" aria-labelledby="honest-title">
+    <h2 id="honest-title" class="max-w-xl text-3xl text-ink">
+      Ce qui est écrit, ce qui est annoncé, ce que nous estimons
+    </h2>
+    <p class="mt-3 max-w-2xl text-ink-2">
+      Chaque chiffre porte l’un de ces trois statuts, avec la même présentation partout. Les
+      amendements sont rédigés et publiés ; aucun n’est en vigueur.
+    </p>
+    <TierLegend className="mt-6" />
+    <Callout
+      tone="plan"
+      title="Ce qui entre dans votre résultat, et ce qui reste à part"
+      className="mt-6 max-w-3xl"
+    >
+      <p>
+        <strong>Compté par défaut :</strong> les mesures chiffrées dans les amendements, et le
+        remplacement du <GlossaryTerm id="rsa">RSA</GlossaryTerm>, de la{' '}
+        <GlossaryTerm id="prime-activite">prime d’activité</GlossaryTerm>
+        et de l’<GlossaryTerm id="aah">AAH</GlossaryTerm> par l’
+        <GlossaryTerm id="afu">AFU</GlossaryTerm>, que le plan promet (« à la place de toutes les
+        aides »). Vous pouvez désactiver ce remplacement dans le simulateur.
+      </p>
+      <p>
+        <strong>Montré à part, en dehors du total :</strong> les promesses sans montant (compte
+        d’épargne, patrimoine rendu, compte éducation) et les pertes que le simulateur ne sait pas
+        chiffrer.
+      </p>
+    </Callout>
+    <Callout tone="note" title="Le plan, tel qu’il est écrit" className="mt-4 max-w-3xl">
+      <p>
+        Les perdants restent sur la page, avec les hypothèses et la liste de ce que le calcul laisse
+        de côté.
+      </p>
+    </Callout>
+  </section>
+
+  <section class="wrap mt-16 pb-4" aria-labelledby="more-title">
+    <h2 id="more-title" class="sr-only">
+      Pour aller plus loin
+    </h2>
+    <p class="max-w-2xl text-ink-2">
+      Sources, hypothèses et limites du simulateur sont détaillées dans
+      <a href={withBase('/methode/')}>la page Méthode</a>. Les chiffres qui se contredisent restent
+      côte à côte.
+    </p>
+  </section>
+</BaseLayout>

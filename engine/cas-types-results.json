@@ -1,0 +1,1386 @@
+{
+  "_meta": {
+    "description": "Cas-types illustratifs, NON pondérés : variation du revenu disponible mensuel (€/mois, hors TVA sauf deltaAfterTva) entre la législation 2026 et le plan complet appliqué à 2026 (hypothèses par défaut : H1 remplacées, H2 frais pro maintenus, H5 répercussion 100 %). transition = variation moyenne mensuelle par année.",
+    "engineVersion": "1.1.0",
+    "baseline": "Législation 2026 (état du droit au 24 octobre 2026 ; barème IR LF 2026)",
+    "plan": "Amendements Résolution au PLF 2027 (1re et 2de parties) et au PLFSS 2027, 19 octobre 2026 ; fiches et manifeste france-resolution.fr ; classeurs « Synthèse »",
+    "generatedBy": "pnpm --filter @epjn/engine gen:cas-types"
+  },
+  "winners": 37,
+  "losers": 10,
+  "cases": [
+    {
+      "id": "seul-0",
+      "family": "Personnes seules",
+      "label": "Seul·e, sans revenu (RSA), locataire 450 € zone 2",
+      "baseline": 882,
+      "plan": 550,
+      "delta": -332,
+      "deltaPct": -37.6,
+      "deltaAfterTva": -352,
+      "waterfall": {
+        "afu": 550,
+        "rsa": -573,
+        "aides_logement": -308,
+        "tva": -32,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -51,
+        "2028": -178,
+        "2030": -332,
+        "steady": -332
+      },
+      "variants": {
+        "H1_differential": -254,
+        "H2_off": -332,
+        "H5_noPassThroughAfterTva": -332
+      }
+    },
+    {
+      "id": "seul-0.5",
+      "family": "Personnes seules",
+      "label": "Seul·e, mi-temps au SMIC, locataire 500 € zone 2",
+      "baseline": 1219,
+      "plan": 1207,
+      "delta": -12,
+      "deltaPct": -1,
+      "deltaAfterTva": -43,
+      "waterfall": {
+        "salaire_net": 89,
+        "impot_revenu": -171,
+        "afu": 550,
+        "prime_activite": -267,
+        "aides_logement": -213,
+        "tva": -42,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -13,
+        "2028": 94,
+        "2030": -12,
+        "steady": -12
+      },
+      "variants": {
+        "H1_differential": -12,
+        "H2_off": -31,
+        "H5_noPassThroughAfterTva": -12
+      }
+    },
+    {
+      "id": "seul-1",
+      "family": "Personnes seules",
+      "label": "Seul·e, 1 SMIC, locataire 550 € zone 2",
+      "baseline": 1708,
+      "plan": 1863,
+      "delta": 155,
+      "deltaPct": 9.1,
+      "deltaAfterTva": 113,
+      "waterfall": {
+        "salaire_net": 178,
+        "impot_revenu": -343,
+        "afu": 550,
+        "prime_activite": -230,
+        "tva": -54,
+        "cee": 11
+      },
+      "transition": {
+        "2027": 44,
+        "2028": 155,
+        "2030": 155,
+        "steady": 155
+      },
+      "variants": {
+        "H1_differential": 155,
+        "H2_off": 117,
+        "H5_noPassThroughAfterTva": 155
+      }
+    },
+    {
+      "id": "seul-1-z1",
+      "family": "Personnes seules",
+      "label": "Seul·e, 1 SMIC, locataire 750 € zone 1 (Paris)",
+      "baseline": 1708,
+      "plan": 1863,
+      "delta": 155,
+      "deltaPct": 9.1,
+      "deltaAfterTva": 113,
+      "waterfall": {
+        "salaire_net": 178,
+        "impot_revenu": -343,
+        "afu": 550,
+        "prime_activite": -230,
+        "tva": -54,
+        "cee": 11
+      },
+      "transition": {
+        "2027": 44,
+        "2028": 155,
+        "2030": 155,
+        "steady": 155
+      },
+      "variants": {
+        "H1_differential": 155,
+        "H2_off": 117,
+        "H5_noPassThroughAfterTva": 155
+      }
+    },
+    {
+      "id": "seul-1-proprio",
+      "family": "Personnes seules",
+      "label": "Seul·e, 1 SMIC, propriétaire",
+      "baseline": 1631,
+      "plan": 1863,
+      "delta": 232,
+      "deltaPct": 14.2,
+      "deltaAfterTva": 190,
+      "waterfall": {
+        "salaire_net": 178,
+        "impot_revenu": -343,
+        "afu": 550,
+        "prime_activite": -154,
+        "tva": -52,
+        "cee": 11
+      },
+      "transition": {
+        "2027": 44,
+        "2028": 232,
+        "2030": 232,
+        "steady": 232
+      },
+      "variants": {
+        "H1_differential": 232,
+        "H2_off": 194,
+        "H5_noPassThroughAfterTva": 232
+      }
+    },
+    {
+      "id": "seul-1.5",
+      "family": "Personnes seules",
+      "label": "Seul·e, 1,5 SMIC, locataire 650 € zone 2",
+      "baseline": 2116,
+      "plan": 2520,
+      "delta": 404,
+      "deltaPct": 19.1,
+      "deltaAfterTva": 353,
+      "waterfall": {
+        "salaire_net": 267,
+        "impot_revenu": -413,
+        "afu": 550,
+        "tva": -62,
+        "cee": 11
+      },
+      "transition": {
+        "2027": 71,
+        "2028": 404,
+        "2030": 404,
+        "steady": 404
+      },
+      "variants": {
+        "H1_differential": 404,
+        "H2_off": 347,
+        "H5_noPassThroughAfterTva": 404
+      }
+    },
+    {
+      "id": "seul-2",
+      "family": "Personnes seules",
+      "label": "Seul·e, 2 SMIC, locataire 750 € zone 2",
+      "baseline": 2704,
+      "plan": 3176,
+      "delta": 472,
+      "deltaPct": 17.5,
+      "deltaAfterTva": 412,
+      "waterfall": {
+        "salaire_net": 356,
+        "impot_revenu": -433,
+        "afu": 550,
+        "tva": -71,
+        "cee": 11
+      },
+      "transition": {
+        "2027": 88,
+        "2028": 472,
+        "2030": 472,
+        "steady": 472
+      },
+      "variants": {
+        "H1_differential": 472,
+        "H2_off": 396,
+        "H5_noPassThroughAfterTva": 472
+      }
+    },
+    {
+      "id": "seul-3",
+      "family": "Personnes seules",
+      "label": "Seul·e, 3 SMIC (cadre), locataire 900 € zone 1",
+      "baseline": 3775,
+      "plan": 4497,
+      "delta": 722,
+      "deltaPct": 19.1,
+      "deltaAfterTva": 642,
+      "waterfall": {
+        "salaire_net": 534,
+        "impot_revenu": -362,
+        "afu": 550,
+        "tva": -90,
+        "cee": 11
+      },
+      "transition": {
+        "2027": 131,
+        "2028": 722,
+        "2030": 722,
+        "steady": 722
+      },
+      "variants": {
+        "H1_differential": 722,
+        "H2_off": 607,
+        "H5_noPassThroughAfterTva": 722
+      }
+    },
+    {
+      "id": "seul-5",
+      "family": "Personnes seules",
+      "label": "Seul·e, 5 SMIC (cadre), propriétaire",
+      "baseline": 5932,
+      "plan": 7154,
+      "delta": 1221,
+      "deltaPct": 20.6,
+      "deltaAfterTva": 1098,
+      "waterfall": {
+        "salaire_net": 890,
+        "impot_revenu": -218,
+        "afu": 550,
+        "tva": -134,
+        "cee": 11
+      },
+      "transition": {
+        "2027": 216,
+        "2028": 1221,
+        "2030": 1221,
+        "steady": 1221
+      },
+      "variants": {
+        "H1_differential": 1221,
+        "H2_off": 1030,
+        "H5_noPassThroughAfterTva": 1221
+      }
+    },
+    {
+      "id": "couple-1-0",
+      "family": "Couples sans enfant",
+      "label": "Couple marié, 1 SMIC + inactif·ve, locataire 650 € zone 2",
+      "baseline": 2025,
+      "plan": 2413,
+      "delta": 388,
+      "deltaPct": 19.2,
+      "deltaAfterTva": 336,
+      "waterfall": {
+        "salaire_net": 178,
+        "impot_revenu": -343,
+        "afu": 1100,
+        "prime_activite": -486,
+        "aides_logement": -61,
+        "tva": -68,
+        "cee": 17
+      },
+      "transition": {
+        "2027": 44,
+        "2028": 418,
+        "2030": 388,
+        "steady": 388
+      },
+      "variants": {
+        "H1_differential": 388,
+        "H2_off": 350,
+        "H5_noPassThroughAfterTva": 388
+      }
+    },
+    {
+      "id": "couple-1-1",
+      "family": "Couples sans enfant",
+      "label": "Couple marié, 2 × SMIC, locataire 800 € zone 2",
+      "baseline": 3090,
+      "plan": 3726,
+      "delta": 636,
+      "deltaPct": 20.6,
+      "deltaAfterTva": 562,
+      "waterfall": {
+        "salaire_net": 356,
+        "impot_revenu": -678,
+        "afu": 1100,
+        "prime_activite": -142,
+        "tva": -91,
+        "cee": 17
+      },
+      "transition": {
+        "2027": 79,
+        "2028": 636,
+        "2030": 636,
+        "steady": 636
+      },
+      "variants": {
+        "H1_differential": 636,
+        "H2_off": 560,
+        "H5_noPassThroughAfterTva": 636
+      }
+    },
+    {
+      "id": "couple-2-1",
+      "family": "Couples sans enfant",
+      "label": "Couple marié, 2 SMIC + 1 SMIC, propriétaire (crédit)",
+      "baseline": 4206,
+      "plan": 5039,
+      "delta": 834,
+      "deltaPct": 19.8,
+      "deltaAfterTva": 741,
+      "waterfall": {
+        "salaire_net": 534,
+        "impot_revenu": -800,
+        "afu": 1100,
+        "tva": -110,
+        "cee": 17
+      },
+      "transition": {
+        "2027": 143,
+        "2028": 834,
+        "2030": 834,
+        "steady": 834
+      },
+      "variants": {
+        "H1_differential": 834,
+        "H2_off": 719,
+        "H5_noPassThroughAfterTva": 834
+      }
+    },
+    {
+      "id": "couple-5-0-marie",
+      "family": "Couples sans enfant",
+      "label": "Couple marié, 5 SMIC (cadre) + sans revenu, propriétaire",
+      "baseline": 6507,
+      "plan": 7704,
+      "delta": 1197,
+      "deltaPct": 18.4,
+      "deltaAfterTva": 1061,
+      "waterfall": {
+        "salaire_net": 890,
+        "impot_revenu": -793,
+        "afu": 1100,
+        "tva": -152,
+        "cee": 17
+      },
+      "transition": {
+        "2027": 219,
+        "2028": 1197,
+        "2030": 1197,
+        "steady": 1197
+      },
+      "variants": {
+        "H1_differential": 1197,
+        "H2_off": 1005,
+        "H5_noPassThroughAfterTva": 1197
+      }
+    },
+    {
+      "id": "couple-5-0-concubins",
+      "family": "Couples sans enfant",
+      "label": "Couple non marié, 5 SMIC (cadre) + sans revenu, propriétaire",
+      "baseline": 5932,
+      "plan": 7704,
+      "delta": 1771,
+      "deltaPct": 29.9,
+      "deltaAfterTva": 1647,
+      "waterfall": {
+        "salaire_net": 890,
+        "impot_revenu": -218,
+        "afu": 1100,
+        "tva": -141,
+        "cee": 17
+      },
+      "transition": {
+        "2027": 216,
+        "2028": 1771,
+        "2030": 1771,
+        "steady": 1771
+      },
+      "variants": {
+        "H1_differential": 1771,
+        "H2_off": 1580,
+        "H5_noPassThroughAfterTva": 1771
+      }
+    },
+    {
+      "id": "famille-1-0-2e",
+      "family": "Couples avec enfants",
+      "label": "Couple, 1 SMIC + inactif·ve, 2 enfants (6, 10), locataire 700 € zone 2",
+      "baseline": 2588,
+      "plan": 2963,
+      "delta": 375,
+      "deltaPct": 14.5,
+      "deltaAfterTva": 310,
+      "waterfall": {
+        "salaire_net": 178,
+        "impot_revenu": -343,
+        "afu": 1650,
+        "prime_activite": -587,
+        "aides_logement": -299,
+        "allocations_familiales": -152,
+        "ars": -71,
+        "tva": -89,
+        "cee": 23
+      },
+      "transition": {
+        "2027": -6,
+        "2028": 525,
+        "2030": 375,
+        "steady": 375
+      },
+      "variants": {
+        "H1_differential": 375,
+        "H2_off": 337,
+        "H5_noPassThroughAfterTva": 375
+      }
+    },
+    {
+      "id": "famille-1-1-2e",
+      "family": "Couples avec enfants",
+      "label": "Couple, 2 × SMIC, 2 enfants (6, 10), locataire 800 € zone 2",
+      "baseline": 3550,
+      "plan": 4276,
+      "delta": 726,
+      "deltaPct": 20.5,
+      "deltaAfterTva": 637,
+      "waterfall": {
+        "salaire_net": 356,
+        "impot_revenu": -686,
+        "afu": 1650,
+        "prime_activite": -371,
+        "allocations_familiales": -152,
+        "ars": -71,
+        "tva": -113,
+        "cee": 23
+      },
+      "transition": {
+        "2027": 88,
+        "2028": 726,
+        "2030": 726,
+        "steady": 726
+      },
+      "variants": {
+        "H1_differential": 726,
+        "H2_off": 650,
+        "H5_noPassThroughAfterTva": 726
+      }
+    },
+    {
+      "id": "famille-1.5-1-3e",
+      "family": "Couples avec enfants",
+      "label": "Couple, 1,5 + 1 SMIC, 3 enfants (5, 9, 16), locataire 850 € zone 2",
+      "baseline": 4391,
+      "plan": 5208,
+      "delta": 817,
+      "deltaPct": 18.6,
+      "deltaAfterTva": 706,
+      "waterfall": {
+        "salaire_net": 445,
+        "impot_revenu": -857,
+        "afu": 1925,
+        "allocations_familiales": -423,
+        "complement_familial": -198,
+        "ars": -74,
+        "tva": -139,
+        "cee": 29
+      },
+      "transition": {
+        "2027": 130,
+        "2028": 817,
+        "2030": 817,
+        "steady": 817
+      },
+      "variants": {
+        "H1_differential": 817,
+        "H2_off": 722,
+        "H5_noPassThroughAfterTva": 817
+      }
+    },
+    {
+      "id": "famille-2-2-creche",
+      "family": "Couples avec enfants",
+      "label": "Couple, 2 × 2 SMIC, 2 enfants (1, 4) en crèche, propriétaire (crédit)",
+      "baseline": 6002,
+      "plan": 6902,
+      "delta": 901,
+      "deltaPct": 15,
+      "deltaAfterTva": 769,
+      "waterfall": {
+        "salaire_net": 712,
+        "impot_revenu": -1084,
+        "credits_impot": -225,
+        "afu": 1650,
+        "allocations_familiales": -152,
+        "tva": -155,
+        "cee": 23
+      },
+      "transition": {
+        "2027": 121,
+        "2028": 976,
+        "2030": 901,
+        "steady": 901
+      },
+      "variants": {
+        "H1_differential": 901,
+        "H2_off": 748,
+        "H5_noPassThroughAfterTva": 901
+      }
+    },
+    {
+      "id": "famille-3-2-2e",
+      "family": "Couples avec enfants",
+      "label": "Couple de cadres, 3 + 2 SMIC, 2 enfants (8, 12), propriétaire",
+      "baseline": 6856,
+      "plan": 8223,
+      "delta": 1367,
+      "deltaPct": 19.9,
+      "deltaAfterTva": 1220,
+      "waterfall": {
+        "salaire_net": 890,
+        "impot_revenu": -1097,
+        "afu": 1650,
+        "allocations_familiales": -76,
+        "tva": -170,
+        "cee": 23
+      },
+      "transition": {
+        "2027": 219,
+        "2028": 1367,
+        "2030": 1367,
+        "steady": 1367
+      },
+      "variants": {
+        "H1_differential": 1367,
+        "H2_off": 1176,
+        "H5_noPassThroughAfterTva": 1367
+      }
+    },
+    {
+      "id": "famille-5-3-3e",
+      "family": "Couples avec enfants",
+      "label": "Couple aisé, 5 + 3 SMIC, 3 enfants (4, 9, 14), emploi à domicile 6 000 €/an",
+      "baseline": 10702,
+      "plan": 12476,
+      "delta": 1774,
+      "deltaPct": 16.6,
+      "deltaAfterTva": 1550,
+      "waterfall": {
+        "salaire_net": 1423,
+        "impot_revenu": -1183,
+        "credits_impot": -305,
+        "afu": 1925,
+        "allocations_familiales": -87,
+        "tva": -252,
+        "cee": 29
+      },
+      "transition": {
+        "2027": 253,
+        "2028": 1857,
+        "2030": 1774,
+        "steady": 1774
+      },
+      "variants": {
+        "H1_differential": 1774,
+        "H2_off": 1468,
+        "H5_noPassThroughAfterTva": 1774
+      }
+    },
+    {
+      "id": "famille-1-1-4e",
+      "family": "Couples avec enfants",
+      "label": "Couple, 2 × SMIC, 4 enfants (3, 7, 11, 15), locataire 950 € zone 2",
+      "baseline": 4175,
+      "plan": 4826,
+      "delta": 651,
+      "deltaPct": 15.6,
+      "deltaAfterTva": 545,
+      "waterfall": {
+        "salaire_net": 356,
+        "impot_revenu": -686,
+        "afu": 2200,
+        "prime_activite": -158,
+        "aides_logement": -132,
+        "allocations_familiales": -618,
+        "complement_familial": -198,
+        "ars": -112,
+        "tva": -139,
+        "cee": 32
+      },
+      "transition": {
+        "2027": 88,
+        "2028": 717,
+        "2030": 651,
+        "steady": 651
+      },
+      "variants": {
+        "H1_differential": 651,
+        "H2_off": 575,
+        "H5_noPassThroughAfterTva": 651
+      }
+    },
+    {
+      "id": "famille-jeune-majeur",
+      "family": "Couples avec enfants",
+      "label": "Couple, 1,5 + 1 SMIC, enfants de 15 et 20 ans (étudiant rattaché)",
+      "baseline": 3977,
+      "plan": 5208,
+      "delta": 1231,
+      "deltaPct": 30.9,
+      "deltaAfterTva": 1130,
+      "waterfall": {
+        "salaire_net": 445,
+        "impot_revenu": -857,
+        "afu": 1925,
+        "prime_activite": -282,
+        "tva": -129,
+        "cee": 28
+      },
+      "transition": {
+        "2027": 91,
+        "2028": 1231,
+        "2030": 1231,
+        "steady": 1231
+      },
+      "variants": {
+        "H1_differential": 1231,
+        "H2_off": 1136,
+        "H5_noPassThroughAfterTva": 1231
+      }
+    },
+    {
+      "id": "mono-0-1e",
+      "family": "Familles monoparentales",
+      "label": "Parent isolé sans revenu, 1 enfant de 2 ans, locataire 600 € zone 2",
+      "baseline": 1483,
+      "plan": 825,
+      "delta": -658,
+      "deltaPct": -44.4,
+      "deltaAfterTva": -696,
+      "waterfall": {
+        "afu": 825,
+        "rsa": -653,
+        "aides_logement": -432,
+        "paje_base": -198,
+        "asf": -201,
+        "tva": -52,
+        "cee": 14
+      },
+      "transition": {
+        "2027": -72,
+        "2028": -442,
+        "2030": -658,
+        "steady": -658
+      },
+      "variants": {
+        "H1_differential": -434,
+        "H2_off": -658,
+        "H5_noPassThroughAfterTva": -658
+      }
+    },
+    {
+      "id": "mono-0.5-2e",
+      "family": "Familles monoparentales",
+      "label": "Parent isolé, mi-temps SMIC, 2 enfants (4, 9), locataire 700 € zone 2",
+      "baseline": 2122,
+      "plan": 1757,
+      "delta": -366,
+      "deltaPct": -17.2,
+      "deltaAfterTva": -420,
+      "waterfall": {
+        "salaire_net": 89,
+        "impot_revenu": -171,
+        "afu": 1100,
+        "prime_activite": -296,
+        "aides_logement": -498,
+        "allocations_familiales": -152,
+        "ars": -36,
+        "asf": -402,
+        "tva": -72,
+        "cee": 18
+      },
+      "transition": {
+        "2027": -61,
+        "2028": -117,
+        "2030": -366,
+        "steady": -366
+      },
+      "variants": {
+        "H1_differential": -366,
+        "H2_off": -385,
+        "H5_noPassThroughAfterTva": -366
+      }
+    },
+    {
+      "id": "mono-1-1e",
+      "family": "Familles monoparentales",
+      "label": "Parent isolé, 1 SMIC, 1 enfant (5), locataire 600 € zone 2",
+      "baseline": 2169,
+      "plan": 2138,
+      "delta": -31,
+      "deltaPct": -1.4,
+      "deltaAfterTva": -86,
+      "waterfall": {
+        "salaire_net": 178,
+        "impot_revenu": -343,
+        "afu": 825,
+        "prime_activite": -288,
+        "aides_logement": -203,
+        "asf": -201,
+        "tva": -69,
+        "cee": 14
+      },
+      "transition": {
+        "2027": 19,
+        "2028": 70,
+        "2030": -31,
+        "steady": -31
+      },
+      "variants": {
+        "H1_differential": -31,
+        "H2_off": -69,
+        "H5_noPassThroughAfterTva": -31
+      }
+    },
+    {
+      "id": "mono-1-2e",
+      "family": "Familles monoparentales",
+      "label": "Parent isolé, 1 SMIC, 2 enfants (4, 9), locataire 700 € zone 2",
+      "baseline": 2549,
+      "plan": 2413,
+      "delta": -136,
+      "deltaPct": -5.3,
+      "deltaAfterTva": -201,
+      "waterfall": {
+        "salaire_net": 178,
+        "impot_revenu": -343,
+        "afu": 1100,
+        "prime_activite": -183,
+        "aides_logement": -299,
+        "allocations_familiales": -152,
+        "ars": -36,
+        "asf": -402,
+        "tva": -82,
+        "cee": 18
+      },
+      "transition": {
+        "2027": -6,
+        "2028": 14,
+        "2030": -136,
+        "steady": -136
+      },
+      "variants": {
+        "H1_differential": -136,
+        "H2_off": -174,
+        "H5_noPassThroughAfterTva": -136
+      }
+    },
+    {
+      "id": "mono-1.5-2e",
+      "family": "Familles monoparentales",
+      "label": "Parent isolé, 1,5 SMIC, 2 enfants (4, 9), locataire 750 € zone 2",
+      "baseline": 2937,
+      "plan": 3070,
+      "delta": 133,
+      "deltaPct": 4.5,
+      "deltaAfterTva": 60,
+      "waterfall": {
+        "salaire_net": 267,
+        "impot_revenu": -514,
+        "afu": 1100,
+        "prime_activite": -53,
+        "aides_logement": -77,
+        "allocations_familiales": -152,
+        "ars": -36,
+        "asf": -402,
+        "tva": -91,
+        "cee": 18
+      },
+      "transition": {
+        "2027": 49,
+        "2028": 171,
+        "2030": 133,
+        "steady": 133
+      },
+      "variants": {
+        "H1_differential": 133,
+        "H2_off": 76,
+        "H5_noPassThroughAfterTva": 133
+      }
+    },
+    {
+      "id": "mono-2-3e",
+      "family": "Familles monoparentales",
+      "label": "Parent isolé, 2 SMIC, 3 enfants (7, 12, 15), locataire 900 € zone 1",
+      "baseline": 4355,
+      "plan": 4001,
+      "delta": -354,
+      "deltaPct": -8.1,
+      "deltaAfterTva": -458,
+      "waterfall": {
+        "salaire_net": 356,
+        "impot_revenu": -686,
+        "afu": 1375,
+        "aides_logement": -63,
+        "allocations_familiales": -423,
+        "complement_familial": -198,
+        "ars": -112,
+        "asf": -602,
+        "tva": -128,
+        "cee": 23
+      },
+      "transition": {
+        "2027": 93,
+        "2028": -322,
+        "2030": -354,
+        "steady": -354
+      },
+      "variants": {
+        "H1_differential": -354,
+        "H2_off": -430,
+        "H5_noPassThroughAfterTva": -354
+      }
+    },
+    {
+      "id": "retraite-aspa",
+      "family": "Retraités",
+      "label": "Retraité·e seul·e, pension 900 € brut (ASPA), locataire 450 € zone 3",
+      "baseline": 1193,
+      "plan": 1518,
+      "delta": 325,
+      "deltaPct": 27.2,
+      "deltaAfterTva": 295,
+      "waterfall": {
+        "impot_revenu": -207,
+        "afu": 825,
+        "aides_logement": -150,
+        "aspa": -144,
+        "tva": -41,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -25,
+        "2028": 400,
+        "2030": 325,
+        "steady": 325
+      },
+      "variants": {
+        "H1_differential": 325,
+        "H2_off": 325,
+        "H5_noPassThroughAfterTva": 325
+      }
+    },
+    {
+      "id": "retraite-1200",
+      "family": "Retraités",
+      "label": "Retraité·e seul·e, pension 1 200 € brut, locataire 500 € zone 2",
+      "baseline": 1266,
+      "plan": 1708,
+      "delta": 442,
+      "deltaPct": 34.9,
+      "deltaAfterTva": 409,
+      "waterfall": {
+        "pension_nette": -52,
+        "impot_revenu": -266,
+        "afu": 825,
+        "aides_logement": -66,
+        "tva": -43,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -11,
+        "2028": 516,
+        "2030": 442,
+        "steady": 442
+      },
+      "variants": {
+        "H1_differential": 442,
+        "H2_off": 442,
+        "H5_noPassThroughAfterTva": 442
+      }
+    },
+    {
+      "id": "retraite-1800",
+      "family": "Retraités",
+      "label": "Retraité·e seul·e, pension 1 800 € brut, propriétaire",
+      "baseline": 1667,
+      "plan": 2095,
+      "delta": 428,
+      "deltaPct": 25.7,
+      "deltaAfterTva": 386,
+      "waterfall": {
+        "impot_revenu": -397,
+        "afu": 825,
+        "tva": -53,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -28,
+        "2028": 428,
+        "2030": 428,
+        "steady": 428
+      },
+      "variants": {
+        "H1_differential": 428,
+        "H2_off": 428,
+        "H5_noPassThroughAfterTva": 428
+      }
+    },
+    {
+      "id": "retraite-3000",
+      "family": "Retraités",
+      "label": "Retraité·e seul·e, pension 3 000 € brut, propriétaire",
+      "baseline": 2539,
+      "plan": 2903,
+      "delta": 363,
+      "deltaPct": 14.3,
+      "deltaAfterTva": 306,
+      "waterfall": {
+        "impot_revenu": -462,
+        "afu": 825,
+        "tva": -69,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -85,
+        "2028": 363,
+        "2030": 363,
+        "steady": 363
+      },
+      "variants": {
+        "H1_differential": 363,
+        "H2_off": 363,
+        "H5_noPassThroughAfterTva": 363
+      }
+    },
+    {
+      "id": "retraite-couple-3200",
+      "family": "Retraités",
+      "label": "Couple retraité, pensions 2 000 + 1 200 € brut, propriétaire",
+      "baseline": 2955,
+      "plan": 3908,
+      "delta": 953,
+      "deltaPct": 32.3,
+      "deltaAfterTva": 881,
+      "waterfall": {
+        "impot_revenu": -697,
+        "afu": 1650,
+        "tva": -89,
+        "cee": 17
+      },
+      "transition": {
+        "2027": -49,
+        "2028": 953,
+        "2030": 953,
+        "steady": 953
+      },
+      "variants": {
+        "H1_differential": 953,
+        "H2_off": 953,
+        "H5_noPassThroughAfterTva": 953
+      }
+    },
+    {
+      "id": "retraite-couple-6000",
+      "family": "Retraités",
+      "label": "Couple retraité aisé, pensions 3 500 + 2 500 € brut, propriétaire",
+      "baseline": 5021,
+      "plan": 5805,
+      "delta": 785,
+      "deltaPct": 15.6,
+      "deltaAfterTva": 678,
+      "waterfall": {
+        "impot_revenu": -865,
+        "afu": 1650,
+        "tva": -124,
+        "cee": 17
+      },
+      "transition": {
+        "2027": -111,
+        "2028": 785,
+        "2030": 785,
+        "steady": 785
+      },
+      "variants": {
+        "H1_differential": 785,
+        "H2_off": 785,
+        "H5_noPassThroughAfterTva": 785
+      }
+    },
+    {
+      "id": "retraite-2028",
+      "family": "Retraités",
+      "label": "Retraité·e seul·e, pension 1 800 € brut liquidée en 2028 (sans majoration AFU)",
+      "baseline": 1648,
+      "plan": 1820,
+      "delta": 172,
+      "deltaPct": 10.4,
+      "deltaAfterTva": 130,
+      "waterfall": {
+        "impot_revenu": -378,
+        "afu": 550,
+        "tva": -53,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -28,
+        "2028": 172,
+        "2030": 172,
+        "steady": 172
+      },
+      "variants": {
+        "H1_differential": 172,
+        "H2_off": 172,
+        "H5_noPassThroughAfterTva": 172
+      }
+    },
+    {
+      "id": "aah80-seul",
+      "family": "Handicap",
+      "label": "Adulte handicapé (≥ 80 %, CMI invalidité), sans revenu, locataire 450 € zone 2",
+      "baseline": 1350,
+      "plan": 1100,
+      "delta": -250,
+      "deltaPct": -18.5,
+      "deltaAfterTva": -284,
+      "waterfall": {
+        "afu": 1100,
+        "aides_logement": -308,
+        "aah": -1042,
+        "tva": -46,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -51,
+        "2028": -96,
+        "2030": -250,
+        "steady": -250
+      },
+      "variants": {
+        "H1_differential": -250,
+        "H2_off": -250,
+        "H5_noPassThroughAfterTva": -250
+      }
+    },
+    {
+      "id": "aah50-seul",
+      "family": "Handicap",
+      "label": "Adulte handicapé (50–79 %), sans revenu, locataire 450 € zone 2",
+      "baseline": 1350,
+      "plan": 550,
+      "delta": -800,
+      "deltaPct": -59.3,
+      "deltaAfterTva": -834,
+      "waterfall": {
+        "afu": 550,
+        "aides_logement": -308,
+        "aah": -1042,
+        "tva": -46,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -51,
+        "2028": -646,
+        "2030": -800,
+        "steady": -800
+      },
+      "variants": {
+        "H1_differential": -421,
+        "H2_off": -800,
+        "H5_noPassThroughAfterTva": -800
+      }
+    },
+    {
+      "id": "aah80-mi-temps",
+      "family": "Handicap",
+      "label": "Adulte handicapé (≥ 80 %), mi-temps au SMIC, locataire 450 € zone 2",
+      "baseline": 1804,
+      "plan": 1757,
+      "delta": -47,
+      "deltaPct": -2.6,
+      "deltaAfterTva": -92,
+      "waterfall": {
+        "salaire_net": 89,
+        "impot_revenu": -171,
+        "afu": 1100,
+        "aides_logement": -213,
+        "aah": -852,
+        "tva": -56,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -18,
+        "2028": 59,
+        "2030": -47,
+        "steady": -47
+      },
+      "variants": {
+        "H1_differential": -47,
+        "H2_off": -66,
+        "H5_noPassThroughAfterTva": -47
+      }
+    },
+    {
+      "id": "famille-aeeh",
+      "family": "Handicap",
+      "label": "Couple, 1,5 + 1 SMIC, enfant de 8 ans bénéficiaire de l’AEEH (sans CMI invalidité)",
+      "baseline": 3898,
+      "plan": 4658,
+      "delta": 760,
+      "deltaPct": 19.5,
+      "deltaAfterTva": 667,
+      "waterfall": {
+        "salaire_net": 445,
+        "impot_revenu": -816,
+        "afu": 1375,
+        "prime_activite": -92,
+        "aeeh": -152,
+        "tva": -113,
+        "cee": 20
+      },
+      "transition": {
+        "2027": 85,
+        "2028": 760,
+        "2030": 760,
+        "steady": 760
+      },
+      "variants": {
+        "H1_differential": 760,
+        "H2_off": 665,
+        "H5_noPassThroughAfterTva": 760
+      }
+    },
+    {
+      "id": "etudiant",
+      "family": "Jeunes",
+      "label": "Étudiant·e de 20 ans, sans revenu, locataire 400 € zone 2",
+      "baseline": 308,
+      "plan": 550,
+      "delta": 242,
+      "deltaPct": 78.3,
+      "deltaAfterTva": 241,
+      "waterfall": {
+        "afu": 550,
+        "aides_logement": -308,
+        "tva": -11,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -51,
+        "2028": 396,
+        "2030": 242,
+        "steady": 242
+      },
+      "variants": {
+        "H1_differential": 242,
+        "H2_off": 242,
+        "H5_noPassThroughAfterTva": 242
+      }
+    },
+    {
+      "id": "jeune-23-smic",
+      "family": "Jeunes",
+      "label": "Jeune de 23 ans au SMIC, locataire 500 € zone 2",
+      "baseline": 1708,
+      "plan": 1863,
+      "delta": 155,
+      "deltaPct": 9.1,
+      "deltaAfterTva": 113,
+      "waterfall": {
+        "salaire_net": 178,
+        "impot_revenu": -343,
+        "afu": 550,
+        "prime_activite": -230,
+        "tva": -54,
+        "cee": 11
+      },
+      "transition": {
+        "2027": 44,
+        "2028": 155,
+        "2030": 155,
+        "steady": 155
+      },
+      "variants": {
+        "H1_differential": 155,
+        "H2_off": 117,
+        "H5_noPassThroughAfterTva": 155
+      }
+    },
+    {
+      "id": "jeune-22-inactif",
+      "family": "Jeunes",
+      "label": "Jeune de 22 ans sans revenu (pas de RSA avant 25 ans), hébergé·e",
+      "baseline": 0,
+      "plan": 550,
+      "delta": 550,
+      "deltaPct": null,
+      "deltaAfterTva": 561,
+      "waterfall": {
+        "afu": 550,
+        "cee": 11
+      },
+      "transition": {
+        "2027": 0,
+        "2028": 550,
+        "2030": 550,
+        "steady": 550
+      },
+      "variants": {
+        "H1_differential": 550,
+        "H2_off": 550,
+        "H5_noPassThroughAfterTva": 550
+      }
+    },
+    {
+      "id": "chomeur-are",
+      "family": "Sans emploi",
+      "label": "Demandeur·se d’emploi, ARE 1 100 € net, locataire 550 € zone 2",
+      "baseline": 1201,
+      "plan": 1422,
+      "delta": 222,
+      "deltaPct": 18.5,
+      "deltaAfterTva": 191,
+      "waterfall": {
+        "impot_revenu": -228,
+        "afu": 550,
+        "aides_logement": -100,
+        "tva": -41,
+        "cee": 11
+      },
+      "transition": {
+        "2027": -17,
+        "2028": 272,
+        "2030": 222,
+        "steady": 222
+      },
+      "variants": {
+        "H1_differential": 222,
+        "H2_off": 197,
+        "H5_noPassThroughAfterTva": 222
+      }
+    },
+    {
+      "id": "couple-chomeur-2e",
+      "family": "Sans emploi",
+      "label": "Couple, SMIC + ARE 1 000 €, 2 enfants (6, 10), locataire 800 € zone 2",
+      "baseline": 2712,
+      "plan": 3756,
+      "delta": 1044,
+      "deltaPct": 38.5,
+      "deltaAfterTva": 975,
+      "waterfall": {
+        "salaire_net": 178,
+        "impot_revenu": -550,
+        "afu": 1650,
+        "aides_logement": -10,
+        "allocations_familiales": -152,
+        "ars": -71,
+        "tva": -92,
+        "cee": 23
+      },
+      "transition": {
+        "2027": 50,
+        "2028": 1050,
+        "2030": 1044,
+        "steady": 1044
+      },
+      "variants": {
+        "H1_differential": 1044,
+        "H2_off": 983,
+        "H5_noPassThroughAfterTva": 1044
+      }
+    },
+    {
+      "id": "fonctionnaire-2000",
+      "family": "Fonction publique",
+      "label": "Fonctionnaire seul·e, 2 000 € net, locataire 650 € zone 2",
+      "baseline": 2007,
+      "plan": 2323,
+      "delta": 316,
+      "deltaPct": 15.7,
+      "deltaAfterTva": 267,
+      "waterfall": {
+        "salaire_net": 236,
+        "impot_revenu": -394,
+        "afu": 550,
+        "prime_activite": -76,
+        "tva": -60,
+        "cee": 11
+      },
+      "transition": {
+        "2027": 36,
+        "2028": 316,
+        "2030": 316,
+        "steady": 316
+      },
+      "variants": {
+        "H1_differential": 316,
+        "H2_off": 265,
+        "H5_noPassThroughAfterTva": 316
+      }
+    },
+    {
+      "id": "fonctionnaires-2e",
+      "family": "Fonction publique",
+      "label": "Couple d’enseignants, 2 300 + 2 100 € net, 2 enfants (7, 11), propriétaire (crédit)",
+      "baseline": 4484,
+      "plan": 5551,
+      "delta": 1067,
+      "deltaPct": 23.8,
+      "deltaAfterTva": 960,
+      "waterfall": {
+        "salaire_net": 519,
+        "impot_revenu": -950,
+        "afu": 1650,
+        "allocations_familiales": -152,
+        "tva": -130,
+        "cee": 23
+      },
+      "transition": {
+        "2027": 139,
+        "2028": 1067,
+        "2030": 1067,
+        "steady": 1067
+      },
+      "variants": {
+        "H1_differential": 1067,
+        "H2_off": 954,
+        "H5_noPassThroughAfterTva": 1067
+      }
+    },
+    {
+      "id": "cadre-4000",
+      "family": "Personnes seules",
+      "label": "Cadre du privé seul·e, 4 000 € net, locataire 1 000 € zone 1",
+      "baseline": 3456,
+      "plan": 4103,
+      "delta": 648,
+      "deltaPct": 18.7,
+      "deltaAfterTva": 574,
+      "waterfall": {
+        "salaire_net": 481,
+        "impot_revenu": -383,
+        "afu": 550,
+        "tva": -84,
+        "cee": 11
+      },
+      "transition": {
+        "2027": 118,
+        "2028": 648,
+        "2030": 648,
+        "steady": 648
+      },
+      "variants": {
+        "H1_differential": 648,
+        "H2_off": 545,
+        "H5_noPassThroughAfterTva": 648
+      }
+    }
+  ]
+}

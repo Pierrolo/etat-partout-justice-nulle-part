@@ -1,0 +1,206 @@
+import {
+  useId,
+  useState,
+  type ChangeEvent,
+  type FocusEvent,
+  type KeyboardEvent,
+  type ReactNode,
+} from 'react';
+import { cn } from '@/lib/cn';
+import { formatNumber, parseFrenchNumber } from '@/lib/format';
+
+export interface NumberInputProps {
+  label: ReactNode;
+  /** Controlled value; `null` = empty. */
+  value: number | null;
+  onChange: (value: number | null) => void;
+  /** Suffix shown inside the field: « € », « €/mois ». */
+  unit?: string;
+  hint?: ReactNode;
+  /**
+   * External error message (e.g. from the form validation); a built-in parse / range error is used otherwise.
+   * An error is only SHOWN (and announced) once the field has lost focus, or when `validate` is true:
+   * never per keystroke, never on a field nobody has touched yet.
+   */
+  error?: string;
+  /** Show the error now even if the field was never visited (after a « Suivant » / « Voir mon résultat »). */
+  validate?: boolean;
+  min?: number;
+  max?: number;
+  /** Arrow-key increment. Default 10. */
+  step?: number;
+  /** Max fraction digits kept. Default 0 (whole euros); the simulator rounds to avoid false precision. */
+  decimals?: number;
+  id?: string;
+  name?: string;
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
+  className?: string;
+  /** Classes of the bordered field only (e.g. `w-48`), so the label and hint keep the full width. */
+  fieldClassName?: string;
+}
+
+const clamp = (n: number, min?: number, max?: number) =>
+  Math.min(max ?? Number.POSITIVE_INFINITY, Math.max(min ?? Number.NEGATIVE_INFINITY, n));
+
+const round = (n: number, decimals: number) => {
+  const f = 10 ** decimals;
+  return Math.round(n * f) / f;
+};
+
+/**
+ * `parseFrenchNumber` reads a lone « . » or « , » as the decimal mark (« 1.234 » = 1,234). In a whole-number
+ * field nobody means 1,4 € when typing « 1.400 » or « 1,400 »: that is a thousands separator.
+ */
+function parseInput(text: string, decimals: number): number | null {
+  if (decimals === 0) {
+    const compact = text.replace(/[\s\u00A0\u202F]/g, '').replace(/€|\/mois|\/an/gi, '');
+    if (/^[-+−]?\d{1,3}(?:[.,]\d{3})+$/.test(compact))
+      return parseFrenchNumber(compact.replace(/[.,]/g, ''));
+  }
+  return parseFrenchNumber(text);
+}
+
+/**
+ * French money / quantity input. `type="text"` + `inputmode="decimal"` (never `type="number"`:
+ * no spinners, no locale surprises, no scroll-wheel edits). Accepts « 1 234,5 », « 1234.5 », « 2 500 € ».
+ * While focused you edit the raw text; on blur it is re-displayed as « 1 234,5 » with U+202F grouping.
+ */
+export function NumberInput({
+  label,
+  value,
+  onChange,
+  unit,
+  hint,
+  error,
+  min,
+  max,
+  step = 10,
+  decimals = 0,
+  validate,
+  id,
+  name,
+  placeholder,
+  required,
+  disabled,
+  className,
+  fieldClassName,
+}: NumberInputProps) {
+  const uid = useId();
+  const inputId = id ?? `${uid}-input`;
+  const hintId = `${inputId}-hint`;
+  const errId = `${inputId}-err`;
+  const [draft, setDraft] = useState<string | null>(null);
+  /** Text left in the field after a blur that could not be read as a number: kept on screen, with its error. */
+  const [badText, setBadText] = useState<string | null>(null);
+  const [touched, setTouched] = useState(false);
+
+  const shown =
+    draft ??
+    badText ??
+    (value === null ? '' : formatNumber(value, { decimals: { min: 0, max: decimals } }));
+
+  const parseError =
+    badText !== null ? 'Saisissez un nombre, par exemple 1 850 ou 1 850,50.' : undefined;
+  const rangeError =
+    value !== null && ((min !== undefined && value < min) || (max !== undefined && value > max))
+      ? min !== undefined && value < min
+        ? `La valeur minimale est ${formatNumber(min, { decimals: { min: 0, max: decimals } })}.`
+        : `La valeur maximale est ${formatNumber(max!, { decimals: { min: 0, max: decimals } })}.`
+      : undefined;
+  const focused = draft !== null;
+  const found = parseError ?? error ?? rangeError;
+  // Calm validation: nothing while the person is typing, nothing on a field not yet visited.
+  const message = found && (touched || validate) && !focused ? found : undefined;
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const text = e.target.value;
+    setDraft(text);
+    setBadText(null);
+    if (text.trim() === '') return onChange(null);
+    const n = parseInput(text, decimals);
+    if (n !== null) onChange(round(n, decimals));
+  };
+
+  // Keep the text exactly as displayed (grouping included) so the DOM value does not change under the
+  // caret on focus, then select it: typing replaces the whole number, like a native field.
+  const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
+    setDraft(shown);
+    setBadText(null);
+    e.currentTarget.select();
+  };
+
+  const handleBlur = () => {
+    // Every readable keystroke already reached the parent: only an unreadable text needs care.
+    if (draft !== null && draft.trim() !== '' && parseInput(draft, decimals) === null)
+      setBadText(draft);
+    setDraft(null);
+    setTouched(true);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+    e.preventDefault();
+    const base = (draft !== null ? parseInput(draft, decimals) : value) ?? 0;
+    const next = clamp(round(base + (e.key === 'ArrowUp' ? step : -step), decimals), min, max);
+    setDraft(String(next).replace('.', ','));
+    onChange(next);
+  };
+
+  return (
+    <div className={cn('flex flex-col gap-1.5', className)}>
+      <label htmlFor={inputId} className="text-[0.9375rem] font-semibold text-ink">
+        {label}
+        {required && (
+          <>
+            <span aria-hidden="true" className="text-loss">
+              {' '}
+              *
+            </span>
+            <span className="sr-only"> (obligatoire)</span>
+          </>
+        )}
+      </label>
+      {hint && (
+        <p id={hintId} className="text-sm text-ink-3">
+          {hint}
+        </p>
+      )}
+      <div
+        className={cn(
+          'flex min-h-12 items-center rounded-md border-[1.5px] bg-field px-3 focus-within:outline-3 focus-within:outline-offset-2 focus-within:outline-accent',
+          message ? 'border-loss' : 'border-rule-strong',
+          disabled && 'opacity-60',
+          fieldClassName,
+        )}
+      >
+        <input
+          id={inputId}
+          name={name}
+          type="text"
+          inputMode={decimals === 0 && (min === undefined || min >= 0) ? 'numeric' : 'decimal'}
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck={false}
+          enterKeyHint="next"
+          placeholder={placeholder}
+          required={required}
+          disabled={disabled}
+          value={shown}
+          aria-invalid={message ? true : undefined}
+          aria-describedby={cn(hint ? hintId : false, message ? errId : false) || undefined}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          className="num w-full min-w-0 flex-1 bg-transparent py-2 text-lg font-medium text-ink outline-none placeholder:text-ink-3"
+        />
+        {unit && <span className="ms-2 shrink-0 text-[0.9375rem] text-ink-3">{unit}</span>}
+      </div>
+      <p id={errId} aria-live="polite" className={cn('text-sm text-loss', !message && 'hidden')}>
+        {message}
+      </p>
+    </div>
+  );
+}

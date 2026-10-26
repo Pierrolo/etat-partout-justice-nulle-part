@@ -1,0 +1,2691 @@
+{
+ "amendements": [
+  {
+   "article_fr": "Article additionnel après l’article 2",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Cas général : impôt sur le revenu dû au titre de 2026, impôt sur les sociétés des exercices clos à partir du 1er janvier 2027, droits d'enregistrement sur les actes à partir du 1er janvier 2027",
+     "precision": "annee"
+    },
+    {
+     "date": "2027-01-01",
+     "label_fr": "Avantages liés à un investissement, une dépense ou un engagement : investissements et engagements à partir du 1er janvier 2027",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-01-01",
+     "label_fr": "Successions et donations : à partir du 1er janvier 2027",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "TVA, accises et taxes douanières : opérations dont le fait générateur est à partir du 1er juillet 2027",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Plans, comptes, contrats et livrets d'épargne ouverts ou alimentés à partir du 1er juillet 2027 : plus d'avantage fiscal",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Dons : avantage réduit de moitié pour les dons faits à partir du 1er juillet 2027",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-01-01",
+     "label_fr": "Agriculture, services à la personne, garde de jeunes enfants : avantage réduit d'un tiers au titre de 2027",
+     "precision": "annee"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Agriculture, services à la personne, garde de jeunes enfants : avantage réduit de deux tiers au titre de 2028",
+     "precision": "annee"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Décote, nombre de parts et quotient familial, revenus remplacés par l'aide fondamentale, abattements de plus-values, plans et livrets d'épargne : impôt sur le revenu dû au titre de 2028",
+     "precision": "jour"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Dons : plus aucun avantage à partir du 1er janvier 2028",
+     "precision": "jour"
+    },
+    {
+     "date": "2029-01-01",
+     "label_fr": "Agriculture, services à la personne, garde de jeunes enfants : abolition totale à partir de 2029",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2029-01-01",
+   "id": "PLF-P1-1",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 1,
+   "objet_expose_fr": "Cet amendement abroge tout avantage fiscal dérogatoire sur sept impôts, à compter de 2027.",
+   "pdf_page": 4,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4",
+   "resume_fr": "Supprime tous les avantages fiscaux dérogatoires (exonérations, abattements, déductions, réductions et crédits d'impôt, taux réduits, reports, dégrèvements) sur sept impôts, avec six exceptions de principe et un calendrier d'extinction qui s'étale de 2027 à 2029.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 2",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Titres dont la péremption intervient à partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P1-2",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 2,
+   "objet_expose_fr": "Cet amendement transfère au salarié la contre-valeur de ses titres-restaurant et titres-transport périmés.",
+   "pdf_page": 24,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=24",
+   "resume_fr": "Fait verser au salarié, sous forme de salaire, la valeur des titres-restaurant et titres-transport périmés, aujourd'hui reversée au budget des activités sociales et culturelles de l'entreprise.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Titres-restaurant : la valeur périmée rendue au salarié, en salaire"
+  },
+  {
+   "article_fr": "Article 4",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Taux des réductions d'impôt pour dons réduits de moitié",
+     "precision": "jour"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Abrogation des réductions d'impôt pour dons",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2028-01-01",
+   "id": "PLF-P1-3",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 3,
+   "objet_expose_fr": "Cet amendement abroge les réductions d’impôt pour dons et mécénat à compter de 2028.",
+   "pdf_page": 25,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=25",
+   "resume_fr": "Réduit de moitié, pour les dons faits à partir du 1er juillet 2027, les taux des réductions d'impôt pour dons (IR, IS, IFI), puis supprime ces réductions au 1er janvier 2028.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Dons : fin des réductions d’impôt, l’argent rendu à la paie de tous"
+  },
+  {
+   "article_fr": "Article 7",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Offres de prêt à taux zéro émises à partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P1-4",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 4,
+   "objet_expose_fr": "Cet amendement abroge le crédit d’impôt versé aux banques pour le prêt à taux zéro.",
+   "pdf_page": 27,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=27",
+   "resume_fr": "Abroge le crédit d'impôt versé aux banques pour financer le prêt à taux zéro, pour les offres émises à partir du 1er janvier 2027 ; les avances déjà accordées continuent jusqu'à leur terme.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Prêt à taux zéro : les intérêts payés aux banques rendus à la paie des ménages"
+  },
+  {
+   "article_fr": "Article 9",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Demandes d'agrément déposées à partir du 1er janvier 2027",
+     "precision": "jour"
+    },
+    {
+     "date": "2029-07-01",
+     "label_fr": "Les projets déjà agréés gardent leur crédit s'ils sont réalisés avant le 1er juillet 2029",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2029-07-01",
+   "id": "PLF-P1-5",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 5,
+   "objet_expose_fr": "Cet amendement supprime le suramortissement industriel et abroge le crédit d’impôt pour l’industrie verte.",
+   "pdf_page": 28,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=28",
+   "resume_fr": "Supprime le suramortissement industriel prévu par le projet de loi et abroge le crédit d'impôt pour l'industrie verte pour les demandes d'agrément à partir du 1er janvier 2027.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Suramortissement industriel : guichets fermés, la baisse profite à toutes les entreprises"
+  },
+  {
+   "article_fr": "Article 10",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": null,
+   "effective_to": null,
+   "id": "PLF-P1-6",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 6,
+   "objet_expose_fr": "Cet amendement supprime les trois avantages fiscaux créés pour les cessions et reprises d’entreprises.",
+   "pdf_page": 30,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=30",
+   "resume_fr": "Supprime l'article du projet de loi qui crée trois avantages fiscaux pour les cessions et reprises d'entreprises (abattement, droits de mutation à 0,1 %, déduction sur biens neufs).",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Cessions d’entreprise : aucun avantage nouveau, la ressource va aux salaires"
+  },
+  {
+   "article_fr": "Article 12",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2026-12-31",
+     "label_fr": "Les dépenses engagées jusqu'au 31 décembre 2026 restent éligibles",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2026-12-31",
+   "effective_to": "2026-12-31",
+   "id": "PLF-P1-7",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 7,
+   "objet_expose_fr": "Cet amendement supprime la prorogation jusqu’en 2029 de sept avantages fiscaux du secteur culturel.",
+   "pdf_page": 31,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=31",
+   "resume_fr": "Supprime la prorogation jusqu'en 2029 de sept avantages fiscaux du secteur culturel : quatre expirent fin 2026 et le terme de trois crédits d'impôt de production est avancé d'un an.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Soutien à la culture : extinction des avantages, enrichissement de tous les travailleurs"
+  },
+  {
+   "article_fr": "Article 13",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédit d'impôt de remplacement réduit d'un tiers pour les dépenses engagées en 2027",
+     "precision": "annee"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Crédit d'impôt de remplacement réduit de deux tiers pour les dépenses engagées en 2028",
+     "precision": "annee"
+    },
+    {
+     "date": "2029-01-01",
+     "label_fr": "Abrogation pour les dépenses engagées à partir du 1er janvier 2029",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2029-01-01",
+   "id": "PLF-P1-8",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 8,
+   "objet_expose_fr": "Cet amendement supprime le suramortissement agricole et abroge en 2029 le crédit d’impôt de remplacement.",
+   "pdf_page": 32,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=32",
+   "resume_fr": "Supprime le suramortissement agricole et réduit puis abroge le crédit d'impôt de remplacement des agriculteurs : un tiers en moins pour 2027, deux tiers pour 2028, abrogation à partir de 2029.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Suramortissement agricole : fin des régimes particuliers, gain rendu aux actifs"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 13",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Dépenses exposées à partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P1-9",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 9,
+   "objet_expose_fr": "Cet amendement abroge les crédits d’impôt recherche, innovation et recherche collaborative, à compter de 2027.",
+   "pdf_page": 34,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=34",
+   "resume_fr": "Abroge les crédits d'impôt recherche, innovation et recherche collaborative pour les dépenses exposées à partir du 1er janvier 2027.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Crédit d’impôt recherche : supprimé, rendu en salaire net"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 13",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Exercices ouverts à partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P1-10",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 10,
+   "objet_expose_fr": "Cet amendement abroge les dix régimes d’exonération d’impôt attachés à l’implantation en zone.",
+   "pdf_page": 36,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=36",
+   "resume_fr": "Abroge les dix régimes d'exonération d'impôt sur les bénéfices attachés à l'implantation dans une zone (articles 44 sexies à 44 septdecies du CGI) pour les exercices ouverts à partir du 1er janvier 2027.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Zones franches : dix exonérations abrogées, l’impôt baisse pour tous"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 13",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Exercices ouverts à partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P1-11",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 11,
+   "objet_expose_fr": "Cet amendement abroge le régime de taxation au tonnage des entreprises de transport maritime.",
+   "pdf_page": 38,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=38",
+   "resume_fr": "Abroge le régime de taxation au tonnage des armateurs : leur bénéfice réel est imposé comme celui des autres entreprises, pour les exercices ouverts à partir du 1er janvier 2027.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Taxe au tonnage : les armateurs imposés sur leur bénéfice réel, le produit va au travail"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 13",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Dépenses exposées à partir du 1er juillet 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P1-12",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 12,
+   "objet_expose_fr": "Cet amendement abroge le crédit d’impôt famille à compter du 1er juillet 2027.",
+   "pdf_page": 39,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=39",
+   "resume_fr": "Abroge le crédit d'impôt famille (places de crèche financées par l'employeur) pour les dépenses exposées à partir du 1er juillet 2027.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Crédit d’impôt famille : supprimé, le parent reçoit son salaire"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 13",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Biens acquis à partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P1-13",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 13,
+   "objet_expose_fr": "Cet amendement abroge les huit déductions exceptionnelles d’investissement du code général des impôts.",
+   "pdf_page": 40,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=40",
+   "resume_fr": "Abroge huit déductions exceptionnelles d'investissement (poids lourds, robots, navires, engins, simulateurs, cuves…) pour les biens acquis à partir du 1er janvier 2027.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Déductions exceptionnelles : huit régimes éteints, la baisse profite à chaque entreprise"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 13",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Opérations dont le fait générateur est à partir du 1er juillet 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P1-14",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 14,
+   "objet_expose_fr": "Cet amendement abroge les tarifs réduits d’accise sur l’énergie qui procèdent d’un choix national.",
+   "pdf_page": 41,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=41",
+   "resume_fr": "Abroge les tarifs réduits d'accise sur l'énergie qui relèvent d'un choix national (les exonérations imposées par le droit de l'Union sont maintenues), à partir du 1er juillet 2027.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Accise sur l’énergie : même tarif pour tous les métiers, tous les revenus d’activité augmentés"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 13",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Tarif réduit du gazole agricole réduit d'un tiers (fait générateur à partir du 1er janvier 2027)",
+     "precision": "jour"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Tarif réduit du gazole agricole réduit de deux tiers (à partir du 1er janvier 2028)",
+     "precision": "jour"
+    },
+    {
+     "date": "2029-01-01",
+     "label_fr": "Abrogation complète à partir du 1er janvier 2029",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2029-01-01",
+   "id": "PLF-P1-15",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 15,
+   "objet_expose_fr": "Cet amendement abroge en 2029 trois régimes fiscaux réservés à l’agriculture, par tiers annuels.",
+   "pdf_page": 43,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=43",
+   "resume_fr": "Abroge d'ici 2029, par tiers, trois régimes fiscaux réservés à l'agriculture : crédit d'impôt pour l'agriculture biologique, exonération des coopératives et tarif réduit du gazole agricole.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Régimes agricoles : sortie progressive de la dépendance aux subventions"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 24",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Abrogation à partir du 1er juillet 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P1-16",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 16,
+   "objet_expose_fr": "Cet amendement abroge le dispositif des certificats d’économies d’énergie et les obligations qui le portent.",
+   "pdf_page": 45,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=45",
+   "resume_fr": "Abroge le dispositif des certificats d'économies d'énergie et les obligations qui le portent, à partir du 1er juillet 2027.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Certificats d’économies d’énergie : fin des impôts cachés sur la facture d’énergie"
+  },
+  {
+   "article_fr": "Article 26",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2026-12-31",
+     "label_fr": "Date limite de création dans les zones de développement prioritaire",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2026-12-31",
+   "effective_to": "2026-12-31",
+   "id": "PLF-P1-17",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 17,
+   "objet_expose_fr": "Cet amendement supprime la prorogation des exonérations fiscales accordées aux entreprises des zones aidées.",
+   "pdf_page": 47,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=47",
+   "resume_fr": "Supprime les prorogations d'un an des exonérations d'impôts accordées aux entreprises des zones aidées et ramène au 31 décembre 2026 la date limite de création dans les zones de développement prioritaire ; les entreprises déjà exonérées gardent leurs droits.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Impôts locaux : les exonérations d’adresse non prorogées, l’avantage rendu à tous"
+  },
+  {
+   "article_fr": "Article 28",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Investissements dont le fait générateur est à partir du 1er janvier 2027",
+     "precision": "jour"
+    },
+    {
+     "date": "2029-07-01",
+     "label_fr": "Les opérations déjà engagées et achevées avant le 1er juillet 2029 restent régies par le droit ancien",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2029-07-01",
+   "id": "PLF-P1-18",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT I : RESTITUTION ET ABROGATION DES NICHES",
+   "number": 18,
+   "objet_expose_fr": "Cet amendement abroge quatre régimes d’aide à l’investissement au lieu d’en reporter l’extinction.",
+   "pdf_page": 48,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=48",
+   "resume_fr": "Abroge quatre régimes d'aide fiscale à l'investissement (investissement maritime et trois aides outre-mer) au lieu d'en reporter l'extinction, pour les investissements à partir du 1er janvier 2027.",
+   "theme": "niches",
+   "theme_label_fr": "Niches fiscales et avantages particuliers",
+   "tier": "loi",
+   "title_fr": "Aides à l’investissement : abrogées plutôt que prorogées, rendues au salaire net"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 4",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Actes, mutations et successions à partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P1-19",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT II : REFONTE FISCALE",
+   "number": 19,
+   "objet_expose_fr": "Cet amendement substitue aux droits de mutation un tarif unique de 1 % et 3 %.",
+   "pdf_page": 50,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=50",
+   "resume_fr": "Remplace les droits de mutation (achat, succession, donation) par un barème unique — rien sous 10 000 €, 1 % de 10 000 à 100 000 €, 3 % au-delà — supporté par le vendeur ou l'héritier et imputé sur l'impôt sur la plus-value.",
+   "theme": "refonte_fiscale",
+   "theme_label_fr": "Refonte de la fiscalité (mutations, plus-values, TVA, IS, taxes)",
+   "tier": "loi",
+   "title_fr": "Droits de mutation : ramenés à 1 % et 3 %, l’équilibre tenu"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 8",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Immobilier et biens meubles : cessions à partir du 1er janvier 2027",
+     "precision": "jour"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Titres, compte d'épargne personnel : opérations à partir du 1er janvier 2028",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2028-01-01",
+   "id": "PLF-P1-20",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT II : REFONTE FISCALE",
+   "number": 20,
+   "objet_expose_fr": "Cet amendement fond les deux branches qui frappent le capital en un impôt unique.",
+   "pdf_page": 53,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=53",
+   "resume_fr": "Fond l'impôt sur le revenu (12,8 % ou 19 %) et les prélèvements sociaux (17,2 %) sur les plus-values en un prélèvement unique de 30 % calculé sur le gain réel, sans abattements ni exonérations.",
+   "theme": "refonte_fiscale",
+   "theme_label_fr": "Refonte de la fiscalité (mutations, plus-values, TVA, IS, taxes)",
+   "tier": "loi",
+   "title_fr": "Plus-values : le capital imposé sur son gain réel, au service de l’équilibre"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 16",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2028-07-01",
+     "label_fr": "Taux réduits alignés sur 20 % ; alimentation à 10 %",
+     "precision": "jour"
+    },
+    {
+     "date": "2029-07-01",
+     "label_fr": "Alimentation à 15 %",
+     "precision": "jour"
+    },
+    {
+     "date": "2030-07-01",
+     "label_fr": "Alimentation à 20 %",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2028-07-01",
+   "effective_to": "2030-07-01",
+   "id": "PLF-P1-21",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT II : REFONTE FISCALE",
+   "number": 21,
+   "objet_expose_fr": "Cet amendement aligne sur le taux normal les taux réduits de taxe sur la valeur ajoutée.",
+   "pdf_page": 57,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=57",
+   "resume_fr": "Aligne les taux réduits de TVA sur le taux normal de 20 % au 1er juillet 2028 en métropole ; l'alimentation passe par 10 % en 2028, 15 % en 2029 puis 20 % en 2030.",
+   "theme": "refonte_fiscale",
+   "theme_label_fr": "Refonte de la fiscalité (mutations, plus-values, TVA, IS, taxes)",
+   "tier": "loi",
+   "title_fr": "TVA : les trois taux réduits réunis en un seul, à rendement constant"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 19",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Impositions dont le fait générateur est à partir du 1er juillet 2027",
+     "precision": "jour"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Taxes annuelles et contributions sur le revenu",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2028-01-01",
+   "id": "PLF-P1-22",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT II : REFONTE FISCALE",
+   "number": 22,
+   "objet_expose_fr": "Cet amendement supprime vingt et une impositions de l’État, au 1er juillet 2027.",
+   "pdf_page": 59,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=59",
+   "resume_fr": "Supprime vingt et une impositions de l'État (contribution sociale sur l'IS, taxe sur les transactions financières, taxe sur les rachats d'actions, droits de timbre…), la plupart au 1er juillet 2027, les taxes annuelles au 1er janvier 2028.",
+   "theme": "refonte_fiscale",
+   "theme_label_fr": "Refonte de la fiscalité (mutations, plus-values, TVA, IS, taxes)",
+   "tier": "loi",
+   "title_fr": "Taxes d’État : vingt et une disparaissent dans l’impôt, sans hausse du total"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 32",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Exercices ouverts à partir du 1er juillet 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P1-23",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT II : REFONTE FISCALE",
+   "number": 23,
+   "objet_expose_fr": "Cet amendement substitue aux taux de l’impôt sur les sociétés un taux unique de 27 %.",
+   "pdf_page": 61,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=61",
+   "resume_fr": "Fixe un taux unique d'impôt sur les sociétés de 27 % pour tous les bénéfices, sans taux réduit, pour les exercices ouverts à partir du 1er juillet 2027.",
+   "theme": "refonte_fiscale",
+   "theme_label_fr": "Refonte de la fiscalité (mutations, plus-values, TVA, IS, taxes)",
+   "tier": "loi",
+   "title_fr": "Impôt sur les sociétés : un taux unique, pour l’équilibre de la refonte fiscale"
+  },
+  {
+   "article_fr": "Article 42",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Plafonds portés à zéro au titre de 2027 (rendement prévisionnel 29 980,5 M€)",
+     "precision": "annee"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P1-24",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT II : REFONTE FISCALE",
+   "number": 24,
+   "objet_expose_fr": "Cet amendement plafonne à zéro l’affectation de quatre-vingt-deux ressources, dont le produit revient au budget.",
+   "pdf_page": 64,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=64",
+   "resume_fr": "Porte à zéro le plafond d'affectation de quatre-vingt-deux taxes affectées à des organismes : leur produit revient au budget général, voté chaque année par le Parlement.",
+   "theme": "refonte_fiscale",
+   "theme_label_fr": "Refonte de la fiscalité (mutations, plus-values, TVA, IS, taxes)",
+   "tier": "loi",
+   "title_fr": "Taxes affectées : plafond à zéro, tout le produit retourne au budget voté par le Parlement"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 42",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Impositions dont le fait générateur est à partir du 1er juillet 2027 et rémunérations versées à partir de cette date",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-12-31",
+     "label_fr": "Taxes annuelles : dues une dernière fois au titre de 2027",
+     "precision": "annee"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2027-12-31",
+   "id": "PLF-P1-25",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT II : REFONTE FISCALE",
+   "number": 25,
+   "objet_expose_fr": "Cet amendement supprime cinquante-sept impositions affectées à des opérateurs et à des organismes.",
+   "pdf_page": 67,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=67",
+   "resume_fr": "Abroge cinquante-sept impositions affectées à des opérateurs et organismes (versement mobilité, formation, apprentissage, effort de construction…) : au 1er juillet 2027 pour celles qui se perçoivent par opération ou sur les rémunérations, avec un dernier exercice 2027 pour les taxes annuelles.",
+   "theme": "refonte_fiscale",
+   "theme_label_fr": "Refonte de la fiscalité (mutations, plus-values, TVA, IS, taxes)",
+   "tier": "loi",
+   "title_fr": "Taxes affectées : cinquante-sept supprimées, fondues en une ressource unique à produit égal"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 42",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Entrée en vigueur",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-04-01",
+     "label_fr": "Les avances d'actions de transformation non employées sont restituées avant le 1er avril 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-04-01",
+   "id": "PLF-P1-26",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT II : REFONTE FISCALE",
+   "number": 26,
+   "objet_expose_fr": "Cet amendement referme les canaux budgétaires par lesquels l’État finance des personnes privées hors du budget général.",
+   "pdf_page": 70,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=70",
+   "resume_fr": "Retire France Télévisions, Radio France, France Médias Monde et TV5 Monde du compte de concours financiers alimenté par une fraction de TVA : leur financement revient au budget général.",
+   "theme": "refonte_fiscale",
+   "theme_label_fr": "Refonte de la fiscalité (mutations, plus-values, TVA, IS, taxes)",
+   "tier": "loi",
+   "title_fr": "Refermer les canaux budgétaires hors budget général"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 6",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2028-01-01",
+     "label_fr": "Entrée en vigueur ; les produits d'épargne existants deviennent des compartiments du compte",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2028-01-01",
+   "effective_to": "2028-01-01",
+   "id": "PLF-P1-27",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT III : COMPTE D’ÉPARGNE",
+   "number": 27,
+   "objet_expose_fr": "Cet amendement introduit un compte d’épargne personnel unique, ouvert à chaque résident fiscal.",
+   "pdf_page": 72,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=72",
+   "resume_fr": "Crée un compte d'épargne personnel unique par résident fiscal, alimenté chaque année par un versement proportionnel aux revenus d'activité et un versement de patrimoine identique pour tous (montants fixés en loi de finances, nuls à défaut), bloqué jusqu'à la retraite puis servi en rente viagère.",
+   "theme": "epargne",
+   "theme_label_fr": "Compte d'épargne personnel",
+   "tier": "loi",
+   "title_fr": "Un compte d’épargne au nom de chacun, alimenté par la restitution"
+  },
+  {
+   "article_fr": "Article 2",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2028-01-01",
+     "label_fr": "Versement mensuel de l'aide par acomptes à partir du 1er janvier 2028 (impôt sur le revenu de 2028)",
+     "precision": "jour"
+    },
+    {
+     "date": "2051-01-01",
+     "label_fr": "Fin de la majoration de 3 300 € pour les pensions liquidées avant le 1er janvier 2028 : jusqu'à l'imposition des revenus de 2051",
+     "precision": "annee"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2028-01-01",
+   "effective_to": "2051-01-01",
+   "id": "PLF-P1-28",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT IV : AIDE FONDAMENTALE ET TAUX UNIQUE",
+   "number": 28,
+   "objet_expose_fr": "Cet amendement substitue au barème progressif un taux unique de 23 % et introduit l’aide fondamentale universelle.",
+   "pdf_page": 75,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=75",
+   "resume_fr": "Remplace le barème progressif de l'impôt sur le revenu par un taux unique de 23 % diminué d'une aide fondamentale universelle de 6 600 € par adulte et 3 300 € par enfant à charge (majorations pour invalidité et pensions anciennes), l'excédent étant versé ; supprime le quotient familial et la décote.",
+   "theme": "aide_fondamentale",
+   "theme_label_fr": "Impôt unique et aide fondamentale universelle",
+   "tier": "loi",
+   "title_fr": "Un taux unique finance une aide fondamentale versée à chacun"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 27",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2028-01-01",
+     "label_fr": "Entrée en vigueur ; premières impositions au titre de 2028",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2028-01-01",
+   "effective_to": "2028-01-01",
+   "id": "PLF-P1-29",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT V : COLLECTIVITÉS ET FISCALITÉ LOCALE",
+   "number": 29,
+   "objet_expose_fr": "Cet amendement fusionne les impositions foncières en une taxe unique votée par la commune.",
+   "pdf_page": 77,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=77",
+   "resume_fr": "Fusionne les impôts fonciers locaux (taxes foncières, taxe d'habitation sur les résidences secondaires, ordures ménagères, taxe d'aménagement) en une taxe communale unique assise sur la valeur locative de marché, au taux voté par la commune entre 10 % et 30 %.",
+   "theme": "collectivites",
+   "theme_label_fr": "Collectivités locales et fiscalité locale",
+   "tier": "loi",
+   "title_fr": "Taxe foncière : cinq impôts en une taxe communale lisible et équitable"
+  },
+  {
+   "article_fr": "Article 34",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Compensations cessent d'être versées à partir de 2027",
+     "precision": "annee"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P1-30",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT V : COLLECTIVITÉS ET FISCALITÉ LOCALE",
+   "number": 30,
+   "objet_expose_fr": "Cet amendement supprime au 1er janvier 2027 les dotations compensant des impôts locaux supprimés.",
+   "pdf_page": 81,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=81",
+   "resume_fr": "Supprime à partir de 2027 les dotations de l'État qui compensent des impôts locaux disparus ou des exonérations décidées par la loi.",
+   "theme": "collectivites",
+   "theme_label_fr": "Collectivités locales et fiscalité locale",
+   "tier": "loi",
+   "title_fr": "Compensations : fin des versements pour impôts disparus, l’économie rendue au travail"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 34",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Retraits de compétences prenant effet à partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P1-31",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT V : COLLECTIVITÉS ET FISCALITÉ LOCALE",
+   "number": 31,
+   "objet_expose_fr": "Cet amendement conditionne les concours de l’État aux compétences que la collectivité exerce effectivement.",
+   "pdf_page": 83,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=83",
+   "resume_fr": "Conditionne les concours de l'État aux compétences que la collectivité exerce effectivement : quand une compétence est retirée, la dotation baisse de ce que la collectivité y consacrait en moyenne sur trois ans.",
+   "theme": "collectivites",
+   "theme_label_fr": "Collectivités locales et fiscalité locale",
+   "tier": "loi",
+   "title_fr": "Dotations : moins de compétences facultatives, moins de charges sur les contribuables"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 34",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Entrée en vigueur des retraits de compétences",
+     "precision": "jour"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Aides économiques plafonnées aux deux tiers de la moyenne 2024-2026 en 2028",
+     "precision": "annee"
+    },
+    {
+     "date": "2030-01-01",
+     "label_fr": "Abrogation des pouvoirs d'aide aux entreprises",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2030-01-01",
+   "id": "PLF-P1-32",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT V : COLLECTIVITÉS ET FISCALITÉ LOCALE",
+   "number": 32,
+   "objet_expose_fr": "Cet amendement retire des compétences aux départements et aux régions et le financement correspondant.",
+   "pdf_page": 85,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=85",
+   "resume_fr": "Retire aux départements et aux régions plusieurs compétences facultatives (égalité femmes-hommes, culture, sport, tourisme, langues régionales, éducation populaire) et leurs pouvoirs d'aide aux entreprises, avec la baisse correspondante des concours de l'État.",
+   "theme": "collectivites",
+   "theme_label_fr": "Collectivités locales et fiscalité locale",
+   "tier": "loi",
+   "title_fr": "Départements et régions : les compétences retirées, le financement retiré d’autant"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 34",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Dotation forfaitaire minorée d'un tiers en 2027",
+     "precision": "annee"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Minorée de deux tiers en 2028",
+     "precision": "annee"
+    },
+    {
+     "date": "2029-01-01",
+     "label_fr": "Suppression totale en 2029",
+     "precision": "annee"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2029-01-01",
+   "id": "PLF-P1-33",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT V : COLLECTIVITÉS ET FISCALITÉ LOCALE",
+   "number": 33,
+   "objet_expose_fr": "Cet amendement substitue en trois ans l’impôt foncier communal à la dotation forfaitaire des communes.",
+   "pdf_page": 88,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=88",
+   "resume_fr": "Supprime en trois ans la dotation forfaitaire des communes (un tiers en 2027, deux tiers en 2028, la totalité en 2029) ; chaque commune peut la compenser par sa taxe foncière ou réduire sa dépense.",
+   "theme": "collectivites",
+   "theme_label_fr": "Collectivités locales et fiscalité locale",
+   "tier": "loi",
+   "title_fr": "Dotation forfaitaire : remplacée par l’impôt que la commune vote elle-même"
+  },
+  {
+   "article_fr": "Article 36",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2028-01-01",
+     "label_fr": "Plafonnement à partir de 2028",
+     "precision": "annee"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+   "effective_from": "2028-01-01",
+   "effective_to": "2028-01-01",
+   "id": "PLF-P1-34",
+   "liasse": "PLF-P1",
+   "liasse_label_fr": "PLF 2027, première partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf",
+   "lot_fr": "LOT V : COLLECTIVITÉS ET FISCALITÉ LOCALE",
+   "number": 34,
+   "objet_expose_fr": "Cet amendement conditionne aux compétences exercées la fraction de taxe sur la valeur ajoutée des collectivités.",
+   "pdf_page": 90,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=90",
+   "resume_fr": "Plafonne, à partir de 2028, la fraction de TVA versée aux départements et aux régions à ce qu'ils justifient avoir dépensé pour leurs compétences obligatoires, et fait absorber par la TVA, en dernier recours, les baisses de ressources liées aux compétences retirées.",
+   "theme": "collectivites",
+   "theme_label_fr": "Collectivités locales et fiscalité locale",
+   "tier": "loi",
+   "title_fr": "TVA des collectivités : plafonnée au coût de leurs compétences"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-1",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 1,
+   "objet_expose_fr": "Cet amendement retire de la mission « Cohésion des territoires » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 4,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=4",
+   "resume_fr": "Retire 13,129 Md€ de crédits de paiement (et 13,293 Md€ d'autorisations d'engagement) de la mission « Cohésion des territoires », soit 49,4 % des autorisations d'engagement des 6 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Cohésion des territoires »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-2",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 2,
+   "objet_expose_fr": "Cet amendement retire de la mission « Travail, emploi et administration des ministères sociaux » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 5,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=5",
+   "resume_fr": "Retire 10,696 Md€ de crédits de paiement (et 12,065 Md€ d'autorisations d'engagement) de la mission « Travail, emploi et administration des ministères sociaux », soit 63,2 % des autorisations d'engagement des 4 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Travail, emploi et administration des ministères sociaux »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-3",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 3,
+   "objet_expose_fr": "Cet amendement retire de la mission « Aide publique au développement » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 6,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=6",
+   "resume_fr": "Retire 2,186 Md€ de crédits de paiement (et 2,335 Md€ d'autorisations d'engagement) de la mission « Aide publique au développement », soit 100,0 % des autorisations d'engagement des 3 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Aide publique au développement »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-4",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 4,
+   "objet_expose_fr": "Cet amendement retire de la mission « Écologie, développement et mobilité durables » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 7,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=7",
+   "resume_fr": "Retire 3,270 Md€ de crédits de paiement (et 3,773 Md€ d'autorisations d'engagement) de la mission « Écologie, développement et mobilité durables », soit 28,7 % des autorisations d'engagement des 7 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Écologie, développement et mobilité durables »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-5",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 5,
+   "objet_expose_fr": "Cet amendement retire de la mission « Relations avec les collectivités territoriales » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 8,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=8",
+   "resume_fr": "Retire 2,815 Md€ de crédits de paiement (et 3,760 Md€ d'autorisations d'engagement) de la mission « Relations avec les collectivités territoriales », soit 91,2 % des autorisations d'engagement des 2 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Relations avec les collectivités territoriales »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-6",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 6,
+   "objet_expose_fr": "Cet amendement retire de la mission « Culture » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 9,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=9",
+   "resume_fr": "Retire 1,743 Md€ de crédits de paiement (et 2,028 Md€ d'autorisations d'engagement) de la mission « Culture », soit 55,0 % des autorisations d'engagement des 4 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Culture »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-7",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 7,
+   "objet_expose_fr": "Cet amendement retire de la mission « Sport, jeunesse et vie associative » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 10,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=10",
+   "resume_fr": "Retire 0,974 Md€ de crédits de paiement (et 1,006 Md€ d'autorisations d'engagement) de la mission « Sport, jeunesse et vie associative », soit 84,9 % des autorisations d'engagement des 3 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Sport, jeunesse et vie associative »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-8",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 8,
+   "objet_expose_fr": "Cet amendement retire de la mission « Immigration, asile et intégration » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 11,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=11",
+   "resume_fr": "Retire 1,257 Md€ de crédits de paiement (et 1,259 Md€ d'autorisations d'engagement) de la mission « Immigration, asile et intégration », soit 55,7 % des autorisations d'engagement des 2 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Immigration, asile et intégration »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-9",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 9,
+   "objet_expose_fr": "Cet amendement retire de la mission « Santé » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 12,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=12",
+   "resume_fr": "Retire 0,779 Md€ de crédits de paiement (et 0,782 Md€ d'autorisations d'engagement) de la mission « Santé », soit 51,2 % des autorisations d'engagement des 2 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Santé »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-10",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 10,
+   "objet_expose_fr": "Cet amendement retire de la mission « Recherche et enseignement supérieur » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 13,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=13",
+   "resume_fr": "Retire 0,670 Md€ de crédits de paiement (et 0,773 Md€ d'autorisations d'engagement) de la mission « Recherche et enseignement supérieur », soit 23,0 % des autorisations d'engagement des 1 programme visé.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Recherche et enseignement supérieur »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-11",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 11,
+   "objet_expose_fr": "Cet amendement retire de la mission « Médias, livre et industries culturelles » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 14,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=14",
+   "resume_fr": "Retire 0,569 Md€ de crédits de paiement (et 0,675 Md€ d'autorisations d'engagement) de la mission « Médias, livre et industries culturelles », soit 96,1 % des autorisations d'engagement des 2 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Médias, livre et industries culturelles »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-12",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 12,
+   "objet_expose_fr": "Cet amendement retire de la mission « Économie » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 15,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=15",
+   "resume_fr": "Retire 0,557 Md€ de crédits de paiement (et 0,630 Md€ d'autorisations d'engagement) de la mission « Économie », soit 21,2 % des autorisations d'engagement des 3 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Économie »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-13",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 13,
+   "objet_expose_fr": "Cet amendement retire de la mission « Direction de l’action du Gouvernement » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 16,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=16",
+   "resume_fr": "Retire 0,368 Md€ de crédits de paiement (et 0,514 Md€ d'autorisations d'engagement) de la mission « Direction de l’action du Gouvernement », soit 53,9 % des autorisations d'engagement des 2 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Direction de l’action du Gouvernement »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-14",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 14,
+   "objet_expose_fr": "Cet amendement retire de la mission « Transformation et fonction publiques » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 17,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=17",
+   "resume_fr": "Retire 0,168 Md€ de crédits de paiement (et 0,208 Md€ d'autorisations d'engagement) de la mission « Transformation et fonction publiques », soit 73,6 % des autorisations d'engagement des 2 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Transformation et fonction publiques »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques (demi-exercice)",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-15",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 15,
+   "objet_expose_fr": "Cet amendement retire de la mission « Enseignement scolaire » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 18,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=18",
+   "resume_fr": "Retire 0,225 Md€ de crédits de paiement (et 0,225 Md€ d'autorisations d'engagement) de la mission « Enseignement scolaire », soit 0,4 % des autorisations d'engagement des 3 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Enseignement scolaire »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-16",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 16,
+   "objet_expose_fr": "Cet amendement retire de la mission « Action extérieure de l’État » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 19,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=19",
+   "resume_fr": "Retire 0,200 Md€ de crédits de paiement (et 0,206 Md€ d'autorisations d'engagement) de la mission « Action extérieure de l’État », soit 26,6 % des autorisations d'engagement des 2 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Action extérieure de l’État »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-17",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 17,
+   "objet_expose_fr": "Cet amendement retire de la mission « Solidarité, insertion et égalité des chances » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 20,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=20",
+   "resume_fr": "Retire 0,102 Md€ de crédits de paiement (et 0,102 Md€ d'autorisations d'engagement) de la mission « Solidarité, insertion et égalité des chances », soit 0,3 % des autorisations d'engagement des 3 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Solidarité, insertion et égalité des chances »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-18",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 18,
+   "objet_expose_fr": "Cet amendement retire de la mission « Agriculture, alimentation, forêt et affaires rurales » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 21,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=21",
+   "resume_fr": "Retire 0,079 Md€ de crédits de paiement (et 0,092 Md€ d'autorisations d'engagement) de la mission « Agriculture, alimentation, forêt et affaires rurales », soit 14,4 % des autorisations d'engagement des 1 programme visé.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Agriculture, alimentation, forêt et affaires rurales »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales (exercice plein)",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P2-19",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 19,
+   "objet_expose_fr": "Cet amendement retire de la mission « Administration générale et territoriale de l’État » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 22,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=22",
+   "resume_fr": "Retire 0,069 Md€ de crédits de paiement (et 0,069 Md€ d'autorisations d'engagement) de la mission « Administration générale et territoriale de l’État », soit 11,7 % des autorisations d'engagement des 1 programme visé.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Administration générale et territoriale de l’État »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-20",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 20,
+   "objet_expose_fr": "Cet amendement retire de la mission « Sécurités » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 23,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=23",
+   "resume_fr": "Retire 0,038 Md€ de crédits de paiement (et 0,049 Md€ d'autorisations d'engagement) de la mission « Sécurités », soit 62,7 % des autorisations d'engagement des 1 programme visé.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Sécurités »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques (demi-exercice)",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-21",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 21,
+   "objet_expose_fr": "Cet amendement retire de la mission « Justice » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 24,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=24",
+   "resume_fr": "Retire 0,006 Md€ de crédits de paiement (et 0,007 Md€ d'autorisations d'engagement) de la mission « Justice », soit 0,8 % des autorisations d'engagement des 1 programme visé.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Justice »"
+  },
+  {
+   "article_fr": "Article 58, état B",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Crédits retirés pour les personnes morales",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Crédits retirés pour les personnes physiques",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-07-01",
+   "id": "PLF-P2-22",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 22,
+   "objet_expose_fr": "Cet amendement retire de la mission « Conseil et contrôle de l’État » les crédits des dispositifs que la présente loi interrompt.",
+   "pdf_page": 25,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=25",
+   "resume_fr": "Retire 0,006 Md€ de crédits de paiement (et 0,006 Md€ d'autorisations d'engagement) de la mission « Conseil et contrôle de l’État », soit 2,1 % des autorisations d'engagement des 2 programmes visés.",
+   "theme": "credits_etat",
+   "theme_label_fr": "Crédits de l'État retirés (état B)",
+   "tier": "loi",
+   "title_fr": "Retirer les crédits que la présente loi interrompt, mission « Conseil et contrôle de l’État »"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 58",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Entrée en vigueur",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P2-23",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 23,
+   "objet_expose_fr": "Cet amendement supprime la contribution que l’assurance chômage verse à France Travail, en conséquence de l’extinction des dépenses qu’elle finance.",
+   "pdf_page": 26,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=26",
+   "resume_fr": "Supprime la contribution que l'assurance chômage verse à France Travail (au moins 10 % de ses ressources), puisque les dépenses d'intervention et de fonctionnement qu'elle finance sont interrompues.",
+   "theme": "etat_agences_emplois",
+   "theme_label_fr": "Agences, emplois et agents publics",
+   "tier": "loi",
+   "title_fr": "Supprimer la contribution de l’assurance chômage à France Travail"
+  },
+  {
+   "article_fr": "Article 63",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Fermeture des 61 400 postes des missions abandonnées",
+     "precision": "jour"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Effet entier en 2028 : 61 400 emplois",
+     "precision": "annee"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2028-01-01",
+   "id": "PLF-P2-24",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 24,
+   "objet_expose_fr": "Cet amendement abaisse de 30 698 emplois le plafond d’autorisation des emplois de l’État.",
+   "pdf_page": 27,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=27",
+   "resume_fr": "Abaisse de 30 698 emplois le plafond des emplois de l'État pour 2027 (de 2 032 750 à 2 002 052 ETPT), soit la moitié de l'effet annuel de la fermeture de 61 400 postes à partir du 1er juillet 2027.",
+   "theme": "etat_agences_emplois",
+   "theme_label_fr": "Agences, emplois et agents publics",
+   "tier": "loi",
+   "title_fr": "Retirer du plafond les emplois des missions que l’État abandonne"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 65",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Dissolution des personnes morales listées",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-12-01",
+     "label_fr": "Fin des subventions pour charges de service public aux établissements vivant de leur patrimoine",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2027-12-01",
+   "id": "PLF-P2-25",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 25,
+   "objet_expose_fr": "Cet amendement ferme les structures de l’État qui exercent une mission facultative.",
+   "pdf_page": 29,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=29",
+   "resume_fr": "Dissout au 1er juillet 2027 les personnes morales autres que l'État qui exercent une mission facultative (337 entités nommées), reprend les missions de puissance publique dans les ministères et épargne les établissements vivant de leur patrimoine et les autorités indépendantes.",
+   "theme": "etat_agences_emplois",
+   "theme_label_fr": "Agences, emplois et agents publics",
+   "tier": "loi",
+   "title_fr": "Agences de l’État : les structures facultatives fermées, les missions régaliennes rendues aux ministères"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 66",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Entrée en vigueur ; indemnité due à partir du 1er juillet 2027",
+     "precision": "jour"
+    },
+    {
+     "date": "2035-01-01",
+     "label_fr": "Rapport annuel au Parlement jusqu'en 2035",
+     "precision": "annee"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2035-01-01",
+   "id": "PLF-P2-26",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 26,
+   "objet_expose_fr": "Le contribuable paie aujourd’hui le traitement d’agents dont la Nation n’a plus la mission.",
+   "pdf_page": 45,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=45",
+   "resume_fr": "Organise la sortie des agents dont l'emploi est supprimé : indemnité mensuelle de 70 % d'une base de traitement pendant 1 à 7 ans selon l'ancienneté, cumulable avec un emploi privé.",
+   "theme": "etat_agences_emplois",
+   "theme_label_fr": "Agences, emplois et agents publics",
+   "tier": "loi",
+   "title_fr": "Organiser la sortie des agents dont l’emploi est supprimé"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 67",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "À partir du lendemain de la publication de la loi et jusqu'au 1er janvier 2028",
+     "precision": "approx"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P2-27",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 27,
+   "objet_expose_fr": "Cet amendement suspend en 2027 les dépenses nouvelles des sept missions que l’État conserve.",
+   "pdf_page": 50,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=50",
+   "resume_fr": "Suspend en 2027 les engagements de dépenses nouvelles sur les sept missions que l'État conserve, sauf décision motivée du ministre du budget pour les dépenses indispensables.",
+   "theme": "regles_depense",
+   "theme_label_fr": "Règles de dépense de l'État",
+   "tier": "loi",
+   "title_fr": "Plus aucune dépense nouvelle de l’État sans une signature qui en réponde"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 74",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Revalorisations prenant effet à partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P2-28",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 28,
+   "objet_expose_fr": "Cet amendement rend la revalorisation au vote et la subordonne à l’équilibre des comptes.",
+   "pdf_page": 52,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=52",
+   "resume_fr": "Retire l'automaticité de la revalorisation de l'AAH, de la prime d'activité, du RSA, de l'ASS et de l'aide aux anciens migrants : la revalorisation n'est possible que si le solde du dernier exercice clos n'est pas déficitaire.",
+   "theme": "retraites_indexations",
+   "theme_label_fr": "Retraites et indexations",
+   "tier": "loi",
+   "title_fr": "Retirer l’automaticité des indexations et rendre la revalorisation au vote"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 74",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "À partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P2-29",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 29,
+   "objet_expose_fr": "Cet amendement met fin, au 1er janvier 2027, aux aides de l’État à la construction et à l’acquisition de logements locatifs sociaux.",
+   "pdf_page": 54,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=54",
+   "resume_fr": "Met fin à toute aide nouvelle de l'État à la construction et à l'acquisition de logements locatifs sociaux ; les décisions déjà prises sont exécutées.",
+   "theme": "logement_aides",
+   "theme_label_fr": "Logement, hébergement et énergie",
+   "tier": "loi",
+   "title_fr": "Plus un logement social neuf financé par l’État"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 75",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "À partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P2-30",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 30,
+   "objet_expose_fr": "Cet amendement interdit à l’État d’apporter du capital et d’acheter des titres dès 2027.",
+   "pdf_page": 55,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=55",
+   "resume_fr": "Interdit à l'État d'apporter du capital et d'acheter des titres (hors engagements antérieurs) et lui fait publier chaque année l'état de ses participations et le calendrier de leur cession.",
+   "theme": "regles_depense",
+   "theme_label_fr": "Règles de dépense de l'État",
+   "tier": "loi",
+   "title_fr": "L’État cesse d’acheter, il valorise et il vend"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 75",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Interdictions à partir du 1er janvier 2027",
+     "precision": "jour"
+    },
+    {
+     "date": "2029-01-01",
+     "label_fr": "Engagements antérieurs : terme au plus tard le 1er janvier 2029",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2029-01-01",
+   "id": "PLF-P2-31",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 31,
+   "objet_expose_fr": "Cet amendement pose deux règles générales : l’une sur l’emploi des crédits de l’État, l’autre sur l’affectation des impositions.",
+   "pdf_page": 56,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=56",
+   "resume_fr": "Interdit tout concours de l'État à une personne morale de droit privé et toute attribution de crédits sur sélection de dossiers, ainsi que l'affectation d'une imposition à une personne privée ; les engagements en cours s'achèvent au plus tard le 1er janvier 2029.",
+   "theme": "regles_depense",
+   "theme_label_fr": "Règles de dépense de l'État",
+   "tier": "loi",
+   "title_fr": "Cesser de subventionner, cesser de choisir sur dossier"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 78",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-06-01",
+     "label_fr": "Plus aucun droit ouvert pour une demande déposée à partir du 1er juin 2027",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-07-01",
+     "label_fr": "Parc conventionné : aide réduite d'un tiers",
+     "precision": "jour"
+    },
+    {
+     "date": "2028-07-01",
+     "label_fr": "Parc conventionné : aide réduite de deux tiers",
+     "precision": "jour"
+    },
+    {
+     "date": "2029-07-01",
+     "label_fr": "Parc conventionné : l'aide cesse",
+     "precision": "jour"
+    },
+    {
+     "date": "2030-01-01",
+     "label_fr": "Toutes les aides personnelles au logement supprimées",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-06-01",
+   "effective_to": "2030-01-01",
+   "id": "PLF-P2-32",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 32,
+   "objet_expose_fr": "Cet amendement éteint l’aide personnelle au logement au rythme des droits en cours.",
+   "pdf_page": 58,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=58",
+   "resume_fr": "Éteint l'aide personnelle au logement : plus de droit ouvert pour une demande déposée à partir du 1er juin 2027, baisse d'un tiers puis de deux tiers des aides du parc conventionné, et suppression de toutes les aides au 1er janvier 2030.",
+   "theme": "logement_aides",
+   "theme_label_fr": "Logement, hébergement et énergie",
+   "tier": "loi",
+   "title_fr": "Éteindre l’aide personnelle au logement au rythme des droits en cours"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 78",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Entrée en vigueur",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P2-33",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 33,
+   "objet_expose_fr": "Cet amendement rend l’hébergement d’urgence à sa fonction et en fait une faculté temporaire.",
+   "pdf_page": 60,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=60",
+   "resume_fr": "Fait de l'hébergement d'urgence une faculté temporaire réservée aux personnes en danger ou qui ne peuvent se loger en raison d'une grossesse, d'une incapacité ou de la charge d'un jeune enfant, sous condition de régularité du séjour.",
+   "theme": "logement_aides",
+   "theme_label_fr": "Logement, hébergement et énergie",
+   "tier": "loi",
+   "title_fr": "Rendre l’hébergement d’urgence à l’urgence"
+  },
+  {
+   "article_fr": "Article 81",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Entrée en vigueur",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P2-34",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 34,
+   "objet_expose_fr": "Cet amendement abroge le chèque énergie et le régime qui l’organise au code de l’énergie.",
+   "pdf_page": 61,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=61",
+   "resume_fr": "Abroge le chèque énergie et le régime qui l'organise : la campagne d'émission de 2027 n'a pas lieu.",
+   "theme": "logement_aides",
+   "theme_label_fr": "Logement, hébergement et énergie",
+   "tier": "loi",
+   "title_fr": "Mettre fin au chèque énergie plutôt que d’en élargir le recours"
+  },
+  {
+   "article_fr": "Article 83",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Entrée en vigueur",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLF-P2-35",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 35,
+   "objet_expose_fr": "Cet amendement supprime les subventions que l’État attribue aux collectivités sur dossier, à la discrétion du préfet ou du ministre.",
+   "pdf_page": 62,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=62",
+   "resume_fr": "Abroge les subventions que l'État attribue aux collectivités sur dossier (DETR, DSIL, politique de la ville, fonds d'aménagement du territoire…) ; les subventions déjà attribuées sont honorées.",
+   "theme": "collectivites",
+   "theme_label_fr": "Collectivités locales et fiscalité locale",
+   "tier": "loi",
+   "title_fr": "Supprimer les subventions que l’État distribue aux collectivités sur dossier"
+  },
+  {
+   "article_fr": "Article 85",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": null,
+   "effective_to": null,
+   "id": "PLF-P2-36",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 36,
+   "objet_expose_fr": "Cet amendement supprime la dotation pour les communes rurales de faible densité que le projet de loi de finances crée pour 2027.",
+   "pdf_page": 63,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=63",
+   "resume_fr": "Supprime la dotation pour les communes rurales de faible densité (50 M€ en 2027) que crée l'article 85 du projet de loi de finances.",
+   "theme": "collectivites",
+   "theme_label_fr": "Collectivités locales et fiscalité locale",
+   "tier": "loi",
+   "title_fr": "Refuser le concours nouveau créé par l’article 85"
+  },
+  {
+   "article_fr": "Article 86",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": null,
+   "effective_to": null,
+   "id": "PLF-P2-37",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 37,
+   "objet_expose_fr": "Cet amendement supprime l’extension aux départements, en 2027, des subventions exceptionnelles que l’État attribue par arrêté aux communes en difficulté financière.",
+   "pdf_page": 64,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=64",
+   "resume_fr": "Supprime l'extension aux départements des subventions exceptionnelles que l'État attribue aux collectivités en difficulté financière (article 86 du projet de loi de finances).",
+   "theme": "collectivites",
+   "theme_label_fr": "Collectivités locales et fiscalité locale",
+   "tier": "loi",
+   "title_fr": "Refuser l’extension créée par l’article 86"
+  },
+  {
+   "article_fr": "Article 87",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": null,
+   "effective_to": null,
+   "id": "PLF-P2-38",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 38,
+   "objet_expose_fr": "Cet amendement supprime le fonds de soutien exceptionnel que le projet de loi crée pour les communes assujetties à la contribution à l’effort budgétaire.",
+   "pdf_page": 65,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=65",
+   "resume_fr": "Supprime le fonds de soutien exceptionnel que le projet de loi de finances crée pour les communes soumises à la contribution à l'effort budgétaire (article 87).",
+   "theme": "collectivites",
+   "theme_label_fr": "Collectivités locales et fiscalité locale",
+   "tier": "loi",
+   "title_fr": "Refuser le fonds de soutien créé par l’article 87"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 75",
+   "bill_fr": "PLF 2027 n° 3210",
+   "dates": [
+    {
+     "date": "2028-01-01",
+     "label_fr": "Rapport publié à partir du projet de loi de finances pour 2028",
+     "precision": "annee"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+   "effective_from": "2028-01-01",
+   "effective_to": "2028-01-01",
+   "id": "PLF-P2-39",
+   "liasse": "PLF-P2",
+   "liasse_label_fr": "PLF 2027, seconde partie",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf",
+   "lot_fr": null,
+   "number": 39,
+   "objet_expose_fr": "Cet amendement fait publier chaque année un rapport sur l’équilibre de la refonte des impositions.",
+   "pdf_page": 66,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=66",
+   "resume_fr": "Fait publier chaque année un rapport sur l'équilibre de la refonte des impositions : impositions supprimées, produits supplémentaires, solde et rapport des prélèvements obligatoires au PIB comparé à son niveau de 2026.",
+   "theme": "regles_depense",
+   "theme_label_fr": "Règles de dépense de l'État",
+   "tier": "loi",
+   "title_fr": "Rapport annuel sur l’équilibre de la refonte des impositions"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 7",
+   "bill_fr": "PLFSS 2027 n° 3211",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Abrogation des exonérations de cotisations ; début de la baisse : CSG à 7,6 % (juillet)",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-08-01",
+     "label_fr": "CSG à 6,0 % (août)",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-09-01",
+     "label_fr": "CSG à 4,3 % (septembre)",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-10-01",
+     "label_fr": "CSG à 2,7 % (octobre)",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-11-01",
+     "label_fr": "CSG à 1,1 % (novembre)",
+     "precision": "jour"
+    },
+    {
+     "date": "2027-12-01",
+     "label_fr": "CSG et CRDS supprimées sur les revenus d'activité",
+     "precision": "jour"
+    },
+    {
+     "date": "2028-01-01",
+     "label_fr": "Exonérations emploi à domicile et assimilées : réduites de deux tiers",
+     "precision": "jour"
+    },
+    {
+     "date": "2029-01-01",
+     "label_fr": "Exonérations emploi à domicile et assimilées : abrogées",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2029-01-01",
+   "id": "PLFSS-1",
+   "liasse": "PLFSS",
+   "liasse_label_fr": "PLFSS 2027",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf",
+   "lot_fr": null,
+   "number": 1,
+   "objet_expose_fr": "Cet amendement supprime la contribution sociale généralisée et la contribution pour le remboursement de la dette sociale sur les revenus d’activité : 114 milliards d’euros en année pleine rendus au salaire net.",
+   "pdf_page": 3,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3",
+   "resume_fr": "Supprime la CSG et la CRDS sur les revenus d'activité (114 Md€ en année pleine rendus au salaire net) par paliers de juillet à novembre 2027 puis totalement au 1er décembre 2027, et se gage sur l'abrogation d'exonérations de cotisations sociales.",
+   "theme": "csg_salaire_net",
+   "theme_label_fr": "CSG, CRDS et salaire net",
+   "tier": "loi",
+   "title_fr": "CSG et CRDS supprimées sur les revenus d’activité : les économies rendues au salaire net, soit +13 %"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 14",
+   "bill_fr": "PLFSS 2027 n° 3211",
+   "dates": [
+    {
+     "date": "2027-12-01",
+     "label_fr": "Entrée en vigueur",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.docx",
+   "effective_from": "2027-12-01",
+   "effective_to": "2027-12-01",
+   "id": "PLFSS-2",
+   "liasse": "PLFSS",
+   "liasse_label_fr": "PLFSS 2027",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf",
+   "lot_fr": null,
+   "number": 2,
+   "objet_expose_fr": "Cet amendement abroge les cinq parts d’affectation assises sur la contribution sur les revenus d’activité.",
+   "pdf_page": 8,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=8",
+   "resume_fr": "Retire de la clé de répartition de la CSG les cinq parts assises sur la contribution sur les revenus d'activité (114 Md€ de recettes affectées en rythme annuel).",
+   "theme": "csg_salaire_net",
+   "theme_label_fr": "CSG, CRDS et salaire net",
+   "tier": "loi",
+   "title_fr": "Retirer de la clé de répartition la part qui n’a plus de produit"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 14",
+   "bill_fr": "PLFSS 2027 n° 3211",
+   "dates": [
+    {
+     "date": "2028-01-01",
+     "label_fr": "Réduction d'un tiers (rémunérations versées en 2028)",
+     "precision": "jour"
+    },
+    {
+     "date": "2029-01-01",
+     "label_fr": "Réduction de deux tiers (rémunérations versées en 2029)",
+     "precision": "annee"
+    },
+    {
+     "date": "2030-01-01",
+     "label_fr": "Abrogation",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.docx",
+   "effective_from": "2028-01-01",
+   "effective_to": "2030-01-01",
+   "id": "PLFSS-3",
+   "liasse": "PLFSS",
+   "liasse_label_fr": "PLFSS 2027",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf",
+   "lot_fr": null,
+   "number": 3,
+   "objet_expose_fr": "Cet amendement éteint la taxe sur les salaires en deux marches, en 2028 et en 2029 et l’abroge au 1er janvier 2030.",
+   "pdf_page": 10,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=10",
+   "resume_fr": "Éteint la taxe sur les salaires (17,9 Md€) par étapes — réduction d'un tiers pour les rémunérations de 2028, de deux tiers pour celles de 2029 — puis l'abroge au 1er janvier 2030.",
+   "theme": "csg_salaire_net",
+   "theme_label_fr": "CSG, CRDS et salaire net",
+   "tier": "loi",
+   "title_fr": "Taxe sur les salaires : l’éteindre par marches et l’abroger"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 30",
+   "bill_fr": "PLFSS 2027 n° 3211",
+   "dates": [
+    {
+     "date": "2028-01-01",
+     "label_fr": "Entrée en vigueur, à la date d'entrée en vigueur de l'aide fondamentale et sous réserve de celle-ci",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.docx",
+   "effective_from": "2028-01-01",
+   "effective_to": "2028-01-01",
+   "id": "PLFSS-4",
+   "liasse": "PLFSS",
+   "liasse_label_fr": "PLFSS 2027",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf",
+   "lot_fr": null,
+   "number": 4,
+   "objet_expose_fr": "Cet amendement plafonne à une part fixe des ressources ce que chacun paie en santé.",
+   "pdf_page": 12,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=12",
+   "resume_fr": "Plafonne le reste à charge annuel en santé à une part fixe des ressources du foyer (5 %, nettes de l'impôt), avec un plancher de 5 % de l'aide fondamentale universelle, sous réserve de l'entrée en vigueur de cette aide.",
+   "theme": "sante",
+   "theme_label_fr": "Santé",
+   "tier": "loi",
+   "title_fr": "Personne ne paie plus de sa santé qu’une part fixe de ses ressources"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 35",
+   "bill_fr": "PLFSS 2027 n° 3211",
+   "dates": [
+    {
+     "date": "2027-01-01",
+     "label_fr": "Revalorisations prenant effet à partir du 1er janvier 2027",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.docx",
+   "effective_from": "2027-01-01",
+   "effective_to": "2027-01-01",
+   "id": "PLFSS-5",
+   "liasse": "PLFSS",
+   "liasse_label_fr": "PLFSS 2027",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf",
+   "lot_fr": null,
+   "number": 5,
+   "objet_expose_fr": "Cet amendement retire aux prestations sociales leur revalorisation automatique et la rend au vote.",
+   "pdf_page": 15,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=15",
+   "resume_fr": "Retire aux prestations sociales et aux pensions leur revalorisation automatique : elle redevient un acte voté ou une décision réglementaire conditionnée à un solde non déficitaire des régimes de base.",
+   "theme": "retraites_indexations",
+   "theme_label_fr": "Retraites et indexations",
+   "tier": "loi",
+   "title_fr": "Indexations sociales : retirer l’automaticité à sa source et rendre la revalorisation au vote"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 35",
+   "bill_fr": "PLFSS 2027 n° 3211",
+   "dates": [
+    {
+     "date": "2028-01-01",
+     "label_fr": "Remplacement des régimes de base",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.docx",
+   "effective_from": "2028-01-01",
+   "effective_to": "2028-01-01",
+   "id": "PLFSS-6",
+   "liasse": "PLFSS",
+   "liasse_label_fr": "PLFSS 2027",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf",
+   "lot_fr": null,
+   "number": 6,
+   "objet_expose_fr": "Cet amendement remplace les régimes de retraite par répartition par un régime socle unique.",
+   "pdf_page": 17,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=17",
+   "resume_fr": "Remplace les régimes de retraite de base par répartition par un régime socle unique : plus d'affiliation nouvelle aux anciens régimes, droits acquis et pensions liquidées servis jusqu'à leur terme ; une loi ultérieure fixera les règles.",
+   "theme": "retraites_indexations",
+   "theme_label_fr": "Retraites et indexations",
+   "tier": "loi",
+   "title_fr": "Un régime socle unique remplace les régimes de base par répartition"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 37",
+   "bill_fr": "PLFSS 2027 n° 3211",
+   "dates": [
+    {
+     "date": "2028-01-01",
+     "label_fr": "Entrée en vigueur, à la date d'entrée en vigueur de l'aide fondamentale et sous réserve de celle-ci",
+     "precision": "jour"
+    },
+    {
+     "date": "2030-01-01",
+     "label_fr": "Abrogation de l'article L. 511-1 (allocation de logement)",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.docx",
+   "effective_from": "2028-01-01",
+   "effective_to": "2030-01-01",
+   "id": "PLFSS-7",
+   "liasse": "PLFSS",
+   "liasse_label_fr": "PLFSS 2027",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf",
+   "lot_fr": null,
+   "number": 7,
+   "objet_expose_fr": "Cet amendement éteint les prestations familiales et l’action sociale des caisses d’allocations familiales au 1 janvier 2028. er Une famille modeste doit connaître chaque aide, la demander, déclarer ses ressources à chaque guichet et rembourser les trop-perçus quand sa situation change.",
+   "pdf_page": 19,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=19",
+   "resume_fr": "Abroge les neuf prestations familiales et l'action sociale des caisses d'allocations familiales (sauf l'allocation de logement, éteinte en 2030), à la date et sous réserve de l'entrée en vigueur de l'aide fondamentale universelle.",
+   "theme": "aide_fondamentale",
+   "theme_label_fr": "Impôt unique et aide fondamentale universelle",
+   "tier": "loi",
+   "title_fr": "Une aide pour toutes : les prestations qu’elle remplace s’éteignent le jour où elle commence"
+  },
+  {
+   "article_fr": "Article additionnel après l’article 43",
+   "bill_fr": "PLFSS 2027 n° 3211",
+   "dates": [
+    {
+     "date": "2027-07-01",
+     "label_fr": "Entrée en vigueur",
+     "precision": "jour"
+    },
+    {
+     "date": "2029-07-01",
+     "label_fr": "Engagements en cours exécutés au plus tard jusqu'au 1er juillet 2029",
+     "precision": "jour"
+    }
+   ],
+   "docx_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.docx",
+   "effective_from": "2027-07-01",
+   "effective_to": "2029-07-01",
+   "id": "PLFSS-8",
+   "liasse": "PLFSS",
+   "liasse_label_fr": "PLFSS 2027",
+   "liasse_pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf",
+   "lot_fr": null,
+   "number": 8,
+   "objet_expose_fr": "Cet amendement interdit aux organismes de sécurité sociale tout concours financier sans contrepartie définie.",
+   "pdf_page": 21,
+   "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=21",
+   "resume_fr": "Interdit aux organismes de sécurité sociale et au fonds d'intervention régional tout concours financier sans contrepartie définie : seul l'achat de prestations déterminées reste possible.",
+   "theme": "securite_sociale",
+   "theme_label_fr": "Organismes de sécurité sociale",
+   "tier": "loi",
+   "title_fr": "Concours financiers des organismes de sécurité sociale et du fonds d’intervention régional : interdire la subvention sans contrepartie et n’autoriser que l’achat de prestations déterminées"
+  }
+ ],
+ "meta": {
+  "counts": {
+   "PLF-P1": 34,
+   "PLF-P2": 39,
+   "PLFSS": 8,
+   "total": 81
+  },
+  "dates_note": "dates : une entrée par effet daté écrit dans le texte (precision : jour = jour écrit ; annee = année sans jour, 1er janvier par convention ; approx = point de départ non écrit). Chaque entrée a été vérifiée contre le texte de l'amendement lors de la construction.",
+  "liasses": [
+   {
+    "bill_fr": "PLF 2027 n° 3210",
+    "date_fr": "19 octobre 2026",
+    "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.docx",
+    "id": "PLF-P1",
+    "label_fr": "PLF 2027, première partie",
+    "n_amendements": 34,
+    "n_pages": 91,
+    "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf"
+   },
+   {
+    "bill_fr": "PLF 2027 n° 3210",
+    "date_fr": "19 octobre 2026",
+    "docx_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.docx",
+    "id": "PLF-P2",
+    "label_fr": "PLF 2027, seconde partie",
+    "n_amendements": 39,
+    "n_pages": 66,
+    "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf"
+   },
+   {
+    "bill_fr": "PLFSS 2027 n° 3211",
+    "date_fr": "19 octobre 2026",
+    "docx_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.docx",
+    "id": "PLFSS",
+    "label_fr": "PLFSS 2027",
+    "n_amendements": 8,
+    "n_pages": 22,
+    "pdf_url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf"
+   }
+  ],
+  "pdf_note": "pdf_url pointe vers la page du PDF de la liasse (ancre #page=N) sur france-resolution.fr.",
+  "resume_note": "resume_fr : une phrase neutre rédigée par le pipeline d'après l'exposé sommaire et le dispositif ; objet_expose_fr : première phrase de l'exposé sommaire, reprise telle quelle.",
+  "themes": [
+   {
+    "id": "niches",
+    "label_fr": "Niches fiscales et avantages particuliers",
+    "n": 18
+   },
+   {
+    "id": "refonte_fiscale",
+    "label_fr": "Refonte de la fiscalité (mutations, plus-values, TVA, IS, taxes)",
+    "n": 8
+   },
+   {
+    "id": "epargne",
+    "label_fr": "Compte d'épargne personnel",
+    "n": 1
+   },
+   {
+    "id": "aide_fondamentale",
+    "label_fr": "Impôt unique et aide fondamentale universelle",
+    "n": 2
+   },
+   {
+    "id": "collectivites",
+    "label_fr": "Collectivités locales et fiscalité locale",
+    "n": 10
+   },
+   {
+    "id": "credits_etat",
+    "label_fr": "Crédits de l'État retirés (état B)",
+    "n": 22
+   },
+   {
+    "id": "etat_agences_emplois",
+    "label_fr": "Agences, emplois et agents publics",
+    "n": 4
+   },
+   {
+    "id": "regles_depense",
+    "label_fr": "Règles de dépense de l'État",
+    "n": 4
+   },
+   {
+    "id": "logement_aides",
+    "label_fr": "Logement, hébergement et énergie",
+    "n": 4
+   },
+   {
+    "id": "csg_salaire_net",
+    "label_fr": "CSG, CRDS et salaire net",
+    "n": 3
+   },
+   {
+    "id": "sante",
+    "label_fr": "Santé",
+    "n": 1
+   },
+   {
+    "id": "retraites_indexations",
+    "label_fr": "Retraites et indexations",
+    "n": 3
+   },
+   {
+    "id": "securite_sociale",
+    "label_fr": "Organismes de sécurité sociale",
+    "n": 1
+   }
+  ],
+  "tier": "loi",
+  "tier_note": "Ce sont des projets d'amendements rédigés par l'association Résolution (liasses d'octobre 2026) : ils ne sont ni déposés ni adoptés ; leur texte est la seule spécification précise des paramètres du plan.",
+  "title_fr": "Les 81 amendements « prêts à déposer » de Résolution"
+ }
+}

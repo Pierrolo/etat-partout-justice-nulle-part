@@ -1,0 +1,35 @@
+<!doctype html><html lang=fr><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Je m’exprime — Résolution</title><meta name=description content="Écrivez au mouvement : contact@france-resolution.fr."><meta property="og:title" content="Je m’exprime — Résolution"><meta property="og:description" content="Écrivez au mouvement : contact@france-resolution.fr."><meta property="og:type" content="article"><link rel=stylesheet href="fiche.css"><div class=s-retour><a class=s-marque href="index.html">← Résolution</a><ul class=a-rub><li><a href="manifeste.html">Manifeste</a></li><li><a href="fiches.html">Propositions</a></li><li><a href="donnees.html">Données</a></li><li><a href="videos.html">Vidéos</a></li><li><a href="auteurs.html">Auteurs</a></li></ul></div><div class=r-page><header class=r-tete><p class=r-sur>Résolution</p><h1 class=r-titre>Je m’exprime</h1><p class=r-chapeau>Une question, une objection, une correction, une proposition : <b>écrivez, on répond.</b></p></header><div class=r-corps><p class=r-lab>Écrivez à</p><p class=r-adr id=adr-contact>contact@france-resolution.fr</p><div class=g-outils><a class="g-bouton g-plein" href="mailto:contact@france-resolution.fr?subject=Je%20m%E2%80%99exprime">Écrire un message</a><button class=g-bouton type=button data-copier="contact@france-resolution.fr" data-cible="adr-contact">Copier l’adresse</button></div><p class=r-lab>Nous suivre</p><div class=r-suivre><a href="https://www.youtube.com/@FranceResolution" target=_blank rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FF0000" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z"/><path fill="#fff" d="M9.75 15.02V8.98L15.5 12z"/></svg>YouTube</a><a href="https://www.instagram.com/franceresolution/" target=_blank rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><radialGradient id="ig1" cx="30%" cy="107%" r="150%"><stop offset="0" stop-color="#fdf497"/><stop offset=".05" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".9" stop-color="#285aeb"/></radialGradient></defs><rect x="1" y="1" width="22" height="22" rx="6" fill="url(#ig1)"/><rect x="5.5" y="5.5" width="13" height="13" rx="4" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="16.4" cy="7.6" r="1" fill="#fff"/></svg>Instagram</a></div></div><div class=m-rgpd><h3>Ce que nous recueillons, et ce que nous en faisons</h3><p>Cette page n’enregistre rien : le site est un ensemble de pages statiques, sans base de données et sans formulaire. Votre message arrive dans la boîte du mouvement, et nulle part ailleurs.</p><p><b>Données recueillies</b> : votre adresse électronique, et le nom et le prénom si vous les indiquez. Rien d’autre.</p><p><b>Finalité</b> : vous envoyer les nouvelles du mouvement. Aucune cession, aucune vente, aucun transfert à un tiers.</p><p><b>Durée</b> : jusqu’à votre demande de retrait.</p><p><b>Vos droits</b> : accès, rectification, effacement et opposition, en écrivant à la même adresse. Un seul message suffit, et il est traité sans condition.</p></div></div><p class=s-pied><a class=a-parici href="contact.html">Je m’exprime</a><a class=a-parici href="adherer.html">J’adhère</a><a class="a-parici a-elu" href="ecrire.html">J’écris à mon élu</a><a class=s-ml href="mentions-legales.html">Mentions légales</a></p><script>
+(function () {
+  // Le lecteur d'une page publiée bloque la navigation « mailto: » depuis un
+  // cadre isolé : le bouton restait sans effet. L'adresse est donc toujours
+  // écrite en clair, et un bouton la copie. Le lien mailto reste, en second.
+  var boutons = document.querySelectorAll('[data-copier]');
+  for (var i = 0; i < boutons.length; i++) {
+    (function (b) {
+      var dit = b.textContent;
+      b.addEventListener('click', function () {
+        var t = b.getAttribute('data-copier');
+        function fini(ok) {
+          b.textContent = ok ? 'Copié' : 'Sélectionnez l’adresse';
+          setTimeout(function () { b.textContent = dit; }, 2200);
+        }
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(t).then(function () { fini(true); },
+                                                  function () { fini(false); });
+            return;
+          }
+        } catch (err) { /* rien : on retombe sur la sélection */ }
+        var cible = document.getElementById(b.getAttribute('data-cible'));
+        if (cible && window.getSelection) {
+          var r = document.createRange();
+          r.selectNodeContents(cible);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(r);
+        }
+        fini(false);
+      });
+    })(boutons[i]);
+  }
+})();
+</script></html>

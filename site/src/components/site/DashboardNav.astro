@@ -1,0 +1,40 @@
+---
+import { COMPRENDRE_PAGES, withBase } from '@/lib/site';
+
+interface Props {
+  /** Slug of the current /comprendre/<slug> page. */
+  slug: string;
+}
+const { slug } = Astro.props;
+const i = COMPRENDRE_PAGES.findIndex((p) => p.slug === slug);
+const prev = i > 0 ? COMPRENDRE_PAGES[i - 1] : undefined;
+const next = i >= 0 && i < COMPRENDRE_PAGES.length - 1 ? COMPRENDRE_PAGES[i + 1] : undefined;
+---
+
+<nav aria-label="Autres pages de Comprendre" class="wrap mt-16">
+  <div class="grid gap-3 border-t border-rule pt-6 sm:grid-cols-2">
+    {prev ? (
+      <a
+        href={withBase(prev.href)}
+        class="card block no-underline hover:border-ink hover:no-underline"
+      >
+        <span class="eyebrow">← Précédent</span>
+        <span class="mt-1 block font-serif text-lg text-ink">{prev.title}</span>
+      </a>
+    ) : (
+      <span />
+    )}
+    {next && (
+      <a
+        href={withBase(next.href)}
+        class="card block text-end no-underline hover:border-ink hover:no-underline"
+      >
+        <span class="eyebrow">Suivant →</span>
+        <span class="mt-1 block font-serif text-lg text-ink">{next.title}</span>
+      </a>
+    )}
+  </div>
+  <p class="mt-4 text-sm">
+    <a href={withBase('/comprendre/')}>Toutes les pages « Comprendre »</a>
+  </p>
+</nav>

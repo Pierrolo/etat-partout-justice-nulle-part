@@ -1,0 +1,218 @@
+---
+/**
+ * /comprendre/amendements — « Les 81 amendements ».
+ * Liste (îlot AmendementsExplorer) + graphique des crédits retirés (statique, <details> natifs).
+ * Vocabulaire : « texte proposé », « projet d'amendement » — jamais « adopté », « voté » ni « en vigueur ».
+ */
+import AmendementsExplorer from '@/components/explorer/AmendementsExplorer';
+import CreditsChart, { type CreditMission } from '@/components/explorer/CreditsChart';
+import { Callout, ChartFrame, StatTile, TierBadge } from '@/components/ui';
+import amendements from '@/data/amendements.json';
+import calendrier from '@/data/calendrier.json';
+import credits from '@/data/credits-retires.json';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
+import {
+  toItems,
+  toLiasses,
+  toThemes,
+  type RawAmendement,
+  type RawLiasse,
+  type RawTheme,
+} from '@/lib/amendements-model';
+import { chip, num } from '@/lib/facts';
+import { FOYERS_SHORT, perFoyerYear } from '@/lib/foyers';
+import {
+  formatCompactEuro,
+  formatInteger,
+  formatMdEuro,
+  formatNumber,
+  formatPercentPoints,
+  NBSP,
+} from '@/lib/format';
+import { withBase } from '@/lib/site';
+
+const items = toItems(amendements.amendements as unknown as RawAmendement[]);
+const liasses = toLiasses(amendements.meta.liasses as unknown as RawLiasse[]);
+const themes = toThemes(amendements.meta.themes as unknown as RawTheme[]);
+const calendarDates = [...new Set(calendrier.events.map((e) => e.date))];
+const total = amendements.meta.counts.total;
+
+/* ── Crédits retirés ───────────────────────────────────────────────────── */
+type RawMission = (typeof credits.missions)[number];
+const missions: CreditMission[] = credits.missions.map((m: RawMission) => ({
+  number: m.amendment,
+  mission: m.mission_fr,
+  cpEur: m.cp_retirees_eur,
+  aeEur: m.ae_retirees_eur,
+  cpSharePct: m.part_du_total_cp_pct,
+  programmes: m.programmes.map((p) => ({
+    name: p.programme_fr,
+    cpEur: p.cp_retirees_eur,
+    aeEur: p.ae_retirees_eur,
+  })),
+  effets: m.effets.map((e) => ({ appliesTo: e.applies_to_fr, date: e.date })),
+  pdfUrl: m.source.url,
+}));
+const sorted = [...missions].sort((a, b) => b.cpEur - a.cpEur);
+const cpMd = num('credits_retires_cp_md');
+const aeMd = num('credits_retires_ae_md');
+const nMissions = num('credits_retires_amendements_nombre');
+const nProgrammes = credits.meta.totals.n_programmes;
+const perHousehold = perFoyerYear(cpMd);
+const aplExpose = num('apl_economie_2027_expose_md');
+const aplEtatB = num('apl_etat_b_cp_md');
+const top2 = sorted.slice(0, 2);
+const top2Share = top2.reduce((n, m) => n + m.cpSharePct, 0);
+const pct = (v: number) => formatPercentPoints(v, { decimals: { min: 0, max: 1 } });
+
+const creditRows = sorted.map((m, i) => ({
+  rang: i + 1,
+  mission: m.mission,
+  amendement: `PLF-P2 n° ${m.number}`,
+  cp_meur: Math.round(m.cpEur / 1e5) / 10,
+  ae_meur: Math.round(m.aeEur / 1e5) / 10,
+  programmes: m.programmes.length,
+  part_cp_pct: m.cpSharePct,
+}));
+
+const amendementsHref = withBase('/comprendre/amendements/');
+const calendrierHref = withBase('/comprendre/calendrier/');
+---
+
+<DashboardLayout
+  slug="amendements"
+  title={`Les ${total} amendements`}
+  lede={`Les ${total} amendements rédigés par l’association Résolution pour le plan, avec la date de chacun.`}
+>
+  <Callout tone="plan" title="Des amendements publiés, pas des lois votées">
+    <p>
+      L’association Résolution a rédigé et publié ces projets d’amendements, datés du{' '}
+      {liasses[0]!.date}. Aucun n’est adopté ni en vigueur. Le simulateur s’appuie sur leur texte,
+      qui décrit les paramètres du plan.
+    </p>
+    <p class="flex flex-wrap items-center gap-x-2 gap-y-1">
+      <TierBadge tier="law" size="sm" />
+      <span>
+        veut dire «&#8239;<strong>texte rédigé et publié, pas en vigueur</strong>
+        &#8239;» : un chiffre ou une date qu’on lit mot pour mot dans l’amendement.
+      </span>
+    </p>
+  </Callout>
+
+  <section aria-labelledby="liste-t" class="space-y-6">
+    <div class="max-w-3xl space-y-2">
+      <h2 id="liste-t" class="text-2xl sm:text-3xl">
+        Lire les amendements
+      </h2>
+      <p class="text-ink-2">
+        Une « liasse » est un paquet d’amendements rédigés pour un même projet de loi : la première
+        et la seconde partie du projet de loi de finances 2027 (PLF), et le projet de loi de
+        financement de la Sécurité sociale (PLFSS). Chaque carte renvoie au texte (PDF, à la bonne
+        page).
+        <a href="#credits-t" class="font-medium">
+          Aller au graphique des crédits retirés ↓
+        </a>
+      </p>
+    </div>
+    <AmendementsExplorer
+      client:load
+      items={items}
+      liasses={liasses}
+      themes={themes}
+      calendarDates={calendarDates}
+      calendrierHref={calendrierHref}
+    />
+  </section>
+
+  <section aria-labelledby="credits-t" class="space-y-6">
+    <div class="max-w-3xl space-y-2">
+      <h2 id="credits-t" class="text-2xl sm:text-3xl">
+        Les crédits que le plan retirerait du budget de l’État
+      </h2>
+      <p class="text-ink-2">
+        {formatInteger(nMissions)} amendements de la seconde partie (l’« état B ») retirent chacun
+        des crédits à une mission du budget 2027. Les voici, de la plus touchée à la moins touchée.
+        Ce sont des crédits que les amendements proposent de retirer.
+      </p>
+    </div>
+    <ul class="grid gap-4 md:grid-cols-3">
+      <StatTile
+        as="li"
+        label="Crédits de paiement retirés"
+        value={formatNumber(cpMd, { decimals: 1 })}
+        unit="Md€"
+        unitLabel="milliards d’euros"
+        reframe={`≈ ${formatNumber(Math.round(perHousehold / 10) * 10)}${NBSP}€ par foyer et par an, sur ${FOYERS_SHORT} (calcul du site)`}
+        tier="law"
+        source={chip('credits_retires_cp_md', { label: `Amendements PLF-P2 n° 1 à ${nMissions}` })}
+      />
+      <StatTile
+        as="li"
+        label="Autorisations d’engagement retirées"
+        value={formatNumber(aeMd, { decimals: 1 })}
+        unit="Md€"
+        unitLabel="milliards d’euros"
+        reframe="Ce que l’État pourrait promettre de payer, ici ou plus tard : toujours au moins égal aux paiements de l’année."
+        tier="law"
+        source={chip('credits_retires_ae_md', { label: `Amendements PLF-P2 n° 1 à ${nMissions}` })}
+      />
+      <StatTile
+        as="li"
+        label="Missions touchées"
+        value={formatInteger(nMissions)}
+        unit="missions"
+        reframe={`${formatInteger(nProgrammes)} programmes. Les deux premières, ${top2[0]!.mission} et ${top2[1]!.mission}, concentrent ${pct(top2Share)} des crédits de paiement retirés.`}
+        tier="law"
+        source={chip('credits_retires_amendements_nombre', {
+          label: `Amendements PLF-P2 n° 1 à ${nMissions}`,
+        })}
+      />
+    </ul>
+    <ChartFrame
+      title="Crédits retirés, mission par mission"
+      subtitle="Amendements d’état B, PLF 2027 seconde partie — touchez une ligne pour voir ses programmes"
+      tier="law"
+      summary={`${top2[0]!.mission} (${formatCompactEuro(top2[0]!.cpEur)} de crédits de paiement, ${pct(top2[0]!.cpSharePct)} du total) et ${top2[1]!.mission.toLowerCase()} (${formatCompactEuro(top2[1]!.cpEur)}, ${pct(top2[1]!.cpSharePct)}) sont les plus touchées. Au total, ${formatMdEuro(cpMd)} de crédits de paiement et ${formatMdEuro(aeMd)} d’autorisations d’engagement seraient retirés.`}
+      sources={[
+        {
+          label: `Amendements PLF-P2 n° 1 à ${nMissions}`,
+          href: credits.meta.source.url,
+          tier: 'law',
+        },
+        chip('credits_retires_cp_md', { label: 'Annexe A de la source-analyse' }),
+      ]}
+      table={{
+        caption: 'Crédits retirés par mission (état B, PLF 2027)',
+        columns: [
+          { key: 'rang', label: 'Rang', numeric: true },
+          { key: 'mission', label: 'Mission' },
+          { key: 'amendement', label: 'Amendement' },
+          {
+            key: 'cp_meur',
+            label: 'CP retirés (M€)',
+            numeric: true,
+            format: (v) => formatNumber(Number(v), { decimals: 1 }),
+          },
+          {
+            key: 'ae_meur',
+            label: 'AE retirées (M€)',
+            numeric: true,
+            format: (v) => formatNumber(Number(v), { decimals: 1 }),
+          },
+          { key: 'programmes', label: 'Programmes', numeric: true },
+          {
+            key: 'part_cp_pct',
+            label: 'Part des CP (%)',
+            numeric: true,
+            format: (v) => formatNumber(Number(v), { decimals: 1 }),
+          },
+        ],
+        rows: creditRows,
+      }}
+      csvFileName="credits-retires-par-mission.csv"
+      note={`Effet : 1er janvier 2027 pour les personnes morales, 1er juillet 2027 pour les personnes physiques (demi-exercice). Dans le détail d’une mission, chaque programme est tracé à l’échelle de son plus gros programme. L’exposé de l’amendement n° 32 chiffre l’économie 2027 de l’aide au logement à ${formatMdEuro(aplExpose, { decimals: 1 })}, l’état B retire ${formatMdEuro(aplEtatB, { decimals: 1 })} de crédits de paiement : les deux chiffres sont conservés (écart D19).`}
+    >
+      <CreditsChart missions={missions} amendementsHref={amendementsHref} />
+    </ChartFrame>
+  </section>
+</DashboardLayout>

@@ -1,0 +1,176 @@
+---
+/**
+ * /comprendre/situations — « Ce que le plan prévoit pour… » : les 18 fiches du livre, regroupées comme
+ * dans le livre, mot pour mot. Niveau « Annoncé » : des promesses, pas des calculs ni des
+ * textes votés. Une ancre par situation (#retraite, #enseignant, #entreprise…) pour que le simulateur
+ * renvoie un profil vers sa fiche.
+ */
+import { Callout } from '@/components/ui';
+import { IconDown, IconUp } from '@/components/ui/icons';
+import { TierBadge } from '@/components/ui/TierBadge';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
+import { situationGroups } from '@/lib/situations';
+import { withBase } from '@/lib/site';
+
+const groups = situationGroups();
+const count = groups.reduce((n, g) => n + g.situations.length, 0);
+---
+
+<DashboardLayout
+  slug="situations"
+  lede={`Les ${count} situations : ce que le plan donne à chacun, et ce qu’il retire. Les textes sont repris mot pour mot.`}
+>
+  <Callout tone="announced" title="Textes des fiches" icon={null}>
+    <p class="mb-2">
+      <TierBadge tier="announced" />
+    </p>
+    <p>
+      Tout ce qui suit vient des fiches. Quand un amendement existe, il est indiqué sous la fiche.
+      Pour un montant en euros sur votre foyer, utilisez
+      <a href={withBase('/simulateur/')}>le simulateur</a>.
+    </p>
+  </Callout>
+
+  <nav aria-label="Les situations" class="card space-y-4">
+    <p class="font-semibold text-ink">Aller directement à ma situation</p>
+    {groups.map((g) => (
+      <div>
+        <p class="eyebrow mb-2">{g.label}</p>
+        <ul class="flex flex-wrap gap-2">
+          {g.situations.map((s) => (
+            <li>
+              <a
+                href={`#${s.slug}`}
+                class="inline-flex min-h-9 items-center rounded-full border border-rule-strong bg-surface px-3 text-[0.9375rem] text-ink no-underline hover:border-ink hover:no-underline"
+              >
+                {s.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </nav>
+
+  {groups.map((g, gi) => (
+    <section aria-labelledby={`groupe-${gi}`} class="space-y-6">
+      <header>
+        <h2 id={`groupe-${gi}`} class="text-2xl text-ink">
+          {g.label}
+        </h2>
+        <p class="mt-1 max-w-2xl text-ink-2">{g.description}</p>
+      </header>
+      <div class="space-y-6">
+        {g.situations.map((s) => (
+          <article id={s.slug} aria-labelledby={`${s.slug}-t`} class="card space-y-5 scroll-mt-24">
+            <header class="space-y-1">
+              <p class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                {s.population && <span class="eyebrow">{s.population}</span>}
+                <TierBadge tier="announced" size="sm" short />
+              </p>
+              <h3
+                id={`${s.slug}-t`}
+                class="font-serif text-2xl font-medium tracking-tight text-ink"
+              >
+                {s.title}
+              </h3>
+              <p class="max-w-2xl text-lg text-ink-2">{s.tagline}</p>
+            </header>
+
+            <div class="grid gap-6 md:grid-cols-2">
+              <section aria-labelledby={`${s.slug}-g`}>
+                <h4
+                  id={`${s.slug}-g`}
+                  class="flex items-center gap-2 text-base font-semibold text-gain"
+                >
+                  <IconUp size={18} />
+                  Ce que le plan donne
+                  <span class="font-normal text-ink-3">({s.gains.length})</span>
+                </h4>
+                <ul class="mt-2 space-y-3">
+                  {s.gains.map((i) => (
+                    <li class="text-[0.9375rem] leading-relaxed text-ink-2">
+                      <strong class="text-ink">{i.headline}</strong> {i.text}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+              <section aria-labelledby={`${s.slug}-p`}>
+                <h4
+                  id={`${s.slug}-p`}
+                  class="flex items-center gap-2 text-base font-semibold text-loss"
+                >
+                  <IconDown size={18} />
+                  Ce qu’il retire
+                  <span class="font-normal text-ink-3">({s.pertes.length})</span>
+                </h4>
+                {s.pertes.length > 0 ? (
+                  <ul class="mt-2 space-y-3">
+                    {s.pertes.map((i) => (
+                      <li class="text-[0.9375rem] leading-relaxed text-ink-2">
+                        <strong class="text-ink">{i.headline}</strong> {i.text}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p class="mt-2 text-[0.9375rem] text-ink-2">
+                    La fiche ne liste aucune perte. Cela ne veut pas dire qu’il n’y en a pas :
+                    <a href={withBase('/simulateur/')}>le simulateur</a> montre, ligne par ligne, ce
+                    que votre foyer gagnerait et perdrait.
+                  </p>
+                )}
+              </section>
+            </div>
+
+            {s.commeChacun.length > 0 && (
+              <p class="text-sm text-ink-3">Et comme chacun : {s.commeChacun.join(' · ')}</p>
+            )}
+            {s.headerMismatch && (
+              <p class="text-sm text-ink-3">
+                L’en-tête de la fiche annonce {s.headerMismatch.gains}{' '}
+                {s.headerMismatch.gains > 1 ? 'gains' : 'gain'} et {s.headerMismatch.pertes}{' '}
+                {s.headerMismatch.pertes > 1 ? 'pertes' : 'perte'}&#8239;; seuls les éléments
+                ci-dessus sont détaillés dans le texte. Nous n’en ajoutons aucun.
+              </p>
+            )}
+
+            {s.amendements.length > 0 && (
+              <div>
+                <p class="text-sm font-semibold text-ink">Amendements concernés</p>
+                <ul class="mt-1 space-y-1 text-[0.9375rem] text-ink-2">
+                  {s.amendements.map((a) => (
+                    <li>
+                      <a href={a.pdfUrl} rel="noopener noreferrer" title={a.title}>
+                        {a.label}
+                      </a>
+                      <span>&#8239;: {a.why}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p class="mt-1 text-sm text-ink-3">
+                  Ces amendements sont rédigés et publiés ; aucun n’est en vigueur.
+                </p>
+              </div>
+            )}
+
+            <footer class="flex flex-wrap gap-x-5 gap-y-1 border-t border-rule pt-3 text-sm">
+              <a href={s.url} rel="noopener noreferrer">
+                Fiche d’origine (france-resolution.fr)
+              </a>
+              <a href={s.pdfUrl} rel="noopener noreferrer">
+                Fiche en PDF
+              </a>
+              <a href={withBase('/simulateur/')}>Calculer pour mon foyer</a>
+              <a href="#main">Haut de page</a>
+            </footer>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <p class="text-sm text-ink-3">
+    Texte des fiches : france-resolution.fr, repris mot pour mot (seules les espaces et les
+    apostrophes sont mises aux normes typographiques).
+  </p>
+</DashboardLayout>

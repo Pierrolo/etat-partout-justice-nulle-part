@@ -1,0 +1,545 @@
+---
+/**
+ * /comprendre/niches — « Les 465 niches fiscales ».
+ * Tout ce qui est au-dessus de l'explorateur est rendu au build (zéro JavaScript) ; l'explorateur est
+ * un îlot React qui charge les 465 lignes à la demande (data/niches.json, voir pages/data/niches.json.ts).
+ */
+import { BarLegend, BarRows, type BarItem } from '@/components/explorer/bars';
+import { catColor } from '@/components/explorer/niche-colors';
+import NichesExplorer from '@/components/explorer/NichesExplorer';
+import { Callout, ChartFrame, Disclosure, StatTile } from '@/components/ui';
+import DashboardLayout from '@/layouts/DashboardLayout.astro';
+import { css } from '@/lib/chart-theme';
+import { chip, num } from '@/lib/facts';
+import { FOYERS_SHORT, perFoyerYear } from '@/lib/foyers';
+import { formatInteger, formatMdEuro, formatNumber, formatPercent, NBSP } from '@/lib/format';
+import { nichesEquation } from '@/lib/niches-wording';
+import { withBase } from '@/lib/site';
+import { TIER_META } from '@/lib/tiers';
+import niches from '@/data/niches.json';
+import {
+  CATEGORY_IDS,
+  CATEGORY_META,
+  PLAN_IDS,
+  TAX_IDS,
+  byCategory,
+  byPlan,
+  costOf,
+  flagOf,
+  sortRows,
+  summarize,
+  toRows,
+  topN,
+  DEFAULT_STATE,
+  PAGE_SIZE,
+  type CategoryId,
+  type PlanId,
+  type RawNiche,
+  type TaxId,
+} from '@/lib/niches-model';
+
+/* ── Données ───────────────────────────────────────────────────────────── */
+const rows = toRows(niches.niches as unknown as RawNiche[]);
+const all2024 = summarize(rows, 2024);
+const initialRows = sortRows(rows, DEFAULT_STATE).slice(0, PAGE_SIZE);
+const missing2024 = rows.filter((r) => costOf(r, 2024) === null);
+const countFlag = (flag: string | null) =>
+  missing2024.filter((r) => flagOf(r, 2024) === flag).length;
+const nNc = countFlag('nc');
+const nEps = countFlag('epsilon');
+const nNoEffect = countFlag('aucun_effet');
+
+const facets = {
+  cats: Object.fromEntries(
+    CATEGORY_IDS.map((id) => [id, rows.filter((r) => r.cat === id).length]),
+  ) as Record<CategoryId, number>,
+  taxes: Object.fromEntries(
+    TAX_IDS.map((id) => [id, rows.filter((r) => r.tax === id).length]),
+  ) as Record<TaxId, number>,
+  plans: Object.fromEntries(
+    PLAN_IDS.map((id) => [id, rows.filter((r) => r.plan === id).length]),
+  ) as Record<PlanId, number>,
+  menages: rows.filter((r) => r.menages).length,
+};
+
+/* ── Chiffres d'en-tête (tout vient de facts.json ou du jeu de données) ── */
+const perHousehold = perFoyerYear;
+/** Md€ avec une décimale au plus (134,7 ; 89,4 ; 143) : les totaux en conflit se lisent à la décimale. */
+const md1 = (v: number) => `${formatNumber(v, { decimals: { min: 0, max: 1 } })}${NBSP}Md€`;
+/** M€ entiers, séparateur de milliers : « 7 800 M€ ». */
+const meur0 = (v: number) => `${formatNumber(v)}${NBSP}M€`;
+const eur = (v: number) => `${formatNumber(Math.round(v / 10) * 10)}${NBSP}€`;
+
+const md465 = num('niches_cout_2024_md'); // 89,406
+const mdApu = num('niches_cout_2024_tva_apu_md'); // 101,321
+const md486 = num('niches_total_md'); // 134,703
+const mdTva21 = num('niches_tva_hors_niches_md'); // 33,382
+const md143 = num('fiche_niches_supprimees_md'); // 143
+const mdMenages = num('niches_menages_communes_cout_2024_md');
+const nMenages = num('niches_menages_communes_nombre');
+const md2026Expose = num('niches_cout_2026_expose_md');
+const md2026Somme = num('niches_cout_2026_somme_md');
+const md52 = num('fiche_niches_baisse_charges_md');
+const nTva21 = num('niches_tva_hors_niches_nombre');
+const nProvisions = niches.provisions_calcul_impot.length;
+const n465 = rows.length;
+const nTotal = num('niches_total_nombre');
+const equation = nichesEquation(n465, nTva21, nTotal);
+const pct = (r: number) => formatPercent(r);
+
+/* ── « Quel total ? » ──────────────────────────────────────────────────── */
+const seg = css.series;
+const totalsItems: BarItem[] = [
+  {
+    id: 'm465',
+    label: `${n465} niches, coût réalisé 2024`,
+    sub: 'Le chiffre de ce site : feuille « Synthèse » du classeur, ligne à ligne',
+    segments: [{ value: md465, color: seg[0]!, srLabel: `${n465} niches` }],
+    valueText: md1(md465),
+  },
+  {
+    id: 'apu',
+    label: '… avec la TVA de toutes les administrations publiques',
+    sub: `+ ${md1(mdApu - md465)} : colonne « y compris TVA APU » du classeur`,
+    segments: [
+      { value: md465, color: seg[0]!, srLabel: `${n465} niches` },
+      { value: mdApu - md465, color: seg[1]!, srLabel: 'TVA des administrations publiques' },
+    ],
+    valueText: md1(mdApu),
+  },
+  {
+    id: 'm486',
+    label: `« ${num('niches_total_nombre')} niches et taux réduits »`,
+    sub: `+ ${md1(mdTva21)} : ${nTva21} taux réduits de TVA, non comptés comme niches`,
+    segments: [
+      { value: md465, color: seg[0]!, srLabel: `${n465} niches` },
+      { value: mdApu - md465, color: seg[1]!, srLabel: 'TVA des administrations publiques' },
+      { value: mdTva21, color: seg[2]!, srLabel: `${nTva21} taux réduits de TVA` },
+    ],
+    valueText: md1(md486),
+  },
+  {
+    id: 'm143',
+    label: `« ${md1(md143)} de niches supprimées »`,
+    sub: 'Annonce de la fiche Contribuable : périmètre non détaillé, il inclurait des niches sociales',
+    segments: [{ value: md143, color: css.accent, hatched: true, srLabel: 'annoncé' }],
+    valueText: md1(md143),
+  },
+];
+const totalsMax = md143;
+
+/* ── Top 20 ────────────────────────────────────────────────────────────── */
+const top = topN(rows, 2024, 20);
+const topTotal = top.reduce((n, r) => n + (costOf(r, 2024) ?? 0), 0);
+const topItems: BarItem[] = top.map((r) => ({
+  id: r.id,
+  label: r.label,
+  sub: CATEGORY_META[r.cat].label,
+  swatch: catColor(r.cat),
+  segments: [{ value: costOf(r, 2024)!, color: catColor(r.cat) }],
+  valueText: meur0(costOf(r, 2024)!),
+}));
+const topCats = CATEGORY_IDS.filter((c) => top.some((r) => r.cat === c));
+const topRows = top.map((r, i) => ({
+  rang: i + 1,
+  niche: r.label,
+  categorie: CATEGORY_META[r.cat].label,
+  impot: r.tax,
+  cout_2024_meur: costOf(r, 2024),
+  reference: r.legal ?? '',
+}));
+const first = top[0]!;
+
+/* ── Répartitions ──────────────────────────────────────────────────────── */
+const cats = byCategory(rows, 2024);
+const catItems: BarItem[] = cats.map((c) => ({
+  id: c.key,
+  label: c.label,
+  sub: `${formatInteger(c.count)} niches · ${formatPercent(c.total / all2024.total)} du coût chiffré${c.unpriced ? ` · ${formatInteger(c.unpriced)} non chiffrées` : ''}`,
+  swatch: catColor(c.key as CategoryId),
+  segments: [{ value: c.total, color: catColor(c.key as CategoryId) }],
+  valueText: formatMdEuro(c.total / 1000),
+}));
+const catRows = cats.map((c) => ({
+  categorie: c.label,
+  niches: c.count,
+  cout_2024_meur: c.total,
+  non_chiffrees: c.unpriced,
+}));
+const [c1, c2] = cats;
+
+const plans = byPlan(rows, 2024);
+const planItems: BarItem[] = plans.map((p) => ({
+  id: p.key,
+  label: p.label,
+  sub: `${formatInteger(p.count)} niches${p.unpriced ? ` · ${formatInteger(p.unpriced)} non chiffrées` : ''}`,
+  segments: [{ value: p.total, color: css.other }],
+  valueText: formatMdEuro(p.total / 1000),
+}));
+const planRows = plans.map((p) => ({
+  effet: p.label,
+  niches: p.count,
+  cout_2024_meur: p.total,
+  non_chiffrees: p.unpriced,
+}));
+const pSupp = plans.find((p) => p.key === 'supprimee')!;
+const pDead = plans.find((p) => p.key === 'eteinte')!;
+
+const links = {
+  amendements: withBase('/comprendre/amendements/'),
+  calendrier: withBase('/comprendre/calendrier/'),
+};
+---
+
+<DashboardLayout
+  slug="niches"
+  title={`Les ${n465} niches fiscales`}
+  lede={`${n465} avantages fiscaux ont un coût pour l’État. Avec les taux réduits de TVA, le total annoncé en compte plus : ${equation}.`}
+>
+  <section aria-labelledby="chiffres-t" class="space-y-6">
+    <h2 id="chiffres-t" class="sr-only">
+      Les chiffres clés
+    </h2>
+    <p class="max-w-3xl text-ink-2">
+      Une « niche fiscale » (ou dépense fiscale) est un avantage que la loi accorde à certains
+      contribuables : exonération, réduction, crédit d’impôt, taux réduit. Chacune coûte des
+      recettes à l’État. Le plan propose d’en abolir presque toutes et de rendre le gain aux
+      salaires.
+      <a href="#liste" class="font-medium">
+        Aller directement à la liste ↓
+      </a>
+    </p>
+    <ul class="grid gap-4 md:grid-cols-3">
+      <StatTile
+        as="li"
+        label={`Coût des ${n465} niches en 2024 (réalisé)`}
+        value={formatNumber(md465, { decimals: 1 })}
+        unit="Md€"
+        unitLabel="milliards d’euros"
+        reframe={`≈ ${eur(perHousehold(md465))} par foyer et par an, sur ${FOYERS_SHORT} (calcul du site)`}
+        source={chip('niches_cout_2024_md')}
+      />
+      <StatTile
+        as="li"
+        label={`Dont ${formatInteger(nMenages)} niches que les ménages rencontrent couramment`}
+        value={formatNumber(mdMenages, { decimals: 1 })}
+        unit="Md€"
+        unitLabel="milliards d’euros"
+        reframe={`${formatPercent(mdMenages / md465)} du total ; ≈ ${eur(perHousehold(mdMenages))} par foyer et par an (même base)`}
+        source={chip('niches_menages_communes_cout_2024_md')}
+      />
+      <StatTile
+        as="li"
+        label="Niches sans coût chiffré en 2024"
+        value={formatInteger(all2024.unpriced)}
+        unit={`sur ${formatInteger(all2024.count)}`}
+        reframe={`« Non calculé » (${formatInteger(nNc)}), « moins de 0,5 M€ » (${formatInteger(nEps)}) ou « aucun effet budgétaire » (${formatInteger(nNoEffect)}). Aucune n’entre dans les totaux.`}
+        source={{
+          label: 'Chiffrage publié, feuille « Chiffrages »',
+          href: String(niches.meta.source.url),
+          year: 2024,
+        }}
+      />
+    </ul>
+  </section>
+
+  <section aria-labelledby="totaux-t" class="space-y-6">
+    <div class="max-w-3xl space-y-2">
+      <h2 id="totaux-t" class="text-2xl sm:text-3xl">
+        Quel total retenir ?
+      </h2>
+      <p class="text-ink-2">
+        {md1(md465)}, {md1(mdApu)}, {md1(md486)} ou {md1(md143)}&#8239;: les sources parlent de
+        « niches » avec quatre périmètres différents. Aucun chiffre n’est une erreur, ils ne
+        comptent pas la même chose. Nous avons gardé chaque valeur, sans en corriger aucune en
+        silence.
+      </p>
+    </div>
+    <ChartFrame
+      title="Quatre totaux pour « les niches », quatre périmètres"
+      subtitle="Milliards d’euros, coût 2024"
+      summary={`Le total de ce site est de ${md1(md465)} : les ${n465} niches du classeur, coût réalisé en 2024. Y ajouter la TVA des administrations publiques donne ${md1(mdApu)}, puis les ${nTva21} taux réduits de TVA ${md1(md486)}. Le chiffre de ${md1(md143)} est une annonce, dont le périmètre n’est pas détaillé.`}
+      sources={[
+        chip('niches_cout_2024_md'),
+        chip('niches_total_md', { label: `Chiffrage, ${nTotal} niches et taux réduits` }),
+        chip('fiche_niches_supprimees_md', { label: 'Fiche Contribuable' }),
+      ]}
+      table={{
+        caption: 'Les quatre totaux de « niches » et leur périmètre',
+        columns: [
+          { key: 'perimetre', label: 'Périmètre' },
+          {
+            key: 'md',
+            label: 'Md€',
+            numeric: true,
+            format: (v) => formatNumber(Number(v), { decimals: { min: 0, max: 1 } }),
+          },
+          { key: 'niveau', label: 'Niveau de preuve' },
+        ],
+        rows: [
+          {
+            perimetre: `${n465} niches, coût réalisé 2024`,
+            md: md465,
+            niveau: 'Donnée (PLF 2026)',
+          },
+          {
+            perimetre: `${n465} niches avec la TVA de toutes les administrations publiques`,
+            md: mdApu,
+            niveau: 'Donnée (PLF 2026)',
+          },
+          {
+            perimetre: `${nTotal} niches et taux réduits de TVA`,
+            md: md486,
+            niveau: 'Donnée (PLF 2026)',
+          },
+          {
+            perimetre: `« ${md1(md143)} de niches supprimées » (fiche Contribuable)`,
+            md: md143,
+            niveau: TIER_META.announced.label,
+          },
+        ],
+      }}
+      csvFileName="niches-quatre-totaux.csv"
+      note={`Et pour 2026 ? L’exposé de l’amendement PLF-P1 n° 1 cite ${md1(md2026Expose)} ; la somme des ${n465} lignes du classeur donne ${formatNumber(md2026Somme, { decimals: 3 })}${NBSP}Md€ (les coûts « non calculés » comptent pour zéro dans cette somme, pas dans notre tableau). L’écart est de ${formatNumber((md2026Somme - md2026Expose) * 1000)} M€ : un arrondi, non expliqué par la source.`}
+    >
+      <div class="space-y-5">
+        <BarLegend
+          label="Légende des périmètres"
+          items={[
+            { label: `${n465} niches`, color: seg[0]! },
+            { label: 'TVA des administrations publiques', color: seg[1]! },
+            { label: `${nTva21} taux réduits de TVA`, color: seg[2]! },
+            { label: TIER_META.announced.label, color: css.accent, hatched: true },
+          ]}
+        />
+        <BarRows
+          label="Les quatre totaux de niches, en milliards d’euros"
+          items={totalsItems}
+          max={totalsMax}
+          labelWidth="minmax(0, 20rem)"
+          thickness={18}
+        />
+      </div>
+    </ChartFrame>
+    <div class="grid gap-4 md:grid-cols-2">
+      <Callout title={`Pourquoi ${md1(md465)} ou ${md1(md486)} ?`}>
+        <p class="font-semibold">{equation}.</p>
+        <p>
+          {md1(md465)} = les {n465} niches du classeur. {md1(md486)} = ces {n465} niches comptées
+          avec la TVA de toutes les administrations publiques, plus {nTva21} taux réduits de TVA que
+          le classeur ne compte pas comme niches (leur liste n’est pas publiée, seul leur coût
+          l’est). Les deux sont des données du PLF 2026.
+        </p>
+      </Callout>
+      <Callout tone="announced" title={`Et ${md1(md143)} ?`}>
+        <p>
+          «&#8239;{md1(md143)} de niches supprimées, dont {md1(md52)} vous reviennent » est une
+          annonce de la fiche Contribuable. D’après nos recoupements, ce périmètre additionne niches
+          fiscales, niches sociales et « autre gisement » de la feuille « Flux ». Ce total vient de
+          ce recoupement. Il inclut des niches sociales, en plus des {num('niches_total_nombre')}.
+        </p>
+      </Callout>
+    </div>
+  </section>
+
+  <section aria-labelledby="top-t" class="space-y-6">
+    <h2 id="top-t" class="max-w-3xl text-2xl sm:text-3xl">
+      Où sont les plus grosses ?
+    </h2>
+    <ChartFrame
+      title="Les 20 niches les plus coûteuses"
+      subtitle="Coût réalisé en 2024, en millions d’euros"
+      summary={`Les 20 niches les plus coûteuses pèsent ${formatMdEuro(topTotal / 1000)}, soit ${pct(topTotal / all2024.total)} des ${md1(md465)} chiffrés pour ${n465} niches. La première, « ${first.label.toLowerCase()} », coûte ${meur0(costOf(first, 2024)!)}.`}
+      sources={[chip('niches_cout_2024_md', { label: 'PLF 2026, annexe Dépenses fiscales' })]}
+      table={{
+        caption: 'Les 20 niches les plus coûteuses, coût réalisé 2024',
+        columns: [
+          { key: 'rang', label: 'Rang', numeric: true },
+          { key: 'niche', label: 'Niche' },
+          { key: 'categorie', label: 'Catégorie' },
+          {
+            key: 'cout_2024_meur',
+            label: 'Coût 2024 (M€)',
+            numeric: true,
+            format: (v) => formatNumber(Number(v)),
+          },
+          { key: 'reference', label: 'Référence légale' },
+        ],
+        rows: topRows,
+      }}
+      csvFileName="niches-top-20-cout-2024.csv"
+      note="Seules les niches dont le coût est chiffré sont classées ; les autres ne sont pas à zéro, elles sont « non chiffrées »."
+    >
+      <div class="space-y-4">
+        <BarLegend
+          label="Légende des catégories"
+          items={topCats.map((c) => ({ label: CATEGORY_META[c].label, color: catColor(c) }))}
+        />
+        <BarRows
+          label="Les 20 niches les plus coûteuses en 2024"
+          items={topItems}
+          max={costOf(first, 2024)!}
+          labelWidth="minmax(0, 26rem)"
+          valueWidth="5.75rem"
+        />
+      </div>
+    </ChartFrame>
+  </section>
+
+  <section aria-labelledby="rep-t" class="space-y-6">
+    <h2 id="rep-t" class="max-w-3xl text-2xl sm:text-3xl">
+      Qui en profite, et que devient chacune ?
+    </h2>
+    <div class="grid gap-6 lg:grid-cols-2">
+      <ChartFrame
+        title="Coût par catégorie"
+        subtitle={`Coût réalisé 2024, ${n465} niches`}
+        summary={`${c1!.label} (${formatInteger(c1!.count)} niches, ${formatMdEuro(c1!.total / 1000)}) et ${c2!.label.toLowerCase()} (${formatInteger(c2!.count)} niches, ${formatMdEuro(c2!.total / 1000)}) pèsent à eux deux ${formatPercent((c1!.total + c2!.total) / all2024.total)} du coût chiffré.`}
+        sources={[chip('niches_cout_2024_md', { label: 'PLF 2026, annexe Dépenses fiscales' })]}
+        table={{
+          caption: 'Coût 2024 des niches par catégorie',
+          columns: [
+            { key: 'categorie', label: 'Catégorie' },
+            { key: 'niches', label: 'Niches', numeric: true },
+            {
+              key: 'cout_2024_meur',
+              label: 'Coût 2024 (M€)',
+              numeric: true,
+              format: (v) => formatNumber(Number(v)),
+            },
+            { key: 'non_chiffrees', label: 'Non chiffrées', numeric: true },
+          ],
+          rows: catRows,
+        }}
+        csvFileName="niches-par-categorie-2024.csv"
+        note="Une niche n’a qu’une catégorie : la première règle qui s’applique (outre-mer, TVA, épargne, logement, puis ménages ou entreprises selon les bénéficiaires, sinon « autres »)."
+      >
+        <BarRows
+          label="Coût 2024 par catégorie de niche"
+          items={catItems}
+          valueWidth="5.5rem"
+          labelWidth="minmax(0, 13rem)"
+          thickness={16}
+        />
+      </ChartFrame>
+      <ChartFrame
+        title="Ce que le plan en ferait"
+        subtitle="Coût réalisé 2024, par effet prévu"
+        tier="announced"
+        summary={`${formatInteger(pSupp.count)} niches sur ${formatInteger(all2024.count)} seraient supprimées, aux dates fixées par l’amendement n° 1 (${formatMdEuro(pSupp.total / 1000)} de coût en 2024). ${formatInteger(pDead.count)} sont déjà éteintes : le plan n’a rien à y supprimer.`}
+        sources={[
+          {
+            label: 'Chiffrage publié, feuille « Chiffrages Résolution »',
+            href: String(niches.meta.source.url),
+            tier: 'announced',
+          },
+          { label: 'Amendement PLF-P1 n° 1', href: `${links.amendements}#PLF-P1-1`, tier: 'law' },
+        ]}
+        table={{
+          caption: 'Coût 2024 des niches selon ce que prévoit le plan',
+          columns: [
+            { key: 'effet', label: 'Effet prévu' },
+            { key: 'niches', label: 'Niches', numeric: true },
+            {
+              key: 'cout_2024_meur',
+              label: 'Coût 2024 (M€)',
+              numeric: true,
+              format: (v) => formatNumber(Number(v)),
+            },
+            { key: 'non_chiffrees', label: 'Non chiffrées', numeric: true },
+          ],
+          rows: planRows,
+        }}
+        csvFileName="niches-effet-du-plan-2024.csv"
+        note="Le texte de l’amendement n° 1 abroge les avantages article par article. Le rapprochement de chaque niche du chiffrage avec ces articles vient du chiffrage publié."
+      >
+        <BarRows
+          label="Coût 2024 des niches selon ce que prévoit le plan"
+          items={planItems}
+          valueWidth="5.5rem"
+          labelWidth="minmax(0, 13rem)"
+          thickness={16}
+        />
+      </ChartFrame>
+    </div>
+  </section>
+
+  <section id="liste" aria-labelledby="liste-t" class="scroll-mt-20 space-y-6">
+    <div class="max-w-3xl space-y-2">
+      <h2 id="liste-t" class="text-2xl sm:text-3xl">
+        Les niches, une par une
+      </h2>
+      <p class="text-ink-2">
+        Cherchez par mot (« garde », « dons », « livret »), filtrez par catégorie, impôt ou effet du
+        plan, triez par coût. L’adresse de la page garde vos filtres : vous pouvez la partager.
+      </p>
+    </div>
+    <Callout tone="announced" title="« Ce que prévoit le plan » : le classement annoncé">
+      <p>
+        L’amendement n° 1 supprime les avantages fiscaux par article de code. Le classement de
+        chaque niche (supprimée, en trois ans, intégrée à l’aide fondamentale…) vient du chiffrage,
+        d’où le statut « annoncé ». Les niches « supprimées » suivent la date générale de
+        l’amendement selon l’impôt. Les dons et l’épargne ont leur propre calendrier. La date
+        affichée reste celle de la source.
+      </p>
+    </Callout>
+    <noscript>
+      <p class="card text-ink-2">
+        La recherche et les filtres demandent JavaScript. Sans lui, la liste montre les {PAGE_SIZE}{' '}
+        niches les plus coûteuses. Les {n465} lignes sont aussi disponibles en
+        <a href={withBase('data/niches.json')}>JSON</a>.
+      </p>
+    </noscript>
+    <NichesExplorer
+      client:load
+      initialRows={initialRows}
+      initialSummary={all2024}
+      facets={facets}
+      dataUrl={withBase('data/niches.json')}
+      links={links}
+    />
+  </section>
+
+  <section aria-labelledby="lire-t" class="max-w-3xl">
+    <h2 id="lire-t" class="mb-4 text-2xl">
+      Comment lire ces chiffres
+    </h2>
+    <Disclosure summary="Pourquoi « non chiffré » et pas zéro ?" variant="plain">
+      <p>
+        {formatInteger(all2024.unpriced)} niches n’ont pas de coût en 2024 dans le classeur :
+        {formatInteger(nNc)} « non calculées » (nc), {formatInteger(nEps)} sous le seuil de 0,5 M€
+        (ε) et {formatInteger(nNoEffect)} sans effet budgétaire. Les afficher à « 0 € » mélangerait
+        un coût inconnu, un coût minuscule et une absence de coût : elles sont donc écrites « non
+        chiffré », avec leur motif, classées en dernier et exclues des totaux.
+        {formatInteger(all2024.count - all2024.unpriced)} niches ont un coût chiffré.
+      </p>
+    </Disclosure>
+    <Disclosure summary={`Ce qui n’est pas dans ces ${n465} niches`} variant="plain">
+      <p>
+        Les {nTva21} taux réduits de TVA ({md1(mdTva21)} en 2024) ne sont pas comptés comme niches
+        et le classeur n’en publie pas la liste : nous n’en avons inventé aucune ligne. Les{' '}
+        {nProvisions} « modalités de calcul de l’impôt » (décote, plus-value sur la résidence
+        principale…) sont listées à part dans les données et ne sont pas dans les {n465}. Les niches
+        sociales (exonérations de cotisations) ne sont pas non plus dans ce classeur.
+      </p>
+    </Disclosure>
+    <Disclosure summary="Qui est « ménages », qui est « entreprises » ?" variant="plain">
+      <p>
+        Chaque niche reçoit une seule catégorie, selon une règle ordonnée (outre-mer, TVA, épargne,
+        logement, puis ménages ou entreprises selon la nature des bénéficiaires du classeur, sinon
+        « autres »). La mention « concerne souvent les ménages » repose sur une liste éditoriale
+        (emploi à domicile, garde d’enfants, abattement sur les pensions, dons, livrets…) plus la
+        règle « au moins un million de ménages bénéficiaires ». Ce sont nos choix de lecture, listés
+        dans les données : ils ne viennent pas du classeur.
+      </p>
+    </Disclosure>
+    <Disclosure summary="D’où viennent les coûts ?" variant="plain">
+      <p>
+        De l’annexe « Dépenses fiscales » du PLF 2026 (Évaluation des voies et moyens, tome II),
+        reprise dans le classeur publié. 2024 est le coût réalisé ; 2025 et 2026 sont des
+        prévisions. La fiabilité du chiffrage (« très bonne », « bonne », « ordre de grandeur ») est
+        indiquée niche par niche dans « Détails ».
+      </p>
+    </Disclosure>
+  </section>
+</DashboardLayout>

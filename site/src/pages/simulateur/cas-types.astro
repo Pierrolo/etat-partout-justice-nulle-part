@@ -1,0 +1,27 @@
+---
+import Breadcrumbs from '@/components/site/Breadcrumbs.astro';
+import PageHeader from '@/components/site/PageHeader.astro';
+import CasTypes from '@/components/simulator/CasTypes';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Qui gagne, qui perd ?"
+  description="Le plan appliqué à des foyers types : qui gagne, qui perd, de combien. Des exemples, pas la part des ménages gagnants ou perdants."
+>
+  <PageHeader
+    eyebrow="Simulateur"
+    title="Qui gagne, qui perd ?"
+    lede="Le plan appliqué à des foyers types — les perdants y figurent au même titre que les gagnants."
+  >
+    <Breadcrumbs
+      slot="before"
+      items={[
+        { label: 'Accueil', href: '/' },
+        { label: 'Simulateur', href: '/simulateur/' },
+        { label: 'Qui gagne, qui perd ?' },
+      ]}
+    />
+  </PageHeader>
+  <CasTypes client:load />
+</BaseLayout>

@@ -1,0 +1,67 @@
+---
+import { COMPRENDRE_PAGES, NAV, SITE, withBase } from '@/lib/site';
+import Logo from './Logo.astro';
+---
+
+<footer class="brand-footer mt-24 border-t border-rule bg-sunken">
+  <div class="wrap grid gap-10 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div class="space-y-3">
+      <p class="flex items-center gap-2.5 font-serif text-lg font-medium text-ink">
+        <Logo size={24} />
+        {SITE.name}
+      </p>
+      <p class="max-w-sm text-sm text-ink-2" data-testid="independence">
+        {SITE.independence} {SITE.dataSources}
+      </p>
+      <p class="max-w-sm text-sm text-ink-3">
+        Aucun cookie, aucun traceur, aucune requête vers un service tiers : le calcul se fait dans
+        votre navigateur.
+      </p>
+    </div>
+
+    <nav aria-label="Pages du site">
+      <p class="eyebrow mb-3">Le site</p>
+      <ul class="space-y-1 text-sm">
+        {NAV.map((item) => (
+          <li>
+            <a
+              href={withBase(item.href)}
+              class="inline-flex min-h-8 items-center text-ink-2 no-underline hover:text-ink hover:underline"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav aria-label="Comprendre">
+      <p class="eyebrow mb-3">Comprendre</p>
+      <ul class="space-y-1 text-sm">
+        {COMPRENDRE_PAGES.slice(0, 5).map((p) => (
+          <li>
+            <a
+              href={withBase(p.href)}
+              class="inline-flex min-h-8 items-center text-ink-2 no-underline hover:text-ink hover:underline"
+            >
+              {p.title}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a
+            href={withBase('/comprendre/')}
+            class="inline-flex min-h-8 items-center font-medium no-underline hover:underline"
+          >
+            Toutes les pages →
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="border-t border-rule">
+    <p class="wrap py-4 text-xs text-ink-3">
+      Les résultats sont des estimations, à partir d’hypothèses publiées.
+    </p>
+  </div>
+</footer>

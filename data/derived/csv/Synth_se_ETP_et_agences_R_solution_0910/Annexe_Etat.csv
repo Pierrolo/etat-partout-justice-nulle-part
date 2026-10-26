@@ -1,0 +1,164 @@
+,MISSIONS,,,,,,,,PROGRAMMES
+AA,Action extérieure de l'État,,,,,M,AA,Action extérieure de l'État,
+AB,Administration générale et territoriale de l'État,,,,,P,AA,105,Action de la France en Europe et dans le monde
+AC,"Agriculture, alimentation, forêt et affaires rurales",,,,,P,AA,151,Français à l'étranger et affaires consulaires
+AD,Aide publique au développement,,,,,P,AA,185,Diplomatie culturelle et d'influence
+VA,Cohésion des territoires,,,,,M,AB,Administration générale et territoriale de l'État,
+CA,Conseil et contrôle de l'État,,,,,P,AB,216,Conduite et pilotage des politiques de l'intérieur
+CB,Culture,,,,,P,AB,232,Vie politique
+DA,Défense,,,,,P,AB,354,Administration territoriale de l'État
+DC,Direction de l'action du Gouvernement,,,,,M,AC,"Agriculture, alimentation, forêt et affaires rurales",
+TA,"Écologie, développement et mobilité durables",,,,,P,AC,149,"Compétitivité et durabilité de l'agriculture, de l'agroalimentaire et de la forêt"
+DB,Économie,,,,,P,AC,206,Sécurité et qualité sanitaires de l'alimentation
+EC,Enseignement scolaire,,,,,P,AC,215,Conduite et pilotage des politiques de l'agriculture
+GA,Gestion des finances publiques,,,,,P,AC,381,Allègements du coût du travail en agriculture (TODE-AG)
+IA,"Immigration, asile et intégration",,,,,M,AD,Aide publique au développement,
+AV,Investir pour la France de 2030,,,,,P,AD,110,Aide économique et financière au développement
+JA,Justice,,,,,P,AD,209,Solidarité à l'égard des pays en développement
+MA,"Médias, livre et industries culturelles",,,,,P,AD,365,Renforcement des fonds propres de l'Agence française de développement
+MB,"Monde combattant, mémoire et liens avec la Nation",,,,,P,AD,384,Fonds de solidarité pour le développement
+OA,Outre-mer,,,,,M,VA,Cohésion des territoires,
+RA,Recherche et enseignement supérieur,,,,,P,VA,109,Aide à l'accès au logement
+RB,Régimes sociaux et de retraite,,,,,P,VA,112,Impulsion et coordination de la politique d'aménagement du territoire
+RC,Relations avec les collectivités territoriales,,,,,P,VA,135,"Urbanisme, territoires et amélioration de l'habitat"
+SA,Santé,,,,,P,VA,147,Politique de la ville
+SB,Sécurités,,,,,P,VA,162,Interventions territoriales de l'État
+SE,"Solidarité, insertion et égalité des chances",,,,,P,VA,177,"Hébergement, parcours vers le logement et insertion des personnes vulnérables"
+SF,"Sport, jeunesse et vie associative",,,,,M,CA,Conseil et contrôle de l'État,
+TR,Transformation et fonction publiques,,,,,P,CA,126,"Conseil économique, social et environnemental"
+TB,"Travail, emploi et administration des ministères sociaux",,,,,P,CA,164,Cour des comptes et autres juridictions financières
+XC,Contrôle et exploitation aériens,,,,,P,CA,165,Conseil d'État et autres juridictions administratives
+XJ,Publications officielles et information administrative,,,,,M,CB,Culture,
+YK,Financement des aides aux collectivités pour l'électrification rurale,,,,,P,CB,131,Création
+YB,Gestion du patrimoine immobilier de l'État,,,,,P,CB,175,Patrimoines
+YE,Contrôle de la circulation et du stationnement routiers,,,,,P,CB,224,Soutien aux politiques du ministère de la culture
+YF,Développement agricole et rural,,,,,P,CB,361,Transmission des savoirs et démocratisation de la culture
+ZD,Avances à l'audiovisuel public,,,,,M,DA,Défense,
+,,,,,,P,DA,144,Environnement et prospective de la politique de défense
+,,,,,,P,DA,146,Équipement des forces
+,,,,,,P,DA,178,Préparation et emploi des forces
+,,,,,,P,DA,212,Soutien de la politique de la défense
+,,,,,,M,DC,Direction de l'action du Gouvernement,
+,,,,,,P,DC,129,Coordination du travail gouvernemental
+,,,,,,P,DC,308,Protection des droits et libertés
+,,,,,,M,TA,"Écologie, développement et mobilité durables",
+,,,,,,P,TA,113,"Paysages, eau et biodiversité"
+,,,,,,P,TA,159,"Expertise, information géographique et météorologie"
+,,,,,,P,TA,174,"Énergie, climat et après-mines"
+,,,,,,P,TA,181,Prévention des risques
+,,,,,,P,TA,203,Infrastructures et services de transports
+,,,,,,P,TA,205,"Affaires maritimes, pêche et aquaculture"
+,,,,,,P,TA,217,"Conduite et pilotage des politiques de l'écologie, du développement et de la mobilité durables"
+,,,,,,P,TA,235,Sûreté nucléaire et radioprotection
+,,,,,,P,TA,345,Service public de l'énergie
+,,,,,,P,TA,380,Fonds d'accélération de la transition écologique dans les territoires
+,,,,,,M,DB,Économie,
+,,,,,,P,DB,134,Développement des entreprises et régulations
+,,,,,,P,DB,220,Statistiques et études économiques
+,,,,,,P,DB,305,Stratégies économiques
+,,,,,,P,DB,343,Plan France Très haut débit
+,,,,,,M,EC,Enseignement scolaire,
+,,,,,,P,EC,139,Enseignement privé du premier et du second degrés
+,,,,,,P,EC,140,Enseignement scolaire public du premier degré
+,,,,,,P,EC,141,Enseignement scolaire public du second degré
+,,,,,,P,EC,143,Enseignement technique agricole
+,,,,,,P,EC,214,Soutien de la politique de l'éducation nationale
+,,,,,,P,EC,230,Vie de l'élève
+,,,,,,M,GA,Gestion des finances publiques,
+,,,,,,P,GA,156,Gestion fiscale et financière de l'État et du secteur public local
+,,,,,,P,GA,218,Conduite et pilotage des politiques économiques et financières
+,,,,,,P,GA,302,Facilitation et sécurisation des échanges
+,,,,,,M,IA,"Immigration, asile et intégration",
+,,,,,,P,IA,104,Intégration et accès à la nationalité française
+,,,,,,P,IA,303,Immigration et asile
+,,,,,,M,AV,Investir pour la France de 2030,
+,,,,,,P,AV,421,Soutien des progrès de l'enseignement et de la recherche
+,,,,,,P,AV,422,Valorisation de la recherche
+,,,,,,P,AV,423,Accélération de la modernisation des entreprises
+,,,,,,P,AV,424,Financement des investissements stratégiques
+,,,,,,P,AV,425,Financement structurel des écosystèmes d'innovation
+,,,,,,M,JA,Justice,
+,,,,,,P,JA,101,Accès au droit et à la justice
+,,,,,,P,JA,107,Administration pénitentiaire
+,,,,,,P,JA,166,Justice judiciaire
+,,,,,,P,JA,182,Protection judiciaire de la jeunesse
+,,,,,,P,JA,310,Conduite et pilotage de la politique de la justice
+,,,,,,P,JA,335,Conseil supérieur de la magistrature
+,,,,,,M,MA,"Médias, livre et industries culturelles",
+,,,,,,P,MA,180,Presse et médias
+,,,,,,P,MA,334,Livre et industries culturelles
+,,,,,,M,MB,"Monde combattant, mémoire et liens avec la Nation",
+,,,,,,P,MB,158,Indemnisation des victimes des persécutions antisémites et des actes de barbarie pendant la seconde guerre mondiale
+,,,,,,P,MB,169,"Reconnaissance et réparation en faveur du monde combattant, mémoire et liens avec la Nation"
+,,,,,,M,OA,Outre-mer,
+,,,,,,P,OA,123,Conditions de vie outre-mer
+,,,,,,P,OA,138,Emploi outre-mer
+,,,,,,M,RA,Recherche et enseignement supérieur,
+,,,,,,P,RA,142,Enseignement supérieur et recherche agricoles
+,,,,,,P,RA,150,Formations supérieures et recherche universitaire
+,,,,,,P,RA,172,Recherches scientifiques et technologiques pluridisciplinaires
+,,,,,,P,RA,190,"Recherche dans les domaines de l'énergie, du développement et de la mobilité durables"
+,,,,,,P,RA,191,Recherche duale (civile et militaire)
+,,,,,,P,RA,192,Recherche et enseignement supérieur en matière économique et industrielle
+,,,,,,P,RA,193,Recherche spatiale
+,,,,,,P,RA,231,Vie étudiante
+,,,,,,M,RB,Régimes sociaux et de retraite,
+,,,,,,P,RB,195,"Régimes de retraite des mines, de la SEITA, et divers"
+,,,,,,P,RB,197,Régimes de retraite et de sécurité sociale des marins
+,,,,,,P,RB,198,Régimes sociaux et de retraite des transports terrestres
+,,,,,,M,RC,Relations avec les collectivités territoriales,
+,,,,,,P,RC,119,Concours financiers aux collectivités territoriales et à leurs groupements
+,,,,,,P,RC,122,Concours spécifiques et administration
+,,,,,,M,SA,Santé,
+,,,,,,P,SA,183,Protection maladie
+,,,,,,P,SA,204,"Prévention, sécurité sanitaire et offre de soins"
+,,,,,,P,SA,379,Reversement à la sécurité sociale des recettes de la Facilité pour la Relance et la Résilience (FRR) européenne au titre du volet « Ségur investissement » du plan national de relance et de résilience (PNRR)
+,,,,,,M,SB,Sécurités,
+,,,,,,P,SB,152,Gendarmerie nationale
+,,,,,,P,SB,161,Sécurité civile
+,,,,,,P,SB,176,Police nationale
+,,,,,,P,SB,207,Sécurité et éducation routières
+,,,,,,M,SE,"Solidarité, insertion et égalité des chances",
+,,,,,,P,SE,137,Égalité entre les femmes et les hommes
+,,,,,,P,SE,157,Handicap et dépendance
+,,,,,,P,SE,304,Inclusion sociale et protection des personnes
+,,,,,,M,SF,"Sport, jeunesse et vie associative",
+,,,,,,P,SF,163,Jeunesse et vie associative
+,,,,,,P,SF,219,Sport
+,,,,,,P,SF,385,Jeux olympiques et paralympiques d'hiver 2030
+,,,,,,M,TR,Transformation et fonction publiques,
+,,,,,,P,TR,148,Fonction publique
+,,,,,,P,TR,348,Performance et résilience des bâtiments de l'État et de ses opérateurs
+,,,,,,P,TR,349,Transformation publique
+,,,,,,M,TB,"Travail, emploi et administration des ministères sociaux",
+,,,,,,P,TB,102,Accès et retour à l'emploi
+,,,,,,P,TB,103,Accompagnement des mutations économiques et développement de l'emploi
+,,,,,,P,TB,111,Amélioration de la qualité de l'emploi et des relations du travail
+,,,,,,P,TB,155,Soutien des ministères sociaux
+,,,,,,M,XC,Contrôle et exploitation aériens,
+,,,,,,P,XC,612,Navigation aérienne
+,,,,,,P,XC,613,Soutien aux prestations de l'aviation civile
+,,,,,,P,XC,614,"Transports aériens, surveillance et certification"
+,,,,,,M,XJ,Publications officielles et information administrative,
+,,,,,,P,XJ,623,Édition et diffusion
+,,,,,,P,XJ,624,Pilotage et ressources humaines
+,,,,,,M,YK,Financement des aides aux collectivités pour l'électrification rurale,
+,,,,,,P,YK,793,Électrification rurale
+,,,,,,P,YK,794,"Opérations de maîtrise de la demande d'électricité, de production d'électricité par des énergies renouvelables ou de production de proximité dans les zones non interconnectées"
+,,,,,,M,YB,Gestion du patrimoine immobilier de l'État,
+,,,,,,P,YB,723,Opérations immobilières et entretien des bâtiments de l'État
+,,,,,,M,YE,Contrôle de la circulation et du stationnement routiers,
+,,,,,,P,YE,751,Structures et dispositifs de sécurité routière
+,,,,,,P,YE,753,Contrôle et modernisation de la politique de la circulation et du stationnement routiers
+,,,,,,P,YE,754,"Contribution à l'équipement des collectivités territoriales pour l'amélioration des transports en commun, de la sécurité et de la circulation routières"
+,,,,,,P,YE,755,Désendettement de l'État
+,,,,,,M,YF,Développement agricole et rural,
+,,,,,,P,YF,775,Développement et transfert en agriculture
+,,,,,,P,YF,776,Recherche appliquée et innovation en agriculture
+,,,,,,M,ZD,Avances à l'audiovisuel public,
+,,,,,,P,ZD,841,France Télévisions
+,,,,,,P,ZD,842,ARTE France
+,,,,,,P,ZD,843,Radio France
+,,,,,,P,ZD,844,France Médias Monde
+,,,,,,P,ZD,845,Institut national de l'audiovisuel
+,,,,,,P,ZD,847,TV5 Monde
