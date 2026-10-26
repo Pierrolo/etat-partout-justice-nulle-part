@@ -3,19 +3,17 @@
  * Parses `src/styles/tokens.css` (light-dark(#a, #b) declarations), so the CSS stays the single
  * source of truth. Used by contrast.test.ts, scripts/contrast-report.ts and the /styleguide page.
  *
- * Two token files share the same names: tokens.css is the base, brand-ci.css overrides it for the
- * look the site ships (`data-brand="ci"`). `resolveBrand()` merges the two parsed files, so every pair
- * below is checked for each brand; `BRAND_PAIRS` adds the pairs that only exist in one brand.
+ * Two token files share the same names: tokens.css is the base layer, brand-ci.css overrides it for the
+ * one look the site ships (`data-brand="ci"`, see lib/look.ts). `resolveLook()` merges the two parsed
+ * files into the tokens actually in force; every pair below is checked on that merge, and `LOOK_PAIRS`
+ * adds the pairs that only exist in the shipped look (the `signal` accent).
  */
 
-import { BRANDS, type Brand } from './brands.ts';
-
-export { BRANDS, type Brand };
 export type Mode = 'light' | 'dark';
 export type TokenMap = Record<Mode, Record<string, string>>;
 
-/** Tokens of a brand = the base token file with the brand's overrides on top. */
-export function resolveBrand(base: TokenMap, overrides?: TokenMap): TokenMap {
+/** Tokens in force = the base token file with the look's overrides on top. */
+export function resolveLook(base: TokenMap, overrides?: TokenMap): TokenMap {
   if (!overrides) return base;
   return {
     light: { ...base.light, ...overrides.light },
@@ -107,7 +105,7 @@ export const PAIRS: Pair[] = [
   text('--on-accent', '--accent', 'Label on solid accent (buttons)'),
   text('--on-gain', '--gain', 'Label on solid gain'),
   text('--on-loss', '--loss', 'Label on solid loss'),
-  text('--tier-law-fg', '--tier-law-bg', 'Tier badge « Écrit dans la loi »'),
+  text('--tier-law-fg', '--tier-law-bg', 'Tier badge « Proposé dans un amendement »'),
   text('--ink-2', '--surface', 'Tier badge « Annoncé » label'),
   // Non-text contrast (WCAG 1.4.11)
   graphic('--rule-strong', '--paper', 'Control borders on paper'),
@@ -140,27 +138,24 @@ export const PAIRS: Pair[] = [
 ];
 
 /**
- * Pairs that exist on the shipped look only. It has a second accent, `signal`, with its
- * own rules (README of the brand): text on it is always `ink`; as TEXT it is only allowed on the dark
- * scene (2,8 : 1 on paper: fills and strokes only), so that pair is checked in dark mode only.
+ * Pairs that exist on the shipped look only. It has a second accent, `signal`, with its own rules:
+ * text on it is always `ink`; as TEXT it is only allowed on the dark scene (2,8 : 1 on paper: fills and
+ * strokes only), so that pair is checked in dark mode only.
  */
-export const BRAND_PAIRS: Record<Brand, Pair[]> = {
-  editorial: [],
-  ci: [
-    text('--on-signal', '--signal', 'Label on the signal fill (primary button, key figure)'),
-    text('--on-signal', '--btn-primary-hover', 'Label on the hovered primary button'),
-    ...surfaces.map((s) => ({
-      ...text('--signal', s, 'Key figure in signal, on the dark scene'),
-      modes: ['dark'] as const,
-    })),
-    { ...graphic('--signal', '--surface', 'Signal pulse on the dark scene'), modes: ['dark'] },
-    graphic('--line', '--paper', 'Brand rule (1,5 px line) on the page'),
-    graphic('--line', '--surface', 'Brand rule (1,5 px line) on a card'),
-  ],
-};
+export const LOOK_PAIRS: Pair[] = [
+  text('--on-signal', '--signal', 'Label on the signal fill (primary button, key figure)'),
+  text('--on-signal', '--btn-primary-hover', 'Label on the hovered primary button'),
+  ...surfaces.map((s) => ({
+    ...text('--signal', s, 'Key figure in signal, on the dark scene'),
+    modes: ['dark'] as const,
+  })),
+  { ...graphic('--signal', '--surface', 'Signal pulse on the dark scene'), modes: ['dark'] },
+  graphic('--line', '--paper', 'Rule (1,5 px line) on the page'),
+  graphic('--line', '--surface', 'Rule (1,5 px line) on a card'),
+];
 
-/** Every pair that must hold for a brand. */
-export const pairsFor = (brand: Brand): Pair[] => [...PAIRS, ...BRAND_PAIRS[brand]];
+/** Every pair that must hold for the shipped look. */
+export const ALL_PAIRS: Pair[] = [...PAIRS, ...LOOK_PAIRS];
 
 export interface PairResult extends Pair {
   mode: Mode;

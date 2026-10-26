@@ -54,6 +54,15 @@ test.describe('/methode', () => {
     await expect(main).toContainText('Proposé dans un amendement');
     await expect(main).toContainText('Annoncé');
     await expect(main).toContainText('Notre estimation');
+    // ONE tier vocabulary on the page: the legend, the prose (#niveaux) and the register agree
+    await expect(page.locator('#niveaux ~ ul').first()).toContainText('Annoncé');
+    await expect(page.locator('tr#h1')).toContainText('Annoncé');
+    const text = await main.innerText();
+    for (const old of ['Promis par les auteurs', 'Écrit dans la loi', 'Annoncé par les auteurs']) {
+      expect(text, `l’ancien libellé « ${old} »`).not.toContain(old);
+    }
+    expect(text).not.toMatch(/\bPromis\b/);
+    expect(text).not.toMatch(/ni déposés? ni votés?|en attente de dépôt|puis votés/);
     // the gap with OpenFisca, the not-modelled list and the conflicts between sources are there
     await expect(page.locator('#openfisca ~ div table').first()).toBeVisible();
     await expect(page.locator('#non-compte')).toBeVisible();
@@ -101,24 +110,46 @@ test.describe('landing', () => {
     await expect(cta).toHaveAttribute('href', /simulateur\/$/);
   });
 
-  test('the 63 € card says plainly that it is the authors’ own calculation', async ({ page }) => {
+  test('the 63 € card says plainly that it is the plan’s own calculation, with no outside source', async ({
+    page,
+  }) => {
     await page.goto('');
     const card = page.locator('[data-teaser="heure-de-travail"]');
     await expect(card.getByTestId('hour-caveat')).toBeVisible();
     await expect(card.getByTestId('hour-caveat')).toContainText('Ordre de grandeur annoncé');
-    await expect(card).toContainText('Annoncé');
+    await expect(card.getByTestId('hour-caveat')).toContainText('ne cite pas de source externe');
+    await expect(card.locator('[data-tier="announced"]').first()).toBeVisible();
+    await expect(card).toContainText('Selon le chiffrage du plan');
   });
 
-  test('says which promises are counted and which are shown apart, with the new vocabulary', async ({
+  test('says what the result counts and what is shown apart, with one vocabulary', async ({
     page,
   }) => {
     await page.goto('');
     const main = page.locator('main');
     await expect(main).toContainText('Compté par défaut');
-    await expect(main).toContainText('Montré à part, jamais additionné');
+    await expect(main).toContainText('Montré à part, en dehors du total');
+    await expect(main).toContainText('promesses sans montant');
     await expect(main).toContainText('Proposé dans un amendement');
+    await expect(main).toContainText('Annoncé');
     await expect(main).not.toContainText('Écrit dans la loi');
     await expect(main).not.toContainText('Hypothèse du simulateur');
+    await expect(main).not.toContainText('Promis par les auteurs');
+  });
+
+  test('says the amendments are written and published, never that they will be filed or voted', async ({
+    page,
+  }) => {
+    await page.goto('');
+    const main = page.locator('main');
+    await expect(main).toContainText('aucun n’est en vigueur');
+    const text = await main.innerText();
+    expect(text).not.toMatch(/en attente de dépôt|attendent d’être déposés|puis votés/);
+  });
+
+  test('says that everything is computed in the browser', async ({ page }) => {
+    await page.goto('');
+    await expect(page.locator('main')).toContainText('Tout se calcule dans votre navigateur');
   });
 });
 

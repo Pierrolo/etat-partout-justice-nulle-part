@@ -575,8 +575,14 @@ test.describe('cas-types', () => {
   test('leads with the pattern in words and the caveat, not with a « 37 sur 47 » counter', async ({
     page,
   }) => {
-    await expect(page.getByText('Des exemples de foyers')).toBeVisible();
-    await expect(page.getByText(/Ce n.est pas un échantillon représentatif/)).toBeVisible();
+    // the representativeness caveat leads the page, above the map
+    const caveat = page.getByRole('note').filter({ hasText: 'Des exemples de foyers' });
+    await expect(caveat).toBeVisible();
+    await expect(caveat).toContainText(
+      'Le nombre de foyers dans chaque situation est inconnu, donc ces exemples ne donnent pas la part des ménages qui gagnent ou qui perdent',
+    );
+    const top = await caveat.evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
+    expect(top).toBeLessThan(700);
     await expect(page.getByTestId('pattern')).toContainText('perdent');
     const text = await body(page);
     expect(text).not.toMatch(/\d+\s+sur\s+\d+/);

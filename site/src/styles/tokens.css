@@ -9,38 +9,20 @@
  *   `color-scheme`:  OS preference by default, forced by <html data-theme="light|dark"> (toggle).
  *   Never write `dark:` utilities or hard-coded hex in components: use the semantic tokens below.
  *
- * IDENTITY (docs/VISION.md §8)
- *   Editorial, calm, factual — a newsroom explainer, not a ministry site and not a campaign tract.
- *   Paper off-white + deep ink + ONE accent (deep violet, "le plan") + a colour-blind-safe diverging
- *   pair for polarity (teal-blue = gain, vermilion = loss — never red/green) + neutral greys.
- *   No DSFR, no Marianne, no blue-white-red. Violet was chosen precisely because it is neither
- *   "État bleu" nor a party colour, and stays distinct from the gain/loss pair under CVD.
+ * TWO LAYERS, ONE LOOK
+ *   This file is the base layer: it names every token and gives each one a value, so that a token the
+ *   look does not override still resolves. The site ships ONE look, <html data-brand="ci"> (lib/look.ts):
+ *   brand-ci.css overrides the colours, fonts, shapes and chart palettes below, and that file's header
+ *   holds the identity (paper / ink, one signal accent, teal gain, grotesque type) and the contrast and
+ *   colour-blindness figures that were validated. The values here that brand-ci.css overrides are not
+ *   what visitors see. There is no switch, no second look.
  *
- * CONTRAST (WCAG 2.2 AA) — computed by `pnpm --filter @epjn/site contrast`, enforced in
- * src/lib/contrast.test.ts (112 pairs, both modes). Ratios, light / dark:
- *   ink       on paper 16.9 / 15.4    on surface 17.9 / 14.2    on sunken 15.6 / 15.9
- *   ink-2     on paper  8.7 / 10.3    on surface  9.2 /  9.5    on sunken  8.0 / 10.7
- *   ink-3     on paper  5.9 /  6.7    on surface  6.2 /  6.1    on sunken  5.4 /  6.9   (muted TEXT)
- *   accent    on paper  8.3 / 10.8    on surface  8.8 /  9.9    on accent-soft 7.4 / 9.0
- *   on-accent on accent 8.8 / 10.8    (white on violet / near-black on lavender)
- *   gain      on paper  5.3 /  7.7    on gain-soft  4.8 / 6.0   (text AND marks)
- *   loss      on paper  5.1 /  7.3    on loss-soft  4.6 / 6.0   (text AND marks)
- *   rule-strong on paper 3.4 / 3.6    (form-control borders, WCAG 1.4.11 needs ≥ 3 : 1)
- *   series-1…8, gain, loss on paper/surface ≥ 3.0 : 1 (marks, WCAG 1.4.11)
+ * CONTRAST (WCAG 2.2 AA) — computed on the MERGE of this file and brand-ci.css by
+ * `pnpm --filter @epjn/site contrast` and enforced in src/lib/contrast.test.ts (every guaranteed pair,
+ * both modes).
  *
- * CHART PALETTE VALIDATION — scripts from the `dataviz` skill (OKLab ΔE ×100, Machado 2009 CVD):
- *   categorical light  worst adjacent CVD ΔE 11.8 (≥ 8 target), normal-vision 20.4 (≥ 15 floor), all ≥ 3 : 1
- *   categorical dark   worst adjacent CVD ΔE 11.5,               normal-vision 19.6, all ≥ 3 : 1
- *   first three series also validate under `--pairs all` (scatter / small multiples): ΔE 11.8 / 15.1.
- *   Past 3 series in an all-pairs chart: fold into « Autres » or facet.
- *   gain/loss/accent trio, all pairs: CVD ΔE 13.7 light / 9.1 dark, normal-vision ≥ 20.
- *
- * Hex values are 6-digit on purpose: src/lib/contrast.ts parses this file, and
+ * Hex values are 6-digit on purpose: src/lib/contrast.ts parses these files, and
  * src/lib/chart-theme.ts mirrors the chart tokens (a test keeps both in sync).
- *
- * LOOK
- *   tokens.css holds the base custom properties. brand-ci.css overrides them when
- *   <html data-brand="ci">, which is the only look the site ships. Components read tokens.
  */
 
 :root {
@@ -73,8 +55,8 @@
   --loss-soft: light-dark(#fbe9e0, #3a2118);
   --on-gain: light-dark(#ffffff, #0b1d1e);
   --on-loss: light-dark(#ffffff, #2a1209);
-  /* The same poles as GRAPHICAL MARKS (bars, lines, dots: ≥ 3 : 1). In « Éditorial » one value does both
-     jobs (text ≥ 4.5 : 1 implies mark ≥ 3 : 1); a brand may split them (see brand-ci.css). */
+  /* The same poles as GRAPHICAL MARKS (bars, lines, dots: ≥ 3 : 1). Here one value does both jobs
+     (text ≥ 4.5 : 1 implies mark ≥ 3 : 1); brand-ci.css splits them. */
   --gain-mark: light-dark(#00737a, #28bac1);
   --loss-mark: light-dark(#bc3f06, #ef8959);
 
@@ -142,12 +124,12 @@
 
   /* ── Type ─────────────────────────────────────────────────────────────── */
   /* 'EPJN Narrow Space' supplies U+202F (narrow no-break space), absent from the fontsource subsets. */
-  --ff-serif:
-    'EPJN Narrow Space', 'Fraunces Variable', 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --ff-sans:
-    'EPJN Narrow Space', 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
-  --ff-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+    'EPJN Narrow Space', 'Schibsted Grotesk', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --ff-serif: var(--ff-sans); /* the display face is the same grotesque */
+  --ff-mono:
+    'EPJN Narrow Space', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas,
+    monospace;
 
   /* ── Shape & layout ───────────────────────────────────────────────────── */
   --r-sm: 4px;
@@ -157,7 +139,7 @@
   --measure: 40rem; /* comfortable reading column (≈ 68 characters) */
   --tap: 2.75rem; /* 44 px comfortable touch target (WCAG 2.5.8 needs only 24 px) */
 
-  /* ── Brand-level shape & type tokens (the « Éditorial » values; brand-ci.css overrides them) ───── */
+  /* ── Shape & type tokens of the base layer (brand-ci.css overrides them) ───── */
   --field-bg: var(--surface); /* text inputs, selects, segmented options */
   --card-bg: var(--surface);
   --card-bw: 1px;

@@ -6,9 +6,9 @@
 /** The three epistemic tiers of every figure (VISION §2.3). */
 export const TIERS = ['law', 'announced', 'hypothesis'] as const;
 /**
- * - `law`        « Écrit dans la loi » — amendment text (or current law for the baseline).
+ * - `law`        « Proposé dans un amendement » — amendment text, written but not tabled or voted (or current law for the baseline).
  * - `announced`  « Annoncé » — fiches / manifesto / workbook, no legal text.
- * - `hypothesis` « Hypothèse du simulateur » — our choice where the text is silent.
+ * - `hypothesis` « Notre estimation » — our choice where the text is silent.
  */
 export type Tier = (typeof TIERS)[number];
 

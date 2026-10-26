@@ -30,6 +30,9 @@ export interface FactSource {
   ref: string;
   url: string | null;
   quote?: string;
+  /** Amendments only: the liasse (« PLF-P2 ») and the amendment number inside it. */
+  liasse?: string;
+  number?: number;
   page?: string;
   inputs?: string[];
   also?: { kind: string; ref: string; url: string | null };

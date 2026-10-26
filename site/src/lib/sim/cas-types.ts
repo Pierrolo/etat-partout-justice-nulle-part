@@ -116,8 +116,6 @@ export interface TileColor {
   bgDark: string;
   fgLight: string;
   fgDark: string;
-  /** Same four colours on the shipped ramp. */
-  ci: { bgLight: string; bgDark: string; fgLight: string; fgDark: string };
 }
 
 /** Pure black / white: with these two the worst case (mid-tone fill) is still 4.58 : 1 (near-black gives 4.24). */
@@ -130,31 +128,17 @@ function best(bg: string): string {
 
 const light = divergingInterpolator('light');
 const dark = divergingInterpolator('dark');
-// The shipped look has its own diverging ramp; the page chooses it with CSS
-// (brand-ci.css reads the --tile-*-ci properties), so the heat map is right on first paint.
-const lightCi = divergingInterpolator('light', 'ci');
-const darkCi = divergingInterpolator('dark', 'ci');
 
 /** `t` in [−1, 1]: −1 strongest loss, 0 neutral, +1 strongest gain. Text is white or black, whichever contrasts more (≥ 4.5 : 1 everywhere). */
 export function tileColor(t: number): TileColor {
   const bgLight = rgb(light(t)).formatHex();
   const bgDark = rgb(dark(t)).formatHex();
-  const ci = {
-    bgLight: rgb(lightCi(t)).formatHex(),
-    bgDark: rgb(darkCi(t)).formatHex(),
-    fgLight: '',
-    fgDark: '',
-  };
-  ci.fgLight = best(ci.bgLight);
-  ci.fgDark = best(ci.bgDark);
-  return { bgLight, bgDark, fgLight: best(bgLight), fgDark: best(bgDark), ci };
+  return { bgLight, bgDark, fgLight: best(bgLight), fgDark: best(bgDark) };
 }
 
 export const tileStyle = (c: TileColor) => ({
   background: `light-dark(${c.bgLight}, ${c.bgDark})`,
   color: `light-dark(${c.fgLight}, ${c.fgDark})`,
-  '--tile-bg-ci': `light-dark(${c.ci.bgLight}, ${c.ci.bgDark})`,
-  '--tile-fg-ci': `light-dark(${c.ci.fgLight}, ${c.ci.fgDark})`,
 });
 
 /* ── The pattern, in words ──────────────────────────────────────────────── */

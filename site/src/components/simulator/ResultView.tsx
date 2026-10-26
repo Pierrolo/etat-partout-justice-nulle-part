@@ -177,7 +177,8 @@ export function ResultView({
             Partager ce résultat
           </h2>
           <p className="text-sm text-ink-2">
-            Le lien contient vos réponses dans son adresse. Seule la personne qui l’ouvre les verra.
+            Le lien contient vos réponses dans son adresse (après le « # »). Rien n’est envoyé à un
+            serveur : seule la personne qui ouvre le lien les verra, avec le résultat.
           </p>
           <p className="text-xs text-ink-3">
             Moteur de calcul, version {engineVersion}. {baselineYear}.

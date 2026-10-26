@@ -1,6 +1,6 @@
 # VISION — « Et moi, dans tout ça ? »
 
-*An independent, open-source companion to the book « État partout, justice nulle part » (Barrat, Marle, Mitterrand — Éditions Chronique, 2026).*
+*An open-source explainer for the plan in the book « État partout, justice nulle part » (Barrat, Marle, Mitterrand — Éditions Chronique, 2026). It speaks for the plan in plain words; it is not the plan's author, not the association Résolution, and not the State.*
 
 Status: v1.1 spec (review by an independent agent folded in — see docs/VISION-review.md), written by the orchestrator. Inputs: `research/source-analysis.md`, `research/reform_parameters.json`, `research/sota-inspiration.md`, `research/baseline/*`.
 
@@ -19,14 +19,14 @@ The book makes a big, abstract claim — "the State is everywhere, so justice is
 
 ## 2. Principles (non-negotiable)
 
-1. **Faithful *and* honest.** We present the plan as the authors wrote it — that is the point — but we never hide a loser. If a single RSA recipient renting in Paris loses, the simulator says so, plainly. Credibility *is* the product (cf. the 2024 « simulateur mensonger » lawsuit).
-2. **Every number has a source.** Each parameter: value, unit, effective date, source (amendment n°, workbook cell, Légifrance/CAF URL). Each headline figure in the dashboard comes from `facts.json`; CI fails on an unsourced figure.
-3. **Separate law from promise.** Three tiers, visually distinct everywhere:
-   - **Écrit dans la loi** (amendment text) — solid.
-   - **Annoncé par les auteurs** (fiches, manifesto, workbook; no legal text) — hatched / dashed, shown *outside* disposable income (e.g., CEP savings, asset restitution).
-   - **Hypothèse du simulateur** (our choice where the text is silent) — listed in a visible hypotheses register, user-toggleable where it matters.
-4. **Client-side only.** No backend, no tracker, no cookie, no third-party request, no runtime LLM. State in the URL **hash** (shareable, never logged).
-5. **Independent, not official, not the authors.** Own visual identity. No DSFR, no Marianne, no Résolution logo. Clear banner: « Outil indépendant, non affilié à l'association Résolution ni à l'État. »
+1. **Faithful *and* honest.** We present the plan as it is written — that is the point — but we never hide a loser. If a single RSA recipient renting in Paris loses, the simulator says so, plainly. Credibility *is* the product (cf. the 2024 « simulateur mensonger » lawsuit).
+2. **Every number has a source.** Each parameter: value, unit, effective date, source (amendment n°, workbook cell, Légifrance/CAF URL). Each headline figure in the dashboard comes from `facts.json`; CI fails on an unsourced figure. When two sources disagree (« 4 impôts » in the manifesto, « 5 impôts » in the letters to elected officials), both values are shown and the conflict is listed on /methode.
+3. **Separate law from promise.** Three tiers, visually distinct everywhere, with ONE vocabulary (`lib/tiers.ts`; the ids in code stay `law` / `announced` / `hypothesis`):
+   - **Proposé dans un amendement** (the precise text of an amendment, written and published; none is in force) — solid. Never say such a text « will be filed » or « will be voted »: no source says so. Say what it is today.
+   - **Annoncé** (the plan's fiches, manifesto and published workbook; no legal text) — hatched / dashed, shown *outside* disposable income when it has no amount (e.g., CEP savings, asset restitution). A figure that exists only there is asked and answered as the plan's (« Selon le décompte du plan… »), with this tier.
+   - **Notre estimation** (our choice where the text is silent) — dotted, listed in a visible hypotheses register, user-toggleable where it matters.
+4. **Client-side only.** No backend, no tracker, no cookie, no third-party request, no runtime LLM. Every calculation runs in the visitor's browser and nothing is sent; state lives in the URL **hash** (shareable, never logged). The page says so at the moment it matters (hero, share note).
+5. **An explainer for the plan — not official, not the authors.** The site speaks about the plan in its own plain words, and for the plan: it is an explainer, not a neutral third party, and it says so. It does not become the plan's author: it never claims to be the association Résolution or the book's authors, never lists their names as the site's authors, and invents no affiliation. It is not affiliated with the State. Own visual identity: no DSFR, no Marianne, no Résolution logo. Banner: « Outil indépendant de l'association Résolution et de l'État. » The /a-propos page stays truthful about who made the site (the open-source contributors) and how; the amendments, fiches and workbooks it quotes are the association Résolution's, the « notre estimation » lines are the site's.
 6. **Accessible by construction.** WCAG 2.2 AA; every chart has a text summary + data table; no hover-only info; keyboard everything; French number formatting via `Intl` (narrow NBSP).
 7. **Fast, mobile-first.** Most visitors arrive from a phone via a shared link. Simulator interactive < 2 s on mid-range 4G.
 
@@ -139,9 +139,9 @@ Anything not modelled appears in a **"Ce que le simulateur ne compte pas"** list
 
 ## 8. Visual identity & tone
 
-- **Editorial, calm, factual** — a newsroom explainer, not a campaign tract and not a ministry site. Think FT/Le Monde Décodeurs × Our World in Data × PolicyEngine.
-- Paper off-white background, deep ink text, **one accent** for the plan, a **colour-blind-safe diverging pair** for gain (blue-teal) / loss (orange-vermilion) — never red/green. Dark mode supported.
-- Type: a characterful serif for display numbers/headlines (e.g., *Fraunces* or *Source Serif 4*), a clean grotesque for UI (*Inter* / *Public Sans*), **tabular figures** everywhere money is shown. Self-hosted.
+- **Calm, factual** — an explainer for the plan, clear and sourced: not a campaign tract and not a ministry site. Think FT/Le Monde Décodeurs × Our World in Data × PolicyEngine.
+- One look (`site/src/styles/brand-ci.css`, `lib/look.ts`; there is no switch): two grounds (paper / ink), **one warm accent** (signal orange, fills and strokes only) with teal as the calm secondary. A **colour-blind-safe diverging pair** for gain (teal) / loss (signal-derived orange) — never red/green, and never colour alone (sign, arrow, words). Dark mode supported.
+- Type: Schibsted Grotesk for text and titles, JetBrains Mono for labels and key figures, **tabular figures** everywhere money is shown. Self-hosted (`@fontsource`), no third-party request.
 - Big numbers are always paired with a human-scale reframing ("= 148 € par foyer et par jour").
 - Copy in plain French, *tu*? no — **vous**, short sentences, no jargon without a tooltip-free inline definition (`<abbr>` + glossary).
 

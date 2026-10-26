@@ -235,7 +235,7 @@ export default function CasTypes() {
         title="Qui gagne, qui perd ?"
         subtitle={`Écart de revenu disponible par foyer type (${period === 'steady' ? 'plan complet' : period}). Chaque case ou chaque ligne est un foyer : touchez-la pour l’ouvrir dans le simulateur.`}
         summary={typo(
-          `${pattern.map((p) => p.text).join(' ')} Le plus fort gain est pour « ${bestRow.label} » (${formatEuroDelta(bestRow.delta)} par mois), la plus forte perte pour « ${worstRow.label} » (${formatEuroDelta(worstRow.delta)} par mois). Exemples de foyers.`,
+          `${pattern.map((p) => p.text).join(' ')} Le plus fort gain est pour « ${bestRow.label} » (${formatEuroDelta(bestRow.delta)} par mois), la plus forte perte pour « ${worstRow.label} » (${formatEuroDelta(worstRow.delta)} par mois). Ce sont des exemples de foyers : ils ne donnent pas la part des ménages qui gagnent ou qui perdent.`,
         )}
         sources={SOURCES}
         note={

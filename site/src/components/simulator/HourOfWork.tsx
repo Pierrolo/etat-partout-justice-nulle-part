@@ -32,8 +32,8 @@ interface Part {
 /**
  * Greys for « what leaves the pay slip »: a mix of the ink and the card surface, in sRGB. Every level is
  * ≥ 3 : 1 against the card in both themes (graphical marks, WCAG 1.4.11). Its text colour is a token of
- * the brand (`--on-tint-<pct>`: pure black or white, whichever contrasts more, ≥ 4.5 : 1 — computed for
- * each brand's ink and card by chart-theme.test.ts), so it follows the brand with no script.
+ * the look (`--on-tint-<pct>`: pure black or white, whichever contrasts more, ≥ 4.5 : 1 — computed for
+ * the ink and the card by chart-theme.test.ts), so it follows the theme with no script.
  */
 function tint(pct: 90 | 78 | 66 | 56 | 48): Pick<Part, 'fill' | 'ink'> {
   return {

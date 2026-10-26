@@ -1,9 +1,9 @@
 /**
  * Les 81 amendements — modèle de l'explorateur (/comprendre/amendements).
  *
- * Ce sont des projets d'amendements rédigés par l'association Résolution (liasses du 19 octobre
- * 2026) : ni déposés, ni adoptés. « Proposé dans un amendement » (niveau `law`) veut dire « écrit dans le
- * texte de loi proposé » — jamais « en vigueur ». Pur TypeScript, sans DOM.
+ * Ce sont des projets d'amendements rédigés et publiés par l'association Résolution (liasses du 19
+ * octobre 2026) : aucun n'est adopté. « Proposé dans un amendement » (niveau `law`) veut dire « écrit
+ * dans le texte de loi proposé » — jamais « en vigueur ». Pur TypeScript, sans DOM.
  */
 import { formatDateFr } from './dates';
 import { matchesAll, normalize, tokens } from './search';

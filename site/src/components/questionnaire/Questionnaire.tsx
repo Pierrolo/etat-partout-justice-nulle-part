@@ -3,8 +3,11 @@ import { Button } from '@/components/ui/Button';
 import { Callout } from '@/components/ui/Callout';
 import { NumberInput } from '@/components/ui/NumberInput';
 import { SourceChip } from '@/components/ui/SourceChip';
+import { TierBadge } from '@/components/ui/TierBadge';
 import {
   bilanSentence,
+  closeBand,
+  closeRule,
   formatGuess,
   verdictFor,
   type Question,
@@ -44,8 +47,10 @@ export function Questionnaire({ questions }: { questions: Question[] }) {
   const uid = useId();
   const headingRef = useRef<HTMLHeadingElement>(null);
   const answerRef = useRef<HTMLDivElement>(null);
+  const fieldRef = useRef<HTMLDivElement>(null);
   const skipFocus = useRef(true);
   const pendingAnswerFocus = useRef(false);
+  const pendingFieldFocus = useRef(false);
   const [index, setIndex] = useState(0);
   const [done, setDone] = useState(false);
   const [guesses, setGuesses] = useState<Record<string, Guess>>({});
@@ -64,9 +69,19 @@ export function Questionnaire({ questions }: { questions: Question[] }) {
   }, [index, done]);
 
   useEffect(() => {
-    if (!pendingAnswerFocus.current) return;
-    pendingAnswerFocus.current = false;
-    answerRef.current?.focus();
+    if (pendingAnswerFocus.current) {
+      pendingAnswerFocus.current = false;
+      answerRef.current?.focus();
+    }
+    // « Modifier » removes the focused button: put the focus back on the field (WCAG 2.4.3).
+    if (pendingFieldFocus.current) {
+      pendingFieldFocus.current = false;
+      fieldRef.current
+        ?.querySelector<HTMLElement>(
+          'input[type="range"], input[type="radio"]:checked, input[type="radio"]',
+        )
+        ?.focus();
+    }
   }, [open]);
 
   const restart = () => {
@@ -95,6 +110,7 @@ export function Questionnaire({ questions }: { questions: Question[] }) {
           <p className="max-w-2xl text-[0.9375rem] leading-relaxed text-ink-2">
             {bilanSentence(closes, total)}
           </p>
+          <p className="max-w-2xl text-sm leading-relaxed text-ink-3">{closeRule()}</p>
         </div>
         <ol className="space-y-3">
           {questions.map((q, i) => {
@@ -106,12 +122,20 @@ export function Questionnaire({ questions }: { questions: Question[] }) {
                   {q.prompt}
                 </p>
                 <p className="text-[0.9375rem] leading-relaxed text-ink">
-                  Vous : {guessLabel(q, guesses[q.id])}.{' '}
-                  {q.kind === 'scale' ? q.answerLead : 'La table'}
-                  {' : '}
-                  {referenceLabel(q)}.
+                  Vous : {guessLabel(q, guesses[q.id])}. {q.answerLead}
+                  {' : '}
+                  <span className={q.tier === 'announced' ? 'hatch px-1' : undefined}>
+                    {referenceLabel(q)}
+                  </span>
+                  .
                 </p>
                 {v && <p className="text-sm text-ink-2">{v.text}</p>}
+                <p className="flex flex-wrap items-center gap-2 text-xs text-ink-3">
+                  <span className="font-semibold">Sources&nbsp;:</span>
+                  {q.sources.map((src, k) => (
+                    <SourceChip key={k} {...src} />
+                  ))}
+                </p>
                 <a href={withBase(q.more.href)} className="text-sm font-semibold">
                   {q.more.label}
                 </a>
@@ -163,7 +187,10 @@ export function Questionnaire({ questions }: { questions: Question[] }) {
 
       <div className="card space-y-5 border-[1.5px] border-accent bg-accent-soft p-5 sm:p-6">
         <div className="space-y-1.5">
-          <p className="eyebrow eyebrow-accent">{current.eyebrow}</p>
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <span className="eyebrow eyebrow-accent">{current.eyebrow}</span>
+            {current.tier && <TierBadge tier={current.tier} size="sm" />}
+          </p>
           <h2
             id={`${uid}-q`}
             ref={headingRef}
@@ -175,50 +202,56 @@ export function Questionnaire({ questions }: { questions: Question[] }) {
           <p className="text-sm text-ink-2">{current.hint}</p>
         </div>
 
-        {current.kind === 'scale' ? (
-          <ScaleField
-            key={current.id}
-            q={current}
-            uid={uid}
-            guess={typeof guess === 'number' ? guess : null}
-            revealed={revealed}
-            onGuess={(n) => {
-              setNeedGuess(false);
-              if (n === null) {
-                setGuesses((s) => {
-                  const next = { ...s };
-                  delete next[current.id];
-                  return next;
-                });
-              } else {
-                setGuesses((s) => ({ ...s, [current.id]: n }));
-              }
-            }}
-          />
-        ) : (
-          <fieldset key={current.id} className="space-y-2">
-            <legend className="sr-only">Votre réponse</legend>
-            {current.options.map((opt) => (
-              <label key={opt.id} className="block cursor-pointer">
-                <input
-                  type="radio"
-                  name={`${uid}-choice`}
-                  value={opt.id}
-                  className="peer sr-only"
-                  checked={guess === opt.id}
-                  disabled={revealed}
-                  onChange={() => {
-                    setNeedGuess(false);
-                    setGuesses((s) => ({ ...s, [current.id]: opt.id }));
-                  }}
-                />
-                <span className="flex min-h-11 items-center rounded-md border-[1.5px] border-rule-strong bg-field px-3.5 text-[0.9375rem] font-semibold text-ink peer-checked:border-accent peer-checked:bg-accent peer-checked:text-on-accent peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent peer-disabled:opacity-70">
-                  {opt.label}
-                </span>
-              </label>
-            ))}
-          </fieldset>
-        )}
+        <div ref={fieldRef}>
+          {current.kind === 'scale' ? (
+            <ScaleField
+              key={current.id}
+              q={current}
+              uid={uid}
+              guess={typeof guess === 'number' ? guess : null}
+              revealed={revealed}
+              onGuess={(n) => {
+                setNeedGuess(false);
+                if (n === null) {
+                  setGuesses((s) => {
+                    const next = { ...s };
+                    delete next[current.id];
+                    return next;
+                  });
+                } else {
+                  setGuesses((s) => ({ ...s, [current.id]: n }));
+                }
+              }}
+            />
+          ) : (
+            <div
+              key={current.id}
+              role="radiogroup"
+              aria-labelledby={`${uid}-q`}
+              className="space-y-2"
+            >
+              {current.options.map((opt) => (
+                <label key={opt.id} className="block cursor-pointer">
+                  <input
+                    type="radio"
+                    name={`${uid}-choice`}
+                    value={opt.id}
+                    className="peer sr-only"
+                    checked={guess === opt.id}
+                    disabled={revealed}
+                    onChange={() => {
+                      setNeedGuess(false);
+                      setGuesses((s) => ({ ...s, [current.id]: opt.id }));
+                    }}
+                  />
+                  <span className="flex min-h-11 items-center rounded-md border-[1.5px] border-rule-strong bg-field px-3.5 text-[0.9375rem] font-semibold text-ink peer-checked:border-accent peer-checked:bg-accent peer-checked:text-on-accent peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent peer-disabled:opacity-70">
+                    {opt.label}
+                  </span>
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
 
         {needGuess && (
           <p role="alert" className="text-sm font-semibold text-ink">
@@ -237,7 +270,10 @@ export function Questionnaire({ questions }: { questions: Question[] }) {
           {revealed && (
             <Button
               variant="secondary"
-              onClick={() => setOpen((s) => ({ ...s, [current.id]: false }))}
+              onClick={() => {
+                pendingFieldFocus.current = true;
+                setOpen((s) => ({ ...s, [current.id]: false }));
+              }}
             >
               Modifier
             </Button>
@@ -254,12 +290,17 @@ export function Questionnaire({ questions }: { questions: Question[] }) {
             <div
               ref={answerRef}
               tabIndex={-1}
-              aria-live="polite"
               className="space-y-3 rounded-md bg-surface p-4 focus:outline-3 focus:outline-offset-2 focus:outline-accent"
             >
-              <p className="text-lg font-semibold leading-snug text-ink">
+              <p
+                className={
+                  current.tier === 'announced'
+                    ? 'hatch rounded-md border-[1.5px] border-dashed border-[var(--tier-announced-bd)] p-3 text-lg font-semibold leading-snug text-ink'
+                    : 'text-lg font-semibold leading-snug text-ink'
+                }
+              >
                 Vous avez dit {guessLabel(current, guess)}. {current.answerLead}
-                {' : '}
+                {' : '}
                 <span className="text-accent">{referenceLabel(current)}</span>.
               </p>
               <p className="text-[0.9375rem] text-ink-2">{verdict.text}</p>
@@ -279,10 +320,15 @@ export function Questionnaire({ questions }: { questions: Question[] }) {
                   <SourceChip key={i} {...s} />
                 ))}
               </p>
-              <p>
+              <p className="flex flex-wrap gap-x-5 gap-y-1">
                 <a href={withBase(current.more.href)} className="text-sm font-semibold">
                   {current.more.label}
                 </a>
+                {current.also && (
+                  <a href={withBase(current.also.href)} className="text-sm font-semibold">
+                    {current.also.label}
+                  </a>
+                )}
               </p>
             </div>
           )}
@@ -303,6 +349,12 @@ export function Questionnaire({ questions }: { questions: Question[] }) {
                 </p>
               ))}
               {q.caveat && <p className="text-[0.9375rem] text-ink-2">{q.caveat.text}</p>}
+              <p className="flex flex-wrap items-center gap-2 text-xs text-ink-3">
+                <span className="font-semibold">Sources&nbsp;:</span>
+                {q.sources.map((src, k) => (
+                  <SourceChip key={k} {...src} />
+                ))}
+              </p>
             </article>
           ))}
         </div>
@@ -325,7 +377,7 @@ function ScaleField({
   onGuess: (n: number | null) => void;
 }) {
   const track = (v: number) => `${((v - q.min) / (q.max - q.min)) * 100}%`;
-  const near = guess !== null && revealed && Math.abs(guess - q.truth) <= q.closeAbs;
+  const near = guess !== null && revealed && Math.abs(guess - q.truth) <= closeBand(q);
   const gapPct = guess === null ? 100 : (Math.abs(guess - q.truth) / (q.max - q.min)) * 100;
   const stack = revealed && guess !== null && !near && gapPct < 14;
 

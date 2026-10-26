@@ -42,9 +42,8 @@
 
 /* ── 2. Fonts ───────────────────────────────────────────────────────────── */
 /* Latin subsets of @fontsource (static weights, only the ones used). A @font-face costs nothing until a
-   glyph is rendered with it. U+202F (narrow
-   no-break space, French thousands separator) is in neither font: 'EPJN Narrow Space' (global.css) is
-   listed first in every stack, exactly as for Fraunces and Inter. */
+   glyph is rendered with it. U+202F (narrow no-break space, French thousands separator) is in neither
+   font: 'EPJN Narrow Space' (global.css) is listed first in every stack. */
 @font-face {
   font-family: 'Schibsted Grotesk';
   font-style: normal;
@@ -478,11 +477,4 @@
 :root[data-brand='ci'] a {
   transition-timing-function: var(--ease-enter);
   transition-duration: var(--dur-quick);
-}
-
-/* The cas-types heat map bakes its colours into inline styles (editorial ramp + a --tile-*-ci pair for
-   this brand): the brand takes over with CSS, so there is no flash of the other ramp. */
-:root[data-brand='ci'] [style*='--tile-bg-ci'] {
-  background: var(--tile-bg-ci) !important;
-  color: var(--tile-fg-ci) !important;
 }

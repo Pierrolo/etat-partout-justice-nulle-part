@@ -25,8 +25,8 @@ export function TaxesGrid({
     <ChartFrame
       tier="announced"
       title={`${formatInteger(total)} impôts et taxes`}
-      subtitle="Un carré = un impôt. Il n’existe pas de liste publique de ces impôts dans les sources."
-      summary={`On compte ${formatInteger(total)} impôts et propose d’en garder ${formatInteger(kept)} (${keptNames}), qui « portent déjà ${formatNumber(share)} % des recettes ». Les lettres aux élus parlent de ${formatInteger(alt)} impôts : les sources ne nomment pas le cinquième.`}
+      subtitle="Un carré = un impôt, selon le décompte du plan. Il n’existe pas de liste publique de ces impôts dans les sources."
+      summary={`Le plan recense ${formatInteger(total)} impôts et propose d’en garder ${formatInteger(kept)} (${keptNames}), qui « portent déjà ${formatNumber(share)} % des recettes ». Les lettres aux élus parlent de ${formatInteger(alt)} impôts : les sources ne nomment pas le cinquième.`}
       sources={sources.map((s) => ({ ...s }))}
       table={{
         columns: [
@@ -37,7 +37,7 @@ export function TaxesGrid({
           { groupe: `Impôts conservés (${keptNames})`, n: kept },
           { groupe: 'Autres impôts et taxes', n: total - kept },
         ],
-        caption: 'Impôts et taxes',
+        caption: 'Impôts et taxes, selon le décompte du plan',
       }}
       csvFileName="impots-manifeste.csv"
     >

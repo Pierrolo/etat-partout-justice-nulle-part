@@ -15,7 +15,7 @@ import schibsted700 from '@fontsource/schibsted-grotesk/files/schibsted-grotesk-
 import jetbrains500 from '@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2?url';
 import Footer from '@/components/site/Footer.astro';
 import Header from '@/components/site/Header.astro';
-import { BRAND_THEME_COLOR } from '@/lib/brand';
+import { THEME_COLOR } from '@/lib/look';
 import { SITE, withBase } from '@/lib/site';
 
 interface Props {
@@ -41,9 +41,7 @@ const fullTitle = title
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 const ogImageUrl = Astro.site ? new URL(withBase(ogImage), Astro.site).href : undefined;
 
-// One look, written on <html> so it is there before paint and without JavaScript.
-// ?brand= and a stored choice used to override it; they no longer do.
-const theme = BRAND_THEME_COLOR.ci;
+// One look, written on <html> so it is there before paint and without JavaScript (lib/look.ts).
 const fontPreload = [schibsted400, schibsted700, jetbrains500];
 ---
 
@@ -55,18 +53,8 @@ const fontPreload = [schibsted400, schibsted700, jetbrains500];
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light dark" />
-    <meta
-      name="theme-color"
-      content={theme.light}
-      media="(prefers-color-scheme: light)"
-      data-brand-theme="light"
-    />
-    <meta
-      name="theme-color"
-      content={theme.dark}
-      media="(prefers-color-scheme: dark)"
-      data-brand-theme="dark"
-    />
+    <meta name="theme-color" content={THEME_COLOR.light} media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content={THEME_COLOR.dark} media="(prefers-color-scheme: dark)" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
     {fontPreload.map((href) => (

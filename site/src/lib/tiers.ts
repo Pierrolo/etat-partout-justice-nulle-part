@@ -4,11 +4,14 @@
  * the ids (`law`, `announced`, `hypothesis`) never change, only the words readers see.
  *
  * Plain-French vocabulary (docs/qa/FIX-PLAN.md, « Tier vocabulary »): « Loi » made readers think the
- * text was voted, so the words now say what the authors actually did.
+ * text was voted, so the words now say what the text is: written and published, not in force.
+ * The site speaks in the plan's own voice (docs/VISION.md §2.5), so « Annoncé » is the plan's announcement.
  *
- *   law         solid      « Proposé dans un amendement »  (text written by the authors, not tabled, not voted)
- *   announced   hatched    « Annoncé »      (fiches / manifeste / tableurs, no precise text)
+ *   law         solid      « Proposé dans un amendement »  (amendment written and published, not in force)
+ *   announced   hatched    « Annoncé »                     (fiches / manifeste / chiffrage publié, no precise text)
  *   hypothesis  dotted     « Notre estimation »            (our choice where the text is silent)
+ *
+ * Never say an amendment « will be filed » or « will be voted »: no source says so. Say what it is today.
  *
  * Simulator outputs carry no tier of their own: each line carries the tier of the rule that drives it.
  */
@@ -22,7 +25,7 @@ export interface TierMeta {
   label: string;
   /** Short label for tight spaces (table cells, chart legends, source chips). */
   short: string;
-  /** Parenthetical, lower-case clarification, to follow the label (« texte précis proposé dans les amendements… »). */
+  /** Parenthetical, lower-case clarification, to follow the label (« texte rédigé et publié… »). */
   explanation: string;
   /** One or two plain-French sentences explaining what the tier means for the reader. */
   description: string;
@@ -32,9 +35,9 @@ export const TIER_META: Record<Tier, TierMeta> = {
   law: {
     label: 'Proposé dans un amendement',
     short: 'Amendement proposé',
-    explanation: 'texte rédigé, en attente de dépôt et de vote',
+    explanation: 'texte rédigé et publié, pas en vigueur',
     description:
-      'Texte rédigé dans un amendement. Il s’appliquerait tel quel une fois déposé et adopté.',
+      'Texte précis d’un amendement rédigé et publié. Aucun n’est en vigueur : il s’appliquerait tel quel s’il était adopté.',
   },
   announced: {
     label: 'Annoncé',

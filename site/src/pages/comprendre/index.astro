@@ -227,7 +227,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
           </p>
           <p class="max-w-xl text-lg text-ink-2">
             Opérateurs, autorités, commissions… sans compter {formatInteger(min.before)} ministères.
-            le plan garderait {formatInteger(min.after)} ministères et{' '}
+            Selon le plan, il resterait {formatInteger(min.after)} ministères et{' '}
             {formatInteger(fates.find((f) => f.id === 'autonomie')!.n)} agences autonomes.
           </p>
           <div
@@ -296,7 +296,8 @@ const planDay = perFoyerDay(num('eco236_total_md'));
             {nichesEquation(num('niches_nombre'), nichesTva, niches)}. Des réductions, exonérations
             et taux réduits : {formatMdEuro(num('niches_total_md'), { decimals: 1 })} par an, soit
             environ {formatEuro(roundForDisplay(perFoyerYear(num('niches_total_md')), 50))} par
-            foyer (sur {FOYERS_LABEL}). On compte aussi {formatInteger(impots)} impôts et taxes.
+            foyer (sur {FOYERS_LABEL}). Le plan recense aussi {formatInteger(impots)} impôts et
+            taxes.
           </p>
           <div
             class="max-w-2xl"

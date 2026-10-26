@@ -95,8 +95,8 @@ export function AdultFields({
                   entreprise et recevez une fiche de paie (président·e de SAS, gérant·e minoritaire
                   de SARL), choisissez « dirigeant·e »{', '}
                   <Term id="dirigeant-assimile">assimilé salarié</Term>. Gérant majoritaire,
-                  indépendant et micro-entrepreneur (<Term id="tns">TNS</Term>) : leur calcul est
-                  encore en préparation.
+                  indépendant et micro-entrepreneur (<Term id="tns">TNS</Term>) : pas encore pris en
+                  compte.
                 </>
               }
               options={STATUSES}
@@ -112,9 +112,10 @@ export function AdultFields({
               className="rounded-md border-s-4 border-ink-3 bg-sunken px-4 py-3 text-[0.9375rem] text-ink"
             >
               <strong>Pas encore couvert.</strong> Le revenu d’un indépendant ou d’un gérant
-              majoritaire (cotisations aux indépendants, bénéfices, micro-entreprise) attend encore
-              son modèle. Si vous êtes en réalité président·e de SAS ou gérant·e minoritaire de
-              SARL, choisissez « dirigeant·e ».
+              majoritaire (cotisations aux indépendants, bénéfices, micro-entreprise) n’est pas
+              modélisé : nous ne vous montrerons pas de chiffre qui ne serait pas le vôtre. Si vous
+              êtes en réalité président·e de SAS ou gérant·e minoritaire de SARL, choisissez
+              « dirigeant·e ».
             </p>
           )}
 

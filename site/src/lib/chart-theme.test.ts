@@ -2,7 +2,6 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
   accent,
-  brandColors,
   categorical,
   categoricalNames,
   chrome,
@@ -17,13 +16,13 @@ import {
   series,
 } from './chart-theme';
 import { NBSP, NNBSP } from './format';
-import { contrastRatio, parseTokens, resolveBrand } from './contrast';
+import { contrastRatio, parseTokens, resolveLook } from './contrast';
 
 const read = (name: string) => readFileSync(new URL(`../styles/${name}`, import.meta.url), 'utf8');
-const tokens = parseTokens(read('tokens.css'));
-const ciTokens = resolveBrand(tokens, parseTokens(read('brand-ci.css')));
+/** The tokens in force: tokens.css (base) with brand-ci.css (the shipped look) on top. */
+const tokens = resolveLook(parseTokens(read('tokens.css')), parseTokens(read('brand-ci.css')));
 
-describe('chart-theme mirrors tokens.css', () => {
+describe('chart-theme mirrors the tokens in force', () => {
   for (const mode of ['light', 'dark'] as const) {
     it(`categorical (${mode})`, () => {
       expect(categorical[mode]).toEqual(
@@ -44,8 +43,8 @@ describe('chart-theme mirrors tokens.css', () => {
         [1, 2, 3, 4].map((n) => tokens[mode][`--div-loss-${n}`]),
       );
       expect(diverging[mode].mid).toBe(tokens[mode]['--div-mid']);
-      expect(polarity.gain[mode]).toBe(tokens[mode]['--gain']);
-      expect(polarity.loss[mode]).toBe(tokens[mode]['--loss']);
+      expect(polarity.gain[mode]).toBe(tokens[mode]['--gain-mark']);
+      expect(polarity.loss[mode]).toBe(tokens[mode]['--loss-mark']);
       expect(accent[mode]).toBe(tokens[mode]['--accent']);
       expect(chrome.grid[mode]).toBe(tokens[mode]['--chart-grid']);
       expect(chrome.axis[mode]).toBe(tokens[mode]['--chart-axis']);
@@ -68,16 +67,17 @@ describe('series()', () => {
 });
 
 describe('interpolators', () => {
-  it('sequential runs from the first to the last stop', () => {
-    const f = sequentialInterpolator('light');
-    expect(f(0)).toBe('rgb(228, 240, 255)');
-    expect(f(1)).toBe('rgb(0, 56, 137)');
+  it('sequential runs from the first to the last stop (teal ramp)', () => {
+    const light = sequentialInterpolator('light');
+    expect(light(0)).toBe('rgb(214, 228, 222)');
+    expect(light(1)).toBe('rgb(9, 61, 55)');
+    expect(sequentialInterpolator('dark')(0)).toBe('rgb(28, 58, 53)');
   });
-  it('diverging is neutral at 0, loss at −1, gain at +1', () => {
+  it('diverging is neutral at 0, loss at −1, gain at +1 (teal gain, signal-orange loss)', () => {
     const f = divergingInterpolator('light');
-    expect(f(0)).toBe('rgb(235, 232, 224)');
-    expect(f(-1)).toBe('rgb(188, 63, 6)');
-    expect(f(1)).toBe('rgb(0, 115, 122)');
+    expect(f(0)).toBe('rgb(236, 233, 223)');
+    expect(f(-1)).toBe('rgb(196, 60, 6)');
+    expect(f(1)).toBe('rgb(15, 94, 85)');
     expect(f(5)).toBe(f(1));
   });
 });
@@ -90,59 +90,27 @@ describe('French tick formatters', () => {
   });
 });
 
-describe('chart-theme mirrors brand-ci.css', () => {
-  const ci = brandColors('ci');
-  for (const mode of ['light', 'dark'] as const) {
-    const t = ciTokens[mode];
-    it(`categorical, sequential, diverging, polarity, chrome (${mode})`, () => {
-      expect(ci.categorical[mode]).toEqual([1, 2, 3, 4, 5, 6, 7, 8].map((n) => t[`--series-${n}`]));
-      expect(ci.other[mode]).toBe(t['--series-other']);
-      expect(ci.sequential[mode]).toEqual([1, 2, 3, 4, 5, 6, 7].map((n) => t[`--seq-${n}`]));
-      expect(ci.diverging[mode].gain).toEqual([4, 3, 2, 1].map((n) => t[`--div-gain-${n}`]));
-      expect(ci.diverging[mode].loss).toEqual([1, 2, 3, 4].map((n) => t[`--div-loss-${n}`]));
-      expect(ci.diverging[mode].mid).toBe(t['--div-mid']);
-      expect(ci.polarity.gain[mode]).toBe(t['--gain-mark']);
-      expect(ci.polarity.loss[mode]).toBe(t['--loss-mark']);
-      expect(ci.accent[mode]).toBe(t['--accent']);
-      expect(ci.chrome.grid[mode]).toBe(t['--chart-grid']);
-      expect(ci.chrome.axis[mode]).toBe(t['--chart-axis']);
-      expect(ci.chrome.ink[mode]).toBe(t['--ink']);
-      expect(ci.chrome.ink2[mode]).toBe(t['--ink-2']);
-      expect(ci.chrome.ink3[mode]).toBe(t['--ink-3']);
-      expect(ci.chrome.surface[mode]).toBe(t['--surface']);
-      expect(ci.chrome.paper[mode]).toBe(t['--paper']);
-    });
-  }
+describe('chart-theme names', () => {
   it('names its 8 slots', () => {
-    expect(ci.names).toHaveLength(8);
     expect(categoricalNames).toHaveLength(8);
-  });
-  it('the interpolators honour the brand', () => {
-    expect(divergingInterpolator('light', 'ci')(0)).toBe('rgb(236, 233, 223)');
-    expect(divergingInterpolator('light', 'ci')(1)).toBe('rgb(15, 94, 85)'); // teal
-    expect(divergingInterpolator('light')(1)).not.toBe(divergingInterpolator('light', 'ci')(1));
-    expect(sequentialInterpolator('dark', 'ci')(0)).toBe('rgb(28, 58, 53)');
+    expect(categorical.light).toHaveLength(8);
+    expect(categorical.dark).toHaveLength(8);
   });
 });
 
-describe('text on the greys of « Votre heure de travail » (--on-tint-n), per brand', () => {
+describe('text on the greys of « Votre heure de travail » (--on-tint-n)', () => {
   const mix = (a: string, b: string, pctA: number) => {
     const ch = (h: string, i: number) => parseInt(h.slice(1 + i * 2, 3 + i * 2), 16);
     const m = (i: number) => Math.round((ch(a, i) * pctA + ch(b, i) * (100 - pctA)) / 100);
     return `#${[0, 1, 2].map((i) => m(i).toString(16).padStart(2, '0')).join('')}`;
   };
-  for (const [brand, map] of [
-    ['editorial', tokens],
-    ['ci', ciTokens],
-  ] as const) {
-    for (const mode of ['light', 'dark'] as const) {
-      it(`${brand} / ${mode}: every grey is a mark (≥ 3 : 1 on the card) and its text reads (≥ 4.5 : 1)`, () => {
-        for (const pct of [90, 78, 66, 56, 48]) {
-          const bg = mix(map[mode]['--ink']!, map[mode]['--surface']!, pct);
-          expect(contrastRatio(bg, map[mode]['--surface']!)).toBeGreaterThanOrEqual(3);
-          expect(contrastRatio(map[mode][`--on-tint-${pct}`]!, bg)).toBeGreaterThanOrEqual(4.5);
-        }
-      });
-    }
+  for (const mode of ['light', 'dark'] as const) {
+    it(`${mode}: every grey is a mark (≥ 3 : 1 on the card) and its text reads (≥ 4.5 : 1)`, () => {
+      for (const pct of [90, 78, 66, 56, 48]) {
+        const bg = mix(tokens[mode]['--ink']!, tokens[mode]['--surface']!, pct);
+        expect(contrastRatio(bg, tokens[mode]['--surface']!)).toBeGreaterThanOrEqual(3);
+        expect(contrastRatio(tokens[mode][`--on-tint-${pct}`]!, bg)).toBeGreaterThanOrEqual(4.5);
+      }
+    });
   }
 });

@@ -42,7 +42,7 @@ for (const scheme of ['light', 'dark'] as const) {
         await expect(page.locator('h1')).toHaveCount(1);
         await expect(page.locator('a.skip-link')).toHaveCount(1);
         await expect(page.getByRole('contentinfo')).toContainText(
-          'indépendant de l’association Résolution',
+          'Outil indépendant de l’association Résolution et de l’État',
         );
 
         const results = await new AxeBuilder({ page })

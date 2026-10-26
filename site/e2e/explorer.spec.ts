@@ -156,12 +156,13 @@ test.describe('/comprendre/amendements', () => {
   const summary = (page: Page) => page.getByTestId('amendements-summary');
 
   test('dit clairement que ce sont des textes proposés, pas des lois', async ({ page }) => {
-    await expect(page.getByText('Amendements rédigés, en attente de dépôt')).toBeVisible();
-    await expect(page.getByText(/attendent d’être déposés, puis votés/)).toBeVisible();
-    await expect(
-      page.getByText(/texte rédigé, en attente de dépôt et de vote/i).first(),
-    ).toBeVisible();
+    await expect(page.getByText('Des amendements publiés, pas des lois votées')).toBeVisible();
+    await expect(page.getByText(/Aucun n’est adopté ni en vigueur/)).toBeVisible();
+    await expect(page.getByText(/texte rédigé et publié, pas en vigueur/i).first()).toBeVisible();
     await expect(summary(page)).toContainText('81 amendements');
+    // what no source says: that they will be filed, or voted
+    const text = await page.locator('main').innerText();
+    expect(text).not.toMatch(/en attente de dépôt|attendent d’être déposés|puis votés/);
   });
 
   test('la recherche trouve un amendement sans tenir compte des accents', async ({ page }) => {
@@ -278,7 +279,13 @@ test.describe('/a-propos', () => {
   test('indépendance, licence MIT, sources, vie privée et contact', async ({ page }) => {
     await page.goto('a-propos/');
     const main = page.locator('main');
-    await expect(main).toContainText('indépendant de l’association Résolution');
+    await expect(main).toContainText('Outil indépendant de l’association Résolution et de l’État');
+    // who made the site, and who did not
+    await expect(main).toContainText('Un explicatif du plan, pas un site officiel');
+    await expect(main).toContainText('Il n’est pas le site de l’association Résolution');
+    await expect(main).toContainText('Contributeurs du projet');
+    await expect(main).toContainText('tous les calculs se font dans votre navigateur');
+    await expect(main).not.toContainText('Barrat');
     await expect(main).toContainText('licence MIT');
     await expect(main).toContainText('Licence Ouverte');
     await expect(main).toContainText('CC BY 4.0');

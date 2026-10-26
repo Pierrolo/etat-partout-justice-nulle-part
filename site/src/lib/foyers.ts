@@ -3,7 +3,7 @@
  *
  * Le livre emploie quatre « foyers » différents (30 / 29,5 / 31 M de foyers, et 40,2 M de foyers
  * fiscaux, voir /methode#foyers). Tout ré-échelonnement « par foyer » fait par le site utilise
- * UN SEUL dénominateur : les **30 millions de foyers** que dans leurs fiches
+ * UN SEUL dénominateur : les **30 millions de foyers** que le plan écrit dans ses fiches
  * (fact `fiche_pop_foyers`).
  *
  * Pourquoi celui-là :

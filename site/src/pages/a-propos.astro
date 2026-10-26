@@ -20,7 +20,7 @@ const sections = [
 /** Conditions de réutilisation de chaque famille de sources (voir aussi site/src/data/README.md). */
 const sources = [
   {
-    who: 'Association Résolution — france-resolution.fr (chiffrages, amendements, fiches)',
+    who: 'Association Résolution — france-resolution.fr (classeurs de données, amendements, fiches, manifeste)',
     terms: 'Aucune licence indiquée par la source',
     use: 'Citées avec attribution, liens vers la source, aucun logo ni aucune charte reprise. Si vous êtes l’auteur d’un contenu et souhaitez un retrait ou une correction, ouvrez une issue.',
   },
@@ -72,30 +72,37 @@ const sources = [
         <h2 id="independance-t" class="!mt-0">
           Indépendance
         </h2>
-        <Callout tone="plan" title="Outil indépendant">
+        <Callout tone="plan" title="Un explicatif du plan, pas un site officiel">
           <p>
-            {SITE.independence} Il parle en son nom. Logos, chartes officielles et Système de design
-            de l’État restent dehors.
+            {SITE.independence} Ce site explique le plan avec ses propres mots, ses amendements et
+            ses chiffres. Il n’est pas le site de l’association Résolution ni celui des auteurs du
+            livre, et il ne parle pas à leur place. Il n’émane d’aucune administration. Logos,
+            chartes officielles et Système de design de l’État restent dehors.
           </p>
         </Callout>
         <p>
-          Il présente le plan tel qu’il est écrit. Les perdants restent visibles. Trois statuts
-          accompagnent les chiffres : « proposé dans un amendement » (texte rédigé, en attente de
-          dépôt et de vote), « annoncé » et « notre estimation ». La
-          <a href={withBase('/methode/')}>méthode</a> les détaille.
+          Le plan présenté ici est celui publié par l’association Résolution (france-resolution.fr),
+          exposé dans le livre « État partout, justice nulle part ». Le site le présente tel qu’il
+          est écrit, sans cacher ceux qui y perdraient. Chaque chiffre est relié à sa source, et
+          tous les calculs se font dans votre navigateur. Trois statuts accompagnent les chiffres :
+          « proposé dans un amendement » (texte rédigé et publié, pas en vigueur), « annoncé » (une
+          annonce du plan, sans texte précis) et « notre estimation » (un choix du simulateur là où
+          le texte est muet). La <a href={withBase('/methode/')}>méthode</a> les détaille.
         </p>
       </section>
 
       <section id="qui" aria-labelledby="qui-t" class="scroll-mt-20">
         <h2 id="qui-t">Qui fait ce site</h2>
         <p>
-          Un projet indépendant, collectif et ouvert à toute contribution : le copyright est détenu
-          par les « Contributeurs du projet « Et moi, dans tout ça ? » ». Le site ne contient aucune
+          Un projet collectif et ouvert à toute contribution : le copyright est détenu par les
+          « Contributeurs du projet « Et moi, dans tout ça ? » ». Le site ne contient aucune
           publicité, ne défend aucun parti et ne demande rien à ses visiteurs.
         </p>
         <p>
           Il montre ce que le plan changerait pour un foyer donné, et il met en images les données
-          qui l’appuient.
+          qui l’appuient. Les amendements, les fiches et les chiffrages sont ceux publiés par
+          l’association Résolution ; les lignes « notre estimation » sont les choix du site, pas les
+          siens.
         </p>
       </section>
 

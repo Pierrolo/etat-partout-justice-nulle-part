@@ -2,8 +2,8 @@
  * CHART THEME — colours, Observable Plot defaults and French tick formatters.
  *
  * Method: `dataviz` skill (form → colour job → validate → marks → hover → accessibility).
- * Palette values mirror src/styles/tokens.css (chart-theme.test.ts keeps both in sync) and were
- * validated with the skill's validator — see the header of tokens.css for the numbers.
+ * Palette values mirror the tokens in force (tokens.css under brand-ci.css; chart-theme.test.ts keeps
+ * both in sync) and were validated with the skill's validator — numbers below and in brand-ci.css.
  *
  * Colour jobs (never mix them):
  *   categorical  identity of a series            → `categorical` / `series(n)`     fixed order, ≤ 8, never cycled
@@ -17,7 +17,6 @@
  */
 import { interpolateRgb, piecewise } from 'd3';
 import type * as PlotNS from '@observablehq/plot';
-import type { Brand } from './brands.ts';
 import {
   formatCompactEuro,
   formatEuro,
@@ -27,140 +26,80 @@ import {
 } from './format';
 
 export type ColorMode = 'light' | 'dark';
-export type { Brand };
 
 /* ── Palettes (hex) ─────────────────────────────────────────────────────── */
-
-export const categorical = {
-  light: ['#2d6bbb', '#df662f', '#00918b', '#bb8603', '#d66098', '#6f8f20', '#7255cf', '#a0522c'],
-  dark: ['#4f8ddf', '#de6a35', '#00aaa3', '#b88715', '#d6679a', '#80a236', '#8a6ee2', '#b66946'],
-} as const;
-/** Names of the 8 hues, in slot order. */
-export const categoricalNames = [
-  'bleu',
-  'orange',
-  'sarcelle',
-  'ocre',
-  'rose',
-  'olive',
-  'violet',
-  'terre',
-] as const;
-export const otherColor = { light: '#8a867b', dark: '#6b6d78' } as const;
-
-export const sequential = {
-  light: ['#e4f0ff', '#b4d1f7', '#87b2eb', '#5c92db', '#3473c4', '#0a55a8', '#003889'],
-  dark: ['#202f42', '#29456a', '#325c94', '#3e75bd', '#4f8fe3', '#66aaff', '#81c6ff'],
-} as const;
-
-/** Gain arm (strong → light), neutral midpoint, loss arm (light → strong). 9 stops, symmetric. */
-export const diverging = {
-  light: {
-    gain: ['#00737a', '#33a0aa', '#85c4cc', '#c3e0e5'],
-    mid: '#ebe8e0',
-    loss: ['#f3cdbb', '#e9a07f', '#d36d43', '#bc3f06'],
-  },
-  dark: {
-    gain: ['#58d0d6', '#35a3a9', '#2a7a7f', '#1f4a4d'],
-    mid: '#2c2e37',
-    loss: ['#5a3426', '#92522f', '#c9703f', '#f2956a'],
-  },
-} as const;
-
-/** Poles of the diverging pair, for bars/lines (≥ 3 : 1 on paper and card). */
-export const polarity = {
-  gain: { light: '#00737a', dark: '#28bac1' },
-  loss: { light: '#bc3f06', dark: '#ef8959' },
-} as const;
-
-export const accent = { light: '#602e9d', dark: '#d4bcff' } as const;
-
-export const chrome = {
-  grid: { light: '#e4e0d6', dark: '#2c2d35' },
-  axis: { light: '#b9b5a9', dark: '#4a4c57' },
-  ink: { light: '#15171c', dark: '#edece7' },
-  ink2: { light: '#434852', dark: '#c4c3bc' },
-  ink3: { light: '#5c616c', dark: '#9a9ca6' },
-  surface: { light: '#ffffff', dark: '#1c1d24' },
-  paper: { light: '#faf8f4', dark: '#14151a' },
-} as const;
-
-/**
- * The shipped look (brand-ci.css) — the same roles, other values. A test keeps them in sync with the
- * CSS. Validation (dataviz skill, scripts/validate_palette.js; plates = the darkest surface of each mode):
+/*
+ * The shipped look (styles/brand-ci.css) — chart-theme.test.ts keeps every value below in sync with it.
+ * Validation (dataviz skill, scripts/validate_palette.js; plates = the darkest surface of each mode):
  *   categorical light  adjacent CVD ΔE 14.4 (target 8), normal-vision 25.1 (floor 15), all ≥ 3 : 1 on #e4e0d3
  *   categorical dark   adjacent CVD ΔE 13.3,             normal-vision 22.8,            all ≥ 3 : 1 on #262c29
  *   first three slots also pass `--pairs all` in both modes; any two of the 8: normal-vision ΔE ≥ 13.3 / 11.2.
  *   polarity  teal vs signal-orange: lightness differs (OKLCH L .44 / .60 light, .78 / .66 dark), CVD ΔE ≥ 11.
  */
-export const ciPalette = {
-  categorical: {
-    light: ['#0b8e7f', '#d9480f', '#3c52b6', '#43600e', '#963c91', '#8c7e2d', '#816bd8', '#96173a'],
-    dark: ['#0b9989', '#f25820', '#5e73b8', '#73a21f', '#ba5db3', '#8a7b1d', '#9581ef', '#c64961'],
+
+export const categorical = {
+  light: ['#0b8e7f', '#d9480f', '#3c52b6', '#43600e', '#963c91', '#8c7e2d', '#816bd8', '#96173a'],
+  dark: ['#0b9989', '#f25820', '#5e73b8', '#73a21f', '#ba5db3', '#8a7b1d', '#9581ef', '#c64961'],
+} as const;
+/** Names of the 8 hues, in slot order. */
+export const categoricalNames = [
+  'sarcelle',
+  'orange signal',
+  'indigo',
+  'sapin',
+  'prune',
+  'kaki',
+  'violet',
+  'bordeaux',
+] as const;
+export const otherColor = { light: '#747b77', dark: '#7d857f' } as const;
+
+export const sequential = {
+  light: ['#d6e4de', '#b0cfc5', '#82b3a6', '#559787', '#2f7a6b', '#0f5e55', '#093d37'],
+  dark: ['#1c3a35', '#24524a', '#2c6c61', '#36887a', '#46a898', '#6ec6b6', '#9ddfd2'],
+} as const;
+
+/** Gain arm (strong → light), neutral midpoint, loss arm (light → strong). 9 stops, symmetric. */
+export const diverging = {
+  light: {
+    gain: ['#0f5e55', '#3a8377', '#8fbbb0', '#cde0d9'],
+    mid: '#ece9df',
+    loss: ['#f3d3c1', '#eba283', '#dc501a', '#c43c06'],
   },
-  names: ['sarcelle', 'orange signal', 'indigo', 'sapin', 'prune', 'kaki', 'violet', 'bordeaux'],
-  other: { light: '#747b77', dark: '#7d857f' },
-  sequential: {
-    light: ['#d6e4de', '#b0cfc5', '#82b3a6', '#559787', '#2f7a6b', '#0f5e55', '#093d37'],
-    dark: ['#1c3a35', '#24524a', '#2c6c61', '#36887a', '#46a898', '#6ec6b6', '#9ddfd2'],
-  },
-  diverging: {
-    light: {
-      gain: ['#0f5e55', '#3a8377', '#8fbbb0', '#cde0d9'],
-      mid: '#ece9df',
-      loss: ['#f3d3c1', '#eba283', '#dc501a', '#c43c06'],
-    },
-    dark: {
-      gain: ['#4ad0ba', '#35a392', '#27766b', '#1e4a43'],
-      mid: '#2c3330',
-      loss: ['#4e2e22', '#8d3f1e', '#d9551d', '#ff5a1f'],
-    },
-  },
-  polarity: {
-    gain: { light: '#0f5e55', dark: '#4ad0ba' },
-    loss: { light: '#d9480f', dark: '#f25820' },
-  },
-  accent: { light: '#121614', dark: '#f3f1ea' },
-  chrome: {
-    grid: { light: '#d2cdbd', dark: '#353d39' },
-    axis: { light: '#121614', dark: '#a3aaa5' },
-    ink: { light: '#121614', dark: '#f3f1ea' },
-    ink2: { light: '#323935', dark: '#d3d5ce' },
-    ink3: { light: '#5c635f', dark: '#a3aaa5' },
-    surface: { light: '#e4e0d3', dark: '#262c29' },
-    paper: { light: '#f3f1ea', dark: '#121614' },
+  dark: {
+    gain: ['#4ad0ba', '#35a392', '#27766b', '#1e4a43'],
+    mid: '#2c3330',
+    loss: ['#4e2e22', '#8d3f1e', '#d9551d', '#ff5a1f'],
   },
 } as const;
 
-/** The colour tables of a brand (« editorial » = the exports above). */
-export function brandColors(brand: Brand = 'editorial') {
-  if (brand === 'ci') return ciPalette;
-  return {
-    categorical,
-    names: categoricalNames,
-    other: otherColor,
-    sequential,
-    diverging,
-    polarity,
-    accent,
-    chrome,
-  };
-}
+/** Poles of the diverging pair, for bars/lines (≥ 3 : 1 on paper and card): the `-mark` tokens. */
+export const polarity = {
+  gain: { light: '#0f5e55', dark: '#4ad0ba' },
+  loss: { light: '#d9480f', dark: '#f25820' },
+} as const;
 
-export function palette(mode: ColorMode, brand: Brand = 'editorial') {
-  const b = brandColors(brand);
+export const accent = { light: '#121614', dark: '#f3f1ea' } as const;
+
+export const chrome = {
+  grid: { light: '#d2cdbd', dark: '#353d39' },
+  axis: { light: '#121614', dark: '#a3aaa5' },
+  ink: { light: '#121614', dark: '#f3f1ea' },
+  ink2: { light: '#323935', dark: '#d3d5ce' },
+  ink3: { light: '#5c635f', dark: '#a3aaa5' },
+  surface: { light: '#e4e0d3', dark: '#262c29' },
+  paper: { light: '#f3f1ea', dark: '#121614' },
+} as const;
+
+export function palette(mode: ColorMode) {
   return {
-    categorical: b.categorical[mode],
-    sequential: b.sequential[mode],
-    diverging: [
-      ...b.diverging[mode].gain,
-      b.diverging[mode].mid,
-      ...b.diverging[mode].loss,
-    ] as string[],
-    gain: b.polarity.gain[mode],
-    loss: b.polarity.loss[mode],
-    accent: b.accent[mode],
-    other: b.other[mode],
+    categorical: categorical[mode],
+    sequential: sequential[mode],
+    diverging: [...diverging[mode].gain, diverging[mode].mid, ...diverging[mode].loss] as string[],
+    gain: polarity.gain[mode],
+    loss: polarity.loss[mode],
+    accent: accent[mode],
+    other: otherColor[mode],
   };
 }
 
@@ -209,22 +148,16 @@ export function series(index: number): string {
 /* ── Continuous interpolators (hex → need the colour mode) ──────────────── */
 
 /** 0 → 1 over the sequential ramp. */
-export function sequentialInterpolator(
-  mode: ColorMode,
-  brand: Brand = 'editorial',
-): (t: number) => string {
-  return piecewise(interpolateRgb, [...brandColors(brand).sequential[mode]]);
+export function sequentialInterpolator(mode: ColorMode): (t: number) => string {
+  return piecewise(interpolateRgb, [...sequential[mode]]);
 }
 
 /**
  * Diverging interpolator on [−1, 1]: −1 = strongest loss, 0 = neutral, +1 = strongest gain.
  * Use with a symmetric domain (`[-m, m]`) so equal magnitudes get equal intensity.
  */
-export function divergingInterpolator(
-  mode: ColorMode,
-  brand: Brand = 'editorial',
-): (t: number) => string {
-  const d = brandColors(brand).diverging[mode];
+export function divergingInterpolator(mode: ColorMode): (t: number) => string {
+  const d = diverging[mode];
   const stops = [...[...d.loss].reverse(), d.mid, ...[...d.gain].reverse()];
   const interp = piecewise(interpolateRgb, stops);
   return (v) => interp((Math.max(-1, Math.min(1, v)) + 1) / 2);

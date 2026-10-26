@@ -167,10 +167,10 @@ const announced = [
           Pas de découpage publié : un seul changement est chiffré.
         </p>
         <p class="text-[0.9375rem] leading-relaxed text-ink-2">
-          Il n’existe pas de version « avec le plan » de ces {formatEuro(num('va_heure_total_eur'))}
-          . Ce qu’ils chiffrent : la fin de la CSG et de la CRDS ajouterait{' '}
-          <strong class="text-gain">{formatEuro(csgMois)} par mois</strong> au salaire net médian de{' '}
-          {formatEuro(netMedian)}, soit{' '}
+          Le chiffrage publié ne donne pas de version « avec le plan » de ces{' '}
+          {formatEuro(num('va_heure_total_eur'))}. Il ne chiffre qu’un changement : la fin de la CSG
+          et de la CRDS ajouterait <strong class="text-gain">{formatEuro(csgMois)} par mois</strong>{' '}
+          au salaire net médian de {formatEuro(netMedian)}, soit{' '}
           <strong class="text-gain">
             {formatNumber(csgPct, { decimals: 1, signed: true })}&nbsp;%
           </strong>
@@ -252,10 +252,10 @@ const announced = [
     </div>
     <Disclosure summary="Comment lire ces deux colonnes ?" variant="card">
       <p>
-        « Proposé dans un amendement » : le chiffre figure dans un amendement rédigé, en attente de
-        dépôt et de vote. Il s’appliquerait tel quel une fois adopté. « Annoncé » : avancé dans les
-        fiches ou les chiffrages, sans texte précis. Le simulateur montre les promesses sans montant
-        à part, hors de votre revenu disponible.{' '}
+        « Proposé dans un amendement » : le chiffre figure dans un amendement rédigé et publié, pas
+        en vigueur. Il s’appliquerait tel quel s’il était adopté. « Annoncé » : avancé dans le
+        manifeste, les fiches ou le chiffrage publié, sans texte précis. Le simulateur montre les
+        promesses sans montant à part, hors de votre revenu disponible.{' '}
         <a href={withBase('/methode/')}>Méthode et hypothèses</a>.
       </p>
     </Disclosure>

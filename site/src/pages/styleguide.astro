@@ -5,7 +5,6 @@
  * Contrast ratios are computed at build time from src/styles/tokens.css.
  */
 import StyleguideChart from '@/components/charts/StyleguideChart';
-import BrandValue from '@/components/site/BrandValue.astro';
 import PageHeader from '@/components/site/PageHeader.astro';
 import {
   Button,
@@ -18,8 +17,8 @@ import {
 } from '@/components/ui';
 import { FormDemo, TabsDemo } from '@/components/ui/StyleguideDemos';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { brandColors, categoricalNames } from '@/lib/chart-theme';
-import { contrastRatio, parseTokens, resolveBrand } from '@/lib/contrast';
+import { categoricalNames } from '@/lib/chart-theme';
+import { contrastRatio, parseTokens, resolveLook } from '@/lib/contrast';
 import {
   formatCompactEuro,
   formatEuro,
@@ -37,21 +36,19 @@ import brandCiCss from '@/styles/brand-ci.css?raw';
 import tokensCss from '@/styles/tokens.css?raw';
 
 // Tokens in force on the site: tokens.css, overridden by brand-ci.css (data-brand="ci").
-const tokens = parseTokens(tokensCss);
-const ciTokens = resolveBrand(tokens, parseTokens(brandCiCss));
+const tokens = resolveLook(parseTokens(tokensCss), parseTokens(brandCiCss));
 const ratio = (fg: string, bg: string, map = tokens) => ({
   light: contrastRatio(map.light[fg]!, map.light[bg]!),
   dark: contrastRatio(map.dark[fg]!, map.dark[bg]!),
 });
 const fmt = (n: number) => n.toFixed(1).replace('.', ',');
-/** « #aaaaaa / #bbbbbb » (light / dark) of a token, for one brand. */
+/** « #aaaaaa / #bbbbbb » (light / dark) of a token. */
 const hexPair = (t: string, map = tokens) => `${map.light[t] ?? '—'} / ${map.dark[t] ?? '—'}`;
-/** « 5,4 / 7,7 » ratios of a pair, « — » when a token does not exist in the brand. */
+/** « 5,4 / 7,7 » ratios of a pair, « — » when a token does not exist. */
 const ratioText = (fg: string, bg: string, map = tokens) =>
   map.light[fg] && map.light[bg] && map.dark[fg] && map.dark[bg]
     ? `${fmt(ratio(fg, bg, map).light)} / ${fmt(ratio(fg, bg, map).dark)}`
     : '—';
-const ciNames = brandColors('ci').names;
 // A readable subset of the guaranteed pairs, side by side (the full list: `pnpm --filter @epjn/site contrast`).
 const keyPairs: Array<[string, string, string]> = [
   ['--ink', '--paper', 'Texte courant sur la page'],
@@ -188,7 +185,7 @@ const formatRows: Array<[string, string]> = [
                     {fg.slice(2)} sur {bg.slice(2)}
                   </span>
                 </th>
-                <td data-numeric>{ratioText(fg, bg, ciTokens)}</td>
+                <td data-numeric>{ratioText(fg, bg)}</td>
               </tr>
             ))}
           </tbody>
@@ -254,9 +251,7 @@ const formatRows: Array<[string, string]> = [
               <div class="h-16" style={`background: var(${s})`} />
               <div class="bg-surface p-3 text-sm">
                 <p class="font-semibold text-ink">{s.slice(2)}</p>
-                <p class="font-mono text-xs text-ink-3">
-                  <BrandValue editorial={hexPair(s)} ci={hexPair(s, ciTokens)} />
-                </p>
+                <p class="font-mono text-xs text-ink-3">{hexPair(s)}</p>
               </div>
             </li>
           ))}
@@ -268,16 +263,8 @@ const formatRows: Array<[string, string]> = [
                 Aa {name}
               </p>
               <p class="mt-1 text-sm text-ink-2">{use}</p>
-              <p class="mt-2 font-mono text-xs text-ink-3">
-                <BrandValue editorial={hexPair(t)} ci={hexPair(t, ciTokens)} />
-              </p>
-              <p class="mt-1 text-xs text-ink-3">
-                Sur papier :{' '}
-                <BrandValue
-                  editorial={ratioText(t, '--paper')}
-                  ci={ratioText(t, '--paper', ciTokens)}
-                />
-              </p>
+              <p class="mt-2 font-mono text-xs text-ink-3">{hexPair(t)}</p>
+              <p class="mt-1 text-xs text-ink-3">Sur papier : {ratioText(t, '--paper')}</p>
             </li>
           ))}
         </ul>
@@ -292,13 +279,8 @@ const formatRows: Array<[string, string]> = [
               <div class="space-y-1 bg-surface p-3 text-sm">
                 <p class="font-semibold text-ink">{name}</p>
                 <p class="text-ink-2">{use}</p>
-                <p class="font-mono text-xs text-ink-3">
-                  <BrandValue editorial={hexPair(t)} ci={hexPair(t, ciTokens)} />
-                </p>
-                <p class="text-xs text-ink-3">
-                  Sur papier :{' '}
-                  <BrandValue editorial={ratioText(t, bg)} ci={ratioText(t, bg, ciTokens)} />
-                </p>
+                <p class="font-mono text-xs text-ink-3">{hexPair(t)}</p>
+                <p class="text-xs text-ink-3">Sur papier : {ratioText(t, bg)}</p>
               </div>
             </li>
           ))}
@@ -309,25 +291,19 @@ const formatRows: Array<[string, string]> = [
         <h3 class="mb-1 text-lg">Graphiques · catégoriel (identité)</h3>
         <p class="mb-3 max-w-2xl text-sm text-ink-2">
           Huit teintes, ordre fixe, jamais cyclées. Au-delà de huit : « Autres ». Validé (ΔE OKLab,
-          simulation protanopie/deutéranopie) :
-          <BrandValue
-            editorial="voisins ≥ 11,5 en daltonisme, ≥ 19 en vision normale ; chaque teinte ≥ 3 : 1 sur le papier."
-            ci="voisins ≥ 13,3 en daltonisme, ≥ 22,8 en vision normale (≥ 11 entre deux teintes quelconques) ; chaque teinte ≥ 3 : 1 sur le papier et sur la carte."
-          />
-          Trois premières séries sûres en nuage de points.
+          simulation protanopie/deutéranopie) : voisins ≥ 13,3 en daltonisme, ≥ 22,8 en vision
+          normale (≥ 11 entre deux teintes quelconques) ; chaque teinte ≥ 3 : 1 sur le papier et sur
+          la carte. Trois premières séries sûres en nuage de points.
         </p>
         <ul class="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8">
           {categoricalNames.map((name, i) => (
             <li class="rounded-md border border-rule bg-surface p-2">
               <div class="h-10 rounded-sm" style={`background: var(--series-${i + 1})`} />
               <p class="mt-1.5 text-xs font-semibold text-ink">
-                {i + 1}. <BrandValue editorial={name} ci={ciNames[i] ?? name} />
+                {i + 1}. {name}
               </p>
               <p class="font-mono text-[0.6875rem] text-ink-3">
-                <BrandValue
-                  editorial={tokens.light[`--series-${i + 1}`] ?? ''}
-                  ci={ciTokens.light[`--series-${i + 1}`] ?? ''}
-                />
+                {tokens.light[`--series-${i + 1}`] ?? ''}
               </p>
             </li>
           ))}
@@ -365,9 +341,9 @@ const formatRows: Array<[string, string]> = [
       <div>
         <h3 class="mb-1 text-lg">Traitements « promis, sans texte précis »</h3>
         <p class="mb-3 max-w-2xl text-sm text-ink-2">
-          Hachures à 45° (classes <code>hatch</code>, <code>hatch-fine</code>),{' '}
-          <BrandValue editorial="ton sur ton" ci="tracées en signal" />, et contour en tirets :
-          jamais décoratifs, réservés à ce qui n’est pas proposé dans un amendement.
+          Hachures à 45° (classes <code>hatch</code>, <code>hatch-fine</code>), tracées en signal,
+          et contour en tirets : jamais décoratifs, réservés à ce qui n’est pas proposé dans un
+          amendement.
         </p>
         <div class="grid gap-3 sm:grid-cols-3">
           <div class="hatch rounded-md border-[1.5px] border-dashed border-[var(--tier-announced-bd)] bg-surface p-4 text-sm text-ink">

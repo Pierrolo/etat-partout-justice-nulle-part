@@ -1,12 +1,15 @@
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import { expect, test, type Page } from '@playwright/test';
 
 /**
- * The only look: data-brand="ci" is in the HTML. A query or a stored choice cannot change it.
- * Fonts are self-hosted. The signature rules (signal, square corners, numbered sections, dark footer)
- * apply on a normal URL.
+ * The one look the site ships (lib/look.ts): data-brand="ci" is written in the HTML, and neither a query
+ * parameter nor a value left in storage by the removed switch can change it. Fonts are self-hosted and
+ * only the families in use are built. The signature rules (signal, square corners, numbered sections, dark
+ * footer) apply on a normal URL.
  */
 
-const brand = (page: Page) => page.locator('html').getAttribute('data-brand');
+const look = (page: Page) => page.locator('html').getAttribute('data-brand');
 const css = (page: Page, selector: string, prop: string, pseudo?: string) =>
   page.evaluate(
     ([s, p, ps]) => getComputedStyle(document.querySelector(s!)!, ps || null).getPropertyValue(p!),
@@ -14,21 +17,21 @@ const css = (page: Page, selector: string, prop: string, pseudo?: string) =>
   );
 const SIGNAL = 'rgb(255, 90, 31)';
 
-test.describe('the look is fixed', () => {
-  test('the page is ci, in the HTML itself, in Schibsted Grotesk', async ({ page }) => {
+test.describe('there is one look', () => {
+  test('the page wears it in the HTML itself, in Schibsted Grotesk', async ({ page }) => {
     await page.goto('');
-    expect(await brand(page)).toBe('ci');
+    expect(await look(page)).toBe('ci');
     expect(await css(page, 'body', 'font-family')).toContain('Schibsted Grotesk');
     await expect(page.getByRole('group', { name: 'Apparence' })).toHaveCount(0);
     expect(await page.content()).not.toContain('Call Intelligence');
   });
 
-  test('a stored or queried alternate look does not apply', async ({ page }) => {
+  test('a query or a value stored by the removed switch changes nothing', async ({ page }) => {
     await page.addInitScript(() => localStorage.setItem('epjn-brand', 'editorial'));
     await page.goto('?brand=editorial');
-    expect(await brand(page)).toBe('ci');
+    expect(await look(page)).toBe('ci');
     await page.goto('?brand=neon');
-    expect(await brand(page)).toBe('ci');
+    expect(await look(page)).toBe('ci');
     expect(await css(page, 'h1', 'font-family')).toContain('Schibsted Grotesk');
   });
 
@@ -42,6 +45,12 @@ test.describe('the look is fixed', () => {
 });
 
 test.describe('fonts: self-hosted, only the families in use', () => {
+  test('the build holds no Fraunces or Inter file', () => {
+    const assets = readdirSync(join(import.meta.dirname, '..', 'dist', '_astro'));
+    expect(assets.filter((f) => /fraunces|inter-/i.test(f))).toEqual([]);
+    expect(assets.some((f) => /schibsted-grotesk/i.test(f))).toBe(true);
+  });
+
   async function fontRequests(page: Page, url: string) {
     const fonts: string[] = [];
     page.on('response', (res) => {

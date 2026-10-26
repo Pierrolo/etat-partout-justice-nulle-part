@@ -4,22 +4,21 @@ Le simulateur compare, pour **votre ménage**, deux situations :
 
 - **Aujourd'hui** : la législation en vigueur au 24 octobre 2026 (barème de l'impôt de la loi de finances pour 2026,
   prestations revalorisées en avril 2026, aides au logement revalorisées en octobre 2026, SMIC de juin 2026) ;
-- **Avec le plan** du livre « État partout, justice nulle part » (Barrat, Marle, Mitterrand — Éditions Chronique,
-  2026), tel qu'il est écrit dans les 81 amendements publiés par l'association Résolution (PLF 2027, 1re et 2de
-  parties ; PLFSS 2027), complétés par les fiches et le manifeste quand le texte juridique est muet.
+- **Avec le plan** de l'association Résolution, tel qu'il est écrit dans les 81 amendements qu'elle a publiés (PLF 2027,
+  1re et 2de parties ; PLFSS 2027), complétés par ses fiches et son manifeste quand le texte juridique est muet.
 
 Par défaut, le résultat est le **plan complet appliqué à 2026** : toutes les mesures en vigueur, appliquées à vos
 revenus de 2026, en euros de 2026. Trois « photos » de la transition (2027, 2028, 2030) donnent la moyenne mensuelle
 de chaque année. Tous les montants sont **mensuels**.
 
-Outil indépendant, non affilié à l'association Résolution ni à l'État. Le calcul se fait dans votre navigateur ;
-rien n'est envoyé nulle part.
+Outil indépendant de l'association Résolution et de l'État (voir [À propos](/a-propos/)). Le calcul se fait dans
+votre navigateur ; rien n'est envoyé nulle part.
 
 ## En deux minutes {#en-clair}
 
 - **Ce que fait le simulateur.** Il calcule ce qui vous reste pour vivre chaque mois (le [revenu disponible](#calcul)) aujourd'hui, puis avec le plan complet, et vous montre l'écart ligne par ligne.
-- **D'où viennent les règles du plan.** Des 81 amendements rédigés par les auteurs, qui ne sont ni déposés ni votés, complétés par leurs fiches et leur manifeste quand le texte est muet. Chaque ligne dit de quel type de source elle vient.
-- **Ce qui est compté par défaut.** Les mesures chiffrées dans les amendements, et le remplacement du RSA, de la prime d'activité et de l'AAH par l'AFU, que les auteurs promettent sans l'écrire dans un amendement (hypothèse [H1](#h1), réglable).
+- **D'où viennent les règles du plan.** Des 81 amendements rédigés et publiés par l'association Résolution (aucun n'est en vigueur), complétés par ses fiches et son manifeste quand le texte est muet. Chaque ligne dit de quel type de source elle vient.
+- **Ce qui est compté par défaut.** Les mesures chiffrées dans les amendements, et le remplacement du RSA, de la prime d'activité et de l'AAH par l'AFU, que le plan annonce sans l'écrire dans un amendement (hypothèse [H1](#h1), réglable).
 - **Ce qui est montré à part.** Les promesses sans montant (compte d'épargne, patrimoine rendu, compte éducation) et les pertes que le simulateur ne sait pas chiffrer. Elles ne sont jamais additionnées au résultat.
 - **Ce qui est vérifié.** La situation d'aujourd'hui est comparée à OpenFisca, le moteur de référence, sur 40 ménages types : au pire quelques euros par mois d'écart ([détail](#openfisca)).
 - **Ce qui n'est pas calculé.** Patrimoine, taxe foncière, santé, travailleurs indépendants… La [liste complète](#non-compte) figure aussi sur la page de résultat.
@@ -51,26 +50,26 @@ service-public, Légifrance, INSEE…).
 
 Chaque chiffre du site porte l'un de ces trois statuts, avec la même présentation partout. C'est la règle centrale : ne jamais faire passer une promesse pour un texte voté.
 
-- **Proposé dans un amendement** — texte précis rédigé par les auteurs, ni déposé ni voté. Il s'appliquerait tel quel si l'amendement était adopté. (Ce niveau s'appelait « Écrit dans la loi » : nous l'avons renommé, parce que ces textes n'ont pas été votés. Les lignes « aujourd'hui » suivent la législation en vigueur et n'ont pas de niveau : ce sont les règles actuelles.)
-- **Promis par les auteurs** — annoncé dans les fiches, le manifeste ou les classeurs, sans texte précis.
+- **Proposé dans un amendement** — texte précis d'un amendement rédigé et publié par l'association Résolution. Aucun n'est en vigueur : il s'appliquerait tel quel s'il était adopté. Rien ici n'est présenté comme une loi votée, ni comme un texte déjà déposé ou à voter. (Les lignes « aujourd'hui » suivent la législation en vigueur et n'ont pas de niveau : ce sont les règles actuelles.)
+- **Annoncé** — chiffre ou promesse du plan, avancé dans le manifeste, les fiches ou le chiffrage publié, sans texte précis.
 - **Notre estimation** — notre choix là où le texte est muet. Chaque estimation est numérotée dans le [registre](#registre) et souvent réglable.
 
 Deux règles découlent de ces niveaux :
 
 - Les promesses **sans montant** (compte d'épargne « 300 €/mois », patrimoine « 20 000 € par foyer », compte éducation « 6 600 € par enfant ») sont montrées **à part**, à côté des pertes non chiffrées, **jamais additionnées** au revenu disponible.
-- Le remplacement du RSA, de la prime d'activité et de l'AAH par l'AFU est lui aussi une promesse (« à la place de toutes les aides », hypothèse [H1](#h1)), mais il est **compté par défaut** : sans lui, le résultat additionnerait l'AFU et les anciennes aides, ce que les auteurs ne décrivent pas. Vous pouvez le désactiver (« maintenus en différentiel »), et le simulateur montre les deux lectures côte à côte quand elles diffèrent.
+- Le remplacement du RSA, de la prime d'activité et de l'AAH par l'AFU est lui aussi une promesse (« à la place de toutes les aides », hypothèse [H1](#h1)), mais il est **compté par défaut** : sans lui, le résultat additionnerait l'AFU et les anciennes aides, ce que le plan ne décrit pas. Vous pouvez le désactiver (« maintenus en différentiel »), et le simulateur montre les deux lectures côte à côte quand elles diffèrent.
 
 ## 3. Registre des hypothèses {#registre}
 
 | # | Là où le texte est muet | Choix par défaut | Niveau | Réglable |
 |---|---|---|---|---|
-| H1 | RSA, prime d'activité, AAH, ASPA, bourses remplacés par l'AFU ? Le manifeste dit « à la place de toutes les aides », les classeurs comptent 135 Md€ d'aides fusionnées, mais aucun amendement ne les abroge | **Remplacés** | Promis | Oui : « maintenus en différentiel » (l'AFU compte comme ressource, l'aide complète jusqu'au niveau actuel, elle devient imposable à 23 %) |
-| H2 | La déduction de 10 % pour frais professionnels survit-elle ? (art. 83 3° CGI non abrogé) | **Maintenue** : 0,793 € gardé par euro gagné, seuil d'équilibre ≈ 31 884 € de salaire net annuel | Estimation | Oui : supprimée = lecture des auteurs (0,77 € ; 28 695,65 €) |
+| H1 | RSA, prime d'activité, AAH, ASPA, bourses remplacés par l'AFU ? Le manifeste dit « à la place de toutes les aides », les classeurs comptent 135 Md€ d'aides fusionnées, mais aucun amendement ne les abroge | **Remplacés** | Annoncé | Oui : « maintenus en différentiel » (l'AFU compte comme ressource, l'aide complète jusqu'au niveau actuel, elle devient imposable à 23 %) |
+| H2 | La déduction de 10 % pour frais professionnels survit-elle ? (art. 83 3° CGI non abrogé) | **Maintenue** : 0,793 € gardé par euro gagné, seuil d'équilibre ≈ 31 884 € de salaire net annuel | Estimation | Oui : supprimée = lecture du plan (0,77 € ; 28 695,65 €) |
 | H3 | Revenu imposable | Aujourd'hui : net + CSG non déductible + CRDS ; plan : salaire net (plus de CSG) − 10 % ; pensions : CSG déductible maintenue, abattement de 10 % supprimé | Amendement proposé | — |
-| H4 | Qui capte la baisse de CSG et la fin des exonérations patronales ? | 100 % au salarié (incidence légale de court terme), salaire brut et coût employeur inchangés | Promis | — |
+| H4 | Qui capte la baisse de CSG et la fin des exonérations patronales ? | 100 % au salarié (incidence légale de court terme), salaire brut et coût employeur inchangés | Annoncé | — |
 | H5 | Répercussion de la TVA et de la fin des CEE sur les prix | **100 %**, panier fixe lissé selon le niveau de vie | Estimation | Oui : 0 %, 50 %, 100 % |
-| H6 | Chômage « de treize à six mois » (aucun texte) | Montant mensuel de l'ARE inchangé ; « au 7e mois : ARE = 0 » montré dans les pertes non chiffrées | Promis | — |
-| H7 | Compte d'épargne, patrimoine, compte éducation | Montrés à part aux montants annoncés | Promis | — |
+| H6 | Chômage « de treize à six mois » (aucun texte) | Montant mensuel de l'ARE inchangé ; « au 7e mois : ARE = 0 » montré dans les pertes non chiffrées | Annoncé | — |
+| H7 | Compte d'épargne, patrimoine, compte éducation | Montrés à part aux montants annoncés | Annoncé | — |
 | H8 | Taxe foncière unique | Non modélisée (les tarifs INSEE n'existent pas encore) | — | — |
 | H9 | Gel de l'indexation | En euros 2026 : non modélisé ; signalé | Amendement proposé | — |
 | H10 | Garde alternée, partage de l'AFU entre parents séparés | Non modélisé (enfants dans un seul ménage) | — | — |
@@ -184,8 +183,8 @@ Tolérances des tests : 0,08 € (salaires), 0,40 € (RGDU), 0,60 € (prestati
 disponible), avec deux exceptions documentées à 7 €. Les fonctionnaires, l'ARE, les couples non mariés, l'AEEH, les
 dons et l'emploi à domicile ne sont **pas** couverts par ces cas : ce sont des approximations.
 
-Le plan est vérifié sur les chiffres des auteurs : gain de CSG au SMIC 2025 (1 801,80 € brut) = **171,72 €/mois** ;
-table « GraphIR » (revenu imposable 0 / 8 000 / 21 000 / 34 000 / 48 000 €) avec la lecture des auteurs (H2
+Le plan est vérifié sur les chiffres publiés : gain de CSG au SMIC 2025 (1 801,80 € brut) = **171,72 €/mois** ;
+table « GraphIR » (revenu imposable 0 / 8 000 / 21 000 / 34 000 / 48 000 €) avec la lecture du plan (H2
 désactivée) ; seuil 28 695,65 € ; 0,77 € gardé par euro ; adulte handicapé : 1 100 €/mois.
 
 ## 8. Ce que le simulateur ne compte pas {#non-compte}
@@ -204,8 +203,8 @@ désactivée) ; seuil 28 695,65 € ; 0,77 € gardé par euro ; adulte handicap
 - les effets sur les salaires, l'emploi, les loyers et les prix autres que la TVA et les CEE ;
 - les travailleurs non salariés (indépendants, gérants majoritaires), les DOM, l'Alsace-Moselle.
 
-Ces éléments figurent, quand ils vous concernent, dans les panneaux « Promis, non chiffré par la loi » et « Retiré,
-non chiffré ici », à poids égal.
+Ces éléments figurent, quand ils vous concernent, dans les panneaux « Promesses non chiffrées » et « Pertes non chiffrées »,
+à poids égal.
 
 ## 9. Cas-types {#cas-types}
 
@@ -228,15 +227,16 @@ publiés dans le fichier [`cas-types-results.json`](https://github.com/Pierrolo/
 Chaque paramètre (plus de 300) porte sa valeur, son unité, sa date d'effet et sa source dans le
 [code du moteur](https://github.com/Pierrolo/etat-partout-justice-nulle-part/tree/main/engine/src/params), publié en open source.
 
-## 11. Où les sources du livre se contredisent {#ecarts-sources}
+## 11. Où les sources se contredisent {#ecarts-sources}
 
-Le livre, ses amendements et ses classeurs ne disent pas toujours la même chose. **Aucun chiffre n'est corrigé en silence** : quand deux sources divergent, le site conserve les deux valeurs, dit laquelle sert au calcul ou au graphique, et renvoie ici. Les écarts sont numérotés D01 à D34 ; les plus visibles sont rappelés d'abord.
+Le manifeste, les amendements et les classeurs ne disent pas toujours la même chose. **Aucun chiffre n'est corrigé en silence** : quand deux sources divergent, le site conserve les deux valeurs, dit laquelle sert au calcul ou au graphique, et renvoie ici. Les écarts sont numérotés D01 à D34 ; les plus visibles sont rappelés d'abord.
 
 ## 12. Journal des modifications {#journal}
 
 | Date | Version | Ce qui a changé |
 |---|---|---|
+| 26 octobre 2026 | site | Le site parle du plan avec ses propres mots ; un seul vocabulaire pour les trois niveaux (« Proposé dans un amendement », « Annoncé », « Notre estimation ») ; les amendements sont décrits comme rédigés et publiés, en vigueur nulle part ; questionnaire « À votre avis, où va l’argent public ? », où les chiffres du plan sont marqués « Annoncé » ; une seule identité visuelle. |
 | 24 octobre 2026 | moteur 1.1.0 | Complément de libre choix du mode de garde (CMG) et crédit d'impôt garde d'enfants ; pension alimentaire et allocation de soutien familial ; phrase de synthèse en clair ; raison de chaque aide à 0 € ; heure de travail cohérente avec le revenu du foyer ; seconde lecture de H1 ; dirigeants assimilés salariés et travailleurs non salariés ; arrondi d'affichage à 5 € qui préserve les totaux. |
-| 24 octobre 2026 | site | Niveaux de certitude renommés (« Proposé dans un amendement », « Promis par les auteurs », « Notre estimation ») ; page Méthode complète ; glossaire des sigles ; page « Ce que le plan prévoit pour… ». |
+| 24 octobre 2026 | site | Niveaux de certitude renommés (« Proposé dans un amendement », « Annoncé », « Notre estimation ») ; page Méthode complète ; glossaire des sigles ; page « Ce que le plan prévoit pour… ». |
 | 24 octobre 2026 | moteur 1.0.1 | Audit indépendant du moteur, quatre corrections : AEEH et carte mobilité inclusion (défaut), demi-part de la carte, CSG déductible en 2027, tranche de CSG des pensions en 2028. |
-| 24 octobre 2026 | moteur 1.0.0 | Première version publiée : situation 2026 vérifiée sur 40 ménages types OpenFisca, plan reproduit sur les cas du livre. |
+| 24 octobre 2026 | moteur 1.0.0 | Première version publiée : situation 2026 vérifiée sur 40 ménages types OpenFisca, plan reproduit sur les cas publiés. |

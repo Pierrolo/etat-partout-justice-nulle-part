@@ -115,8 +115,8 @@ const CATALOGUE: Entry[] = [
       tier: 'law',
       title: 'Frais de notaire : 1 % / 3 % payés par le vendeur',
       detail:
-        'Barème unique au 1er janvier 2027 : rien sous 10 000 €, 1 % de 10 000 à 100 000 €, 3 % au-delà, à la charge de celui qui réalise la plus-value. Exemple donné : appartement de 200 000 € → 3 900 € payés par le vendeur, au lieu d’environ 10 000 € par l’acheteur aujourd’hui.',
-      amountHint: '−6 100 € sur un achat à 200 000 € (exemple donné)',
+        'Barème unique au 1er janvier 2027 : rien sous 10 000 €, 1 % de 10 000 à 100 000 €, 3 % au-delà, à la charge de celui qui réalise la plus-value. Exemple de l’amendement : appartement de 200 000 € → 3 900 € payés par le vendeur, au lieu d’environ 10 000 € par l’acheteur aujourd’hui.',
+      amountHint: '−6 100 € sur un achat à 200 000 € (exemple de l’amendement)',
       sources: [SRC_AM19_DMTO, fiche('locataire', 'Locataire')],
     },
   },
@@ -306,7 +306,7 @@ const CATALOGUE: Entry[] = [
       tier: 'law',
       title: 'Taxe foncière unique : montant inconnu',
       detail:
-        'À partir de 2028 : base = valeur locative de marché (tarifs INSEE à créer), taux communal entre 10 et 30 %. « à 10 %, un logement acquitte à peu près la taxe foncière d’aujourd’hui ». Non chiffrable aujourd’hui (H8).',
+        'À partir de 2028 : base = valeur locative de marché (tarifs INSEE à créer), taux communal entre 10 et 30 %. Le plan indique qu’« à 10 %, un logement acquitte à peu près la taxe foncière d’aujourd’hui ». Non chiffrable aujourd’hui (H8).',
       sources: [SRC_AM29_TF],
     },
   },

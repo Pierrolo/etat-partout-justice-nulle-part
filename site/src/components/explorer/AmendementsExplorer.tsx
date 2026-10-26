@@ -1,10 +1,10 @@
 /**
  * Les 81 amendements : liste recherchable, regroupée par liasse ou par thème.
  *
- * Rappel qui compte : ce sont des TEXTES PROPOSÉS (projets d'amendements rédigés par Résolution),
- * ni déposés ni adoptés. Le niveau « Proposé dans un amendement » veut dire « texte précis
- * proposé dans les amendements, ni déposé ni voté ». Chaque carte a une ancre (`#PLF-P1-28`) : la frise, le tableau des niches et les
- * autres pages y renvoient.
+ * Rappel qui compte : ce sont des TEXTES PROPOSÉS (projets d'amendements rédigés et publiés par
+ * Résolution), aucun n'est adopté ni en vigueur. Le niveau « Proposé dans un amendement » veut dire
+ * « texte précis rédigé et publié, pas en vigueur ». Chaque carte a une ancre (`#PLF-P1-28`) : la
+ * frise, le tableau des niches et les autres pages y renvoient.
  */
 import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import { SegmentedControl, TierBadge } from '@/components/ui';

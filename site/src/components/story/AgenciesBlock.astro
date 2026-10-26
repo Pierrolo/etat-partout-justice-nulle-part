@@ -32,11 +32,11 @@ const agencesParFoyer = perFoyerYear(num('eco236_agences_md'));
       {formatInteger(agencesTotal)} agences, un carré chacune
     </h2>
     <p class="text-ink-2">
-      Agences, opérateurs, autorités indépendantes, commissions : le décompte en recense
-      {formatInteger(agencesTotal)} au niveau de l’État. Celles qui ne sont pas indispensables
-      coûtent environ {formatEuro(roundForDisplay(agencesParFoyer, 10))} par foyer et par an (sur{' '}
-      {FOYERS_SHORT}). On compte en plus {formatInteger(agencesLocales)} organismes locaux, que le
-      plan ne traite pas ici.
+      Agences, opérateurs, autorités indépendantes, commissions : le plan en recense
+      {formatInteger(agencesTotal)} au niveau de l’État. Il chiffre à environ{' '}
+      {formatEuro(roundForDisplay(agencesParFoyer, 10))} par foyer et par an (sur {FOYERS_SHORT}) le
+      coût de celles qui ne sont pas indispensables. Le chiffrage publié compte en plus{' '}
+      {formatInteger(agencesLocales)} organismes locaux, que le plan ne traite pas ici.
     </p>
   </div>
   <AgencyWaffle

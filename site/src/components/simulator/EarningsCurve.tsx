@@ -228,8 +228,8 @@ export function EarningsCurve({ household, hypotheses, comparison }: EarningsCur
           Votre revenu selon votre salaire
         </h4>
         <p className="text-[0.9375rem] text-ink-2">
-          Cette courbe montre l’effet d’un salaire plus élevé. Quand la première personne du foyer
-          est retraitée, la pension suit une autre logique, et la courbe s’arrête.
+          Cette courbe montre l’effet d’un salaire plus élevé. Elle n’est pas proposée quand la
+          première personne du foyer est retraitée : une pension n’est pas un salaire.
         </p>
       </section>
     );

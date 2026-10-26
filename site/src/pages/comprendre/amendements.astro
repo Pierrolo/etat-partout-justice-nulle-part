@@ -84,16 +84,16 @@ const calendrierHref = withBase('/comprendre/calendrier/');
   title={`Les ${total} amendements`}
   lede={`Les ${total} amendements rédigés par l’association Résolution pour le plan, avec la date de chacun.`}
 >
-  <Callout tone="plan" title="Amendements rédigés, en attente de dépôt">
+  <Callout tone="plan" title="Des amendements publiés, pas des lois votées">
     <p>
-      L’association Résolution a rédigé ces projets d’amendements, datés du {liasses[0]!.date}. Ils
-      attendent d’être déposés, puis votés. Le simulateur s’appuie sur leur texte, qui décrit les
-      paramètres du plan.
+      L’association Résolution a rédigé et publié ces projets d’amendements, datés du{' '}
+      {liasses[0]!.date}. Aucun n’est adopté ni en vigueur. Le simulateur s’appuie sur leur texte,
+      qui décrit les paramètres du plan.
     </p>
     <p class="flex flex-wrap items-center gap-x-2 gap-y-1">
       <TierBadge tier="law" size="sm" />
       <span>
-        veut dire «&#8239;<strong>texte rédigé, en attente de dépôt et de vote</strong>
+        veut dire «&#8239;<strong>texte rédigé et publié, pas en vigueur</strong>
         &#8239;» : un chiffre ou une date qu’on lit mot pour mot dans l’amendement.
       </span>
     </p>

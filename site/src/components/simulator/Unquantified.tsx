@@ -26,9 +26,9 @@ export function Unquantified({ promises, losses }: UnquantifiedProps) {
           Ce que le plan promet ou laisse ouvert, sans le chiffrer
         </h4>
         <p className="text-[0.9375rem] text-ink-2">
-          Ces éléments restent en dehors du revenu disponible. Leur montant est encore ouvert dans
-          les amendements. Ils figurent à part, avec le même poids. Les plus importants pour votre
-          foyer sont déjà signalés sous le résultat.
+          Ces éléments ne sont pas comptés dans votre revenu disponible : aucun montant n’est écrit
+          dans les amendements (0 € par défaut). Ils figurent à part, avec le même poids. Les plus
+          importants pour votre foyer sont déjà signalés sous le résultat.
         </p>
       </header>
       <div className="grid items-stretch gap-4 md:grid-cols-2">

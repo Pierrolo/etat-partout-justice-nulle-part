@@ -440,8 +440,8 @@ function EmptyResultUnsupported() {
       <h2 className="eyebrow eyebrow-accent">Votre résultat</h2>
       <p className="font-serif text-xl font-medium text-ink">Pas encore couvert</p>
       <p className="text-[0.9375rem] text-ink-2">
-        Le revenu d’un indépendant ou d’un gérant majoritaire reste hors du modèle. Le simulateur
-        n’affiche donc pas de montant.
+        Le revenu d’un indépendant ou d’un gérant majoritaire n’est pas modélisé : aucun chiffre
+        n’est affiché plutôt qu’un chiffre qui ne serait pas le vôtre.
       </p>
     </div>
   );

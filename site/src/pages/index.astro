@@ -37,14 +37,15 @@ const nSituations = fiches.meta.count;
           <span aria-hidden="true">→</span>
         </a>
         <a href={withBase('/questionnaire/')} class="text-[0.9375rem] font-medium">
-          Deviner où va le budget
+          Tester vos ordres de grandeur
         </a>
         <a href={withBase('/comprendre/')} class="text-[0.9375rem] font-medium">
           Ou comprendre d’abord où va l’argent public
         </a>
       </p>
       <p class="mt-3 max-w-xl text-sm text-ink-3">
-        Si le plan vous coûtait de l’argent, le simulateur le dirait aussi clairement.
+        Moins d’une minute. Tout se calcule dans votre navigateur : rien n’est envoyé. Si le plan
+        vous coûtait de l’argent, le simulateur le dirait aussi clairement.
       </p>
     </div>
 
@@ -58,12 +59,13 @@ const nSituations = fiches.meta.count;
         class="rounded-md border border-dashed border-[var(--tier-announced-bd)] px-3 py-2 text-[0.9375rem] font-medium text-ink"
         data-testid="hour-caveat"
       >
-        Ordre de grandeur annoncé. L’onglet ne cite pas de source externe.
+        Ordre de grandeur annoncé : le chiffrage publié ne cite pas de source externe pour ce
+        partage.
       </p>
       <HourBar />
       <p class="text-[0.9375rem] leading-relaxed text-ink-2">
-        La part qui revient à l’État sur une heure de travail moyen. Pour votre paie, le simulateur
-        calcule.
+        Selon le chiffrage du plan, voici la part qui revient à l’État sur une heure de travail
+        moyenne. Pour votre paie, le simulateur calcule.
       </p>
     </div>
   </section>
@@ -144,7 +146,7 @@ const nSituations = fiches.meta.count;
         label="Agences d’État aujourd’hui"
         value={formatInteger(agencesAvant)}
         unit="agences"
-        reframe={`Le plan en fermerait ${formatInteger(agencesFermees)} et en garderait ${formatInteger(agencesApres)}. Fermer les agences non indispensables économiserait environ ${formatEuro(roundForDisplay(agencesParFoyer, 10))} par foyer et par an (sur ${FOYERS_SHORT}).`}
+        reframe={`Le plan en fermerait ${formatInteger(agencesFermees)} et en garderait ${formatInteger(agencesApres)}. Il chiffre à environ ${formatEuro(roundForDisplay(agencesParFoyer, 10))} par foyer et par an (sur ${FOYERS_SHORT}) l’économie de la fermeture des agences non indispensables.`}
         tier="announced"
         source={chip('agences_etat_avant', { label: 'Chiffrage publié' })}
       />
@@ -169,11 +171,11 @@ const nSituations = fiches.meta.count;
   <!-- HOW WE KEEP IT HONEST -->
   <section class="wrap mt-16 sm:mt-24" aria-labelledby="honest-title">
     <h2 id="honest-title" class="max-w-xl text-3xl text-ink">
-      Ce qui est écrit, ce qui est promis, ce que nous estimons
+      Ce qui est écrit, ce qui est annoncé, ce que nous estimons
     </h2>
     <p class="mt-3 max-w-2xl text-ink-2">
-      Chaque chiffre porte l’un de ces trois statuts. Les amendements sont rédigés et attendent
-      d’être déposés, puis votés.
+      Chaque chiffre porte l’un de ces trois statuts, avec la même présentation partout. Les
+      amendements sont rédigés et publiés ; aucun n’est en vigueur.
     </p>
     <TierLegend className="mt-6" />
     <Callout

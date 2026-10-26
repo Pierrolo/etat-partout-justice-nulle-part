@@ -26,7 +26,7 @@
   },
   "amendement": {
     "term": "Amendement",
-    "definition": "Proposition de modification d’un projet de loi. Ceux du plan sont rédigés et attendent d’être déposés au Parlement, puis votés."
+    "definition": "Proposition de modification d’un projet de loi. Ceux du plan sont rédigés et publiés par l’association Résolution ; aucun n’est en vigueur."
   },
   "aides-logement": {
     "term": "Aides au logement (APL, ALF, ALS)",
@@ -150,7 +150,7 @@
     "href": "/methode"
   },
   "hypothese": {
-    "term": "Hypothèse du simulateur",
+    "term": "Notre estimation (hypothèse)",
     "definition": "Choix que nous faisons là où le texte du plan est muet (par exemple : les aides actuelles sont-elles remplacées par l’AFU ?). Elles portent un numéro H1, H2… et sont toutes listées sur la page Méthode.",
     "href": "/methode#registre"
   },
@@ -164,7 +164,7 @@
   },
   "liasse": {
     "term": "Liasse d’amendements",
-    "definition": "Paquet d’amendements déposés ensemble sur un même projet de loi. Le plan en compte trois : PLF première partie, PLF seconde partie et PLFSS."
+    "definition": "Paquet d’amendements rédigés ensemble pour un même projet de loi. Le plan en compte trois : PLF première partie, PLF seconde partie et PLFSS."
   },
   "menage": {
     "term": "Ménage",

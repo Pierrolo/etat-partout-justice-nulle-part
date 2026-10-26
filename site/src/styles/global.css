@@ -2,7 +2,7 @@
  * GLOBAL STYLES — imported once by BaseLayout.astro.
  *
  *   1. Tailwind v4 (utilities only where useful) + our tokens
- *   2. Self-hosted fonts (latin subsets; no third-party request)
+ *   2. The narrow-space fallback font (the text fonts are declared in brand-ci.css)
  *   3. Tailwind theme mapped onto the CSS custom properties of tokens.css
  *   4. Base element styles, prose, layout helpers, buttons, cards, tables
  *
@@ -16,40 +16,8 @@
 @import './brand-ci.css';
 
 /* ── Fonts ──────────────────────────────────────────────────────────────── */
-/* Fraunces (display serif, optical-size axis) and Inter (UI sans) from @fontsource, latin subset. */
-@font-face {
-  font-family: 'Fraunces Variable';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2')
-    format('woff2-variations');
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter Variable';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('@fontsource-variable/inter/files/inter-latin-wght-normal.woff2')
-    format('woff2-variations');
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter Variable';
-  font-style: italic;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('@fontsource-variable/inter/files/inter-latin-wght-italic.woff2')
-    format('woff2-variations');
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
+/* Schibsted Grotesk and JetBrains Mono are declared in brand-ci.css (latin subsets of @fontsource, no
+   third-party request). This file only keeps the fallback that supplies the French thousands separator. */
 /* 312-byte font that only contains U+202F (narrow no-break space), 0.2 em wide: the fontsource
    subsets lack it, and French thousands separators (« 1 234 € ») rely on it. */
 @font-face {
@@ -527,12 +495,6 @@
     font-size: var(--text-sm);
     color: var(--ink-2);
   }
-}
-
-/* Content that only exists for one brand (BrandValue.astro, /styleguide): the other one is not rendered. */
-:root[data-brand='editorial'] [data-brand-only='ci'],
-:root[data-brand='ci'] [data-brand-only='editorial'] {
-  display: none !important;
 }
 
 /* ── Accessibility modes ────────────────────────────────────────────────── */

@@ -1,14 +1,14 @@
 # « Et moi, dans tout ça ? »
 
-Compagnon **indépendant** et open source du livre _« État partout, justice nulle part »_ (Barrat, Marle, Mitterrand — Éditions Chronique, 2026).
+Explicatif **open source** du plan présenté dans le livre _« État partout, justice nulle part »_ (Barrat, Marle, Mitterrand — Éditions Chronique, 2026). Le site parle du plan avec ses propres mots, pour le faire comprendre. Il n'en est pas l'auteur : il n'est ni l'association Résolution ni les auteurs du livre, ne parle pas à leur place, et n'est affilié à aucune administration.
 
-1. **Et moi ?** — en moins d'une minute, voir ce que les propositions du livre changeraient pour _son_ foyer, en euros par mois, chaque euro relié à un amendement ou à une hypothèse déclarée.
-2. **Comprendre** — parcourir les données du livre (dépenses publiques, agences, niches fiscales, calendrier…) en graphiques explorables, ramenés à l'échelle d'un foyer.
+1. **Et moi ?** — en moins d'une minute, voir ce que le plan changerait pour _son_ foyer, en euros par mois, chaque euro relié à un amendement ou à une hypothèse déclarée.
+2. **Comprendre** — parcourir les données du plan (dépenses publiques, agences, niches fiscales, calendrier…) en graphiques explorables, ramenés à l'échelle d'un foyer.
 
-> **Outil indépendant, non affilié à l'association Résolution ni à l'État.**
+> **Outil indépendant de l'association Résolution et de l'État.**
 > Données : france-resolution.fr, Insee, Eurostat, DGFiP.
 
-Principes (détail : [`docs/VISION.md`](docs/VISION.md) §2) : fidèle _et_ honnête (les perdants sont affichés) · tout chiffre a une source · loi / annonce / hypothèse toujours distinguées · 100 % côté client (aucun cookie, traceur ni requête tierce) · accessible (WCAG 2.2 AA) · rapide sur mobile · identité visuelle propre (ni DSFR, ni Marianne, ni bleu-blanc-rouge).
+Principes (détail : [`docs/VISION.md`](docs/VISION.md) §2) : un explicatif du plan, honnête (les perdants sont affichés) · tout chiffre a une source (et les désaccords entre sources sont montrés) · trois niveaux de preuve toujours distingués : « Proposé dans un amendement », « Annoncé », « Notre estimation » · 100 % côté client (tous les calculs se font dans le navigateur ; aucun cookie, traceur ni requête tierce) · accessible (WCAG 2.2 AA) · rapide sur mobile · identité visuelle propre (ni DSFR, ni Marianne, ni bleu-blanc-rouge).
 
 ## Démarrer
 
@@ -42,7 +42,7 @@ Variables d'environnement (build) :
 ```
 engine/     @epjn/engine — moteur de calcul en TypeScript pur (complet, 118 tests ; voir docs/ENGINE-API.md)
 site/       Astro 6 (statique) + îlots React 19 + Tailwind CSS v4
-  src/styles/     tokens.css (jetons, clair/sombre) · global.css (Tailwind, polices, base)
+  src/styles/     tokens.css (jetons de base) · brand-ci.css (l'identité livrée, polices) · global.css (Tailwind, base)
   src/lib/        format.ts (formatage français) · chart-theme.ts · tiers.ts · site.ts · contrast.ts · csv.ts
   src/components/ui/      primitives accessibles (StatTile, ChartFrame, NumberInput…)
   src/components/charts/  PlotFigure (Observable Plot) + exemple
@@ -59,11 +59,11 @@ data/ research/ scripts/ docs/   matériaux de départ, recherche, spécificatio
 
 ## Système de design (en bref)
 
-Édition calme et factuelle — un explicatif de rédaction, pas un site ministériel ni un tract. **Voir `/styleguide`** (noindex) pour tout, rendu avec les vrais composants.
+Un style sobre et factuel — un explicatif du plan, pas un site ministériel ni un tract. **Une seule identité** (`site/src/styles/brand-ci.css`), sans bascule. **Voir `/styleguide`** (noindex) pour tout, rendu avec les vrais composants.
 
-- **Couleurs** : papier `#faf8f4`, encre `#15171c`, **un seul accent** « le plan » (violet `#602e9d`), paire divergente sûre pour le daltonisme (gain bleu-vert `#00737a`, perte orange-vermillon `#bc3f06` — jamais rouge/vert). Clair et sombre via `light-dark()` + `<html data-theme>`. Contrastes AA vérifiés par test (`pnpm --filter @epjn/site contrast`).
-- **Niveaux de preuve** : « Écrit dans la loi » (plein) · « Annoncé par les auteurs » (hachuré, tireté) · « Hypothèse du simulateur » (pointillé). Jamais la couleur seule.
-- **Polices** (auto-hébergées, `@fontsource`) : Fraunces (titres, grands chiffres), Inter (interface). Chiffres tabulaires pour les colonnes de montants (`num`).
+- **Couleurs** : papier `#f3f1ea`, encre `#121614`, **un seul accent chaud** (le signal `#ff5a1f`, en aplats et en traits, jamais en texte sur papier), teal `#0f5e55` en second plan, paire divergente sûre pour le daltonisme (gain teal, perte orange-signal — jamais rouge/vert). Clair et sombre via `light-dark()` + `<html data-theme>`. Contrastes AA vérifiés par test (`pnpm --filter @epjn/site contrast`).
+- **Niveaux de preuve** : « Proposé dans un amendement » (plein) · « Annoncé » (hachuré, tireté) · « Notre estimation » (pointillé). Jamais la couleur seule.
+- **Polices** (auto-hébergées, `@fontsource`) : Schibsted Grotesk (texte, titres), JetBrains Mono (étiquettes, chiffres clés). Chiffres tabulaires pour les colonnes de montants (`num`).
 - **Formatage** : tout nombre affiché passe par `src/lib/format.ts` (espace fine insécable, `1 234 €`, `+212 €`, `Md€`, reformulations par foyer / jour).
 - **Graphiques** : `src/lib/chart-theme.ts` (palettes validées, réglages Observable Plot, formateurs français) + `ChartFrame` (résumé en clair, tableau, CSV, source).
 
@@ -71,7 +71,7 @@ Règle : pas de couleur, de taille ni de composant inventés dans une page — �
 
 ## Licence
 
-Code : [MIT](LICENSE) — © Contributeurs du projet « Et moi, dans tout ça ? ». Les données de tiers gardent leurs conditions (classeurs et amendements de Résolution : aucune licence indiquée, cités avec attribution ; Insee et DGFiP : Licence Ouverte 2.0 ; Eurostat : CC BY 4.0) — voir la page « À propos » du site.
+Code : [MIT](LICENSE) — © Contributeurs du projet « Et moi, dans tout ça ? ». Les données de tiers gardent leurs conditions (classeurs, amendements, fiches et manifeste de Résolution : aucune licence indiquée, cités avec attribution ; Insee et DGFiP : Licence Ouverte 2.0 ; Eurostat : CC BY 4.0) — voir la page « À propos » du site.
 
 ## Contribuer / signaler une erreur
 
@@ -81,8 +81,8 @@ Ouvrez une _issue_. Les hypothèses du simulateur sont publiées sur la page « 
 
 ## In English
 
-**« Et moi, dans tout ça ? »** ("And me, in all this?") is an independent, open-source companion to the French book _« État partout, justice nulle part »_. It lets a visitor see, in under a minute, what the book's proposals would change for their own household (€/month, every euro traced to an amendment or a stated hypothesis), and explore the underlying public-finance data.
+**« Et moi, dans tout ça ? »** ("And me, in all this?") is an open-source explainer for the plan in the French book _« État partout, justice nulle part »_. It speaks about the plan in its own words and lets a visitor see, in under a minute, what the plan would change for their own household (€/month, every euro traced to an amendment or a stated hypothesis), and explore the underlying public-finance data. It is not the plan's author.
 
-**Independent — not affiliated with the association Résolution or with the French State.** Fully client-side: no backend, no cookie, no tracker, no third-party request (enforced by an e2e test).
+**Independent of the association Résolution and of the French State, not their site and not speaking for them.** Every calculation runs client-side: no backend, no cookie, no tracker, no third-party request (enforced by an e2e test).
 
 Stack: pnpm workspaces · Astro 6 (static) + React 19 islands · Tailwind CSS v4 · Observable Plot + d3 · TypeScript (strict) · Vitest + fast-check · Playwright + axe. Run `pnpm install && pnpm dev`; see the table above for test commands, and open `/styleguide` for the design system.

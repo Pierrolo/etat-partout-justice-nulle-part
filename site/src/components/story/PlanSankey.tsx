@@ -159,7 +159,7 @@ export function PlanSankey({
         subtitle="Milliards d’euros par an. Largeur du ruban = montant. Plein = proposé dans un amendement ; hachuré = annoncé."
         summary={
           horizon === 'pleine'
-            ? `cinq grandes économies (structures, subventions, niches, assurance chômage, rendement du patrimoine) atteignent ${md(total)} par an en régime de croisière. ${md(sn.value)} reviennent au salaire net par la fin de la CSG/CRDS sur les revenus d’activité : c’est la partie proposée dans un amendement. Le reste, ${md(cap.value)}, alimente une épargne personnelle dont le montant n’est inscrit nulle part.`
+            ? `Selon le chiffrage du plan, cinq grandes économies (structures, subventions, niches, assurance chômage, rendement du patrimoine) atteignent ${md(total)} par an en régime de croisière. ${md(sn.value)} reviennent au salaire net par la fin de la CSG/CRDS sur les revenus d’activité : c’est la partie proposée dans un amendement. Le reste, ${md(cap.value)}, alimente une épargne personnelle dont le montant n’est inscrit nulle part.`
             : `La première année, ${md(year1)} d’économies financent d’abord les ${md(sn.value)} de CSG/CRDS rendus au salaire net ; ${md(year1 - sn.value)} restent pour l’épargne.`
         }
         sources={sources.map((s) => ({ ...s }))}

@@ -1,23 +1,11 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import {
-  BRANDS,
-  contrastRatio,
-  evaluate,
-  pairsFor,
-  parseTokens,
-  resolveBrand,
-  type Brand,
-} from './contrast';
+import { ALL_PAIRS, contrastRatio, evaluate, parseTokens, resolveLook } from './contrast';
 
 const read = (name: string) => readFileSync(new URL(`../styles/${name}`, import.meta.url), 'utf8');
-const css = read('tokens.css');
-const tokens = parseTokens(css);
-const ci = parseTokens(read('brand-ci.css'));
-const byBrand: Record<Brand, ReturnType<typeof resolveBrand>> = {
-  editorial: tokens,
-  ci: resolveBrand(tokens, ci),
-};
+const base = parseTokens(read('tokens.css'));
+/** The tokens in force: the base layer with the shipped look (brand-ci.css) on top. */
+const look = resolveLook(base, parseTokens(read('brand-ci.css')));
 
 describe('contrast maths', () => {
   it('matches known WCAG reference values', () => {
@@ -28,18 +16,17 @@ describe('contrast maths', () => {
 
 describe('design tokens', () => {
   it('parses both modes', () => {
-    expect(tokens.light['--paper']).toBe('#faf8f4');
-    expect(tokens.dark['--paper']).toBe('#14151a');
+    expect(look.light['--paper']).toBe('#f3f1ea');
+    expect(look.dark['--paper']).toBe('#121614');
   });
   it('resolves plain aliases (--field-bg: var(--surface))', () => {
-    expect(tokens.light['--field-bg']).toBe(tokens.light['--surface']);
-    expect(tokens.dark['--field-bg']).toBe(tokens.dark['--surface']);
+    expect(base.light['--field-bg']).toBe(base.light['--surface']);
+    expect(base.dark['--field-bg']).toBe(base.dark['--surface']);
   });
 });
 
-describe.each(BRANDS)('brand « %s »: WCAG 2.2 AA', (brand) => {
-  const map = byBrand[brand];
-  const results = evaluate(map, pairsFor(brand));
+describe('the shipped look: WCAG 2.2 AA', () => {
+  const results = evaluate(look, ALL_PAIRS);
 
   it('has no failing pair, in light and in dark', () => {
     const failing = results
@@ -57,9 +44,9 @@ describe.each(BRANDS)('brand « %s »: WCAG 2.2 AA', (brand) => {
   });
 });
 
-describe('brand « ci » follows the brand README', () => {
-  const l = byBrand.ci.light;
-  const d = byBrand.ci.dark;
+describe('the look follows the brand README', () => {
+  const l = look.light;
+  const d = look.dark;
   it('uses the owner’s palette literally', () => {
     expect(l['--paper']).toBe('#f3f1ea');
     expect(l['--surface']).toBe('#e4e0d3'); // paper-deep
