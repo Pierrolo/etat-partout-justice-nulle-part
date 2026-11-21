@@ -7,7 +7,13 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import fiches from '@/data/fiches.json';
 import { chip, num } from '@/lib/facts';
 import { FOYERS_NOTE, FOYERS_SHORT, perFoyerDay, perFoyerYear } from '@/lib/foyers';
-import { formatEuro, formatInteger, formatNumber, roundForDisplay } from '@/lib/format';
+import {
+  formatEuro,
+  formatInteger,
+  formatMdEuro,
+  formatNumber,
+  roundForDisplay,
+} from '@/lib/format';
 import { READING_HYPOTHESES, readingTime } from '@/lib/reading';
 import { withBase } from '@/lib/site';
 
@@ -146,7 +152,7 @@ const nSituations = fiches.meta.count;
         label="Agences d’État aujourd’hui"
         value={formatInteger(agencesAvant)}
         unit="agences"
-        reframe={`Le plan en fermerait ${formatInteger(agencesFermees)} et en garderait ${formatInteger(agencesApres)}. Il chiffre à environ ${formatEuro(roundForDisplay(agencesParFoyer, 10))} par foyer et par an (sur ${FOYERS_SHORT}) l’économie de la fermeture des agences non indispensables.`}
+        reframe={`Le plan en fermerait ${formatInteger(agencesFermees)} et en garderait ${formatInteger(agencesApres)}. Il chiffre à ${formatMdEuro(num('eco236_agences_md'))} par an l’économie de la fermeture des agences non indispensables, soit ${formatEuro(num('eco236_agences_eur_foyer'))} par foyer dans le chiffrage publié (environ ${formatEuro(roundForDisplay(agencesParFoyer, 10))} sur ${FOYERS_SHORT}).`}
         tier="announced"
         source={chip('agences_etat_avant', { label: 'Chiffrage publié' })}
       />

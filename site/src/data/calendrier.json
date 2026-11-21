@@ -228,10 +228,10 @@
    "in_timeline_2027_2030": true,
    "label_fr": "Cas général : impôt sur le revenu dû au titre de 2026, impôt sur les sociétés des exercices clos à partir du 1er janvier 2027, droits d'enregistrement sur les actes à partir du 1er janvier 2027",
    "n_amendments": 1,
-   "precision": "annee",
+   "precision": "jour",
    "source": {
     "kind": "amendment",
-    "quote": "le I s’applique à l’impôt sur le revenu dû au titre de 2026",
+    "quote": "à l’impôt sur les sociétés dû au titre des exercices clos à compter du 1er janvier 2027",
     "ref": "Amendement PLF-P1 n° 1 (page 20 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=20"
    },
@@ -1038,7 +1038,7 @@
    "precision": "approx",
    "source": {
     "kind": "amendment",
-    "quote": "À compter du lendemain de la publication de la présente loi et avant le 1 er janvier 2028",
+    "quote": "À compter du lendemain de la publication de la présente loi et avant le 1er janvier 2028",
     "ref": "Amendement PLF-P2 n° 27 (page 53 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=53"
    },
@@ -1359,7 +1359,7 @@
    "precision": "jour",
    "source": {
     "kind": "amendment",
-    "quote": "l’avantage est réduit de moitié pour les dons et versements effectués à compter du 1 er juillet 2027",
+    "quote": "l’avantage est réduit de moitié pour les dons et versements effectués à compter du 1er juillet 2027",
     "ref": "Amendement PLF-P1 n° 1 (page 21 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
    },
@@ -1932,7 +1932,7 @@
    "precision": "jour",
    "source": {
     "kind": "amendment",
-    "quote": "ils ne disparaissent qu’à compter du 1 er juillet 2027",
+    "quote": "ils ne disparaissent qu’à compter du 1er juillet 2027",
     "ref": "Amendement PLF-P2 n° 24 (page 30 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=30"
    },
@@ -3458,7 +3458,7 @@
     "cal_058"
    ],
    "n_events": 19,
-   "summary_fr": "Début de la baisse de la CSG/CRDS sur les revenus d'activité, abrogation des exonérations de cotisations, dissolution de 337 entités, 61 400 postes d'État fermés, IS à 27 %, 54 taxes d'État, 72 taxes affectées et 21 contributions sociales supprimées, accise sur l'électricité à 1 € par mégawattheure, TVA dérogatoire, accises et CEE, dons réduits de moitié, et, dans les crédits d'État retirés, les aides au logement, les subventions aux associations, aux opérateurs et les rémunérations.",
+   "summary_fr": "Début de la baisse de la CSG/CRDS sur les revenus d'activité, abrogation des exonérations de cotisations, dissolution de 337 entités, 61 400 postes d'État fermés, IS à 27 %, 54 taxes d'État, 72 taxes affectées et 21 contributions sociales supprimées pour la plupart à cette date (les taxes annuelles tombent au 1er janvier 2028 ou sont dues une dernière fois au titre de 2027), accise sur l'électricité à 1 € par mégawattheure, lignes de taux de TVA que le III bis nomme, accises et CEE, dons réduits de moitié, et, dans les crédits d'État retirés, les aides au logement, les subventions aux associations, aux opérateurs et les rémunérations.",
    "title_fr": "Gros bloc de l'été 2027"
   },
   {
@@ -3836,7 +3836,7 @@
   {
    "id": "tva_autres_taux_reduits",
    "label_fr": "TVA : autres taux réduits (10 %, 5,5 %, 2,1 %) alignés sur le taux normal",
-   "note": "Les taux dérogatoires comptés comme niches fiscales (46 niches de TVA) sont supprimés plus tôt, au 1er juillet 2027 (PLF-P1 n° 1, IV.D).",
+   "note": "Les taux dérogatoires que le III bis de PLF-P1 n° 1 abroge (22 niches de TVA identifiées par leur intitulé, sur 46 niches de TVA au total) sont supprimés plus tôt, au 1er juillet 2027 (III bis, dernier alinéa). Les taux que ni le III ni le III bis ne nomment (6 taux, plus 2 nommés en partie) sont maintenus par le II, 4° : les exposés des n° 1 et 21 annoncent pourtant le 1er juillet 2027, conflit signalé sur la page Niches (D40).",
    "steps": [
     {
      "from": "2028-07-01",
@@ -4057,7 +4057,7 @@
   {
    "id": "niches_agri_services_garde",
    "label_fr": "Avantages fiscaux agricoles, services à la personne et garde de jeunes enfants (part restante)",
-   "note": "Les numéros du III cités par le IV.E de PLF-P1 n° 1 recouvrent 26 niches du classeur (11,8 Md€ en 2024) : le crédit d'impôt emploi à domicile (6 420 M€), le crédit d'impôt garde d'enfants de moins de 6 ans (1 737 M€, art. 200 quater B : rapprochement inféré, voir niches.json) et des niches agricoles ou de coopératives. Ne s'applique pas à la TVA.",
+   "note": "Les numéros du III cités par le IV.E de PLF-P1 n° 1 recouvrent 26 niches du classeur (11,5 Md€ en 2024) : le crédit d'impôt emploi à domicile (6 420 M€), le crédit d'impôt garde d'enfants de moins de 6 ans (1 737 M€, art. 200 quater B : rapprochement inféré, voir niches.json) et des niches agricoles ou de coopératives. Ne s'applique pas à la TVA.",
    "steps": [
     {
      "from": "2026-01-01",

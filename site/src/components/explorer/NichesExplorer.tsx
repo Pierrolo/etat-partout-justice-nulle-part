@@ -134,6 +134,18 @@ function PlanIcon({ plan }: { plan: PlanId }) {
           <path d="M2.5 9c1.4-1.8 2.8-1.8 4.2 0s2.8 1.8 4.2 0M2.5 5.5c1.4-1.8 2.8-1.8 4.2 0s2.8 1.8 4.2 0" />
         </svg>
       );
+    case 'partielle':
+      return (
+        <svg {...common}>
+          <path d="m3.5 3.5 5 5M3.5 12.5h9M11 3.5h1.5" />
+        </svg>
+      );
+    case 'maintenue':
+      return (
+        <svg {...common}>
+          <path d="M3.5 5.5h9M3.5 10.5h9" />
+        </svg>
+      );
     case 'eteinte':
       return (
         <svg {...common}>
@@ -199,7 +211,17 @@ function PlanCell({ row, links }: Pick<RowProps, 'row' | 'links'>) {
         <p className="mt-1 text-xs leading-snug text-ink-3">
           Le classeur des auteurs classe cette niche «&#8239;
           {PLAN_META[row.planClasseur].label.toLowerCase()}&#8239;» ; le site suit le texte de
-          l’amendement{row.planInferred ? ' (rapprochement inféré)' : ''}.
+          l’amendement{row.planInferred ? ' (lecture inférée, voir Détails)' : ''}.
+        </p>
+      )}
+      {!row.planConflict && row.planInferred && (
+        <p className="mt-1 text-xs leading-snug text-ink-3">
+          Lecture inférée par la nature du dispositif (voir Détails).
+        </p>
+      )}
+      {row.planExposeConflict && (
+        <p className="mt-1 text-xs font-semibold leading-snug text-ink-2">
+          Le texte et l’exposé de l’amendement se contredisent (voir Détails).
         </p>
       )}
       {!dead && (
@@ -278,6 +300,7 @@ const NicheLine = memo(function NicheLine({ row, year, maxCost, links }: RowProp
               {row.ends !== null &&
                 ` · fait générateur : ${typeof row.ends === 'number' ? `jusqu’en ${row.ends}` : row.ends.toLowerCase()}`}
             </Detail>
+            {row.planNote && <Detail term="Ce que dit le texte">{row.planNote}</Detail>}
             {row.menagesWhy && <Detail term="Pourquoi « ménages »">{row.menagesWhy}</Detail>}
             <Detail term="Identifiant">{row.id}</Detail>
           </dl>
@@ -549,7 +572,7 @@ export default function NichesExplorer({
             label="Concerne souvent les ménages"
             checked={ui.menages}
             onChange={(menages) => patch({ menages })}
-            hint={`${formatInteger(facets.menages)} niches que la plupart des foyers rencontrent : emploi à domicile, garde d’enfants, dons, livrets, TVA des travaux…`}
+            hint={`${formatInteger(facets.menages)} niches que beaucoup de foyers rencontrent : emploi à domicile, garde d’enfants, dons, livrets, TVA des travaux…`}
             stateLabels={['Oui', 'Non']}
           />
         </div>

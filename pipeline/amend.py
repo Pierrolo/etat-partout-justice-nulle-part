@@ -158,9 +158,18 @@ def amendment_text(liasse: str, n: int) -> str:
     return a["dispositif"] + "\n" + a["expose"]
 
 
+# pdftotext puts the superscript of « 1er » on its own line AFTER the end of the sentence (« au 1 janvier 2028.\n er\n Une famille… »)
+_ER_STRAY = re.compile(r"\b1 ((?:janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)\b[^.]{0,80}\.)\s+er\s+(?=[A-ZÀ-ÖØ-ÞÉ])")
+
+
+def repair_er(text: str) -> str:
+    """« …au 1 janvier 2028. er Une famille… » → « …au 1er janvier 2028. Une famille… » (PDF superscript artefact)."""
+    return _ER_STRAY.sub(r"1er \1 ", text)
+
+
 def first_sentence(expose: str) -> str:
-    """First sentence of the exposé sommaire, verbatim (whitespace-normalised)."""
-    t = ws(expose)
+    """First sentence of the exposé sommaire, verbatim (whitespace-normalised, PDF « 1er » artefact repaired)."""
+    t = repair_er(ws(expose))
     m = re.match(r"(.+?[.!?])(?:\s+(?=[A-ZÀ-ÖØ-ÞÉ«\"(]|\d)|$)", t)
     return m.group(1).strip() if m else t[:240]
 

@@ -175,11 +175,13 @@ test.describe('/comprendre/amendements', () => {
 
   test('dit clairement que ce sont des textes proposés, pas des lois', async ({ page }) => {
     await expect(page.getByText('Des amendements publiés, pas des lois votées')).toBeVisible();
-    await expect(page.getByText(/Aucun n’est adopté ni en vigueur/)).toBeVisible();
+    await expect(page.getByText(/Aucun n’est adopté ni en\s+vigueur/)).toBeVisible();
     await expect(page.getByText(/texte rédigé et publié, pas en vigueur/i).first()).toBeVisible();
     await expect(summary(page)).toContainText('84 amendements');
-    // la version du plan est affichée : « Amendements publiés le 18 novembre 2026 »
-    await expect(page.getByText('Amendements publiés le 18 novembre 2026').first()).toBeVisible();
+    // la version du plan est affichée : « Amendements publiés les 17 et 18 novembre 2026 »
+    await expect(
+      page.getByText('Amendements publiés les 17 et 18 novembre 2026').first(),
+    ).toBeVisible();
     // what no source says: that they will be filed, or voted
     const text = await page.locator('main').innerText();
     expect(text).not.toMatch(/en attente de dépôt|attendent d’être déposés|puis votés/);
@@ -236,7 +238,9 @@ test.describe('/comprendre/calendrier', () => {
   test('filtre par domaine, sans marqueur « aujourd’hui »', async ({ page }) => {
     await page.goto('comprendre/calendrier/');
     await hydrated(page, 'CalendrierExplorer');
-    await expect(page.getByText('Amendements publiés le 18 novembre 2026').first()).toBeVisible();
+    await expect(
+      page.getByText('Amendements publiés les 17 et 18 novembre 2026').first(),
+    ).toBeVisible();
     await expect(page.getByText(/109 mesures affichées sur 109/)).toBeVisible();
     await page.getByRole('button', { name: /^Collectivités/ }).click();
     await expect(page.getByText(/12 mesures affichées sur 109/)).toBeVisible();

@@ -5,12 +5,15 @@ vintage below; the workbook value is kept next to it (`value_classeur`) when it 
 
     tec00023  updated 2026-10-21  total general government expenditure, % of GDP  (freq A, unit PC_GDP, na_item TE, sector S13)
     tec00127  updated 2026-10-21  net lending (+) / net borrowing (-), % of GDP   (freq A, unit PC_GDP, na_item B9, sector S13)
+    gov_10a_main updated 2026-10-21  same indicator (B9, % of GDP, S13) from the main aggregates table; it also publishes Iceland, Norway and
+                                  Switzerland, which tec00127 leaves out (R2-03)
     ilc_di03  updated 2026-10-20  median equivalised net income (EU-SILC)       (statinfo MED_EI, unit EUR / PPS, age TOTAL, sex T)
     nama_10_gdp updated 2026-11-11  GDP at current prices, France only, M€     (unit CP_MEUR, na_item B1GQ, geo FR)
 
 Downloaded on 2026-11-21 from
 https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/<dataset>?format=JSON&lang=EN&sinceTimePeriod=2024
-(ilc_di03 also with &age=TOTAL&sex=T; nama_10_gdp with &geo=FR&unit=CP_MEUR&na_item=B1GQ). The files are only
+(ilc_di03 also with &age=TOTAL&sex=T; nama_10_gdp with &geo=FR&unit=CP_MEUR&na_item=B1GQ; gov_10a_main with
+&unit=PC_GDP&sector=S13&na_item=B9). The files are only
 parsed as JSON.
 """
 from __future__ import annotations
@@ -25,6 +28,7 @@ DIR = ROOT / "data" / "eurostat"
 FIXED = {
     "tec00023": {"freq": "A", "unit": "PC_GDP", "na_item": "TE", "sector": "S13"},
     "tec00127": {"freq": "A", "unit": "PC_GDP", "na_item": "B9", "sector": "S13"},
+    "gov_10a_main": {"freq": "A", "unit": "PC_GDP", "na_item": "B9", "sector": "S13"},
     "ilc_di03_eur": {"freq": "A", "age": "TOTAL", "sex": "T", "statinfo": "MED_EI", "unit": "EUR"},
     "ilc_di03_pps": {"freq": "A", "age": "TOTAL", "sex": "T", "statinfo": "MED_EI", "unit": "PPS"},
     "nama_10_gdp": {"freq": "A", "unit": "CP_MEUR", "na_item": "B1GQ"},

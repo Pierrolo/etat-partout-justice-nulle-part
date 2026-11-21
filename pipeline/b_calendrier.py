@@ -43,6 +43,7 @@ DOMAIN_ORDER = {d: i for i, (d, _) in enumerate(DOMAINS)}
 # --------------------------------------------------------------------------------------------
 def _traj():
     _E = b_niches.build()["plan_texte"]["plan_final"]["trois-ans"]
+    _tva = b_niches.build()["plan_texte"]["tva"]
     T = []
     T.append({
         "id": "csg_crds_activite_2027",
@@ -78,7 +79,9 @@ def _traj():
         "label_fr": "TVA : autres taux réduits (10 %, 5,5 %, 2,1 %) alignés sur le taux normal",
         "unit": "% (taux de TVA)",
         "steps": [{"from": "2028-07-01", "to": None, "value": 20, "label_fr": "Tous les taux réduits passent à 20 % (métropole, Corse comprise ; outre-mer inchangé)", "q": [("PLF-P1", 21, "au 1er juillet 2028, sur tout le territoire métropolitain, Corse comprise")]}],
-        "note": "Les taux dérogatoires comptés comme niches fiscales (46 niches de TVA) sont supprimés plus tôt, au 1er juillet 2027 (PLF-P1 n° 1, IV.D).",
+        "note": (f"Les taux dérogatoires que le III bis de PLF-P1 n° 1 abroge ({_tva['nommees_iii_bis']['n_niches']} niches de TVA identifiées par leur intitulé, sur {_tva['n_niches']} niches de TVA au total) "
+                 f"sont supprimés plus tôt, au 1er juillet 2027 (III bis, dernier alinéa). Les taux que ni le III ni le III bis ne nomment ({_tva['taux_non_nommes_maintenus']['n_niches']} taux, plus {_tva['partiellement_nommees']['n_niches']} nommés en partie) sont maintenus par le II, 4° : "
+                 "les exposés des n° 1 et 21 annoncent pourtant le 1er juillet 2027, conflit signalé sur la page Niches (D40)."),
         "tier": "loi",
     })
     T.append({
@@ -174,7 +177,7 @@ def _traj():
             for (lid, n, q) in s.pop("q"):
                 assert quote_in_amendment(lid, n, q), f"trajectory quote not found {t['id']} {lid} n°{n}: {q!r}"
                 first, _last = quote_pages(lid, n, q)  # the page that holds the quote
-                s.setdefault("sources", []).append({"liasse": lid, "number": n, "page": first, "quote": q, "url": pdf_url(lid, first)})
+                s.setdefault("sources", []).append({"liasse": lid, "number": n, "page": first, "quote": ws(q), "url": pdf_url(lid, first)})
         t["steps"] = [{k: v for k, v in s.items()} for s in t["steps"]]
     return T
 
@@ -195,7 +198,7 @@ JALONS = [
     ("2027-01-01", "Premières coupes", "Crédits d'État retirés pour le fonctionnement courant, l'investissement, les aides aux entreprises et les transferts aux collectivités, chèque énergie et aides au logement social neuf supprimés, mutations à 1 % / 3 %, plus-values immobilières au réel, indexations gelées, crédit d'impôt famille abrogé, premières niches supprimées (revenus 2026, successions et donations, Pacte Dutreil)."),
     ("2027-04-01", "Hébergement d'urgence recentré", "L'hébergement d'urgence devient une faculté temporaire ; les crédits d'hébergement d'urgence sont retirés à cette date."),
     ("2027-06-01", "Fin des nouvelles demandes d'APL", "Aucune demande d'aide personnelle au logement déposée à partir de cette date n'ouvre de droit."),
-    ("2027-07-01", "Gros bloc de l'été 2027", "Début de la baisse de la CSG/CRDS sur les revenus d'activité, abrogation des exonérations de cotisations, dissolution de 337 entités, 61 400 postes d'État fermés, IS à 27 %, 54 taxes d'État, 72 taxes affectées et 21 contributions sociales supprimées, accise sur l'électricité à 1 € par mégawattheure, TVA dérogatoire, accises et CEE, dons réduits de moitié, et, dans les crédits d'État retirés, les aides au logement, les subventions aux associations, aux opérateurs et les rémunérations."),
+    ("2027-07-01", "Gros bloc de l'été 2027", "Début de la baisse de la CSG/CRDS sur les revenus d'activité, abrogation des exonérations de cotisations, dissolution de 337 entités, 61 400 postes d'État fermés, IS à 27 %, 54 taxes d'État, 72 taxes affectées et 21 contributions sociales supprimées pour la plupart à cette date (les taxes annuelles tombent au 1er janvier 2028 ou sont dues une dernière fois au titre de 2027), accise sur l'électricité à 1 € par mégawattheure, lignes de taux de TVA que le III bis nomme, accises et CEE, dons réduits de moitié, et, dans les crédits d'État retirés, les aides au logement, les subventions aux associations, aux opérateurs et les rémunérations."),
     ("2027-12-01", "Plus de CSG ni de CRDS sur le travail", "CSG et CRDS à zéro sur les revenus d'activité."),
     ("2028-01-01", "Impôt unique et aide fondamentale", "Impôt à 23 % et aide fondamentale universelle (revenus 2028), compte d'épargne personnel, bouclier sanitaire (sous réserve de l'aide), régime socle unique, prestations familiales abrogées, taxe foncière unique, dons sans réduction."),
     ("2028-07-01", "TVA : taux réduits à 20 %", "Taux réduits de TVA alignés sur 20 % ; alimentation à 10 % ; APL du parc conventionné réduite de deux tiers."),
@@ -255,7 +258,7 @@ def build() -> dict:
                 "domain": dom, "theme": theme,
                 "amendments": [{"liasse": lid, "number": n}], "n_amendments": 1,
                 "tier": "loi",
-                "source": {"kind": "amendment", "ref": f"Amendement {lid} n° {n} ({page_label(*quote_pages(lid, n, q))} du PDF)", "url": pdf_url(lid, quote_pages(lid, n, q)[0]), "quote": q},
+                "source": {"kind": "amendment", "ref": f"Amendement {lid} n° {n} ({page_label(*quote_pages(lid, n, q))} du PDF)", "url": pdf_url(lid, quote_pages(lid, n, q)[0]), "quote": ws(q)},
             })
     events.sort(key=lambda e: (e["date"], DOMAIN_ORDER[e["domain"]], e["amendments"][0]["liasse"], e["amendments"][0]["number"], e["label_fr"]))
     for i, e in enumerate(events, 1):

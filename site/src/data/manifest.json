@@ -20,15 +20,15 @@
    }
   },
   "amendements.json": {
-   "bytes": 151076,
-   "sha256": "c386be42c8a31fd3b2809150a46433dc0b4a388766b2925ca9b120c68410356e",
+   "bytes": 152261,
+   "sha256": "023139e1aeba518c366ea5f005810f81410ce190bd572211377fcd6aa1a8016c",
    "top_level_lists": {
     "amendements": 84
    }
   },
   "calendrier.json": {
-   "bytes": 134748,
-   "sha256": "390ef1e24eea5d3dd386aaa06f52b483e69b325b8209f961abc332e3c86a8981",
+   "bytes": 135231,
+   "sha256": "b009b2bd87951980dea9697e259cf49651f7456117b6393831daa7720b5b11d5",
    "top_level_lists": {
     "annonces_sans_date": 9,
     "events": 109,
@@ -62,8 +62,8 @@
    }
   },
   "europe.json": {
-   "bytes": 118592,
-   "sha256": "b508a82f99cfe402408921a101f4a074dc6a12c0557dd2bc1a4b6245009a7a7c",
+   "bytes": 123601,
+   "sha256": "3a29944ff3d6fd8f5efa301d4abf75057c85201628f9d0685662d1098f718563",
    "top_level_lists": {
     "agregats": 4,
     "depenses_publiques_pib": 68,
@@ -74,10 +74,10 @@
    }
   },
   "facts.json": {
-   "bytes": 238811,
-   "sha256": "17a9f8ca4c121543b38a1148d9c901fab60500065e2a074b2064610f0598ef56",
+   "bytes": 242691,
+   "sha256": "7ba5ab62f4f09884548c769ef8af4b7ce065e67eb134087e8ea27d20917b0494",
    "top_level_lists": {
-    "facts": 420
+    "facts": 423
    }
   },
   "fiches.json": {
@@ -97,8 +97,8 @@
    }
   },
   "niches.json": {
-   "bytes": 1167812,
-   "sha256": "caf39f4ad879bb7f5cc2ddfca73d377474b32c7f01221b7f4b7cc705e9d00b96",
+   "bytes": 1227123,
+   "sha256": "b48002c734ee70a3c7ca8df4ea07e3490cf359cbbc6795aa183234d46bec0027",
    "top_level_lists": {
     "niches": 465,
     "provisions_calcul_impot": 81

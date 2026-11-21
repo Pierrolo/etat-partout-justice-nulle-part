@@ -26,6 +26,7 @@ export interface FactSource {
     | 'dgafp'
     | 'legifrance'
     | 'reglementation'
+    | 'fipeco'
     | 'calcul';
   ref: string;
   url: string | null;
@@ -93,6 +94,7 @@ const KIND_LABEL: Record<FactSource['kind'], string> = {
   dgafp: 'DGAFP',
   legifrance: 'Légifrance',
   reglementation: 'Légifrance, Code du travail',
+  fipeco: 'FIPECO',
   calcul: 'Calcul du site',
 };
 

@@ -8,7 +8,7 @@ import { packAgencies } from '@/lib/etat-shared';
 import { chip, conflicts, num } from '@/lib/facts';
 import { formatDateFr } from '@/lib/dates';
 import { FOYERS_SHORT, perFoyerYear } from '@/lib/foyers';
-import { formatEuro, formatInteger, roundForDisplay } from '@/lib/format';
+import { formatEuro, formatInteger, formatMdEuro, roundForDisplay } from '@/lib/format';
 
 // ── Agences ─────────────────────────────────────────────────────────────────
 const fates = agencyFates();
@@ -33,10 +33,16 @@ const agencesParFoyer = perFoyerYear(num('eco236_agences_md'));
     </h2>
     <p class="text-ink-2">
       Agences, opérateurs, autorités indépendantes, commissions : le plan en recense
-      {formatInteger(agencesTotal)} au niveau de l’État. Il chiffre à environ{' '}
-      {formatEuro(roundForDisplay(agencesParFoyer, 10))} par foyer et par an (sur {FOYERS_SHORT}) le
-      coût de celles qui ne sont pas indispensables. Le chiffrage publié compte en plus{' '}
-      {formatInteger(agencesLocales)} organismes locaux, que le plan ne traite pas ici.
+      {formatInteger(agencesTotal)} au niveau de l’État. Il chiffre à{' '}
+      {formatMdEuro(num('eco236_agences_md'))}
+      par an le coût de celles qui ne sont pas indispensables, soit{' '}
+      {formatEuro(num('eco236_agences_eur_foyer'))}
+      par foyer dans le chiffrage publié (environ {formatEuro(
+        roundForDisplay(agencesParFoyer, 10),
+      )}{' '}
+      sur
+      {FOYERS_SHORT}). Le chiffrage publié compte en plus {formatInteger(agencesLocales)} organismes
+      locaux, que le plan ne traite pas ici.
     </p>
   </div>
   <AgencyWaffle

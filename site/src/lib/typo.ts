@@ -44,8 +44,29 @@ const RE_GROUPS = /(?<![\d,.])\d{1,3}(?:[  ]\d{3})+(?!\d)/g;
 const RE_UNIT = /(\d) +(?=(?:Md€|M€|k€|€|%|‰)(?![\p{L}\d]))/gu;
 const RE_FIRST = new RegExp(`(?<![\\d,.h])\\b1(?=[ \\u00A0\\u202F](?:${MONTHS})\\b)`, 'gu');
 
+/**
+ * Web addresses are never prose: « …/S%C3%A9ries.xlsx » must not become « …/S%C3 %A9ries.xlsx » (the « 3% » rule
+ * of `spaceBeforePercent`), nor an address followed by « : » get a no-break space glued into it. They are swapped
+ * for opaque placeholders for the duration of the pass, then put back untouched (R2-01).
+ */
+const RE_URL = /(?:https?:\/\/|mailto:)[^\s<>"'«»]+/g;
+/** Characters of a URL that are really the sentence's punctuation when they end it. */
+const URL_TAIL = /[.,;:!?)\]”’]+$/;
+
 export function typo(input: string, opts: TypoOptions = {}): string {
   if (!input) return input;
+  if (/https?:\/\/|mailto:/.test(input)) {
+    const urls: string[] = [];
+    const masked = input.replace(RE_URL, (u) => {
+      const tail = URL_TAIL.exec(u)?.[0] ?? '';
+      const core = tail ? u.slice(0, -tail.length) : u;
+      urls.push(core);
+      return `\uE000${urls.length - 1}\uE001${tail}`;
+    });
+    // Placeholders contain no letter, digit or space: no rule can rewrite them.
+    const out = typo(masked, opts);
+    return out.replace(/\uE000(\d+)\uE001/g, (_m, i: string) => urls[Number(i)]!);
+  }
   // A letter stands for the word that precedes the text (it is never rewritten, and is dropped at the end).
   const lead = opts.afterInline ? 'x' : '';
   let s = lead + input;
@@ -73,14 +94,22 @@ export function typo(input: string, opts: TypoOptions = {}): string {
   return lead ? s.slice(lead.length) : s;
 }
 
-/** Deep-map every string of a JSON-like value through `typo` (datasets, build time). */
-export function typoDeep<T>(value: T, opts: TypoOptions = {}): T {
-  if (typeof value === 'string') return typo(value, opts) as T;
-  if (Array.isArray(value)) return value.map((v) => typoDeep(v, opts)) as T;
+/** Keys whose value is a web address (never typographed): `url`, `href`, `pdf_url`, `origin_url`… */
+const URL_KEY = /(?:^|_)(?:url|href)$/i;
+/** A string that is nothing but a web address. */
+const WHOLE_URL = /^(?:https?:\/\/|mailto:)\S+$/;
+
+/** Deep-map every string of a JSON-like value through `typo` (datasets, build time). URLs are left as they are. */
+export function typoDeep<T>(value: T, opts: TypoOptions = {}, key?: string): T {
+  if (typeof value === 'string') {
+    if ((key && URL_KEY.test(key)) || WHOLE_URL.test(value)) return value;
+    return typo(value, opts) as T;
+  }
+  if (Array.isArray(value)) return value.map((v) => typoDeep(v, opts, key)) as T;
   if (value && typeof value === 'object') {
     const out: Record<string, unknown> = {};
     for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
-      out[k] = typoDeep(v, opts);
+      out[k] = typoDeep(v, opts, k);
     }
     return out as T;
   }

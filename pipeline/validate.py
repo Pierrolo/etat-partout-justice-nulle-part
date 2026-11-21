@@ -26,7 +26,7 @@ from amend import LIASSES, all_amendments, quote_in_amendment  # noqa: E402
 from lib import OUT_DIR, ROOT, SHEET_TITLES, WORKBOOKS, Sheet, fr, load_reform_params, quote_in, rp  # noqa: E402
 
 TIERS = {"loi", "annonce", "donnee", "calcul"}
-KINDS = {"workbook", "amendment", "site", "insee", "eurostat", "dgafp", "legifrance", "reglementation", "calcul"}
+KINDS = {"workbook", "amendment", "site", "insee", "eurostat", "dgafp", "legifrance", "reglementation", "fipeco", "calcul"}
 TOL = 1e-6
 
 
@@ -157,7 +157,7 @@ def check_facts(R: Report, facts: dict):
                 errs.append("snapshot vintage changed")
             elif abs(f["value"] - raw * s.get("scale", 1)) > 0.05 + 1e-9:
                 errs.append(f"value {f['value']} != snapshot {raw}")
-        elif s.get("kind") in ("workbook", "insee", "eurostat", "dgafp", "legifrance"):
+        elif s.get("kind") in ("workbook", "insee", "eurostat", "dgafp", "legifrance") and not f.get("verified_by"):  # verified_by : lu dans la source officielle, hors classeur
             raw = _reread_cell(s["ref"].split(" — repris dans ")[-1])
             if raw is None:
                 errs.append("cell not re-readable")
@@ -360,8 +360,15 @@ def check_niches(R, d, facts):
     R.check(d["taux_reduits_tva_hors_niches"]["count"] == 21, area, "21 reduced VAT rates (aggregate only)")
     pt = d["plan_texte"]
     byid = {r["id"]: r for r in n}
-    R.check(all(r["resolution"]["plan_final"] in {"supprimee", "trois-ans", "aide-fondamentale", "outre-mer", "eteinte"} for r in n) and sum(v["n_niches"] for v in pt["plan_final"].values()) == 465, area,
+    R.check(all(r["resolution"]["plan_final"] in {"supprimee", "trois-ans", "aide-fondamentale", "outre-mer", "partielle", "maintenue", "eteinte"} for r in n) and sum(v["n_niches"] for v in pt["plan_final"].values()) == 465, area,
             "plan_final set on the 465 niches (text of PLF-P1 n° 1 over the authors' column)")
+    tva = pt["tva"]
+    R.check(tva["n_niches"] == 46 and [tva[k]["n_niches"] for k in ("nommees_iii_bis", "exonerations_regle_generale", "taux_non_nommes_maintenus", "partiellement_nommees", "outre_mer_hors_champ", "outre_mer_flux_om", "deja_eteintes")] == [22, 6, 6, 2, 2, 5, 3], area,
+            "46 TVA niches: 22 named by III bis + 6 exemptions (general rule) + 6 rates kept by II 4° + 2 partly named + 2 overseas out of scope + 5 « Flux OM » + 3 extinct")
+    R.check(pt["outre_mer"]["hors_champ"]["n_niches"] == 16 and pt["outre_mer"]["hors_champ"]["dont_oui_au_classeur"]["n_niches"] == 10, area,
+            "16 overseas niches outside Am. 1 (II, last paragraph): 6 « Flux OM » + 10 « Oui » of the workbook")
+    R.check((byid["110240"]["resolution"]["plan_final"], byid["120124"]["resolution"]["plan_final"], byid["60203"]["resolution"]["plan_final"]) == ("trois-ans", "supprimee", "trois-ans"), area,
+            "110240 = trois-ans (Am. 8), 120124 = supprimée (IV.A), 60203 = trois-ans (agricultural, inferred)")
     R.check(byid["520110"]["resolution"]["plan_texte"]["groupe"] == "Cbis" and byid["110203"]["resolution"]["plan_texte"]["groupe"] == "E" and byid["110107"]["resolution"]["plan_texte"]["groupe"] == "C", area,
             "Pacte Dutreil = IV.C bis (1er janvier 2027), garde d'enfants = IV.E (par tiers), quotient conjugal = IV.C (IR 2028)")
     R.check(pt["ir_2028"]["n_niches"] >= 19, area, f"{pt['ir_2028']['n_niches']} IR niches fall under IV.C (impôt dû au titre de 2028)")
@@ -378,7 +385,13 @@ def check_niches(R, d, facts):
         R.warn("D20", f"Niches 2026 : somme des lignes {fr(cmp['somme_lignes_2026_meur'] / 1000, 3)} Md€ vs 79,5 Md€ de l'exposé de PLF-P1 n° 1 ; fiche Contribuable « 143 Md€ » vs 134,7 Md€ (486) vs 89,4 Md€ (465).")
     cf = pt["conflits_avec_le_classeur"]
     if cf:
-        R.warn("D40", f"Niches : {len(cf)} niches pour lesquelles la colonne « Suppression » du classeur et le texte de PLF-P1 n° 1 (III et IV.A à F) donnent deux traitements (" + ", ".join(f"{c['id']} {c['plan_classeur']} → {c['plan_final']}" for c in cf[:6]) + ", …) ; {len(pt['classeur_non_verifie_dans_le_texte'])} niches « En 3 ans » du classeur ne sont nommées dans aucun groupe du IV.E.".replace("{len(pt['classeur_non_verifie_dans_le_texte'])}", str(len(pt["classeur_non_verifie_dans_le_texte"]))))
+        R.warn("D40", f"Niches : {len(cf)} niches pour lesquelles la colonne « Suppression » du classeur et le texte de PLF-P1 n° 1 (II, III, III bis, IV.A à F) donnent deux traitements (" + ", ".join(f"{c['id']} {c['plan_classeur']} → {c['plan_final']}" for c in cf[:6]) + f", …) ; {len(pt['lectures_inferees'])} lectures inférées par la nature du dispositif ({', '.join(x['id'] for x in pt['lectures_inferees'])}).")
+    # D41 : qui paie les droits de mutation (PLF-P1 n° 19 et n° 20), citations vérifiées dans le texte
+    from amend import quote_in_amendment
+    q19 = ["le vendeur pour une vente, l’héritier pour une succession", "le vendeur acquitte 3 900 euros", "supportés par celui qui liquide la plus-value sur laquelle ils s’imputent"]
+    q20 = ["des droits acquittés à titre d’acompte par le cédant en application du III de l’article 683", "lors de l’acquisition, intervenue à compter du 1er janvier 2027", "le droit de mutation payé à l’achat s’impute sur l’impôt dû à la revente"]
+    R.check(all(quote_in_amendment("PLF-P1", 19, q) for q in q19) and all(quote_in_amendment("PLF-P1", 20, q) for q in q20), area, "D41 quotes found verbatim in PLF-P1 n° 19 and n° 20")
+    R.warn("D41", "Droits de mutation : l'exposé de PLF-P1 n° 19 dit « le vendeur pour une vente » et que le vendeur acquitte 3 900 € ; le dispositif dit « supportés par celui qui liquide la plus-value sur laquelle ils s'imputent » ; le n° 20 (200 B) impute « les droits acquittés … par le cédant … lors de l'acquisition » (« payé à l'achat »).")
     R.warn("D30", "Niches : colonne « S / E » du classeur sans légende (S = exonérations salariales, E = épargne : interprétation par recoupement).")
     R.warn("D32", "TVA : la liste individuelle des 21 taux réduits non comptés comme niches n'est publiée dans aucune source (nombre et coût agrégé seulement).")
 

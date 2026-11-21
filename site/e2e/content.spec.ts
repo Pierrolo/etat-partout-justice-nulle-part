@@ -57,7 +57,11 @@ test.describe('/methode', () => {
     // ONE tier vocabulary on the page: the legend, the prose (#niveaux) and the register agree
     await expect(page.locator('#niveaux ~ ul').first()).toContainText('Annoncé');
     await expect(page.locator('tr#h1')).toContainText('Annoncé');
-    const text = await main.innerText();
+    // the journal (§ 12) keeps the history: on 24 October the middle tier was still « Promis par les auteurs »
+    const text = (await main.innerText())
+      .split('\n')
+      .filter((line) => !/Niveaux de certitude renommés/.test(line))
+      .join('\n');
     for (const old of ['Promis par les auteurs', 'Écrit dans la loi', 'Annoncé par les auteurs']) {
       expect(text, `l’ancien libellé « ${old} »`).not.toContain(old);
     }
@@ -69,7 +73,9 @@ test.describe('/methode', () => {
     await expect(page.locator('#d16')).toHaveCount(1); // « Quatre foyers différents »
     await expect(page.locator('#d04')).toContainText('PIB');
     // the version of the plan, and the conflicts born with the November 2026 version
-    await expect(page.getByText('Amendements publiés le 18 novembre 2026').first()).toBeVisible();
+    await expect(
+      page.getByText('Amendements publiés les 17 et 18 novembre 2026').first(),
+    ).toBeVisible();
     await expect(page.locator('#d38')).toContainText(/minoration/);
     await expect(page.locator('#d40')).toContainText(/Suppression/);
   });

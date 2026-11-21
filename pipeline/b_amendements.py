@@ -98,8 +98,8 @@ def build() -> dict:
         "meta": {
             "title_fr": "Les 84 amendements rédigés et publiés par Résolution",
             "tier": "loi",
-            "tier_note": "Ce sont des projets d'amendements rédigés et publiés par l'association Résolution (liasses republiées les 17 et 18 novembre 2026) : ils ne sont pas en vigueur, aucun n'a été déposé au Parlement à la date du 21 novembre 2026 ; leur texte est la seule spécification précise des paramètres du plan.",
-            "version": {k: PLAN_VERSION[k] for k in ("date_iso", "date_fr", "label_fr", "pdf_dates_fr", "cover_fr", "previous_fr")},
+            "tier_note": "Ce sont des projets d'amendements rédigés et publiés par l'association Résolution (liasses republiées les 17 et 18 novembre 2026) : ils ne sont pas en vigueur. Une recherche dans les données ouvertes des amendements de l'Assemblée nationale et du Sénat, faite le 21 novembre 2026 sur vingt formules caractéristiques de ces textes, n'en a retrouvé aucun parmi les amendements déposés. L'Assemblée nationale a d'ailleurs rejeté la première partie du PLF 2027 le 4 novembre 2026 (458 voix contre, aucune pour : LCP, 4 novembre 2026), qui part au Sénat dans la version du gouvernement. Leur texte est la seule spécification précise des paramètres du plan.",
+            "version": {k: PLAN_VERSION[k] for k in ("date_iso", "date_fr", "label_fr", "published_label_fr", "pdf_dates_fr", "cover_fr", "previous_fr")},
             "donnees_page_cards": donnees_cards(),
             "counts": {"total": 84, **{lid: m["count"] for lid, m in LIASSES.items()}},
             "liasses": [
@@ -107,7 +107,7 @@ def build() -> dict:
                 for lid, m in LIASSES.items()
             ],
             "themes": [{"id": k, "label_fr": v, "n": len(by_theme.get(k, []))} for k, v in THEMES.items()],
-            "dates_note": "dates : une entrée par effet daté écrit dans le texte (precision : jour = jour écrit ; annee = année sans jour, 1er janvier par convention ; approx = point de départ non écrit). Chaque entrée a été vérifiée contre le texte de l'amendement lors de la construction.",
+            "dates_note": "dates : une entrée par effet daté écrit dans le texte (precision : jour = jour écrit ; annee = année sans jour : 1er janvier de l'année écrite pour un début, 31 décembre pour une fin (« dernière fois au titre de 2027 »), une date limite écrite (« jusqu'au 31 décembre 2026 ») étant donnée à son dernier jour ; approx = point de départ non écrit). Chaque entrée a été vérifiée contre le texte de l'amendement lors de la construction.",
             "resume_note": "resume_fr : une phrase neutre rédigée par le pipeline d'après l'exposé sommaire et le dispositif ; objet_expose_fr : première phrase de l'exposé sommaire, reprise telle quelle.",
             "pdf_note": "pdf_url pointe vers la première page de l'amendement dans le PDF de la liasse (ancre #page=N) sur france-resolution.fr ; chaque entrée de dates[] pointe vers la page qui contient la phrase citée.",
         },

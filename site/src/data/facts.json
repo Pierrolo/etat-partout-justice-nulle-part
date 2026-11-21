@@ -1099,12 +1099,10 @@
   "note": "Valeur : 23 amendements, un par mission (n° 1 à 22, plus le n° 40 « Outre-mer » ajouté en novembre 2026).",
   "source": {
    "kind": "amendment",
-   "liasse": "PLF-P2",
-   "number": 40,
-   "page": 70,
-   "quote": "Cet amendement retire de la mission « Outre-mer » les crédits des dispositifs que la présente loi interrompt",
-   "ref": "Amendement PLF-P2 n° 40 (page 70 du PDF)",
-   "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=70"
+   "page": 1,
+   "quote": "Les 22 premiers retirent, mission par mission, les crédits de l’état B que la présente loi interrompt. Le n° 23 supprime la contribution de l’assurance chômage à France Travail. Les 16 suivants sont normatifs. Le n° 40, ajouté en dernier numéro, retire les crédits de la mission « Outre-mer ».",
+   "ref": "Liasse PLF-P2, page de couverture (page 1 du PDF) : 22 amendements d'état B, plus le n° 40 « Outre-mer »",
+   "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=1"
   },
   "tier": "loi",
   "unit": "amendements",
@@ -4822,7 +4820,7 @@
     ]
    }
   ],
-  "label_fr": "« 143 Md€ de niches supprimées, dont 52 milliards vous reviennent » (fiche Contribuable)",
+  "label_fr": "« 143 Md€ : De niches supprimées, dont 52 milliards d'euros vous reviennent en baisse de charges et de taxes » (fiche Contribuable)",
   "source": {
    "kind": "site",
    "page": "fiches__contribuable",
@@ -5205,6 +5203,20 @@
   "value": 5803.862,
   "year": 2023
  },
+ "fp_effectifs_2024_k": {
+  "label_fr": "Effectifs des trois fonctions publiques au 31 décembre 2024",
+  "note": "5,85 millions de personnes. Le classeur des auteurs reprend l'édition 2025 du rapport (31 décembre 2023 : 5,80 millions) : le site garde ses chiffres détaillés par versant et statut, datés de 2023, et signale cette édition plus récente.",
+  "source": {
+   "kind": "dgafp",
+   "ref": "DGAFP, Fonction publique, chiffres clés, édition 2026 (octobre 2026), figure 2 : « 5 848,3 » milliers d'agents au 31 décembre 2024, France hors Mayotte (emplois principaux, tous statuts)",
+   "url": "https://www.fonction-publique.gouv.fr/files/files/publications/publications-dgafp/cc-2026-web.pdf"
+  },
+  "tier": "donnee",
+  "unit": "milliers de personnes",
+  "value": 5848.3,
+  "verified_by": "lecture du PDF officiel (figure 2, 21 novembre 2026), hors classeur",
+  "year": 2024
+ },
  "fp_etat_ministeres_2023_k": {
   "label_fr": "Agents de l'État dans les ministères (hors opérateurs)",
   "source": {
@@ -5272,6 +5284,20 @@
   "unit": "milliers de personnes",
   "value": 2570.237,
   "year": 2023
+ },
+ "fp_fpe_2024_k": {
+  "label_fr": "Fonction publique de l'État au 31 décembre 2024",
+  "note": "2,58 millions, soit 44 % de l'emploi public (2 581,9 ÷ 5 848,3) : l'État n'est pas la majorité des agents, comme en 2023.",
+  "source": {
+   "kind": "dgafp",
+   "ref": "DGAFP, Fonction publique, chiffres clés, édition 2026 (octobre 2026), figure 2 : « 2 581,9 » milliers d'agents de la fonction publique de l'État au 31 décembre 2024",
+   "url": "https://www.fonction-publique.gouv.fr/files/files/publications/publications-dgafp/cc-2026-web.pdf"
+  },
+  "tier": "donnee",
+  "unit": "milliers de personnes",
+  "value": 2581.9,
+  "verified_by": "lecture du PDF officiel (figure 2, 21 novembre 2026), hors classeur",
+  "year": 2024
  },
  "fp_fph_2023_k": {
   "label_fr": "Fonction publique hospitalière",
@@ -5343,7 +5369,7 @@
   "conflicts": [
    {
     "group": "nb_impots_cibles",
-    "note": "« Quatre impôts » (TVA, revenu, sociétés, foncier) dans le manifeste ; « 5 impôts au lieu de 438 » dans les lettres aux élus. Les amendements PLFSS n° 1 à 3 maintiennent en outre la CSG sur les pensions, le chômage et les indemnités journalières (n° 1) et sur les revenus du capital (n° 2), et une taxe sur les salaires jusqu'en 2029 (n° 3, abrogée au 1er janvier 2030).",
+    "note": "« Quatre impôts » (TVA, revenu, sociétés, foncier) dans le manifeste ; « 5 impôts au lieu de 438 » dans les lettres aux élus. Les amendements PLFSS n° 1 à 3 maintiennent en outre la CSG sur les pensions, le chômage et les indemnités journalières (n° 1) et sur les revenus du capital (n° 2, qui laisse leurs parts « inchangées » dans la clé de répartition), et une taxe sur les salaires jusqu'en 2029 (n° 3, abrogée au 1er janvier 2030). Le n° 9, en revanche, majore le taux de la CSG sur les revenus du patrimoine et les produits de placement (articles L. 136-6 et L. 136-7) pour compenser la suppression de vingt et une contributions : la CSG sur le capital n'est donc pas laissée telle quelle.",
     "with": [
      "impots_cibles_manifeste"
     ]
@@ -5367,7 +5393,7 @@
   "conflicts": [
    {
     "group": "nb_impots_cibles",
-    "note": "« Quatre impôts » (TVA, revenu, sociétés, foncier) dans le manifeste ; « 5 impôts au lieu de 438 » dans les lettres aux élus. Les amendements PLFSS n° 1 à 3 maintiennent en outre la CSG sur les pensions, le chômage et les indemnités journalières (n° 1) et sur les revenus du capital (n° 2), et une taxe sur les salaires jusqu'en 2029 (n° 3, abrogée au 1er janvier 2030).",
+    "note": "« Quatre impôts » (TVA, revenu, sociétés, foncier) dans le manifeste ; « 5 impôts au lieu de 438 » dans les lettres aux élus. Les amendements PLFSS n° 1 à 3 maintiennent en outre la CSG sur les pensions, le chômage et les indemnités journalières (n° 1) et sur les revenus du capital (n° 2, qui laisse leurs parts « inchangées » dans la clé de répartition), et une taxe sur les salaires jusqu'en 2029 (n° 3, abrogée au 1er janvier 2030). Le n° 9, en revanche, majore le taux de la CSG sur les revenus du patrimoine et les produits de placement (articles L. 136-6 et L. 136-7) pour compenser la suppression de vingt et une contributions : la CSG sur le capital n'est donc pas laissée telle quelle.",
     "with": [
      "impots_cibles_lettres"
     ]
@@ -5625,7 +5651,8 @@
   "year": 2027
  },
  "mutation_exemple_vendeur_eur": {
-  "label_fr": "Exemple : pour un appartement de 200 000 €, le vendeur acquitte 3 900 € (contre 10 000 € payés par l'acheteur aujourd'hui)",
+  "label_fr": "Exemple de l'amendement n° 19 : pour un appartement de 200 000 €, le vendeur acquitte 3 900 €",
+  "note": "Qui paie : voir D41 (l'exposé dit le vendeur, le n° 20 impute les droits payés à l'achat). L'exposé compte 10 000 € payés comptant aujourd'hui (3,80 % + 1,20 %) ; ce n'est plus le cas : depuis la hausse permise par la loi de finances pour 2025 (art. 116, du 1er avril 2025), 88 départements appliquent 5 % (au 1er juin 2026), soit environ 6,32 % avec la taxe communale et les frais d'assiette, donc environ 12 640 € sur 200 000 € (BOFiP 14771-PGP, 17 juin 2026 ; Banque des Territoires, jechange.fr). Environ 11 610 € dans un département resté à 4,50 % et pour un premier achat de résidence principale.",
   "source": {
    "kind": "amendment",
    "liasse": "PLF-P1",
@@ -5880,6 +5907,19 @@
   "unit": "niches fiscales",
   "value": 486,
   "year": 2026
+ },
+ "niches_nombre_plf2027": {
+  "label_fr": "Niches fiscales recensées au PLF 2027 (rapport annexé)",
+  "note": "Le chiffre du PLF 2027 (Évaluation des voies et moyens, tome II, déposé en octobre 2026) est repris de FIPECO : le tome II officiel n'a pas pu être ouvert depuis nos outils. Le classeur des auteurs, et donc les 465 niches de ce site, reposent sur le PLF 2026.",
+  "source": {
+   "kind": "fipeco",
+   "ref": "FIPECO, « Les dépenses fiscales », 29 octobre 2026 : « Le rapport annexé au PLF pour 2027 recense 459 niches (465 dans le PLF précédent) »",
+   "url": "https://fipeco.fr/fiche/Les-depenses-fiscales"
+  },
+  "tier": "donnee",
+  "unit": "niches",
+  "value": 459,
+  "year": 2027
  },
  "niches_total_md": {
   "conflict": true,

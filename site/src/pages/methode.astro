@@ -63,7 +63,7 @@ const pct1 = (v: number) => formatPercentPoints(v, { decimals: 1 });
     <p class="text-sm text-ink-3">
       Moteur de calcul, version <strong class="text-ink">{ENGINE_VERSION}</strong>. Plan :{' '}
       <strong class="text-ink" data-plan-version>
-        {planVersion.label_fr}
+        {planVersion.published_label_fr}
       </strong>{' '}
       (rédigés et publiés, pas en vigueur). Le code, les données et les paramètres sont publics :
       <a href={SITE.repo}>dépôt du projet</a>.
@@ -180,9 +180,12 @@ const pct1 = (v: number) => formatPercentPoints(v, { decimals: 1 });
         {formatMdEuro(num('dep_total_2024_md'))}, il faudrait un PIB d’environ{' '}
         {formatMdEuro(gdp.implied, { decimals: 0 })}, soit {formatMdEuro(gdp.gap, { decimals: 0 })}{' '}
         ({formatNumber(gdp.gapPct, { decimals: 1 })}&nbsp;%) de plus que celui du classeur. Le
-        classeur ne précise pas le millésime ou le périmètre de son PIB ; nous n’avons pas la table
-        qui l’expliquerait. Le site utilise Eurostat pour comparer les pays, et l’Insee pour
-        répartir la dépense française.
+        classeur reprend le PIB de l’édition de mai 2025 des comptes nationaux ; l’édition de mai
+        2026 le porte à {formatMdEuro(num('pib_2024_insee_2026_md'), { decimals: 0 })}
+        (Eurostat, comptes nationaux), ce qui donne{' '}
+        {pct((num('dep_total_2024_md') / num('pib_2024_insee_2026_md')) * 100)} avec la même
+        dépense. Le site utilise Eurostat pour comparer les pays, et l’Insee pour répartir la
+        dépense française.
       </p>
 
       <h3 id="ecarts">Les écarts les plus visibles</h3>

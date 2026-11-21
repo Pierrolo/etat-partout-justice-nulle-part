@@ -112,14 +112,15 @@ const busiest = groupByDate(events, jalons)
 >
   <Callout tone="note" title="Dates écrites dans les amendements">
     <p>
-      <strong data-plan-version>{amendements.meta.version.label_fr}</strong>&#8239;: ces dates
-      viennent des {formatInteger(amendements.meta.counts.total)} amendements rédigés par
+      <strong data-plan-version>{amendements.meta.version.published_label_fr}</strong>&#8239;: ces
+      dates viennent des {formatInteger(amendements.meta.counts.total)} amendements rédigés par
       l’association Résolution (liasses republiées les 17 et 18 novembre 2026). Rédigés et publiés,
-      ils ne sont pas en vigueur : à la date du 21 novembre 2026, aucun n’avait été déposé au
-      Parlement. « Proposé dans un amendement » veut dire « écrit dans le texte d’un amendement ».
-      Pour la frise, une date « 1er janvier » sans jour écrit dans le texte est signalée comme
-      telle ; les crédits de l’état B sont datés par nature de crédit (1er janvier, 1er avril ou 1er
-      juillet 2027).
+      ils ne sont pas en vigueur. Le 21 novembre 2026, une recherche dans les données ouvertes des
+      amendements de l’Assemblée nationale et du Sénat n’en a retrouvé aucun parmi les amendements
+      déposés ; l’Assemblée a rejeté la première partie du PLF 2027 le 4 novembre 2026. « Proposé
+      dans un amendement » veut dire « écrit dans le texte d’un amendement ». Pour la frise, une
+      date « 1er janvier » sans jour écrit dans le texte est signalée comme telle ; les crédits de
+      l’état B sont datés par nature de crédit (1er janvier, 1er avril ou 1er juillet 2027).
     </p>
   </Callout>
 
@@ -139,7 +140,7 @@ const busiest = groupByDate(events, jalons)
         as="li"
         label="Dates clés"
         value={formatInteger(jalons.length)}
-        reframe={`Du ${formatDateFr(jalons[0]!.date)} au ${formatDateFr(jalons[jalons.length - 2]!.date)} pour la transition ; un dernier palier en ${jalons[jalons.length - 1]!.date.slice(0, 4)} (majoration de pension).`}
+        reframe={`Du ${formatDateFr(jalons[0]!.date)} au ${formatDateFr(jalons[jalons.length - 2]!.date)} pour la transition ; un dernier palier en ${jalons[jalons.length - 1]!.date.slice(0, 4)} (minoration de pension).`}
         source={{ label: 'Calendrier des amendements', href: amendementsHref, tier: 'law' }}
       />
       <StatTile

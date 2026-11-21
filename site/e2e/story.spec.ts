@@ -108,7 +108,9 @@ test('Sankey: the horizon toggle changes the figure and keeps a table alternativ
   await page.goto('comprendre/le-plan/');
   await scrollThrough(page);
   // the version of the plan is shown, and « année 1 » is the workbook's undated label (E4)
-  await expect(page.getByText('Amendements publiés le 18 novembre 2026').first()).toBeVisible();
+  await expect(
+    page.getByText('Amendements publiés les 17 et 18 novembre 2026').first(),
+  ).toBeVisible();
   await page.locator('label', { hasText: 'Année 1 du chiffrage' }).click();
   await expect(
     page.getByRole('heading', { name: /Selon le chiffrage, dès l.année 1/ }),

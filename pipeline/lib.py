@@ -44,6 +44,7 @@ PLAN_VERSION = {
     "date_iso": "2026-11-18",
     "date_fr": "18 novembre 2026",
     "label_fr": "Amendements publiés le 18 novembre 2026",  # same wording as engine PARAMS_META.planVersionLabel
+    "published_label_fr": "Amendements publiés les 17 et 18 novembre 2026",  # shown on the pages; same wording as engine PARAMS_META.planPublishedLabel (the PDFs were generated on 17 Nov for PLF-P1 and PLFSS, 18 Nov for PLF-P2)
     "pdf_dates_fr": {"PLF-P1": "17 novembre 2026", "PLF-P2": "18 novembre 2026", "PLFSS": "17 novembre 2026"},
     "cover_fr": "Résolution — octobre 2026",
     "snapshot": SNAPSHOT,

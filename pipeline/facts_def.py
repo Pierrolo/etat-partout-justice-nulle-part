@@ -6,7 +6,7 @@ CSG, aide fondamentale, épargne, actifs) · F paramètres légaux · G fiches �
 from __future__ import annotations
 
 from facts_core import (DGAFP, EUROSTAT, INSEE_3217, INSEE_3301, INSEE_PATRIMOINE, LEGIFRANCE, PLF_DEPENSES_FISCALES, Facts)
-from lib import Sheet, clean
+from lib import Sheet, clean, quote_in
 import b_credits
 import b_niches
 import b_plan
@@ -272,6 +272,10 @@ def _d_etat_partout(F: Facts):
     F.wb("niches_eteintes_avant_2025_nombre", "niches", ny, "C9", "niches", "Niches dont le fait générateur est éteint (fin ≤ 2024)", 2024, "donnee", expect=47, nd=0)
     F.wb("niches_eteintes_avant_2025_md", "niches", ny, "D9", "Md€", "Coût 2024 des niches au fait générateur éteint (fin ≤ 2024)", 2024, "donnee", nd=3)
     F.wb("niches_eteintes_fin_2025_nombre", "niches", ny, "C10", "niches", "Niches dont le fait générateur s'éteint en 2025", 2024, "donnee", expect=35, nd=0)
+    F.external("niches_nombre_plf2027", 459, "niches", "Niches fiscales recensées au PLF 2027 (rapport annexé)", 2027, "fipeco",
+               "FIPECO, « Les dépenses fiscales », 29 octobre 2026 : « Le rapport annexé au PLF pour 2027 recense 459 niches (465 dans le PLF précédent) »",
+               "https://fipeco.fr/fiche/Les-depenses-fiscales",
+               note="Le chiffre du PLF 2027 (Évaluation des voies et moyens, tome II, déposé en octobre 2026) est repris de FIPECO : le tome II officiel n'a pas pu être ouvert depuis nos outils. Le classeur des auteurs, et donc les 465 niches de ce site, reposent sur le PLF 2026.")
     F.amend("niches_cout_2026_expose_md", 79.5, "Md€", "Coût prévisionnel des niches en 2026 cité par l'exposé de PLF-P1 n° 1", 2026, "PLF-P1", 1, "pour un coût prévisionnel de 79,5 milliards d’euros en 2026", tier="loi")
     nb = b_niches.build()
     F.calc_value("niches_cout_2026_somme_md", clean(nb["meta"]["totals"]["cost_2026_meur"] / 1000, 3), [], "Md€", "Somme des 465 lignes de coût 2026 du classeur", 2026,
@@ -309,6 +313,14 @@ def _d_etat_partout(F: Facts):
     F.wb("fp_fpe_2023_k", EM, se, "C13", "milliers de personnes", "Fonction publique de l'État", 2023, "donnee", expect=2570.237, nd=3, **dg)
     F.wb("fp_fpt_2023_k", EM, se, "C17", "milliers de personnes", "Fonction publique territoriale", 2023, "donnee", expect=1994.19, nd=3, **dg)
     F.wb("fp_fph_2023_k", EM, se, "C21", "milliers de personnes", "Fonction publique hospitalière", 2023, "donnee", expect=1239.435, nd=3, **dg)
+    # édition 2026 du rapport (octobre 2026) : effectifs au 31 décembre 2024, lus dans le PDF officiel (figure 2), hors classeur des auteurs
+    DGAFP_CC2026 = "https://www.fonction-publique.gouv.fr/files/files/publications/publications-dgafp/cc-2026-web.pdf"
+    F.external("fp_effectifs_2024_k", 5848.3, "milliers de personnes", "Effectifs des trois fonctions publiques au 31 décembre 2024", 2024, "dgafp",
+               "DGAFP, Fonction publique, chiffres clés, édition 2026 (octobre 2026), figure 2 : « 5 848,3 » milliers d'agents au 31 décembre 2024, France hors Mayotte (emplois principaux, tous statuts)",
+               DGAFP_CC2026, verified_by="lecture du PDF officiel (figure 2, 21 novembre 2026), hors classeur", note="5,85 millions de personnes. Le classeur des auteurs reprend l'édition 2025 du rapport (31 décembre 2023 : 5,80 millions) : le site garde ses chiffres détaillés par versant et statut, datés de 2023, et signale cette édition plus récente.")
+    F.external("fp_fpe_2024_k", 2581.9, "milliers de personnes", "Fonction publique de l'État au 31 décembre 2024", 2024, "dgafp",
+               "DGAFP, Fonction publique, chiffres clés, édition 2026 (octobre 2026), figure 2 : « 2 581,9 » milliers d'agents de la fonction publique de l'État au 31 décembre 2024",
+               DGAFP_CC2026, verified_by="lecture du PDF officiel (figure 2, 21 novembre 2026), hors classeur", note="2,58 millions, soit 44 % de l'emploi public (2 581,9 ÷ 5 848,3) : l'État n'est pas la majorité des agents, comme en 2023.")
     F.wb("fp_fonctionnaires_2023_k", EM, se, "C4", "milliers de personnes", "Fonctionnaires", 2023, "donnee", nd=3, **dg)
     F.wb("fp_contractuels_2023_k", EM, se, "C5", "milliers de personnes", "Contractuels", 2023, "donnee", nd=3, **dg)
     F.wb("fp_militaires_2023_k", EM, se, "C6", "milliers de personnes", "Militaires", 2023, "donnee", nd=3, **dg)
@@ -496,7 +508,11 @@ def _e_plan(F: Facts):
     F.add("credits_retires_cp_md", t["cp_retirees_md"], "Md€", "Crédits de paiement retirés par les 23 amendements d'état B", 2027, dict(src_b), "loi",
           note="21 034,5 M€ (39 905,0 M€ pour les 22 amendements de la version d'octobre 2026) ; effet au 1er janvier, au 1er avril ou au 1er juillet 2027 selon la nature des crédits de chaque mission.")
     F.add("credits_retires_ae_md", t["ae_retirees_md"], "Md€", "Autorisations d'engagement retirées par les 23 amendements d'état B", 2027, dict(src_b), "loi", note="24 261,6 M€ (43 855,4 M€ en octobre 2026).")
-    F.amend("credits_retires_amendements_nombre", len(cr["missions"]), "amendements", "Amendements d'état B qui retirent les crédits des missions", 2027, "PLF-P2", 40, "Cet amendement retire de la mission « Outre-mer » les crédits des dispositifs que la présente loi interrompt", note="Valeur : 23 amendements, un par mission (n° 1 à 22, plus le n° 40 « Outre-mer » ajouté en novembre 2026).")
+    _cover = "Les 22 premiers retirent, mission par mission, les crédits de l’état B que la présente loi interrompt. Le n° 23 supprime la contribution de l’assurance chômage à France Travail. Les 16 suivants sont normatifs. Le n° 40, ajouté en dernier numéro, retire les crédits de la mission « Outre-mer »."
+    assert quote_in("amendements__Liasse_PLF_P2", _cover), "cover quote of Liasse PLF-P2"
+    F.add("credits_retires_amendements_nombre", len(cr["missions"]), "amendements", "Amendements d'état B qui retirent les crédits des missions", 2027,
+          {"kind": "amendment", "ref": "Liasse PLF-P2, page de couverture (page 1 du PDF) : 22 amendements d'état B, plus le n° 40 « Outre-mer »", "url": pdf_url("PLF-P2", 1), "quote": _cover, "page": 1}, "loi",
+          note="Valeur : 23 amendements, un par mission (n° 1 à 22, plus le n° 40 « Outre-mer » ajouté en novembre 2026).")
     apl_cp = next(p for p in cr["missions"][0]["programmes"] if p["programme_fr"].startswith("Aide à l’accès au logement"))
     F.add("apl_etat_b_cp_md", apl_cp["cp_retirees_md"], "Md€", "Crédits de paiement retirés du programme « Aide à l'accès au logement » (PLF-P2 n° 1)", 2027,
           {"kind": "amendment", "ref": "Amendement PLF-P2 n° 1 (état B), ligne « Aide à l'accès au logement » : 2 690 349 921 € (8 067 767 822 € en octobre 2026), page " + str(quote_pages("PLF-P2", 1, "2 690 349 921")[0]) + " du PDF", "url": pdf_url("PLF-P2", quote_pages("PLF-P2", 1, "2 690 349 921")[0])}, "loi")
@@ -521,7 +537,8 @@ def _f_loi(F: Facts):
     F.amend("mutation_taux_tranche_1_pct", 1, "%", "Droits de mutation : taux entre 10 000 et 100 000 €", 2027, "PLF-P1", 19, "rien sous 10 000 euros, 1 % de 10 000 à 100 000 euros, 3 % au-delà")
     F.amend("mutation_seuil_tranche_2_eur", 100000, "€", "Droits de mutation : seuil du taux supérieur", 2027, "PLF-P1", 19, "rien sous 10 000 euros, 1 % de 10 000 à 100 000 euros, 3 % au-delà")
     F.amend("mutation_taux_tranche_2_pct", 3, "%", "Droits de mutation : taux au-delà de 100 000 €", 2027, "PLF-P1", 19, "rien sous 10 000 euros, 1 % de 10 000 à 100 000 euros, 3 % au-delà")
-    F.amend("mutation_exemple_vendeur_eur", 3900, "€", "Exemple : pour un appartement de 200 000 €, le vendeur acquitte 3 900 € (contre 10 000 € payés par l'acheteur aujourd'hui)", 2027, "PLF-P1", 19, "le vendeur acquitte 3 900 euros")
+    F.amend("mutation_exemple_vendeur_eur", 3900, "€", "Exemple de l'amendement n° 19 : pour un appartement de 200 000 €, le vendeur acquitte 3 900 €", 2027, "PLF-P1", 19, "le vendeur acquitte 3 900 euros",
+            note="Qui paie : voir D41 (l'exposé dit le vendeur, le n° 20 impute les droits payés à l'achat). L'exposé compte 10 000 € payés comptant aujourd'hui (3,80 % + 1,20 %) ; ce n'est plus le cas : depuis la hausse permise par la loi de finances pour 2025 (art. 116, du 1er avril 2025), 88 départements appliquent 5 % (au 1er juin 2026), soit environ 6,32 % avec la taxe communale et les frais d'assiette, donc environ 12 640 € sur 200 000 € (BOFiP 14771-PGP, 17 juin 2026 ; Banque des Territoires, jechange.fr). Environ 11 610 € dans un département resté à 4,50 % et pour un premier achat de résidence principale.")
     F.amend("plusvalue_taux_unique_pct", 30, "%", "Prélèvement unique sur les plus-values (gain réel)", 2027, "PLF-P1", 20, "un prélèvement unique de 30 %")
     F.amend("taxe_fonciere_taux_min_pct", 10, "%", "Taxe foncière unique : taux communal minimal", 2028, "PLF-P1", 29, "Ce taux est compris entre 10 % et 30 %")
     F.amend("taxe_fonciere_taux_max_pct", 30, "%", "Taxe foncière unique : taux communal maximal", 2028, "PLF-P1", 29, "Ce taux est compris entre 10 % et 30 %")
@@ -560,7 +577,7 @@ def _g_fiches(F: Facts):
     F.site("fiche_patient_gestion_eur_an", 300, "€ par an", "« 300 € par an de frais de gestion en moins » (fiche Patient)", 2026, "fiches__patient", "Par an de frais de gestion en moins")
     F.site("fiche_consommateur_81_pct", 81, "%", "« 81 % : les produits faits en France que vous consommez deviennent plus abordables » (fiche Consommateur, sans source)", 2026, "fiches__consommateur", "Les produits faits en France que vous consommez deviennent plus abordables")
     F.site("fiche_inflation_faciale_pct", 2, "% (borne haute)", "« inflation faciale inférieure à 2 % » (fiche Citoyen)", 2026, "fiches__citoyen", "inflation faciale inférieure à 2 %")
-    F.site("fiche_niches_supprimees_md", 143, "Md€", "« 143 Md€ de niches supprimées, dont 52 milliards vous reviennent » (fiche Contribuable)", 2026, "fiches__contribuable", "**143 Md€** : De niches supprimées")
+    F.site("fiche_niches_supprimees_md", 143, "Md€", "« 143 Md€ : De niches supprimées, dont 52 milliards d'euros vous reviennent en baisse de charges et de taxes » (fiche Contribuable)", 2026, "fiches__contribuable", "**143 Md€** : De niches supprimées")
     F.site("fiche_niches_baisse_charges_md", 52, "Md€", "« dont 52 milliards d'euros vous reviennent en baisse de charges et de taxes » (fiche Contribuable)", 2026, "fiches__contribuable", "dont 52 milliards d'euros vous reviennent en baisse de charges et de taxes")
     F.site("fiche_parc_social_actif_net_md", 340, "Md€", "Actif net des organismes de logement social estimé à « 340 milliards d'euros » (fiche Locataire)", 2026, "fiches__locataire", "L’actif net des organismes de logement social est estimé à 340 milliards d’euros")
     F.site("fiche_parc_social_logements_m", 4.5, "millions de logements", "« quatre millions et demi de logements » remis sur le marché par la vente du parc social (fiche Locataire)", 2026, "fiches__locataire", "remet quatre millions et demi de logements sur le marché")
@@ -597,7 +614,7 @@ def _i_conflicts(F: Facts):
     F.conflict("restitution_600_eur", ["restitution_epargne_manifeste_eur_mois", "cep_implicite_classeur_eur_mois_30m"],
                "« 600 € par mois » = 300 € de salaire net + 300 € d'épargne. Les flux du classeur vers la capitalisation (121,94 Md€) représentent ≈ 339 €/mois par foyer (30 M de foyers) ou 350 € par travailleur (29 M) : le 300 € n'est pas directement vérifiable, et les lettres aux élus annoncent « 25 % » de hausse en trois ans.")
     F.conflict("nb_impots_cibles", ["impots_cibles_manifeste", "impots_cibles_lettres"],
-               "« Quatre impôts » (TVA, revenu, sociétés, foncier) dans le manifeste ; « 5 impôts au lieu de 438 » dans les lettres aux élus. Les amendements PLFSS n° 1 à 3 maintiennent en outre la CSG sur les pensions, le chômage et les indemnités journalières (n° 1) et sur les revenus du capital (n° 2), et une taxe sur les salaires jusqu'en 2029 (n° 3, abrogée au 1er janvier 2030).")
+               "« Quatre impôts » (TVA, revenu, sociétés, foncier) dans le manifeste ; « 5 impôts au lieu de 438 » dans les lettres aux élus. Les amendements PLFSS n° 1 à 3 maintiennent en outre la CSG sur les pensions, le chômage et les indemnités journalières (n° 1) et sur les revenus du capital (n° 2, qui laisse leurs parts « inchangées » dans la clé de répartition), et une taxe sur les salaires jusqu'en 2029 (n° 3, abrogée au 1er janvier 2030). Le n° 9, en revanche, majore le taux de la CSG sur les revenus du patrimoine et les produits de placement (articles L. 136-6 et L. 136-7) pour compenser la suppression de vingt et une contributions : la CSG sur le capital n'est donc pas laissée telle quelle.")
     F.conflict("afu_smic", ["afu_smic_amendement_eur_mois", "afu_smic_net_fiche_eur_mois", "afu_smic_net_calc_eur_mois"],
                "L'exposé de PLF-P1 n° 28 dit que le salarié au SMIC « reçoit 550 € par mois de l'administration fiscale » (aide brute) ; la fiche annonce « +220 € » et le classeur (GraphIR) raisonne en versement net : aide 6 600 € − 23 % du revenu, soit ≈ 220 €/mois au niveau du SMIC.")
     F.conflict("foyer_denominateurs", ["fiche_pop_foyers", "foyers_implicites_dep_m", "foyers_implicites_236_m", "foyers_implicites_actifs_m", "foyers_fiscaux_loi_m"],

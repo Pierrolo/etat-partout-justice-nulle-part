@@ -60,6 +60,7 @@ EU27 = EURO_AREA_20 | {"BG", "CZ", "DK", "HU", "PL", "RO", "SE"}
 URLS = {
     "tec00023": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table",
     "tec00127": "https://ec.europa.eu/eurostat/databrowser/view/tec00127/default/table?lang=en",
+    "gov_10a_main": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main/default/table?lang=en",
     "ilc_di03": "https://ec.europa.eu/eurostat/databrowser/view/ilc_di03/default/table?lang=fr&category=qol.qol_mlc.qol_mlc_i",
 }
 
@@ -101,18 +102,23 @@ def _fr1(x: float) -> str:
     return f"{x:.1f}".replace(".", ",")
 
 
-def _refresh(records, key, years):
-    """replace the workbook values by the Eurostat snapshot (key of eurostat.FIXED)."""
+def _refresh(records, key, years, fallback=None):
+    """replace the workbook values by the Eurostat snapshot (key of eurostat.FIXED); `fallback` = another dataset of
+    the snapshot for the geos that `key` does not publish (tec00127 → gov_10a_main for IS, NO, CH)."""
     changed = []
     for rec in records:
         rec["classeur"] = dict(rec["values"])
         rec["vintage"] = {}
+        rec["dataset"] = {}
         for y in years:
-            new = eurostat.value(key, rec["geo"], y)
+            new, used = eurostat.value(key, rec["geo"], y), key
+            if new is None and fallback:
+                new, used = eurostat.value(fallback, rec["geo"], y), fallback
             if new is None:
                 rec["vintage"][y] = "classeur" if rec["values"][y] is not None else None
                 continue
             rec["vintage"][y] = "eurostat"
+            rec["dataset"][y] = eurostat.dataset_of(used)
             if rec["values"][y] is None or abs(rec["values"][y] - new) > 1e-9:
                 changed.append((rec["geo"], y, rec["values"][y], new))
             rec["values"][y] = new
@@ -157,7 +163,7 @@ def build() -> dict:
 
     # values: Eurostat snapshot (21 Oct 2026); the workbook's own figures are kept as value_classeur
     _refresh(spend, "tec00023", (2024, 2025))
-    _refresh(deficit, "tec00127", (2024, 2025))
+    _refresh(deficit, "tec00127", (2024, 2025), fallback="gov_10a_main")
     _refresh(med_eur, "ilc_di03_eur", (2024,))
     _refresh(med_pps, "ilc_di03_pps", (2024,))
 
@@ -194,6 +200,7 @@ def build() -> dict:
                     "missing": v is None,
                     "value_classeur": clean(rec["classeur"][y], 3) if rec["classeur"][y] is not None else None,
                     "vintage": rec["vintage"][y],
+                    "dataset_eurostat": rec["dataset"].get(y),
                     "rank_desc": ranks[y][0].get(rec["geo"]) if rec["kind"] == "country" and v is not None else None,
                     "rank_asc": ranks[y][1].get(rec["geo"]) if rec["kind"] == "country" and v is not None else None,
                     "n_countries_ranked": ranks[y][2] if rec["kind"] == "country" else None,
@@ -273,8 +280,8 @@ def build() -> dict:
             "title_fr": "La France et l'Europe : dépenses publiques, solde public, revenu médian",
             "source": {
                 "kind": "eurostat",
-                "ref": f"Eurostat tec00023 (dépenses des administrations publiques, % du PIB) et tec00127 (capacité/besoin de financement, % du PIB), mise à jour du {eurostat.vintage_fr('tec00023')} ; ilc_di03 (revenu médian équivalent, enquête SILC), mise à jour du {eurostat.vintage_fr('ilc_di03')}. Lignes (pays, agrégats) d'après " + gov.file_name + " › GraphGov, GraphRDB",
-                "vintage": {"tec00023": eurostat.updated("tec00023"), "tec00127": eurostat.updated("tec00127"), "ilc_di03": eurostat.updated("ilc_di03")},
+                "ref": f"Eurostat tec00023 (dépenses des administrations publiques, % du PIB) et tec00127 (capacité/besoin de financement, % du PIB ; gov_10a_main pour l'Islande, la Norvège et la Suisse, que tec00127 ne publie pas), mise à jour du {eurostat.vintage_fr('tec00023')} ; ilc_di03 (revenu médian équivalent, enquête SILC), mise à jour du {eurostat.vintage_fr('ilc_di03')}. Lignes (pays, agrégats) d'après " + gov.file_name + " › GraphGov, GraphRDB",
+                "vintage": {"tec00023": eurostat.updated("tec00023"), "tec00127": eurostat.updated("tec00127"), "gov_10a_main": eurostat.updated("gov_10a_main"), "ilc_di03": eurostat.updated("ilc_di03")},
                 "vintage_fr": eurostat.vintage_fr("tec00023"),
                 "downloaded": "2026-11-21",
                 "url": URLS["tec00023"],

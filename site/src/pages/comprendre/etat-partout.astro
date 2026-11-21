@@ -38,11 +38,13 @@ const keptNames = (fact('impots_cibles_manifeste').label_fr.split(/\s:\s/)[1] ??
 const niches = num('niches_total_nombre');
 const nichesMenages = num('niches_menages_communes_nombre');
 const nichesRecensees = num('niches_nombre');
+const niches2027 = num('niches_nombre_plf2027');
 const nichesTva = num('niches_tva_hors_niches_nombre');
 const impotConflict = conflicts('impots_cibles_manifeste')[0]?.note ?? '';
 const impotSources = [chip('impots_nombre_manifeste', { label: 'france-resolution.fr' })];
 const nicheSources = [
   chip('niches_nombre', { label: 'PLF 2026, annexe Dépenses fiscales' }),
+  chip('niches_nombre_plf2027'),
   chip('niches_total_nombre', {
     label: `Chiffrage des auteurs : ${nichesRecensees} niches + ${nichesTva} taux réduits de TVA`,
   }),
@@ -61,7 +63,11 @@ const legif2026 = num('droit_mots_legislatif_2026');
 
 // ── Effectifs ───────────────────────────────────────────────────────────────
 const wf = workforce();
-const wfSources = [chip('fp_effectifs_2023_k', { label: 'DGAFP, rapport annuel 2025' })];
+const wfSources = [
+  chip('fp_effectifs_2023_k', { label: 'DGAFP, rapport annuel 2025 (31 décembre 2023)' }),
+  chip('fp_effectifs_2024_k', { label: 'DGAFP, édition 2026 (31 décembre 2024)' }),
+];
+const wf2024 = num('fp_effectifs_2024_k');
 const postesFermes = num('postes_publics_fermes_manifeste');
 
 // ── Chaîne démocratique ─────────────────────────────────────────────────────
@@ -108,9 +114,10 @@ const chainSources = [
       </h2>
       <p class="text-ink-2">
         Le plan recense {formatInteger(impots)} impôts et taxes. Une « niche » est un avantage
-        fiscal (réduction, exonération, taux réduit). Le dernier recensement en compte{' '}
-        {formatInteger(nichesRecensees)}, auxquelles s’ajoutent {formatInteger(nichesTva)} taux
-        réduits de TVA que le recensement ne compte pas comme niches :{' '}
+        fiscal (réduction, exonération, taux réduit). Le recensement du PLF 2026 en compte{' '}
+        {formatInteger(nichesRecensees)} (celui du PLF 2027, déposé en octobre 2026, en compte{' '}
+        {formatInteger(niches2027)} selon FIPECO), auxquelles s’ajoutent {formatInteger(nichesTva)}{' '}
+        taux réduits de TVA que le recensement ne compte pas comme niches :{' '}
         {nichesEquation(nichesRecensees, nichesTva, niches)}.
       </p>
     </div>
@@ -224,11 +231,14 @@ const chainSources = [
   <section aria-labelledby="eff-titre" class="space-y-4">
     <div class="max-w-2xl space-y-2">
       <h2 id="eff-titre" class="text-3xl text-ink">
-        {formatNumber(wf.totalK / 1000, { decimals: 1 })} millions d’agents publics
+        {formatNumber(wf.totalK / 1000, { decimals: 1 })} millions d’agents publics fin {wf.year}
       </h2>
       <p class="text-ink-2">
-        État, collectivités, hôpitaux : trois fonctions publiques, plusieurs statuts. Le plan
-        annonce la fermeture de {formatInteger(postesFermes)} postes, soit environ
+        État, collectivités, hôpitaux : trois fonctions publiques, plusieurs statuts. Le détail
+        ci-dessous date du 31 décembre {wf.year}&#8239;; l’édition 2026 du rapport de la DGAFP
+        compte {formatNumber(wf2024 / 1000, { decimals: 2 })} millions d’agents au 31 décembre{' '}
+        {fact('fp_effectifs_2024_k').year}. Le plan annonce la fermeture de{' '}
+        {formatInteger(postesFermes)} postes, soit environ
         {formatPercentPoints((postesFermes / (wf.totalK * 1000)) * 100, { decimals: 0 })} des
         effectifs. L’amendement PLF-P2 n° 26 organise la sortie des seuls fonctionnaires de l’État
         dont l’emploi est supprimé :{' '}

@@ -39,6 +39,10 @@ export interface RawNiche {
       groupe: string | null;
       inferred: boolean;
       note_fr: string | null;
+      /** La note est propre à cette niche : elle est montrée sous la ligne (TVA, outre-mer, lectures inférées…). */
+      afficher_note?: boolean;
+      /** Le texte de l'amendement et un exposé de la même liasse se contredisent (TVA : taux non nommés). */
+      conflit_expose?: boolean;
     };
   };
 }
@@ -112,6 +116,8 @@ export const PLAN_IDS = [
   'supprimee',
   'trois-ans',
   'aide-fondamentale',
+  'partielle',
+  'maintenue',
   'outre-mer',
   'eteinte',
 ] as const;
@@ -125,14 +131,14 @@ export const PLAN_META: Record<
     label: 'Supprimée',
     short: 'Supprimée',
     detail:
-      'Abrogée par l’amendement n° 1, à la date de son groupe (IV.A à IV.F) : le plus souvent en 2027, parfois pour l’impôt de 2028.',
+      'Abrogée par l’amendement n° 1, à la date de son groupe (IV.A à IV.F, III bis pour la TVA) : le plus souvent en 2027, parfois pour l’impôt de 2028.',
     raw: 'Oui',
   },
   'trois-ans': {
     label: 'Supprimée en trois ans',
     short: 'En trois ans',
     detail:
-      'Réduite d’un tiers au titre de 2027, de deux tiers au titre de 2028, supprimée en totalité à partir de 2029 (IV.E de l’amendement n° 1).',
+      'Réduite d’un tiers au titre de 2027, de deux tiers au titre de 2028, supprimée en totalité à partir de 2029 (IV.E de l’amendement n° 1, ou amendement n° 8 pour le crédit d’impôt de remplacement agricole).',
     raw: 'En 3 ans',
   },
   'aide-fondamentale': {
@@ -142,11 +148,25 @@ export const PLAN_META: Record<
       'Remplacée par l’aide fondamentale universelle (crédits d’impôt sur le revenu fusionnés, article 28, VII).',
     raw: 'Fusion CI IR',
   },
+  partielle: {
+    label: 'Supprimée en partie',
+    short: 'En partie',
+    detail:
+      'Taux de TVA dont seules certaines lignes sont nommées par le III bis (supprimées au 1er juillet 2027) ; le reste est maintenu par le II, 4°. L’exposé du n° 21 annonce pourtant une suppression au 1er juillet 2027 : texte et exposé divergent.',
+    raw: null,
+  },
+  maintenue: {
+    label: 'Maintenue par le texte',
+    short: 'Maintenue',
+    detail:
+      'Taux réduit ou dérogatoire de TVA que ni le III ni le III bis ne nomment : le II, 4° de l’amendement n° 1 le laisse hors du I. L’exposé du n° 21 annonce pourtant qu’une disposition distincte le supprime au 1er juillet 2027 : texte et exposé divergent, nous ne le comptons pas comme supprimé.',
+    raw: null,
+  },
   'outre-mer': {
-    label: 'Refondue (outre-mer)',
+    label: 'Hors du champ (outre-mer)',
     short: 'Outre-mer',
     detail:
-      'Régime à part pour les collectivités d’outre-mer : refondu, non supprimé (« flux OM » dans le classeur).',
+      'Disposition propre aux collectivités des articles 73 et 74 de la Constitution ou à la Nouvelle-Calédonie : « Ne relèvent pas du I et du III… » (amendement n° 1, II, dernier alinéa), régime fiscal distinct, pas de date. Le classeur la note « supprimée » ou « flux OM » selon les cas.',
     raw: 'Flux OM',
   },
   eteinte: {
@@ -179,6 +199,8 @@ export interface NicheRow {
   /** Explication du rapprochement texte ↔ niche, quand il y en a une à donner. */
   planNote: string | null;
   planInferred: boolean;
+  /** Le texte et l'exposé de l'amendement se contredisent pour cette niche (taux de TVA non nommés). */
+  planExposeConflict: boolean;
   /** Coûts 2024 (réalisé), 2025 et 2026 (prévisions) en M€ ; `null` = non chiffré. */
   cost: [number | null, number | null, number | null];
   /** Motif d'un coût manquant, par année (même ordre que `cost`). */
@@ -242,10 +264,12 @@ export function toRow(raw: RawNiche): NicheRow {
     planGroup: raw.resolution.plan_texte?.groupe ?? null,
     planConflict: raw.resolution.plan_conflit_classeur === true,
     planClasseur: raw.resolution.plan_conflit_classeur ? raw.resolution.plan_classeur : null,
-    planNote: raw.resolution.plan_conflit_classeur
-      ? (raw.resolution.plan_texte.note_fr ?? null)
-      : null,
+    planNote:
+      raw.resolution.plan_conflit_classeur || raw.resolution.plan_texte?.afficher_note
+        ? (raw.resolution.plan_texte?.note_fr ?? null)
+        : null,
     planInferred: raw.resolution.plan_texte?.inferred === true,
+    planExposeConflict: raw.resolution.plan_texte?.conflit_expose === true,
     cost: [raw.cost_2024_meur, raw.cost_2025_meur, raw.cost_2026_meur],
     flag: [flagFor(2024), flagFor(2025), flagFor(2026)],
     legal: legalLabel(raw.legal_ref),
@@ -297,7 +321,20 @@ export function whenOf(
         anchor: '2028-01-01',
       };
     case 'outre-mer':
-      return { text: 'Pas de date : régime refondu à part', anchor: null };
+      return {
+        text: 'Pas de date : hors du champ de l’amendement n° 1 (régime fiscal distinct)',
+        anchor: null,
+      };
+    case 'maintenue':
+      return {
+        text: 'Pas supprimée par le texte (II, 4°) ; l’exposé annonce le 1er juillet 2027 : conflit, non tranché',
+        anchor: null,
+      };
+    case 'partielle':
+      return {
+        text: 'Seules les lignes nommées au III bis, dès le 1er juillet 2027 ; le reste du taux est maintenu',
+        anchor: '2027-07-01',
+      };
     case 'eteinte':
       return { text: 'Rien à supprimer', anchor: null };
     case 'supprimee':
@@ -328,8 +365,14 @@ export function whenOf(
             text: 'À partir de l’impôt sur le revenu dû au titre de 2028 (opérations dès le 1er janvier 2028), pas dès 2027',
             anchor: '2028-01-01',
           };
+        case 'D3bis':
+          return {
+            text: 'Ligne de taux nommée au III bis : dès le 1er juillet 2027',
+            anchor: '2027-07-01',
+          };
         case 'D':
           return { text: 'Dès le 1er juillet 2027 (cas général)', anchor: '2027-07-01' };
+        case 'B18':
         case 'B':
           return {
             text: 'Investissements, dépenses et engagements à partir du 1er janvier 2027',
@@ -356,7 +399,13 @@ export function whenOf(
       }
       if (row.tax === 'ir' || row.tax === 'is' || row.tax === 'ir-is' || row.tax === 'droits') {
         return {
-          text: 'Date non rapprochée du texte : cas général dès 2027, sauf exceptions du IV.B à F (2028 pour le barème et les plus-values)',
+          text: 'Date non rapprochée du texte : cas général du IV.A (impôt sur le revenu dû au titre de 2026, exercices clos et actes à partir du 1er janvier 2027), sauf exceptions du IV.B à F (2028 pour le barème et les plus-values)',
+          anchor: null,
+        };
+      }
+      if (row.tax === 'locaux') {
+        return {
+          text: 'Date non rapprochée du texte : cas général du IV.A (impositions locales dues au titre de 2027), sauf exceptions du IV.B à F',
           anchor: null,
         };
       }

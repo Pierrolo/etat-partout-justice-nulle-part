@@ -63,6 +63,7 @@ export const FEATURED_DISCREPANCIES = [
   'D04',
   'D38',
   'D40',
+  'D41',
   'D12',
   'D20',
   'D18',

@@ -42,6 +42,11 @@ describe('amendements-model', () => {
     expect(amendements.meta.version.date_iso).toBe('2026-11-18');
     // the same wording as the simulator's result page (engine PARAMS_META)
     expect(amendements.meta.version.label_fr).toBe(PARAMS_META.planVersionLabel);
+    // et le libellé affiché sur les pages, le même que le pied de page du simulateur (PDF des 17 et 18 novembre)
+    expect(amendements.meta.version.published_label_fr).toBe(
+      'Amendements publiés les 17 et 18 novembre 2026',
+    );
+    expect(amendements.meta.version.published_label_fr).toBe(PARAMS_META.planPublishedLabel);
     expect(amendements.meta.version.date_iso).toBe(PARAMS_META.planVersionDate);
   });
 

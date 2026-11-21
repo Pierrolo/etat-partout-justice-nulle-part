@@ -106,7 +106,7 @@ Le simulateur ne connaît pas votre panier : il l'estime, **sans effet de seuil*
   l'enquête Budget de famille).
 - Avec le plan, **le même panier** coûte plus cher : prix × (1 + répercussion × (nouveau taux − ancien taux) / (1 +
   ancien taux)). 85 % de la tranche à 5,5 % est de l'alimentation (calendrier lent) ; un quart des autres taux réduits
-  sont des « niches » supprimées dès juillet 2027 (hypothèses).
+  sont des « niches » supprimées dès juillet 2027 (hypothèse du simulateur : le texte de l'amendement n° 1 ne supprime à cette date que les lignes nommées au III bis, 22 niches de TVA ; les taux qu'il ne nomme pas sont maintenus par le II, 4°, conflit avec les exposés signalé en D40).
 - Fin des certificats d'économies d'énergie (CEE, ≈ 6 Md€/an selon la Cour des comptes) : baisse des factures de
   6 Md€ ÷ 30 millions de ménages, proportionnelle aux unités de consommation (hypothèse).
 
@@ -118,7 +118,7 @@ Repère : la TVA représente ≈ 10,7 % de la consommation des ménages (INSEE) 
 |---|---|
 | Revenus 2026 (impôt payé en 2027) | Fin de l'abattement de 10 % sur les pensions (PLF-P1 am. 1, déduit du calendrier par défaut) |
 | 1er janvier 2027 | Crédits garde d'enfants et emploi à domicile réduits d'un tiers (2027), deux tiers (2028), supprimés (2029) ; chèque énergie supprimé |
-| 1er juillet 2027 | CSG sur les revenus d'activité : 7,6 % (juillet), 6,0 %, 4,3 %, 2,7 %, 1,1 % (novembre) ; CRDS 0,5 % jusqu'en novembre (PLFSS am. 1) ; taux réduits de TVA « niches » à 20 % ; fin des CEE ; dons : avantage divisé par deux ; APL des baux en cours −1/3 |
+| 1er juillet 2027 | CSG sur les revenus d'activité : 7,6 % (juillet), 6,0 %, 4,3 %, 2,7 %, 1,1 % (novembre) ; CRDS 0,5 % jusqu'en novembre (PLFSS am. 1) ; lignes de taux de TVA que le III bis nomme (22 niches de TVA, PLF-P1 am. 1) supprimées ; fin des CEE ; dons : avantage divisé par deux ; APL des baux en cours −1/3 |
 | 1er décembre 2027 | CSG et CRDS = 0 sur les revenus d'activité |
 | 1er janvier 2028 | Impôt à 23 % et aide fondamentale (PLF-P1 am. 28), diminuée de 3 300 €/an pour une pension de retraite liquidée avant 2028 ; fin des prestations familiales (PLFSS am. 7) ; fin du RSA, de la prime d'activité, de l'AAH, de l'ASPA (H1) ; réduction pour dons supprimée |
 | 1er juillet 2028 | Taux réduits de TVA à 20 %, alimentation à 10 % (PLF-P1 am. 21) ; APL des baux en cours −2/3 |
@@ -236,8 +236,7 @@ publiés dans le fichier [`cas-types-results.json`](https://github.com/Pierrolo/
 ## 10. Sources principales {#sources}
 
 - Plan : liasses d'amendements Résolution (PLF 2027 1re partie, 2de partie, PLFSS 2027 ; version publiée les 17 et
-  18 novembre 2026, 84 amendements : 35 + 40 + 9 ; affichée sur le site comme « Amendements publiés le 18 novembre
-  2026 ») — france-resolution.fr/amendements ; fiches et manifeste — france-resolution.fr ; classeurs publiés par les
+  18 novembre 2026, 84 amendements : 35 + 40 + 9 ; affichée sur le site comme « Amendements publiés les 17 et 18 novembre 2026 » : les PDF de PLF-P1 et du PLFSS ont été générés le 17, celui de PLF-P2 le 18 ; la page « Données » des auteurs, elle, date encore les trois cartes du 10 novembre) — france-resolution.fr/amendements ; fiches et manifeste — france-resolution.fr ; classeurs publiés par les
   auteurs dans leur version de novembre 2026 : « Synthèse des chiffrages » et « Séries des graphiques » (anciennement
   « Synthèse Chiffres » et « Synthèse Graphiques »), « Emplois publics » et « Agences publiques » (l'ancien classeur
   « Synthèse ETP et agences » a été scindé en deux), « Niches fiscales », « Dépenses de l'État », « Dépenses locales » et
@@ -267,6 +266,6 @@ Le manifeste, les amendements et les classeurs ne disent pas toujours la même c
 | 21 novembre 2026 | moteur et site | Vérification de la législation actuelle : CMG jusqu'aux 12 ans de l'enfant pour un parent seul qui emploie une assistante maternelle ; forfait étudiant des aides au logement (8 600 €, 6 900 € pour un·e boursier·e, question ajoutée) ; seuil de recouvrement de l'impôt appliqué après les réductions et avant les crédits ; majoration « isolement » décrite sur 12 mois ; total après TVA arrondi au multiple de 5 € le plus proche ; zones APL et durées d'indemnisation du chômage corrigées ; comparaisons européennes mises à jour d'après Eurostat (21 octobre 2026). |
 | 26 octobre 2026 | site | Le site parle du plan avec ses propres mots ; un seul vocabulaire pour les trois niveaux (« Proposé dans un amendement », « Annoncé », « Notre estimation ») ; les amendements sont décrits comme rédigés et publiés, en vigueur nulle part ; questionnaire « À votre avis, où va l’argent public ? », où les chiffres du plan sont marqués « Annoncé » ; une seule identité visuelle. |
 | 24 octobre 2026 | moteur 1.1.0 | Complément de libre choix du mode de garde (CMG) et crédit d'impôt garde d'enfants ; pension alimentaire et allocation de soutien familial ; phrase de synthèse en clair ; raison de chaque aide à 0 € ; heure de travail cohérente avec le revenu du foyer ; seconde lecture de H1 ; dirigeants assimilés salariés et travailleurs non salariés ; arrondi d'affichage à 5 € qui préserve les totaux. |
-| 24 octobre 2026 | site | Niveaux de certitude renommés (« Proposé dans un amendement », « Annoncé », « Notre estimation ») ; page Méthode complète ; glossaire des sigles ; page « Ce que le plan prévoit pour… ». |
+| 24 octobre 2026 | site | Niveaux de certitude renommés (« Proposé dans un amendement », « Promis par les auteurs », « Notre estimation ») ; page Méthode complète ; glossaire des sigles ; page « Ce que le plan prévoit pour… ». |
 | 24 octobre 2026 | moteur 1.0.1 | Audit indépendant du moteur, quatre corrections : AEEH et carte mobilité inclusion (défaut), demi-part de la carte, CSG déductible en 2027, tranche de CSG des pensions en 2028. |
 | 24 octobre 2026 | moteur 1.0.0 | Première version publiée : situation 2026 vérifiée sur 40 ménages types OpenFisca, plan reproduit sur les cas publiés. |

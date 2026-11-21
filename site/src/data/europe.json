@@ -48,6 +48,7 @@
  "depenses_publiques_pib": [
   {
    "cell": "B9",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "FI",
@@ -70,6 +71,7 @@
   },
   {
    "cell": "C9",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "FI",
@@ -92,6 +94,7 @@
   },
   {
    "cell": "B10",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "FR",
@@ -114,6 +117,7 @@
   },
   {
    "cell": "C10",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "FR",
@@ -136,6 +140,7 @@
   },
   {
    "cell": "B11",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "AT",
@@ -158,6 +163,7 @@
   },
   {
    "cell": "C11",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "AT",
@@ -180,6 +186,7 @@
   },
   {
    "cell": "B12",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "BE",
@@ -202,6 +209,7 @@
   },
   {
    "cell": "C12",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "BE",
@@ -224,6 +232,7 @@
   },
   {
    "cell": "B13",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "SE",
@@ -246,6 +255,7 @@
   },
   {
    "cell": "C13",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "SE",
@@ -268,6 +278,7 @@
   },
   {
    "cell": "B14",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "IT",
@@ -290,6 +301,7 @@
   },
   {
    "cell": "C14",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "IT",
@@ -312,6 +324,7 @@
   },
   {
    "cell": "B15",
+   "dataset_eurostat": "tec00023",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA21",
@@ -334,6 +347,7 @@
   },
   {
    "cell": "C15",
+   "dataset_eurostat": "tec00023",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA21",
@@ -356,6 +370,7 @@
   },
   {
    "cell": "B16",
+   "dataset_eurostat": "tec00023",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA20",
@@ -378,6 +393,7 @@
   },
   {
    "cell": "C16",
+   "dataset_eurostat": "tec00023",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA20",
@@ -400,6 +416,7 @@
   },
   {
    "cell": "B17",
+   "dataset_eurostat": "tec00023",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA19",
@@ -422,6 +439,7 @@
   },
   {
    "cell": "C17",
+   "dataset_eurostat": "tec00023",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA19",
@@ -444,6 +462,7 @@
   },
   {
    "cell": "B18",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "DE",
@@ -466,6 +485,7 @@
   },
   {
    "cell": "C18",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "DE",
@@ -488,6 +508,7 @@
   },
   {
    "cell": "B19",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "PL",
@@ -510,6 +531,7 @@
   },
   {
    "cell": "C19",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "PL",
@@ -532,6 +554,7 @@
   },
   {
    "cell": "B20",
+   "dataset_eurostat": "tec00023",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EU27_2020",
@@ -554,6 +577,7 @@
   },
   {
    "cell": "C20",
+   "dataset_eurostat": "tec00023",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EU27_2020",
@@ -576,6 +600,7 @@
   },
   {
    "cell": "B21",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "HR",
@@ -598,6 +623,7 @@
   },
   {
    "cell": "C21",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "HR",
@@ -620,6 +646,7 @@
   },
   {
    "cell": "B22",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "EL",
@@ -642,6 +669,7 @@
   },
   {
    "cell": "C22",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "EL",
@@ -664,6 +692,7 @@
   },
   {
    "cell": "B23",
+   "dataset_eurostat": "tec00023",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "NO",
@@ -686,6 +715,7 @@
   },
   {
    "cell": "C23",
+   "dataset_eurostat": "tec00023",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "NO",
@@ -708,6 +738,7 @@
   },
   {
    "cell": "B24",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "SK",
@@ -730,6 +761,7 @@
   },
   {
    "cell": "C24",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "SK",
@@ -752,6 +784,7 @@
   },
   {
    "cell": "B25",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "DK",
@@ -774,6 +807,7 @@
   },
   {
    "cell": "C25",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "DK",
@@ -796,6 +830,7 @@
   },
   {
    "cell": "B26",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "HU",
@@ -818,6 +853,7 @@
   },
   {
    "cell": "C26",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "HU",
@@ -840,6 +876,7 @@
   },
   {
    "cell": "B27",
+   "dataset_eurostat": "tec00023",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "IS",
@@ -862,6 +899,7 @@
   },
   {
    "cell": "C27",
+   "dataset_eurostat": "tec00023",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "IS",
@@ -884,6 +922,7 @@
   },
   {
    "cell": "B28",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LU",
@@ -906,6 +945,7 @@
   },
   {
    "cell": "C28",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LU",
@@ -928,6 +968,7 @@
   },
   {
    "cell": "B29",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "SI",
@@ -950,6 +991,7 @@
   },
   {
    "cell": "C29",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "SI",
@@ -972,6 +1014,7 @@
   },
   {
    "cell": "B30",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "ES",
@@ -994,6 +1037,7 @@
   },
   {
    "cell": "C30",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "ES",
@@ -1016,6 +1060,7 @@
   },
   {
    "cell": "B31",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LV",
@@ -1038,6 +1083,7 @@
   },
   {
    "cell": "C31",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LV",
@@ -1060,6 +1106,7 @@
   },
   {
    "cell": "B32",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "NL",
@@ -1082,6 +1129,7 @@
   },
   {
    "cell": "C32",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "NL",
@@ -1104,6 +1152,7 @@
   },
   {
    "cell": "B33",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "EE",
@@ -1126,6 +1175,7 @@
   },
   {
    "cell": "C33",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "EE",
@@ -1148,6 +1198,7 @@
   },
   {
    "cell": "B34",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "RO",
@@ -1170,6 +1221,7 @@
   },
   {
    "cell": "C34",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "RO",
@@ -1192,6 +1244,7 @@
   },
   {
    "cell": "B35",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "CZ",
@@ -1214,6 +1267,7 @@
   },
   {
    "cell": "C35",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "CZ",
@@ -1236,6 +1290,7 @@
   },
   {
    "cell": "B36",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "PT",
@@ -1258,6 +1313,7 @@
   },
   {
    "cell": "C36",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "PT",
@@ -1280,6 +1336,7 @@
   },
   {
    "cell": "B37",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LT",
@@ -1302,6 +1359,7 @@
   },
   {
    "cell": "C37",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LT",
@@ -1324,6 +1382,7 @@
   },
   {
    "cell": "B38",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "BG",
@@ -1346,6 +1405,7 @@
   },
   {
    "cell": "C38",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "BG",
@@ -1368,6 +1428,7 @@
   },
   {
    "cell": "B39",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "CY",
@@ -1390,6 +1451,7 @@
   },
   {
    "cell": "C39",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "CY",
@@ -1412,6 +1474,7 @@
   },
   {
    "cell": "B40",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "MT",
@@ -1434,6 +1497,7 @@
   },
   {
    "cell": "C40",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "MT",
@@ -1456,6 +1520,7 @@
   },
   {
    "cell": "B41",
+   "dataset_eurostat": "tec00023",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "CH",
@@ -1478,6 +1543,7 @@
   },
   {
    "cell": "C41",
+   "dataset_eurostat": "tec00023",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "CH",
@@ -1500,6 +1566,7 @@
   },
   {
    "cell": "B42",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "IE",
@@ -1522,6 +1589,7 @@
   },
   {
    "cell": "C42",
+   "dataset_eurostat": "tec00023",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "IE",
@@ -1585,15 +1653,17 @@
   ],
   "source": {
    "datasets": {
+    "gov_10a_main": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main/default/table?lang=en",
     "ilc_di03": "https://ec.europa.eu/eurostat/databrowser/view/ilc_di03/default/table?lang=fr&category=qol.qol_mlc.qol_mlc_i",
     "tec00023": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table",
     "tec00127": "https://ec.europa.eu/eurostat/databrowser/view/tec00127/default/table?lang=en"
    },
    "downloaded": "2026-11-21",
    "kind": "eurostat",
-   "ref": "Eurostat tec00023 (dépenses des administrations publiques, % du PIB) et tec00127 (capacité/besoin de financement, % du PIB), mise à jour du 21 octobre 2026 ; ilc_di03 (revenu médian équivalent, enquête SILC), mise à jour du 20 octobre 2026. Lignes (pays, agrégats) d'après Séries des graphiques.xlsx › GraphGov, GraphRDB",
+   "ref": "Eurostat tec00023 (dépenses des administrations publiques, % du PIB) et tec00127 (capacité/besoin de financement, % du PIB ; gov_10a_main pour l'Islande, la Norvège et la Suisse, que tec00127 ne publie pas), mise à jour du 21 octobre 2026 ; ilc_di03 (revenu médian équivalent, enquête SILC), mise à jour du 20 octobre 2026. Lignes (pays, agrégats) d'après Séries des graphiques.xlsx › GraphGov, GraphRDB",
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table",
    "vintage": {
+    "gov_10a_main": "2026-10-21",
     "ilc_di03": "2026-10-20",
     "tec00023": "2026-10-21",
     "tec00127": "2026-10-21"
@@ -1817,8 +1887,8 @@
    "geo": "IS",
    "is_france": false,
    "name_fr": "Islande",
-   "solde_pib_2024": -3.7,
-   "solde_pib_2025": -2.8
+   "solde_pib_2024": -4.1,
+   "solde_pib_2025": -2.6
   },
   {
    "depenses_pib_2024": 50.3,
@@ -1896,7 +1966,7 @@
    "revenu_median_eur_2024": 40432,
    "revenu_median_spa_2024": 32338,
    "solde_pib_2024": 12.7,
-   "solde_pib_2025": 10.4
+   "solde_pib_2025": 10.5
   },
   {
    "depenses_pib_2024": 44.6,
@@ -1995,8 +2065,8 @@
    "name_fr": "Suisse",
    "revenu_median_eur_2024": 51926,
    "revenu_median_spa_2024": 29828,
-   "solde_pib_2024": 0.5,
-   "solde_pib_2025": null
+   "solde_pib_2024": 0.3,
+   "solde_pib_2025": 0.2
   },
   {
    "depenses_pib_2024": 50,
@@ -3505,6 +3575,7 @@
  "solde_public_pib": [
   {
    "cell": "B50",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "RO",
@@ -3527,6 +3598,7 @@
   },
   {
    "cell": "C50",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "RO",
@@ -3537,10 +3609,10 @@
    "kind": "country",
    "label_source": "Romania",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Roumanie",
    "rank_asc": 1,
-   "rank_desc": 29,
+   "rank_desc": 30,
    "unit": "% du PIB",
    "value": -7.8,
    "value_classeur": -7.9,
@@ -3549,6 +3621,7 @@
   },
   {
    "cell": "B51",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "PL",
@@ -3571,6 +3644,7 @@
   },
   {
    "cell": "C51",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "PL",
@@ -3581,10 +3655,10 @@
    "kind": "country",
    "label_source": "Poland",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Pologne",
    "rank_asc": 2,
-   "rank_desc": 28,
+   "rank_desc": 29,
    "unit": "% du PIB",
    "value": -7.2,
    "value_classeur": -7.3,
@@ -3593,6 +3667,7 @@
   },
   {
    "cell": "B52",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "FR",
@@ -3615,6 +3690,7 @@
   },
   {
    "cell": "C52",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "FR",
@@ -3625,10 +3701,10 @@
    "kind": "country",
    "label_source": "France",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "France",
    "rank_asc": 4,
-   "rank_desc": 26,
+   "rank_desc": 27,
    "unit": "% du PIB",
    "value": -5.1,
    "value_classeur": -5.1,
@@ -3637,6 +3713,7 @@
   },
   {
    "cell": "B53",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "SK",
@@ -3659,6 +3736,7 @@
   },
   {
    "cell": "C53",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "SK",
@@ -3669,10 +3747,10 @@
    "kind": "country",
    "label_source": "Slovakia",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Slovaquie",
    "rank_asc": 6,
-   "rank_desc": 24,
+   "rank_desc": 25,
    "unit": "% du PIB",
    "value": -4.4,
    "value_classeur": -4.5,
@@ -3681,6 +3759,7 @@
   },
   {
    "cell": "B54",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "HU",
@@ -3703,6 +3782,7 @@
   },
   {
    "cell": "C54",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "HU",
@@ -3713,10 +3793,10 @@
    "kind": "country",
    "label_source": "Hungary",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Hongrie",
    "rank_asc": 5,
-   "rank_desc": 25,
+   "rank_desc": 26,
    "unit": "% du PIB",
    "value": -4.7,
    "value_classeur": -4.7,
@@ -3725,6 +3805,7 @@
   },
   {
    "cell": "B55",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "AT",
@@ -3747,6 +3828,7 @@
   },
   {
    "cell": "C55",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "AT",
@@ -3757,10 +3839,10 @@
    "kind": "country",
    "label_source": "Austria",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Autriche",
    "rank_asc": 7,
-   "rank_desc": 23,
+   "rank_desc": 24,
    "unit": "% du PIB",
    "value": -4.1,
    "value_classeur": -4.2,
@@ -3769,6 +3851,7 @@
   },
   {
    "cell": "B56",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "BE",
@@ -3791,6 +3874,7 @@
   },
   {
    "cell": "C56",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "BE",
@@ -3801,10 +3885,10 @@
    "kind": "country",
    "label_source": "Belgium",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Belgique",
    "rank_asc": 3,
-   "rank_desc": 27,
+   "rank_desc": 28,
    "unit": "% du PIB",
    "value": -5.2,
    "value_classeur": -5.2,
@@ -3813,6 +3897,7 @@
   },
   {
    "cell": "B57",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "FI",
@@ -3835,6 +3920,7 @@
   },
   {
    "cell": "C57",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "FI",
@@ -3845,10 +3931,10 @@
    "kind": "country",
    "label_source": "Finland",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Finlande",
    "rank_asc": 9,
-   "rank_desc": 21,
+   "rank_desc": 22,
    "unit": "% du PIB",
    "value": -3.8,
    "value_classeur": -3.4,
@@ -3857,6 +3943,7 @@
   },
   {
    "cell": "B58",
+   "dataset_eurostat": "gov_10a_main",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "IS",
@@ -3872,13 +3959,14 @@
    "rank_asc": 9,
    "rank_desc": 22,
    "unit": "% du PIB",
-   "value": -3.7,
+   "value": -4.1,
    "value_classeur": -3.7,
-   "vintage": "classeur",
+   "vintage": "eurostat",
    "year": 2024
   },
   {
    "cell": "C58",
+   "dataset_eurostat": "gov_10a_main",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "IS",
@@ -3889,18 +3977,19 @@
    "kind": "country",
    "label_source": "Iceland",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Islande",
    "rank_asc": 13,
-   "rank_desc": 17,
+   "rank_desc": 18,
    "unit": "% du PIB",
-   "value": -2.8,
+   "value": -2.6,
    "value_classeur": -2.8,
-   "vintage": "classeur",
+   "vintage": "eurostat",
    "year": 2025
   },
   {
    "cell": "B59",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "IT",
@@ -3923,6 +4012,7 @@
   },
   {
    "cell": "C59",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "IT",
@@ -3933,10 +4023,10 @@
    "kind": "country",
    "label_source": "Italy",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Italie",
    "rank_asc": 10,
-   "rank_desc": 20,
+   "rank_desc": 21,
    "unit": "% du PIB",
    "value": -3.1,
    "value_classeur": -3.1,
@@ -3945,6 +4035,7 @@
   },
   {
    "cell": "B60",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "MT",
@@ -3967,6 +4058,7 @@
   },
   {
    "cell": "C60",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "MT",
@@ -3977,10 +4069,10 @@
    "kind": "country",
    "label_source": "Malta",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Malte",
    "rank_asc": 18,
-   "rank_desc": 12,
+   "rank_desc": 13,
    "unit": "% du PIB",
    "value": -2.1,
    "value_classeur": -2.2,
@@ -3989,6 +4081,7 @@
   },
   {
    "cell": "B61",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "ES",
@@ -4011,6 +4104,7 @@
   },
   {
    "cell": "C61",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "ES",
@@ -4021,10 +4115,10 @@
    "kind": "country",
    "label_source": "Spain",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Espagne",
    "rank_asc": 16,
-   "rank_desc": 14,
+   "rank_desc": 15,
    "unit": "% du PIB",
    "value": -2.4,
    "value_classeur": -2.4,
@@ -4033,6 +4127,7 @@
   },
   {
    "cell": "B62",
+   "dataset_eurostat": "tec00127",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EU27_2020",
@@ -4055,6 +4150,7 @@
   },
   {
    "cell": "C62",
+   "dataset_eurostat": "tec00127",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EU27_2020",
@@ -4077,6 +4173,7 @@
   },
   {
    "cell": "B63",
+   "dataset_eurostat": "tec00127",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA21",
@@ -4099,6 +4196,7 @@
   },
   {
    "cell": "C63",
+   "dataset_eurostat": "tec00127",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA21",
@@ -4121,6 +4219,7 @@
   },
   {
    "cell": "B64",
+   "dataset_eurostat": "tec00127",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA20",
@@ -4143,6 +4242,7 @@
   },
   {
    "cell": "C64",
+   "dataset_eurostat": "tec00127",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA20",
@@ -4165,6 +4265,7 @@
   },
   {
    "cell": "B65",
+   "dataset_eurostat": "tec00127",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA19",
@@ -4187,6 +4288,7 @@
   },
   {
    "cell": "C65",
+   "dataset_eurostat": "tec00127",
    "eu27_member": null,
    "euro_area_member_2024": null,
    "geo": "EA19",
@@ -4209,6 +4311,7 @@
   },
   {
    "cell": "B66",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "BG",
@@ -4231,6 +4334,7 @@
   },
   {
    "cell": "C66",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "BG",
@@ -4241,10 +4345,10 @@
    "kind": "country",
    "label_source": "Bulgaria",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Bulgarie",
    "rank_asc": 8,
-   "rank_desc": 22,
+   "rank_desc": 23,
    "unit": "% du PIB",
    "value": -4,
    "value_classeur": -3.5,
@@ -4253,6 +4357,7 @@
   },
   {
    "cell": "B67",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "DE",
@@ -4275,6 +4380,7 @@
   },
   {
    "cell": "C67",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "DE",
@@ -4285,10 +4391,10 @@
    "kind": "country",
    "label_source": "Allemagne",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Allemagne",
    "rank_asc": 12,
-   "rank_desc": 18,
+   "rank_desc": 19,
    "unit": "% du PIB",
    "value": -2.9,
    "value_classeur": -2.7,
@@ -4297,6 +4403,7 @@
   },
   {
    "cell": "B68",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "HR",
@@ -4319,6 +4426,7 @@
   },
   {
    "cell": "C68",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "HR",
@@ -4329,10 +4437,10 @@
    "kind": "country",
    "label_source": "Croatia",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Croatie",
    "rank_asc": 11,
-   "rank_desc": 19,
+   "rank_desc": 20,
    "unit": "% du PIB",
    "value": -3,
    "value_classeur": -3,
@@ -4341,6 +4449,7 @@
   },
   {
    "cell": "B69",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "CZ",
@@ -4363,6 +4472,7 @@
   },
   {
    "cell": "C69",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "CZ",
@@ -4373,10 +4483,10 @@
    "kind": "country",
    "label_source": "Czechia",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Tchéquie",
    "rank_asc": 17,
-   "rank_desc": 13,
+   "rank_desc": 14,
    "unit": "% du PIB",
    "value": -2.2,
    "value_classeur": -2.1,
@@ -4385,6 +4495,7 @@
   },
   {
    "cell": "B70",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LV",
@@ -4407,6 +4518,7 @@
   },
   {
    "cell": "C70",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LV",
@@ -4417,10 +4529,10 @@
    "kind": "country",
    "label_source": "Latvia",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Lettonie",
    "rank_asc": 14,
-   "rank_desc": 15,
+   "rank_desc": 16,
    "unit": "% du PIB",
    "value": -2.5,
    "value_classeur": -2.5,
@@ -4429,6 +4541,7 @@
   },
   {
    "cell": "B71",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "SE",
@@ -4451,6 +4564,7 @@
   },
   {
    "cell": "C71",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "SE",
@@ -4461,10 +4575,10 @@
    "kind": "country",
    "label_source": "Sweden",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Suède",
    "rank_asc": 22,
-   "rank_desc": 7,
+   "rank_desc": 8,
    "unit": "% du PIB",
    "value": -1.6,
    "value_classeur": -1.3,
@@ -4473,6 +4587,7 @@
   },
   {
    "cell": "B72",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LT",
@@ -4495,6 +4610,7 @@
   },
   {
    "cell": "C72",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LT",
@@ -4505,10 +4621,10 @@
    "kind": "country",
    "label_source": "Lithuania",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Lituanie",
    "rank_asc": 20,
-   "rank_desc": 9,
+   "rank_desc": 10,
    "unit": "% du PIB",
    "value": -1.8,
    "value_classeur": -1.8,
@@ -4517,6 +4633,7 @@
   },
   {
    "cell": "B73",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "EE",
@@ -4539,6 +4656,7 @@
   },
   {
    "cell": "C73",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "EE",
@@ -4549,10 +4667,10 @@
    "kind": "country",
    "label_source": "Estonie",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Estonie",
    "rank_asc": 19,
-   "rank_desc": 11,
+   "rank_desc": 12,
    "unit": "% du PIB",
    "value": -2,
    "value_classeur": -2,
@@ -4561,6 +4679,7 @@
   },
   {
    "cell": "B74",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "SI",
@@ -4583,6 +4702,7 @@
   },
   {
    "cell": "C74",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "SI",
@@ -4593,10 +4713,10 @@
    "kind": "country",
    "label_source": "Slovenia",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Slovénie",
    "rank_asc": 14,
-   "rank_desc": 15,
+   "rank_desc": 16,
    "unit": "% du PIB",
    "value": -2.5,
    "value_classeur": -2.5,
@@ -4605,6 +4725,7 @@
   },
   {
    "cell": "B75",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "NL",
@@ -4627,6 +4748,7 @@
   },
   {
    "cell": "C75",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "NL",
@@ -4637,10 +4759,10 @@
    "kind": "country",
    "label_source": "Pays-Bas",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Pays-Bas",
    "rank_asc": 22,
-   "rank_desc": 7,
+   "rank_desc": 8,
    "unit": "% du PIB",
    "value": -1.6,
    "value_classeur": -1.6,
@@ -4649,6 +4771,7 @@
   },
   {
    "cell": "B76",
+   "dataset_eurostat": "gov_10a_main",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "CH",
@@ -4664,13 +4787,14 @@
    "rank_asc": 23,
    "rank_desc": 8,
    "unit": "% du PIB",
-   "value": 0.5,
+   "value": 0.3,
    "value_classeur": 0.5,
-   "vintage": "classeur",
+   "vintage": "eurostat",
    "year": 2024
   },
   {
    "cell": "C76",
+   "dataset_eurostat": "gov_10a_main",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "CH",
@@ -4680,19 +4804,20 @@
    "is_france": false,
    "kind": "country",
    "label_source": "Suisse",
-   "missing": true,
-   "n_countries_ranked": 29,
+   "missing": false,
+   "n_countries_ranked": 30,
    "name_fr": "Suisse",
-   "rank_asc": null,
-   "rank_desc": null,
+   "rank_asc": 24,
+   "rank_desc": 7,
    "unit": "% du PIB",
-   "value": null,
+   "value": 0.2,
    "value_classeur": null,
-   "vintage": null,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
    "cell": "B77",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "PT",
@@ -4715,6 +4840,7 @@
   },
   {
    "cell": "C77",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "PT",
@@ -4725,9 +4851,9 @@
    "kind": "country",
    "label_source": "Portugal",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Portugal",
-   "rank_asc": 24,
+   "rank_asc": 25,
    "rank_desc": 6,
    "unit": "% du PIB",
    "value": 0.7,
@@ -4737,6 +4863,7 @@
   },
   {
    "cell": "B78",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LU",
@@ -4759,6 +4886,7 @@
   },
   {
    "cell": "C78",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LU",
@@ -4769,10 +4897,10 @@
    "kind": "country",
    "label_source": "Luxembourg",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Luxembourg",
    "rank_asc": 20,
-   "rank_desc": 9,
+   "rank_desc": 10,
    "unit": "% du PIB",
    "value": -1.8,
    "value_classeur": -2,
@@ -4781,6 +4909,7 @@
   },
   {
    "cell": "B79",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "EL",
@@ -4803,6 +4932,7 @@
   },
   {
    "cell": "C79",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "EL",
@@ -4813,9 +4943,9 @@
    "kind": "country",
    "label_source": "Greece",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Grèce",
-   "rank_asc": 26,
+   "rank_asc": 27,
    "rank_desc": 4,
    "unit": "% du PIB",
    "value": 2,
@@ -4825,6 +4955,7 @@
   },
   {
    "cell": "B80",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "IE",
@@ -4847,6 +4978,7 @@
   },
   {
    "cell": "C80",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "IE",
@@ -4857,9 +4989,9 @@
    "kind": "country",
    "label_source": "Ireland",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Irlande",
-   "rank_asc": 25,
+   "rank_asc": 26,
    "rank_desc": 5,
    "unit": "% du PIB",
    "value": 1.8,
@@ -4869,6 +5001,7 @@
   },
   {
    "cell": "B81",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "CY",
@@ -4891,6 +5024,7 @@
   },
   {
    "cell": "C81",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "CY",
@@ -4901,9 +5035,9 @@
    "kind": "country",
    "label_source": "Cyprus",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Chypre",
-   "rank_asc": 28,
+   "rank_asc": 29,
    "rank_desc": 2,
    "unit": "% du PIB",
    "value": 3.6,
@@ -4913,6 +5047,7 @@
   },
   {
    "cell": "B82",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "DK",
@@ -4935,6 +5070,7 @@
   },
   {
    "cell": "C82",
+   "dataset_eurostat": "tec00127",
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "DK",
@@ -4945,9 +5081,9 @@
    "kind": "country",
    "label_source": "Danemark",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Danemark",
-   "rank_asc": 27,
+   "rank_asc": 28,
    "rank_desc": 3,
    "unit": "% du PIB",
    "value": 2.9,
@@ -4957,6 +5093,7 @@
   },
   {
    "cell": "B83",
+   "dataset_eurostat": "gov_10a_main",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "NO",
@@ -4974,11 +5111,12 @@
    "unit": "% du PIB",
    "value": 12.7,
    "value_classeur": 12.7,
-   "vintage": "classeur",
+   "vintage": "eurostat",
    "year": 2024
   },
   {
    "cell": "C83",
+   "dataset_eurostat": "gov_10a_main",
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "NO",
@@ -4989,14 +5127,14 @@
    "kind": "country",
    "label_source": "Norway",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Norvège",
-   "rank_asc": 29,
+   "rank_asc": 30,
    "rank_desc": 1,
    "unit": "% du PIB",
-   "value": 10.4,
+   "value": 10.5,
    "value_classeur": 10.4,
-   "vintage": "classeur",
+   "vintage": "eurostat",
    "year": 2025
   }
  ]

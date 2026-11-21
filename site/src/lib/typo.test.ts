@@ -65,3 +65,59 @@ describe('typo', () => {
     });
   });
 });
+
+describe('typo : adresses web (R2-01)', () => {
+  const XLSX = 'https://france-resolution.fr/donnees/S%C3%A9ries%20des%20graphiques.xlsx';
+  const XLSX2 = 'https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx';
+
+  it('ne casse pas l’encodage en pourcentage d’une adresse, même avec spaceBeforePercent', () => {
+    for (const u of [XLSX, XLSX2]) {
+      expect(typo(u, { spaceBeforePercent: true })).toBe(u);
+      expect(typo(u, { spaceBeforePercent: true })).not.toMatch(/[\u00A0\u202F]/);
+    }
+  });
+
+  it('protège une adresse noyée dans une phrase et ponctue le reste', () => {
+    const t = typo(`Source : ${XLSX} ; 10% du total (voir ${XLSX2}).`, {
+      spaceBeforePercent: true,
+    });
+    expect(t).toBe(`Source${NNBSP}: ${XLSX}${NNBSP}; 10${NBSP}% du total (voir ${XLSX2}).`);
+  });
+
+  it('typoDeep laisse intactes les clés url/href et toute chaîne qui est une adresse', () => {
+    const data = {
+      url: XLSX,
+      pdf_url: XLSX2,
+      origin_url: 'https://www.budget.gouv.fr/a%C3%A9',
+      liens: [{ href: '/comprendre/niches/#a%C3%A9 10%', label: 'Un lien : 10%' }],
+      source: { quote: 'Un fait : 10%', ref: XLSX },
+    };
+    const out = typoDeep(data, { spaceBeforePercent: true });
+    expect(out.url).toBe(XLSX);
+    expect(out.pdf_url).toBe(XLSX2);
+    expect(out.origin_url).toBe(data.origin_url);
+    expect(out.liens[0]!.href).toBe(data.liens[0]!.href);
+    expect(out.liens[0]!.label).toBe(`Un lien${NNBSP}: 10${NBSP}%`);
+    expect(out.source.quote).toBe(`Un fait${NNBSP}: 10${NBSP}%`);
+    expect(out.source.ref).toBe(XLSX);
+  });
+
+  it('aucune chaîne de données ne contient d’espace insécable dans une adresse après la passe', async () => {
+    const files = import.meta.glob('../data/*.json', { eager: true, import: 'default' });
+    let urls = 0;
+    const walk = (v: unknown) => {
+      if (typeof v === 'string') {
+        for (const m of v.matchAll(/https?:\/\/[^ \t\r\n"<>]+/g)) {
+          urls++;
+          expect(m[0], m[0]).not.toMatch(/[\u00A0\u202F]/);
+        }
+      } else if (Array.isArray(v)) v.forEach(walk);
+      else if (v && typeof v === 'object') Object.values(v).forEach(walk);
+    };
+    for (const [path, json] of Object.entries(files)) {
+      if (path.endsWith('manifest.json')) continue;
+      walk(typoDeep(json, { spaceBeforePercent: true, enDash: true }));
+    }
+    expect(urls).toBeGreaterThan(1000); // url, pdf_url, docx_url, liasse_pdf_url… of every dataset
+  });
+});

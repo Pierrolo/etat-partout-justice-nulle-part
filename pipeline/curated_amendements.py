@@ -14,7 +14,8 @@ Faithfulness rules
 
 A date entry is (ISO date, precision, label_fr, quote).  precision:
   'jour'    exact day written in the text
-  'annee'   a year / tax year without a day (ISO date = 1 January of that year)
+  'annee'   a year / tax year without a day (ISO date = 1 January of that year when it marks a start, 31 December when it
+            marks an end: « due une dernière fois au titre de 2027 »)
   'approx'  start date not written (e.g. « lendemain de la publication de la loi »)
 """
 from __future__ import annotations
@@ -43,7 +44,7 @@ CURATED: dict[tuple[str, int], dict] = {
         "theme": "niches",
         "resume": "Supprime tous les avantages fiscaux dérogatoires (exonérations, abattements, déductions, réductions et crédits d'impôt, taux réduits, reports, dégrèvements) sur sept impôts, avec six exceptions (droit commun du revenu imposable, double imposition, droit de l'Union, taux réduits de TVA non abrogés, aide fondamentale, compte d'épargne personnel et tarif des droits de mutation) et un calendrier d'extinction qui s'étale de 2027 à 2029.",
         "dates": [
-            ("2027-01-01", A, "Cas général : impôt sur le revenu dû au titre de 2026, impôt sur les sociétés des exercices clos à partir du 1er janvier 2027, droits d'enregistrement sur les actes à partir du 1er janvier 2027", "le I s’applique à l’impôt sur le revenu dû au titre de 2026"),
+            ("2027-01-01", J, "Cas général : impôt sur le revenu dû au titre de 2026, impôt sur les sociétés des exercices clos à partir du 1er janvier 2027, droits d'enregistrement sur les actes à partir du 1er janvier 2027", "à l’impôt sur les sociétés dû au titre des exercices clos à compter du 1er janvier 2027"),
             ("2027-01-01", J, "Avantages liés à un investissement, une dépense ou un engagement : investissements et engagements à partir du 1er janvier 2027", "aux engagements pris à compter du 1er janvier 2027"),
             ("2027-01-01", J, "Successions et donations : à partir du 1er janvier 2027", "aux successions ouvertes et aux donations consenties à compter du 1er janvier 2027"),
             ("2027-07-01", J, "TVA, accises et taxes douanières : opérations dont le fait générateur est à partir du 1er juillet 2027", "aux opérations dont le fait générateur intervient à compter du 1er juillet 2027"),
@@ -160,7 +161,7 @@ CURATED: dict[tuple[str, int], dict] = {
     },
     ("PLF-P1", 19): {
         "theme": "refonte_fiscale",
-        "resume": "Remplace les droits de mutation (achat, succession, donation) par un barème unique — rien sous 10 000 €, 1 % de 10 000 à 100 000 €, 3 % au-delà — supporté par le vendeur ou l'héritier et imputé sur l'impôt sur la plus-value.",
+        "resume": "Remplace les droits de mutation (achat, succession, donation) par un barème unique — rien sous 10 000 €, 1 % de 10 000 à 100 000 €, 3 % au-delà — imputé comme acompte sur l'impôt sur la plus-value. Le dispositif le met à la charge de « celui qui liquide la plus-value sur laquelle ils s'imputent » ; l'exposé écrit le vendeur ou l'héritier, et celui du n° 20 les droits payés à l'achat (D41).",
         "dates": [("2027-01-01", J, "Actes, mutations et successions à partir du 1er janvier 2027", "aux successions ouvertes à compter du 1er janvier 2027")],
     },
     ("PLF-P1", 20): {
@@ -211,7 +212,7 @@ CURATED: dict[tuple[str, int], dict] = {
     },
     ("PLF-P1", 26): {
         "theme": "refonte_fiscale",
-        "resume": "Retire France Télévisions, Radio France, France Médias Monde et TV5 Monde du compte de concours financiers alimenté par une fraction de TVA : leur financement revient au budget général.",
+        "resume": "Referme les canaux budgétaires hors budget général : retire France Télévisions, Radio France, France Médias Monde et TV5 Monde du compte de concours financiers alimenté par une fraction de TVA (leur financement revient au budget général), réserve les dépenses du compte « Participations financières de l'État » aux personnes morales de droit public, met fin aux fonds que le compte de commerce « Soutien financier au commerce extérieur » met à disposition d'organismes privés et supprime trois affectations de taxes.",
         "dates": [
             ("2027-01-01", J, "Entrée en vigueur", "Le I, le II, le III et le IV entrent en vigueur le 1er janvier 2027"),
             ("2027-04-01", J, "Les avances d'actions de transformation non employées sont restituées avant le 1er avril 2027", "sont restituées à l’État avant le 1er avril 2027"),
@@ -313,7 +314,7 @@ CURATED: dict[tuple[str, int], dict] = {
     },
     ("PLF-P2", 28): {
         "theme": "retraites_indexations",
-        "resume": "Retire l'automaticité de la revalorisation de l'AAH, de la prime d'activité, du RSA, de l'ASS et de l'aide aux anciens migrants : la revalorisation n'est possible que si le solde du dernier exercice clos n'est pas déficitaire.",
+        "resume": "Retire l'automaticité de toute revalorisation ou indexation à la charge de l'État, notamment celle de l'AAH, de la prime d'activité, du RSA, de l'ASS et de l'aide aux anciens migrants : le pouvoir réglementaire ne peut revaloriser que si le solde du dernier exercice clos n'est pas déficitaire et si le coût reste inférieur à l'excédent constaté.",
         "dates": [("2027-01-01", J, "Revalorisations prenant effet à partir du 1er janvier 2027", "Le présent article s’applique aux revalorisations prenant effet à compter du 1er janvier 2027")],
     },
     ("PLF-P2", 29): {
@@ -430,7 +431,7 @@ CURATED: dict[tuple[str, int], dict] = {
     },
     ("PLFSS", 7): {
         "theme": "aide_fondamentale",
-        "resume": "Abroge les neuf prestations familiales et l'action sociale des caisses d'allocations familiales (sauf l'allocation de logement, éteinte en 2030), à la date et sous réserve de l'entrée en vigueur de l'aide fondamentale universelle.",
+        "resume": "Abroge les prestations familiales du code de la sécurité sociale (huit des neuf que l'exposé compte : seule l'allocation de logement est conservée, éteinte en 2030) et l'action sociale des caisses d'allocations familiales, à la date et sous réserve de l'entrée en vigueur de l'aide fondamentale universelle.",
         "dates": [
             ("2028-01-01", J, "Entrée en vigueur, à la date d'entrée en vigueur de l'aide fondamentale et sous réserve de celle-ci", "Le I entre en vigueur le 1er janvier 2028, à la date d’entrée en vigueur de l’aide fondamentale universelle et sous réserve de cette entrée en vigueur"),
             ("2030-01-01", J, "Abrogation de l'article L. 511-1 (allocation de logement)", "est abrogé à compter du 1er janvier 2030"),

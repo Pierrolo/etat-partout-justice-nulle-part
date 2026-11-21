@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import niches from '@/data/niches.json';
 import {
   DEFAULT_STATE,
+  PLAN_IDS,
   PAGE_SIZE,
   byCategory,
   byTax,
@@ -274,8 +275,153 @@ describe('niches-model: ce que dit le texte de l’amendement n° 1 (novembre 20
 
   it('signale chaque désaccord avec le classeur sans le cacher', () => {
     const conflicts = rows.filter((r) => r.planConflict);
-    expect(conflicts).toHaveLength(17);
+    expect(conflicts).toHaveLength(37); // 17 d’octobre + TVA (8) + outre-mer (10) + 110240 + 120124
     expect(conflicts.every((r) => r.planClasseur && r.planClasseur !== r.plan)).toBe(true);
     expect(rows.filter((r) => !r.planConflict).every((r) => r.planClasseur === null)).toBe(true);
+  });
+});
+
+describe('niches-model: TVA, outre-mer et lectures par la nature (amendement n° 1, novembre 2026)', () => {
+  const byId = (id: string) => rows.find((r) => r.id === id)!;
+  const plan = (p: string) => rows.filter((r) => r.plan === p);
+  const cost = (rs: typeof rows) => rs.reduce((n, r) => n + (costOf(r, 2024) ?? 0), 0);
+
+  it('répartit les 465 niches en sept effets, qui somment au coût total', () => {
+    expect(PLAN_IDS).toHaveLength(7);
+    expect(rows.every((r) => PLAN_IDS.includes(r.plan))).toBe(true);
+    expect(Object.fromEntries(PLAN_IDS.map((p) => [p, [plan(p).length, cost(plan(p))]]))).toEqual({
+      supprimee: [327, 65121],
+      'trois-ans': [26, 11489],
+      'aide-fondamentale': [6, 3522],
+      partielle: [2, 173],
+      maintenue: [6, 526],
+      'outre-mer': [16, 3522],
+      eteinte: [82, 5053],
+    });
+    expect(cost(rows)).toBe(89406);
+  });
+
+  it('TVA : 22 lignes nommées au III bis sont supprimées au 1er juillet 2027', () => {
+    const named = rows.filter((r) => r.planGroup === 'D3bis');
+    expect(named).toHaveLength(22);
+    expect(cost(named)).toBe(8330);
+    for (const r of named) {
+      expect(r.plan, r.id).toBe('supprimee');
+      expect(whenOf(r).anchor, r.id).toBe('2027-07-01');
+      expect(r.planNote, r.id).toContain('III bis');
+    }
+    // « Taux de 5,5 % pour les droits d’entrée aux réunions sportives » n’est pas une niche d’outre-mer
+    expect(byId('730224').cat).toBe('tva');
+  });
+
+  it('TVA : six exonérations et régimes particuliers relèvent de la règle générale (IV.D)', () => {
+    for (const id of ['720106', '720107', '720108', '720207', '740105', '740107']) {
+      const r = byId(id);
+      expect(r.plan, id).toBe('supprimee');
+      expect(r.planGroup, id).toBe('D');
+      expect(r.planNote, id).toContain('II, 3°');
+    }
+  });
+
+  it('TVA : six taux non nommés sont maintenus par le II, 4° : un conflit affiché, pas une suppression', () => {
+    for (const id of ['730208', '730214', '730218', '730230', '730232', '730235']) {
+      const r = byId(id);
+      expect(r.plan, id).toBe('maintenue');
+      expect(r.planConflict, id).toBe(true);
+      expect(r.planClasseur, id).toBe('supprimee');
+      expect(r.planExposeConflict, id).toBe(true);
+      expect(whenOf(r).anchor, id).toBeNull();
+      expect(whenOf(r).text, id).toMatch(/conflit/);
+      expect(r.planNote, id).toMatch(/n° 21/);
+    }
+  });
+
+  it('TVA : deux taux ne sont nommés qu’en partie', () => {
+    for (const id of ['730207', '730227']) {
+      const r = byId(id);
+      expect(r.plan, id).toBe('partielle');
+      expect(r.planExposeConflict, id).toBe(true);
+      expect(whenOf(r).text, id).toMatch(/III bis/);
+    }
+  });
+
+  it('outre-mer : dix niches « supprimées » du classeur sont hors du champ (II, dernier alinéa)', () => {
+    const ids = [
+      '50109',
+      '60108',
+      '90108',
+      '110302',
+      '210322',
+      '500102',
+      '550105',
+      '710109',
+      '710110',
+      '990202',
+    ];
+    for (const id of ids) {
+      const r = byId(id);
+      expect(r.plan, id).toBe('outre-mer');
+      expect(r.planClasseur, id).toBe('supprimee');
+      expect(r.planConflict, id).toBe(true);
+      expect(whenOf(r).anchor, id).toBeNull();
+    }
+    expect(plan('outre-mer')).toHaveLength(16); // + les six « flux OM » du classeur
+    // les avantages d’investisseurs non domiciliés restent dans le champ ; 110256, 320136, 320146 : n° 1 III 135° et n° 18
+    for (const id of [
+      '110210',
+      '110224',
+      '110260',
+      '320113',
+      '210325',
+      '110256',
+      '320136',
+      '320146',
+    ]) {
+      expect(byId(id).plan, id).toBe('supprimee');
+    }
+    expect(byId('320136').planGroup).toBe('B18');
+    expect(byId('110256').planGroup).toBe('B');
+  });
+
+  it('110240 suit l’amendement n° 8 (par tiers), 120124 le cas général du IV.A, 60203 est par tiers (inféré)', () => {
+    const remplacement = byId('110240');
+    expect(remplacement.plan).toBe('trois-ans');
+    expect(remplacement.planGroup).toBe('E8');
+    expect(remplacement.planClasseur).toBe('supprimee');
+    expect(whenOf(remplacement).text).toMatch(/tiers/);
+    const detaches = byId('120124');
+    expect(detaches.plan).toBe('supprimee');
+    expect(detaches.planGroup).toBe('A');
+    expect(detaches.planClasseur).toBe('trois-ans');
+    expect(detaches.planInferred).toBe(true);
+    expect(whenOf(detaches).text).toContain('2026');
+    const jeunes = byId('60203');
+    expect(jeunes.plan).toBe('trois-ans');
+    expect(jeunes.planInferred).toBe(true);
+    expect(jeunes.planConflict).toBe(false);
+    expect(byId('110203').planInferred).toBe(true);
+  });
+
+  it('le cas général est le IV.A (impôt de 2026), pas 2028', () => {
+    const generic = rows.filter(
+      (r) =>
+        r.plan === 'supprimee' &&
+        !r.planGroup &&
+        r.tax === 'ir' &&
+        r.cat !== 'epargne' &&
+        !['110201', '210309', '440201'].includes(r.id),
+    );
+    expect(generic.length).toBeGreaterThan(10);
+    for (const r of generic) {
+      expect(whenOf(r).text, r.id).toContain('IV.A');
+      expect(whenOf(r).text, r.id).toContain('2026');
+    }
+    const raw = niches.niches.find(
+      (n) =>
+        n.resolution.plan_texte.methode === 'non rapproché' &&
+        n.resolution.plan_texte.note_fr?.startsWith('Aucun numéro'),
+    )!;
+    expect(raw.resolution.plan_texte.note_fr).toContain('IV.A');
+    expect(raw.resolution.plan_texte.note_fr).not.toContain('au titre de 2028');
   });
 });

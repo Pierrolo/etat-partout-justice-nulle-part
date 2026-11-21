@@ -135,7 +135,7 @@ const totalsItems: BarItem[] = [
   },
   {
     id: 'm143',
-    label: `« ${md1(md143)} de niches supprimées »`,
+    label: `${md1(md143)} de niches supprimées (annonce)`,
     sub: 'Annonce de la fiche Contribuable : périmètre non détaillé, il inclurait des niches sociales',
     segments: [{ value: md143, color: css.accent, hatched: true, srLabel: 'annoncé' }],
     valueText: md1(md143),
@@ -209,6 +209,19 @@ const garde = byId.get('110203');
 const agri = conflicts.filter((c) => c.groupe === 'E' && !['110203'].includes(c.id));
 const accise = agri.filter((c) => c.id.startsWith('8'));
 const ir2028 = planText.ir_2028;
+const tva = planText.tva;
+const inferredById = new Map(planText.lectures_inferees.map((c) => [c.id, c]));
+const om = planText.outre_mer;
+const pPart = plans.find((p) => p.key === 'partielle')!;
+const pMaint = plans.find((p) => p.key === 'maintenue')!;
+const pOm = plans.find((p) => p.key === 'outre-mer')!;
+/** Niches de TVA que le chiffrage des auteurs dit « supprimées » (22 + 6 + 6 + 2 + 2). */
+const tvaOui =
+  tva.nommees_iii_bis.n_niches +
+  tva.partiellement_nommees.n_niches +
+  tva.taux_non_nommes_maintenus.n_niches +
+  tva.exonerations_regle_generale.n_niches +
+  tva.outre_mer_hors_champ.n_niches;
 
 const links = {
   amendements: withBase('/comprendre/amendements/'),
@@ -320,7 +333,7 @@ const links = {
             niveau: `${TIER_META.announced.label} (${md1(md465)} du PLF + ${md1(mdApu - md465)} de calcul des auteurs + ${md1(mdTva21)} d’estimation du CPO de 2023 projetée par les auteurs)`,
           },
           {
-            perimetre: `« ${md1(md143)} de niches supprimées » (fiche Contribuable)`,
+            perimetre: `${md1(md143)} de niches supprimées (fiche Contribuable)`,
             md: md143,
             niveau: TIER_META.announced.label,
           },
@@ -373,10 +386,12 @@ const links = {
       </Callout>
       <Callout tone="announced" title={`Et ${md1(md143)} ?`}>
         <p>
-          «&#8239;{md1(md143)} de niches supprimées, dont {md1(md52)} vous reviennent » est une
-          annonce de la fiche Contribuable. D’après nos recoupements, ce périmètre additionne niches
-          fiscales, niches sociales et « autre gisement » de la feuille « Flux ». Ce total vient de
-          ce recoupement. Il inclut des niches sociales, en plus des {num('niches_total_nombre')}.
+          «&#8239;{md1(md143)}&#8239;: De niches supprimées, dont {formatInteger(md52)} milliards
+          d’euros vous reviennent en baisse de charges et de taxes » est la deuxième ligne de « Ce
+          que vous gagnez » de la fiche Contribuable ({md1(md143)} en gras). C’est une annonce.
+          D’après nos recoupements, ce périmètre additionne niches fiscales, niches sociales et
+          « autre gisement » de la feuille « Flux ». Ce total vient de ce recoupement. Il inclut des
+          niches sociales, en plus des {num('niches_total_nombre')}.
         </p>
       </Callout>
     </div>
@@ -466,7 +481,7 @@ const links = {
         title="Ce que le plan en ferait"
         subtitle="Coût réalisé 2024, par effet prévu"
         tier="announced"
-        summary={`${formatInteger(pSupp.count)} niches sur ${formatInteger(all2024.count)} seraient supprimées, aux dates fixées par l’amendement n° 1 (${formatMdEuro(pSupp.total / 1000)} de coût en 2024), ${formatInteger(pThree.count)} par tiers jusqu’en 2029 (${formatMdEuro(pThree.total / 1000)}). ${formatInteger(pDead.count)} sont déjà éteintes : le plan n’a rien à y supprimer.`}
+        summary={`${formatInteger(pSupp.count)} niches sur ${formatInteger(all2024.count)} seraient supprimées, aux dates fixées par l’amendement n° 1 (${formatMdEuro(pSupp.total / 1000)} de coût en 2024), ${formatInteger(pThree.count)} par tiers jusqu’en 2029 (${formatMdEuro(pThree.total / 1000)}). ${formatInteger(pPart.count + pMaint.count)} taux de TVA ne sont supprimés qu’en partie (${formatInteger(pPart.count)}) ou pas du tout (${formatInteger(pMaint.count)}) par le texte, dont l’exposé annonce pourtant leur suppression ; ${formatInteger(pOm.count)} niches propres à l’outre-mer sont hors du champ de l’amendement ; ${formatInteger(pDead.count)} sont déjà éteintes : le plan n’a rien à y supprimer.`}
         sources={[
           {
             label: 'Chiffrage publié, feuille « Chiffrages Résolution »',
@@ -522,14 +537,19 @@ const links = {
         L’amendement n° 1 supprime les avantages fiscaux numéro par numéro de code (III) et fixe un
         calendrier par groupe (IV). Pour chaque niche, nous cherchons les numéros qui citent sa
         référence légale et lisons la date de leur groupe : successions et donations dès le 1er
-        janvier 2027, TVA et accises dès le 1er juillet 2027, barème, parts et plus-values à partir
-        de l’impôt sur le revenu de 2028 ({formatInteger(ir2028.n_niches)} niches de l’impôt sur le
-        revenu, pas « dès 2027 »), agriculture, services à la personne et garde d’enfants par tiers
-        jusqu’en 2029, dons par moitié puis en totalité. Quand aucun numéro ne cite la niche, la
-        date est le cas général de l’impôt, avec renvoi au texte. La classification elle-même
-        (supprimée, en trois ans, intégrée à l’aide fondamentale…) vient du chiffrage publié des
-        auteurs, d’où le statut « annoncé » ; sur {formatInteger(conflicts.length)} niches elle
-        diffère du texte, et nous suivons le texte.
+        janvier 2027, accises et douane dès le 1er juillet 2027, barème, parts et plus-values à
+        partir de l’impôt sur le revenu de 2028 ({formatInteger(ir2028.n_niches)} niches de l’impôt
+        sur le revenu, pas « dès 2027 »), agriculture, services à la personne et garde d’enfants par
+        tiers jusqu’en 2029, dons par moitié puis en totalité. Pour la TVA, seules les lignes de
+        taux que le III bis nomme disparaissent le 1er juillet 2027 (
+        {formatInteger(tva.nommees_iii_bis.n_niches)} niches) ; les autres taux réduits sont
+        maintenus par le II, 4°. Quand aucun numéro ne cite la niche, la date est le cas général du
+        IV.A (impôt sur le revenu dû au titre de 2026, impôt sur les sociétés des exercices clos et
+        droits d’enregistrement à partir du 1er janvier 2027, impositions locales dues au titre de
+        2027), avec renvoi au texte. La classification elle-même (supprimée, en trois ans, intégrée
+        à l’aide fondamentale…) vient du chiffrage publié des auteurs, d’où le statut « annoncé » ;
+        sur {formatInteger(conflicts.length)} niches elle diffère du texte, et nous suivons le
+        texte.
       </p>
       <Disclosure
         summary={`Les ${formatInteger(conflicts.length)} niches où le texte et le chiffrage divergent`}
@@ -553,7 +573,9 @@ const links = {
             <strong>
               un tiers en moins au titre de 2027, deux tiers au titre de 2028, supprimées en 2029
             </strong>
-            .
+            . Le crédit d’impôt de remplacement des exploitants agricoles (
+            {meur0(byId.get('110240')?.cout_2024_meur ?? 0)}), que le III ne cite pas, suit la même
+            cadence par l’amendement n° 8.
           </li>
           {garde && (
             <li>
@@ -567,6 +589,59 @@ const links = {
               comme sur la page Calendrier.
             </li>
           )}
+          <li>
+            Taux réduits de TVA : le chiffrage dit « supprimée » pour {formatInteger(tvaOui)} niches
+            de TVA (hors {formatInteger(tva.outre_mer_flux_om.n_niches)} « flux OM » et{' '}
+            {formatInteger(tva.deja_eteintes.n_niches)} déjà éteintes). Le texte en supprime{' '}
+            {formatInteger(tva.nommees_iii_bis.n_niches)} (
+            {meur0(tva.nommees_iii_bis.cout_2024_meur)}) <strong>au 1er juillet 2027</strong>
+            &#8239;: les lignes que le III bis nomme. Il laisse sous la règle générale (I et IV.D,
+            même date, sous réserve du droit de l’Union){' '}
+            {formatInteger(tva.exonerations_regle_generale.n_niches)} exonérations et régimes
+            particuliers ({meur0(tva.exonerations_regle_generale.cout_2024_meur)}), ne supprime que{' '}
+            <strong>en partie</strong> {formatInteger(tva.partiellement_nommees.n_niches)} taux (
+            {meur0(tva.partiellement_nommees.cout_2024_meur)}) et <strong>maintient</strong>{' '}
+            {formatInteger(tva.taux_non_nommes_maintenus.n_niches)} taux que ni le III ni le III bis
+            ne nomment ({meur0(tva.taux_non_nommes_maintenus.cout_2024_meur)}, II, 4°). Les
+            {formatInteger(tva.outre_mer_hors_champ.n_niches)} niches de TVA restantes sont
+            d’outre-mer (voir plus bas).
+          </li>
+          <li>
+            <strong>Texte contre exposé, non tranché.</strong> Pour ces{' '}
+            {formatInteger(tva.conflit_expose.n_niches)} taux non nommés (ou nommés en partie),
+            l’exposé du n° 21 écrit : « Les taux dérogatoires recensés comme dépenses fiscales ne
+            sont pas visés ici : une disposition distincte les supprime au 1er juillet 2027. » Le
+            texte du n° 1 ne le fait pas, et l’exposé du n° 1 range lui-même parmi les exceptions
+            « les taux réduits de taxe sur la valeur ajoutée autres que ceux que le III abroge ».
+            Nous les affichons comme un conflit, pas comme une suppression.
+          </li>
+          <li>
+            {formatInteger(om.hors_champ.dont_oui_au_classeur.n_niches)} niches propres à
+            l’outre-mer ({meur0(om.hors_champ.dont_oui_au_classeur.cout_2024_meur)}) : le chiffrage
+            dit « supprimée » ; le dernier alinéa du II de l’amendement n° 1 écarte du I et du III
+            « les dispositions propres aux collectivités régies par l’article 73 ou par l’article 74
+            de la Constitution et à la Nouvelle-Calédonie » :{' '}
+            <strong>hors du champ, pas de date</strong>
+            (les{' '}
+            {formatInteger(
+              om.hors_champ.n_niches - om.hors_champ.dont_oui_au_classeur.n_niches,
+            )}{' '}
+            « flux OM » du chiffrage sont dans le même cas). Les avantages accordés à une personne
+            non domiciliée outre-mer (investisseurs de métropole) restent dans le champ ; deux
+            crédits d’impôt au logement social et à l’investissement outre-mer sont en outre abrogés
+            par l’amendement n° 18.
+          </li>
+          <li>
+            Deux niches « en trois ans » du chiffrage ne sont nommées ni dans le IV.E ni ailleurs.
+            Le IV.E vise les dispositions « relatives aux activités agricoles, aux services à la
+            personne et à la garde des jeunes enfants, au nombre desquelles » il numérote les
+            siennes : le dégrèvement d’office des jeunes agriculteurs (article 1647-00 bis,{' '}
+            {meur0(inferredById.get('60203')?.cout_2024_meur ?? 0)}) est <strong>par tiers</strong>{' '}
+            (lecture par la nature, inférée) ; l’exonération des salariés détachés à l’étranger
+            (article 81 A, {meur0(byId.get('120124')?.cout_2024_meur ?? 0)}) n’est ni agricole, ni
+            un service à la personne, ni une garde d’enfants : <strong>cas général du IV.A</strong>,
+            impôt sur le revenu dû au titre de 2026.
+          </li>
         </ul>
       </Disclosure>
     </Callout>
@@ -625,7 +700,10 @@ const links = {
         De l’annexe « Dépenses fiscales » du PLF 2026 (Évaluation des voies et moyens, tome II),
         reprise dans le classeur publié. 2024 est le coût réalisé ; 2025 et 2026 sont des
         prévisions. La fiabilité du chiffrage (« très bonne », « bonne », « ordre de grandeur ») est
-        indiquée niche par niche dans « Détails ».
+        indiquée niche par niche dans « Détails ». Le PLF 2027, déposé en octobre 2026, recense{' '}
+        {formatInteger(num('niches_nombre_plf2027'))}
+        niches (FIPECO, 29 octobre 2026) : le classeur des auteurs, et donc cette page, reste sur le
+        PLF 2026 ({n465} niches).
       </p>
     </Disclosure>
   </section>

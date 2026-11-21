@@ -31,6 +31,16 @@ Two readings of « what the plan does with each niche », kept side by side:
     (article and sub-paragraph), the group is read in IV; a niche matched to several groups, or to none, gets
     `groupe: null` (no claim).  Where the two readings disagree, `plan_final` follows the text and
     `plan_conflit_classeur` is true.
+
+The reading of the 18 Nov 2026 text (Am. 1, II 4°, II last paragraph, III bis, IV.A/D/E):
+  * TVA: only the 21 CIBS items of the III bis remove rate lines (1 Jul 2027); II 4° keeps every other reduced or
+    derogatory VAT rate; the exemptions and special regimes (261, 291, 293 B…) are not « taux » so the general rule
+    I + IV.D applies; the exposé of Am. 21 announces that « une disposition distincte » suppresses all of them on
+    1 Jul 2027, which the text does not do (flagged conflict, not a deletion);
+  * overseas: « Ne relèvent pas du I et du III les dispositions propres aux collectivités régies par l'article 73 ou
+    74 de la Constitution et à la Nouvelle-Calédonie » (II, last paragraph): out of the amendment, no date;
+  * Am. 8 (crédit d'impôt de remplacement agricole) and Am. 18 (199 undecies C, 244 quater X, 244 quater Y) carry
+    their own dates for niches that the III does not cite.
 """
 from __future__ import annotations
 
@@ -45,7 +55,8 @@ from lib import Sheet, cell_flag, clean, parse_num, ws
 # What PLF-P1 n° 1 says about each niche (III = list of abrogated provisions, IV = calendar by group)
 # --------------------------------------------------------------------------
 GROUPS_FR = {
-    "A": ("Cas général", "impôt sur le revenu dû au titre de 2026, impôt sur les sociétés des exercices clos à partir du 1er janvier 2027, droits d'enregistrement à partir du 1er janvier 2027", "IV.A",
+    # (label, effet, où dans le texte, citation, n° de l'amendement — 1 par défaut)
+    "A": ("Cas général", "impôt sur le revenu dû au titre de 2026, impôt sur les sociétés des exercices clos à partir du 1er janvier 2027, impôt sur la fortune immobilière et impositions locales dus au titre de 2027, droits d'enregistrement à partir du 1er janvier 2027", "IV.A",
           "le I s’applique à l’impôt sur le revenu dû au titre de 2026"),
     "B": ("Avantage lié à un engagement", "investissements réalisés, dépenses payées, versements effectués et engagements pris à partir du 1er janvier 2027", "IV.B",
           "aux engagements pris à compter du 1er janvier 2027"),
@@ -55,19 +66,101 @@ GROUPS_FR = {
            "le I s’applique aux cessions et aux exportations intervenant à compter du 1er janvier 2027"),
     "Cbis": ("Mutations à titre gratuit", "successions ouvertes et donations consenties à partir du 1er janvier 2027", "IV.C bis",
              "aux successions ouvertes et aux donations consenties à compter du 1er janvier 2027"),
-    "D": ("TVA, accises et douane", "opérations dont le fait générateur est à partir du 1er juillet 2027", "IV.D",
+    "D": ("TVA (exonérations et régimes particuliers), accises et douane", "opérations dont le fait générateur est à partir du 1er juillet 2027", "IV.D",
           "aux opérations dont le fait générateur intervient à compter du 1er juillet 2027"),
+    "D3bis": ("TVA : taux nommés au III bis", "lignes de taux réduit ou dérogatoire du code des impositions sur les biens et services que le III bis supprime, pour les opérations dont le fait générateur est à partir du 1er juillet 2027", "III bis, dernier alinéa",
+              "Le présent III bis s’applique aux opérations dont le fait générateur intervient à compter du 1er juillet 2027"),
+    "D3bisPart": ("TVA : taux en partie nommé au III bis", "seules les lignes que le III bis nomme sont supprimées (1er juillet 2027) ; le reste du taux est maintenu par le II, 4°", "II, 4°, et III bis",
+                  "Qui fixent un taux réduit ou dérogatoire de taxe sur la valeur ajoutée, à l’exception de celles que le III abroge"),
+    "Dmaint": ("TVA : taux non nommé, maintenu par le texte", "taux réduit ou dérogatoire de TVA que ni le III ni le III bis ne nomment : le II, 4° le laisse hors du I (l'exposé du n° 21 annonce pourtant une suppression au 1er juillet 2027)", "II, 4°",
+               "Qui fixent un taux réduit ou dérogatoire de taxe sur la valeur ajoutée, à l’exception de celles que le III abroge"),
     "E": ("Agriculture, services à la personne, garde des jeunes enfants", "avantage réduit d'un tiers au titre de 2027, de deux tiers au titre de 2028, supprimé en totalité à partir de 2029", "IV.E",
           "l’avantage est réduit d’un tiers au titre de 2027 et de deux tiers au titre de 2028"),
+    "E8": ("Crédit d'impôt de remplacement des exploitants agricoles", "crédit d'impôt réduit d'un tiers pour les dépenses engagées en 2027, de deux tiers pour celles de 2028, abrogé à partir des dépenses engagées en 2029", "V, A",
+           "est réduit d’un tiers pour les dépenses engagées en 2027 et de deux tiers pour les dépenses engagées en 2028", 8),
+    "B18": ("Aides à l'investissement abrogées par le n° 18", "abrogées pour les investissements dont le fait générateur est à partir du 1er janvier 2027 (les opérations déjà engagées et achevées avant le 1er juillet 2029 restent au droit ancien)", "IV, B",
+            "Les A, C et E du II s’appliquent aux investissements dont le fait générateur intervient à compter du 1er janvier 2027", 18),
     "F": ("Dons et versements", "avantage réduit de moitié pour les dons à partir du 1er juillet 2027, supprimé à partir du 1er janvier 2028", "IV.F",
           "l’avantage est réduit de moitié pour les dons et versements effectués à compter du 1er juillet 2027"),
+    "OM": ("Outre-mer : hors du champ de l'amendement", "dispositions propres aux collectivités des articles 73 et 74 de la Constitution et à la Nouvelle-Calédonie : ni le I ni le III ne s'y appliquent (régime fiscal distinct), donc pas de date", "II, dernier alinéa",
+           "Ne relèvent pas du I et du III les dispositions propres aux collectivités régies par l’article 73 ou par l’article 74 de la Constitution et à la Nouvelle-Calédonie, qui sont régies par un régime fiscal distinct"),
 }
-# Niches whose legal reference no III item cites by article: (groupe, III items or None, why, inferred)
+# Groupes qui donnent un échelonnement par tiers jusqu'en 2029
+TROIS_ANS_GROUPS = {"E", "E8"}
+
+# Niches dont la référence légale n'est citée par aucun numéro du III, lues autrement.
+# (groupe, numéros du III ou None, explication, inféré ?) — la note est affichée sous la niche.
 PLAN_TEXT_OVERRIDES = {
     "110203": ("E", [150], "Le crédit d'impôt pour frais de garde des enfants de moins de 6 ans (art. 200 quater B) n'est cité par aucun numéro du III. Le seul numéro du IV.E qui ne désigne pas un article est le 150° (« 23° bis du II de la section V »), et le IV.E vise « la garde des jeunes enfants » ; l'article 28 VII, qui fusionne des crédits dans l'aide fondamentale, ne cite pas non plus l'article 200 quater B. Rapprochement non vérifié sur Légifrance (injoignable).", True),
     "110107": ("C", None, "L'article 194 (quotient conjugal) n'est pas dans le III : il est abrogé par PLF-P1 n° 28, V, 2°, pour l'imposition des revenus de 2028 (« Le 1°, le 2° et le 3° du V s’appliquent à l’imposition des revenus de l’année 2028 »).", False),
     "110201": ("F", [148], "La réduction d'impôt pour dons (art. 200) est le 20° du II de la section V (III 148°), cité par le IV.F.", False),
+    # M3 : l'article 200 undecies n'est pas dans le III, l'amendement n° 8 l'échelonne lui-même
+    "110240": ("E8", None, "L'article 200 undecies (crédit d'impôt de remplacement des exploitants agricoles) n'est cité par aucun numéro du III : l'amendement n° 8 (V, A) le réduit d'un tiers pour les dépenses engagées en 2027, de deux tiers pour celles de 2028 et l'abroge à partir de 2029 (II, B).", False),
+    # 60203 : IV.E est défini par la nature (« activités agricoles… au nombre desquelles »), non par une liste fermée
+    "60203": ("E", None, "L'article 1647-00 bis (dégrèvement d'office des jeunes agriculteurs) n'est cité par aucun numéro du III. Le IV.E vise les dispositions « relatives aux activités agricoles, aux services à la personne et à la garde des jeunes enfants, au nombre desquelles » celles qu'il numérote : la liste n'est pas fermée. Lecture par la nature du dispositif, non par un numéro.", True),
+    # M4 : 81 A n'est ni agricole, ni service à la personne, ni garde d'enfants
+    "120124": ("A", None, "L'article 81 A (salariés détachés à l'étranger) n'est cité par aucun numéro du III ni du III quater ou quinquies, et n'est ni agricole, ni un service à la personne, ni une garde d'enfants : il ne relève pas du IV.E, malgré la mention « En 3 ans » du classeur. Le cas général du IV.A s'applique (impôt sur le revenu dû au titre de 2026). Lecture par exclusion, non par un numéro.", True),
+    # M2 : les articles 199 undecies A à C sont cités par le III (135°, IV.B) ; 244 quater X et Y ne le sont que par l'amendement n° 18
+    "110210": ("B", [135], "L'article 199 undecies A est cité par le III 135° (« Les articles 199 undecies A à 199 undecies C », IV.B : investissements réalisés à partir du 1er janvier 2027). Avantage d'investisseurs : il reste dans le champ de l'amendement n° 1 malgré le II, dernier alinéa (bénéfice accordé à une personne non domiciliée outre-mer).", False),
+    "110224": ("B", [135], "L'article 199 undecies B est cité par le III 135° (« Les articles 199 undecies A à 199 undecies C », IV.B : investissements réalisés à partir du 1er janvier 2027). Avantage d'investisseurs : il reste dans le champ de l'amendement n° 1 malgré le II, dernier alinéa (bénéfice accordé à une personne non domiciliée outre-mer).", False),
+    "110256": ("B", [135], "L'article 199 undecies C est cité par le III 135° (IV.B : investissements réalisés à partir du 1er janvier 2027) et abrogé aussi par l'amendement PLF-P1 n° 18 (II, C), les opérations engagées et achevées avant le 1er juillet 2029 restant au droit ancien.", False),
+    "320136": ("B18", None, "L'article 244 quater X est abrogé par l'amendement PLF-P1 n° 18 (II, C) pour les investissements dont le fait générateur est à partir du 1er janvier 2027, les opérations engagées et achevées avant le 1er juillet 2029 restant au droit ancien. Le III de l'amendement n° 1 ne le cite pas.", False),
+    "320146": ("B18", None, "L'article 244 quater Y est abrogé par l'amendement PLF-P1 n° 18 (III, E) pour les investissements dont le fait générateur est à partir du 1er janvier 2027, les opérations engagées et achevées avant le 1er juillet 2029 restant au droit ancien. Le III de l'amendement n° 1 ne le cite pas.", False),
 }
+# M2 : dispositions propres à l'outre-mer, hors du champ de l'amendement n° 1 (II, dernier alinéa). Les « Flux OM » du classeur
+# (suppression_code) y sont aussi, voir `_plan_texte`. Les avantages accordés à des personnes non domiciliées outre-mer
+# (investisseurs : 110210, 110224, 110260, 320113, 210325) restent dans le champ (seconde phrase du même alinéa).
+HORS_CHAMP_OM = {"50109", "60108", "90108", "110302", "210322", "500102", "550105", "710109", "710110", "990202"}
+DANS_LE_CHAMP_OM = {"110210", "110224", "110260", "320113", "210325"}
+NOTE_OM = "Disposition propre à une collectivité d'outre-mer (article 73 ou 74 de la Constitution, Nouvelle-Calédonie) : « Ne relèvent pas du I et du III les dispositions propres aux collectivités régies par l’article 73 ou par l’article 74 de la Constitution et à la Nouvelle-Calédonie » (PLF-P1 n° 1, II, dernier alinéa). Le texte ne lui donne pas de date ; régime fiscal distinct."
+NOTE_OM_INVEST = "Dispositif d'investissement outre-mer : le II (dernier alinéa) exclut les dispositions propres aux collectivités d'outre-mer, mais pas celles dont le bénéfice est accordé à une personne qui n'est pas domiciliée dans ces collectivités (investisseurs de métropole). Nous la laissons dans le champ de l'amendement n° 1 ; date non affirmée."
+
+# TVA — Am. 1, II 4° (« taux réduit ou dérogatoire … à l'exception de celles que le III abroge »), III bis, IV.D.
+# Lecture par l'intitulé : la correspondance CGI → CIBS (L. 213-xxx) n'est pas dans le dépôt et Légifrance est injoignable.
+# Pour chaque niche nommée, le numéro du III bis qui supprime la ligne de taux (21 numéros, tous au 1er juillet 2027).
+TVA_NOMMEES = {
+    "720201": "4° et 6° (lignes de transport de personnes et de biens entre la Corse et le reste de la métropole)",
+    "720206": "2° (ligne « Poissons, crustacés et mollusques … livrés par le pêcheur »)",
+    "730205": "17° (ligne « Hébergement à usage touristique »)",
+    "730206": "17° (ligne « Mise à disposition de terrains de camping ou caravanage »)",
+    "730210": "21° (ligne « Autres logements locatifs sociaux ainsi que les travaux d’extension ou de remise à neuf »)",
+    "730212": "3° (ligne « Produits améliorant la culture agricole et pouvant être utilisés en agriculture biologique »)",
+    "730213": "15° (ligne « Autres travaux légers sur un logement qui n’est pas neuf »)",
+    "730216": "20° et 21° (lignes d'accession sociale à la propriété et de logements locatifs sociaux)",
+    "730221": "17° (ligne « Restauration et produits alimentaires … préparés en vue d’une consommation immédiate »)",
+    "730222": "21° (ligne « Logements locatifs intermédiaires »)",
+    "730223": "15° (ligne « Travaux légers de rénovation énergétique sur un logement qui n’est pas neuf »)",
+    "730224": "14° (ligne « Manifestations sportives »)",
+    "730226": "7° (ligne « Services de gestion des déchets des ménages »)",
+    "730228": "11° (ligne « Objets d’art, de collection ou d’antiquité »)",
+    "730231": "14° (ligne « Représentations théâtrales, concerts, spectacles de cirque, spectacles de variété, cinéma, compétitions de jeux vidéo »)",
+    "730233": "14° (ligne « Service de télévision »)",
+    "730234": "15° (ligne « Pose, installation et entretien d’infrastructures de recharge pour véhicules électriques »)",
+    "730236": "15° (ligne « Livraison et installation de panneaux solaires »)",
+    "730301": "14° (ligne « 140 premières représentations théâtrales, d’un concert ou d’un spectacle de cirque »)",
+    "730302": "3° (ligne « Animaux de boucherie ou de charcuterie vivants à destination des petits agriculteurs »)",
+    "730305": "8° à 10° (ligne « Publications de presse » et critères de la presse)",
+    "730306": "les lignes « en Corse » des 2°, 3°, 4°, 6°, 7°, 11° à 14°, 16°, 17° et 18°",
+}
+# Nommés en partie : une ligne du III bis ne couvre qu'une fraction du taux (le reste est maintenu par le II, 4°).
+TVA_PARTIELLES = {
+    "730207": "Le 17° du III bis ne supprime que la ligne « Restauration dans les cantines d’entreprise, en Corse » : le taux de 10 % des cantines hors de Corse n'est pas nommé.",
+    "730227": "Le 19° du III bis ne supprime que les lignes « Travaux légers portant sur les logements locatifs sociaux et les établissements sociaux et médico-sociaux » et les services qui s'y rapportent : le reste du taux de 5,5 % du secteur social et médico-social n'est pas nommé.",
+}
+# Taux ni dans le III ni dans le III bis : le II, 4° les laisse hors du I.
+TVA_NON_NOMMES = {"730208", "730214", "730218", "730230", "730232", "730235"}
+# Exonérations, franchises et régimes particuliers : pas des « taux », le II, 4° ne les couvre pas ; règle générale I + IV.D.
+TVA_REGLE_GENERALE = {"720106", "720107", "720108", "720207", "740105", "740107"}
+NOTE_TVA_NON_NOMME = (
+    "Aucune ligne du III bis ne correspond à ce taux et aucun numéro du III ne cite l'article : le II, 4° (« Qui fixent un taux réduit ou dérogatoire de taxe sur la valeur ajoutée, à l’exception de celles que le III abroge ») le laisse hors du I. "
+    "Les exposés disent autre chose : celui du n° 21 écrit que « Les taux dérogatoires recensés comme dépenses fiscales ne sont pas visés ici : une disposition distincte les supprime au 1er juillet 2027 », "
+    "et celui du n° 1 date « les taux réduits de taxe sur la valeur ajoutée au 1er juillet 2027 » tout en rangeant parmi les exceptions « les taux réduits … autres que ceux que le III abroge ». "
+    "Texte et exposé divergent : nous signalons le conflit sans le trancher et ne comptons pas ce taux comme supprimé."
+)
+NOTE_TVA_REGLE_GENERALE = (
+    "Exonération, franchise ou régime particulier de TVA : ce n'est pas un « taux réduit ou dérogatoire », le II, 4° ne s'y applique pas. La règle générale du I et du IV.D vise la taxe sur la valeur ajoutée à partir du 1er juillet 2027, "
+    "sous réserve du II, 3° (disposition qui résulte d'une obligation du droit de l'Union européenne), que nous n'avons pas examiné niche par niche."
+)
 _ARTONLY = re.compile(r"^\d{1,4}(?:-\d+)?(?: (?:bis|ter|quater|quinquies|sexies|septies|octies|nonies|decies|undecies|duodecies|terdecies|quaterdecies|quindecies|sexdecies|septdecies|octodecies|novodecies|vicies|[A-Z]{1,3}))*$")
 _STOP = {"le", "la", "les", "l", "d", "de", "du", "des", "et", "à", "au", "aux", "article", "articles", "même", "code", "section", "chapitre", "titre", "partie", "livre", "sous", "première", "premier"}
 
@@ -168,11 +261,44 @@ def _match_items(st: dict, ref: str) -> list[int]:
 
 
 def _plan_texte(st: dict, niche: dict) -> dict:
-    """What PLF-P1 n° 1 says about one niche (see module docstring)."""
+    """What PLF-P1 n° 1 says about one niche (see module docstring).  `afficher_note` = the note is specific to this
+    niche and is shown under it on the page; `conflit_expose` = the text and an exposé of the same liasse disagree."""
     i, tax, code, ref = niche["id"], niche["tax"], niche["legal_ref"]["code"] or "", niche["legal_ref"]["reference"] or ""
+    suppression = niche["resolution"]["suppression_code"]
     if i in PLAN_TEXT_OVERRIDES:
         g, items, why, inferred = PLAN_TEXT_OVERRIDES[i]
-        return {"groupe": g, "iii": items, "methode": "rapprochement hors article", "inferred": inferred, "note_fr": why}
+        return {"groupe": g, "iii": items, "methode": "rapprochement hors article" if items is None or inferred else "article cité par le III", "inferred": inferred, "note_fr": why, "afficher_note": True}
+    # M2 — outre-mer : hors du champ de l'amendement (II, dernier alinéa) ; les « Flux OM » du classeur en font partie
+    if i in HORS_CHAMP_OM or suppression == "Flux OM":
+        return {"groupe": "OM", "iii": None, "methode": "II, dernier alinéa (outre-mer)", "inferred": False, "note_fr": NOTE_OM, "afficher_note": True}
+    if i in DANS_LE_CHAMP_OM:
+        pt = _plan_texte_generic(st, niche)
+        pt["note_fr"] = NOTE_OM_INVEST + (" " + pt["note_fr"] if pt.get("note_fr") else "")
+        pt["afficher_note"] = True
+        return pt
+    # TVA — II, 4° et III bis (M1)
+    if i in TVA_NOMMEES:
+        return {"groupe": "D3bis", "iii": None, "methode": "III bis (rapprochement par l'intitulé)", "inferred": False, "afficher_note": True,
+                "note_fr": f"Ligne de taux nommée au III bis, {TVA_NOMMEES[i]} : supprimée pour les opérations dont le fait générateur est à partir du 1er juillet 2027. Rapprochement par l'intitulé (la numérotation du code des impositions sur les biens et services n'a pas pu être vérifiée à la source)."}
+    if i in TVA_PARTIELLES:
+        return {"groupe": "D3bisPart", "iii": None, "methode": "III bis en partie (rapprochement par l'intitulé)", "inferred": False, "afficher_note": True, "conflit_expose": True,
+                "note_fr": TVA_PARTIELLES[i] + " Le II, 4° maintient le reste ; l'exposé du n° 21 annonce pourtant la suppression au 1er juillet 2027 : conflit signalé, non tranché."}
+    if i in TVA_NON_NOMMES:
+        return {"groupe": "Dmaint", "iii": None, "methode": "II, 4° (taux non nommé)", "inferred": False, "afficher_note": True, "conflit_expose": True, "note_fr": NOTE_TVA_NON_NOMME}
+    if i in TVA_REGLE_GENERALE:
+        return {"groupe": "D", "iii": None, "methode": "règle générale du I et du IV.D (exonération ou régime particulier de TVA)", "inferred": False, "afficher_note": True, "note_fr": NOTE_TVA_REGLE_GENERALE}
+    return _plan_texte_generic(st, niche)
+
+
+NOTE_CAS_GENERAL = (
+    "Aucun numéro du III ne cite cette référence. Le cas général du IV.A s'applique, sous réserve des B à F : impôt sur le revenu dû au titre de 2026, "
+    "impôt sur les sociétés des exercices clos à compter du 1er janvier 2027, impôt sur la fortune immobilière et impositions directes locales dus au titre de 2027, "
+    "droits d'enregistrement et de timbre des actes et mutations à compter du 1er janvier 2027. Le 1er janvier 2028 (I, A, dernière phrase) ne vaut que pour ce que le IV ne couvre pas."
+)
+
+
+def _plan_texte_generic(st: dict, niche: dict) -> dict:
+    i, tax, code, ref = niche["id"], niche["tax"], niche["legal_ref"]["code"] or "", niche["legal_ref"]["reference"] or ""
     cibs_or_customs = "impositions sur les biens" in code or "douanes" in code
     if tax in ("Taxe sur la valeur ajoutée", "Accise sur les énergies") or cibs_or_customs:
         nums = [int(x) for x in re.findall(r"L\. ?312-(\d+)", ref)]
@@ -188,14 +314,20 @@ def _plan_texte(st: dict, niche: dict) -> dict:
     if len(gs) > 1:
         return {"groupe": None, "iii": hits, "methode": "ambigu", "inferred": False, "ambigu": gs,
                 "note_fr": "Les numéros du III qui citent ces articles relèvent de plusieurs groupes du IV (" + ", ".join(gs) + ") : aucune date n'est affirmée niche par niche."}
-    return {"groupe": None, "iii": None, "methode": "non rapproché", "inferred": False, "note_fr": "Aucun numéro du III ne cite cette référence : la clause générale du I s'applique à défaut (le I s'applique à l'impôt dû au titre de 2028 et aux opérations à compter du 1er janvier 2028, IV.A à F réservés)."}
+    return {"groupe": None, "iii": None, "methode": "non rapproché", "inferred": False, "note_fr": NOTE_CAS_GENERAL}
 
 
 def _plan_final(base: str, groupe: str | None) -> str:
     if base == "eteinte":
         return base
-    if groupe == "E":
+    if groupe in TROIS_ANS_GROUPS:
         return "trois-ans"
+    if groupe == "OM":
+        return "outre-mer"
+    if groupe == "Dmaint":
+        return "maintenue"
+    if groupe == "D3bisPart":
+        return "partielle"
     if base == "trois-ans" and groupe is not None:
         return "supprimee"
     return base
@@ -206,9 +338,11 @@ PLAN_OF_CODE = {"Oui": "supprimee", "En 3 ans": "trois-ans", "Fusion CI IR": "ai
 
 def _group_sources() -> dict:
     out = {}
-    for g, (label, effect, where, quote) in GROUPS_FR.items():
-        first, last = quote_pages("PLF-P1", 1, quote)
-        out[g] = {"label_fr": label, "effet_fr": effect, "ou_fr": f"Amendement PLF-P1 n° 1, {where} ({page_label(first, last)} du PDF)", "url": pdf_url("PLF-P1", first), "quote": quote}
+    for g, spec in GROUPS_FR.items():
+        label, effect, where, quote = spec[:4]
+        n = spec[4] if len(spec) > 4 else 1
+        first, last = quote_pages("PLF-P1", n, quote)
+        out[g] = {"label_fr": label, "effet_fr": effect, "ou_fr": f"Amendement PLF-P1 n° {n}, {where} ({page_label(first, last)} du PDF)", "url": pdf_url("PLF-P1", first), "quote": quote}
     return out
 
 
@@ -220,7 +354,7 @@ def _fold(s: str) -> str:
 
 
 OUTRE_MER = re.compile(
-    r"outre-mer|outremer|\bdom\b|guadeloupe|martinique|reunion|guyane|mayotte|saint-pierre|polynesie|nouvelle-caledonie|wallis|article 73 de la constitution|terres australes"
+    r"outre-mer|outremer|\bdom\b|guadeloupe|martinique|\breunion\b|guyane|mayotte|saint-pierre|polynesie|nouvelle-caledonie|wallis|article 73 de la constitution|terres australes"
 )
 EPARGNE = re.compile(
     r"livret|epargne|plan d'epargne|\bpea\b|\bpel\b|assurance-vie|assurance vie|contrats? de capitalisation|bons ou contrats|\bper\b|\bperp\b|plans d'epargne populaire|produits des plans"
@@ -462,7 +596,7 @@ def build() -> dict:
         final = _plan_final(base, pt["groupe"])
         r["resolution"]["plan_final"] = final
         r["resolution"]["plan_conflit_classeur"] = final != base
-        r["resolution"]["plan_non_verifie"] = base == "trois-ans" and pt["groupe"] is None
+        r["resolution"]["plan_lecture_inferee"] = pt["inferred"]
     # --- Résolution suppression codes
     by_code = collections.Counter(r["resolution"]["suppression_code"] for r in recs)
     assert by_code == {"Oui": 359, None: 82, "En 3 ans": 11, "Fusion CI IR": 7, "Flux OM": 6}, by_code
@@ -581,24 +715,63 @@ def build() -> dict:
         return clean(sum(r["cost_2024_meur"] or 0 for r in rs), 3)
 
     conflits = [r for r in recs if r["resolution"]["plan_conflit_classeur"]]
-    non_verifie = [r for r in recs if r["resolution"]["plan_non_verifie"]]
+    inferees = [r for r in recs if r["resolution"]["plan_lecture_inferee"]]
     by_groupe = collections.Counter(r["resolution"]["plan_texte"]["groupe"] for r in recs)
     by_final = collections.Counter(r["resolution"]["plan_final"] for r in recs)
-    assert {r["id"] for r in recs if r["resolution"]["plan_texte"]["groupe"] == "E" and r["resolution"]["plan_classeur"] != "eteinte"} >= {
+    grp = lambda r: r["resolution"]["plan_texte"]["groupe"]  # noqa: E731
+    assert {r["id"] for r in recs if grp(r) == "E" and r["resolution"]["plan_classeur"] != "eteinte"} >= {
         "300101", "300102", "60102", "60104", "120147", "300110", "300208", "530208", "60202", "300109", "500101", "530216", "110203", "110246"}, "IV.E niches"
     assert by_id["520110"]["resolution"]["plan_texte"]["groupe"] == "Cbis" and by_id["520110"]["resolution"]["plan_final"] == "supprimee"  # Pacte Dutreil: 1er janvier 2027
-    c_ir = [r for r in recs if r["resolution"]["plan_texte"]["groupe"] == "C" and r["tax"].startswith("Impôt sur le revenu")]
+    c_ir = [r for r in recs if grp(r) == "C" and r["tax"].startswith("Impôt sur le revenu")]
     assert {"110102", "110103", "110107", "100202", "140122", "150114", "150117", "150120", "150515", "150518", "190208", "150121", "150210", "150211", "150406", "150705", "150706", "150707", "150710"} <= {r["id"] for r in c_ir}
+    # M3, M4, open items 2 and 3
+    assert (by_id["110240"]["resolution"]["plan_final"], grp(by_id["110240"])) == ("trois-ans", "E8")
+    assert (by_id["120124"]["resolution"]["plan_final"], grp(by_id["120124"])) == ("supprimee", "A")
+    assert (by_id["60203"]["resolution"]["plan_final"], grp(by_id["60203"])) == ("trois-ans", "E") and by_id["60203"]["resolution"]["plan_texte"]["inferred"]
+    assert by_id["110203"]["resolution"]["plan_texte"]["inferred"] and by_id["110203"]["resolution"]["plan_final"] == "trois-ans"
+
+    # TVA : lecture de PLF-P1 n° 1 (II 4°, III bis, IV.D) sur les 46 niches de TVA
+    tva = [r for r in recs if r["tax"] == "Taxe sur la valeur ajoutée"]
+    assert len(tva) == 46
+    tva_parts = {
+        "nommees_iii_bis": [r for r in tva if grp(r) == "D3bis"],
+        "partiellement_nommees": [r for r in tva if grp(r) == "D3bisPart"],
+        "taux_non_nommes_maintenus": [r for r in tva if grp(r) == "Dmaint"],
+        "exonerations_regle_generale": [r for r in tva if r["id"] in TVA_REGLE_GENERALE],
+        "outre_mer_hors_champ": [r for r in tva if r["id"] in HORS_CHAMP_OM],
+        "outre_mer_flux_om": [r for r in tva if r["resolution"]["suppression_code"] == "Flux OM"],
+        "deja_eteintes": [r for r in tva if r["resolution"]["plan_classeur"] == "eteinte"],
+    }
+    assert {k: len(v) for k, v in tva_parts.items()} == {"nommees_iii_bis": 22, "partiellement_nommees": 2, "taux_non_nommes_maintenus": 6, "exonerations_regle_generale": 6,
+                                                         "outre_mer_hors_champ": 2, "outre_mer_flux_om": 5, "deja_eteintes": 3}, {k: len(v) for k, v in tva_parts.items()}
+    assert sum(len(v) for v in tva_parts.values()) == 46 and len({r["id"] for v in tva_parts.values() for r in v}) == 46
+    om = [r for r in recs if grp(r) == "OM"]
+    om_oui = [r for r in om if r["resolution"]["plan_classeur"] == "supprimee"]
+    assert len(om) == 16 and len(om_oui) == 10 and {r["id"] for r in om_oui} == HORS_CHAMP_OM, (len(om), len(om_oui))
+    assert all(r["category"] != "outre-mer" for r in tva if r["id"] == "730224")  # m6 : « réunions sportives » n'est pas la Réunion
     plan_texte = {
         "source": _group_sources(),
-        "note_fr": "Lecture du texte de PLF-P1 n° 1 : le III abroge les dispositions numéro par numéro, le IV donne un calendrier à chaque groupe de numéros. Chaque niche est rapprochée des numéros du III par sa référence légale (article et alinéa) ; quand les numéros rapprochés relèvent de plusieurs groupes, ou quand aucun ne la cite, aucune date n'est affirmée (groupe null). Le classeur des auteurs (colonne « Suppression ») donne une autre lecture pour certaines niches : elles sont listées dans conflits_avec_le_classeur ; plan_final suit le texte.",
-        "groupes": {g: {"n_niches": by_groupe.get(g, 0), "cout_2024_meur": _sum([r for r in recs if r["resolution"]["plan_texte"]["groupe"] == g])} for g in list(GROUPS_FR) + [None] for g in [g] if True} if False else
-                   {str(g): {"n_niches": by_groupe.get(g, 0), "cout_2024_meur": _sum([r for r in recs if r["resolution"]["plan_texte"]["groupe"] == g])} for g in list(GROUPS_FR) + [None]},
+        "note_fr": "Lecture du texte de PLF-P1 n° 1 : le III abroge les dispositions numéro par numéro, le IV donne un calendrier à chaque groupe de numéros. Chaque niche est rapprochée des numéros du III par sa référence légale (article et alinéa) ; quand les numéros rapprochés relèvent de plusieurs groupes, ou quand aucun ne la cite, aucune date n'est affirmée (groupe null). Pour la TVA, le III bis supprime des lignes de taux au 1er juillet 2027 et le II, 4° maintient les autres taux réduits ou dérogatoires ; pour l'outre-mer, le II (dernier alinéa) met les dispositions propres aux collectivités des articles 73 et 74 hors du I et du III. Le classeur des auteurs (colonne « Suppression ») donne une autre lecture pour certaines niches : elles sont listées dans conflits_avec_le_classeur ; plan_final suit le texte.",
+        "groupes": {str(g): {"n_niches": by_groupe.get(g, 0), "cout_2024_meur": _sum([r for r in recs if grp(r) == g])} for g in list(GROUPS_FR) + [None]},
         "plan_final": {k: {"n_niches": v, "cout_2024_meur": _sum([r for r in recs if r["resolution"]["plan_final"] == k])} for k, v in sorted(by_final.items())},
         "conflits_avec_le_classeur": [{"id": r["id"], "label_fr": r["label_fr"], "cout_2024_meur": r["cost_2024_meur"], "plan_classeur": r["resolution"]["plan_classeur"], "plan_final": r["resolution"]["plan_final"],
-                                       "groupe": r["resolution"]["plan_texte"]["groupe"], "inferred": r["resolution"]["plan_texte"]["inferred"]} for r in conflits],
-        "classeur_non_verifie_dans_le_texte": [{"id": r["id"], "label_fr": r["label_fr"], "cout_2024_meur": r["cost_2024_meur"]} for r in non_verifie],
+                                       "groupe": grp(r), "inferred": r["resolution"]["plan_texte"]["inferred"]} for r in conflits],
+        "lectures_inferees": [{"id": r["id"], "label_fr": r["label_fr"], "cout_2024_meur": r["cost_2024_meur"], "groupe": grp(r), "plan_final": r["resolution"]["plan_final"]} for r in inferees],
         "ir_2028": {"n_niches": len(c_ir), "cout_2024_meur": _sum(c_ir), "note_fr": "Niches de l'impôt sur le revenu dont l'abrogation s'applique à l'impôt dû au titre de 2028 (IV.C), et non dès 2027."},
+        "tva": {
+            "n_niches": len(tva), "cout_2024_meur": _sum(tva),
+            **{k: {"n_niches": len(v), "cout_2024_meur": _sum(v), "ids": [r["id"] for r in v]} for k, v in tva_parts.items()},
+            "note_fr": "Lecture par l'intitulé : la correspondance entre les articles du code général des impôts et les lignes du code des impositions sur les biens et services (III bis) n'est pas dans les sources du dépôt. Le II, 4° ne laisse hors du I que les taux réduits ou dérogatoires « à l'exception de celles que le III abroge » ; les 21 numéros du III bis sont les seules lignes de taux supprimées au 1er juillet 2027. Les exposés des n° 1 et 21 annoncent davantage (conflit texte et exposé, non tranché).",
+            "conflit_expose": {"n_niches": len(tva_parts["taux_non_nommes_maintenus"]) + len(tva_parts["partiellement_nommees"]),
+                               "ids": [r["id"] for r in tva_parts["taux_non_nommes_maintenus"] + tva_parts["partiellement_nommees"]],
+                               "citation_expose_21": "Les taux dérogatoires recensés comme dépenses fiscales ne sont pas visés ici : une disposition distincte les supprime au 1er juillet 2027.",
+                               "citation_texte_ii_4": "Qui fixent un taux réduit ou dérogatoire de taxe sur la valeur ajoutée, à l’exception de celles que le III abroge."},
+        },
+        "outre_mer": {
+            "hors_champ": {"n_niches": len(om), "cout_2024_meur": _sum(om), "dont_oui_au_classeur": {"n_niches": len(om_oui), "cout_2024_meur": _sum(om_oui), "ids": sorted(r["id"] for r in om_oui)}},
+            "investissements_dans_le_champ": sorted(DANS_LE_CHAMP_OM | {"110210", "110224", "110256", "320136", "320146"}),
+            "note_fr": "II, dernier alinéa : « Ne relèvent pas du I et du III les dispositions propres aux collectivités régies par l’article 73 ou par l’article 74 de la Constitution et à la Nouvelle-Calédonie, qui sont régies par un régime fiscal distinct. Le présent alinéa ne s’applique pas aux dispositions dont le bénéfice est accordé à une personne qui n’est pas domiciliée dans ces collectivités. »",
+        },
     }
 
     return {

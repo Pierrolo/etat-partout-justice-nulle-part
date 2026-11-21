@@ -293,17 +293,17 @@ export function questionnaire(): Question[] {
     answerLead: 'Le décompte',
     body: [
       `${formatInteger(num('niches_nombre'))} niches fiscales coûtent ${md(nichesSeulesMd)}. L’enseignement (fonction « Enseignement » de l’Insee) fait ${md(eduMd)}.`,
-      `Le plan écrit ${formatInteger(num('niches_total_nombre'))} niches : les ${formatInteger(num('niches_nombre'))} niches du PLF plus ${formatInteger(num('niches_tva_hors_niches_nombre'))} taux réduits de TVA que les auteurs ajoutent, pour ${md(nichesMd)} selon leur calcul (${md(num('niches_tva_hors_niches_md'))} d’estimation du CPO de 2023 projetée sur 2024 pour ces taux, ${md(num('niches_cout_2024_tva_apu_md') - nichesSeulesMd)} de TVA des administrations publiques).`,
+      `Le plan écrit ${formatInteger(num('niches_total_nombre'))} niches : les ${formatInteger(num('niches_nombre'))} niches du PLF 2026 plus ${formatInteger(num('niches_tva_hors_niches_nombre'))} taux réduits de TVA que les auteurs ajoutent, pour ${md(nichesMd)} selon leur calcul (${md(num('niches_tva_hors_niches_md'))} d’estimation du CPO de 2023 projetée sur 2024 pour ces taux, ${md(num('niches_cout_2024_tva_apu_md') - nichesSeulesMd)} de TVA des administrations publiques).`,
       foyerLine(nichesMd),
     ],
     caveat: {
       tone: 'note',
       title: 'Deux périmètres',
-      text: `Les niches seules ont un coût. Niches et taux réduits de TVA réunis en ont un autre. Les deux figurent ici. Le « ${formatInteger(num('niches_total_nombre'))} » du plan n’est pas arrondi : c’est exactement ${formatInteger(num('niches_nombre'))} niches du projet de loi plus ${formatInteger(num('niches_tva_hors_niches_nombre'))} taux réduits de TVA, et seul le coût des ${formatInteger(num('niches_nombre'))} niches est un chiffre du PLF. L’enseignement compté ici est la fonction entière de l’Insee ; le regroupement « Éducation » du livre, qui laisse de côté les services annexes (cantine, transport scolaire), fait ${md(num('dep_education_2024_md'))} : avec lui, la réponse serait ${nichesMd > num('dep_education_2024_md') ? 'oui' : 'non'}.`,
+      text: `Les niches seules ont un coût. Niches et taux réduits de TVA réunis en ont un autre. Les deux figurent ici. Le « ${formatInteger(num('niches_total_nombre'))} » du plan n’est pas arrondi : c’est exactement ${formatInteger(num('niches_nombre'))} niches du PLF 2026 plus ${formatInteger(num('niches_tva_hors_niches_nombre'))} taux réduits de TVA, et seul le coût des ${formatInteger(num('niches_nombre'))} niches est un chiffre du PLF 2026. L’enseignement compté ici est la fonction entière de l’Insee ; le regroupement « Éducation » du livre, qui laisse de côté les services annexes (cantine, transport scolaire), fait ${md(num('dep_education_2024_md'))} : avec lui, la réponse serait ${nichesMd > num('dep_education_2024_md') ? 'oui' : 'non'}.`,
     },
     sources: [
-      chip('niches_nombre', { label: 'PLF, niches' }),
-      chip('niches_cout_2024_md', { label: 'PLF, coût des niches' }),
+      chip('niches_nombre', { label: 'PLF 2026, niches' }),
+      chip('niches_cout_2024_md', { label: 'PLF 2026, coût des niches' }),
       chip('niches_total_nombre', { label: 'Niches et taux réduits' }),
       chip('niches_total_md', { label: 'Coût du total large' }),
       chip('dep_cofog09_enseignement_2024_md', { label: 'Insee, enseignement (COFOG 09)' }),
@@ -375,7 +375,7 @@ export function questionnaire(): Question[] {
     caveat: {
       tone: 'announced',
       title: 'Quatre impôts ou cinq : deux chiffres du plan',
-      text: 'Le nombre d’impôts, et la part des impôts conservés, viennent des annonces du plan, en dehors des tableaux de la comptabilité nationale. Les amendements PLFSS n° 1 et n° 3 maintiennent en outre : le n° 1, la CSG sur les pensions, les allocations de chômage et les indemnités journalières ; le n° 3, une taxe sur les salaires réduite d’un tiers en 2028 et de deux tiers en 2029, puis abrogée au 1er janvier 2030. La CSG sur les revenus du capital est laissée inchangée par le n° 2.',
+      text: 'Le nombre d’impôts, et la part des impôts conservés, viennent des annonces du plan, en dehors des tableaux de la comptabilité nationale. Les amendements PLFSS n° 1 et n° 3 maintiennent en outre : le n° 1, la CSG sur les pensions, les allocations de chômage et les indemnités journalières ; le n° 3, une taxe sur les salaires réduite d’un tiers en 2028 et de deux tiers en 2029, puis abrogée au 1er janvier 2030. Le n° 2 laisse inchangées les parts de la CSG sur les revenus du capital dans la clé de répartition, mais le n° 9 majore le taux de cette CSG (revenus du patrimoine et produits de placement) pour compenser la suppression de vingt et une contributions : la CSG sur les revenus du capital n’est donc pas laissée telle quelle.',
     },
     sources: [
       chip('impots_nombre_manifeste', { label: 'Annonce du plan' }),
@@ -579,6 +579,7 @@ export function questionnaire(): Question[] {
       `${heads('fp_fpe_2023_k')} à l’État, ${heads('fp_fpt_2023_k')} dans la territoriale, ${heads('fp_fph_2023_k')} à l’hôpital, sur ${heads('fp_effectifs_2023_k')}.`,
       `L’État fait ${formatPercentPoints((stateK / allK) * 100, { decimals: 0 })} du total. La territoriale et l’hôpital, réunis, font le reste.`,
       `Parmi l’ensemble, ${heads('fp_contractuels_2023_k')} sont contractuels.`,
+      `L’édition 2026 du rapport (octobre 2026) donne ${heads('fp_effectifs_2024_k')} agents au 31 décembre ${yearOf('fp_effectifs_2024_k')}, dont ${heads('fp_fpe_2024_k')} à l’État (${formatPercentPoints((num('fp_fpe_2024_k') / num('fp_effectifs_2024_k')) * 100, { decimals: 0 })}) : la réponse ne change pas.`,
     ],
     sources: [
       chip('fp_effectifs_2023_k', { label: 'DGAFP, total' }),
@@ -586,6 +587,7 @@ export function questionnaire(): Question[] {
       chip('fp_fpt_2023_k', { label: 'DGAFP, territoriale' }),
       chip('fp_fph_2023_k', { label: 'DGAFP, hospitalière' }),
       chip('fp_contractuels_2023_k', { label: 'DGAFP, contractuels' }),
+      chip('fp_effectifs_2024_k', { label: 'DGAFP, édition 2026 (31 décembre 2024)' }),
     ],
     more: { href: '/comprendre/etat-partout/', label: 'Voir les effectifs' },
   };
