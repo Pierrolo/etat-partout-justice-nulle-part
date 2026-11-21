@@ -155,6 +155,7 @@ describe('questionnaire', () => {
       combinaisons: 'charges_sociales_combinaisons_manifeste',
       agences: 'agences_etat_avant',
       heure: 'va_heure_salaire_net_eur',
+      locaux: 'agences_locales',
     };
     for (const [id, basis] of Object.entries(announcedBasis)) {
       const q = byId.get(id)!;
@@ -176,8 +177,8 @@ describe('questionnaire', () => {
     }
     expect(byId.get('securite')?.caveat).toBeUndefined();
     expect(byId.get('dette')?.caveat).toBeUndefined();
-    // a count the workbook publishes as data keeps a plain note
-    expect(byId.get('locaux')?.caveat?.tone).toBe('note');
+    // the local bodies are the authors' own count, in the same workbook as the 1 104 agencies: announced too
+    expect(byId.get('locaux')?.caveat?.tone).toBe('announced');
   });
 
   it('never presents a question about the plan’s count as a question about the world', () => {
@@ -187,7 +188,7 @@ describe('questionnaire', () => {
     expect(question('cerfa').prompt).toContain('Selon le plan');
     expect(question('agences').prompt).toContain('Selon le décompte du plan');
     expect(question('combinaisons').prompt).toContain('Selon le plan');
-    expect(question('jour').prompt).toContain('Selon le plan');
+    expect(question('jour').prompt).toContain('écrite par le plan');
     expect(question('heure').prompt).toContain('Selon le chiffrage du plan');
     expect(question('locaux').prompt).toContain('le chiffrage du plan');
     expect(flat(question('impots').body.join(' '))).toContain('Le plan compte');

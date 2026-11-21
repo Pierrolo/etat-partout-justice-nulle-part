@@ -293,13 +293,13 @@ export function questionnaire(): Question[] {
     answerLead: 'Le décompte',
     body: [
       `${formatInteger(num('niches_nombre'))} niches fiscales coûtent ${md(nichesSeulesMd)}. L’enseignement (fonction « Enseignement » de l’Insee) fait ${md(eduMd)}.`,
-      `${formatInteger(num('niches_total_nombre'))} en ajoutant les taux réduits de TVA, pour ${md(nichesMd)}.`,
+      `Le plan écrit ${formatInteger(num('niches_total_nombre'))} niches : les ${formatInteger(num('niches_nombre'))} niches du PLF plus ${formatInteger(num('niches_tva_hors_niches_nombre'))} taux réduits de TVA que les auteurs ajoutent, pour ${md(nichesMd)} selon leur calcul (${md(num('niches_tva_hors_niches_md'))} d’estimation du CPO de 2023 projetée sur 2024 pour ces taux, ${md(num('niches_cout_2024_tva_apu_md') - nichesSeulesMd)} de TVA des administrations publiques).`,
       foyerLine(nichesMd),
     ],
     caveat: {
       tone: 'note',
       title: 'Deux périmètres',
-      text: `Les niches seules ont un coût. Niches et taux réduits de TVA réunis en ont un autre. Les deux figurent ici. Le nombre arrondi du plan et le tableau du projet de loi détaillent chacun leur périmètre. L’enseignement compté ici est la fonction entière de l’Insee ; le regroupement « Éducation » du livre, qui laisse de côté les services annexes (cantine, transport scolaire), fait ${md(num('dep_education_2024_md'))} : avec lui, la réponse serait ${nichesMd > num('dep_education_2024_md') ? 'oui' : 'non'}.`,
+      text: `Les niches seules ont un coût. Niches et taux réduits de TVA réunis en ont un autre. Les deux figurent ici. Le « ${formatInteger(num('niches_total_nombre'))} » du plan n’est pas arrondi : c’est exactement ${formatInteger(num('niches_nombre'))} niches du projet de loi plus ${formatInteger(num('niches_tva_hors_niches_nombre'))} taux réduits de TVA, et seul le coût des ${formatInteger(num('niches_nombre'))} niches est un chiffre du PLF. L’enseignement compté ici est la fonction entière de l’Insee ; le regroupement « Éducation » du livre, qui laisse de côté les services annexes (cantine, transport scolaire), fait ${md(num('dep_education_2024_md'))} : avec lui, la réponse serait ${nichesMd > num('dep_education_2024_md') ? 'oui' : 'non'}.`,
     },
     sources: [
       chip('niches_nombre', { label: 'PLF, niches' }),
@@ -317,7 +317,8 @@ export function questionnaire(): Question[] {
     id: 'jour',
     kind: 'scale',
     eyebrow: 'Dépense publique, par jour',
-    prompt: 'Selon le plan, combien l’État dépense-t-il par foyer et par jour ?',
+    prompt:
+      'Ramenée à une journée, la dépense de l’État écrite par le plan fait combien par foyer ?',
     hint: `Le plan écrit : ${q('dep_par_foyer_manifeste_eur')}. À vous de le ramener à une journée.`,
     min: 0,
     max: JOUR_SCALE_MAX,
@@ -327,7 +328,7 @@ export function questionnaire(): Question[] {
     truth: jour,
     truthLabel: formatEuro(jour, { decimals: 0 }),
     marker: 'annoncé',
-    answerLead: 'Le chiffre du plan',
+    answerLead: 'Le plan, ramené à un jour',
     tier: tierOf('dep_par_foyer_manifeste_eur'),
     body: [
       `${formatEuro(num('dep_par_foyer_manifeste_eur'), { decimals: 0 })} par foyer et par an, divisés par les jours de l’année, font ${formatEuro(jour, { decimals: 0 })} par jour.`,
@@ -369,14 +370,16 @@ export function questionnaire(): Question[] {
       `Le plan compte ${formatInteger(num('impots_nombre_manifeste'))} impôts.`,
       `Il écrit : ${q('impots_cibles_manifeste')} (TVA, revenu, sociétés, foncier). Puis : ${q('impots_75pct_recettes_manifeste')}.`,
       `Le plan retient ${formatInteger(num('impots_cibles_manifeste'))} impôts dans son manifeste, et ${formatInteger(num('impots_cibles_lettres'))} dans ses lettres aux élus : ${q('impots_cibles_lettres')}. Les sources ne nomment pas le cinquième.`,
+      `Le titre d’un graphique du plan dit ${formatInteger(num('impots_nombre_graphique_fusion'))} prélèvements, et non ${formatInteger(num('impots_nombre_manifeste'))} : la source ne dit pas lesquels font la différence.`,
     ],
     caveat: {
       tone: 'announced',
       title: 'Quatre impôts ou cinq : deux chiffres du plan',
-      text: 'Le nombre d’impôts, et la part des impôts conservés, viennent des annonces du plan, en dehors des tableaux de la comptabilité nationale. L’amendement PLFSS n° 1 maintient en outre la CSG sur les pensions et le capital, et une taxe sur les salaires jusqu’en 2029.',
+      text: 'Le nombre d’impôts, et la part des impôts conservés, viennent des annonces du plan, en dehors des tableaux de la comptabilité nationale. Les amendements PLFSS n° 1 et n° 3 maintiennent en outre : le n° 1, la CSG sur les pensions, les allocations de chômage et les indemnités journalières ; le n° 3, une taxe sur les salaires réduite d’un tiers en 2028 et de deux tiers en 2029, puis abrogée au 1er janvier 2030. La CSG sur les revenus du capital est laissée inchangée par le n° 2.',
     },
     sources: [
       chip('impots_nombre_manifeste', { label: 'Annonce du plan' }),
+      chip('impots_nombre_graphique_fusion', { label: 'Page graphique « Fusion des impôts »' }),
       chip('impots_cibles_manifeste', { label: 'Annonce, quatre impôts' }),
       chip('impots_cibles_lettres', { label: 'Lettres aux élus, cinq impôts' }),
       chip('impots_75pct_recettes_manifeste', { label: 'Annonce, part des recettes' }),
@@ -536,16 +539,17 @@ export function questionnaire(): Question[] {
     decimals: 0,
     truth: num('agences_locales'),
     truthLabel: `${formatInteger(num('agences_locales'))} organismes`,
-    marker: 'chiffrage',
-    answerLead: 'Le chiffrage publié',
+    marker: 'annoncé',
+    answerLead: 'Le chiffrage publié du plan',
+    tier: tierOf('agences_locales'),
     body: [
       `Le chiffrage du plan compte ${formatInteger(num('agences_locales'))} organismes locaux, à côté des ${formatInteger(agences)} agences nationales.`,
       `Additionnés, cela fait ${formatInteger(num('agences_total_avec_locales'))}.`,
     ],
     caveat: {
-      tone: 'note',
-      title: 'Chiffre du chiffrage publié',
-      text: 'Ce nombre vient du chiffrage publié du plan. Le décompte des agences nationales est un autre chiffre.',
+      tone: 'announced',
+      title: 'Chiffre annoncé, dans le chiffrage publié',
+      text: 'Ce nombre vient du chiffrage publié du plan (la liste des organismes locaux de l’Insee, classée par les auteurs) : c’est un décompte annoncé, comme celui des agences nationales, qui est un autre chiffre.',
     },
     sources: [
       chip('agences_locales', { label: 'Chiffrage, organismes locaux' }),
@@ -604,7 +608,7 @@ export function questionnaire(): Question[] {
     answerLead: 'L’amendement',
     tier: tierOf('indemnite_sortie_taux_pct'),
     body: [
-      `${formatPercentPoints(num('indemnite_sortie_taux_pct'), { decimals: 0 })} de l’assiette : le traitement indiciaire brut, plus une part des primes si un décret la fixe. L’indemnité dure jusqu’à ${formatInteger(num('indemnite_sortie_duree_max_ans'))} ans pour les agents qui ont le plus d’ancienneté (${amendmentRef('indemnite_sortie_taux_pct')}).`,
+      `${formatPercentPoints(num('indemnite_sortie_taux_pct'), { decimals: 0 })} de l’assiette : le traitement indiciaire brut, plus une part des primes si un décret la fixe. L’indemnité dure ${formatInteger(num('indemnite_sortie_duree_base_mois'))} mois, plus un mois par trimestre de services, ${formatInteger(num('indemnite_sortie_duree_max_mois'))} mois au plus (jusqu’à ${formatInteger(num('indemnite_sortie_duree_max_ans'))} ans), et au plus jusqu’à la date d’une pension de retraite sans décote (${amendmentRef('indemnite_sortie_taux_pct')}).`,
       `Un autre amendement (${amendmentRef('emplois_etat_fermes_annee_pleine_loi')}) ferme ${formatInteger(num('emplois_etat_fermes_annee_pleine_loi'))} emplois d’État en année pleine.`,
       `Le chiffrage publié additionne ${formatInteger(num('postes_fermes_apuc_plus_apul'))} postes, dont ${formatInteger(num('postes_fermes_apul_classeur'))} dans les collectivités. Le plan annonce ${formatInteger(num('postes_publics_fermes_manifeste'))}. Les amendements, eux, ne comptent que les emplois d’État.`,
     ],

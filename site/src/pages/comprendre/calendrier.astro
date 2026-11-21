@@ -112,10 +112,14 @@ const busiest = groupByDate(events, jalons)
 >
   <Callout tone="note" title="Dates écrites dans les amendements">
     <p>
-      Ces dates viennent des {formatInteger(amendements.meta.counts.total)} amendements rédigés par
-      l’association Résolution (octobre 2026). Aucun n’est en vigueur. « Proposé dans un
-      amendement » veut dire « écrit dans le texte d’un amendement ». Pour la frise, une date « 1er
-      janvier » sans jour écrit dans le texte est signalée comme telle.
+      <strong data-plan-version>{amendements.meta.version.label_fr}</strong>&#8239;: ces dates
+      viennent des {formatInteger(amendements.meta.counts.total)} amendements rédigés par
+      l’association Résolution (liasses republiées les 17 et 18 novembre 2026). Rédigés et publiés,
+      ils ne sont pas en vigueur : à la date du 21 novembre 2026, aucun n’avait été déposé au
+      Parlement. « Proposé dans un amendement » veut dire « écrit dans le texte d’un amendement ».
+      Pour la frise, une date « 1er janvier » sans jour écrit dans le texte est signalée comme
+      telle ; les crédits de l’état B sont datés par nature de crédit (1er janvier, 1er avril ou 1er
+      juillet 2027).
     </p>
   </Callout>
 
@@ -189,18 +193,18 @@ const busiest = groupByDate(events, jalons)
     </ChartFrame>
 
     <ChartFrame
-      title="Six avantages et dotations qui s’éteignent par tiers"
+      title="Six avantages et dotations qui s’éteignent par paliers"
       subtitle="Part restante de l’avantage actuel, en % — même axe pour les six graphiques. Touchez un repère, ou parcourez-les aux flèches, pour lire sa date et son texte."
       tier="law"
-      summary={`Chaque graphique descend par tiers puis s’éteint : ${zeros.map((z) => `${z.title.toLowerCase()} le ${formatDateFr(z.date)}`).join('\u202F; ')}. Les dons sont les premiers à disparaître (${formatDateFr(zeros[0]!.date)}), la taxe sur les salaires les derniers.`}
+      summary={`Chaque graphique descend par paliers (par tiers, ou par moitié pour les dons) puis s’éteint : ${zeros.map((z) => `${z.title.toLowerCase()} le ${formatDateFr(z.date)}`).join('\u202F; ')}. Les dons sont les premiers à disparaître (${formatDateFr(zeros[0]!.date)}), la taxe sur les salaires les derniers.`}
       sources={sourcesOf(part)}
       table={{
-        caption: 'Paliers datés des six avantages et dotations qui s’éteignent par tiers',
+        caption: 'Paliers datés des six avantages et dotations qui s’éteignent par paliers',
         columns: [...columns],
         rows: rowsOf(part),
       }}
       csvFileName="calendrier-trajectoires-par-tiers.csv"
-      note="Les parts de 66,67 % et 33,33 % sont les deux tiers et le tiers restants, calculés à partir de « réduit d’un tiers » et « de deux tiers » du texte. Le palier de départ à 100 %, quand il est en pointillé, rappelle la situation actuelle : il n’est pas écrit dans l’amendement."
+      note="Les parts de 66,67 % et 33,33 % sont les deux tiers et le tiers restants, calculés à partir de « réduit d’un tiers » et « de deux tiers » du texte ; les dons baissent de moitié puis disparaissent. Le palier de départ à 100 %, quand il est en pointillé, rappelle la situation actuelle : il n’est pas écrit dans l’amendement."
     >
       <StepGrid client:visible panels={part} columns={3} />
     </ChartFrame>

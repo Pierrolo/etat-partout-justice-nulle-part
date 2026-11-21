@@ -259,12 +259,16 @@ def _d_etat_partout(F: Facts):
     pl = dict(kind="workbook", also=False)
     F.wb("niches_nombre", "niches", ny, "C7", "niches", "Niches fiscales recensées au PLF 2026", 2024, "donnee", expect=465, nd=0, note="PLF 2026, Évaluation des voies et moyens, tome II, annexe 3.")
     F.wb("niches_cout_2024_md", "niches", ny, "D7", "Md€", "Coût des 465 niches fiscales (réalisation 2024)", 2024, "donnee", expect=89.406, nd=3)
-    F.wb("niches_cout_2024_tva_apu_md", "niches", ny, "D8", "Md€", "Coût des 465 niches fiscales, TVA de toutes les administrations publiques comprise (2024)", 2024, "donnee", nd=3)
-    F.wb("niches_tva_hors_niches_nombre", "niches", ny, "C11", "taux réduits", "Taux réduits de TVA non comptés comme niches", 2024, "donnee", expect=21, nd=0)
-    F.wb("niches_tva_hors_niches_md", "niches", ny, "D11", "Md€", "Coût des 21 taux réduits de TVA non comptés comme niches (projection 2024)", 2024, "donnee", nd=3,
-         note="Estimation du CPO (février 2023) : 30 Md€ en 2021 dont 20 Md€ sur l'eau et l'alimentation ; projection 2024 au prorata de la TVA des comptes nationaux.")
-    F.wb("niches_total_nombre", "niches", ny, "C12", "niches", "Niches fiscales et taux réduits de TVA (total)", 2024, "donnee", expect=486, nd=0)
-    F.wb("niches_total_md", "niches", ny, "D12", "Md€", "Coût des 486 niches et taux réduits de TVA (2024)", 2024, "donnee", nd=3, note="134,70 Md€.")
+    F.wb("niches_cout_2024_tva_apu_md", "niches", ny, "D8", "Md€", "Coût des 465 niches fiscales, TVA de toutes les administrations publiques comprise (2024)", 2024, "annonce", nd=3,
+         note="Calcul des auteurs (colonne « yc TVA APU » de la feuille « Chiffrages Résolution » de leur copie du classeur) : ce n'est pas un chiffre de l'annexe du PLF.")
+    F.wb("niches_tva_hors_niches_nombre", "niches", ny, "C11", "taux réduits", "Taux réduits de TVA non comptés comme niches", 2024, "annonce", expect=21, nd=0,
+         note="Compte des auteurs (feuille « Synthèse » de leur copie du classeur « Niches fiscales ») : le PLF ne compte pas ces taux comme dépenses fiscales.")
+    F.wb("niches_tva_hors_niches_md", "niches", ny, "D11", "Md€", "Coût des 21 taux réduits de TVA non comptés comme niches (projection 2024 par les auteurs)", 2024, "annonce", nd=3,
+         note="Estimation du CPO (février 2023, p. 32) : 30 Md€ en 2021 dont 20 Md€ sur l'eau et l'alimentation, projetée sur 2024 par les auteurs au prorata de la TVA des comptes nationaux de l'Insee. Ce n'est pas un chiffre du PLF 2026.")
+    F.wb("niches_total_nombre", "niches", ny, "C12", "niches", "Niches fiscales et taux réduits de TVA (total)", 2024, "annonce", expect=486, nd=0,
+         note="465 niches de l'annexe du PLF + 21 taux réduits de TVA ajoutés par les auteurs (465 + 21 = 486 exactement, feuille « Synthèse » C12 ; ce n'est pas un arrondi).")
+    F.wb("niches_total_md", "niches", ny, "D12", "Md€", "Coût des 486 niches et taux réduits de TVA (2024), calcul des auteurs", 2024, "annonce", nd=3,
+         note="134,70 Md€ = 89,406 (465 niches, annexe du PLF 2026) + 11,915 (TVA de toutes les administrations publiques, calcul des auteurs) + 33,382 (21 taux réduits : estimation du CPO de février 2023 projetée sur 2024 par les auteurs). Seuls les 89,406 Md€ sont un chiffre de l'annexe du PLF.")
     F.wb("niches_eteintes_avant_2025_nombre", "niches", ny, "C9", "niches", "Niches dont le fait générateur est éteint (fin ≤ 2024)", 2024, "donnee", expect=47, nd=0)
     F.wb("niches_eteintes_avant_2025_md", "niches", ny, "D9", "Md€", "Coût 2024 des niches au fait générateur éteint (fin ≤ 2024)", 2024, "donnee", nd=3)
     F.wb("niches_eteintes_fin_2025_nombre", "niches", ny, "C10", "niches", "Niches dont le fait générateur s'éteint en 2025", 2024, "donnee", expect=35, nd=0)
@@ -415,9 +419,9 @@ def _e_plan(F: Facts):
     F.amend("afu_adulte_eur_an", 6600, "€ par an", "Aide fondamentale universelle par adulte", 2028, "PLF-P1", 28, "6 600 € par an et par adulte")
     F.amend("afu_enfant_eur_an", 3300, "€ par an", "Aide fondamentale universelle par enfant à charge", 2028, "PLF-P1", 28, "3 300 € par enfant à charge")
     F.amend("afu_invalidite_eur_an", 6600, "€ par an", "Majoration invalidité de l'aide fondamentale", 2028, "PLF-P1", 28, "majorés de 6 600 € pour une personne invalide")
-    F.amend("afu_pension_minoration_eur_an", 3300, "€ par an", "Minoration de l'aide fondamentale pour une pension de retraite liquidée avant le 1er janvier 2028", 2028, "PLF-P1", 28,
+    F.amend("afu_pension_eur_an", -3300, "€ par an (négatif : minoration)", "Minoration de l'aide fondamentale pour une pension de retraite liquidée avant le 1er janvier 2028 (montant négatif)", 2028, "PLF-P1", 28,
             "minorés de 3 300 € pour une pension de retraite liquidée avant le 1er janvier 2028",
-            note="Dans la version d'octobre 2026 de l'amendement, ce montant était une majoration (« majoré de 3 300 € »). Version de novembre 2026 : « minoré », pour une pension servie par un régime obligatoire ; pour une pension liquidée à compter de 2028 la minoration est réduite au prorata des droits acquis avant cette date ; elle s'applique jusqu'à l'imposition des revenus de 2051.")
+            note="Dans la version d'octobre 2026 de l'amendement ce montant était une majoration de +3 300 € (« majoré de 3 300 € ») ; en novembre 2026 le texte dit « minoré » : −3 300 €, pour une pension servie par un régime obligatoire, jusqu'à l'imposition des revenus de 2051 ; pour une pension liquidée à compter de 2028, la minoration est réduite à proportion des droits acquis avant 2028 (à défaut de décret : 3 300 € × durée d'assurance validée avant 2028 ÷ durée d'assurance totale).")
     F.amend("ir_taux_unique_pct", 23, "%", "Taux unique de l'impôt sur le revenu", 2028, "PLF-P1", 28, "un taux unique de 23 %")
     F.calc("afu_adulte_eur_mois", ["afu_adulte_eur_an"], lambda x: x / 12, "€ par mois", "Aide fondamentale universelle par adulte et par mois", 2028, "afu_adulte_eur_an ÷ 12", nd=0, note="550 €/mois.")
     F.calc("afu_enfant_eur_mois", ["afu_enfant_eur_an"], lambda x: x / 12, "€ par mois", "Aide fondamentale universelle par enfant et par mois", 2028, "afu_enfant_eur_an ÷ 12", nd=2, note="275 €/mois.")

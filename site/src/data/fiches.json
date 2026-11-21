@@ -163,7 +163,7 @@
    "group_fr": "Tout le monde",
    "header_counts": {
     "gains": 10,
-    "pertes": 0
+    "pertes": null
    },
    "header_fr": "30 M foyers · 10 gains",
    "header_population": {
@@ -177,7 +177,7 @@
     "gains_listes_hors_sous_points": 6,
     "gains_listes_plus_comme_chacun": 8,
     "gains_match": false,
-    "pertes_header": 0,
+    "pertes_header": null,
     "pertes_listees": 0,
     "pertes_match": true
    },
@@ -349,7 +349,7 @@
    "group_fr": "Le travail et l'entreprise",
    "header_counts": {
     "gains": 8,
-    "pertes": 0
+    "pertes": null
    },
    "header_fr": "29 M · 8 gains",
    "header_population": {
@@ -363,7 +363,7 @@
     "gains_listes_hors_sous_points": 5,
     "gains_listes_plus_comme_chacun": 9,
     "gains_match": true,
-    "pertes_header": 0,
+    "pertes_header": null,
     "pertes_listees": 0,
     "pertes_match": true
    },
@@ -1159,7 +1159,7 @@
    "group_fr": "Se loger, se soigner, se former",
    "header_counts": {
     "gains": 2,
-    "pertes": 0
+    "pertes": null
    },
    "header_fr": "2 gains",
    "header_population": null,
@@ -1169,7 +1169,7 @@
     "gains_listes_hors_sous_points": 2,
     "gains_listes_plus_comme_chacun": 2,
     "gains_match": true,
-    "pertes_header": 0,
+    "pertes_header": null,
     "pertes_listees": 0,
     "pertes_match": true
    },

@@ -297,10 +297,12 @@ const planDay = perFoyerDay(num('eco236_total_md'));
           </p>
           <p class="max-w-xl text-lg text-ink-2">
             {nichesEquation(num('niches_nombre'), nichesTva, niches)}. Des réductions, exonérations
-            et taux réduits : {formatMdEuro(num('niches_total_md'), { decimals: 1 })} par an, soit
-            environ {formatEuro(roundForDisplay(perFoyerYear(num('niches_total_md')), 50))} par
-            foyer (sur {FOYERS_LABEL}). Le plan recense aussi {formatInteger(impots)} impôts et
-            taxes.
+            et taux réduits : {formatMdEuro(num('niches_cout_2024_md'), { decimals: 1 })} par an
+            pour les {formatInteger(num('niches_nombre'))} niches du PLF, soit environ{' '}
+            {formatEuro(roundForDisplay(perFoyerYear(num('niches_cout_2024_md')), 50))} par foyer
+            (sur {FOYERS_LABEL}) ; {formatMdEuro(num('niches_total_md'), { decimals: 1 })} avec les
+            taux réduits de TVA, selon le calcul des auteurs. Le plan recense aussi{' '}
+            {formatInteger(impots)} impôts et taxes.
           </p>
           <div
             class="max-w-2xl"
@@ -346,7 +348,12 @@ const planDay = perFoyerDay(num('eco236_total_md'));
           </div>
           <p class="flex flex-wrap items-center gap-2 text-xs text-ink-3">
             <SourceChip
-              {...chip('niches_total_nombre', { label: 'PLF 2026, annexe Dépenses fiscales' })}
+              {...chip('niches_cout_2024_md', { label: 'PLF 2026, annexe Dépenses fiscales' })}
+            />
+            <SourceChip
+              {...chip('niches_total_nombre', {
+                label: `Chiffrage des auteurs : ${num('niches_nombre')} niches + ${nichesTva} taux réduits de TVA`,
+              })}
             />
             <a href={withBase('/comprendre/niches/')} class="text-sm font-semibold">
               Chercher « ma » niche →

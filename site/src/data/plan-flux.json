@@ -1201,7 +1201,7 @@
   "totaux": {
    "annexe_manuscrit_E_plus_F": 236.352699,
    "annexe_manuscrit_colonne_C": 236.352699,
-   "destinations_classeur_114_46_plus_121_749": 236.397699
+   "destinations_classeur_114_46_plus_capitalisation": 236.397699
   },
   "unit": "Md€",
   "year_1_vs_flux": {
@@ -1270,7 +1270,7 @@
    },
    {
     "kind": "montant_affirme_classeur",
-    "ref": "Synthèse Chiffres › CSG-CRDS!I3 (114,46 Md€, PLACSS 2024 annexe 1)",
+    "ref": "Synthèse des chiffrages.xlsx › CSG-CRDS › I3 (114,46 Md€, PLACSS 2024 annexe 1)",
     "source": "annee_1",
     "target": "salaire_net",
     "value_md": 114.46

@@ -1,6 +1,6 @@
 ---
 /**
- * /comprendre/amendements — « Les 81 amendements ».
+ * /comprendre/amendements — « Les 84 amendements » (version publiée les 17 et 18 novembre 2026).
  * Liste (îlot AmendementsExplorer) + graphique des crédits retirés (statique, <details> natifs).
  * Vocabulaire : « texte proposé », « projet d'amendement » — jamais « adopté », « voté » ni « en vigueur ».
  */
@@ -36,6 +36,9 @@ const liasses = toLiasses(amendements.meta.liasses as unknown as RawLiasse[]);
 const themes = toThemes(amendements.meta.themes as unknown as RawTheme[]);
 const calendarDates = [...new Set(calendrier.events.map((e) => e.date))];
 const total = amendements.meta.counts.total;
+const version = amendements.meta.version;
+/** Les amendements d'état B : n° 1 à 22 et, ajouté en dernier numéro, le n° 40 (« Outre-mer »). */
+const etatBRange = 'n° 1 à 22 et n° 40';
 
 /* ── Crédits retirés ───────────────────────────────────────────────────── */
 type RawMission = (typeof credits.missions)[number];
@@ -86,9 +89,12 @@ const calendrierHref = withBase('/comprendre/calendrier/');
 >
   <Callout tone="plan" title="Des amendements publiés, pas des lois votées">
     <p>
-      L’association Résolution a rédigé et publié ces projets d’amendements, datés du{' '}
-      {liasses[0]!.date}. Aucun n’est adopté ni en vigueur. Le simulateur s’appuie sur leur texte,
-      qui décrit les paramètres du plan.
+      <strong data-plan-version>{version.label_fr}</strong>&#8239;: l’association Résolution a
+      rédigé et publié ces projets d’amendements ; les trois liasses (PDF) ont été republiées les 17
+      et 18 novembre 2026, et leur couverture indique encore « octobre 2026 ». Trois amendements ont
+      été ajoutés depuis la {version.previous_fr}. Aucun n’est adopté ni en vigueur : à la date du
+      21 novembre 2026, aucun n’avait été déposé au Parlement. Le simulateur s’appuie sur leur
+      texte, qui décrit les paramètres du plan.
     </p>
     <p class="flex flex-wrap items-center gap-x-2 gap-y-1">
       <TierBadge tier="law" size="sm" />
@@ -130,9 +136,9 @@ const calendrierHref = withBase('/comprendre/calendrier/');
         Les crédits que le plan retirerait du budget de l’État
       </h2>
       <p class="text-ink-2">
-        {formatInteger(nMissions)} amendements de la seconde partie (l’« état B ») retirent chacun
-        des crédits à une mission du budget 2027. Les voici, de la plus touchée à la moins touchée.
-        Ce sont des crédits que les amendements proposent de retirer.
+        {formatInteger(nMissions)} amendements de la seconde partie (l’« état B » : {etatBRange})
+        retirent chacun des crédits à une mission du budget 2027. Les voici, de la plus touchée à la
+        moins touchée. Ce sont des crédits que les amendements proposent de retirer.
       </p>
     </div>
     <ul class="grid gap-4 md:grid-cols-3">
@@ -144,7 +150,7 @@ const calendrierHref = withBase('/comprendre/calendrier/');
         unitLabel="milliards d’euros"
         reframe={`≈ ${formatNumber(Math.round(perHousehold / 10) * 10)}${NBSP}€ par foyer et par an, sur ${FOYERS_SHORT} (calcul du site)`}
         tier="law"
-        source={chip('credits_retires_cp_md', { label: `Amendements PLF-P2 n° 1 à ${nMissions}` })}
+        source={chip('credits_retires_cp_md', { label: `Amendements PLF-P2 ${etatBRange}` })}
       />
       <StatTile
         as="li"
@@ -154,7 +160,7 @@ const calendrierHref = withBase('/comprendre/calendrier/');
         unitLabel="milliards d’euros"
         reframe="Ce que l’État pourrait promettre de payer, ici ou plus tard : toujours au moins égal aux paiements de l’année."
         tier="law"
-        source={chip('credits_retires_ae_md', { label: `Amendements PLF-P2 n° 1 à ${nMissions}` })}
+        source={chip('credits_retires_ae_md', { label: `Amendements PLF-P2 ${etatBRange}` })}
       />
       <StatTile
         as="li"
@@ -164,7 +170,7 @@ const calendrierHref = withBase('/comprendre/calendrier/');
         reframe={`${formatInteger(nProgrammes)} programmes. Les deux premières, ${top2[0]!.mission} et ${top2[1]!.mission}, concentrent ${pct(top2Share)} des crédits de paiement retirés.`}
         tier="law"
         source={chip('credits_retires_amendements_nombre', {
-          label: `Amendements PLF-P2 n° 1 à ${nMissions}`,
+          label: `Amendements PLF-P2 ${etatBRange}`,
         })}
       />
     </ul>
@@ -175,11 +181,10 @@ const calendrierHref = withBase('/comprendre/calendrier/');
       summary={`${top2[0]!.mission} (${formatCompactEuro(top2[0]!.cpEur)} de crédits de paiement, ${pct(top2[0]!.cpSharePct)} du total) et ${top2[1]!.mission.toLowerCase()} (${formatCompactEuro(top2[1]!.cpEur)}, ${pct(top2[1]!.cpSharePct)}) sont les plus touchées. Au total, ${formatMdEuro(cpMd)} de crédits de paiement et ${formatMdEuro(aeMd)} d’autorisations d’engagement seraient retirés.`}
       sources={[
         {
-          label: `Amendements PLF-P2 n° 1 à ${nMissions}`,
+          label: `Amendements PLF-P2 ${etatBRange}`,
           href: credits.meta.source.url,
           tier: 'law',
         },
-        chip('credits_retires_cp_md', { label: 'Annexe A de la source-analyse' }),
       ]}
       table={{
         caption: 'Crédits retirés par mission (état B, PLF 2027)',
@@ -210,7 +215,7 @@ const calendrierHref = withBase('/comprendre/calendrier/');
         rows: creditRows,
       }}
       csvFileName="credits-retires-par-mission.csv"
-      note={`Effet : 1er janvier 2027 pour les personnes morales, 1er juillet 2027 pour les personnes physiques (demi-exercice). Dans le détail d’une mission, chaque programme est tracé à l’échelle de son plus gros programme. L’exposé de l’amendement n° 32 chiffre l’économie 2027 de l’aide au logement à ${formatMdEuro(aplExpose, { decimals: 1 })}, l’état B retire ${formatMdEuro(aplEtatB, { decimals: 1 })} de crédits de paiement : les deux chiffres sont conservés (écart D19).`}
+      note={`Chaque exposé date séparément chaque nature de crédit : 1er janvier 2027 (fonctionnement courant, investissement, aides aux entreprises, transferts aux collectivités…), 1er avril 2027 (hébergement d’urgence) ou 1er juillet 2027 (rémunérations, subventions aux associations et aux opérateurs, transferts aux ménages…). « Un dispositif qui s’éteint en trois ans est retiré pour sa première année. » Dans le détail d’une mission, chaque programme est tracé à l’échelle de son plus gros programme. L’exposé de l’amendement n° 32 chiffre l’économie 2027 de l’aide au logement à ${formatMdEuro(aplExpose, { decimals: 1 })}, l’état B retire ${formatMdEuro(aplEtatB, { decimals: 1 })} de crédits de paiement : les deux chiffres sont conservés (écart D19). Les états B ont été réécrits en novembre 2026 (version d’octobre : ${formatMdEuro(credits.meta.october_2026.cp_retirees_md, { decimals: 1 })} de crédits de paiement).`}
     >
       <CreditsChart missions={missions} amendementsHref={amendementsHref} />
     </ChartFrame>

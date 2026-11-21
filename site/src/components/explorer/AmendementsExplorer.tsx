@@ -1,5 +1,5 @@
 /**
- * Les 81 amendements : liste recherchable, regroupée par liasse ou par thème.
+ * Les 84 amendements : liste recherchable, regroupée par liasse ou par thème.
  *
  * Rappel qui compte : ce sont des TEXTES PROPOSÉS (projets d'amendements rédigés et publiés par
  * Résolution), aucun n'est adopté ni en vigueur. Le niveau « Proposé dans un amendement » veut dire
@@ -92,7 +92,16 @@ function AmCard({
               return (
                 <li key={i} className="border-s-2 border-rule-strong ps-3">
                   <span className="font-semibold text-ink">{formatDateFr(d.date)}</span>
-                  <span className="text-ink-2"> — {d.label}</span>
+                  <span className="text-ink-2"> — {d.label}</span>{' '}
+                  <a
+                    href={d.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="whitespace-nowrap"
+                  >
+                    (texte, p. {d.pdfPage})
+                    <span className="sr-only"> (s’ouvre dans un nouvel onglet)</span>
+                  </a>
                   {note && <span className="block text-ink-3">{note}</span>}
                 </li>
               );

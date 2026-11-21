@@ -1,8 +1,8 @@
 /**
- * Les 81 amendements — modèle de l'explorateur (/comprendre/amendements).
+ * Les 84 amendements — modèle de l'explorateur (/comprendre/amendements).
  *
- * Ce sont des projets d'amendements rédigés et publiés par l'association Résolution (liasses du 19
- * octobre 2026) : aucun n'est adopté. « Proposé dans un amendement » (niveau `law`) veut dire « écrit
+ * Ce sont des projets d'amendements rédigés et publiés par l'association Résolution (liasses
+ * republiées les 17 et 18 novembre 2026, 35 + 40 + 9) : aucun n'est adopté. « Proposé dans un amendement » (niveau `law`) veut dire « écrit
  * dans le texte de loi proposé » — jamais « en vigueur ». Pur TypeScript, sans DOM.
  */
 import { formatDateFr } from './dates';
@@ -21,7 +21,14 @@ export interface RawAmendement {
   theme: string;
   resume_fr: string;
   objet_expose_fr: string;
-  dates: Array<{ date: string; label_fr: string; precision: string }>;
+  dates: Array<{
+    date: string;
+    label_fr: string;
+    precision: string;
+    /** Page du PDF qui contient la phrase citée (et non la première page de l'amendement). */
+    pdf_page: number;
+    pdf_url: string;
+  }>;
   effective_from: string | null;
   effective_to: string | null;
   pdf_page: number;
@@ -57,7 +64,13 @@ export interface AmItem {
   summary: string;
   from: string | null;
   to: string | null;
-  dates: Array<{ date: string; label: string; precision: string }>;
+  dates: Array<{
+    date: string;
+    label: string;
+    precision: string;
+    pdfPage: number;
+    pdfUrl: string;
+  }>;
   pdfUrl: string;
   pdfPage: number;
 }
@@ -90,7 +103,13 @@ export const toItems = (raw: RawAmendement[]): AmItem[] =>
     summary: a.resume_fr,
     from: a.effective_from,
     to: a.effective_to,
-    dates: a.dates.map((d) => ({ date: d.date, label: d.label_fr, precision: d.precision })),
+    dates: a.dates.map((d) => ({
+      date: d.date,
+      label: d.label_fr,
+      precision: d.precision,
+      pdfPage: d.pdf_page,
+      pdfUrl: d.pdf_url,
+    })),
     pdfUrl: a.pdf_url,
     pdfPage: a.pdf_page,
   }));

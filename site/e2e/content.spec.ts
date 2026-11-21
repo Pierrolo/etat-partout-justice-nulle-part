@@ -68,6 +68,10 @@ test.describe('/methode', () => {
     await expect(page.locator('#non-compte')).toBeVisible();
     await expect(page.locator('#d16')).toHaveCount(1); // « Quatre foyers différents »
     await expect(page.locator('#d04')).toContainText('PIB');
+    // the version of the plan, and the conflicts born with the November 2026 version
+    await expect(page.getByText('Amendements publiés le 18 novembre 2026').first()).toBeVisible();
+    await expect(page.locator('#d38')).toContainText(/minoration/);
+    await expect(page.locator('#d40')).toContainText(/Suppression/);
   });
 
   test('#h1 deep link lands on the hypothesis and highlights it', async ({ page }) => {
@@ -176,6 +180,25 @@ test.describe('/comprendre/situations', () => {
       'href',
       /^https:\/\/france-resolution\.fr\//,
     );
+    // our own note, outside the fiche: the n° 28 text now reduces the AFU of a pensioner
+    await expect(retraite).toContainText('Note du site, hors fiche');
+    await expect(retraite).toContainText(/minore l.aide fondamentale de 3\s300\s€ par an/);
+  });
+
+  test('restores the sub-points of the Travailleur and Jeune adulte fiches and the header counts', async ({
+    page,
+  }) => {
+    await page.goto('comprendre/situations/');
+    const travailleur = page.locator('article#travailleur');
+    await expect(travailleur).toContainText('Ce que le plan donne (8)');
+    await expect(travailleur).toContainText('Vous en suivez la croissance');
+    const jeune = page.locator('article#jeune-adulte');
+    await expect(jeune).toContainText('Ce que le plan donne (8)');
+    await expect(jeune.locator('li li')).toHaveCount(5);
+    // the Contribuable header announces gains only: no invented « 0 perte »
+    const contribuable = page.locator('article#contribuable');
+    await expect(contribuable).toContainText('annonce 10 gains');
+    await expect(contribuable).not.toContainText('0 perte');
   });
 
   test('is reachable from the Comprendre hub and from the previous/next navigation', async ({

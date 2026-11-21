@@ -3,6 +3,7 @@ import { HourBar } from '@/components/story/HourBar';
 import { Lifecycle } from '@/components/story/Lifecycle';
 import { PlanSankey } from '@/components/story/PlanSankey';
 import { Callout, Disclosure, SourceChip, TierBadge } from '@/components/ui';
+import amendements from '@/data/amendements.json';
 import DashboardLayout from '@/layouts/DashboardLayout.astro';
 import { chip, conflicts, datasetChip, fact, num } from '@/lib/facts';
 import { formatEuro, formatMdEuro, formatNumber, formatPercentPoints } from '@/lib/format';
@@ -18,6 +19,7 @@ const sankeySources = [
 ];
 const rec = sk.reconciliation;
 const nf3 = (v: number) => formatNumber(v, { decimals: 3 });
+const version = amendements.meta.version;
 
 // ── Heure de travail, CSG ───────────────────────────────────────────────────
 const csgMois = num('csg_gain_median_mois_eur');
@@ -46,7 +48,7 @@ const written = [
     chip: chip('csg_cout_annee_pleine_md_loi', { label: 'Amendement PLFSS n° 1' }),
   },
   {
-    text: `Aide fondamentale universelle dès ${afuYear} : ${formatEuro(num('afu_adulte_eur_an'))} par an et par adulte (${formatEuro(num('afu_adulte_eur_mois'))} par mois), ${formatEuro(num('afu_enfant_eur_an'))} par enfant à charge.`,
+    text: `Aide fondamentale universelle dès ${afuYear} : ${formatEuro(num('afu_adulte_eur_an'))} par an et par adulte (${formatEuro(num('afu_adulte_eur_mois'))} par mois), ${formatEuro(num('afu_enfant_eur_an'))} par enfant à charge, minorée de ${formatEuro(Math.abs(num('afu_pension_eur_an')))} par an pour une pension de retraite liquidée avant 2028 (jusqu’à l’imposition des revenus de 2051).`,
     chip: chip('afu_adulte_eur_an', { label: 'Amendement PLF-P1 n° 28' }),
   },
   {
@@ -54,11 +56,11 @@ const written = [
     chip: chip('ir_taux_unique_pct', { label: 'Amendements PLF-P1' }),
   },
   {
-    text: `TVA sur l’alimentation : ${tvaSteps.map((s) => `${formatPercentPoints(s.pct, { decimals: 0 })} en ${s.year}`).join(', puis ')}.`,
+    text: `TVA sur l’alimentation : ${tvaSteps.map((s) => `${formatPercentPoints(s.pct, { decimals: 0 })} dès le 1er juillet ${s.year}`).join(', puis ')}.`,
     chip: chip('tva_alimentation_palier_1_pct', { label: 'Amendements PLF-P1', year: false }),
   },
   {
-    text: `${formatMdEuro(num('credits_retires_cp_md'))} de crédits de paiement retirés à ${formatNumber(num('credits_retires_amendements_nombre'))} missions (état B, ${fact('credits_retires_cp_md').year}).`,
+    text: `${formatMdEuro(num('credits_retires_cp_md'))} de crédits de paiement retirés à ${formatNumber(num('credits_retires_amendements_nombre'))} missions (état B, ${fact('credits_retires_cp_md').year} ; selon la nature des crédits, dès le 1er janvier, le 1er avril ou le 1er juillet).`,
     chip: chip('credits_retires_cp_md', { label: 'Amendements PLF-P2, état B' }),
   },
   {
@@ -66,13 +68,14 @@ const written = [
     chip: chip('emplois_etat_fermes_annee_pleine_loi', { label: 'Amendement PLF-P2 n° 24' }),
   },
 ];
+const epargneQuote = fact('restitution_epargne_manifeste_eur_mois').source.quote!;
 const announced = [
   {
     text: `${formatMdEuro(total)} d’économies par an, estimations du chiffrage.`,
     chip: chip('eco236_total_md', { label: 'Chiffrage publié' }),
   },
   {
-    text: `Compte d’épargne retraite : « ${formatEuro(num('restitution_epargne_manifeste_eur_mois'))} par mois d’ici trois ans ». Montant inscrit dans l’amendement : ${formatEuro(num('cep_montant_loi_eur'))} ; il serait fixé chaque année par la loi de finances.`,
+    text: `Compte d’épargne retraite : « ${epargneQuote} » (manifeste). Aucun montant n’est inscrit dans l’amendement : il serait fixé chaque année par la loi de finances, et nul à défaut.`,
     chip: chip('restitution_epargne_manifeste_eur_mois', { label: 'Annonce' }),
   },
   {
@@ -94,6 +97,10 @@ const announced = [
   slug="le-plan"
   lede={`D’où viennent ${formatMdEuro(total)} d’économies par an, où elles vont (salaire net, épargne), et ce que l’amendement écrit noir sur blanc.`}
 >
+  <p class="max-w-2xl text-sm text-ink-3" data-plan-version>
+    <strong class="text-ink-2">{version.label_fr}.</strong> Chiffrage et amendements dans leur
+    version de novembre 2026 ; les amendements sont rédigés et publiés, pas en vigueur.
+  </p>
   <section aria-labelledby="schema-titre" class="space-y-4">
     <div class="max-w-2xl space-y-2">
       <h2 id="schema-titre" class="sr-only">
@@ -113,20 +120,23 @@ const announced = [
       sources={sankeySources}
       total={sk.total}
       year1={sk.year1}
+      csg2027={num('csg_cout_2027_md_loi')}
+      csgFullYear={num('csg_cout_annee_pleine_md_loi')}
     />
     <Callout
       tone="note"
-      title={`Trois façons de compter « ${formatNumber(total, { decimals: 0 })} milliards »`}
+      title={`Plusieurs façons de compter « ${formatNumber(total, { decimals: 0 })} milliards »`}
     >
       <p>
-        Selon la ligne et la feuille du classeur, le total vaut{' '}
-        {nf3(rec.totaux.annexe_manuscrit_colonne_C)}&nbsp;Md€ (colonne C),{' '}
-        {nf3(rec.totaux.annexe_manuscrit_E_plus_F)}&nbsp;Md€ (années 1 et pleine additionnées, ce
-        schéma) ou
-        {nf3(rec.totaux.destinations_classeur_114_46_plus_121_749)}&nbsp;Md€ (somme des deux
-        destinations). Les trois s’arrondissent à {formatNumber(total, { decimals: 0 })}. De même,
-        le gain de la première année est de {nf3(sk.year1)}&nbsp;Md€ dans l’annexe et de{' '}
-        {formatNumber(sk.year1Flux, { decimals: 1 })}&nbsp;Md€ dans la feuille « Flux ».
+        Dans la version de novembre 2026 du classeur, le total de l’annexe vaut{' '}
+        {nf3(rec.totaux.annexe_manuscrit_colonne_C)}&nbsp;Md€ : la colonne C est égale à la somme
+        des années 1 et pleine (ce schéma), ce qui n’était pas le cas en octobre. La feuille de
+        réconciliation (somme des deux destinations) donne{' '}
+        {nf3(rec.totaux.destinations_classeur_114_46_plus_capitalisation)}&nbsp;Md€, et la feuille
+        qui alimente le graphique du livre {nf3(rec.graph236.total_md)}&nbsp;Md€. Les trois
+        s’arrondissent à {formatNumber(total, { decimals: 0 })}. Le gain de l’année 1 est de{' '}
+        {nf3(sk.year1)}&nbsp;Md€ dans l’annexe, comme dans la feuille « Flux » ({nf3(sk.year1Flux)}
+        &nbsp;Md€) ; le classeur ne date pas cette « année 1 ».
       </p>
       <p class="mt-2 text-sm text-ink-3">
         Ce schéma utilise uniquement l’annexe. Le classeur contient un second schéma, légèrement
@@ -134,6 +144,7 @@ const announced = [
       </p>
       <p class="mt-3 flex flex-wrap items-center gap-2">
         <SourceChip {...chip('eco236_total_md', { label: 'Total : colonne C' })} />
+        <SourceChip {...chip('eco236_graph236_total_md', { label: 'Total : feuille Graph236' })} />
         <SourceChip {...chip('plan_gain_annee_1_flux_md', { label: 'Année 1 : feuille Flux' })} />
       </p>
     </Callout>
@@ -212,6 +223,7 @@ const announced = [
       series={life.series}
       rows={life.rows}
       sources={lifeSources}
+      pensionMinoration={Math.abs(num('afu_pension_eur_an'))}
     />
   </section>
 

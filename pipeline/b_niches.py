@@ -22,6 +22,15 @@ Coarse category (for filters) = ONE category per niche, first matching rule:
   5. ménages | entreprises   by beneficiary nature (Bénéficiaires sheet)
   6. autre       everything else (mixed beneficiaries, vehicles, parcels, premises)
 `category_tags` lists every rule that fires; `category_rule` says which fired first.
+
+Two readings of « what the plan does with each niche », kept side by side:
+  * `resolution.suppression_code` / `plan_classeur`: the authors' own column « Suppression » of their copy of the
+    workbook (Oui / En 3 ans / Fusion CI IR / Flux OM / blank);
+  * `resolution.plan_texte`: what the TEXT of PLF-P1 n° 1 says (III lists the abrogated provisions by number; IV.A to
+    IV.F give each group of numbers its own calendar).  Each niche's legal reference is matched to the III items
+    (article and sub-paragraph), the group is read in IV; a niche matched to several groups, or to none, gets
+    `groupe: null` (no claim).  Where the two readings disagree, `plan_final` follows the text and
+    `plan_conflit_classeur` is true.
 """
 from __future__ import annotations
 
@@ -29,7 +38,179 @@ import collections
 import re
 import unicodedata
 
+from amend import amendment, page_label, pdf_url, quote_pages
 from lib import Sheet, cell_flag, clean, parse_num, ws
+
+# --------------------------------------------------------------------------
+# What PLF-P1 n° 1 says about each niche (III = list of abrogated provisions, IV = calendar by group)
+# --------------------------------------------------------------------------
+GROUPS_FR = {
+    "A": ("Cas général", "impôt sur le revenu dû au titre de 2026, impôt sur les sociétés des exercices clos à partir du 1er janvier 2027, droits d'enregistrement à partir du 1er janvier 2027", "IV.A",
+          "le I s’applique à l’impôt sur le revenu dû au titre de 2026"),
+    "B": ("Avantage lié à un engagement", "investissements réalisés, dépenses payées, versements effectués et engagements pris à partir du 1er janvier 2027", "IV.B",
+          "aux engagements pris à compter du 1er janvier 2027"),
+    "C": ("Barème, parts et plus-values", "impôt sur le revenu dû au titre de 2028 et opérations à partir du 1er janvier 2028 (plans, comptes et livrets : plus d'avantage pour les ouvertures et versements à partir du 1er juillet 2027)", "IV.C",
+          "le I s’applique à l’impôt sur le revenu dû au titre de 2028 et aux opérations réalisées à compter du 1er janvier 2028"),
+    "C0": ("Cessions et exportations (82° et 83°)", "cessions et exportations à partir du 1er janvier 2027", "IV.C, dernière phrase",
+           "le I s’applique aux cessions et aux exportations intervenant à compter du 1er janvier 2027"),
+    "Cbis": ("Mutations à titre gratuit", "successions ouvertes et donations consenties à partir du 1er janvier 2027", "IV.C bis",
+             "aux successions ouvertes et aux donations consenties à compter du 1er janvier 2027"),
+    "D": ("TVA, accises et douane", "opérations dont le fait générateur est à partir du 1er juillet 2027", "IV.D",
+          "aux opérations dont le fait générateur intervient à compter du 1er juillet 2027"),
+    "E": ("Agriculture, services à la personne, garde des jeunes enfants", "avantage réduit d'un tiers au titre de 2027, de deux tiers au titre de 2028, supprimé en totalité à partir de 2029", "IV.E",
+          "l’avantage est réduit d’un tiers au titre de 2027 et de deux tiers au titre de 2028"),
+    "F": ("Dons et versements", "avantage réduit de moitié pour les dons à partir du 1er juillet 2027, supprimé à partir du 1er janvier 2028", "IV.F",
+          "l’avantage est réduit de moitié pour les dons et versements effectués à compter du 1er juillet 2027"),
+}
+# Niches whose legal reference no III item cites by article: (groupe, III items or None, why, inferred)
+PLAN_TEXT_OVERRIDES = {
+    "110203": ("E", [150], "Le crédit d'impôt pour frais de garde des enfants de moins de 6 ans (art. 200 quater B) n'est cité par aucun numéro du III. Le seul numéro du IV.E qui ne désigne pas un article est le 150° (« 23° bis du II de la section V »), et le IV.E vise « la garde des jeunes enfants » ; l'article 28 VII, qui fusionne des crédits dans l'aide fondamentale, ne cite pas non plus l'article 200 quater B. Rapprochement non vérifié sur Légifrance (injoignable).", True),
+    "110107": ("C", None, "L'article 194 (quotient conjugal) n'est pas dans le III : il est abrogé par PLF-P1 n° 28, V, 2°, pour l'imposition des revenus de 2028 (« Le 1°, le 2° et le 3° du V s’appliquent à l’imposition des revenus de l’année 2028 »).", False),
+    "110201": ("F", [148], "La réduction d'impôt pour dons (art. 200) est le 20° du II de la section V (III 148°), cité par le IV.F.", False),
+}
+_ARTONLY = re.compile(r"^\d{1,4}(?:-\d+)?(?: (?:bis|ter|quater|quinquies|sexies|septies|octies|nonies|decies|undecies|duodecies|terdecies|quaterdecies|quindecies|sexdecies|septdecies|octodecies|novodecies|vicies|[A-Z]{1,3}))*$")
+_STOP = {"le", "la", "les", "l", "d", "de", "du", "des", "et", "à", "au", "aux", "article", "articles", "même", "code", "section", "chapitre", "titre", "partie", "livre", "sous", "première", "premier"}
+
+
+def _toks(txt: str) -> set[str]:
+    txt = txt.lower().replace("’", "'").replace("'", " ")
+    txt = re.sub(r"[\-,.;:()«»]", " ", txt)
+    return {t for t in txt.split() if t and t not in _STOP}
+
+
+def _item_skip(txt: str) -> bool:
+    return bool(re.search(r"\bL\. ?\d|\bR\. ?\d|\bloi\b", txt))
+
+
+def _am1_structure() -> dict:
+    """III items (350) and the item numbers of each IV group, parsed from the amendment text and sanity-checked."""
+    a = amendment("PLF-P1", 1)
+    txt = a["dispositif"]
+    iii = txt[txt.index("III. – Sont abrogés") : txt.index("III bis.")]
+    items: dict[int, str] = {}
+    exp, cur = 1, None
+    for line in (l.strip() for l in iii.split("\n")[1:]):
+        m = re.match(r"^(\d{1,3})°\s*(.*)$", line)
+        if m and int(m.group(1)) == exp:
+            cur = exp
+            items[cur] = m.group(2)
+            exp += 1
+        elif cur is not None and line:
+            items[cur] += " " + line
+    assert len(items) == 350, len(items)
+    iv = txt[txt.index("IV. – A.") :]
+
+    def rng(spec: str) -> set[int]:
+        out: set[int] = set()
+        for piece in spec.replace(" et ", ", ").split(","):
+            piece = piece.strip()
+            if piece:
+                m = re.fullmatch(r"(\d+)°(?: à (\d+)°)?", piece)
+                assert m, piece
+                out |= set(range(int(m.group(1)), int(m.group(2) or m.group(1)) + 1))
+        return out
+
+    def grab(start: str, end: str) -> set[int]:
+        k = iv.index(start)
+        seg = re.sub(r"\s+", " ", iv[k : iv.index(end, k + 5)])
+        m = re.search(r"que le III abroge à ses (.+?), (?:le I s’applique|l’avantage est réduit)", seg)
+        assert m, start
+        return rng(m.group(1))
+
+    groups = {
+        "B": grab("B. – Sous réserve des C à F", "C. – Par dérogation"),
+        "C": grab("C. – Par dérogation aux A et B, pour", "C bis. –"),
+        "Cbis": grab("C bis. –", "D. – En matière"),
+        "E": grab("E. – Par dérogation", "F. – Par dérogation"),
+        "F": grab("F. – Par dérogation au A", "G. – Les créances"),
+    }
+    assert {k: len(v) for k, v in groups.items()} == {"B": 91, "C": 44, "Cbis": 22, "E": 29, "F": 6}, {k: len(v) for k, v in groups.items()}
+    assert groups["E"] >= {31, 142, 150, 158, 159, 162, 263} and 197 not in groups["E"] and {195, 196, 197, 198, 199} <= groups["B"]
+    # IV.C, last sentence: the 82° and 83° apply to sales and exports from 1 January 2027
+    assert "pour les dispositions que le III abroge à ses 82° et 83°" in re.sub(r"\s+", " ", iv)
+    groups["C0"] = {82, 83}
+    groups["C"] = groups["C"] - groups["C0"]
+    pure: dict[int, set[str]] = {}
+    for k, v in items.items():
+        m = re.match(r"^(?:L’article|Les articles) (.+?) du même code\.$", v)
+        if m and not _item_skip(v) and " le " not in m.group(1) and " les " not in m.group(1):
+            pure[k] = {re.sub(r"\s+", " ", p.strip()).lower() for p in re.split(r", | et ", m.group(1))}
+    return {"items": items, "groups": groups, "tokens": {k: _toks(v) for k, v in items.items() if not _item_skip(v)}, "pure": pure}
+
+
+def _group_of_item(st: dict, k: int) -> str:
+    for g in ("E", "F", "Cbis", "C0", "C", "B"):
+        if k in st["groups"][g]:
+            return g
+    return "A"
+
+
+def _pieces(ref: str) -> list[str]:
+    out: list[str] = []
+    for p in (q.strip() for q in re.split(r",\s+|;\s*|\s+et\s+", ref) if q.strip()):
+        if re.match(r"^\d{2,4}(?![\d°])", p) or not out:
+            out.append(p)
+        else:
+            out[-1] += " " + p  # « 3° bis », « 10° et 11° » continue the previous article
+    return out
+
+
+def _match_items(st: dict, ref: str) -> list[int]:
+    hits: set[int] = set()
+    for piece in _pieces(ref):
+        if _ARTONLY.match(piece):
+            hits |= {k for k, arts in st["pure"].items() if piece.lower() in arts}
+        else:
+            t = _toks(piece)
+            if len(t) >= 2:
+                hits |= {k for k, tt in st["tokens"].items() if t <= tt}
+    return sorted(hits)
+
+
+def _plan_texte(st: dict, niche: dict) -> dict:
+    """What PLF-P1 n° 1 says about one niche (see module docstring)."""
+    i, tax, code, ref = niche["id"], niche["tax"], niche["legal_ref"]["code"] or "", niche["legal_ref"]["reference"] or ""
+    if i in PLAN_TEXT_OVERRIDES:
+        g, items, why, inferred = PLAN_TEXT_OVERRIDES[i]
+        return {"groupe": g, "iii": items, "methode": "rapprochement hors article", "inferred": inferred, "note_fr": why}
+    cibs_or_customs = "impositions sur les biens" in code or "douanes" in code
+    if tax in ("Taxe sur la valeur ajoutée", "Accise sur les énergies") or cibs_or_customs:
+        nums = [int(x) for x in re.findall(r"L\. ?312-(\d+)", ref)]
+        if any(60 <= n <= 63 for n in nums):  # III 318° : « L. 312-60 à L. 312-63 », cited by IV.E
+            return {"groupe": "E", "iii": [318], "methode": "article du CIBS cité par le III", "inferred": False, "note_fr": "L. 312-60 à L. 312-63 du code des impositions sur les biens et services (III 318°), dans la liste du IV.E."}
+        return {"groupe": "D", "iii": None, "methode": "règle du IV.D par impôt", "inferred": False, "note_fr": "Le IV.D fixe le 1er juillet 2027 pour la TVA, les impositions des livres III et IV du code des impositions sur les biens et services et le code des douanes ; la liste exacte des numéros du III n'est pas rapprochée niche par niche."}
+    if "général des impôts" not in code:
+        return {"groupe": None, "iii": None, "methode": "non rapproché", "inferred": False, "note_fr": "Référence légale hors code général des impôts : non rapprochée du III."}
+    hits = _match_items(st, ref)
+    gs = sorted({_group_of_item(st, k) for k in hits})
+    if len(gs) == 1:
+        return {"groupe": gs[0], "iii": hits, "methode": "article et alinéa cités par le III", "inferred": False, "note_fr": None}
+    if len(gs) > 1:
+        return {"groupe": None, "iii": hits, "methode": "ambigu", "inferred": False, "ambigu": gs,
+                "note_fr": "Les numéros du III qui citent ces articles relèvent de plusieurs groupes du IV (" + ", ".join(gs) + ") : aucune date n'est affirmée niche par niche."}
+    return {"groupe": None, "iii": None, "methode": "non rapproché", "inferred": False, "note_fr": "Aucun numéro du III ne cite cette référence : la clause générale du I s'applique à défaut (le I s'applique à l'impôt dû au titre de 2028 et aux opérations à compter du 1er janvier 2028, IV.A à F réservés)."}
+
+
+def _plan_final(base: str, groupe: str | None) -> str:
+    if base == "eteinte":
+        return base
+    if groupe == "E":
+        return "trois-ans"
+    if base == "trois-ans" and groupe is not None:
+        return "supprimee"
+    return base
+
+
+PLAN_OF_CODE = {"Oui": "supprimee", "En 3 ans": "trois-ans", "Fusion CI IR": "aide-fondamentale", "Flux OM": "outre-mer", None: "eteinte"}
+
+
+def _group_sources() -> dict:
+    out = {}
+    for g, (label, effect, where, quote) in GROUPS_FR.items():
+        first, last = quote_pages("PLF-P1", 1, quote)
+        out[g] = {"label_fr": label, "effet_fr": effect, "ou_fr": f"Amendement PLF-P1 n° 1, {where} ({page_label(first, last)} du PDF)", "url": pdf_url("PLF-P1", first), "quote": quote}
+    return out
+
 
 # --------------------------------------------------------------------------
 # classification
@@ -271,6 +452,17 @@ def build() -> dict:
         }
         recs.append(rec)
 
+    # --- what the text of PLF-P1 n° 1 says, niche by niche
+    st = _am1_structure()
+    for r in recs:
+        pt = _plan_texte(st, r)
+        base = PLAN_OF_CODE[r["resolution"]["suppression_code"]]
+        r["resolution"]["plan_classeur"] = base
+        r["resolution"]["plan_texte"] = pt
+        final = _plan_final(base, pt["groupe"])
+        r["resolution"]["plan_final"] = final
+        r["resolution"]["plan_conflit_classeur"] = final != base
+        r["resolution"]["plan_non_verifie"] = base == "trois-ans" and pt["groupe"] is None
     # --- Résolution suppression codes
     by_code = collections.Counter(r["resolution"]["suppression_code"] for r in recs)
     assert by_code == {"Oui": 359, None: 82, "En 3 ans": 11, "Fusion CI IR": 7, "Flux OM": 6}, by_code
@@ -384,6 +576,31 @@ def build() -> dict:
 
     top10 = sorted(recs, key=lambda r: -(r["cost_2024_meur"] or 0))[:10]
 
+    # --- plan: the authors' column vs the text of PLF-P1 n° 1
+    def _sum(rs):
+        return clean(sum(r["cost_2024_meur"] or 0 for r in rs), 3)
+
+    conflits = [r for r in recs if r["resolution"]["plan_conflit_classeur"]]
+    non_verifie = [r for r in recs if r["resolution"]["plan_non_verifie"]]
+    by_groupe = collections.Counter(r["resolution"]["plan_texte"]["groupe"] for r in recs)
+    by_final = collections.Counter(r["resolution"]["plan_final"] for r in recs)
+    assert {r["id"] for r in recs if r["resolution"]["plan_texte"]["groupe"] == "E" and r["resolution"]["plan_classeur"] != "eteinte"} >= {
+        "300101", "300102", "60102", "60104", "120147", "300110", "300208", "530208", "60202", "300109", "500101", "530216", "110203", "110246"}, "IV.E niches"
+    assert by_id["520110"]["resolution"]["plan_texte"]["groupe"] == "Cbis" and by_id["520110"]["resolution"]["plan_final"] == "supprimee"  # Pacte Dutreil: 1er janvier 2027
+    c_ir = [r for r in recs if r["resolution"]["plan_texte"]["groupe"] == "C" and r["tax"].startswith("Impôt sur le revenu")]
+    assert {"110102", "110103", "110107", "100202", "140122", "150114", "150117", "150120", "150515", "150518", "190208", "150121", "150210", "150211", "150406", "150705", "150706", "150707", "150710"} <= {r["id"] for r in c_ir}
+    plan_texte = {
+        "source": _group_sources(),
+        "note_fr": "Lecture du texte de PLF-P1 n° 1 : le III abroge les dispositions numéro par numéro, le IV donne un calendrier à chaque groupe de numéros. Chaque niche est rapprochée des numéros du III par sa référence légale (article et alinéa) ; quand les numéros rapprochés relèvent de plusieurs groupes, ou quand aucun ne la cite, aucune date n'est affirmée (groupe null). Le classeur des auteurs (colonne « Suppression ») donne une autre lecture pour certaines niches : elles sont listées dans conflits_avec_le_classeur ; plan_final suit le texte.",
+        "groupes": {g: {"n_niches": by_groupe.get(g, 0), "cout_2024_meur": _sum([r for r in recs if r["resolution"]["plan_texte"]["groupe"] == g])} for g in list(GROUPS_FR) + [None] for g in [g] if True} if False else
+                   {str(g): {"n_niches": by_groupe.get(g, 0), "cout_2024_meur": _sum([r for r in recs if r["resolution"]["plan_texte"]["groupe"] == g])} for g in list(GROUPS_FR) + [None]},
+        "plan_final": {k: {"n_niches": v, "cout_2024_meur": _sum([r for r in recs if r["resolution"]["plan_final"] == k])} for k, v in sorted(by_final.items())},
+        "conflits_avec_le_classeur": [{"id": r["id"], "label_fr": r["label_fr"], "cout_2024_meur": r["cost_2024_meur"], "plan_classeur": r["resolution"]["plan_classeur"], "plan_final": r["resolution"]["plan_final"],
+                                       "groupe": r["resolution"]["plan_texte"]["groupe"], "inferred": r["resolution"]["plan_texte"]["inferred"]} for r in conflits],
+        "classeur_non_verifie_dans_le_texte": [{"id": r["id"], "label_fr": r["label_fr"], "cout_2024_meur": r["cost_2024_meur"]} for r in non_verifie],
+        "ir_2028": {"n_niches": len(c_ir), "cout_2024_meur": _sum(c_ir), "note_fr": "Niches de l'impôt sur le revenu dont l'abrogation s'applique à l'impôt dû au titre de 2028 (IV.C), et non dès 2027."},
+    }
+
     return {
         "meta": {
             "title_fr": "Les 465 niches fiscales recensées au PLF 2026",
@@ -407,11 +624,13 @@ def build() -> dict:
                 "suppression_sans_objet": "les 82 lignes sans code de suppression sont exactement celles dont le fait générateur s'éteint en 2025 ou avant",
             },
         },
+        "plan_texte": plan_texte,
         "niches": recs,
         "provisions_calcul_impot": prov,
         "taux_reduits_tva_hors_niches": {
             "count": tva_n, "cost_2024_meur": clean(tva_md * 1000, 3), "cost_2024_md": tva_md,
-            "estimation": "Projection sur 2024 au pro-rata de la TVA dans les comptes nationaux de l'Insee ; estimation du CPO (février 2023, p. 32) : 30 Md€ en 2021 dont 20 Md€ sur l'eau et l'alimentation.",
+            "estimation": "Estimation du CPO (février 2023, p. 32), projetée sur 2024 au prorata de la TVA dans les comptes nationaux de l'Insee par les auteurs : 30 Md€ en 2021 dont 20 Md€ sur l'eau et l'alimentation. Ce n'est pas un chiffre de l'annexe du PLF (qui ne compte pas ces 21 taux comme dépenses fiscales).",
+            "tier": "annonce",
             "liste_individuelle": None,
             "liste_note": "Les sources du dépôt ne publient pas la liste des 21 taux réduits (seulement leur nombre et leur coût agrégé) ; les taux visés par l'amendement PLF-P1 n° 21 sont 10 %, 5,5 % et 2,1 % (alimentation : 10 % au 1er juillet 2028, 15 % en 2029, 20 % en 2030).",
             "source": sy.source("B11:D14"),

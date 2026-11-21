@@ -42,7 +42,10 @@ const nichesTva = num('niches_tva_hors_niches_nombre');
 const impotConflict = conflicts('impots_cibles_manifeste')[0]?.note ?? '';
 const impotSources = [chip('impots_nombre_manifeste', { label: 'france-resolution.fr' })];
 const nicheSources = [
-  chip('niches_total_nombre', { label: 'PLF 2026, annexe Dépenses fiscales' }),
+  chip('niches_nombre', { label: 'PLF 2026, annexe Dépenses fiscales' }),
+  chip('niches_total_nombre', {
+    label: `Chiffrage des auteurs : ${nichesRecensees} niches + ${nichesTva} taux réduits de TVA`,
+  }),
   chip('niches_menages_communes_nombre', { label: 'Classement du site' }),
 ];
 
@@ -129,6 +132,7 @@ const chainSources = [
         total={niches}
         costCommonMd={num('niches_menages_communes_cout_2024_md')}
         costTotalMd={num('niches_total_md')}
+        cost465Md={num('niches_cout_2024_md')}
         sources={nicheSources}
         explorerHref={withBase('/comprendre/niches/')}
       />
@@ -158,12 +162,12 @@ const chainSources = [
       />
       <StatTile
         as="li"
-        label="Niches : coût en 2024"
-        value={formatNumber(num('niches_total_md'), { decimals: 1 })}
+        label={`Niches : coût en 2024 (${formatInteger(nichesRecensees)} niches du PLF)`}
+        value={formatNumber(num('niches_cout_2024_md'), { decimals: 1 })}
         unit="Md€"
         unitLabel="milliards d’euros"
-        reframe={`≈ ${formatEuro(roundForDisplay(perFoyerYear(num('niches_total_md')), 50))} par foyer et par an, sur ${FOYERS_SHORT}.`}
-        source={chip('niches_total_md', { label: 'PLF 2026, annexe Dépenses fiscales' })}
+        reframe={`≈ ${formatEuro(roundForDisplay(perFoyerYear(num('niches_cout_2024_md')), 50))} par foyer et par an, sur ${FOYERS_SHORT}. Avec la TVA des administrations et les ${formatInteger(nichesTva)} taux réduits de TVA (estimation du CPO de 2023 projetée par les auteurs, hors PLF) : ${formatNumber(num('niches_total_md'), { decimals: 1 })} Md€, annoncés par les auteurs.`}
+        source={chip('niches_cout_2024_md', { label: 'PLF 2026, annexe Dépenses fiscales' })}
       />
     </ul>
   </section>
@@ -226,10 +230,12 @@ const chainSources = [
         État, collectivités, hôpitaux : trois fonctions publiques, plusieurs statuts. Le plan
         annonce la fermeture de {formatInteger(postesFermes)} postes, soit environ
         {formatPercentPoints((postesFermes / (wf.totalK * 1000)) * 100, { decimals: 0 })} des
-        effectifs, avec, d’après l’amendement qui l’organise,{' '}
-        {formatPercentPoints(num('indemnite_sortie_taux_pct'), { decimals: 0 })} du traitement
-        conservé pendant {formatInteger(num('indemnite_sortie_duree_max_ans'))} ans au plus pour les
-        agents concernés.
+        effectifs. L’amendement PLF-P2 n° 26 organise la sortie des seuls fonctionnaires de l’État
+        dont l’emploi est supprimé :{' '}
+        {formatPercentPoints(num('indemnite_sortie_taux_pct'), { decimals: 0 })} du traitement,
+        pendant {formatInteger(num('indemnite_sortie_duree_base_mois'))} mois plus un mois par
+        trimestre de services, {formatInteger(num('indemnite_sortie_duree_max_mois'))} mois au plus
+        et jusqu’à la retraite sans décote au plus tard.
       </p>
     </div>
     <Workforce

@@ -100,21 +100,36 @@ const totalsItems: BarItem[] = [
   {
     id: 'apu',
     label: '… avec la TVA de toutes les administrations publiques',
-    sub: `+ ${md1(mdApu - md465)} : colonne « y compris TVA APU » du classeur`,
+    sub: `+ ${md1(mdApu - md465)} : colonne « y compris TVA APU » de la feuille « Chiffrages Résolution », calcul des auteurs`,
     segments: [
       { value: md465, color: seg[0]!, srLabel: `${n465} niches` },
-      { value: mdApu - md465, color: seg[1]!, srLabel: 'TVA des administrations publiques' },
+      {
+        value: mdApu - md465,
+        color: seg[1]!,
+        hatched: true,
+        srLabel: 'TVA des administrations publiques (calcul des auteurs)',
+      },
     ],
     valueText: md1(mdApu),
   },
   {
     id: 'm486',
     label: `« ${num('niches_total_nombre')} niches et taux réduits »`,
-    sub: `+ ${md1(mdTva21)} : ${nTva21} taux réduits de TVA, non comptés comme niches`,
+    sub: `+ ${md1(mdTva21)} : ${nTva21} taux réduits de TVA non comptés comme niches par le PLF, estimation du CPO (février 2023) projetée sur 2024 par les auteurs`,
     segments: [
       { value: md465, color: seg[0]!, srLabel: `${n465} niches` },
-      { value: mdApu - md465, color: seg[1]!, srLabel: 'TVA des administrations publiques' },
-      { value: mdTva21, color: seg[2]!, srLabel: `${nTva21} taux réduits de TVA` },
+      {
+        value: mdApu - md465,
+        color: seg[1]!,
+        hatched: true,
+        srLabel: 'TVA des administrations publiques (calcul des auteurs)',
+      },
+      {
+        value: mdTva21,
+        color: seg[2]!,
+        hatched: true,
+        srLabel: `${nTva21} taux réduits de TVA (estimation du CPO, projetée par les auteurs)`,
+      },
     ],
     valueText: md1(md486),
   },
@@ -184,6 +199,16 @@ const planRows = plans.map((p) => ({
 }));
 const pSupp = plans.find((p) => p.key === 'supprimee')!;
 const pDead = plans.find((p) => p.key === 'eteinte')!;
+const pThree = plans.find((p) => p.key === 'trois-ans')!;
+const planText = niches.plan_texte;
+const conflicts = planText.conflits_avec_le_classeur;
+const conflictCost = conflicts.reduce((n, c) => n + (c.cout_2024_meur ?? 0), 0);
+const byId = new Map(conflicts.map((c) => [c.id, c]));
+const dutreil = byId.get('520110');
+const garde = byId.get('110203');
+const agri = conflicts.filter((c) => c.groupe === 'E' && !['110203'].includes(c.id));
+const accise = agri.filter((c) => c.id.startsWith('8'));
+const ir2028 = planText.ir_2028;
 
 const links = {
   amendements: withBase('/comprendre/amendements/'),
@@ -261,7 +286,9 @@ const links = {
       summary={`Le total de ce site est de ${md1(md465)} : les ${n465} niches du classeur, coût réalisé en 2024. Y ajouter la TVA des administrations publiques donne ${md1(mdApu)}, puis les ${nTva21} taux réduits de TVA ${md1(md486)}. Le chiffre de ${md1(md143)} est une annonce, dont le périmètre n’est pas détaillé.`}
       sources={[
         chip('niches_cout_2024_md'),
-        chip('niches_total_md', { label: `Chiffrage, ${nTotal} niches et taux réduits` }),
+        chip('niches_total_md', {
+          label: `Chiffrage des auteurs, ${nTotal} niches et taux réduits (hors PLF)`,
+        }),
         chip('fiche_niches_supprimees_md', { label: 'Fiche Contribuable' }),
       ]}
       table={{
@@ -285,12 +312,12 @@ const links = {
           {
             perimetre: `${n465} niches avec la TVA de toutes les administrations publiques`,
             md: mdApu,
-            niveau: 'Donnée (PLF 2026)',
+            niveau: `${TIER_META.announced.label} (calcul des auteurs : +${md1(mdApu - md465)} de TVA des administrations publiques)`,
           },
           {
             perimetre: `${nTotal} niches et taux réduits de TVA`,
             md: md486,
-            niveau: 'Donnée (PLF 2026)',
+            niveau: `${TIER_META.announced.label} (${md1(md465)} du PLF + ${md1(mdApu - md465)} de calcul des auteurs + ${md1(mdTva21)} d’estimation du CPO de 2023 projetée par les auteurs)`,
           },
           {
             perimetre: `« ${md1(md143)} de niches supprimées » (fiche Contribuable)`,
@@ -307,8 +334,16 @@ const links = {
           label="Légende des périmètres"
           items={[
             { label: `${n465} niches`, color: seg[0]! },
-            { label: 'TVA des administrations publiques', color: seg[1]! },
-            { label: `${nTva21} taux réduits de TVA`, color: seg[2]! },
+            {
+              label: 'TVA des administrations publiques (calcul des auteurs)',
+              color: seg[1]!,
+              hatched: true,
+            },
+            {
+              label: `${nTva21} taux réduits de TVA (estimation du CPO, projetée)`,
+              color: seg[2]!,
+              hatched: true,
+            },
             { label: TIER_META.announced.label, color: css.accent, hatched: true },
           ]}
         />
@@ -328,7 +363,12 @@ const links = {
           {md1(md465)} = les {n465} niches du classeur. {md1(md486)} = ces {n465} niches comptées
           avec la TVA de toutes les administrations publiques, plus {nTva21} taux réduits de TVA que
           le classeur ne compte pas comme niches (leur liste n’est pas publiée, seul leur coût
-          l’est). Les deux sont des données du PLF 2026.
+          l’est). Seuls les {md1(md465)} sont le chiffre de l’annexe du PLF 2026. Les{' '}
+          {md1(mdApu - md465)} de TVA des administrations publiques sont un calcul des auteurs, et
+          les {md1(mdTva21)} des {nTva21} taux réduits une estimation du CPO (février 2023,{' '}
+          {md1(num('tva_taux_reduits_cpo_2021_md'))}
+          en 2021) projetée sur 2024 au prorata de la TVA des comptes nationaux de l’Insee : ni l’un
+          ni l’autre n’est un chiffre du PLF.
         </p>
       </Callout>
       <Callout tone="announced" title={`Et ${md1(md143)} ?`}>
@@ -426,7 +466,7 @@ const links = {
         title="Ce que le plan en ferait"
         subtitle="Coût réalisé 2024, par effet prévu"
         tier="announced"
-        summary={`${formatInteger(pSupp.count)} niches sur ${formatInteger(all2024.count)} seraient supprimées, aux dates fixées par l’amendement n° 1 (${formatMdEuro(pSupp.total / 1000)} de coût en 2024). ${formatInteger(pDead.count)} sont déjà éteintes : le plan n’a rien à y supprimer.`}
+        summary={`${formatInteger(pSupp.count)} niches sur ${formatInteger(all2024.count)} seraient supprimées, aux dates fixées par l’amendement n° 1 (${formatMdEuro(pSupp.total / 1000)} de coût en 2024), ${formatInteger(pThree.count)} par tiers jusqu’en 2029 (${formatMdEuro(pThree.total / 1000)}). ${formatInteger(pDead.count)} sont déjà éteintes : le plan n’a rien à y supprimer.`}
         sources={[
           {
             label: 'Chiffrage publié, feuille « Chiffrages Résolution »',
@@ -451,7 +491,7 @@ const links = {
           rows: planRows,
         }}
         csvFileName="niches-effet-du-plan-2024.csv"
-        note="Le texte de l’amendement n° 1 abroge les avantages article par article. Le rapprochement de chaque niche du chiffrage avec ces articles vient du chiffrage publié."
+        note={`Le texte de l’amendement n° 1 abroge les avantages numéro par numéro (III) et donne à chaque groupe de numéros son calendrier (IV). Nous rapprochons chaque niche de ces numéros par sa référence légale ; quand le texte et la colonne « Suppression » du chiffrage publié divergent, nous suivons le texte (${formatInteger(conflicts.length)} niches, ${formatMdEuro(conflictCost / 1000)} de coût en 2024, voir plus bas).`}
       >
         <BarRows
           label="Coût 2024 des niches selon ce que prévoit le plan"
@@ -474,14 +514,61 @@ const links = {
         plan, triez par coût. L’adresse de la page garde vos filtres : vous pouvez la partager.
       </p>
     </div>
-    <Callout tone="announced" title="« Ce que prévoit le plan » : le classement annoncé">
+    <Callout
+      tone="announced"
+      title="« Ce que prévoit le plan » : texte de l’amendement et chiffrage publié"
+    >
       <p>
-        L’amendement n° 1 supprime les avantages fiscaux par article de code. Le classement de
-        chaque niche (supprimée, en trois ans, intégrée à l’aide fondamentale…) vient du chiffrage,
-        d’où le statut « annoncé ». Les niches « supprimées » suivent la date générale de
-        l’amendement selon l’impôt. Les dons et l’épargne ont leur propre calendrier. La date
-        affichée reste celle de la source.
+        L’amendement n° 1 supprime les avantages fiscaux numéro par numéro de code (III) et fixe un
+        calendrier par groupe (IV). Pour chaque niche, nous cherchons les numéros qui citent sa
+        référence légale et lisons la date de leur groupe : successions et donations dès le 1er
+        janvier 2027, TVA et accises dès le 1er juillet 2027, barème, parts et plus-values à partir
+        de l’impôt sur le revenu de 2028 ({formatInteger(ir2028.n_niches)} niches de l’impôt sur le
+        revenu, pas « dès 2027 »), agriculture, services à la personne et garde d’enfants par tiers
+        jusqu’en 2029, dons par moitié puis en totalité. Quand aucun numéro ne cite la niche, la
+        date est le cas général de l’impôt, avec renvoi au texte. La classification elle-même
+        (supprimée, en trois ans, intégrée à l’aide fondamentale…) vient du chiffrage publié des
+        auteurs, d’où le statut « annoncé » ; sur {formatInteger(conflicts.length)} niches elle
+        diffère du texte, et nous suivons le texte.
       </p>
+      <Disclosure
+        summary={`Les ${formatInteger(conflicts.length)} niches où le texte et le chiffrage divergent`}
+        variant="plain"
+      >
+        <ul class="list-disc space-y-1.5 ps-5">
+          {dutreil && (
+            <li>
+              Pacte Dutreil (transmission d’entreprise, {meur0(dutreil.cout_2024_meur ?? 0)}) : le
+              chiffrage dit « en trois ans » ; le numéro du III qui abroge les articles du Pacte
+              Dutreil est dans le IV.C bis (successions et donations à partir du 1er janvier 2027) :{' '}
+              <strong>supprimé au 1er janvier 2027</strong>.
+            </li>
+          )}
+          <li>
+            {formatInteger(agri.length)} niches agricoles, de coopératives, d’organismes d’HLM, de
+            droits d’enregistrement spéciaux ou de tarifs réduits d’accise (
+            {formatInteger(accise.length)} tarifs, articles L. 312-60 à L. 312-63 du code des
+            impositions) (environ {meur0(agri.reduce((n, c) => n + (c.cout_2024_meur ?? 0), 0))} en
+            2024) : le chiffrage dit « supprimée » ; leurs numéros sont dans le IV.E :{' '}
+            <strong>
+              un tiers en moins au titre de 2027, deux tiers au titre de 2028, supprimées en 2029
+            </strong>
+            .
+          </li>
+          {garde && (
+            <li>
+              Crédit d’impôt pour frais de garde des enfants de moins de 6 ans (
+              {meur0(garde.cout_2024_meur ?? 0)}) : le chiffrage le range avec les crédits
+              « intégrés à l’aide fondamentale » ; le texte le range dans le IV.E (« la garde des
+              jeunes enfants »), comme le crédit d’impôt emploi à domicile, et l’article 28 ne le
+              compte pas parmi les crédits fusionnés. Le rapprochement avec le numéro du III qui
+              désigne le « 23° bis du II de la section V » est une inférence (la numérotation du
+              code n’a pas pu être vérifiée à la source) : <strong>par tiers jusqu’en 2029</strong>,
+              comme sur la page Calendrier.
+            </li>
+          )}
+        </ul>
+      </Disclosure>
     </Callout>
     <noscript>
       <p class="card text-ink-2">

@@ -45,7 +45,7 @@ export function AgencyWaffle({
       tier="announced"
       title={`Le sort des ${formatInteger(total)} agences d’État`}
       subtitle="Un carré = une agence, un opérateur, une autorité ou une commission. Sort proposé."
-      summary={`Sur ${formatInteger(total)} agences, ${formatInteger(closed)} seraient fermées (supprimées ou cédées), ${formatInteger(fates.find((f) => f.id === 'internalisation')!.n)} intégrées à un ministère et ${formatInteger(kept)} resteraient autonomes. Seule la liste de ${formatInteger(lawCount)} entités de l’amendement PLF-P2 n° 25 (au ${lawDate}) a valeur de loi.`}
+      summary={`Sur ${formatInteger(total)} agences, ${formatInteger(closed)} seraient fermées (supprimées ou cédées), ${formatInteger(fates.find((f) => f.id === 'internalisation')!.n)} intégrées à un ministère et ${formatInteger(kept)} resteraient autonomes. Seule la liste de ${formatInteger(lawCount)} entités de l’amendement PLF-P2 n° 25 (au ${lawDate}) figure dans un texte d’amendement : proposé, rédigé et publié, pas en vigueur.`}
       sources={sources.map((s) => ({ ...s }))}
       table={{
         columns: [

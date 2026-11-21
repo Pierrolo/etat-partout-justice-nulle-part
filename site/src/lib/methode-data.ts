@@ -61,11 +61,13 @@ export const FEATURED_DISCREPANCIES = [
   'D16',
   'D05',
   'D04',
-  'D08',
+  'D38',
+  'D40',
   'D12',
   'D20',
   'D18',
   'D19',
+  'D35',
 ] as const;
 
 /** « Par foyer » : les dénominateurs du livre, leur origine, et celui que le site retient. */

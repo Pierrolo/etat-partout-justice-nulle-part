@@ -70,6 +70,10 @@ def _operateurs():
             "n_entities": nb,
             "etpt_lfi_2025": {"total": _int(row[6]), "sous_plafond": _int(row[7]), "hors_plafond": _int(row[8])},
             "etpt_plf_2026": {"total": _int(row[9]), "sous_plafond": _int(row[10]), "hors_plafond": _int(row[11])},
+            # columns U-AB, new in the November 2026 version of « Agences publiques » (k€)
+            "financement_plf_2026_keur": {"scsp": _int(row[20]), "investissement": _int(row[21]), "transferts": _int(row[22]), "taxes_affectees": _int(row[23]), "total": _int(row[24])}
+            if len(row) > 24 else None,
+            "economie_taxes_affectees_keur": {"horizon_1_an": _int(row[25]), "supplementaire": _int(row[26]), "totale": _int(row[27])} if len(row) > 27 else None,
             "fate": fate, "fate_label_fr": FATE_LABEL[fate], "fate_group": FATE_GROUP[fate],
             "mission_conservee": row[0].strip() in MISSIONS_CONSERVEES,
             "cell_row": r,
@@ -230,6 +234,18 @@ def _dissolutions_am25():
 def build() -> dict:
     etat_ag = b_etat._agences()
     sh_op, ops = _operateurs()
+
+    # totals row (row 3) of the financing columns, checked against the sum of the 180 lines
+    _cols = {"scsp": "U", "investissement": "V", "transferts": "W", "taxes_affectees": "X", "total": "Y", "eco1": "Z", "eco2": "AA", "eco3": "AB"}
+
+    def _tot(key: str):
+        stated = sh_op.num(f"{_cols[key]}3")
+        if key in ("scsp", "investissement", "transferts", "taxes_affectees", "total"):
+            summed = sum(o["financement_plf_2026_keur"][key] or 0 for o in ops)
+        else:
+            summed = sum(o["economie_taxes_affectees_keur"][{"eco1": "horizon_1_an", "eco2": "supplementaire", "eco3": "totale"}[key]] or 0 for o in ops)
+        assert abs(stated - summed) < 1, (key, stated, summed)
+        return int(stated)
     sh_od, odac, odal, aapi = _odac()
     sh_co, coms = _commissions()
     sh_em, emplois = _emplois_etat()
@@ -313,7 +329,7 @@ def build() -> dict:
             "title_fr": "Le sort des 1 104 agences d'État",
             "source": sh_op.source("A2:R184") | {"also": [etat_ag["source"]["ref"], sh_od.ref(), sh_co.ref(), sh_em.ref(), sh_fpe.ref()]},
             "tier": "annonce",
-            "tier_note": "Les « sorts » (cession, suppression, internalisation, autonomie) sont la proposition de Résolution (colonnes ajoutées au classeur) ; les effectifs et les listes d'organismes viennent de LFI 2025, PLF 2026, Insee (ODAC/ODAL), Jaune 2026, DGAFP, RAP 2024. Seule la liste de l'amendement PLF-P2 n° 25 (337 entités dissoutes au 1er juillet 2027) a valeur de texte de loi.",
+            "tier_note": "Les « sorts » (cession, suppression, internalisation, autonomie) sont la proposition de Résolution (colonnes ajoutées au classeur) ; les effectifs et les listes d'organismes viennent de LFI 2025, PLF 2026, Insee (ODAC/ODAL), Jaune 2026, DGAFP, RAP 2024. Seule la liste de l'amendement PLF-P2 n° 25 (337 entités dissoutes au 1er juillet 2027) figure dans un texte d'amendement : un texte proposé, rédigé et publié, qui n'est pas en vigueur.",
             "fates": [{"id": k, "label_fr": l, "group": g, "group_label_fr": GROUP_LABEL[g]} for k, l, g in FATES],
             "counts": {"agences_etat": 1104, "apres_reforme": 303, "fermees": 746, "internalisees": 55, "locales": 23264, "total": 24368,
                        "operateurs_plf": 434, "organismes_hors_plf": 328, "autorites_independantes": 24, "commissions_matrice": 318, "commissions_feuille": n_com},
@@ -328,6 +344,12 @@ def build() -> dict:
         "sorts_agences_etat": waffle,
         "sorts_groupes": group_counts,
         "operateurs": ops,
+        "operateurs_financement_totaux_keur": {
+            "source": sh_op.source("U3:AB3"),
+            "note": "Colonnes ajoutées par les auteurs en novembre 2026 : financement public 2026 des opérateurs (PLF 2026) et économie sur leurs taxes affectées (classeur des taxes affectées). Elles apparaissent en même temps qu'une hausse de 1,371 Md€ des économies sur les taxes affectées dans les feuilles Flux et Détail Economies ; le lien entre les deux n'est pas écrit dans le classeur.",
+            "scsp": _tot("scsp"), "investissement": _tot("investissement"), "transferts": _tot("transferts"), "taxes_affectees": _tot("taxes_affectees"), "total": _tot("total"),
+            "economie_taxes_affectees_horizon_1_an": _tot("eco1"), "economie_taxes_affectees_supplementaire": _tot("eco2"), "economie_taxes_affectees_totale": _tot("eco3"),
+        },
         "operateurs_totaux": {"n_lignes": len(ops), "n_entites": sum_nb, "etpt_lfi_2025": etpt_lfi, "etpt_plf_2026": etpt_plf, "etpt_plf_2026_sous_plafond": sous_plafond_plf,
                               "etpt_lfi_2025_par_sort": {k: int(v) for k, v in row4.items()}},
         "operateurs_par_mission": par_mission,

@@ -316,9 +316,9 @@
   "value": 550,
   "year": 2026
  },
- "afu_pension_minoration_eur_an": {
-  "label_fr": "Minoration de l'aide fondamentale pour une pension de retraite liquidée avant le 1er janvier 2028",
-  "note": "Dans la version d'octobre 2026 de l'amendement, ce montant était une majoration (« majoré de 3 300 € »). Version de novembre 2026 : « minoré », pour une pension servie par un régime obligatoire ; pour une pension liquidée à compter de 2028 la minoration est réduite au prorata des droits acquis avant cette date ; elle s'applique jusqu'à l'imposition des revenus de 2051.",
+ "afu_pension_eur_an": {
+  "label_fr": "Minoration de l'aide fondamentale pour une pension de retraite liquidée avant le 1er janvier 2028 (montant négatif)",
+  "note": "Dans la version d'octobre 2026 de l'amendement ce montant était une majoration de +3 300 € (« majoré de 3 300 € ») ; en novembre 2026 le texte dit « minoré » : −3 300 €, pour une pension servie par un régime obligatoire, jusqu'à l'imposition des revenus de 2051 ; pour une pension liquidée à compter de 2028, la minoration est réduite à proportion des droits acquis avant 2028 (à défaut de décret : 3 300 € × durée d'assurance validée avant 2028 ÷ durée d'assurance totale).",
   "source": {
    "kind": "amendment",
    "liasse": "PLF-P1",
@@ -329,8 +329,8 @@
    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=77"
   },
   "tier": "loi",
-  "unit": "€ par an",
-  "value": 3300,
+  "unit": "€ par an (négatif : minoration)",
+  "value": -3300,
   "year": 2028
  },
  "afu_seuil_equilibre_eur_an": {
@@ -5729,12 +5729,13 @@
  },
  "niches_cout_2024_tva_apu_md": {
   "label_fr": "Coût des 465 niches fiscales, TVA de toutes les administrations publiques comprise (2024)",
+  "note": "Calcul des auteurs (colonne « yc TVA APU » de la feuille « Chiffrages Résolution » de leur copie du classeur) : ce n'est pas un chiffre de l'annexe du PLF.",
   "source": {
    "kind": "workbook",
    "ref": "Niches fiscales.xls › Synthèse › D8",
    "url": "https://france-resolution.fr/donnees/Niches%20fiscales.xls"
   },
-  "tier": "donnee",
+  "tier": "annonce",
   "unit": "Md€",
   "value": 101.320989,
   "year": 2024
@@ -5892,26 +5893,27 @@
     ]
    }
   ],
-  "label_fr": "Coût des 486 niches et taux réduits de TVA (2024)",
-  "note": "134,70 Md€.",
+  "label_fr": "Coût des 486 niches et taux réduits de TVA (2024), calcul des auteurs",
+  "note": "134,70 Md€ = 89,406 (465 niches, annexe du PLF 2026) + 11,915 (TVA de toutes les administrations publiques, calcul des auteurs) + 33,382 (21 taux réduits : estimation du CPO de février 2023 projetée sur 2024 par les auteurs). Seuls les 89,406 Md€ sont un chiffre de l'annexe du PLF.",
   "source": {
    "kind": "workbook",
    "ref": "Niches fiscales.xls › Synthèse › D12",
    "url": "https://france-resolution.fr/donnees/Niches%20fiscales.xls"
   },
-  "tier": "donnee",
+  "tier": "annonce",
   "unit": "Md€",
   "value": 134.702866,
   "year": 2024
  },
  "niches_total_nombre": {
   "label_fr": "Niches fiscales et taux réduits de TVA (total)",
+  "note": "465 niches de l'annexe du PLF + 21 taux réduits de TVA ajoutés par les auteurs (465 + 21 = 486 exactement, feuille « Synthèse » C12 ; ce n'est pas un arrondi).",
   "source": {
    "kind": "workbook",
    "ref": "Niches fiscales.xls › Synthèse › C12",
    "url": "https://france-resolution.fr/donnees/Niches%20fiscales.xls"
   },
-  "tier": "donnee",
+  "tier": "annonce",
   "unit": "niches",
   "value": 486,
   "year": 2024
@@ -5934,26 +5936,27 @@
   "year": 2024
  },
  "niches_tva_hors_niches_md": {
-  "label_fr": "Coût des 21 taux réduits de TVA non comptés comme niches (projection 2024)",
-  "note": "Estimation du CPO (février 2023) : 30 Md€ en 2021 dont 20 Md€ sur l'eau et l'alimentation ; projection 2024 au prorata de la TVA des comptes nationaux.",
+  "label_fr": "Coût des 21 taux réduits de TVA non comptés comme niches (projection 2024 par les auteurs)",
+  "note": "Estimation du CPO (février 2023, p. 32) : 30 Md€ en 2021 dont 20 Md€ sur l'eau et l'alimentation, projetée sur 2024 par les auteurs au prorata de la TVA des comptes nationaux de l'Insee. Ce n'est pas un chiffre du PLF 2026.",
   "source": {
    "kind": "workbook",
    "ref": "Niches fiscales.xls › Synthèse › D11",
    "url": "https://france-resolution.fr/donnees/Niches%20fiscales.xls"
   },
-  "tier": "donnee",
+  "tier": "annonce",
   "unit": "Md€",
   "value": 33.381877,
   "year": 2024
  },
  "niches_tva_hors_niches_nombre": {
   "label_fr": "Taux réduits de TVA non comptés comme niches",
+  "note": "Compte des auteurs (feuille « Synthèse » de leur copie du classeur « Niches fiscales ») : le PLF ne compte pas ces taux comme dépenses fiscales.",
   "source": {
    "kind": "workbook",
    "ref": "Niches fiscales.xls › Synthèse › C11",
    "url": "https://france-resolution.fr/donnees/Niches%20fiscales.xls"
   },
-  "tier": "donnee",
+  "tier": "annonce",
   "unit": "taux réduits",
   "value": 21,
   "year": 2024

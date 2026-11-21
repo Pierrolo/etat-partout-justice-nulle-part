@@ -14,6 +14,7 @@ from __future__ import annotations
 import collections
 
 import b_credits
+import b_niches
 from amend import amendment, page_label, pdf_url, quote_in_amendment, quote_pages
 from curated_amendements import CURATED, THEMES
 from lib import PLAN_VERSION, SITE, clean, fr, quote_in, read_page, ws
@@ -41,6 +42,7 @@ DOMAIN_ORDER = {d: i for i, (d, _) in enumerate(DOMAINS)}
 # trajectories: (liasse, n) for the quote check
 # --------------------------------------------------------------------------------------------
 def _traj():
+    _E = b_niches.build()["plan_texte"]["plan_final"]["trois-ans"]
     T = []
     T.append({
         "id": "csg_crds_activite_2027",
@@ -127,7 +129,7 @@ def _traj():
             {"from": "2028-01-01", "to": "2028-12-31", "value": 33.33, "label_fr": "Au titre de 2028 : réduit de deux tiers", "q": [("PLF-P1", 1, "de deux tiers au titre de 2028")], "calc": "1 − 2/3"},
             {"from": "2029-01-01", "to": None, "value": 0, "label_fr": "À partir de 2029 : supprimé", "q": [("PLF-P1", 1, "Le I s’applique en totalité aux impositions dues au titre de 2029")]},
         ],
-        "note": "Concerne en particulier le crédit d'impôt emploi à domicile (6 420 M€ en 2024) et le crédit d'impôt garde d'enfants de moins de 6 ans (1 737 M€). Ne s'applique pas à la TVA.",
+        "note": f"Les numéros du III cités par le IV.E de PLF-P1 n° 1 recouvrent {_E['n_niches']} niches du classeur ({fr(_E['cout_2024_meur'] / 1000, 1)} Md€ en 2024) : le crédit d'impôt emploi à domicile (6 420 M€), le crédit d'impôt garde d'enfants de moins de 6 ans (1 737 M€, art. 200 quater B : rapprochement inféré, voir niches.json) et des niches agricoles ou de coopératives. Ne s'applique pas à la TVA.",
         "tier": "loi",
     })
     T.append({
@@ -282,7 +284,7 @@ def build() -> dict:
             "title_fr": "La transition 2027 → 2030 : chaque mesure datée du plan",
             "tier": "loi",
             "tier_note": "Les dates viennent exclusivement du texte des 84 amendements (rédigés et publiés par Résolution, pas en vigueur). Chaque événement cite un extrait vérifié mot à mot et renvoie à la page du PDF qui le contient. Les promesses sans base légale datée sont séparées dans annonces_sans_date (tier annonce).",
-            "version": {k: PLAN_VERSION[k] for k in ("date_iso", "date_fr", "pdf_dates_fr", "cover_fr", "previous_fr")},
+            "version": {k: PLAN_VERSION[k] for k in ("date_iso", "date_fr", "label_fr", "pdf_dates_fr", "cover_fr", "previous_fr")},
             "counts": {"events": len(events), "events_par_annee": dict(sorted(per_year.items())), "jalons": len(jalons), "trajectoires": len(traj), "annonces_sans_date": len(ann)},
             "domains": [{"id": d, "label_fr": l} for d, l in DOMAINS],
             "precision": {"jour": "jour écrit dans le texte", "annee": "année (ou année fiscale) sans jour : date = 1er janvier par convention", "approx": "point de départ non écrit (ex. « lendemain de la publication de la loi »)"},

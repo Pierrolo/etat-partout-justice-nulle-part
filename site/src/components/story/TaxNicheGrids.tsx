@@ -73,6 +73,7 @@ export function NichesGrid({
   total,
   costCommonMd,
   costTotalMd,
+  cost465Md,
   sources,
   explorerHref,
 }: {
@@ -81,14 +82,17 @@ export function NichesGrid({
   vat: number;
   total: number;
   costCommonMd: number;
+  /** Coût des 486 niches et taux réduits (calcul des auteurs, pas un chiffre du PLF). */
   costTotalMd: number;
+  /** Coût des 465 niches de l'annexe du PLF 2026. */
+  cost465Md: number;
   sources: ChipProps[];
   explorerHref: string;
 }) {
   return (
     <ChartFrame
       title={`${formatInteger(total)} niches fiscales`}
-      subtitle={`Un carré = une niche (dépense fiscale) ou un taux réduit de TVA. Coût en 2024 : ${formatNumber(costTotalMd, { decimals: 1 })} Md€.`}
+      subtitle={`Un carré = une niche (dépense fiscale) ou un taux réduit de TVA. Coût en 2024 : ${formatNumber(cost465Md, { decimals: 1 })} Md€ pour les niches de l’annexe du PLF ; ${formatNumber(costTotalMd, { decimals: 1 })} Md€ avec les taux réduits de TVA, selon le calcul des auteurs (estimation du CPO de 2023, hors PLF).`}
       summary={`${formatInteger(common)} niches touchent couramment les ménages (${formatNumber(costCommonMd, { decimals: 1 })} Md€ en 2024) ; les ${formatInteger(others)} autres visent surtout des entreprises ou des cas particuliers. ${formatInteger(vat)} taux réduits de TVA sont comptés à part : seul leur total est publié.`}
       sources={sources.map((s) => ({ ...s }))}
       table={{

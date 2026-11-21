@@ -178,7 +178,7 @@ def _sankey(sh, recs, by_id):
         if full[c]:
             links.append({"source": c, "target": "annee_pleine", "value_md": full[c], "kind": "exact_classeur", "cell": f"F{_row(c)}"})
     links.append({"source": "annee_1", "target": "salaire_net", "value_md": clean(salaire, 6), "kind": "montant_affirme_classeur",
-                  "ref": "Synthèse Chiffres › CSG-CRDS!I3 (114,46 Md€, PLACSS 2024 annexe 1)"})
+                  "ref": "Synthèse des chiffrages.xlsx › CSG-CRDS › I3 (114,46 Md€, PLACSS 2024 annexe 1)"})
     links.append({"source": "annee_1", "target": "capitalisation", "value_md": cap_from_y1, "kind": "calcule",
                   "formula": f"gain année 1 ({fr(y1_tot, 4)}) − CSG/CRDS restituée ({fr(salaire, 2)})"})
     links.append({"source": "annee_pleine", "target": "capitalisation", "value_md": full_tot, "kind": "exact_classeur"})
@@ -298,7 +298,7 @@ def _reconciliation(by_id, sk, classeur):
         "totaux": {
             "annexe_manuscrit_colonne_C": c_total,
             "annexe_manuscrit_E_plus_F": ef_total,
-            "destinations_classeur_114_46_plus_121_749": flux_total,
+            "destinations_classeur_114_46_plus_capitalisation": flux_total,
         },
         "residuels": [
             {

@@ -2,8 +2,8 @@
  "_comment": "Généré par pipeline/build.py ; sha256 du texte JSON de chaque fichier (hors manifest.json). Sortie déterministe : deux exécutions donnent les mêmes empreintes.",
  "files": {
   "agences.json": {
-   "bytes": 675506,
-   "sha256": "54c1112e97c138eb28e44429b334f2377b20e1f004317ef211666c0a0cee9a0d",
+   "bytes": 723548,
+   "sha256": "5cad0481d07f308d8410f94b303bf1169ecfa5ebadbcdf3db9fd6415a6dfd1e3",
    "top_level_lists": {
     "autorites_independantes": 24,
     "commissions": 324,
@@ -20,15 +20,15 @@
    }
   },
   "amendements.json": {
-   "bytes": 151109,
-   "sha256": "d93992c9692e416150a96ca2dfbaa36ebbf6f6946563da03935cf98a716412c4",
+   "bytes": 151076,
+   "sha256": "c386be42c8a31fd3b2809150a46433dc0b4a388766b2925ca9b120c68410356e",
    "top_level_lists": {
     "amendements": 84
    }
   },
   "calendrier.json": {
-   "bytes": 134506,
-   "sha256": "2abcd469a9fba5ffa61079afb8ec5bcfa512ed5331fcc912b51e50220bfb7439",
+   "bytes": 134748,
+   "sha256": "390ef1e24eea5d3dd386aaa06f52b483e69b325b8209f961abc332e3c86a8981",
    "top_level_lists": {
     "annonces_sans_date": 9,
     "events": 109,
@@ -74,22 +74,22 @@
    }
   },
   "facts.json": {
-   "bytes": 237752,
-   "sha256": "a3b4510b802056dbc7079d762faa9f469e239d4977f971b43e20df968d99f4e2",
+   "bytes": 238811,
+   "sha256": "17a9f8ca4c121543b38a1148d9c901fab60500065e2a074b2064610f0598ef56",
    "top_level_lists": {
     "facts": 420
    }
   },
   "fiches.json": {
-   "bytes": 47838,
-   "sha256": "af46d3cafee6faf8a5921af481b0f85316783f5397ac33e64e5cc64f9b5b98ee",
+   "bytes": 47856,
+   "sha256": "eaeb02e8fea191a2bc3ba9e6e7b509a067ace3b789f42e3d0fbf4d6bfbcdf71b",
    "top_level_lists": {
     "fiches": 18
    }
   },
   "lifecycle.json": {
-   "bytes": 72726,
-   "sha256": "80f1a862bfb28a14f919e616c34fecd11d7291f5bb55cfab5fa1c82d990e01c3",
+   "bytes": 73327,
+   "sha256": "060bb7d8492e26f49ea303c34760b8e95abbbaa02bd8ffb48b6763b1050af0d0",
    "top_level_lists": {
     "by_age": 86,
     "records": 321,
@@ -97,16 +97,16 @@
    }
   },
   "niches.json": {
-   "bytes": 966648,
-   "sha256": "63283357b0970b34483d635416cef910c3f2a95733b5c080c963f723ac153629",
+   "bytes": 1167812,
+   "sha256": "caf39f4ad879bb7f5cc2ddfca73d377474b32c7f01221b7f4b7cc705e9d00b96",
    "top_level_lists": {
     "niches": 465,
     "provisions_calcul_impot": 81
    }
   },
   "plan-flux.json": {
-   "bytes": 62136,
-   "sha256": "e4b557713978143e8a3d8432a9d95de14808081750d9860914f590496cda3752",
+   "bytes": 62158,
+   "sha256": "d332876716140d122ed28cac2e1b874aebf96f3ee5da1a8a54754b29ae5ab503",
    "top_level_lists": {
     "savings_table": 26
    }

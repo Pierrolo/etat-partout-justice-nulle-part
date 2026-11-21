@@ -9,11 +9,15 @@
  */
 import data from '@/data/fiches.json';
 import amendements from '@/data/amendements.json';
+import { num } from '@/lib/facts';
+import { formatEuro } from '@/lib/format';
 import { withBase } from '@/lib/site';
 
 export interface SituationItem {
   headline: string;
   text: string;
+  /** Sous-points de la fiche, mot pour mot (Travailleur : « 300 € » ; Jeune adulte : « Vos études »). */
+  subItems: string[];
 }
 
 export interface Situation {
@@ -26,8 +30,12 @@ export interface Situation {
   pertes: SituationItem[];
   /** « Et comme chacun » : rappels de gains communs à plusieurs fiches. */
   commeChacun: string[];
-  /** Comptes de l’en-tête de la fiche, quand ils ne correspondent pas aux éléments listés (D23). */
-  headerMismatch?: { gains: number; pertes: number };
+  /** Nombre de gains listés, sous-points compris : c'est le compte que l'en-tête de la fiche annonce. */
+  gainsCount: number;
+  /** Comptes de l’en-tête de la fiche, quand ils ne correspondent pas aux éléments listés (D23). `pertes` est `null` quand l’en-tête n’en annonce aucun compte. */
+  headerMismatch?: { gains: number; pertes: number | null };
+  /** Note du site, hors fiche (jamais mêlée au texte de la fiche) : un fait que le texte de l'amendement établit et que la fiche ne dit pas. */
+  siteNote?: string;
   url: string;
   pdfUrl: string;
   amendements: RelatedAmendement[];
@@ -106,7 +114,10 @@ const RELATED: Record<string, Array<[id: string, why: string]>> = {
   ],
   retraite: [
     ['PLFSS-5', 'retire la revalorisation automatique des pensions'],
-    ['PLF-P1-28', 'l’aide fondamentale, avec un supplément pour les pensions liquidées avant 2028'],
+    [
+      'PLF-P1-28',
+      'l’aide fondamentale, minorée pour les pensions de retraite liquidées avant 2028',
+    ],
     ['PLFSS-6', 'un régime socle unique de retraite'],
   ],
   locataire: [
@@ -137,15 +148,20 @@ const RELATED: Record<string, Array<[id: string, why: string]>> = {
   ],
 };
 
+/** Notes du site, hors fiche, quand l'amendement établit un fait que la fiche ne dit pas. */
+const SITE_NOTES: Record<string, string> = {
+  retraite: `Note du site, hors fiche : la fiche ne mentionne pas que l’amendement PLF-P1 n° 28 (version de novembre 2026) minore l’aide fondamentale de ${formatEuro(Math.abs(num('afu_pension_eur_an')))} par an pour chaque titulaire d’une pension de retraite servie par un régime obligatoire et liquidée avant le 1er janvier 2028, jusqu’à l’imposition des revenus de 2051 ; pour une pension liquidée ensuite, la minoration est réduite au prorata des droits acquis avant 2028.`,
+};
+
 interface RawFiche {
   slug: string;
   title_fr: string;
   tagline_fr: string;
-  gains: Array<{ headline_fr: string; text_fr: string }>;
+  gains: Array<{ headline_fr: string; text_fr: string; sub_items_fr: string[] }>;
   pertes: Array<{ title_fr: string; text_fr: string }>;
   comme_chacun_fr: string[];
   header_population: { raw: string } | null;
-  header_counts: { gains: number; pertes: number };
+  header_counts: { gains: number; pertes: number | null };
   header_vs_listed: { gains_match: boolean; pertes_match: boolean };
   url: string;
   pdf_url: string;
@@ -186,10 +202,16 @@ function toSituation(f: RawFiche): Situation {
     title: f.title_fr,
     tagline: f.tagline_fr,
     population: f.header_population?.raw ?? null,
-    gains: f.gains.map((g) => ({ headline: g.headline_fr, text: g.text_fr })),
-    pertes: f.pertes.map((p) => ({ headline: p.title_fr, text: p.text_fr })),
+    gains: f.gains.map((g) => ({
+      headline: g.headline_fr,
+      text: g.text_fr,
+      subItems: g.sub_items_fr,
+    })),
+    gainsCount: f.gains.reduce((n, g) => n + 1 + g.sub_items_fr.length, 0),
+    pertes: f.pertes.map((p) => ({ headline: p.title_fr, text: p.text_fr, subItems: [] })),
     commeChacun: f.comme_chacun_fr,
     headerMismatch: mismatch ? f.header_counts : undefined,
+    siteNote: SITE_NOTES[f.slug],
     url: f.url,
     pdfUrl: f.pdf_url,
     amendements: related(f.slug),

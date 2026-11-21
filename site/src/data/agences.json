@@ -8687,7 +8687,7 @@
    "url": "https://france-resolution.fr/donnees/Agences%20publiques.xlsx"
   },
   "tier": "annonce",
-  "tier_note": "Les « sorts » (cession, suppression, internalisation, autonomie) sont la proposition de Résolution (colonnes ajoutées au classeur) ; les effectifs et les listes d'organismes viennent de LFI 2025, PLF 2026, Insee (ODAC/ODAL), Jaune 2026, DGAFP, RAP 2024. Seule la liste de l'amendement PLF-P2 n° 25 (337 entités dissoutes au 1er juillet 2027) a valeur de texte de loi.",
+  "tier_note": "Les « sorts » (cession, suppression, internalisation, autonomie) sont la proposition de Résolution (colonnes ajoutées au classeur) ; les effectifs et les listes d'organismes viennent de LFI 2025, PLF 2026, Insee (ODAC/ODAL), Jaune 2026, DGAFP, RAP 2024. Seule la liste de l'amendement PLF-P2 n° 25 (337 entités dissoutes au 1er juillet 2027) figure dans un texte d'amendement : un texte proposé, rédigé et publié, qui n'est pas en vigueur.",
   "title_fr": "Le sort des 1 104 agences d'État"
  },
  "missions_conservees": [
@@ -8729,6 +8729,11 @@
  "operateurs": [
   {
    "cell_row": 5,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 1,
     "sous_plafond": 9,
@@ -8742,6 +8747,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 1357,
+    "taxes_affectees": 0,
+    "total": 1357,
+    "transferts": 0
+   },
    "id": "op_005",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -8753,6 +8765,11 @@
   },
   {
    "cell_row": 6,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 5,
     "sous_plafond": 76,
@@ -8766,6 +8783,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 54000,
+    "scsp": 17000,
+    "taxes_affectees": 0,
+    "total": 71000,
+    "transferts": 0
+   },
    "id": "op_006",
    "mission_code": "AB",
    "mission_conservee": false,
@@ -8777,6 +8801,11 @@
   },
   {
    "cell_row": 7,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 265,
     "sous_plafond": 1069,
@@ -8790,6 +8819,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 1009078,
+    "taxes_affectees": 0,
+    "total": 1415779,
+    "transferts": 406701
+   },
    "id": "op_007",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -8801,6 +8837,11 @@
   },
   {
    "cell_row": 8,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 5161,
     "sous_plafond": 5579,
@@ -8814,6 +8855,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 391638,
+    "taxes_affectees": 0,
+    "total": 503113,
+    "transferts": 111475
+   },
    "id": "op_008",
    "mission_code": "AA",
    "mission_conservee": true,
@@ -8825,6 +8873,11 @@
   },
   {
    "cell_row": 9,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 715690,
+    "supplementaire": 0,
+    "totale": 715690
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 0,
@@ -8838,6 +8891,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 2957123,
+    "total": 2957123,
+    "transferts": 0
+   },
    "id": "op_009",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -8849,6 +8909,11 @@
   },
   {
    "cell_row": 10,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 5330,
@@ -8862,6 +8927,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 123849,
+    "taxes_affectees": 0,
+    "total": 123849,
+    "transferts": 0
+   },
    "id": "op_010",
    "mission_code": "TB",
    "mission_conservee": false,
@@ -8873,6 +8945,11 @@
   },
   {
    "cell_row": 11,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 47,
@@ -8886,6 +8963,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 1350,
+    "scsp": 5008,
+    "taxes_affectees": 0,
+    "total": 6358,
+    "transferts": 0
+   },
    "id": "op_011",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -8897,6 +8981,11 @@
   },
   {
    "cell_row": 12,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 695120,
+    "supplementaire": 1390240,
+    "totale": 2085360
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 24,
     "sous_plafond": 1551,
@@ -8910,6 +8999,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 2397620,
+    "total": 2397620,
+    "transferts": 0
+   },
    "id": "op_012",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -8921,6 +9017,11 @@
   },
   {
    "cell_row": 13,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 69,
@@ -8934,6 +9035,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 425,
+    "scsp": 12618,
+    "taxes_affectees": 9900,
+    "total": 22943,
+    "transferts": 0
+   },
    "id": "op_013",
    "mission_code": "JA",
    "mission_conservee": true,
@@ -8945,6 +9053,11 @@
   },
   {
    "cell_row": 14,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 25,
     "sous_plafond": 265,
@@ -8958,6 +9071,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 11250,
+    "taxes_affectees": 0,
+    "total": 18234,
+    "transferts": 6984
+   },
    "id": "op_014",
    "mission_code": "TB",
    "mission_conservee": false,
@@ -8969,6 +9089,11 @@
   },
   {
    "cell_row": 15,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 199500,
+    "supplementaire": 210000,
+    "totale": 409500
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 285,
@@ -8982,6 +9107,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 37800,
+    "scsp": 169900,
+    "taxes_affectees": 700000,
+    "total": 2235325,
+    "transferts": 1327625
+   },
    "id": "op_015",
    "mission_code": "VA",
    "mission_conservee": false,
@@ -8993,6 +9125,11 @@
   },
   {
    "cell_row": 16,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 136,
@@ -9006,6 +9143,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 17784,
+    "total": 17784,
+    "transferts": 0
+   },
    "id": "op_016",
    "mission_code": "VA",
    "mission_conservee": false,
@@ -9017,6 +9161,11 @@
   },
   {
    "cell_row": 17,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 8,
     "sous_plafond": 350,
@@ -9030,6 +9179,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 3000,
+    "scsp": 63646,
+    "taxes_affectees": 0,
+    "total": 66646,
+    "transferts": 0
+   },
    "id": "op_017",
    "mission_code": "VA",
    "mission_conservee": false,
@@ -9041,6 +9197,11 @@
   },
   {
    "cell_row": 18,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 528,
     "sous_plafond": 263,
@@ -9054,6 +9215,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 3200,
+    "taxes_affectees": 188290,
+    "total": 191490,
+    "transferts": 0
+   },
    "id": "op_018",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -9065,6 +9233,11 @@
   },
   {
    "cell_row": 19,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 5,
     "sous_plafond": 292,
@@ -9078,6 +9251,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 39209,
+    "taxes_affectees": 380,
+    "total": 39589,
+    "transferts": 0
+   },
    "id": "op_019",
    "mission_code": "DB",
    "mission_conservee": false,
@@ -9089,6 +9269,11 @@
   },
   {
    "cell_row": 20,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 113,
@@ -9102,6 +9287,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 12200,
+    "taxes_affectees": 0,
+    "total": 206989,
+    "transferts": 194789
+   },
    "id": "op_020",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -9113,6 +9305,11 @@
   },
   {
    "cell_row": 21,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 30,
     "sous_plafond": 355,
@@ -9126,6 +9323,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 40130,
+    "taxes_affectees": 0,
+    "total": 2384529,
+    "transferts": 2344399
+   },
    "id": "op_021",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -9137,6 +9341,11 @@
   },
   {
    "cell_row": 22,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 71,
@@ -9150,6 +9359,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 6820,
+    "taxes_affectees": 224733,
+    "total": 380893,
+    "transferts": 149340
+   },
    "id": "op_022",
    "mission_code": "SF",
    "mission_conservee": false,
@@ -9161,6 +9377,11 @@
   },
   {
    "cell_row": 23,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 4,
     "sous_plafond": 23,
@@ -9174,6 +9395,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 11073,
+    "taxes_affectees": 0,
+    "total": 11073,
+    "transferts": 0
+   },
    "id": "op_023",
    "mission_code": "SB",
    "mission_conservee": true,
@@ -9185,6 +9413,11 @@
   },
   {
    "cell_row": 24,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 120,
     "sous_plafond": 1327,
@@ -9198,6 +9431,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 300,
+    "scsp": 115543,
+    "taxes_affectees": 26415,
+    "total": 142488,
+    "transferts": 230
+   },
    "id": "op_024",
    "mission_code": "AC",
    "mission_conservee": false,
@@ -9209,6 +9449,11 @@
   },
   {
    "cell_row": 25,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 15,
     "sous_plafond": 61,
@@ -9222,6 +9467,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 16000,
+    "scsp": 108483,
+    "taxes_affectees": 0,
+    "total": 124483,
+    "transferts": 0
+   },
    "id": "op_025",
    "mission_code": "YE",
    "mission_conservee": false,
@@ -9233,6 +9485,11 @@
   },
   {
    "cell_row": 26,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 8,
     "sous_plafond": 163,
@@ -9246,6 +9503,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 286733,
+    "total": 316233,
+    "transferts": 29500
+   },
    "id": "op_026",
    "mission_code": "AB",
    "mission_conservee": false,
@@ -9257,6 +9521,11 @@
   },
   {
    "cell_row": 27,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 5,
     "sous_plafond": 164,
@@ -9270,6 +9539,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 470,
+    "scsp": 17650,
+    "taxes_affectees": 0,
+    "total": 18120,
+    "transferts": 0
+   },
    "id": "op_027",
    "mission_code": "JA",
    "mission_conservee": true,
@@ -9281,6 +9557,11 @@
   },
   {
    "cell_row": 28,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 8273,
@@ -9294,6 +9575,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 627142,
+    "taxes_affectees": 0,
+    "total": 627142,
+    "transferts": 0
+   },
    "id": "op_028",
    "mission_code": "TB",
    "mission_conservee": false,
@@ -9305,6 +9593,11 @@
   },
   {
    "cell_row": 29,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 57,
     "sous_plafond": 69,
@@ -9318,6 +9611,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 465000,
+    "taxes_affectees": 0,
+    "total": 465000,
+    "transferts": 0
+   },
    "id": "op_029",
    "mission_code": "SF",
    "mission_conservee": false,
@@ -9329,6 +9629,11 @@
   },
   {
    "cell_row": 30,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 241,
     "sous_plafond": 1786,
@@ -9342,6 +9647,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 62279,
+    "scsp": 176722,
+    "taxes_affectees": 19000,
+    "total": 6649628,
+    "transferts": 6391627
+   },
    "id": "op_030",
    "mission_code": "AC",
    "mission_conservee": false,
@@ -9353,6 +9665,11 @@
   },
   {
    "cell_row": 31,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 0,
@@ -9366,6 +9683,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 704,
+    "taxes_affectees": 0,
+    "total": 10108,
+    "transferts": 9404
+   },
    "id": "op_031",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -9377,6 +9701,11 @@
   },
   {
    "cell_row": 32,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 40,
     "sous_plafond": 237,
@@ -9390,6 +9719,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 22993,
+    "taxes_affectees": 0,
+    "total": 23193,
+    "transferts": 200
+   },
    "id": "op_032",
    "mission_code": "DB",
    "mission_conservee": false,
@@ -9401,6 +9737,11 @@
   },
   {
    "cell_row": 33,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3659,
     "sous_plafond": 11088,
@@ -9414,6 +9755,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 20574,
+    "scsp": 936073,
+    "taxes_affectees": 0,
+    "total": 957659,
+    "transferts": 1012
+   },
    "id": "op_033",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -9425,6 +9773,11 @@
   },
   {
    "cell_row": 34,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 13,
     "sous_plafond": 2202,
@@ -9438,6 +9791,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 35335,
+    "scsp": 212845,
+    "taxes_affectees": 0,
+    "total": 248180,
+    "transferts": 0
+   },
    "id": "op_034",
    "mission_code": "MA",
    "mission_conservee": false,
@@ -9449,6 +9809,11 @@
   },
   {
    "cell_row": 35,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 1,
     "sous_plafond": 60,
@@ -9462,6 +9827,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 5126,
+    "scsp": 7666,
+    "taxes_affectees": 0,
+    "total": 12792,
+    "transferts": 0
+   },
    "id": "op_035",
    "mission_code": "MA",
    "mission_conservee": false,
@@ -9473,6 +9845,11 @@
   },
   {
    "cell_row": 36,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 100,
     "sous_plafond": 965,
@@ -9486,6 +9863,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 950,
+    "scsp": 91081,
+    "taxes_affectees": 0,
+    "total": 92635,
+    "transferts": 604
+   },
    "id": "op_036",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -9497,6 +9881,11 @@
   },
   {
    "cell_row": 37,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 1418,
@@ -9510,6 +9899,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 89441,
+    "taxes_affectees": 0,
+    "total": 89441,
+    "transferts": 0
+   },
    "id": "op_037",
    "mission_code": "DB",
    "mission_conservee": false,
@@ -9521,6 +9917,11 @@
   },
   {
    "cell_row": 38,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 25,
     "sous_plafond": 233,
@@ -9534,6 +9935,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 5170,
+    "taxes_affectees": 0,
+    "total": 60608,
+    "transferts": 55438
+   },
    "id": "op_038",
    "mission_code": "AA",
    "mission_conservee": true,
@@ -9545,6 +9953,11 @@
   },
   {
    "cell_row": 39,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": null,
     "sous_plafond": 134,
@@ -9558,6 +9971,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 979,
+    "scsp": 18546,
+    "taxes_affectees": 0,
+    "total": 19525,
+    "transferts": 0
+   },
    "id": "op_039",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -9569,6 +9989,11 @@
   },
   {
    "cell_row": 40,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3343,
     "sous_plafond": 17296,
@@ -9582,6 +10007,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 1906291,
+    "taxes_affectees": 175000,
+    "total": 2283658,
+    "transferts": 202367
+   },
    "id": "op_040",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -9593,6 +10025,11 @@
   },
   {
    "cell_row": 41,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 26000,
+    "supplementaire": 0,
+    "totale": 26000
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 30,
     "sous_plafond": 178,
@@ -9606,6 +10043,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 700,
+    "scsp": 0,
+    "taxes_affectees": 42500,
+    "total": 43750,
+    "transferts": 550
+   },
    "id": "op_041",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -9617,6 +10061,11 @@
   },
   {
    "cell_row": 42,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 72,
@@ -9630,6 +10079,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 0,
+    "total": 0,
+    "transferts": 0
+   },
    "id": "op_042",
    "mission_code": "TB",
    "mission_conservee": false,
@@ -9641,6 +10097,11 @@
   },
   {
    "cell_row": 43,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 122,
     "sous_plafond": 2495,
@@ -9654,6 +10115,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 186349,
+    "taxes_affectees": 0,
+    "total": 188224,
+    "transferts": 1875
+   },
    "id": "op_043",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -9665,6 +10133,11 @@
   },
   {
    "cell_row": 44,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 8,
     "sous_plafond": 99,
@@ -9678,6 +10151,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 6083,
+    "taxes_affectees": 0,
+    "total": 6083,
+    "transferts": 0
+   },
    "id": "op_044",
    "mission_code": "EC",
    "mission_conservee": true,
@@ -9689,6 +10169,11 @@
   },
   {
    "cell_row": 45,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 259189,
+    "supplementaire": 0,
+    "totale": 259189
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 29,
@@ -9702,6 +10187,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 628200,
+    "total": 628200,
+    "transferts": 0
+   },
    "id": "op_045",
    "mission_code": "VA",
    "mission_conservee": false,
@@ -9713,6 +10205,11 @@
   },
   {
    "cell_row": 46,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 137,
@@ -9726,6 +10223,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 725,
+    "scsp": 14245,
+    "taxes_affectees": 0,
+    "total": 14970,
+    "transferts": 0
+   },
    "id": "op_046",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -9737,6 +10241,11 @@
   },
   {
    "cell_row": 47,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 213,
@@ -9750,6 +10259,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 0,
+    "total": 0,
+    "transferts": 0
+   },
    "id": "op_047",
    "mission_code": "MA",
    "mission_conservee": false,
@@ -9761,6 +10277,11 @@
   },
   {
    "cell_row": 48,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 116,
     "sous_plafond": 1779,
@@ -9774,6 +10295,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 141560,
+    "taxes_affectees": 0,
+    "total": 143107,
+    "transferts": 1547
+   },
    "id": "op_048",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -9785,6 +10313,11 @@
   },
   {
    "cell_row": 49,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 36,
     "sous_plafond": 1493,
@@ -9798,6 +10331,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 29220,
+    "scsp": 42027,
+    "taxes_affectees": 0,
+    "total": 71247,
+    "transferts": 0
+   },
    "id": "op_049",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -9809,6 +10349,11 @@
   },
   {
    "cell_row": 50,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 37,
@@ -9822,6 +10367,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 129,
+    "scsp": 3426,
+    "taxes_affectees": 0,
+    "total": 3555,
+    "transferts": 0
+   },
    "id": "op_050",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -9833,6 +10385,11 @@
   },
   {
    "cell_row": 51,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 1007,
@@ -9846,6 +10403,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 34804,
+    "scsp": 78216,
+    "taxes_affectees": 0,
+    "total": 113020,
+    "transferts": 0
+   },
    "id": "op_051",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -9857,6 +10421,11 @@
   },
   {
    "cell_row": 52,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 21,
@@ -9870,6 +10439,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 2350,
+    "scsp": 8714,
+    "taxes_affectees": 0,
+    "total": 11064,
+    "transferts": 0
+   },
    "id": "op_052",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -9881,6 +10457,11 @@
   },
   {
    "cell_row": 53,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 217,
@@ -9894,6 +10475,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 300,
+    "scsp": 18071,
+    "taxes_affectees": 0,
+    "total": 18371,
+    "transferts": 0
+   },
    "id": "op_053",
    "mission_code": "AB",
    "mission_conservee": false,
@@ -9905,6 +10493,11 @@
   },
   {
    "cell_row": 54,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 705335,
+    "supplementaire": 0,
+    "totale": 705335
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 450,
@@ -9918,6 +10511,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 846557,
+    "total": 846557,
+    "transferts": 0
+   },
    "id": "op_054",
    "mission_code": "MA",
    "mission_conservee": false,
@@ -9929,6 +10529,11 @@
   },
   {
    "cell_row": 55,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 99,
@@ -9942,6 +10547,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 530,
+    "scsp": 9700,
+    "taxes_affectees": 0,
+    "total": 10230,
+    "transferts": 0
+   },
    "id": "op_055",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -9953,6 +10565,11 @@
   },
   {
    "cell_row": 56,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 30,
     "sous_plafond": 927,
@@ -9966,6 +10583,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 28894,
+    "taxes_affectees": 0,
+    "total": 28894,
+    "transferts": 0
+   },
    "id": "op_056",
    "mission_code": "EC",
    "mission_conservee": true,
@@ -9977,6 +10601,11 @@
   },
   {
    "cell_row": 57,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 270,
     "sous_plafond": 2404,
@@ -9990,6 +10619,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 85425,
+    "scsp": 734232,
+    "taxes_affectees": 0,
+    "total": 1909788,
+    "transferts": 1090131
+   },
    "id": "op_057",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -10001,6 +10637,11 @@
   },
   {
    "cell_row": 58,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3,
     "sous_plafond": 63,
@@ -10014,6 +10655,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 82,
+    "scsp": 22293,
+    "taxes_affectees": 0,
+    "total": 22375,
+    "transferts": 0
+   },
    "id": "op_058",
    "mission_code": "MA",
    "mission_conservee": false,
@@ -10025,6 +10673,11 @@
   },
   {
    "cell_row": 59,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 39281,
+    "supplementaire": 0,
+    "totale": 39281
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 10,
     "sous_plafond": 121,
@@ -10038,6 +10691,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 20000,
+    "taxes_affectees": 79000,
+    "total": 99000,
+    "transferts": 0
+   },
    "id": "op_059",
    "mission_code": "MA",
    "mission_conservee": false,
@@ -10049,6 +10709,11 @@
   },
   {
    "cell_row": 60,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 100,
     "sous_plafond": 368,
@@ -10062,6 +10727,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 16622,
+    "taxes_affectees": 0,
+    "total": 17342,
+    "transferts": 720
+   },
    "id": "op_060",
    "mission_code": "AC",
    "mission_conservee": false,
@@ -10073,6 +10745,11 @@
   },
   {
    "cell_row": 61,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 11200,
     "sous_plafond": 25999,
@@ -10086,6 +10763,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 2971282,
+    "taxes_affectees": 0,
+    "total": 3059479,
+    "transferts": 88197
+   },
    "id": "op_061",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -10097,6 +10781,11 @@
   },
   {
    "cell_row": 62,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 41,
@@ -10110,6 +10799,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 158,
+    "scsp": 5193,
+    "taxes_affectees": 0,
+    "total": 5351,
+    "transferts": 0
+   },
    "id": "op_062",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10121,6 +10817,11 @@
   },
   {
    "cell_row": 63,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 206,
@@ -10134,6 +10835,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 835,
+    "scsp": 14616,
+    "taxes_affectees": 0,
+    "total": 15451,
+    "transferts": 0
+   },
    "id": "op_063",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10145,6 +10853,11 @@
   },
   {
    "cell_row": 64,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 349,
@@ -10158,6 +10871,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 1902,
+    "scsp": 27490,
+    "taxes_affectees": 0,
+    "total": 29392,
+    "transferts": 0
+   },
    "id": "op_064",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10169,6 +10889,11 @@
   },
   {
    "cell_row": 65,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 399,
@@ -10182,6 +10907,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 706,
+    "scsp": 25704,
+    "taxes_affectees": 0,
+    "total": 26410,
+    "transferts": 0
+   },
    "id": "op_065",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10193,6 +10925,11 @@
   },
   {
    "cell_row": 66,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 441,
     "sous_plafond": 978,
@@ -10206,6 +10943,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 30993,
+    "taxes_affectees": 0,
+    "total": 30993,
+    "transferts": 0
+   },
    "id": "op_066",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -10217,6 +10961,11 @@
   },
   {
    "cell_row": 67,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 19,
     "sous_plafond": 300,
@@ -10230,6 +10979,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 2483,
+    "scsp": 29119,
+    "taxes_affectees": 0,
+    "total": 31602,
+    "transferts": 0
+   },
    "id": "op_067",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -10241,6 +10997,11 @@
   },
   {
    "cell_row": 68,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 9,
     "sous_plafond": 32,
@@ -10254,6 +11015,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 245,
+    "scsp": 1908,
+    "taxes_affectees": 0,
+    "total": 2153,
+    "transferts": 0
+   },
    "id": "op_068",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10265,6 +11033,11 @@
   },
   {
    "cell_row": 69,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 40,
     "sous_plafond": 370,
@@ -10278,6 +11051,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 1119,
+    "scsp": 37135,
+    "taxes_affectees": 0,
+    "total": 38440,
+    "transferts": 186
+   },
    "id": "op_069",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -10289,6 +11069,11 @@
   },
   {
    "cell_row": 70,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 789,
@@ -10302,6 +11087,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 3950,
+    "scsp": 56897,
+    "taxes_affectees": 0,
+    "total": 60847,
+    "transferts": 0
+   },
    "id": "op_070",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10313,6 +11105,11 @@
   },
   {
    "cell_row": 71,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 105,
@@ -10326,6 +11123,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 3205,
+    "scsp": 11653,
+    "taxes_affectees": 0,
+    "total": 14858,
+    "transferts": 0
+   },
    "id": "op_071",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10337,6 +11141,11 @@
   },
   {
    "cell_row": 72,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 314,
     "sous_plafond": 1137,
@@ -10350,6 +11159,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 14742,
+    "scsp": 51034,
+    "taxes_affectees": 0,
+    "total": 74457,
+    "transferts": 8681
+   },
    "id": "op_072",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -10361,6 +11177,11 @@
   },
   {
    "cell_row": 73,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3374,
     "sous_plafond": 9964,
@@ -10374,6 +11195,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 9315,
+    "scsp": 958284,
+    "taxes_affectees": 0,
+    "total": 967599,
+    "transferts": 0
+   },
    "id": "op_073",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -10385,6 +11213,11 @@
   },
   {
    "cell_row": 74,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 7,
     "sous_plafond": 193,
@@ -10398,6 +11231,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 2697,
+    "scsp": 13428,
+    "taxes_affectees": 0,
+    "total": 16125,
+    "transferts": 0
+   },
    "id": "op_074",
    "mission_code": "SF",
    "mission_conservee": false,
@@ -10409,6 +11249,11 @@
   },
   {
    "cell_row": 75,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 6,
     "sous_plafond": 257,
@@ -10422,6 +11267,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 3540,
+    "scsp": 23293,
+    "taxes_affectees": 0,
+    "total": 26833,
+    "transferts": 0
+   },
    "id": "op_075",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -10433,6 +11285,11 @@
   },
   {
    "cell_row": 76,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 140,
     "sous_plafond": 789,
@@ -10446,6 +11303,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 11061,
+    "scsp": 106783,
+    "taxes_affectees": 0,
+    "total": 117844,
+    "transferts": 0
+   },
    "id": "op_076",
    "mission_code": "XC",
    "mission_conservee": false,
@@ -10457,6 +11321,11 @@
   },
   {
    "cell_row": 77,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 275,
@@ -10470,6 +11339,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 36199,
+    "taxes_affectees": 0,
+    "total": 36199,
+    "transferts": 0
+   },
    "id": "op_077",
    "mission_code": "JA",
    "mission_conservee": true,
@@ -10481,6 +11357,11 @@
   },
   {
    "cell_row": 78,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 7,
     "sous_plafond": 286,
@@ -10494,6 +11375,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 11395,
+    "taxes_affectees": 0,
+    "total": 805447,
+    "transferts": 794052
+   },
    "id": "op_078",
    "mission_code": "RB",
    "mission_conservee": false,
@@ -10505,6 +11393,11 @@
   },
   {
    "cell_row": 79,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 283,
@@ -10518,6 +11411,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 48914,
+    "taxes_affectees": 0,
+    "total": 48914,
+    "transferts": 0
+   },
    "id": "op_079",
    "mission_code": "JA",
    "mission_conservee": true,
@@ -10529,6 +11429,11 @@
   },
   {
    "cell_row": 80,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 200,
     "sous_plafond": 309,
@@ -10542,6 +11447,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 1800,
+    "scsp": 30961,
+    "taxes_affectees": 0,
+    "total": 32761,
+    "transferts": 0
+   },
    "id": "op_080",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -10553,6 +11465,11 @@
   },
   {
    "cell_row": 81,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 152,
@@ -10566,6 +11483,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 518,
+    "scsp": 12383,
+    "taxes_affectees": 0,
+    "total": 12901,
+    "transferts": 0
+   },
    "id": "op_081",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10577,6 +11501,11 @@
   },
   {
    "cell_row": 82,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 111,
@@ -10590,6 +11519,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 892,
+    "scsp": 9605,
+    "taxes_affectees": 0,
+    "total": 10497,
+    "transferts": 0
+   },
    "id": "op_082",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10601,6 +11537,11 @@
   },
   {
    "cell_row": 83,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 68,
@@ -10614,6 +11555,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 296,
+    "scsp": 5982,
+    "taxes_affectees": 0,
+    "total": 6278,
+    "transferts": 0
+   },
    "id": "op_083",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10625,6 +11573,11 @@
   },
   {
    "cell_row": 84,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 46,
@@ -10638,6 +11591,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 4370,
+    "taxes_affectees": 0,
+    "total": 4370,
+    "transferts": 0
+   },
    "id": "op_084",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10649,6 +11609,11 @@
   },
   {
    "cell_row": 85,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 239,
@@ -10662,6 +11627,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 22243,
+    "taxes_affectees": 0,
+    "total": 22243,
+    "transferts": 0
+   },
    "id": "op_085",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -10673,6 +11645,11 @@
   },
   {
    "cell_row": 86,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 69,
@@ -10686,6 +11663,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 0,
+    "total": 0,
+    "transferts": 0
+   },
    "id": "op_086",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10697,6 +11681,11 @@
   },
   {
    "cell_row": 87,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 8,
     "sous_plafond": 290,
@@ -10710,6 +11699,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 3000,
+    "scsp": 32400,
+    "taxes_affectees": 0,
+    "total": 35400,
+    "transferts": 0
+   },
    "id": "op_087",
    "mission_code": "SB",
    "mission_conservee": true,
@@ -10721,6 +11717,11 @@
   },
   {
    "cell_row": 88,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 150,
     "sous_plafond": 364,
@@ -10734,6 +11735,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 9131,
+    "scsp": 41625,
+    "taxes_affectees": 0,
+    "total": 50756,
+    "transferts": 0
+   },
    "id": "op_088",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -10745,6 +11753,11 @@
   },
   {
    "cell_row": 89,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 50,
     "sous_plafond": 183,
@@ -10758,6 +11771,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 1000,
+    "scsp": 24676,
+    "taxes_affectees": 0,
+    "total": 25676,
+    "transferts": 0
+   },
    "id": "op_089",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -10769,6 +11789,11 @@
   },
   {
    "cell_row": 90,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 498,
@@ -10782,6 +11807,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 1450,
+    "scsp": 44769,
+    "taxes_affectees": 0,
+    "total": 46219,
+    "transferts": 0
+   },
    "id": "op_090",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10793,6 +11825,11 @@
   },
   {
    "cell_row": 91,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 1142,
@@ -10806,6 +11843,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 17227,
+    "scsp": 73909,
+    "taxes_affectees": 0,
+    "total": 101647,
+    "transferts": 10511
+   },
    "id": "op_091",
    "mission_code": "TB",
    "mission_conservee": false,
@@ -10817,6 +11861,11 @@
   },
   {
    "cell_row": 92,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 247,
@@ -10830,6 +11879,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 1099,
+    "scsp": 46740,
+    "taxes_affectees": 0,
+    "total": 47839,
+    "transferts": 0
+   },
    "id": "op_092",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10841,6 +11897,11 @@
   },
   {
    "cell_row": 93,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3,
     "sous_plafond": 16,
@@ -10854,6 +11915,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 0,
+    "total": 0,
+    "transferts": 0
+   },
    "id": "op_093",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10865,6 +11933,11 @@
   },
   {
    "cell_row": 94,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 4,
     "sous_plafond": 75,
@@ -10878,6 +11951,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 3824,
+    "scsp": 8467,
+    "taxes_affectees": 0,
+    "total": 12291,
+    "transferts": 0
+   },
    "id": "op_094",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10889,6 +11969,11 @@
   },
   {
    "cell_row": 95,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 215,
@@ -10902,6 +11987,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 4500,
+    "scsp": 23841,
+    "taxes_affectees": 0,
+    "total": 28341,
+    "transferts": 0
+   },
    "id": "op_095",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10913,6 +12005,11 @@
   },
   {
    "cell_row": 96,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3,
     "sous_plafond": 32,
@@ -10926,6 +12023,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 2500,
+    "taxes_affectees": 0,
+    "total": 2500,
+    "transferts": 0
+   },
    "id": "op_096",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10937,6 +12041,11 @@
   },
   {
    "cell_row": 97,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 106,
@@ -10950,6 +12059,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 13658,
+    "taxes_affectees": 0,
+    "total": 13658,
+    "transferts": 0
+   },
    "id": "op_097",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -10961,6 +12077,11 @@
   },
   {
    "cell_row": 98,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 81,
     "sous_plafond": 951,
@@ -10974,6 +12095,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 8674,
+    "scsp": 36976,
+    "taxes_affectees": 0,
+    "total": 45650,
+    "transferts": 0
+   },
    "id": "op_098",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -10985,6 +12113,11 @@
   },
   {
    "cell_row": 99,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 4,
     "sous_plafond": 8,
@@ -10998,6 +12131,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 8006,
+    "scsp": 3445,
+    "taxes_affectees": 0,
+    "total": 11451,
+    "transferts": 0
+   },
    "id": "op_099",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -11009,6 +12149,11 @@
   },
   {
    "cell_row": 100,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 9,
@@ -11022,6 +12167,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 573,
+    "taxes_affectees": 0,
+    "total": 573,
+    "transferts": 0
+   },
    "id": "op_100",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -11033,6 +12185,11 @@
   },
   {
    "cell_row": 101,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 26,
     "sous_plafond": 251,
@@ -11046,6 +12203,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 1390,
+    "taxes_affectees": 0,
+    "total": 1390,
+    "transferts": 0
+   },
    "id": "op_101",
    "mission_code": "EC",
    "mission_conservee": true,
@@ -11057,6 +12221,11 @@
   },
   {
    "cell_row": 102,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 0,
@@ -11070,6 +12239,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 0,
+    "total": 0,
+    "transferts": 0
+   },
    "id": "op_102",
    "mission_code": "VA",
    "mission_conservee": false,
@@ -11081,6 +12257,11 @@
   },
   {
    "cell_row": 103,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 3374898,
+    "supplementaire": 6749796,
+    "totale": 10124694
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 91,
@@ -11094,6 +12275,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 613043,
+    "taxes_affectees": 11787438,
+    "total": 12400481,
+    "transferts": 0
+   },
    "id": "op_103",
    "mission_code": "TB",
    "mission_conservee": false,
@@ -11105,6 +12293,11 @@
   },
   {
    "cell_row": 104,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3905,
     "sous_plafond": 49147,
@@ -11118,6 +12311,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 1162913,
+    "taxes_affectees": 0,
+    "total": 3321492,
+    "transferts": 2158579
+   },
    "id": "op_104",
    "mission_code": "TB",
    "mission_conservee": false,
@@ -11129,6 +12329,11 @@
   },
   {
    "cell_row": 105,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 546,
+    "supplementaire": 252,
+    "totale": 798
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 24,
     "sous_plafond": 968,
@@ -11142,6 +12347,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 6116,
+    "scsp": 107832,
+    "taxes_affectees": 840,
+    "total": 257636,
+    "transferts": 142848
+   },
    "id": "op_105",
    "mission_code": "AC",
    "mission_conservee": false,
@@ -11153,6 +12365,11 @@
   },
   {
    "cell_row": 106,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 59,
     "sous_plafond": 197,
@@ -11166,6 +12383,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 23100,
+    "taxes_affectees": 0,
+    "total": 24032,
+    "transferts": 932
+   },
    "id": "op_106",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -11177,6 +12401,11 @@
   },
   {
    "cell_row": 107,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 8,
     "sous_plafond": 50,
@@ -11190,6 +12419,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 2942,
+    "taxes_affectees": 0,
+    "total": 2942,
+    "transferts": 0
+   },
    "id": "op_107",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -11201,6 +12437,11 @@
   },
   {
    "cell_row": 108,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 0,
@@ -11214,6 +12455,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 6021,
+    "taxes_affectees": 0,
+    "total": 6021,
+    "transferts": 0
+   },
    "id": "op_108",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -11225,6 +12473,11 @@
   },
   {
    "cell_row": 109,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 4,
     "sous_plafond": 20,
@@ -11238,6 +12491,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 3698,
+    "taxes_affectees": 0,
+    "total": 12498,
+    "transferts": 8800
+   },
    "id": "op_109",
    "mission_code": "AC",
    "mission_conservee": false,
@@ -11249,6 +12509,11 @@
   },
   {
    "cell_row": 110,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 11,
@@ -11262,6 +12527,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 1525,
+    "taxes_affectees": 0,
+    "total": 1525,
+    "transferts": 0
+   },
    "id": "op_110",
    "mission_code": "TB",
    "mission_conservee": false,
@@ -11273,6 +12545,11 @@
   },
   {
    "cell_row": 111,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 35,
@@ -11286,6 +12563,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 2485,
+    "scsp": 1874,
+    "taxes_affectees": 0,
+    "total": 4359,
+    "transferts": 0
+   },
    "id": "op_111",
    "mission_code": "TB",
    "mission_conservee": false,
@@ -11297,6 +12581,11 @@
   },
   {
    "cell_row": 112,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 361,
@@ -11310,6 +12599,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 2792,
+    "scsp": 28167,
+    "taxes_affectees": 0,
+    "total": 30959,
+    "transferts": 0
+   },
    "id": "op_112",
    "mission_code": "DC",
    "mission_conservee": false,
@@ -11321,6 +12617,11 @@
   },
   {
    "cell_row": 113,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 1389,
     "sous_plafond": 2886,
@@ -11334,6 +12635,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 4000,
+    "scsp": 278542,
+    "taxes_affectees": 0,
+    "total": 289317,
+    "transferts": 6775
+   },
    "id": "op_113",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -11345,6 +12653,11 @@
   },
   {
    "cell_row": 114,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3,
     "sous_plafond": 5,
@@ -11358,6 +12671,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 25,
+    "scsp": 781,
+    "taxes_affectees": 0,
+    "total": 1276,
+    "transferts": 470
+   },
    "id": "op_114",
    "mission_code": "JA",
    "mission_conservee": true,
@@ -11369,6 +12689,11 @@
   },
   {
    "cell_row": 115,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 23,
     "sous_plafond": 598,
@@ -11382,6 +12707,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 38418,
+    "taxes_affectees": 0,
+    "total": 40518,
+    "transferts": 2100
+   },
    "id": "op_115",
    "mission_code": "AC",
    "mission_conservee": false,
@@ -11393,6 +12725,11 @@
   },
   {
    "cell_row": 116,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 100,
     "sous_plafond": 1686,
@@ -11406,6 +12743,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 120957,
+    "taxes_affectees": 0,
+    "total": 120957,
+    "transferts": 0
+   },
    "id": "op_116",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -11417,6 +12761,11 @@
   },
   {
    "cell_row": 117,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 274,
     "sous_plafond": 1363,
@@ -11430,6 +12779,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 201671,
+    "taxes_affectees": 0,
+    "total": 203461,
+    "transferts": 1790
+   },
    "id": "op_117",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -11441,6 +12797,11 @@
   },
   {
    "cell_row": 118,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 63,
     "sous_plafond": 1405,
@@ -11454,6 +12815,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 100513,
+    "taxes_affectees": 0,
+    "total": 102040,
+    "transferts": 1527
+   },
    "id": "op_118",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -11465,6 +12833,11 @@
   },
   {
    "cell_row": 119,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 2,
     "sous_plafond": 66,
@@ -11478,6 +12851,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 6700,
+    "taxes_affectees": 0,
+    "total": 6700,
+    "transferts": 0
+   },
    "id": "op_119",
    "mission_code": "DC",
    "mission_conservee": false,
@@ -11489,6 +12869,11 @@
   },
   {
    "cell_row": 120,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3,
     "sous_plafond": 232,
@@ -11502,6 +12887,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 16980,
+    "taxes_affectees": 7140,
+    "total": 24120,
+    "transferts": 0
+   },
    "id": "op_120",
    "mission_code": "AC",
    "mission_conservee": false,
@@ -11513,6 +12905,11 @@
   },
   {
    "cell_row": 121,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 30,
     "sous_plafond": 131,
@@ -11526,6 +12923,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 41774,
+    "taxes_affectees": 0,
+    "total": 109774,
+    "transferts": 68000
+   },
    "id": "op_121",
    "mission_code": "SA",
    "mission_conservee": false,
@@ -11537,6 +12941,11 @@
   },
   {
    "cell_row": 122,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 63,
     "sous_plafond": 201,
@@ -11550,6 +12959,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 19231,
+    "taxes_affectees": 0,
+    "total": 19231,
+    "transferts": 0
+   },
    "id": "op_122",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -11561,6 +12977,11 @@
   },
   {
    "cell_row": 123,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 50,
     "sous_plafond": 489,
@@ -11574,6 +12995,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 38771,
+    "taxes_affectees": 0,
+    "total": 39031,
+    "transferts": 260
+   },
    "id": "op_123",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -11585,6 +13013,11 @@
   },
   {
    "cell_row": 124,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 6,
@@ -11598,6 +13031,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 975,
+    "taxes_affectees": 0,
+    "total": 987,
+    "transferts": 12
+   },
    "id": "op_124",
    "mission_code": "AC",
    "mission_conservee": false,
@@ -11609,6 +13049,11 @@
   },
   {
    "cell_row": 125,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 9,
     "sous_plafond": 410,
@@ -11622,6 +13067,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 7481,
+    "scsp": 14439,
+    "taxes_affectees": 0,
+    "total": 21920,
+    "transferts": 0
+   },
    "id": "op_125",
    "mission_code": "MB",
    "mission_conservee": false,
@@ -11633,6 +13085,11 @@
   },
   {
    "cell_row": 126,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 1,
     "sous_plafond": 76,
@@ -11646,6 +13103,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 98,
+    "scsp": 7864,
+    "taxes_affectees": 0,
+    "total": 7962,
+    "transferts": 0
+   },
    "id": "op_126",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -11657,6 +13121,11 @@
   },
   {
    "cell_row": 127,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3,
     "sous_plafond": 767,
@@ -11670,6 +13139,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 139000,
+    "total": 139000,
+    "transferts": 0
+   },
    "id": "op_127",
    "mission_code": "DB",
    "mission_conservee": false,
@@ -11681,6 +13157,11 @@
   },
   {
    "cell_row": 128,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 2616,
     "sous_plafond": 9733,
@@ -11694,6 +13175,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 896366,
+    "taxes_affectees": 0,
+    "total": 897624,
+    "transferts": 1258
+   },
    "id": "op_128",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -11705,6 +13193,11 @@
   },
   {
    "cell_row": 129,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 40,
     "sous_plafond": 2010,
@@ -11718,6 +13211,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 1458,
+    "scsp": 96126,
+    "taxes_affectees": 0,
+    "total": 97584,
+    "transferts": 0
+   },
    "id": "op_129",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -11729,6 +13229,11 @@
   },
   {
    "cell_row": 130,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 1732,
     "sous_plafond": 1793,
@@ -11742,6 +13247,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 210831,
+    "taxes_affectees": 0,
+    "total": 210831,
+    "transferts": 0
+   },
    "id": "op_130",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -11753,6 +13265,11 @@
   },
   {
    "cell_row": 131,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 25,
     "sous_plafond": 279,
@@ -11766,6 +13283,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 500,
+    "scsp": 26290,
+    "taxes_affectees": 0,
+    "total": 26790,
+    "transferts": 0
+   },
    "id": "op_131",
    "mission_code": "SF",
    "mission_conservee": false,
@@ -11777,6 +13301,11 @@
   },
   {
    "cell_row": 132,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3180,
     "sous_plafond": 6252,
@@ -11790,6 +13319,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 738759,
+    "taxes_affectees": 0,
+    "total": 738759,
+    "transferts": 0
+   },
    "id": "op_132",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -11801,6 +13337,11 @@
   },
   {
    "cell_row": 133,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 15,
     "sous_plafond": 454,
@@ -11814,6 +13355,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 39770,
+    "taxes_affectees": 0,
+    "total": 39770,
+    "transferts": 0
+   },
    "id": "op_133",
    "mission_code": "DC",
    "mission_conservee": false,
@@ -11825,6 +13373,11 @@
   },
   {
    "cell_row": 134,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 19,
     "sous_plafond": 153,
@@ -11838,6 +13391,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 25522,
+    "taxes_affectees": 0,
+    "total": 25522,
+    "transferts": 0
+   },
    "id": "op_134",
    "mission_code": "AA",
    "mission_conservee": true,
@@ -11849,6 +13409,11 @@
   },
   {
    "cell_row": 135,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 9,
     "sous_plafond": 91,
@@ -11862,6 +13427,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 14387,
+    "taxes_affectees": 0,
+    "total": 14387,
+    "transferts": 0
+   },
    "id": "op_135",
    "mission_code": "TB",
    "mission_conservee": false,
@@ -11873,6 +13445,11 @@
   },
   {
    "cell_row": 136,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 15,
     "sous_plafond": 53,
@@ -11886,6 +13463,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 17201,
+    "taxes_affectees": 0,
+    "total": 17201,
+    "transferts": 0
+   },
    "id": "op_136",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -11897,6 +13481,11 @@
   },
   {
    "cell_row": 137,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 32,
@@ -11910,6 +13499,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 8226,
+    "taxes_affectees": 0,
+    "total": 8226,
+    "transferts": 0
+   },
    "id": "op_137",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -11921,6 +13517,11 @@
   },
   {
    "cell_row": 138,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 2,
     "sous_plafond": 743,
@@ -11934,6 +13535,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 50315,
+    "taxes_affectees": 0,
+    "total": 50315,
+    "transferts": 0
+   },
    "id": "op_138",
    "mission_code": "TR",
    "mission_conservee": false,
@@ -11945,6 +13553,11 @@
   },
   {
    "cell_row": 139,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 295,
     "sous_plafond": 2120,
@@ -11958,6 +13571,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 230294,
+    "taxes_affectees": 0,
+    "total": 230294,
+    "transferts": 0
+   },
    "id": "op_139",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -11969,6 +13589,11 @@
   },
   {
    "cell_row": 140,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 237,
     "sous_plafond": 412,
@@ -11982,6 +13607,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 5130,
+    "scsp": 46987,
+    "taxes_affectees": 0,
+    "total": 52117,
+    "transferts": 0
+   },
    "id": "op_140",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -11993,6 +13625,11 @@
   },
   {
    "cell_row": 141,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 15,
     "sous_plafond": 139,
@@ -12006,6 +13643,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 7746,
+    "taxes_affectees": 0,
+    "total": 63911,
+    "transferts": 56165
+   },
    "id": "op_141",
    "mission_code": "OA",
    "mission_conservee": false,
@@ -12017,6 +13661,11 @@
   },
   {
    "cell_row": 142,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 323,
     "sous_plafond": 280,
@@ -12030,6 +13679,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 2315,
+    "scsp": 16138,
+    "taxes_affectees": 0,
+    "total": 23018,
+    "transferts": 4565
+   },
    "id": "op_142",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -12041,6 +13697,11 @@
   },
   {
    "cell_row": 143,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 397,
@@ -12054,6 +13715,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 4277,
+    "scsp": 52563,
+    "taxes_affectees": 0,
+    "total": 56840,
+    "transferts": 0
+   },
    "id": "op_143",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12065,6 +13733,11 @@
   },
   {
    "cell_row": 144,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 100,
     "sous_plafond": 2632,
@@ -12078,6 +13751,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 268417,
+    "taxes_affectees": 0,
+    "total": 334420,
+    "transferts": 66003
+   },
    "id": "op_144",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -12089,6 +13769,11 @@
   },
   {
    "cell_row": 145,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 6,
     "sous_plafond": 23,
@@ -12102,6 +13787,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 3294,
+    "taxes_affectees": 0,
+    "total": 3294,
+    "transferts": 0
+   },
    "id": "op_145",
    "mission_code": "SF",
    "mission_conservee": false,
@@ -12113,6 +13805,11 @@
   },
   {
    "cell_row": 146,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 20,
     "sous_plafond": 63,
@@ -12126,6 +13823,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 395,
+    "scsp": 19122,
+    "taxes_affectees": 0,
+    "total": 19517,
+    "transferts": 0
+   },
    "id": "op_146",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12137,6 +13841,11 @@
   },
   {
    "cell_row": 147,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 28,
     "sous_plafond": 666,
@@ -12150,6 +13859,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 1498,
+    "scsp": 36083,
+    "taxes_affectees": 0,
+    "total": 37581,
+    "transferts": 0
+   },
    "id": "op_147",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12161,6 +13877,11 @@
   },
   {
    "cell_row": 148,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 7,
     "sous_plafond": 104,
@@ -12174,6 +13895,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 11430,
+    "taxes_affectees": 0,
+    "total": 11430,
+    "transferts": 0
+   },
    "id": "op_148",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -12185,6 +13913,11 @@
   },
   {
    "cell_row": 149,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 10,
     "sous_plafond": 168,
@@ -12198,6 +13931,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 7104,
+    "scsp": 10313,
+    "taxes_affectees": 0,
+    "total": 17417,
+    "transferts": 0
+   },
    "id": "op_149",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -12209,6 +13949,11 @@
   },
   {
    "cell_row": 150,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 263,
@@ -12222,6 +13967,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 1196,
+    "scsp": 14980,
+    "taxes_affectees": 0,
+    "total": 16176,
+    "transferts": 0
+   },
    "id": "op_150",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12233,6 +13985,11 @@
   },
   {
    "cell_row": 151,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 45,
     "sous_plafond": 1972,
@@ -12246,6 +14003,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 10000,
+    "scsp": 90426,
+    "taxes_affectees": 0,
+    "total": 100426,
+    "transferts": 0
+   },
    "id": "op_151",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12257,6 +14021,11 @@
   },
   {
    "cell_row": 152,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 50,
@@ -12270,6 +14039,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 4141,
+    "scsp": 4585,
+    "taxes_affectees": 0,
+    "total": 8726,
+    "transferts": 0
+   },
    "id": "op_152",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12281,6 +14057,11 @@
   },
   {
    "cell_row": 153,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 2,
     "sous_plafond": 7,
@@ -12294,6 +14075,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 52,
+    "scsp": 1039,
+    "taxes_affectees": 0,
+    "total": 1091,
+    "transferts": 0
+   },
    "id": "op_153",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12305,6 +14093,11 @@
   },
   {
    "cell_row": 154,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 10,
     "sous_plafond": 120,
@@ -12318,6 +14111,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 7097,
+    "scsp": 11503,
+    "taxes_affectees": 0,
+    "total": 18600,
+    "transferts": 0
+   },
    "id": "op_154",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -12329,6 +14129,11 @@
   },
   {
    "cell_row": 155,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 22,
     "sous_plafond": 45,
@@ -12342,6 +14147,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 371,
+    "scsp": 4772,
+    "taxes_affectees": 0,
+    "total": 5143,
+    "transferts": 0
+   },
    "id": "op_155",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12353,6 +14165,11 @@
   },
   {
    "cell_row": 156,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 1,
     "sous_plafond": 41,
@@ -12366,6 +14183,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 5120,
+    "taxes_affectees": 0,
+    "total": 107720,
+    "transferts": 102600
+   },
    "id": "op_156",
    "mission_code": "AC",
    "mission_conservee": false,
@@ -12377,6 +14201,11 @@
   },
   {
    "cell_row": 157,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 270,
     "sous_plafond": 2750,
@@ -12390,6 +14219,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 118753,
+    "taxes_affectees": 5400,
+    "total": 125508,
+    "transferts": 1355
+   },
    "id": "op_157",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -12401,6 +14237,11 @@
   },
   {
    "cell_row": 158,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 5,
     "sous_plafond": 30,
@@ -12414,6 +14255,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 2781,
+    "taxes_affectees": 0,
+    "total": 2881,
+    "transferts": 100
+   },
    "id": "op_158",
    "mission_code": "DC",
    "mission_conservee": false,
@@ -12425,6 +14273,11 @@
   },
   {
    "cell_row": 159,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 1193,
@@ -12438,6 +14291,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 9500,
+    "scsp": 255166,
+    "taxes_affectees": 800,
+    "total": 575650,
+    "transferts": 310184
+   },
    "id": "op_159",
    "mission_code": "IA",
    "mission_conservee": false,
@@ -12449,6 +14309,11 @@
   },
   {
    "cell_row": 160,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 1065,
@@ -12462,6 +14327,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 1875,
+    "scsp": 121120,
+    "taxes_affectees": 0,
+    "total": 122995,
+    "transferts": 0
+   },
    "id": "op_160",
    "mission_code": "IA",
    "mission_conservee": false,
@@ -12473,6 +14345,11 @@
   },
   {
    "cell_row": 161,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 26,
     "sous_plafond": 779,
@@ -12486,6 +14363,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 1450,
+    "scsp": 59636,
+    "taxes_affectees": 0,
+    "total": 216280,
+    "transferts": 155194
+   },
    "id": "op_161",
    "mission_code": "MB",
    "mission_conservee": false,
@@ -12497,6 +14381,11 @@
   },
   {
    "cell_row": 162,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 295,
     "sous_plafond": 1815,
@@ -12510,6 +14399,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 63014,
+    "scsp": 118246,
+    "taxes_affectees": 0,
+    "total": 181260,
+    "transferts": 0
+   },
    "id": "op_162",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -12521,6 +14417,11 @@
   },
   {
    "cell_row": 163,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 500,
     "sous_plafond": 7946,
@@ -12534,6 +14435,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 183767,
+    "taxes_affectees": 0,
+    "total": 257391,
+    "transferts": 73624
+   },
    "id": "op_163",
    "mission_code": "AC",
    "mission_conservee": false,
@@ -12545,6 +14453,11 @@
   },
   {
    "cell_row": 164,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 32,
     "sous_plafond": 316,
@@ -12558,6 +14471,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 21050,
+    "taxes_affectees": 0,
+    "total": 21050,
+    "transferts": 0
+   },
    "id": "op_164",
    "mission_code": "EC",
    "mission_conservee": true,
@@ -12569,6 +14489,11 @@
   },
   {
    "cell_row": 165,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 94,
@@ -12582,6 +14507,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 500,
+    "scsp": 13180,
+    "taxes_affectees": 0,
+    "total": 13680,
+    "transferts": 0
+   },
    "id": "op_165",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12593,6 +14525,11 @@
   },
   {
    "cell_row": 166,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 68,
     "sous_plafond": 1478,
@@ -12606,6 +14543,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 5000,
+    "scsp": 106552,
+    "taxes_affectees": 0,
+    "total": 111552,
+    "transferts": 0
+   },
    "id": "op_166",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12617,6 +14561,11 @@
   },
   {
    "cell_row": 167,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 256,
     "sous_plafond": 286,
@@ -12630,6 +14579,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 74821,
+    "taxes_affectees": 0,
+    "total": 74821,
+    "transferts": 0
+   },
    "id": "op_167",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -12641,6 +14597,11 @@
   },
   {
    "cell_row": 168,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 3,
     "sous_plafond": 129,
@@ -12654,6 +14615,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 12537,
+    "taxes_affectees": 0,
+    "total": 12537,
+    "transferts": 0
+   },
    "id": "op_168",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12665,6 +14633,11 @@
   },
   {
    "cell_row": 169,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 1,
     "sous_plafond": 16,
@@ -12678,6 +14651,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 1739,
+    "taxes_affectees": 0,
+    "total": 1739,
+    "transferts": 0
+   },
    "id": "op_169",
    "mission_code": "MB",
    "mission_conservee": false,
@@ -12689,6 +14669,11 @@
   },
   {
    "cell_row": 170,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 115,
     "sous_plafond": 851,
@@ -12702,6 +14687,13 @@
    "fate": "internalisation",
    "fate_group": "internalisation",
    "fate_label_fr": "Internalisation dans un ministère",
+   "financement_plf_2026_keur": {
+    "investissement": 6162,
+    "scsp": 0,
+    "taxes_affectees": 0,
+    "total": 7646,
+    "transferts": 1484
+   },
    "id": "op_170",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -12713,6 +14705,11 @@
   },
   {
    "cell_row": 171,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 0,
@@ -12726,6 +14723,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 0,
+    "total": 189297,
+    "transferts": 189297
+   },
    "id": "op_171",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12737,6 +14741,11 @@
   },
   {
    "cell_row": 172,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 64,
     "sous_plafond": 1237,
@@ -12750,6 +14759,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 82231,
+    "taxes_affectees": 0,
+    "total": 82231,
+    "transferts": 0
+   },
    "id": "op_172",
    "mission_code": "EC",
    "mission_conservee": true,
@@ -12761,6 +14777,11 @@
   },
   {
    "cell_row": 173,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 241,
     "sous_plafond": 12833,
@@ -12774,6 +14795,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 95216,
+    "scsp": 549885,
+    "taxes_affectees": 0,
+    "total": 747030,
+    "transferts": 101929
+   },
    "id": "op_173",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -12785,6 +14813,11 @@
   },
   {
    "cell_row": 174,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 105,
     "sous_plafond": 892,
@@ -12798,6 +14831,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 6000,
+    "scsp": 23237,
+    "taxes_affectees": 0,
+    "total": 29237,
+    "transferts": 0
+   },
    "id": "op_174",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12809,6 +14849,11 @@
   },
   {
    "cell_row": 175,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 953,
@@ -12822,6 +14867,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 0,
+    "taxes_affectees": 984898,
+    "total": 984898,
+    "transferts": 0
+   },
    "id": "op_175",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -12833,6 +14885,11 @@
   },
   {
    "cell_row": 176,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 60,
     "sous_plafond": 505,
@@ -12846,6 +14903,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 1790,
+    "scsp": 47655,
+    "taxes_affectees": 0,
+    "total": 49545,
+    "transferts": 100
+   },
    "id": "op_176",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -12857,6 +14921,11 @@
   },
   {
    "cell_row": 177,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 0,
@@ -12870,6 +14939,13 @@
    "fate": "suppression",
    "fate_group": "fermeture",
    "fate_label_fr": "Suppression",
+   "financement_plf_2026_keur": {
+    "investissement": 7290,
+    "scsp": 4000,
+    "taxes_affectees": 0,
+    "total": 20497,
+    "transferts": 9207
+   },
    "id": "op_177",
    "mission_code": "SF",
    "mission_conservee": false,
@@ -12881,6 +14957,11 @@
   },
   {
    "cell_row": 178,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 95,
@@ -12894,6 +14975,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 560,
+    "scsp": 10580,
+    "taxes_affectees": 0,
+    "total": 11140,
+    "transferts": 0
+   },
    "id": "op_178",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12905,6 +14993,11 @@
   },
   {
    "cell_row": 179,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 131,
@@ -12918,6 +15011,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 545,
+    "scsp": 13840,
+    "taxes_affectees": 0,
+    "total": 14385,
+    "transferts": 0
+   },
    "id": "op_179",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12929,6 +15029,11 @@
   },
   {
    "cell_row": 180,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 99,
@@ -12942,6 +15047,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 500,
+    "scsp": 10910,
+    "taxes_affectees": 0,
+    "total": 11410,
+    "transferts": 0
+   },
    "id": "op_180",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12953,6 +15065,11 @@
   },
   {
    "cell_row": 181,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 0,
     "sous_plafond": 1021,
@@ -12966,6 +15083,13 @@
    "fate": "epic_musee",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC musée et patrimoine",
+   "financement_plf_2026_keur": {
+    "investissement": 5648,
+    "scsp": 104070,
+    "taxes_affectees": 0,
+    "total": 109718,
+    "transferts": 0
+   },
    "id": "op_181",
    "mission_code": "CB",
    "mission_conservee": false,
@@ -12977,6 +15101,11 @@
   },
   {
    "cell_row": 182,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 29119,
     "sous_plafond": 145261,
@@ -12990,6 +15119,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 213486,
+    "scsp": 12838969,
+    "taxes_affectees": 0,
+    "total": 13055675,
+    "transferts": 3220
+   },
    "id": "op_182",
    "mission_code": "RA",
    "mission_conservee": false,
@@ -13001,6 +15137,11 @@
   },
   {
    "cell_row": 183,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 40,
     "sous_plafond": 3990,
@@ -13014,6 +15155,13 @@
    "fate": "cession",
    "fate_group": "fermeture",
    "fate_label_fr": "Cession d'actif",
+   "financement_plf_2026_keur": {
+    "investissement": 0,
+    "scsp": 252746,
+    "taxes_affectees": 150300,
+    "total": 403046,
+    "transferts": 0
+   },
    "id": "op_183",
    "mission_code": "TA",
    "mission_conservee": false,
@@ -13025,6 +15173,11 @@
   },
   {
    "cell_row": 184,
+   "economie_taxes_affectees_keur": {
+    "horizon_1_an": 0,
+    "supplementaire": 0,
+    "totale": 0
+   },
    "etpt_lfi_2025": {
     "hors_plafond": 577,
     "sous_plafond": 2694,
@@ -13038,6 +15191,13 @@
    "fate": "epic_enseignement",
    "fate_group": "autonomie",
    "fate_label_fr": "Autonomie : EPIC enseignement et recherche",
+   "financement_plf_2026_keur": {
+    "investissement": 25583,
+    "scsp": 117421,
+    "taxes_affectees": 0,
+    "total": 143004,
+    "transferts": 0
+   },
    "id": "op_184",
    "mission_code": "DA",
    "mission_conservee": true,
@@ -13048,6 +15208,22 @@
    "programme_fr": "Environnement et prospective de la politique de défense"
   }
  ],
+ "operateurs_financement_totaux_keur": {
+  "economie_taxes_affectees_horizon_1_an": 6015559,
+  "economie_taxes_affectees_supplementaire": 8350288,
+  "economie_taxes_affectees_totale": 14365847,
+  "investissement": 1022878,
+  "note": "Colonnes ajoutées par les auteurs en novembre 2026 : financement public 2026 des opérateurs (PLF 2026) et économie sur leurs taxes affectées (classeur des taxes affectées). Elles apparaissent en même temps qu'une hausse de 1,371 Md€ des économies sur les taxes affectées dans les feuilles Flux et Détail Economies ; le lien entre les deux n'est pas écrit dans le classeur.",
+  "scsp": 33893819,
+  "source": {
+   "kind": "workbook",
+   "ref": "Agences publiques.xlsx › Opérateurs R › U3:AB3",
+   "url": "https://france-resolution.fr/donnees/Agences%20publiques.xlsx"
+  },
+  "taxes_affectees": 21675051,
+  "total": 73288271,
+  "transferts": 16696523
+ },
  "operateurs_par_mission": [
   {
    "etpt_lfi_2025": 319486,

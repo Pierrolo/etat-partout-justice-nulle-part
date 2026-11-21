@@ -3618,6 +3618,7 @@
    "cover_fr": "Résolution — octobre 2026",
    "date_fr": "18 novembre 2026",
    "date_iso": "2026-11-18",
+   "label_fr": "Amendements publiés le 18 novembre 2026",
    "pdf_dates_fr": {
     "PLF-P1": "17 novembre 2026",
     "PLF-P2": "18 novembre 2026",
@@ -4056,7 +4057,7 @@
   {
    "id": "niches_agri_services_garde",
    "label_fr": "Avantages fiscaux agricoles, services à la personne et garde de jeunes enfants (part restante)",
-   "note": "Concerne en particulier le crédit d'impôt emploi à domicile (6 420 M€ en 2024) et le crédit d'impôt garde d'enfants de moins de 6 ans (1 737 M€). Ne s'applique pas à la TVA.",
+   "note": "Les numéros du III cités par le IV.E de PLF-P1 n° 1 recouvrent 26 niches du classeur (11,8 Md€ en 2024) : le crédit d'impôt emploi à domicile (6 420 M€), le crédit d'impôt garde d'enfants de moins de 6 ans (1 737 M€, art. 200 quater B : rapprochement inféré, voir niches.json) et des niches agricoles ou de coopératives. Ne s'applique pas à la TVA.",
    "steps": [
     {
      "from": "2026-01-01",

@@ -195,6 +195,13 @@ function PlanCell({ row, links }: Pick<RowProps, 'row' | 'links'>) {
         <span>{plan.label}</span>
       </p>
       <p className="mt-1 text-sm text-ink-2">{when.text}</p>
+      {row.planConflict && row.planClasseur && (
+        <p className="mt-1 text-xs leading-snug text-ink-3">
+          Le classeur des auteurs classe cette niche «&#8239;
+          {PLAN_META[row.planClasseur].label.toLowerCase()}&#8239;» ; le site suit le texte de
+          l’amendement{row.planInferred ? ' (rapprochement inféré)' : ''}.
+        </p>
+      )}
       {!dead && (
         <p className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 text-sm">
           <a href={`${links.amendements}#PLF-P1-1`}>Amendement n° 1</a>

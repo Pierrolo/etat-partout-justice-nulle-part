@@ -43,6 +43,7 @@ SITE = "https://france-resolution.fr"
 PLAN_VERSION = {
     "date_iso": "2026-11-18",
     "date_fr": "18 novembre 2026",
+    "label_fr": "Amendements publiés le 18 novembre 2026",  # same wording as engine PARAMS_META.planVersionLabel
     "pdf_dates_fr": {"PLF-P1": "17 novembre 2026", "PLF-P2": "18 novembre 2026", "PLFSS": "17 novembre 2026"},
     "cover_fr": "Résolution — octobre 2026",
     "snapshot": SNAPSHOT,

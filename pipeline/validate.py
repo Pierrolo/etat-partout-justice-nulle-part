@@ -358,6 +358,13 @@ def check_niches(R, d, facts):
     R.check(all(isinstance(r["household_common"], bool) for r in n), area, f"household_common set on every niche ({sum(1 for r in n if r['household_common'])} true)")
     R.check(len(d["provisions_calcul_impot"]) == 81, area, "81 provisions de calcul de l'impôt (hors 465)")
     R.check(d["taux_reduits_tva_hors_niches"]["count"] == 21, area, "21 reduced VAT rates (aggregate only)")
+    pt = d["plan_texte"]
+    byid = {r["id"]: r for r in n}
+    R.check(all(r["resolution"]["plan_final"] in {"supprimee", "trois-ans", "aide-fondamentale", "outre-mer", "eteinte"} for r in n) and sum(v["n_niches"] for v in pt["plan_final"].values()) == 465, area,
+            "plan_final set on the 465 niches (text of PLF-P1 n° 1 over the authors' column)")
+    R.check(byid["520110"]["resolution"]["plan_texte"]["groupe"] == "Cbis" and byid["110203"]["resolution"]["plan_texte"]["groupe"] == "E" and byid["110107"]["resolution"]["plan_texte"]["groupe"] == "C", area,
+            "Pacte Dutreil = IV.C bis (1er janvier 2027), garde d'enfants = IV.E (par tiers), quotient conjugal = IV.C (IR 2028)")
+    R.check(pt["ir_2028"]["n_niches"] >= 19, area, f"{pt['ir_2028']['n_niches']} IR niches fall under IV.C (impôt dû au titre de 2028)")
     flagged = sum(1 for r in n if r["cost_flags"])
     nulls = sum(1 for r in n if r["cost_2024_meur"] is None)
     R.ok(area, f"{flagged} niches carry a cost marker (ε / nc / -), {nulls} have a null 2024 cost")
@@ -369,6 +376,9 @@ def check_niches(R, d, facts):
     cmp = d["synthese"]["cout_2026_vs_exposé"]
     if abs(cmp["somme_lignes_2026_meur"] / 1000 - cmp["exposé_plf_p1_1_md"]) > 1e-6:
         R.warn("D20", f"Niches 2026 : somme des lignes {fr(cmp['somme_lignes_2026_meur'] / 1000, 3)} Md€ vs 79,5 Md€ de l'exposé de PLF-P1 n° 1 ; fiche Contribuable « 143 Md€ » vs 134,7 Md€ (486) vs 89,4 Md€ (465).")
+    cf = pt["conflits_avec_le_classeur"]
+    if cf:
+        R.warn("D40", f"Niches : {len(cf)} niches pour lesquelles la colonne « Suppression » du classeur et le texte de PLF-P1 n° 1 (III et IV.A à F) donnent deux traitements (" + ", ".join(f"{c['id']} {c['plan_classeur']} → {c['plan_final']}" for c in cf[:6]) + ", …) ; {len(pt['classeur_non_verifie_dans_le_texte'])} niches « En 3 ans » du classeur ne sont nommées dans aucun groupe du IV.E.".replace("{len(pt['classeur_non_verifie_dans_le_texte'])}", str(len(pt["classeur_non_verifie_dans_le_texte"]))))
     R.warn("D30", "Niches : colonne « S / E » du classeur sans légende (S = exonérations salariales, E = épargne : interprétation par recoupement).")
     R.warn("D32", "TVA : la liste individuelle des 21 taux réduits non comptés comme niches n'est publiée dans aucune source (nombre et coût agrégé seulement).")
 
@@ -524,7 +534,7 @@ def check_conflicts_from_facts(R, facts, data):
     lc = data["lifecycle.json"]
     aide_adulte = {r["age"]: r.get("aide_fondamentale") for r in lc["by_age"]}
     if aide_adulte[70] == facts["afu_adulte_eur_an"]["value"]:
-        R.warn("D38", f"GraphAFU (« Solidarité au cours de la vie ») : aide fondamentale de {fr(aide_adulte[70])} € à 70 ans, sans la minoration de {fr(facts['afu_pension_minoration_eur_an']['value'])} € que PLF-P1 n° 28 (version de novembre 2026) applique aux pensions de retraite liquidées avant 2028 (soit {fr(aide_adulte[70] - facts['afu_pension_minoration_eur_an']['value'])} € par an) ; la fiche Retraité ne la liste pas parmi les pertes.")
+        R.warn("D38", f"GraphAFU (« Solidarité au cours de la vie ») : aide fondamentale de {fr(aide_adulte[70])} € à 70 ans, sans la minoration de {fr(abs(facts['afu_pension_eur_an']['value']))} € que PLF-P1 n° 28 (version de novembre 2026) applique aux pensions de retraite liquidées avant 2028 (soit {fr(aide_adulte[70] + facts['afu_pension_eur_an']['value'])} € par an) ; la fiche Retraité ne la liste pas parmi les pertes.")
 
 
 def check_static_warns(R):
@@ -579,8 +589,8 @@ def check_reform_params(R, data, facts):
         ("income_tax_and_fundamental_aid.afu_per_adult_per_year_eur", facts["afu_adulte_eur_an"]["value"], 1e-9),
         ("income_tax_and_fundamental_aid.afu_per_dependent_child_per_year_eur", facts["afu_enfant_eur_an"]["value"], 1e-9),
         ("income_tax_and_fundamental_aid.afu_supplement_invalidity_per_year_eur", facts["afu_invalidite_eur_an"]["value"], 1e-9),
-        # the sign flipped in November 2026 (« majoré » → « minoré » de 3 300 €): same amount, compared in absolute value
-        ("income_tax_and_fundamental_aid.afu_supplement_pension_per_year_eur", facts["afu_pension_minoration_eur_an"]["value"], 1e-9),
+        # the sign flipped in November 2026 (« majoré » → « minoré » de 3 300 €): same amount, compared in absolute value (facts.json now holds −3 300)
+        ("income_tax_and_fundamental_aid.afu_supplement_pension_per_year_eur", facts["afu_pension_eur_an"]["value"], 1e-9),
         ("income_tax_and_fundamental_aid.flat_rate_on_net_taxable_income", plan["afu_courbe"]["taux_unique"], 1e-9),
         ("income_tax_and_fundamental_aid.break_even_income_single_adult_eur_per_year", facts["afu_seuil_equilibre_eur_an"]["value"], 0.005),
         ("aggregate_savings_workbook_Md_per_year.per_foyer_eur", plan["savings_table"][0]["eur_par_foyer_an"], 1e-9),

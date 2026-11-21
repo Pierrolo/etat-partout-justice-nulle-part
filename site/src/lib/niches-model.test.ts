@@ -182,12 +182,100 @@ describe('niches-model: quand ?', () => {
     expect(whenOf(find('outre-mer')).anchor).toBeNull();
     const tva = rows.find((r) => r.plan === 'supprimee' && r.tax === 'tva')!;
     expect(whenOf(tva).text).toContain('1er juillet 2027');
-    const locaux = rows.find((r) => r.plan === 'supprimee' && r.tax === 'locaux')!;
+    const locaux = rows.find((r) => r.plan === 'supprimee' && r.tax === 'locaux' && !r.planGroup)!;
     expect(whenOf(locaux).anchor).toBeNull();
     // calendriers propres : dons et épargne ne prennent pas la date « cas général »
     const dons = rows.find((r) => r.id === '110201')!;
     expect(whenOf(dons).text).toContain('Moitié');
     const epargne = rows.find((r) => r.cat === 'epargne' && r.plan === 'supprimee')!;
     expect(whenOf(epargne).anchor).toBe('2027-07-01');
+  });
+});
+
+describe('niches-model: ce que dit le texte de l’amendement n° 1 (novembre 2026)', () => {
+  const byId = (id: string) => rows.find((r) => r.id === id)!;
+
+  it('Pacte Dutreil : supprimé au 1er janvier 2027 (IV.C bis), pas en trois ans', () => {
+    const r = byId('520110');
+    expect(r.plan).toBe('supprimee');
+    expect(r.planGroup).toBe('Cbis');
+    expect(r.planClasseur).toBe('trois-ans');
+    expect(whenOf(r).text).toContain('1er janvier 2027');
+  });
+
+  it('les 12 niches agricoles ou de coopératives du IV.E sont supprimées par tiers', () => {
+    const ids = [
+      '300101',
+      '300102',
+      '60102',
+      '60104',
+      '120147',
+      '300110',
+      '300208',
+      '530208',
+      '60202',
+      '300109',
+      '500101',
+      '530216',
+    ];
+    for (const id of ids) {
+      const r = byId(id);
+      expect(r.plan, id).toBe('trois-ans');
+      expect(r.planGroup, id).toBe('E');
+      expect(r.planClasseur, id).toBe('supprimee');
+      expect(whenOf(r).text, id).toMatch(/tiers/);
+    }
+  });
+
+  it('garde d’enfants : la même lecture (par tiers) sur la page niches et sur la page calendrier', () => {
+    const r = byId('110203');
+    expect(r.plan).toBe('trois-ans');
+    expect(r.planClasseur).toBe('aide-fondamentale');
+    expect(r.planInferred).toBe(true);
+    expect(byId('110246').plan).toBe('trois-ans'); // emploi à domicile : même groupe
+  });
+
+  it('les niches de l’impôt sur le revenu du IV.C sont datées de l’impôt de 2028, pas « dès 2027 »', () => {
+    const ids = [
+      '110102',
+      '110103',
+      '110107',
+      '100202',
+      '140122',
+      '150114',
+      '150117',
+      '150120',
+      '150515',
+      '150518',
+      '190208',
+      '150121',
+      '150210',
+      '150211',
+      '150406',
+      '150705',
+      '150706',
+      '150707',
+      '150710',
+    ];
+    for (const id of ids) {
+      const r = byId(id);
+      expect(r.planGroup, id).toBe('C');
+      expect(whenOf(r).text, id).toContain('2028');
+      expect(whenOf(r).text, id).not.toMatch(/^Dès 2027/);
+    }
+  });
+
+  it('dons : IV.F, moitié au 1er juillet 2027 puis plus rien, y compris l’abattement du 788-III', () => {
+    for (const id of ['110201', '210309', '440201', '520114']) {
+      expect(byId(id).planGroup, id).toBe('F');
+      expect(whenOf(byId(id)).text, id).toContain('Moitié');
+    }
+  });
+
+  it('signale chaque désaccord avec le classeur sans le cacher', () => {
+    const conflicts = rows.filter((r) => r.planConflict);
+    expect(conflicts).toHaveLength(17);
+    expect(conflicts.every((r) => r.planClasseur && r.planClasseur !== r.plan)).toBe(true);
+    expect(rows.filter((r) => !r.planConflict).every((r) => r.planClasseur === null)).toBe(true);
   });
 });

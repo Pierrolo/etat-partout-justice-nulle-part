@@ -78,7 +78,8 @@ def _parse(slug: str, order: int, group_label: str, group_desc: str | None):
     tagline, header = nonempty
     # header counts
     pop = None
-    pertes = gains = 0
+    pertes = None  # None = the header does not mention pertes (« 30 M foyers · 10 gains »): not « 0 perte »
+    gains = 0
     for part in [p.strip() for p in header.split("·")]:
         mm = re.match(r"^(\d+) perte(?:s)?$", part)
         if mm:
@@ -155,7 +156,7 @@ def _parse(slug: str, order: int, group_label: str, group_desc: str | None):
             "gains_header": gains, "gains_listes_avec_sous_points": listed_gains, "gains_listes_hors_sous_points": len(gains_items),
             "gains_listes_plus_comme_chacun": listed_gains + len(common),
             "gains_match": gains == listed_gains or gains == listed_gains + len(common),
-            "pertes_match": pertes == len(pertes_items),
+            "pertes_match": (pertes == len(pertes_items)) if pertes is not None else not pertes_items,
         },
         "population_fact_id": POP_FACT.get(slug),
         "url": page_url,

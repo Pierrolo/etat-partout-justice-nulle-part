@@ -1,5 +1,5 @@
 /**
- * « Crédits retirés » : les 22 amendements d'état B (PLF 2027, seconde partie), mission par mission.
+ * « Crédits retirés » : les 23 amendements d'état B (PLF 2027, seconde partie : n° 1 à 22 et n° 40), mission par mission.
  * Deux barres par mission — crédits de paiement (CP) et autorisations d'engagement (AE), même unité,
  * même axe — triées par CP décroissants ; chaque ligne se déplie sur ses programmes.
  *
@@ -18,7 +18,7 @@ export interface CreditProgramme {
 }
 
 export interface CreditMission {
-  /** Numéro de l'amendement PLF-P2 (1 à 22). */
+  /** Numéro de l'amendement PLF-P2 (1 à 22, puis 40 pour « Outre-mer »). */
   number: number;
   mission: string;
   cpEur: number;
@@ -136,16 +136,20 @@ export default function CreditsChart({
                       </li>
                     ))}
                   </ul>
-                  <p className="text-sm text-ink-2">
-                    <span className="font-semibold text-ink">Effet : </span>
-                    {m.effets.map((e, k) => (
-                      <span key={k}>
-                        {k > 0 && '\u202F; '}
-                        {formatDateFr(e.date)} ({e.appliesTo})
-                      </span>
-                    ))}
-                    .
-                  </p>
+                  <div className="text-sm text-ink-2">
+                    <p className="m-0 font-semibold text-ink">
+                      Dates d’effet, selon la nature des crédits
+                    </p>
+                    <ul className="m-0 mt-1 list-none space-y-1 p-0">
+                      {m.effets.map((e, k) => (
+                        <li key={k} className="border-s-2 border-rule-strong ps-3">
+                          <span className="font-semibold text-ink">{formatDateFr(e.date)}</span>
+                          {'\u202F: '}
+                          {e.appliesTo}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                   <p className="flex flex-wrap gap-x-4 text-sm">
                     <a href={`${amendementsHref}#PLF-P2-${m.number}`}>
                       Amendement PLF-P2 n° {m.number}

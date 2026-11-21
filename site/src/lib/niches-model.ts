@@ -26,7 +26,21 @@ export interface RawNiche {
   household_common_reason: string | null;
   purpose_fr: string | null;
   reliability: string | null;
-  resolution: { suppression_code: string | null; suppression_fr: string | null };
+  resolution: {
+    suppression_code: string | null;
+    suppression_fr: string | null;
+    /** Ce que fait le plan d'après le TEXTE de PLF-P1 n° 1 (le texte l'emporte sur le classeur). */
+    plan_final: PlanId;
+    /** Ce que dit la colonne « Suppression » du classeur des auteurs. */
+    plan_classeur: PlanId;
+    plan_conflit_classeur: boolean;
+    plan_texte: {
+      /** Groupe du IV de l'amendement n° 1 : A, B, C, C0, Cbis, D, E, F ; `null` = pas de date affirmée. */
+      groupe: string | null;
+      inferred: boolean;
+      note_fr: string | null;
+    };
+  };
 }
 
 /* ── Catégories, impôts, effets du plan ─────────────────────────────────── */
@@ -90,7 +104,10 @@ const TAX_BY_RAW = Object.fromEntries(TAX_IDS.map((id) => [TAX_META[id].raw, id]
   TaxId
 >;
 
-/** Ce que le plan fait de la niche, d'après la colonne « Suppression » du chiffrage publié. */
+/**
+ * Ce que le plan fait de la niche : le texte de l'amendement PLF-P1 n° 1 (III : dispositions abrogées ;
+ * IV : calendrier par groupe) ; à défaut de texte, la colonne « Suppression » du chiffrage publié.
+ */
 export const PLAN_IDS = [
   'supprimee',
   'trois-ans',
@@ -107,20 +124,22 @@ export const PLAN_META: Record<
   supprimee: {
     label: 'Supprimée',
     short: 'Supprimée',
-    detail: 'Abrogée dès l’entrée en vigueur de l’amendement n° 1, aux dates qu’il fixe.',
+    detail:
+      'Abrogée par l’amendement n° 1, à la date de son groupe (IV.A à IV.F) : le plus souvent en 2027, parfois pour l’impôt de 2028.',
     raw: 'Oui',
   },
   'trois-ans': {
     label: 'Supprimée en trois ans',
     short: 'En trois ans',
-    detail: 'Réduite d’un tiers en 2027, de deux tiers en 2028, supprimée en 2029.',
+    detail:
+      'Réduite d’un tiers au titre de 2027, de deux tiers au titre de 2028, supprimée en totalité à partir de 2029 (IV.E de l’amendement n° 1).',
     raw: 'En 3 ans',
   },
   'aide-fondamentale': {
     label: 'Intégrée à l’aide fondamentale',
     short: 'Aide fondamentale',
     detail:
-      'Remplacée par l’aide fondamentale universelle (crédits d’impôt sur le revenu fusionnés).',
+      'Remplacée par l’aide fondamentale universelle (crédits d’impôt sur le revenu fusionnés, article 28, VII).',
     raw: 'Fusion CI IR',
   },
   'outre-mer': {
@@ -149,7 +168,17 @@ export interface NicheRow {
   label: string;
   cat: CategoryId;
   tax: TaxId;
+  /** Ce que fait le plan d'après le texte de l'amendement n° 1 (voir `PLAN_META`). */
   plan: PlanId;
+  /** Groupe du IV de l'amendement n° 1 (A, B, C, C0, Cbis, D, E, F), `null` si le texte ne permet pas d'en affirmer un. */
+  planGroup: string | null;
+  /** Le classeur des auteurs dit autre chose que le texte (la colonne « Suppression »). */
+  planConflict: boolean;
+  /** Ce que dit le classeur quand il diverge du texte. */
+  planClasseur: PlanId | null;
+  /** Explication du rapprochement texte ↔ niche, quand il y en a une à donner. */
+  planNote: string | null;
+  planInferred: boolean;
   /** Coûts 2024 (réalisé), 2025 et 2026 (prévisions) en M€ ; `null` = non chiffré. */
   cost: [number | null, number | null, number | null];
   /** Motif d'un coût manquant, par année (même ordre que `cost`). */
@@ -193,6 +222,8 @@ const FLAGS: Record<string, CostFlag> = {
 };
 
 function planOf(raw: RawNiche): PlanId {
+  const final = raw.resolution.plan_final;
+  if (PLAN_IDS.includes(final)) return final;
   const code = raw.resolution.suppression_code;
   const hit = PLAN_IDS.find((id) => PLAN_META[id].raw === code);
   return hit ?? 'eteinte';
@@ -208,6 +239,13 @@ export function toRow(raw: RawNiche): NicheRow {
     cat: CATEGORY_BY_RAW[raw.category] ?? 'autre',
     tax: TAX_BY_RAW[raw.tax] ?? 'autres-droits',
     plan: planOf(raw),
+    planGroup: raw.resolution.plan_texte?.groupe ?? null,
+    planConflict: raw.resolution.plan_conflit_classeur === true,
+    planClasseur: raw.resolution.plan_conflit_classeur ? raw.resolution.plan_classeur : null,
+    planNote: raw.resolution.plan_conflit_classeur
+      ? (raw.resolution.plan_texte.note_fr ?? null)
+      : null,
+    planInferred: raw.resolution.plan_texte?.inferred === true,
     cost: [raw.cost_2024_meur, raw.cost_2025_meur, raw.cost_2026_meur],
     flag: [flagFor(2024), flagFor(2025), flagFor(2026)],
     legal: legalLabel(raw.legal_ref),
@@ -233,25 +271,29 @@ export interface WhenInfo {
   anchor: string | null;
 }
 
-/** Réductions d'impôt pour dons (IR, IS, IFI) : l'avantage est réduit de moitié puis supprimé. */
+/** Réductions d'impôt pour dons (IR, IS, IFI) : l'avantage est réduit de moitié puis supprimé (IV.F, filet si le texte ne rapproche pas la niche). */
 const DONS_IDS = ['110201', '210309', '440201'];
 
 /**
- * Date d'effet d'une niche, au niveau de précision que les sources permettent.
- * Les 359 niches « supprimées » n'ont pas de date publiée une à une : on donne le *cas général*
- * de l'amendement PLF-P1 n° 1 selon l'impôt (calendrier cal_005 et cal_040), et on renvoie au texte
- * pour le reste — jamais une date plus précise que la source.
+ * Date d'effet d'une niche, au niveau de précision que le texte de l'amendement PLF-P1 n° 1 permet.
+ * Le III abroge les dispositions numéro par numéro, le IV donne à chaque groupe de numéros son calendrier
+ * (A cas général, B avantages liés à un engagement, C barème et plus-values, C bis successions, D TVA et
+ * accises, E agriculture et services à la personne, F dons). `planGroup` dit le groupe quand la référence
+ * légale de la niche est citée par un numéro du III ; sinon on donne le cas général de l'impôt et on renvoie au
+ * texte — jamais une date plus précise que la source.
  */
-export function whenOf(row: Pick<NicheRow, 'plan' | 'tax' | 'cat' | 'id'>): WhenInfo {
+export function whenOf(
+  row: Pick<NicheRow, 'plan' | 'tax' | 'cat' | 'id'> & { planGroup?: string | null },
+): WhenInfo {
   switch (row.plan) {
     case 'trois-ans':
       return {
-        text: 'Un tiers en 2027, deux tiers en 2028, supprimée en 2029',
+        text: 'Un tiers en moins au titre de 2027, deux tiers au titre de 2028, supprimée à partir de 2029',
         anchor: '2027-01-01',
       };
     case 'aide-fondamentale':
       return {
-        text: 'Avec l’aide fondamentale, à partir du 1er janvier 2028',
+        text: 'Avec l’aide fondamentale : impôt sur le revenu dû au titre de 2028, acomptes dès le 1er janvier 2028',
         anchor: '2028-01-01',
       };
     case 'outre-mer':
@@ -259,7 +301,47 @@ export function whenOf(row: Pick<NicheRow, 'plan' | 'tax' | 'cat' | 'id'>): When
     case 'eteinte':
       return { text: 'Rien à supprimer', anchor: null };
     case 'supprimee':
-      // Calendriers propres de l'amendement n° 1 (IV) : dons (cal_038, cal_064) et épargne (cal_039).
+      switch (row.planGroup) {
+        case 'F':
+          return {
+            text: 'Moitié dès le 1er juillet 2027, plus rien en 2028',
+            anchor: '2027-07-01',
+          };
+        case 'Cbis':
+          return {
+            text: 'Successions ouvertes et donations consenties à partir du 1er janvier 2027',
+            anchor: '2027-01-01',
+          };
+        case 'C0':
+          return {
+            text: 'Cessions et exportations à partir du 1er janvier 2027',
+            anchor: '2027-01-01',
+          };
+        case 'C':
+          if (row.cat === 'epargne') {
+            return {
+              text: 'Plans et livrets ouverts ou alimentés dès le 1er juillet 2027 ; le reste à partir de l’impôt sur le revenu de 2028',
+              anchor: '2027-07-01',
+            };
+          }
+          return {
+            text: 'À partir de l’impôt sur le revenu dû au titre de 2028 (opérations dès le 1er janvier 2028), pas dès 2027',
+            anchor: '2028-01-01',
+          };
+        case 'D':
+          return { text: 'Dès le 1er juillet 2027 (cas général)', anchor: '2027-07-01' };
+        case 'B':
+          return {
+            text: 'Investissements, dépenses et engagements à partir du 1er janvier 2027',
+            anchor: '2027-01-01',
+          };
+        case 'A':
+          return {
+            text: 'Impôt sur le revenu dû au titre de 2026, exercices clos et actes à partir du 1er janvier 2027',
+            anchor: '2027-01-01',
+          };
+      }
+      // Pas de numéro du III rapproché : calendriers propres de l'amendement n° 1 (IV), puis cas général.
       if (DONS_IDS.includes(row.id)) {
         return { text: 'Moitié dès le 1er juillet 2027, plus rien en 2028', anchor: '2027-07-01' };
       }
@@ -273,7 +355,10 @@ export function whenOf(row: Pick<NicheRow, 'plan' | 'tax' | 'cat' | 'id'>): When
         return { text: 'Dès le 1er juillet 2027 (cas général)', anchor: '2027-07-01' };
       }
       if (row.tax === 'ir' || row.tax === 'is' || row.tax === 'ir-is' || row.tax === 'droits') {
-        return { text: 'Dès 2027 (cas général)', anchor: '2027-01-01' };
+        return {
+          text: 'Date non rapprochée du texte : cas général dès 2027, sauf exceptions du IV.B à F (2028 pour le barème et les plus-values)',
+          anchor: null,
+        };
       }
       return { text: 'Date fixée par l’amendement n° 1', anchor: null };
   }

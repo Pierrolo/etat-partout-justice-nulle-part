@@ -26,6 +26,24 @@ test.describe('/comprendre/niches', () => {
     const main = page.locator('main');
     for (const total of ['89,4', '134,7', '143']) await expect(main).toContainText(`${total} Md€`);
     await expect(summary(page)).toContainText('465 niches');
+    // 134,7 n'est pas un chiffre du PLF : les 21 taux réduits sont une estimation du CPO projetée par les auteurs
+    await expect(main).toContainText(/estimation du CPO/);
+    await expect(main).toContainText(/ni l.un\s+ni l.autre n.est un chiffre du PLF/);
+    await expect(main).not.toContainText(/Les deux sont des données du PLF 2026/);
+  });
+
+  test('suit le texte de l’amendement n° 1 : Dutreil au 1er janvier 2027, garde d’enfants par tiers', async ({
+    page,
+  }) => {
+    const box = page.getByRole('searchbox', { name: 'Rechercher une niche' });
+    await box.fill('787 B');
+    const dutreil = rows(page).filter({ hasText: 'transmission' }).or(rows(page).first());
+    await expect(dutreil.first()).toContainText('1er janvier 2027');
+    await expect(dutreil.first()).toContainText(/classeur des auteurs/);
+    await box.fill('frais de garde des enfants');
+    await expect(rows(page).first()).toContainText(/tiers/);
+    await box.fill('demi-part pour les contribuables vivant seuls');
+    await expect(rows(page).first()).toContainText('2028');
   });
 
   test('la recherche ignore les accents et la casse, et l’URL garde le filtre', async ({
@@ -159,7 +177,9 @@ test.describe('/comprendre/amendements', () => {
     await expect(page.getByText('Des amendements publiés, pas des lois votées')).toBeVisible();
     await expect(page.getByText(/Aucun n’est adopté ni en vigueur/)).toBeVisible();
     await expect(page.getByText(/texte rédigé et publié, pas en vigueur/i).first()).toBeVisible();
-    await expect(summary(page)).toContainText('81 amendements');
+    await expect(summary(page)).toContainText('84 amendements');
+    // la version du plan est affichée : « Amendements publiés le 18 novembre 2026 »
+    await expect(page.getByText('Amendements publiés le 18 novembre 2026').first()).toBeVisible();
     // what no source says: that they will be filed, or voted
     const text = await page.locator('main').innerText();
     expect(text).not.toMatch(/en attente de dépôt|attendent d’être déposés|puis votés/);
@@ -168,7 +188,7 @@ test.describe('/comprendre/amendements', () => {
   test('la recherche trouve un amendement sans tenir compte des accents', async ({ page }) => {
     const box = page.getByRole('searchbox', { name: 'Rechercher un amendement' });
     await box.fill('TITRES restaurant');
-    await expect(summary(page)).toContainText('1 amendement sur 81');
+    await expect(summary(page)).toContainText('1 amendement sur 84');
     const card = page.locator('article#PLF-P1-2');
     await expect(card).toBeVisible();
     await expect(card).toContainText('Titres-restaurant');
@@ -186,21 +206,21 @@ test.describe('/comprendre/amendements', () => {
     await expect(
       page.getByRole('heading', { level: 3, name: /PLF 2027, première partie/ }),
     ).toBeVisible();
-    await expect(page.locator('article')).toHaveCount(81);
+    await expect(page.locator('article')).toHaveCount(84);
     await page.getByRole('button', { name: /^PLFSS 2027/ }).click();
-    await expect(summary(page)).toContainText('8 amendements sur 81');
+    await expect(summary(page)).toContainText('9 amendements sur 84');
     await page.getByRole('button', { name: 'Réinitialiser les filtres' }).click();
     await page.getByRole('radio', { name: 'Thème', exact: true }).check({ force: true });
     await expect(
       page.getByRole('heading', { level: 3, name: /Crédits de l.État retirés/ }),
     ).toBeVisible();
     await page.locator('#am-theme').selectOption('credits_etat');
-    await expect(summary(page)).toContainText('22 amendements sur 81');
+    await expect(summary(page)).toContainText('23 amendements sur 84');
   });
 
   test('le graphique des crédits retirés se déplie sur les programmes', async ({ page }) => {
     const list = page.getByRole('list', { name: /Crédits retirés par mission/ });
-    await expect(list.locator('> li')).toHaveCount(22);
+    await expect(list.locator('> li')).toHaveCount(23);
     const first = list.locator('> li').first();
     await expect(first).toContainText('Cohésion des territoires');
     await first.locator('summary').click();
@@ -216,12 +236,13 @@ test.describe('/comprendre/calendrier', () => {
   test('filtre par domaine, sans marqueur « aujourd’hui »', async ({ page }) => {
     await page.goto('comprendre/calendrier/');
     await hydrated(page, 'CalendrierExplorer');
-    await expect(page.getByText(/104 mesures affichées sur 104/)).toBeVisible();
+    await expect(page.getByText('Amendements publiés le 18 novembre 2026').first()).toBeVisible();
+    await expect(page.getByText(/109 mesures affichées sur 109/)).toBeVisible();
     await page.getByRole('button', { name: /^Collectivités/ }).click();
-    await expect(page.getByText(/11 mesures affichées sur 104/)).toBeVisible();
+    await expect(page.getByText(/12 mesures affichées sur 109/)).toBeVisible();
     await expect(page.locator('main')).not.toContainText(/aujourd[’']hui/i);
     await page.getByRole('button', { name: 'Tous les domaines' }).click();
-    await expect(page.getByText(/104 mesures affichées/)).toBeVisible();
+    await expect(page.getByText(/109 mesures affichées/)).toBeVisible();
   });
 
   test('chaque mesure renvoie à son amendement ; une date clé ouvre son groupe', async ({
@@ -229,7 +250,7 @@ test.describe('/comprendre/calendrier', () => {
   }) => {
     await page.goto('comprendre/calendrier/');
     await hydrated(page, 'CalendrierExplorer');
-    await page.getByRole('link', { name: /Date clé 3 : 1er juillet 2027/ }).click();
+    await page.getByRole('link', { name: /Date clé 4 : 1er juillet 2027/ }).click();
     const group = page.locator('details#d-2027-07-01');
     await expect(group).toHaveAttribute('open', '');
     await expect(group.getByRole('link', { name: /^PLF-P1 n° \d+/ }).first()).toHaveAttribute(

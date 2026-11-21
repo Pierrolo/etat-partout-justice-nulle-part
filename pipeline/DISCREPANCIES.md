@@ -2,7 +2,7 @@
 
 Chaque section `## Dxx` correspond à un avertissement (`WARN [Dxx]`) émis par `pipeline/validate.py`. `validate.py` échoue si un code émis n'a pas de section ici.
 
-**Version des sources.** Depuis le 21 novembre 2026, le pipeline lit la version republiée par les auteurs les 17 et 18 novembre 2026 : liasses PDF/DOCX (84 amendements : 35 + 40 + 9), classeurs renommés (« Synthèse des chiffrages », « Séries des graphiques », « Emplois publics » et « Agences publiques » — l'ancien classeur ETP a été scindé en deux —, « Niches fiscales », « Dépenses de l'État », « Dépenses locales », « Taxes affectées aux agences ») et pages du site (`research/pages-2026-11-21/`, `data/derived-2026-11-21/`). Les fichiers d'octobre 2026 restent dans le dépôt comme historique (`data/derived/`, `research/pages/`, `data/raw/`) ; le pipeline ne les lit plus. Les sections marquées **Résolu** décrivent un écart d'octobre qui a disparu en novembre ; elles gardent leur code pour que les renvois restent stables et ne sont plus émises par `validate.py`. Les sections D35 à D39 sont nées de la version de novembre.
+**Version des sources.** Depuis le 21 novembre 2026, le pipeline lit la version republiée par les auteurs les 17 et 18 novembre 2026 : liasses PDF/DOCX (84 amendements : 35 + 40 + 9), classeurs renommés (« Synthèse des chiffrages », « Séries des graphiques », « Emplois publics » et « Agences publiques » — l'ancien classeur ETP a été scindé en deux —, « Niches fiscales », « Dépenses de l'État », « Dépenses locales », « Taxes affectées aux agences ») et pages du site (`research/pages-2026-11-21/`, `data/derived-2026-11-21/`). Les fichiers d'octobre 2026 restent dans le dépôt comme historique (`data/derived/`, `research/pages/`, `data/raw/`) ; le pipeline ne les lit plus. Les sections marquées **Résolu** décrivent un écart d'octobre qui a disparu en novembre ; elles gardent leur code pour que les renvois restent stables et ne sont plus émises par `validate.py`. Les sections D35 à D40 sont nées de la version de novembre.
 
 Règle générale : **aucun chiffre n'est corrigé en silence**. Quand deux sources divergent, les deux valeurs sont conservées (`facts.json`, champ `conflict: true` et liste `conflicts[]` avec `group`, `with`, `note`), et la valeur retenue pour un graphique est indiquée ci-dessous. Les valeurs sont lues dans les cellules du classeur, jamais saisies à la main ; les références sont `feuille!cellule`.
 
@@ -45,15 +45,15 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Interprétation : EA20 (20 pays, 2023-2025) couvre 2024-2025 ; EA21 existe depuis l'adhésion de la Bulgarie (1er janvier 2026) ; EA19 a la même valeur que EA20 sur 2024-2025. Choix de convention du pipeline, non fait par la source.
 - Traitement : Documenté. `europe.json › agregats` garde EA19, EA20, EA21 et UE27 ; `is_euro_area_reference: true` sur EA20.
 
-## D08 — 236 Md€ : total colonne C contre somme E + F — **Résolu en novembre 2026**
-- Constat d'octobre : la ligne « Patrimoine public valorisé et restitué » valait 18 en colonne C et 18,209 en colonne F ; le total de la colonne C (236,055) était inférieur de 0,209 Md€ à E + F (236,264).
-- Novembre 2026 : la cellule `Annexe Manuscrit!C28` n'est plus tronquée (`=SUM(E28,F28)` au lieu de `=TRUNC(SUM(E28,F28))`) ; C = E + F sur chacune des 26 lignes, total 236,352699 Md€ (« 236 milliards » inchangé). `validate.py` vérifie l'égalité ligne à ligne.
-- Traitement : plus d'avertissement. Reste l'écart du total avec la feuille Graph236 (D39) et avec la réconciliation Input Capitalisation (D10).
+## D08 — 236 Md€ : total colonne C contre somme E + F (résolu en novembre 2026)
+- Constat : en octobre, la ligne « Patrimoine public valorisé et restitué » valait 18 en colonne C et 18,209 en colonne F ; le total de la colonne C (236,055) était inférieur de 0,209 Md€ à E + F (236,264). En novembre 2026 la cellule `Annexe Manuscrit!C28` n'est plus tronquée (`=SUM(E28,F28)` au lieu de `=TRUNC(SUM(E28,F28))`) : C = E + F sur chacune des 26 lignes, total 236,352699 Md€ (« 236 milliards » inchangé).
+- Interprétation : la troncature du classeur d'octobre a été corrigée par les auteurs.
+- Traitement : résolu, plus d'avertissement ; `validate.py` vérifie l'égalité ligne à ligne. Reste l'écart du total avec la feuille Graph236 (D39) et avec la réconciliation Input Capitalisation (D10).
 
-## D09 — Gain de l'année 1 : Annexe Manuscrit contre feuille Flux — **Résolu en novembre 2026**
-- Constat d'octobre : 127,352 (Annexe) contre 129,4 (Flux), écart de 2,048 Md€.
-- Novembre 2026 : l'Annexe donne 129,4593 et la feuille Flux 129,459 (écart de 0,0003 Md€ : arrondi). Les deux onglets s'accordent. « Année 1 » reste une étiquette non datée du classeur (D10, et l'exposé de PLFSS n° 1 écrit 33 Md€ de CSG/CRDS en 2027 et 114 Md€ « en année pleine dès 2028 »).
-- Traitement : plus d'avertissement ; le Sankey par catégorie utilise l'Annexe Manuscrit.
+## D09 — Gain de l'année 1 : Annexe Manuscrit contre feuille Flux (résolu en novembre 2026)
+- Constat : en octobre, 127,352 (Annexe) contre 129,4 (Flux), écart de 2,048 Md€. En novembre 2026 l'Annexe donne 129,4593 et la feuille Flux 129,459 (écart de 0,0003 Md€ : arrondi).
+- Interprétation : les deux onglets s'accordent ; « année 1 » reste une étiquette non datée du classeur (l'exposé de PLFSS n° 1 écrit 33 Md€ de CSG/CRDS en 2027 et 114 Md€ « en année pleine dès 2028 »).
+- Traitement : résolu, plus d'avertissement ; le Sankey par catégorie utilise l'Annexe Manuscrit.
 
 ## D10 — Sankey : capitalisation 121,893 (calculée) contre 121,938 (classeur)
 - Constat : en additionnant reliquat d'année 1 et année pleine de l'Annexe, la destination capitalisation vaut 121,893 Md€ ; Input Capitalisation!E2 affirme 121,938 Md€. Résidu de −0,045 Md€ (octobre : +0,055 Md€ avec 121,804 contre 121,749).
@@ -125,10 +125,10 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Interprétation : non expliqué par la source.
 - Traitement : Documenté. `fiches.json › fiches[].header_vs_listed` expose les deux comptes pour chaque fiche ; aucun gain n'est ajouté.
 
-## D24 — État B : arrondi de 1 € sur les amendements n° 4, 5 et 13 — **Résolu en novembre 2026**
-- Constat d'octobre : la somme des programmes dépassait le total publié de 1 € en autorisations d'engagement (n° 4, 5, 13).
-- Novembre 2026 : tous les états B ont été réécrits (23 missions, 63 programmes, 13 sous-lignes « dont titre 2 ») ; la somme des programmes est égale à la ligne TOTAUX pour les 23 amendements. `validate.py` le vérifie ; `credits-retires.json › ecart_somme_programmes_vs_total_eur` vaut 0 partout.
-- Traitement : plus d'avertissement. Totaux : 24 261,6 M€ d'AE et 21 034,5 M€ de CP (43 855,4 et 39 905,0 en octobre).
+## D24 — État B : arrondi de 1 € sur les amendements n° 4, 5 et 13 (résolu en novembre 2026)
+- Constat : en octobre, la somme des programmes dépassait le total publié de 1 € en autorisations d'engagement (n° 4, 5, 13). En novembre 2026, tous les états B ont été réécrits (23 missions, 63 programmes, 13 sous-lignes « dont titre 2 ») et la somme des programmes est égale à la ligne TOTAUX pour les 23 amendements.
+- Interprétation : arrondi de la source d'octobre, absent des nouveaux tableaux.
+- Traitement : résolu, plus d'avertissement ; `credits-retires.json › ecart_somme_programmes_vs_total_eur` vaut 0 partout. Totaux : 24 261,6 M€ d'AE et 21 034,5 M€ de CP (43 855,4 et 39 905,0 en octobre).
 
 ## D25 — GraphAFU : deux séries « Epargne retraite personnelle »
 - Constat : lignes 29 et 30 portent le même libellé (20 064 € et 6 600 € à partir de 64 ans).
@@ -141,9 +141,9 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Traitement : Documenté (`etat-partout.json › impots › recettes_2024 › children_note`). L'arbre n'additionne que les niveaux validés ; les lignes « à titre onéreux / gratuit » sont traitées en niveau 2 pour que le total (624,9) soit juste.
 
 ## D27 — Textes de loi : ambiguïtés juridiques
-- Constat : (a) le « revenu net imposable » après réforme (déduction de 10 %, CSG) n'est pas défini ; (b) l'abrogation de 150 U-II-1° (exonération de la plus-value de résidence principale) découle de PLF-P1 n° 20 et n° 1 : inférence de la source-analyse ; (c) le calendrier de l'abattement de 10 % sur les pensions est déduit.
-- Interprétation : aucune réécriture juridique n'est faite par le pipeline.
-- Traitement : Documenté. Les provisions de calcul de l'impôt concernées sont sorties dans `niches.json › provisions_calcul_impot` et signalées ; les dates ne sont publiées que si la citation est vérifiée mot pour mot dans l'amendement.
+- Constat : (a) le « revenu net imposable » après réforme (déduction de 10 %, CSG) n'est pas défini ; (b) l'abrogation de 150 U-II-1° (exonération de la plus-value de résidence principale) découle de PLF-P1 n° 20 et n° 1 : inférence de la source-analyse ; (c) le calendrier de l'abattement de 10 % sur les pensions est déduit ; (d) l'exposé de PLF-P1 n° 20 écrit « 17,2 % de contributions sociales, soit 30 % sur les titres et 36,2 % sur l'immobilier », alors que depuis la loi de financement de la sécurité sociale pour 2026 (promulguée le 30 décembre 2025) les prélèvements sociaux sur les revenus de titres sont de 18,6 % (CSG de 10,6 %) et le prélèvement forfaitaire de 31,4 % ; 17,2 % ne subsiste que pour l'immobilier, les revenus fonciers et certains placements (vérification d'après des synthèses juridiques ; Légifrance n'a pas été consulté).
+- Interprétation : aucune réécriture juridique n'est faite par le pipeline ; pour (d), le chiffre de l'exposé est celui des auteurs, la mise à jour 18,6 % est une glose du site sur le droit actuel.
+- Traitement : Documenté. Le résumé de PLF-P1 n° 20 dit « 18,6 % sur les titres depuis 2026, 17,2 % sur l'immobilier » (glose du site, séparée de la citation des auteurs). Les provisions de calcul de l'impôt concernées sont sorties dans `niches.json › provisions_calcul_impot` et signalées ; les dates ne sont publiées que si la citation est vérifiée mot pour mot dans l'amendement.
 
 ## D28 — Pas de microsimulation de l'aide fondamentale
 - Constat : coût brut 402,006 Md€ − dépenses existantes fusionnées dans l'aide 135,346 Md€ (fiscal 21,6 + budgétaire 31,8 + social 81,946, feuille « Refonte fiscalité ») = 266,66 Md€ ; aucune répartition gagnants/perdants par décile n'est publiée.
@@ -196,7 +196,7 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Traitement : Documenté (groupe `nb_impots_graphique`). Le site garde « 438 » (manifeste) et expose le « 434 » comme conflit.
 
 ## D38 — GraphAFU et fiche Retraité contre la minoration de pension de PLF-P1 n° 28
-- Constat : la version de novembre 2026 de PLF-P1 n° 28 minore l'aide fondamentale de 3 300 € par an « pour chaque membre du foyer fiscal titulaire d'une pension de retraite servie par un régime obligatoire et liquidée avant le 1er janvier 2028 » (au lieu de la majorer, comme en octobre), jusqu'à l'imposition des revenus de 2051 ; pour une pension liquidée ensuite, la minoration est réduite au prorata des droits acquis avant 2028. La feuille GraphAFU (« Solidarité au cours de la vie ») montre toujours 6 600 € d'aide fondamentale à partir de 18 ans, sans minoration ; la fiche Retraité liste deux pertes (abattement de 10 %, indexation) et ne mentionne pas la minoration.
+- Constat : la version de novembre 2026 de PLF-P1 n° 28 minore l'aide fondamentale de 3 300 € par an « pour chaque membre du foyer fiscal titulaire d'une pension de retraite servie par un régime obligatoire et liquidée avant le 1er janvier 2028 » (au lieu de la majorer, comme en octobre), jusqu'à l'imposition des revenus de 2051 ; pour une pension liquidée ensuite, la minoration est réduite au prorata des droits acquis avant 2028. La feuille GraphAFU (« Solidarité au cours de la vie », identique en octobre et en novembre) donne de 64 à 85 ans 6 600 € d'aide fondamentale plus une « part contributive de retraite » de +6 600 €, jamais une minoration de 3 300 € ; la fiche Retraité liste deux pertes (abattement de 10 %, indexation) et ne mentionne pas la minoration.
 - Interprétation : le classeur et les fiches n'ont pas été mis en cohérence avec le texte de l'amendement ; pour un retraité d'aujourd'hui, l'aide est de 6 600 − 3 300 = 3 300 € par an (275 € par mois) selon l'amendement.
 - Traitement : Documenté. `lifecycle.json` reprend GraphAFU tel quel (série annoncée) et signale l'écart dans la note de la série ; le texte de l'amendement fait foi.
 
@@ -204,6 +204,11 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Constat : `Séries des graphiques › Graph236` donne un total de 236,402207 Md€ (D24) et un rendement des actifs publics de 17,602207 Md€ (D34) ; l'Annexe Manuscrit donne 236,352699 et 17,552699. Écart de 0,0495 Md€ (« Administrations non indispensables 68 » y est en revanche à jour).
 - Interprétation : la feuille qui alimente le graphique n'a pas suivi la modification de l'Annexe Manuscrit.
 - Traitement : Documenté (groupe `eco236_total`). `plan-flux.json › reconciliation › graph236` garde les deux valeurs ; le total retenu est celui de l'Annexe Manuscrit.
+
+## D40 — Niches : colonne « Suppression » du classeur contre texte de PLF-P1 n° 1
+- Constat : pour 17 niches (7,5 Md€ de coût 2024, dont 5,0 pour le Pacte Dutreil et 1,7 pour le crédit d'impôt garde d'enfants), la colonne « Suppression » de la feuille « Chiffrages Résolution » ne dit pas ce que dit le texte de PLF-P1 n° 1. (a) Pacte Dutreil (520110, 787 B et 787 C, 5 000 M€) : le classeur dit « En 3 ans », le III 223° est dans le IV.C bis (successions et donations à partir du 1er janvier 2027). (b) Douze niches agricoles ou de coopératives (300101, 300102, 60102, 60104, 120147, 300110, 300208, 530208 et quatre niches sans coût chiffré) et trois tarifs réduits d'accise (L. 312-60 à L. 312-63) : « Oui » dans le classeur, mais dans le IV.E (un tiers au titre de 2027, deux tiers au titre de 2028, supprimées en 2029). (c) Crédit d'impôt pour frais de garde (110203, 1 737 M€) : « Fusion CI IR » dans le classeur ; le texte l'inclut, par rapprochement inféré avec le III 150°, dans le IV.E, et l'article 28 VII ne le compte pas parmi les crédits fusionnés dans l'aide fondamentale. Deux niches « En 3 ans » du classeur (60203, 120124) ne sont nommées dans aucun groupe du IV.E.
+- Interprétation : le classeur est la lecture des auteurs ; le texte de l'amendement fait foi. Le numéro 150° du III (« 23° bis du II de la section V ») ne cite pas l'article 200 quater B : le rapprochement est signalé `inferred: true` (Légifrance n'a pas pu être consulté).
+- Traitement : Documenté. `niches.json › niches[].resolution` garde `plan_classeur` (colonne des auteurs), `plan_texte` (groupe du IV et numéros du III) et `plan_final` (le texte l'emporte), avec `plan_conflit_classeur` ; `niches.json › plan_texte › conflits_avec_le_classeur` liste les niches. Pour les niches de l'impôt sur le revenu du IV.C, la date est l'imposition des revenus de 2028 (et non « dès 2027 »).
 
 ---
 

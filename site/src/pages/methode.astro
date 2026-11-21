@@ -13,6 +13,7 @@ import '@/components/ui/glossary.css';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { ENGINE_VERSION } from '@/lib/engine';
 import { formatEuro, formatMdEuro, formatNumber, formatPercentPoints } from '@/lib/format';
+import amendements from '@/data/amendements.json';
 import { FOYERS_LABEL } from '@/lib/foyers';
 import {
   FEATURED_DISCREPANCIES,
@@ -24,6 +25,7 @@ import { SITE, withBase } from '@/lib/site';
 import { typo } from '@/lib/typo';
 import { num } from '@/lib/facts';
 
+const planVersion = amendements.meta.version;
 const html = await doc.compiledContent();
 // Section « Journal des modifications » : après les écarts entre sources, que la page complète.
 const cut = html.indexOf('<h2 id="journal"');
@@ -59,8 +61,11 @@ const pct1 = (v: number) => formatPercentPoints(v, { decimals: 1 });
 
   <div class="wrap pb-6">
     <p class="text-sm text-ink-3">
-      Moteur de calcul, version <strong class="text-ink">{ENGINE_VERSION}</strong>. Le code, les
-      données et les paramètres sont publics :
+      Moteur de calcul, version <strong class="text-ink">{ENGINE_VERSION}</strong>. Plan :{' '}
+      <strong class="text-ink" data-plan-version>
+        {planVersion.label_fr}
+      </strong>{' '}
+      (rédigés et publiés, pas en vigueur). Le code, les données et les paramètres sont publics :
       <a href={SITE.repo}>dépôt du projet</a>.
     </p>
     <h2 class="mt-8 text-xl text-ink">Comment lire les étiquettes</h2>

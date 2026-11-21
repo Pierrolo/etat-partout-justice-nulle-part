@@ -47,14 +47,14 @@ def build() -> dict:
                 dts = sorted({d["date"] for d in c["effets"]})
                 resume = (
                     f"Retire {fr(c['cp_retirees_md'], 3)} Md€ de crédits de paiement (et {fr(c['ae_retirees_md'], 3)} Md€ d'autorisations d'engagement) "
-                    f"de la mission « {c['mission_fr']} », soit {fr(c['part_ae_retiree_pct'], 1)} % des autorisations d'engagement des {c['n_programmes']} "
-                    f"programme{'s' if c['n_programmes'] > 1 else ''} visé{'s' if c['n_programmes'] > 1 else ''}. "
+                    f"de la mission « {c['mission_fr']} », soit {fr(c['part_ae_retiree_pct'], 1)} % des autorisations d'engagement "
+                    + (f"des {c['n_programmes']} programmes visés. " if c["n_programmes"] > 1 else "du programme visé. ")
                     + _effect_sentence(dts)
                 )
                 dates = []
                 for d in c["effets"]:
                     first, _last = quote_pages(lid, n, d["sentence_fr"])
-                    dates.append({"date": d["date"], "precision": "jour", "label_fr": f"Crédits retirés pour {d['applies_to_fr']}", "pdf_page": first, "pdf_url": pdf_url(lid, first)})
+                    dates.append({"date": d["date"], "precision": "jour", "label_fr": f"Crédits retirés : {d['applies_to_fr']}", "pdf_page": first, "pdf_url": pdf_url(lid, first)})
             else:
                 cur = CURATED[(lid, n)]
                 theme, resume = cur["theme"], cur["resume"]
@@ -99,7 +99,7 @@ def build() -> dict:
             "title_fr": "Les 84 amendements rédigés et publiés par Résolution",
             "tier": "loi",
             "tier_note": "Ce sont des projets d'amendements rédigés et publiés par l'association Résolution (liasses republiées les 17 et 18 novembre 2026) : ils ne sont pas en vigueur, aucun n'a été déposé au Parlement à la date du 21 novembre 2026 ; leur texte est la seule spécification précise des paramètres du plan.",
-            "version": {k: PLAN_VERSION[k] for k in ("date_iso", "date_fr", "pdf_dates_fr", "cover_fr", "previous_fr")},
+            "version": {k: PLAN_VERSION[k] for k in ("date_iso", "date_fr", "label_fr", "pdf_dates_fr", "cover_fr", "previous_fr")},
             "donnees_page_cards": donnees_cards(),
             "counts": {"total": 84, **{lid: m["count"] for lid, m in LIASSES.items()}},
             "liasses": [

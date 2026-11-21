@@ -35,7 +35,7 @@ type Mode = 'valide' | 'handicap';
 
 /**
  * What the plan would pay one person, year by year of life (age 0 → 85), € per year, stacked.
- * Solid fill = written in the law (aide fondamentale, majoration handicap); hatched fill = announced
+ * Solid fill = written in the amendment (aide fondamentale, majoration handicap; the pension minoration of PLF-P1 n° 28 is NOT in the workbook series); hatched fill = announced
  * by the authors, no legal text (compte éducation, retraite, patrimoine). The disability supplement
  * applies only to a person with a disability, so it is off by default. The two « épargne retraite »
  * series of the workbook are left out of the chart (their meaning is not documented) but kept in the table.
@@ -44,10 +44,13 @@ export function Lifecycle({
   series,
   rows,
   sources,
+  pensionMinoration,
 }: {
   series: LifeSeries[];
   rows: LifeRow[];
   sources: ChipProps[];
+  /** Minoration de l'aide fondamentale pour une pension liquidée avant 2028, en € par an (PLF-P1 n° 28). */
+  pensionMinoration: number;
 }) {
   const uid = useId().replace(/:/g, '');
   const [ref, width] = useWidth<HTMLDivElement>(760);
@@ -171,7 +174,7 @@ export function Lifecycle({
           caption: 'Montants annuels par âge et par dispositif',
         }}
         csvFileName="plan-cycle-de-vie.csv"
-        note={`Les deux séries « épargne retraite personnelle » du classeur (${formatEuro(retired.epargne_retraite_serie_1 ?? 0)} et ${formatEuro(retired.epargne_retraite_serie_2 ?? 0)} par an dès ${retireAge} ans) ne sont pas tracées : leur sens, stock ou flux, n’est pas documenté. Elles figurent dans le tableau. L’aide fondamentale de l’enfant cesse l’année de ses ${adultAge} ans ; le compte éducation court un an de plus.`}
+        note={`Les deux séries « épargne retraite personnelle » du classeur (${formatEuro(retired.epargne_retraite_serie_1 ?? 0)} et ${formatEuro(retired.epargne_retraite_serie_2 ?? 0)} par an dès ${retireAge} ans) ne sont pas tracées : leur sens, stock ou flux, n’est pas documenté. Elles figurent dans le tableau. L’aide fondamentale de l’enfant cesse l’année de ses ${adultAge} ans ; le compte éducation court un an de plus. Le classeur n’applique pas la minoration de ${formatEuro(pensionMinoration)} par an que l’amendement n° 28 impose aux pensions de retraite liquidées avant 2028 (jusqu’aux revenus de 2051) : dès ${retireAge} ans, l’aide fondamentale d’une personne dont la pension est liquidée avant 2028 serait de ${formatEuro(adultNext.aide_fondamentale - pensionMinoration)} par an selon l’amendement, et non de ${formatEuro(adultNext.aide_fondamentale)} comme dans le graphique.`}
       >
         <ul className="mb-3 flex flex-wrap gap-x-5 gap-y-2" aria-label="Légende">
           {ids.map((id) => {

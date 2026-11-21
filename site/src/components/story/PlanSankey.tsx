@@ -64,12 +64,18 @@ export function PlanSankey({
   sources,
   total,
   year1,
+  csg2027,
+  csgFullYear,
 }: {
   nodes: SankeyNode[];
   links: SankeyLink[];
   sources: ChipProps[];
   total: number;
   year1: number;
+  /** CSG/CRDS d'activité en 2027 selon PLFSS n° 1 (Md€) : 33. */
+  csg2027: number;
+  /** … en année pleine dès 2028 selon PLFSS n° 1 (Md€) : 114. */
+  csgFullYear: number;
 }) {
   const uid = useId().replace(/:/g, '');
   const [ref, width] = useWidth<HTMLDivElement>(900);
@@ -115,6 +121,12 @@ export function PlanSankey({
         ? 'var(--series-4)'
         : 'var(--series-other)';
   const active = (l: D3Link<N, L> & L) => !sel || idOf(l.source) === sel || idOf(l.target) === sel;
+  // « Année 1 » is the workbook's undated label. The amendment (PLFSS n° 1) writes 33 Md€ of CSG/CRDS for 2027
+  // and 114 Md€ « en année pleine dès 2028 »: only the full-year view carries the 114 as written in the law.
+  const tierOf = (l: { target: unknown; tier: SankeyLink['tier'] }): SankeyLink['tier'] =>
+    horizon === 'an1' && idOf(l.target) === 'salaire_net' ? 'announced' : l.tier;
+  const nodeTier = (n: N): SankeyNode['tier'] =>
+    horizon === 'an1' && n.id === 'salaire_net' ? 'announced' : n.tier;
 
   const selNode = sel ? nodeById.get(sel) : null;
   const incoming = gLinks.filter((l) => idOf(l.target) === sel);
@@ -143,7 +155,7 @@ export function PlanSankey({
             setSel(null);
           }}
           options={[
-            { value: 'an1', label: 'Première année' },
+            { value: 'an1', label: 'Année 1 du chiffrage' },
             { value: 'pleine', label: 'Année pleine (régime de croisière)' },
           ]}
         />
@@ -154,13 +166,17 @@ export function PlanSankey({
         title={
           horizon === 'pleine'
             ? `${md(total)} d’économies par an, du budget vers votre salaire et votre épargne`
-            : `Dès la première année : ${md(year1)} d’économies, dont ${md(sn.value)} rendus au salaire net`
+            : `Selon le chiffrage, dès l’année 1 : ${md(year1)} d’économies, dont ${md(sn.value)} rendus au salaire net`
         }
-        subtitle="Milliards d’euros par an. Largeur du ruban = montant. Plein = proposé dans un amendement ; hachuré = annoncé."
+        subtitle={
+          horizon === 'pleine'
+            ? 'Milliards d’euros par an. Largeur du ruban = montant. Plein = proposé dans un amendement ; hachuré = annoncé.'
+            : `Milliards d’euros par an. Largeur du ruban = montant. « Année 1 » est l’étiquette non datée du chiffrage : tout est hachuré (annoncé), car l’amendement PLFSS n° 1 chiffre ${md(csg2027)} en 2027 et ${md(csgFullYear)} en année pleine dès 2028.`
+        }
         summary={
           horizon === 'pleine'
             ? `Selon le chiffrage du plan, cinq grandes économies (structures, subventions, niches, assurance chômage, rendement du patrimoine) atteignent ${md(total)} par an en régime de croisière. ${md(sn.value)} reviennent au salaire net par la fin de la CSG/CRDS sur les revenus d’activité : c’est la partie proposée dans un amendement. Le reste, ${md(cap.value)}, alimente une épargne personnelle dont le montant n’est inscrit nulle part.`
-            : `La première année, ${md(year1)} d’économies financent d’abord les ${md(sn.value)} de CSG/CRDS rendus au salaire net ; ${md(year1 - sn.value)} restent pour l’épargne.`
+            : `Selon le chiffrage, l’année 1 compte ${md(year1)} d’économies : elles financent d’abord les ${md(sn.value)} de CSG/CRDS rendus au salaire net, ${md(year1 - sn.value)} restent pour l’épargne. Le chiffrage ne date pas cette année 1 ; l’amendement PLFSS n° 1 écrit ${md(csg2027)} de CSG/CRDS pour 2027 et ${md(csgFullYear)} en année pleine dès 2028.`
         }
         sources={sources.map((s) => ({ ...s }))}
         table={{
@@ -216,9 +232,9 @@ export function PlanSankey({
                   <path
                     key={i}
                     d={path(l) ?? ''}
-                    stroke={l.tier === 'law' ? col : `url(#${uid}-hatch-${key})`}
+                    stroke={tierOf(l) === 'law' ? col : `url(#${uid}-hatch-${key})`}
                     strokeOpacity={
-                      l.tier === 'law' ? (active(l) ? 0.62 : 0.12) : active(l) ? 1 : 0.2
+                      tierOf(l) === 'law' ? (active(l) ? 0.62 : 0.12) : active(l) ? 1 : 0.2
                     }
                     strokeWidth={Math.max(1, l.width ?? 1)}
                   />
@@ -259,7 +275,7 @@ export function PlanSankey({
                     tabIndex={0}
                     role="button"
                     aria-pressed={isSel}
-                    aria-label={`${n.short} : ${md(n.value ?? 0)} par an, ${TIER_WORD[n.tier]}`}
+                    aria-label={`${n.short} : ${md(n.value ?? 0)} par an, ${TIER_WORD[nodeTier(n)]}`}
                     className="cursor-pointer"
                     onClick={() => setSel(isSel ? null : n.id)}
                     onKeyDown={(e) => {
@@ -307,7 +323,7 @@ export function PlanSankey({
                       </tspan>
                       {isDest && !narrow && (
                         <tspan x={x} dy="1.25em" fontSize="12" fill="var(--ink-3)">
-                          {TIER_WORD[n.tier]}
+                          {TIER_WORD[nodeTier(n)]}
                         </tspan>
                       )}
                     </text>
@@ -326,7 +342,7 @@ export function PlanSankey({
             <>
               <p className="font-semibold text-ink">
                 {selNode.label}&#8239;: {md(selNode.value ?? 0)} par an{' '}
-                <span className="font-normal text-ink-3">({TIER_WORD[selNode.tier]})</span>
+                <span className="font-normal text-ink-3">({TIER_WORD[nodeTier(selNode)]})</span>
               </p>
               {incoming.length > 0 && (
                 <p className="mt-1">

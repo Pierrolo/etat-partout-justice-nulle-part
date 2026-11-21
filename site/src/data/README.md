@@ -8,9 +8,11 @@ python3 -I pipeline/build.py --check      # reconstruit en mémoire, échoue si 
 python3 -I pipeline/validate.py           # rapport de validation seul (totaux, sources, citations, écarts)
 ```
 
-Entrées (traitées comme des données non fiables, jamais exécutées) : `data/derived/csv/**` (7 classeurs exportés cellule par cellule), `data/derived/etat_b_credits_retires_plf2027.csv`, `research/pages/amendements__*.md` (liasses PLF-P1, PLF-P2, PLFSS, converties par `pdftotext -layout`), `research/pages/{manifeste,donnees,index,fiches*,lettres*}.md`, `research/reform_parameters.json` (recoupement uniquement, voir « Validation »).
+Entrées (traitées comme des données non fiables, jamais exécutées) : la **version de novembre 2026** des auteurs (republiée les 17 et 18 novembre, relevée le 21) : `data/derived-2026-11-21/csv/**` (8 classeurs exportés cellule par cellule : « Synthèse des chiffrages », « Séries des graphiques », « Emplois publics », « Agences publiques », « Niches fiscales », « Dépenses de l'État », « Dépenses locales », « Taxes affectées aux agences »), `data/derived-2026-11-21/etat_b_credits_retires_plf2027.csv` (99 lignes), `research/pages-2026-11-21/amendements__*.md` (liasses PLF-P1, PLF-P2, PLFSS, converties par `pdftotext -layout` ; les sauts de page du PDF sont conservés, ce qui donne la page de chaque citation), `research/pages-2026-11-21/{manifeste,donnees,index,fiches*,lettres*,graphiques__*}.md`, `research/reform_parameters.json` (extrait d'octobre 2026, recoupement uniquement, voir « Validation »). Les fichiers d'octobre 2026 (`data/derived/`, `research/pages/`, `data/raw/`) restent dans le dépôt comme historique ; le pipeline ne les lit plus (`pipeline/lib.py` : `SNAPSHOT`).
 
-Les écarts entre sources sont décrits dans `pipeline/DISCREPANCIES.md` (codes D01 à D34, cités par `validate.py`).
+Version du plan affichée sur le site : « Amendements publiés le 18 novembre 2026 » (`amendements.json › meta.version`, `calendrier.json › meta.version`). Les trois PDF ont été générés les 17 novembre (PLF-P1, PLFSS) et 18 novembre 2026 (PLF-P2) ; leur couverture dit encore « octobre 2026 » et la page « Données » des auteurs « 10 novembre 2026 » (D35).
+
+Les écarts entre sources sont décrits dans `pipeline/DISCREPANCIES.md` (codes D01 à D40, cités par `validate.py` ; D08, D09 et D24 sont résolus depuis novembre 2026).
 
 ## Règles communes
 
@@ -22,7 +24,7 @@ Les écarts entre sources sont décrits dans `pipeline/DISCREPANCIES.md` (codes 
 | Unités | Chaque nœud ou fait porte son unité : `Md€`, `M€`, `k€`, `€`, `%`, ETPT, etc. Les noms de champ finissent par `_md`, `_meur`, `_eur`, `_pct` quand il y a un risque de confusion. |
 | Provenance | Chaque fichier a un bloc `source` (classeur, feuille et plage de cellules, avec URL) ou `meta.source`. |
 | Niveaux de fiabilité (`tier`) | `loi` : chiffre écrit dans un amendement (dispositif ou exposé sommaire). `annonce` : affirmation ou estimation des auteurs (manifeste, fiches, lettres, classeurs Résolution), sans texte de loi. `donnee` : statistique publiée par un tiers (Insee, Eurostat, DGAFP, Légifrance, documents du PLF). `calcul` : dérivé par le pipeline, avec formule et entrées. Les graphiques doivent distinguer visuellement ces niveaux. |
-| Citations | Toute citation de site ou d'amendement est vérifiée **mot pour mot** (espaces et apostrophes normalisés) dans `research/pages/` au moment du build ; le build échoue sinon. |
+| Citations | Toute citation de site ou d'amendement est vérifiée **mot pour mot** (espaces et apostrophes normalisés) dans `research/pages-2026-11-21/` au moment du build ; le build échoue sinon. Le lien d'une citation d'amendement ouvre la **page du PDF qui contient la phrase** (`#page=N`), pas la première page de l'amendement. |
 | « Par foyer » | Le livre emploie plusieurs dénominateurs (voir ci-dessous). Chaque dérivé du pipeline dit lequel il utilise. |
 
 ### Les « foyers » du livre
@@ -30,7 +32,7 @@ Les écarts entre sources sont décrits dans `pipeline/DISCREPANCIES.md` (codes 
 | Usage | Foyers | Origine |
 |---|---|---|
 | Fiches, « 600 Md€ soit 20 000 € par foyer » | 30 M | fiches |
-| « 236 Md€ soit 8 000 € par foyer » | 29,507 M implicites | 236,055 Md€ ÷ 8 000 € |
+| « 236 Md€ soit 8 000 € par foyer » | 29,544 M implicites | 236,353 Md€ ÷ 8 000 € (29,507 M en octobre) |
 | « 54 000 € par foyer et par an » (dépenses publiques) | 30,959 M implicites | 1 671,794 Md€ ÷ 54 000 € |
 | Exposé de PLF-P1 n° 28 | 40,2 M foyers fiscaux | loi (18,5 M payent l'impôt sur le revenu) |
 
@@ -40,7 +42,7 @@ Ne jamais comparer ou additionner deux montants « par foyer » de sources diff�
 
 Tailles indicatives ; les nombres exacts d'enregistrements sont dans `manifest.json › files[].top_level_lists`.
 
-### `facts.json` (411 faits, 232 Ko)
+### `facts.json` (420 faits, 239 Ko)
 
 Dictionnaire `id → fait`, trié par `id`. Un fait est un chiffre cité quelque part sur le site.
 
@@ -49,7 +51,7 @@ Dictionnaire `id → fait`, trié par `id`. Un fait est un chiffre cité quelque
   "value": 1671.794, "unit": "Md€", "year": 2024,
   "label_fr": "Dépenses des administrations publiques en 2024",
   "tier": "donnee",
-  "source": { "kind": "insee", "ref": "Insee, … — repris dans Synthèse Graphiques Résolution_0910.xlsx › Graph1672Md › D50",
+  "source": { "kind": "insee", "ref": "Insee, … — repris dans Séries des graphiques.xlsx › Graph1672Md › D50",
               "url": "https://www.insee.fr/…", "also": { "kind": "workbook", "ref": "… › D50", "url": "…" } },
   "note": "…"
 }
@@ -68,7 +70,7 @@ Dictionnaire `id → fait`, trié par `id`. Un fait est un chiffre cité quelque
 | `note` | précision d'interprétation, hypothèse, formule |
 | `conflict`, `conflicts[]` | présents quand le chiffre diverge d'un autre : `conflicts[] = {group, with: [ids], note}` ; un fait peut appartenir à plusieurs groupes. Les deux valeurs sont conservées. |
 
-Répartition : `annonce` 206, `donnee` 90, `calcul` 63, `loi` 52 ; 45 faits en conflit (17 groupes, voir `DISCREPANCIES.md`). Les réexpressions à échelle humaine (par foyer, par jour, par heure travaillée) sont des faits `calcul`, avec la formule et le dénominateur dans `note`.
+Répartition : `annonce` 214, `donnee` 88, `calcul` 63, `loi` 55 ; 45 faits en conflit (17 groupes, voir `DISCREPANCIES.md`). Le total des 486 niches et taux réduits de TVA (134,7 Md€) et ses éléments sont `annonce` : seul le coût des 465 niches (89,4 Md€) est un chiffre de l'annexe du PLF. Les réexpressions à échelle humaine (par foyer, par jour, par heure travaillée) sont des faits `calcul`, avec la formule et le dénominateur dans `note`.
 
 ### `depenses-cofog.json` — « Où vont les 1 672 Md€ »
 
@@ -92,32 +94,33 @@ Sections : `ministeres` (35 avant, 7 après : 19 supprimés, 16 regroupés ; D29
 
 ### `plan-flux.json` — « Le plan en flux »
 
-- `savings_table` (26 lignes) : tableau des 236 Md€ (`md_par_an`, `gain_annee_1_md`, `gain_supp_annee_pleine_md`, `eur_par_foyer_an`, arbre par `parent_id`, valeurs arrondies du site dans `web_arrondi`).
-- `sankey` : catégories (Annexe Manuscrit) → échéance (année 1 / année pleine) → destinations (`nodes`, `links`, `balanced`). `sankey_classeur` : feuille « Input Capitalisation » (114,46 salaire net + 121,749 capitalisation = 236,209). **Deux Sankeys distincts, ne pas les mélanger** (D08 à D10).
+- `savings_table` (26 lignes ; C = E + F sur chaque ligne depuis novembre 2026) : tableau des 236 Md€ (`md_par_an`, `gain_annee_1_md`, `gain_supp_annee_pleine_md`, `eur_par_foyer_an`, arbre par `parent_id`, valeurs arrondies du site dans `web_arrondi`).
+- `sankey` : catégories (Annexe Manuscrit) → échéance (année 1 / année pleine) → destinations (`nodes`, `links`, `balanced`). `sankey_classeur` : feuille « Input Capitalisation » (114,46 salaire net + 121,938 capitalisation = 236,398). **Deux Sankeys distincts, ne pas les mélanger** (D10). « Année 1 » est l'étiquette non datée du classeur : l'amendement PLFSS n° 1 chiffre 33 Md€ de CSG/CRDS en 2027 et 114 Md€ en année pleine dès 2028. `reconciliation › graph236` : total de la feuille Graph236 (236,402) contre l'Annexe Manuscrit (236,353, D39).
 - `reconciliation` (3 définitions de « 236 »), `year_split`, `destinations`, `valeur_ajoutee_horaire` (63 € par heure : 29 + 11 + 23), `csg_cas_types` (gain CSG/CRDS par salaire), `flux_mesures` (feuille Flux), `afu_courbe` (73 points de revenu imposable 0–72 000 € avec impôt brut, versement net, revenu disponible, plus 5 cas ; `impot_brut_eur` exporté en positif, D31), `afu_economie`, `prelevements_obligatoires`, `savings_checks`.
 
-### `niches.json` — 465 niches fiscales
+### `niches.json` — 465 niches fiscales (et ce que le texte de l'amendement n° 1 en dit)
 
 - `niches` (465) : `id`, `label_fr`, `category` (une des 7 catégories : outre-mer > TVA > épargne > logement > ménages / entreprises selon les bénéficiaires > autre ; règle ordonnée, expressions régulières dans `pipeline/b_niches.py`, `category_tags` pour toutes les règles qui s'appliquent), `cost_2024_meur`, `cost_2025_meur`, `cost_2026_meur` (millions d'euros ; `null` + `cost_flags` pour ε / nc / -), `beneficiaries`, `dates`, `legal_ref`, `household_common` (47 niches « communes » à la plupart des ménages : liste éditoriale plus règle « Ménages ≥ 1 M de bénéficiaires », `household_common_reason`), `eteint_avant_2025`, `eteint_fin_2025`, `resolution` (chiffrage Résolution), etc.
-- `provisions_calcul_impot` (81, hors des 465 : décote, plus-value de résidence principale, etc.), `taux_reduits_tva_hors_niches` (21 taux, agrégat seulement ; D32), `synthese` (par catégorie, par impôt, top 10, etc.), `meta.totals`.
-- Total 2024 des 465 : 89 406 M€ ; avec les taux réduits : 134,7 Md€ pour 486. Écarts : D20, D30, D34.
+- `resolution.plan_texte` / `plan_classeur` / `plan_final` / `plan_conflit_classeur` : ce que dit le **texte** de PLF-P1 n° 1 (le III abroge numéro par numéro, le IV.A à F donne un calendrier à chaque groupe : A cas général, B engagement, C barème et plus-values à partir de l'IR de 2028, C0 cessions 1er janvier 2027, C bis successions et donations 1er janvier 2027, D TVA et accises 1er juillet 2027, E agriculture, services à la personne et garde d'enfants par tiers jusqu'en 2029, F dons) contre la colonne « Suppression » du classeur ; `plan_final` suit le texte (17 niches en désaccord, listées dans `plan_texte › conflits_avec_le_classeur`, D40). `plan_texte.inferred` : rapprochement non vérifiable sur la seule base du texte (garde d'enfants).
+- `provisions_calcul_impot` (81, hors des 465 : décote, plus-value de résidence principale, etc.), `taux_reduits_tva_hors_niches` (21 taux, agrégat seulement, estimation du CPO de février 2023 projetée sur 2024 par les auteurs et non chiffre du PLF ; D32), `synthese` (par catégorie, par impôt, top 10, etc.), `meta.totals`.
+- Total 2024 des 465 : 89 406 M€ (annexe du PLF 2026) ; avec la TVA des administrations publiques et les taux réduits : 134,7 Md€ pour 486 (calcul des auteurs). Écarts : D20, D30, D34.
 - Fichier le plus gros (≈ 970 Ko) : à charger à la demande.
 
 ### `agences.json` — agences, opérateurs, commissions
 
-`matrice_sorts` et `sorts_agences_etat` (1 104 agences d'État : 746 fermées dont 668 suppressions et 78 cessions, 55 internalisées dans un ministère, 303 maintenues en autonomie), `operateurs` (180 lignes, 434 entités), `operateurs_par_mission`, `operateurs_totaux`, `organismes_odac` (700), `organismes_odal_categories` (23 catégories, 23 264 organismes locaux non traités), `autorites_independantes` (24), `commissions` (324), `commissions_par_ministere`, `entites_dissoutes_loi` (337 personnes morales dissoutes par PLF-P2 n° 25, numérotées 1 à 337), `emplois_etat_rap_2024`, `effectifs_fpe_par_ministere_2023`, `missions_conservees`. Écarts : D17, D18.
+`matrice_sorts` et `sorts_agences_etat` (1 104 agences d'État : 746 fermées dont 668 suppressions et 78 cessions, 55 internalisées dans un ministère, 303 maintenues en autonomie), `operateurs` (180 lignes, 434 entités : somme de la colonne « Nb/cat. » ; 433 est le chiffre de la source-analyse du dépôt), `operateurs_par_mission`, `operateurs_totaux`, `organismes_odac` (700), `organismes_odal_categories` (23 catégories, 23 264 organismes locaux non traités), `autorites_independantes` (24), `commissions` (324), `commissions_par_ministere`, `entites_dissoutes_loi` (337 personnes morales dissoutes par PLF-P2 n° 25, numérotées 1 à 337), `emplois_etat_rap_2024`, `effectifs_fpe_par_ministere_2023`, `missions_conservees`. Écarts : D17, D18.
 
 ### `credits-retires.json` — crédits retirés (état B, PLF 2027)
 
-`missions` : 22 amendements d'état B (un par mission), chacun avec `ae_retirees_*`, `cp_retirees_*` (en €, M€ et Md€), `programmes` (57 au total), `effets` (dates), `part_du_total_cp_pct`, `rang_par_cp`, `ecart_somme_programmes_vs_total_eur`. Totaux : 43 855,4 M€ en autorisations d'engagement, 39 905,0 M€ en crédits de paiement (= annexe A de `research/source-analysis.md`). `meta` contient les totaux et les notes. Écarts : D19, D24.
+`missions` : 23 amendements d'état B (n° 1 à 22 et n° 40 « Outre-mer », un par mission), chacun avec `ae_retirees_*`, `cp_retirees_*` (en €, M€ et Md€), `programmes` (63 au total, `dont_titre_2_*` pour les 13 sous-lignes « dont titre 2 » qui ne sont pas des programmes), `effets` (une date par nature de crédit : 1er janvier, 1er avril ou 1er juillet 2027), `part_du_total_cp_pct`, `rang_par_cp`, `ecart_somme_programmes_vs_total_eur` (0 partout). Totaux : 24 261,6 M€ en autorisations d'engagement, 21 034,5 M€ en crédits de paiement (43 855,4 et 39 905,0 dans la version d'octobre, gardés dans `meta.october_2026`). Écart : D19 (D24 résolu).
 
 ### `calendrier.json` — calendrier 2027–2030
 
-`events` (104, chronologiques, avec `date`, `precision`, `domain`, `amendments[]`, `source.quote` vérifiée, `in_timeline_2027_2030`), `jalons` (10 dates charnières), `trajectoires` (10 séries de paliers datés : CSG/CRDS mois par mois, TVA de l'alimentation, APL en conventionné, taxe sur les salaires, dons, niches, exonérations emploi à domicile, dotation forfaitaire, emplois de l'État ; chaque palier porte ses citations ; `hypothesis: true` pour un palier de départ non écrit dans la loi), `annonces_sans_date` (9). Écart : D33.
+`events` (109, chronologiques, avec `date`, `precision`, `domain`, `amendments[]`, `source.quote` vérifiée, `in_timeline_2027_2030`), `jalons` (11 dates charnières, dont le 1er avril 2027 et le dernier palier de la minoration de pension : revenus 2051), `trajectoires` (10 séries de paliers datés : CSG/CRDS mois par mois, TVA de l'alimentation, APL en conventionné, taxe sur les salaires, dons, niches, exonérations emploi à domicile, dotation forfaitaire, emplois de l'État ; chaque palier porte ses citations ; `hypothesis: true` pour un palier de départ non écrit dans la loi), `annonces_sans_date` (9). Écart : D33.
 
-### `amendements.json` — les 81 amendements
+### `amendements.json` — les 84 amendements
 
-`amendements` : `id` (ex. `PLF-P1-28`), `liasse` (PLF-P1 : 34, PLF-P2 : 39, PLFSS : 8), `number`, `title_fr`, `article_fr`, `lot_fr`, `theme` (13 thèmes, libellés dans `meta.themes`), `objet_expose_fr` (première phrase de l'exposé sommaire, reprise telle quelle), `resume_fr` (résumé neutre en une phrase, rédigé d'après l'exposé et le dispositif ; textes dans `pipeline/curated_amendements.py` pour 59 amendements, générés par `pipeline/b_amendements.py` pour les 22 de l'état B), `dates[]` (143 effets datés, chacun vérifié dans le texte ; `precision` : `jour`, `annee` ou `approx`), `effective_from`, `effective_to`, `pdf_page`, `pdf_url` (ouvre la bonne page), `docx_url`, `tier: "loi"`.
+`amendements` : `id` (ex. `PLF-P1-28`), `liasse` (PLF-P1 : 35, PLF-P2 : 40, PLFSS : 9), `number`, `title_fr`, `article_fr`, `lot_fr`, `theme` (13 thèmes, libellés dans `meta.themes`), `objet_expose_fr` (première phrase de l'exposé sommaire, reprise telle quelle), `resume_fr` (résumé neutre en une phrase, rédigé d'après l'exposé et le dispositif ; textes dans `pipeline/curated_amendements.py` pour 61 amendements, générés par `pipeline/b_amendements.py` pour les 23 de l'état B), `dates[]` (149 effets datés, chacun vérifié dans le texte et lié à sa page du PDF : `pdf_page`, `pdf_url` ; `precision` : `jour`, `annee` ou `approx`), `effective_from`, `effective_to`, `pdf_page`, `pdf_url` (ouvre la bonne page), `docx_url`, `tier: "loi"`.
 
 ### `fiches.json` — 18 fiches « Et moi, dans tout ça ? »
 
@@ -142,4 +145,4 @@ Toutes sont signalées dans les données et dans `DISCREPANCIES.md` :
 
 ## Validation (`pipeline/validate.py`)
 
-Le rapport vérifie notamment : somme des enfants = parent pour les arbres (COFOG, 236 Md€, impôts, effectifs) ; Sankeys équilibrés (entrée = sortie) ; 465 niches, total 2024 = 89 406 M€ ; 22 amendements d'état B et totaux de l'annexe A ; 81 amendements, 143 dates et toutes les citations vérifiées dans le texte ; cohérence entre fichiers ; recoupement indépendant des cellules de classeur citées par les faits ; recoupement de 19 paramètres et de la trajectoire CSG/CRDS avec `research/reform_parameters.json` ; empreintes du manifeste ; reconstruction identique à celle du disque. Les `WARN [Dxx]` sont des écarts **des sources**, documentés ; seul un `FAIL` fait échouer le build.
+Le rapport vérifie notamment : somme des enfants = parent pour les arbres (COFOG, 236 Md€, impôts, effectifs) ; Sankeys équilibrés (entrée = sortie) ; 465 niches, total 2024 = 89 406 M€ ; 23 amendements d'état B (chaque chiffre du CSV retrouvé dans le texte de l'amendement, totaux de la liasse) ; 84 amendements, 149 dates et toutes les citations vérifiées dans le texte, chaque lien `#page=N` tombant dans les pages de l'amendement ; plan des niches rapproché du texte de PLF-P1 n° 1 ; cohérence entre fichiers ; recoupement indépendant des cellules de classeur citées par les faits ; recoupement de 19 paramètres et de la trajectoire CSG/CRDS avec `research/reform_parameters.json` (extrait d'octobre : les valeurs qui ont bougé en novembre sont vérifiées dans les deux sens ; la minoration de pension est comparée en valeur absolue) ; empreintes du manifeste ; reconstruction identique à celle du disque. Les `WARN [Dxx]` sont des écarts **des sources**, documentés ; seul un `FAIL` fait échouer le build.

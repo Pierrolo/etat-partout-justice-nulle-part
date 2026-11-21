@@ -1,8 +1,8 @@
 """etat-partout.json — « L'État partout » : ministères, agences, impôts, niches,
 CERFA, mots de loi, effectifs publics, chaîne de représentation démocratique.
 
-Sources: Synthèse Graphiques (GraphAgences, GraphCodes, GraphETP, Graph51pc),
-Synthèse ETP et agences (Synthèse ETP, Synthèse agences R), Synthèse Chiffres
+Sources (November 2026 workbooks): Séries des graphiques (GraphAgences, GraphCodes, GraphETP, Graph51pc),
+Emplois publics (Synthèse ETP) and Agences publiques (Synthèse agences R), Synthèse des chiffrages
 (Refonte fiscalité, Détail Economies), PLF 2026 V&M (Synthèse, Synthèse TA),
 and verbatim claims of the manifeste.
 """

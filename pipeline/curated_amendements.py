@@ -3,7 +3,10 @@
 Faithfulness rules
 ------------------
 * `resume_fr` is one neutral sentence written from the exposé sommaire / dispositif of the
-  amendment; no figure or date appears that is not in the amendment text.
+  amendment; no figure or date appears that is not in the amendment text, with ONE exception, marked as
+  our own gloss on today's law and never put in the authors' mouth: the social-contribution rates in
+  PLF-P1 n° 20 (« 18,6 % sur les titres depuis 2026, 17,2 % sur l'immobilier »), the exposé still writing
+  « 17,2 % … soit 30 % sur les titres » (see D27 d).
 * every dated effect carries `q`, a verbatim snippet of the amendment (dispositif or exposé);
   build/validate fail if the snippet cannot be found in the amendment text (whitespace and
   apostrophe differences of the PDF extraction are ignored).
@@ -162,7 +165,7 @@ CURATED: dict[tuple[str, int], dict] = {
     },
     ("PLF-P1", 20): {
         "theme": "refonte_fiscale",
-        "resume": "Fond l'impôt sur le revenu (12,8 % ou 19 %) et les prélèvements sociaux (17,2 %) sur les plus-values en un prélèvement unique de 30 % calculé sur le gain réel, sans abattements ni exonérations.",
+        "resume": "Fond l'impôt sur le revenu (12,8 % ou 19 %) et les prélèvements sociaux (18,6 % sur les titres depuis 2026, 17,2 % sur l'immobilier) sur les plus-values en un prélèvement unique de 30 % calculé sur le gain réel, sans abattements ni exonérations.",
         "dates": [
             ("2027-01-01", J, "Immobilier et biens meubles : cessions à partir du 1er janvier 2027", "aux plus-values réalisées lors des cessions intervenant à compter du 1er janvier 2027"),
             ("2028-01-01", J, "Titres, compte d'épargne personnel : opérations à partir du 1er janvier 2028", "aux plus-values et gains réalisés lors des cessions, rachats et autres opérations intervenant à compter du 1er janvier 2028"),

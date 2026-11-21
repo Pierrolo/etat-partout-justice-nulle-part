@@ -107,10 +107,31 @@ test('Sankey: the horizon toggle changes the figure and keeps a table alternativ
 }) => {
   await page.goto('comprendre/le-plan/');
   await scrollThrough(page);
-  await page.locator('label', { hasText: 'Première année' }).click();
-  await expect(page.getByRole('heading', { name: /Dès la première année/ })).toBeVisible();
+  // the version of the plan is shown, and « année 1 » is the workbook's undated label (E4)
+  await expect(page.getByText('Amendements publiés le 18 novembre 2026').first()).toBeVisible();
+  await page.locator('label', { hasText: 'Année 1 du chiffrage' }).click();
+  await expect(
+    page.getByRole('heading', { name: /Selon le chiffrage, dès l.année 1/ }),
+  ).toBeVisible();
+  await expect(
+    page.getByText(/ne date pas cette année 1|étiquette non datée/).first(),
+  ).toBeVisible();
   await page.getByText('Voir les données').first().click();
   await expect(page.getByRole('table').first()).toContainText('Salaire net');
+});
+
+test('le-plan: the written list says « dès le 1er juillet » for the VAT steps and no amount for the savings account', async ({
+  page,
+}) => {
+  await page.goto('comprendre/le-plan/');
+  const main = page.locator('main');
+  await expect(main).toContainText(/10\s%\sdès le 1er juillet 2028/);
+  await expect(main).toContainText(/Aucun montant n.est inscrit dans l.amendement/);
+  await expect(main).toContainText(/minorée de 3\s300\s€ par an pour une pension de retraite/);
+  // the manifesto quote is verbatim, not abridged (E7)
+  await expect(main).toContainText(
+    'versés sur un compte épargne retraite personnel d’ici trois ans',
+  );
 });
 
 test('the agency list filters, announces the count and ignores accents', async ({ page }) => {

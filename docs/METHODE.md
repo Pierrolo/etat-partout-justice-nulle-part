@@ -236,9 +236,13 @@ publiés dans le fichier [`cas-types-results.json`](https://github.com/Pierrolo/
 ## 10. Sources principales {#sources}
 
 - Plan : liasses d'amendements Résolution (PLF 2027 1re partie, 2de partie, PLFSS 2027 ; version publiée les 17 et
-  18 novembre 2026, 84 amendements) — france-resolution.fr/amendements ; fiches et manifeste — france-resolution.fr ;
-  classeurs « Synthèse des chiffrages » et « Séries des graphiques » (anciennement « Synthèse Chiffres » et
-  « Synthèse Graphiques »).
+  18 novembre 2026, 84 amendements : 35 + 40 + 9 ; affichée sur le site comme « Amendements publiés le 18 novembre
+  2026 ») — france-resolution.fr/amendements ; fiches et manifeste — france-resolution.fr ; classeurs publiés par les
+  auteurs dans leur version de novembre 2026 : « Synthèse des chiffrages » et « Séries des graphiques » (anciennement
+  « Synthèse Chiffres » et « Synthèse Graphiques »), « Emplois publics » et « Agences publiques » (l'ancien classeur
+  « Synthèse ETP et agences » a été scindé en deux), « Niches fiscales », « Dépenses de l'État », « Dépenses locales » et
+  « Taxes affectées aux agences ». Les données du site (`site/src/data/`) sont reconstruites à partir de cette version ;
+  la version d'octobre 2026 reste dans le dépôt comme historique.
 - Législation 2026 : service-public.gouv.fr (F2300 SMIC, F2971 CSG, F1419 impôt, F2882 prime d'activité, F19778
   RSA, F12006 APL, F13213 allocations familiales, F12242 AAH, F16871 ASPA…), Légifrance, URSSAF (taux 2026),
   BOFiP (barème 2026), solidarites.gouv.fr (revalorisation du 1er avril 2026), arrêté du 28 septembre 2026 (APL).
@@ -252,12 +256,13 @@ Chaque paramètre (plus de 300) porte sa valeur, son unité, sa date d'effet et 
 
 ## 11. Où les sources se contredisent {#ecarts-sources}
 
-Le manifeste, les amendements et les classeurs ne disent pas toujours la même chose. **Aucun chiffre n'est corrigé en silence** : quand deux sources divergent, le site conserve les deux valeurs, dit laquelle sert au calcul ou au graphique, et renvoie ici. Les écarts sont numérotés D01 à D34 ; les plus visibles sont rappelés d'abord.
+Le manifeste, les amendements et les classeurs ne disent pas toujours la même chose. **Aucun chiffre n'est corrigé en silence** : quand deux sources divergent, le site conserve les deux valeurs, dit laquelle sert au calcul ou au graphique, et renvoie ici. Les écarts sont numérotés D01 à D40 ; les plus visibles sont rappelés d'abord. Quelques-uns datés d'octobre ont disparu avec la version de novembre 2026 (le total des économies est désormais égal à la somme du gain de l'année 1 et du gain supplémentaire, les deux feuilles s'accordent sur l'année 1, les états B s'additionnent exactement) : ils sont indiqués comme résolus. D'autres sont nés de cette version : cartes de la page « Données » des auteurs, tableau des 236 Md€ non mis à jour, « 434 » contre « 438 » prélèvements, minoration de pension de l'amendement n° 28 que le graphique du livre ne montre pas, feuille Graph236, colonne « Suppression » du classeur contre le texte de l'amendement n° 1.
 
 ## 12. Journal des modifications {#journal}
 
 | Date | Version | Ce qui a changé |
 |---|---|---|
+| 21 novembre 2026 | données | Données du site reconstruites sur la version republiée le 18 novembre 2026 : 84 amendements (35 + 40 + 9, dont trois nouveaux), états B réécrits (23 missions ; 24,3 Md€ d'autorisations d'engagement et 21,0 Md€ de crédits de paiement retirés, contre 43,9 et 39,9 en octobre), dates par nature de crédit (1er janvier, 1er avril, 1er juillet 2027), classeurs renommés, total des économies 236,353 Md€ ; liens vers la page du PDF qui contient chaque phrase citée ; écarts D08, D09 et D24 résolus, D35 à D40 nouveaux. |
 | 21 novembre 2026 | moteur 1.2.0 | Plan mis à jour sur les amendements republiés les 17 et 18 novembre 2026 (84 au lieu de 81) : l'aide fondamentale d'un·e retraité·e est **diminuée** de 3 300 € par an pour une pension liquidée avant 2028 (elle était majorée d'autant), au prorata de la durée d'assurance validée avant 2028 pour une pension liquidée ensuite (nouvelle question, hypothèse H21) ; les cas types retraités passent de gagnants à perdants. Indemnité des fonctionnaires de l'État dont le poste est supprimé : 24 mois plus un mois par trimestre de services, au plus 84 mois et jusqu'à la retraite sans décote. 54 taxes d'État, 72 taxes affectées, 21 contributions sociales et 20 impositions locales supprimées ; accise sur l'électricité à 1 €/MWh au 1er juillet 2027. Vérification des textes du plan : sources et niveaux de certitude corrigés (CEE, revalorisation, logement social, ALD, bouclier sanitaire, coût employeur, H3, H11, H12, H13, pensions). |
 | 21 novembre 2026 | moteur et site | Vérification de la législation actuelle : CMG jusqu'aux 12 ans de l'enfant pour un parent seul qui emploie une assistante maternelle ; forfait étudiant des aides au logement (8 600 €, 6 900 € pour un·e boursier·e, question ajoutée) ; seuil de recouvrement de l'impôt appliqué après les réductions et avant les crédits ; majoration « isolement » décrite sur 12 mois ; total après TVA arrondi au multiple de 5 € le plus proche ; zones APL et durées d'indemnisation du chômage corrigées ; comparaisons européennes mises à jour d'après Eurostat (21 octobre 2026). |
 | 26 octobre 2026 | site | Le site parle du plan avec ses propres mots ; un seul vocabulaire pour les trois niveaux (« Proposé dans un amendement », « Annoncé », « Notre estimation ») ; les amendements sont décrits comme rédigés et publiés, en vigueur nulle part ; questionnaire « À votre avis, où va l’argent public ? », où les chiffres du plan sont marqués « Annoncé » ; une seule identité visuelle. |
