@@ -60,3 +60,15 @@ Severity:
 - **minor** — a small imprecision or rounding.
 
 Report back to the orchestrator in ≤ 250 words: counts, and the blockers and majors in one line each.
+
+---
+## Round 2 (2026-11-21, after the authors republished their material)
+
+The plan's sources of truth are now the **18 November 2026 version**:
+- `research/pages-2026-11-21/*.md`: the amendment liasses (84 amendments), fiches, manifesto, pages;
+- `data/derived-2026-11-21/csv/**`: 8 workbooks;
+- `data/raw-2026-11-21/`: originals.
+
+`research/DIFF-2026-10-to-2026-11.md` lists what changed. The October files (`research/pages/`, `data/derived/`, `data/raw/`) are history only. A statement that matches October but not November is an error. The engine is v1.2.0.
+
+The frozen build at the same path has been rebuilt from commit 8d0cf1f. Round-1 reports and fixes are in this folder: `VERIFIED-nonplan.md`, etc. Write round-2 reports as `docs/qa/factcheck/round2-<area>.md`.
