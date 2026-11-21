@@ -221,7 +221,12 @@ function build(c: BuildCtx): ScenarioResult {
       amount: amt,
       formula: parts.length ? parts.join(' ; ') + tierNote : 'Pas de pension.',
       sources: src('pensions.csg_rate_full', 'pensions.csg_rfr_thresholds_1_part'),
-      tier: 'law',
+      // PE-10: when the plan's CSG tier is recomputed with « 1 part par adulte + ½ par enfant » (H16), the pension
+      // change is our estimate, not amendment text.
+      tier:
+        plan && parts.length && rules.months.some((m) => m.pensionTier === 'fixedpoint')
+          ? 'hypothesis'
+          : 'law',
     };
   }
 
@@ -325,15 +330,21 @@ function build(c: BuildCtx): ScenarioResult {
       bits.push(
         `${eur0(n('plan.afu_invalidity'))} × ${a.nInvalidity} titulaire${a.nInvalidity > 1 ? 's' : ''} CMI invalidité`,
       );
-    if (a.nPension)
-      bits.push(
-        `${eur0(n('plan.afu_pension'))} × ${a.nPension} pension${a.nPension > 1 ? 's' : ''} liquidée${a.nPension > 1 ? 's' : ''} avant 2028`,
-      );
+    let text = bits.join(' + ');
+    const full = n('plan.afu_pension_minoration');
+    const before = a.pensions.filter((p) => p.shareSource === 'before_cutoff');
+    if (before.length)
+      text += ` − ${eur0(full)} × ${before.length} titulaire${before.length > 1 ? 's' : ''} d’une pension de retraite liquidée avant 2028`;
+    const defaulted = a.pensions.filter((p) => p.shareSource === 'default');
+    for (const p of a.pensions.filter((x) => x.shareSource !== 'before_cutoff'))
+      text += ` − ${eur0(full)} × ${pct(Math.round(p.share * 1000) / 1000)} (${who(nh, p.index)}pension liquidée en ${p.startYear} : part de la durée d’assurance validée avant 2028${p.shareSource === 'default' ? `, hypothèse d’une carrière de ${n('plan.afu_pension_default_career_quarters')} trimestres terminée au 1er juillet ${p.startYear}` : ', déclarée'} ; soit ${eur0(p.annual)})`;
     d.afu = {
       amount: core.afuAnnualPaid / 12,
-      formula: `${pre}${bits.join(' + ')} = ${eur0(a.annual)}/an ; ÷ 12 = ${eur(a.annual / 12)}/mois (versée même si elle dépasse l’impôt)`,
-      sources: [SRC_AM28],
-      tier: 'law',
+      formula: `${pre}${text} = ${eur0(a.annual)}/an ; ÷ 12 = ${eur(a.annual / 12)}/mois (versée même si elle dépasse l’impôt${a.pensions.length ? ' ; minoration pour pension jusqu’à l’impôt sur les revenus de 2051' : ''})`,
+      sources: defaulted.length
+        ? [SRC_AM28, ...src('plan.afu_pension_default_career_quarters')]
+        : [SRC_AM28],
+      tier: defaulted.length ? 'hypothesis' : 'law',
     };
   } else if (plan) {
     d.afu.formula = 'L’aide fondamentale n’entre en vigueur qu’au 1er janvier 2028.';

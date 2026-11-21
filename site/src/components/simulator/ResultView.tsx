@@ -27,6 +27,8 @@ export interface ResultViewProps {
   getUrl: () => string;
   engineVersion: string;
   baselineYear: string;
+  /** e.g. « Amendements publiés le 18 novembre 2026 » (engine PARAMS_META.planVersionLabel) */
+  planVersion?: string;
   onEdit: (step?: StepId) => void;
   onRestart: () => void;
   onHyp: (h: Hypotheses) => void;
@@ -50,6 +52,7 @@ export function ResultView({
   getUrl,
   engineVersion,
   baselineYear,
+  planVersion,
   onEdit,
   onRestart,
   onHyp,
@@ -182,6 +185,7 @@ export function ResultView({
           </p>
           <p className="text-xs text-ink-3">
             Moteur de calcul, version {engineVersion}. {baselineYear}.
+            {planVersion ? ` Plan : ${planVersion}.` : ''}
           </p>
           <p className="pt-1 text-sm">
             <a href={withBase('/simulateur/cas-types/')}>

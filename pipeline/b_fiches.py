@@ -1,7 +1,7 @@
 """fiches.json — the 18 « situations » (one-page fiches of france-resolution.fr).
 
-Parsed from research/pages/fiches.md (index: groups, order, taglines) and
-research/pages/fiches__<slug>.md (header counts, gains / pertes verbatim).
+Parsed from research/pages-2026-11-21/fiches.md (index: groups, order, taglines) and
+research/pages-2026-11-21/fiches__<slug>.md (header counts, gains / pertes verbatim).
 Wording is copied verbatim (whitespace-normalised, typographic characters kept).
 The header counts (« 1 perte · 13 gains ») are the site's own and do not always match
 the number of items displayed on the fiche: both are exported (`header_vs_listed`).

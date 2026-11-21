@@ -27,14 +27,36 @@ export const SRC_AM28 = am(PLF_P1, '28', 'taux unique 23 % et aide fondamentale 
 export const SRC_AM1_NICHES = am(PLF_P1, '1', 'extinction des dépenses fiscales (III, IV.A-F)');
 export const SRC_AM3_DONS = am(PLF_P1, '3', 'réduction d’impôt pour dons');
 export const SRC_AM21_TVA = am(PLF_P1, '21', 'taux réduits de TVA portés à 20 %');
-export const SRC_CEE = am(PLF_P1, '14-16', 'accises et certificats d’économies d’énergie');
+export const SRC_CEE = am(PLF_P1, '16', 'certificats d’économies d’énergie abrogés');
+export const SRC_AM22_TAXES = am(
+  PLF_P1,
+  '22',
+  'cinquante-quatre taxes d’État supprimées, accise sur l’électricité ramenée à 1 €/MWh',
+);
+export const SRC_AM25_AFFECTEES = am(PLF_P1, '25', 'soixante-douze taxes affectées supprimées');
+export const SRC_PLFSS9_CONTRIB = am(PLFSS, '9', 'vingt et une contributions sociales supprimées');
+export const SRC_PLFSS1_EXO = am(
+  PLFSS,
+  '1',
+  'exonérations et assiettes dérogatoires de cotisations supprimées (I, III, IV)',
+);
 export const SRC_PLFSS1_CSG = am(PLFSS, '1', 'CSG et CRDS supprimées sur les revenus d’activité');
 export const SRC_PLFSS7_PF = am(
   PLFSS,
   '7',
   'prestations familiales et action sociale CAF abrogées',
 );
-export const SRC_PLFSS5_INDEX = am(PLFSS, '5', 'fin de la revalorisation automatique');
+export const SRC_PLFSS5_INDEX = am(
+  PLFSS,
+  '5',
+  'fin de la revalorisation automatique (régimes obligatoires de base)',
+);
+export const SRC_P2_28_INDEX = am(
+  PLF_P2,
+  '28',
+  'fin de la revalorisation automatique (AAH, prime d’activité, RSA…)',
+);
+export const SRC_P2_29_HLM = am(PLF_P2, '29', 'plus d’aide de l’État au logement social neuf');
 export const SRC_PLFSS4_BOUCLIER = am(PLFSS, '4', 'bouclier sanitaire');
 export const SRC_P2_32_APL = am(PLF_P2, '32', 'extinction des aides personnelles au logement');
 export const SRC_P2_26_FP = am(
@@ -92,19 +114,45 @@ export const PLAN_PARAMS = {
     source: SRC_AM28,
     status: 'legal_text',
   },
-  'plan.afu_pension': {
+  /**
+   * Amendments of 17–18 Nov 2026: the old +3 300 € « majoration » became a MINORATION. Text: « Il est minoré de
+   * 3 300 € par an pour chaque membre du foyer fiscal titulaire d’une pension de retraite servie par un régime
+   * obligatoire et liquidée avant le 1er janvier 2028. Pour une pension liquidée à compter de cette date, la
+   * minoration est réduite à proportion de la part, dans les droits qui fondent la pension, de ceux acquis avant le
+   * 1er janvier 2028, dans des conditions fixées par décret. À défaut, elle est égale à 3 300 € multipliés par le
+   * rapport entre la durée d’assurance validée avant le 1er janvier 2028 et la durée d’assurance totale retenue pour
+   * la liquidation. Cette minoration s’applique jusqu’à l’imposition des revenus de l’année 2051. »
+   */
+  'plan.afu_pension_minoration': {
     value: 3300,
-    unit: 'EUR/year per holder of a pension liquidated before 1 Jan 2028 (until IR 2051)',
+    unit: 'EUR/year SUBTRACTED from the AFU per member of the foyer holding a pension of a régime obligatoire liquidated before 1 Jan 2028; pro rata of the insurance duration validated before 1 Jan 2028 for a pension liquidated later (until IR on 2051 incomes)',
     effective: '2028-01-01',
     source: SRC_AM28,
     status: 'legal_text',
   },
   'plan.afu_pension_cutoff_year': {
     value: 2028,
-    unit: 'pension liquidated strictly before 1 January of this year',
+    unit: 'pension liquidated strictly before 1 January of this year: full minoration; from this date: pro rata of the rights acquired before it',
     effective: '2028-01-01',
     source: SRC_AM28,
     status: 'legal_text',
+  },
+  'plan.afu_pension_last_income_year': {
+    value: 2051,
+    unit: 'last income year to which the pension minoration applies (all simulated periods are earlier)',
+    effective: '2028-01-01',
+    source: SRC_AM28,
+    status: 'legal_text',
+  },
+  'plan.afu_pension_default_career_quarters': {
+    value: 172,
+    unit: 'quarters: default total insurance duration of a pension liquidated from 2028 (a full career of 43 years, simulator assumption), with liquidation assumed on 1 July of the start year, when the share validated before 2028 is not given',
+    effective: '2028-01-01',
+    source: {
+      label:
+        'Hypothèse du simulateur : carrière complète de 172 trimestres terminée au 1er juillet de l’année de départ (règle « à défaut » de l’am. 28 : durée d’assurance validée avant 2028 ÷ durée totale)',
+    },
+    status: 'hypothesis',
   },
   'plan.frais_pro_10_kept': {
     value: true,

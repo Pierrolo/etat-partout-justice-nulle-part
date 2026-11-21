@@ -960,8 +960,8 @@
   ],
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphAFU › B23:CJ30",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+   "ref": "Séries des graphiques.xlsx › GraphAFU › B23:CJ30",
+   "url": "https://france-resolution.fr/donnees/S%C3%A9ries%20des%20graphiques.xlsx"
   },
   "tier": "annonce",
   "tier_note": "Calcul de Résolution sur des hypothèses du plan ; seule l'aide fondamentale (et sa majoration invalidité) a une base légale (PLF-P1 n° 28).",

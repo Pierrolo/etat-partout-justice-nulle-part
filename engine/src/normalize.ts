@@ -18,7 +18,13 @@ export interface NAdult {
     inputNet: number | null;
   } | null;
   areNet: number;
-  pension: { amount: number; basis: 'net' | 'brut'; startYear: number } | null;
+  pension: {
+    amount: number;
+    basis: 'net' | 'brut';
+    startYear: number;
+    /** share of the insurance duration validated before 1 Jan 2028 (v1.2), null = not given */
+    shareBefore2028: number | null;
+  } | null;
   /** student holding a bourse sur critères sociaux (only read when activity is 'etudiant') */
   boursier: boolean;
 }
@@ -160,13 +166,32 @@ export function normalize(h: Household): NHousehold {
           w.push(`${who} : année de départ en retraite hors plage, ramenée dans [1950 ; 2060].`);
           startYear = Math.min(2060, Math.max(1950, startYear));
         }
+        let shareBefore2028: number | null = null;
+        if (p.insuranceShareBefore2028 !== undefined && p.insuranceShareBefore2028 !== null) {
+          if (!fin(p.insuranceShareBefore2028))
+            w.push(
+              `${who} : part de la durée d’assurance validée avant 2028 non numérique, ignorée.`,
+            );
+          else {
+            shareBefore2028 = Math.min(1, Math.max(0, p.insuranceShareBefore2028));
+            if (shareBefore2028 !== p.insuranceShareBefore2028)
+              w.push(
+                `${who} : part de la durée d’assurance validée avant 2028 ramenée dans [0 ; 100 %].`,
+              );
+          }
+        }
         if (amount > 0 || startYear > 0)
-          pension = { amount, basis: p.basis === 'brut' ? 'brut' : 'net', startYear };
+          pension = {
+            amount,
+            basis: p.basis === 'brut' ? 'brut' : 'net',
+            startYear,
+            shareBefore2028,
+          };
       } else if (amount > 0)
         w.push(`${who} : pension ignorée car l’activité déclarée n’est pas « retraité·e ».`);
     }
     if (activity === 'retraite' && pension === null)
-      pension = { amount: 0, basis: 'net', startYear: 2020 };
+      pension = { amount: 0, basis: 'net', startYear: 2020, shareBefore2028: null };
     const boursier = activity === 'etudiant' && a.boursier === true;
     return { index, age, activity, disability, salary, areNet, pension, boursier };
   });

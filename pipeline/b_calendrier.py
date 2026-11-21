@@ -1,7 +1,8 @@
 """calendrier.json — la transition 2027 → 2030 : every dated measure of the plan.
 
 * `events`: one record per dated effect written in an amendment (curated_amendements.py, each
-  verified verbatim against the amendment text) + the dated effects of the 22 état B amendments.
+  verified verbatim against the amendment text, each linking to the PDF page that holds the quote)
+  + the dated effects of the 23 état B amendments (1er janvier, 1er avril and 1er juillet 2027).
 * `trajectoires`: phase-in paths (CSG rates by month, VAT on food, APL, taxe sur les salaires,
   dons, niches agricoles/services à la personne/garde d'enfants, dotation forfaitaire, emplois
   de l'État) with a verified quote per step.
@@ -13,9 +14,9 @@ from __future__ import annotations
 import collections
 
 import b_credits
-from amend import amendment, pdf_url, quote_in_amendment
+from amend import amendment, page_label, pdf_url, quote_in_amendment, quote_pages
 from curated_amendements import CURATED, THEMES
-from lib import SITE, clean, fr, quote_in, read_page, ws
+from lib import PLAN_VERSION, SITE, clean, fr, quote_in, read_page, ws
 from amend import all_amendments
 
 DOMAINS = [
@@ -163,20 +164,21 @@ def _traj():
             {"from": "2027-07-01", "to": "2027-12-31", "value": 30698, "label_fr": "2027 : demi-année, 30 698 ETPT retirés du plafond (2 032 750 → 2 002 052)", "q": [("PLF-P2", 24, "Cet amendement abaisse de 30 698 emplois le plafond d’autorisation des emplois de l’État")]},
             {"from": "2028-01-01", "to": None, "value": 61400, "label_fr": "2028 : effet entier, 61 400 emplois", "q": [("PLF-P2", 24, "L’exercice 2028 portera l’effet entier, soit 61 400 emplois")]},
         ],
-        "note": "Sorties d'agents : indemnité de 70 % de la base pendant 1 à 7 ans selon l'ancienneté (PLF-P2 n° 26). Hors collectivités locales et opérateurs.",
+        "note": "Sorties d'agents : indemnité de 70 % de la base pendant 24 mois plus un mois par trimestre de services, 84 mois au plus (PLF-P2 n° 26). Hors collectivités locales et opérateurs.",
         "tier": "loi",
     })
     for t in T:
         for s in t["steps"]:
             for (lid, n, q) in s.pop("q"):
                 assert quote_in_amendment(lid, n, q), f"trajectory quote not found {t['id']} {lid} n°{n}: {q!r}"
-                s.setdefault("sources", []).append({"liasse": lid, "number": n, "page": amendment(lid, n)["page"], "quote": q, "url": pdf_url(lid, amendment(lid, n)["page"])})
+                first, _last = quote_pages(lid, n, q)  # the page that holds the quote
+                s.setdefault("sources", []).append({"liasse": lid, "number": n, "page": first, "quote": q, "url": pdf_url(lid, first)})
         t["steps"] = [{k: v for k, v in s.items()} for s in t["steps"]]
     return T
 
 
 ANNONCES = [
-    ("restitution_300", "« 300 euros par mois restitués dès la première année, soit 13 % de salaire net en plus pour tous » (CSG/CRDS)", "dès la première année", "manifeste", "300 euros par mois restitués dès la première année", f"{SITE}/manifeste.html"),
+    ("restitution_300", "« 300 euros par mois restitués dès la première année, soit +13 % de salaire net en plus pour tous » (CSG/CRDS)", "dès la première année", "manifeste", "300 euros par mois restitués dès la première année", f"{SITE}/manifeste.html"),
     ("cep_300", "« 300 euros par mois versés sur un compte épargne retraite personnel d'ici trois ans »", "d'ici trois ans", "manifeste", "300 euros par mois versés sur un compte épargne retraite personnel d’ici trois ans", f"{SITE}/manifeste.html"),
     ("patrimoine_20000", "« 600 milliards d'euros de patrimoine public rendus aux Français, soit 20 000 euros par foyer en trois ans »", "en trois ans", "manifeste", "soit 20 000 euros par foyer en trois ans", f"{SITE}/manifeste.html"),
     ("parc_social_vente", "Les logements sociaux sont « proposés à la vente en trois ans » (4,5 millions de logements)", "en trois ans", "fiches__locataire", "Les logements sociaux sont proposés à la vente en trois ans", f"{SITE}/fiches/locataire.html"),
@@ -188,16 +190,17 @@ ANNONCES = [
 ]
 
 JALONS = [
-    ("2027-01-01", "Premières coupes", "Crédits d'État retirés pour les personnes morales, chèque énergie et aides au logement social neuf supprimés, mutations à 1 % / 3 %, plus-values immobilières au réel, indexations gelées, premières niches supprimées (revenus 2026)."),
+    ("2027-01-01", "Premières coupes", "Crédits d'État retirés pour le fonctionnement courant, l'investissement, les aides aux entreprises et les transferts aux collectivités, chèque énergie et aides au logement social neuf supprimés, mutations à 1 % / 3 %, plus-values immobilières au réel, indexations gelées, crédit d'impôt famille abrogé, premières niches supprimées (revenus 2026, successions et donations, Pacte Dutreil)."),
+    ("2027-04-01", "Hébergement d'urgence recentré", "L'hébergement d'urgence devient une faculté temporaire ; les crédits d'hébergement d'urgence sont retirés à cette date."),
     ("2027-06-01", "Fin des nouvelles demandes d'APL", "Aucune demande d'aide personnelle au logement déposée à partir de cette date n'ouvre de droit."),
-    ("2027-07-01", "Gros bloc de l'été 2027", "Début de la baisse de la CSG/CRDS sur les revenus d'activité, abrogation des exonérations de cotisations, dissolution de 337 entités, 61 400 postes d'État fermés, IS à 27 %, 21 taxes d'État et 57 taxes affectées supprimées, TVA dérogatoire, accises et CEE, dons réduits de moitié."),
+    ("2027-07-01", "Gros bloc de l'été 2027", "Début de la baisse de la CSG/CRDS sur les revenus d'activité, abrogation des exonérations de cotisations, dissolution de 337 entités, 61 400 postes d'État fermés, IS à 27 %, 54 taxes d'État, 72 taxes affectées et 21 contributions sociales supprimées, accise sur l'électricité à 1 € par mégawattheure, TVA dérogatoire, accises et CEE, dons réduits de moitié, et, dans les crédits d'État retirés, les aides au logement, les subventions aux associations, aux opérateurs et les rémunérations."),
     ("2027-12-01", "Plus de CSG ni de CRDS sur le travail", "CSG et CRDS à zéro sur les revenus d'activité."),
     ("2028-01-01", "Impôt unique et aide fondamentale", "Impôt à 23 % et aide fondamentale universelle (revenus 2028), compte d'épargne personnel, bouclier sanitaire (sous réserve de l'aide), régime socle unique, prestations familiales abrogées, taxe foncière unique, dons sans réduction."),
     ("2028-07-01", "TVA : taux réduits à 20 %", "Taux réduits de TVA alignés sur 20 % ; alimentation à 10 % ; APL du parc conventionné réduite de deux tiers."),
     ("2029-07-01", "Deuxième palier de la TVA alimentaire", "Alimentation à 15 % ; fin de l'APL du parc conventionné."),
     ("2030-01-01", "Fin des aides au logement et de la taxe sur les salaires", "Toutes les aides personnelles au logement supprimées, taxe sur les salaires abrogée, allocation de logement abrogée du CSS, pouvoirs d'aide aux entreprises des départements et régions abrogés."),
     ("2030-07-01", "TVA alimentaire à 20 %", "L'alimentation rejoint le taux normal."),
-    ("2051-01-01", "Fin de la majoration de pension de l'aide fondamentale", "La majoration de 3 300 € pour les pensions liquidées avant 2028 s'applique jusqu'à l'imposition des revenus de 2051."),
+    ("2051-01-01", "Dernière année de la minoration de pension de l'aide fondamentale", "La minoration de 3 300 € pour les pensions liquidées avant 2028 s'applique jusqu'à l'imposition des revenus de 2051 (réduite au prorata pour les pensions liquidées ensuite)."),
 ]
 
 
@@ -206,24 +209,35 @@ def build() -> dict:
     events = []
     credits = b_credits.build()["missions"]
     # --- état B (aggregated by date) -------------------------------------------------
+    # Since the November 2026 version each exposé dates every kind of credit separately (1er janvier, 1er avril,
+    # 1er juillet 2027): one event per date, listing the missions concerned and what stops in each.
     by_date = collections.OrderedDict()
-    for c in credits:
+    for c in sorted(credits, key=lambda c: c["amendment"]):
         for e in c["effets"]:
             by_date.setdefault(e["date"], []).append((c, e))
+    rep_quote = {  # verbatim fragment of the exposé of n° 1, which has the three dates
+        "2027-01-01": "La mesure prend effet au 1er janvier 2027 pour le fonctionnement courant et l’investissement",
+        "2027-04-01": "Elle prend effet au 1er avril 2027 pour l’hébergement d’urgence",
+        "2027-07-01": "Elle prend effet au 1er juillet 2027 pour les aides personnelles au logement",
+    }
+    assert set(by_date) == set(rep_quote), sorted(by_date)
+    n_etat_b = len(credits)
+    day_fr = {"2027-01-01": "1er janvier 2027", "2027-04-01": "1er avril 2027", "2027-07-01": "1er juillet 2027"}
     for date, lst in by_date.items():
-        who = lst[0][1]["applies_to_fr"].split(" (")[0]
         cs = [c for c, _ in lst]
+        q = rep_quote[date]
+        first, last = quote_pages("PLF-P2", 1, q)
         events.append({
             "date": date, "precision": "jour",
-            "subject_fr": "Crédits de l'État retirés (état B, 22 amendements)",
-            "label_fr": f"Crédits retirés pour les {who}" + (f" : {len(cs)} missions" if len(cs) < 22 else " : les 22 missions") ,
+            "subject_fr": f"Crédits de l'État retirés (état B, {n_etat_b} amendements)",
+            "label_fr": f"Crédits retirés à compter du {day_fr[date]} : {len(cs)} mission{'s' if len(cs) > 1 else ''} sur {n_etat_b}" + (" (selon la nature des crédits de chaque mission)" if len(cs) > 1 else ""),
             "domain": "etat_agences_agents", "theme": "credits_etat",
             "amendments": [{"liasse": "PLF-P2", "number": c["amendment"]} for c in cs],
             "n_amendments": len(cs),
-            "amount_cp_md_missions_concernees": clean(sum(c["cp_retirees_md"] for c in cs), 3),
-            "amount_note": "Somme des crédits de paiement des missions concernées (montants annuels ; le classeur ne ventile pas entre personnes morales et physiques).",
+            "missions_detail": [{"liasse": "PLF-P2", "number": c["amendment"], "mission_fr": c["mission_fr"], "applies_to_fr": e["applies_to_fr"]} for c, e in lst],
+            "amount_note": "Les montants retirés par mission (credits-retires.json) ne sont pas ventilés par date : une même mission peut avoir plusieurs dates.",
             "tier": "loi",
-            "source": {"kind": "amendment", "ref": "Amendements PLF-P2 n° 1 à 22 (exposés : « La mesure prend effet au … »)", "url": pdf_url("PLF-P2", 4), "quote": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques"},
+            "source": {"kind": "amendment", "ref": f"Amendement PLF-P2 n° 1 (exposé : « prend effet au … »), {page_label(first, last)} du PDF ; les autres missions : même phrase dans leur exposé", "url": pdf_url("PLF-P2", first), "quote": q},
         })
     # --- all other amendments --------------------------------------------------------
     for (lid, n), cur in sorted(CURATED.items(), key=lambda kv: (kv[0][0], kv[0][1])):
@@ -239,7 +253,7 @@ def build() -> dict:
                 "domain": dom, "theme": theme,
                 "amendments": [{"liasse": lid, "number": n}], "n_amendments": 1,
                 "tier": "loi",
-                "source": {"kind": "amendment", "ref": f"Amendement {lid} n° {n}", "url": pdf_url(lid, a["page"]), "quote": q},
+                "source": {"kind": "amendment", "ref": f"Amendement {lid} n° {n} ({page_label(*quote_pages(lid, n, q))} du PDF)", "url": pdf_url(lid, quote_pages(lid, n, q)[0]), "quote": q},
             })
     events.sort(key=lambda e: (e["date"], DOMAIN_ORDER[e["domain"]], e["amendments"][0]["liasse"], e["amendments"][0]["number"], e["label_fr"]))
     for i, e in enumerate(events, 1):
@@ -267,7 +281,8 @@ def build() -> dict:
         "meta": {
             "title_fr": "La transition 2027 → 2030 : chaque mesure datée du plan",
             "tier": "loi",
-            "tier_note": "Les dates viennent exclusivement du texte des 81 amendements (projets non adoptés). Chaque événement cite un extrait vérifié mot à mot. Les promesses sans base légale datée sont séparées dans annonces_sans_date (tier annonce).",
+            "tier_note": "Les dates viennent exclusivement du texte des 84 amendements (rédigés et publiés par Résolution, pas en vigueur). Chaque événement cite un extrait vérifié mot à mot et renvoie à la page du PDF qui le contient. Les promesses sans base légale datée sont séparées dans annonces_sans_date (tier annonce).",
+            "version": {k: PLAN_VERSION[k] for k in ("date_iso", "date_fr", "pdf_dates_fr", "cover_fr", "previous_fr")},
             "counts": {"events": len(events), "events_par_annee": dict(sorted(per_year.items())), "jalons": len(jalons), "trajectoires": len(traj), "annonces_sans_date": len(ann)},
             "domains": [{"id": d, "label_fr": l} for d, l in DOMAINS],
             "precision": {"jour": "jour écrit dans le texte", "annee": "année (ou année fiscale) sans jour : date = 1er janvier par convention", "approx": "point de départ non écrit (ex. « lendemain de la publication de la loi »)"},
@@ -275,7 +290,7 @@ def build() -> dict:
                 "Bouclier sanitaire (PLFSS n° 4) et abrogation des prestations familiales (PLFSS n° 7) : « à la date d'entrée en vigueur de l'aide fondamentale universelle et sous réserve de cette entrée en vigueur ».",
                 "Compte d'épargne personnel : structure légale au 1er janvier 2028, mais montants « fixés chaque année par la loi de finances » (nuls à défaut).",
             ],
-            "etat_b_note": "Pour les 22 amendements d'état B, l'effet est le 1er janvier 2027 pour les personnes morales et le 1er juillet 2027 pour les personnes physiques (demi-exercice) selon la nature des crédits de chaque mission.",
+            "etat_b_note": "Pour les 23 amendements d'état B (PLF-P2 n° 1 à 22 et n° 40), l'exposé de chaque mission date séparément chaque nature de crédit : 1er janvier 2027 (fonctionnement courant, investissement, aides aux entreprises, transferts aux collectivités…), 1er avril 2027 (hébergement d'urgence, mission « Cohésion des territoires ») ou 1er juillet 2027 (rémunérations, subventions aux associations et aux opérateurs, transferts aux ménages…). La version d'octobre 2026 ne distinguait que les personnes morales (1er janvier) et les personnes physiques (1er juillet).",
         },
         "events": events,
         "jalons": jalons,

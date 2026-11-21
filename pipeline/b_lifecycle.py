@@ -12,13 +12,13 @@ from lib import Sheet, clean, col_letters
 SERIES = [
     # row, id, label_fr, kind, note
     (24, "aide_fondamentale", "Aide fondamentale universelle", "loi",
-     "3 300 €/an jusqu'à 17 ans, 6 600 €/an à partir de 18 ans (PLF-P1 n° 28 : 3 300 € par personne à charge « jusqu'à l'année au cours de laquelle elle atteint l'âge de dix-huit ans », 6 600 € par adulte)."),
+     "3 300 €/an jusqu'à 17 ans, 6 600 €/an à partir de 18 ans (PLF-P1 n° 28 : 3 300 € par personne à charge « jusqu'à l'année au cours de laquelle elle atteint l'âge de dix-huit ans », 6 600 € par adulte). Le classeur n'applique pas la minoration de 3 300 € que la version de novembre 2026 de n° 28 impose aux pensions liquidées avant 2028 (écart D38)."),
     (25, "compte_education", "Compte éducation", "annonce",
      "6 600 €/an de 0 à 18 ans inclus (19 valeurs) : annonce du manifeste, sans texte de loi (l'aide fondamentale cesse de 3 300 € à l'âge de 18 ans mais le compte éducation court jusqu'à 18 ans inclus)."),
     (26, "part_contributive_retraite", "Part contributive de retraite", "annonce",
      "6 600 €/an à partir de 64 ans (le modèle suppose un départ à 64 ans) : sens non documenté dans le classeur."),
     (27, "rendement_patrimoine", "Rendement du patrimoine restitué", "annonce",
-     "264 €/an à tout âge (18,209 Md€ de rendement net annuel ÷ population) : voir facts.json."),
+     "264 €/an à tout âge, valeur de GraphAFU inchangée en novembre 2026 (18,209 Md€ de rendement net annuel ÷ population en octobre ; 17,553 Md€ dans l'Annexe Manuscrit de novembre) : voir facts.json."),
     (28, "aide_handicap", "Part d'aide handicap", "loi",
      "6 600 €/an de 0 à 63 ans (majoration invalidité de l'aide fondamentale, PLF-P1 n° 28) ; la série s'arrête à 63 ans, quand la part contributive de retraite prend le relais."),
     (29, "epargne_retraite_serie_1", "Épargne retraite personnelle (série 1)", "annonce",
@@ -82,6 +82,7 @@ def build() -> dict:
                 "Deux séries portent le même libellé « Epargne retraite personnelle » dans le classeur (lignes 29 et 30) : elles sont exportées séparément (serie_1 = 20 064 €, serie_2 = 6 600 €) ; leur sens n'est pas documenté.",
                 "total_flux_annuels_eur_an = somme des cinq séries de flux annuels (hors les deux séries « épargne retraite personnelle », dont le sens — stock ou flux — n'est pas documenté) : calcul du pipeline, aucun total n'est publié dans le classeur.",
                 "Âge de 64 ans : début de la « part contributive de retraite » et de l'épargne retraite dans le modèle.",
+                "La feuille GraphAFU est identique en octobre et en novembre 2026. Elle montre 6 600 € d'aide fondamentale à partir de 18 ans, y compris pour les retraités, alors que PLF-P1 n° 28 (version de novembre 2026) la minore de 3 300 € pour une pension de retraite liquidée avant le 1er janvier 2028 : voir D38 dans DISCREPANCIES.md.",
                 "L'aide fondamentale de l'enfant (3 300 €) cesse l'année des 18 ans ; le compte éducation court de 0 à 18 ans inclus (19 valeurs) : écart d'un an signalé dans source-analysis §7.6.",
             ],
         },

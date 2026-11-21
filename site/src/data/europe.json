@@ -1591,7 +1591,7 @@
    },
    "downloaded": "2026-11-21",
    "kind": "eurostat",
-   "ref": "Eurostat tec00023 (dépenses des administrations publiques, % du PIB) et tec00127 (capacité/besoin de financement, % du PIB), mise à jour du 21 octobre 2026 ; ilc_di03 (revenu médian équivalent, enquête SILC), mise à jour du 20 octobre 2026. Lignes (pays, agrégats) d'après Synthèse Graphiques Résolution_0910.xlsx › GraphGov, GraphRDB",
+   "ref": "Eurostat tec00023 (dépenses des administrations publiques, % du PIB) et tec00127 (capacité/besoin de financement, % du PIB), mise à jour du 21 octobre 2026 ; ilc_di03 (revenu médian équivalent, enquête SILC), mise à jour du 20 octobre 2026. Lignes (pays, agrégats) d'après Séries des graphiques.xlsx › GraphGov, GraphRDB",
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table",
    "vintage": {
     "ilc_di03": "2026-10-20",
@@ -1602,12 +1602,12 @@
    "workbook": {
     "also": {
      "kind": "workbook",
-     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › A2:B78",
-     "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+     "ref": "Séries des graphiques.xlsx › GraphRDB › A2:B78",
+     "url": "https://france-resolution.fr/donnees/S%C3%A9ries%20des%20graphiques.xlsx"
     },
     "kind": "workbook",
-    "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › A2:C83",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "ref": "Séries des graphiques.xlsx › GraphGov › A2:C83",
+    "url": "https://france-resolution.fr/donnees/S%C3%A9ries%20des%20graphiques.xlsx"
    }
   },
   "tier": "donnee",

@@ -1,4 +1,4 @@
-"""Hand-curated metadata for the 81 amendments (themes, plain-French summaries, dated effects).
+"""Hand-curated metadata for the 84 amendments (themes, plain-French summaries, dated effects).
 
 Faithfulness rules
 ------------------
@@ -38,7 +38,7 @@ CURATED: dict[tuple[str, int], dict] = {
     # ------------------------------------------------------------------ PLF 2027, première partie
     ("PLF-P1", 1): {
         "theme": "niches",
-        "resume": "Supprime tous les avantages fiscaux dérogatoires (exonérations, abattements, déductions, réductions et crédits d'impôt, taux réduits, reports, dégrèvements) sur sept impôts, avec six exceptions de principe et un calendrier d'extinction qui s'étale de 2027 à 2029.",
+        "resume": "Supprime tous les avantages fiscaux dérogatoires (exonérations, abattements, déductions, réductions et crédits d'impôt, taux réduits, reports, dégrèvements) sur sept impôts, avec six exceptions (droit commun du revenu imposable, double imposition, droit de l'Union, taux réduits de TVA non abrogés, aide fondamentale, compte d'épargne personnel et tarif des droits de mutation) et un calendrier d'extinction qui s'étale de 2027 à 2029.",
         "dates": [
             ("2027-01-01", A, "Cas général : impôt sur le revenu dû au titre de 2026, impôt sur les sociétés des exercices clos à partir du 1er janvier 2027, droits d'enregistrement sur les actes à partir du 1er janvier 2027", "le I s’applique à l’impôt sur le revenu dû au titre de 2026"),
             ("2027-01-01", J, "Avantages liés à un investissement, une dépense ou un engagement : investissements et engagements à partir du 1er janvier 2027", "aux engagements pris à compter du 1er janvier 2027"),
@@ -105,32 +105,32 @@ CURATED: dict[tuple[str, int], dict] = {
     },
     ("PLF-P1", 10): {
         "theme": "niches",
-        "resume": "Abroge les dix régimes d'exonération d'impôt sur les bénéfices attachés à l'implantation dans une zone (articles 44 sexies à 44 septdecies du CGI) pour les exercices ouverts à partir du 1er janvier 2027.",
+        "resume": "Abroge les dix régimes d'exonération d'impôt sur les bénéfices attachés à l'implantation dans une zone (articles 44 sexies à 44 septdecies du CGI) pour les exercices ouverts à partir du 1er janvier 2027. Ne se cumule pas avec l'amendement distinct qui neutralise l'ensemble des dépenses fiscales par une clause générale.",
         "dates": [("2027-01-01", J, "Exercices ouverts à partir du 1er janvier 2027", "Le I s’applique aux exercices ouverts à compter du 1er janvier 2027")],
     },
     ("PLF-P1", 11): {
         "theme": "niches",
-        "resume": "Abroge le régime de taxation au tonnage des armateurs : leur bénéfice réel est imposé comme celui des autres entreprises, pour les exercices ouverts à partir du 1er janvier 2027.",
-        "dates": [("2027-01-01", J, "Exercices ouverts à partir du 1er janvier 2027", "Le I s’applique aux exercices ouverts à compter du 1er janvier 2027")],
+        "resume": "Abroge le régime de taxation au tonnage des armateurs : leur bénéfice réel est imposé comme celui des autres entreprises, pour les exercices clos à partir du 1er janvier 2027 ; les options en cours cessent de produire effet à cette date. Ne se cumule pas avec l'amendement distinct qui neutralise l'ensemble des dépenses fiscales par une clause générale.",
+        "dates": [("2027-01-01", J, "Exercices clos à partir du 1er janvier 2027", "Le I s’applique aux exercices clos à compter du 1er janvier 2027")],
     },
     ("PLF-P1", 12): {
         "theme": "niches",
-        "resume": "Abroge le crédit d'impôt famille (places de crèche financées par l'employeur) pour les dépenses exposées à partir du 1er juillet 2027.",
-        "dates": [("2027-07-01", J, "Dépenses exposées à partir du 1er juillet 2027", "Le I s’applique aux dépenses exposées à compter du 1er juillet 2027")],
+        "resume": "Abroge le crédit d'impôt famille (places de crèche financées par l'employeur) pour les dépenses exposées à partir du 1er janvier 2027. Ne se cumule pas avec l'amendement distinct qui neutralise l'ensemble des dépenses fiscales par une clause générale.",
+        "dates": [("2027-01-01", J, "Dépenses exposées à partir du 1er janvier 2027", "Le I s’applique aux dépenses exposées à compter du 1er janvier 2027")],
     },
     ("PLF-P1", 13): {
         "theme": "niches",
-        "resume": "Abroge huit déductions exceptionnelles d'investissement (poids lourds, robots, navires, engins, simulateurs, cuves…) pour les biens acquis à partir du 1er janvier 2027.",
+        "resume": "Abroge huit déductions exceptionnelles d'investissement (poids lourds, robots, navires, engins, simulateurs, cuves…) pour les biens acquis à partir du 1er janvier 2027. Ne se cumule pas avec l'amendement distinct qui neutralise l'ensemble des dépenses fiscales par une clause générale.",
         "dates": [("2027-01-01", J, "Biens acquis à partir du 1er janvier 2027", "pris en location avec option d’achat à compter du 1er janvier 2027")],
     },
     ("PLF-P1", 14): {
         "theme": "niches",
-        "resume": "Abroge les tarifs réduits d'accise sur l'énergie qui relèvent d'un choix national (les exonérations imposées par le droit de l'Union sont maintenues), à partir du 1er juillet 2027.",
+        "resume": "Abroge les tarifs réduits d'accise sur l'énergie qui relèvent d'un choix national (les exonérations imposées par le droit de l'Union sont maintenues), à partir du 1er juillet 2027. Ne se cumule pas avec l'amendement distinct qui neutralise l'ensemble des dépenses fiscales par une clause générale.",
         "dates": [("2027-07-01", J, "Opérations dont le fait générateur est à partir du 1er juillet 2027", "Le I s’applique aux opérations dont le fait générateur intervient à compter du 1er juillet 2027")],
     },
     ("PLF-P1", 15): {
         "theme": "niches",
-        "resume": "Abroge d'ici 2029, par tiers, trois régimes fiscaux réservés à l'agriculture : crédit d'impôt pour l'agriculture biologique, exonération des coopératives et tarif réduit du gazole agricole.",
+        "resume": "Abroge d'ici 2029, par tiers, trois régimes fiscaux réservés à l'agriculture : crédit d'impôt pour l'agriculture biologique, exonération des coopératives et tarif réduit du gazole agricole. Ne se cumule pas avec l'amendement distinct qui neutralise l'ensemble des dépenses fiscales par une clause générale.",
         "dates": [
             ("2027-01-01", J, "Tarif réduit du gazole agricole réduit d'un tiers (fait générateur à partir du 1er janvier 2027)", "réduit d’un tiers pour les opérations dont le fait générateur intervient à compter du 1er janvier 2027"),
             ("2028-01-01", J, "Tarif réduit du gazole agricole réduit de deux tiers (à partir du 1er janvier 2028)", "de deux tiers pour celles dont le fait générateur intervient à compter du 1er janvier 2028"),
@@ -179,16 +179,19 @@ CURATED: dict[tuple[str, int], dict] = {
     },
     ("PLF-P1", 22): {
         "theme": "refonte_fiscale",
-        "resume": "Supprime vingt et une impositions de l'État (contribution sociale sur l'IS, taxe sur les transactions financières, taxe sur les rachats d'actions, droits de timbre…), la plupart au 1er juillet 2027, les taxes annuelles au 1er janvier 2028.",
+        "resume": "Supprime cinquante-quatre impositions de l'État (contribution sociale sur l'IS, taxe sur les transactions financières, taxe sur les rachats d'actions, droits de timbre, redevances et taxes perçues par opération, prélèvements sur les jeux…), la plupart au 1er juillet 2027, les taxes annuelles et les contributions sur le revenu au 1er janvier 2028, et ramène l'accise sur l'électricité à 1 € par mégawattheure pour les ménages et 0,5 € pour les autres consommations dès le 1er juillet 2027.",
         "dates": [
             ("2027-07-01", J, "Impositions dont le fait générateur est à partir du 1er juillet 2027", "Le I s’applique aux impositions dont le fait générateur intervient à compter du 1er juillet 2027"),
+            ("2027-07-01", J, "Accise sur l'électricité à 1 € (ménages) ou 0,5 € (autres consommations) par mégawattheure : quantités fournies ou consommées à partir du 1er juillet 2027", "Le I bis s’applique aux quantités d’électricité fournies ou consommées à compter de la même date"),
             ("2028-01-01", J, "Taxes annuelles et contributions sur le revenu", "suivent au 1er janvier 2028, avec le taux unique de l’impôt sur le revenu"),
         ],
     },
     ("PLF-P1", 23): {
         "theme": "refonte_fiscale",
-        "resume": "Fixe un taux unique d'impôt sur les sociétés de 27 % pour tous les bénéfices, sans taux réduit, pour les exercices ouverts à partir du 1er juillet 2027.",
-        "dates": [("2027-07-01", J, "Exercices ouverts à partir du 1er juillet 2027", "Les I et II s’appliquent aux exercices ouverts à compter du 1er juillet 2027")],
+        "resume": "Fixe un taux unique d'impôt sur les sociétés de 27 % pour tous les bénéfices, sans taux réduit, pour les exercices ouverts à partir du 1er juillet 2027, et rend la Caisse des dépôts et consignations passible de l'impôt sur les sociétés pour son activité pour compte propre.",
+        "dates": [
+            ("2027-07-01", J, "Exercices ouverts à partir du 1er juillet 2027", "s’appliquent aux exercices ouverts à compter du 1er juillet 2027"),
+        ],
     },
     ("PLF-P1", 24): {
         "theme": "refonte_fiscale",
@@ -197,7 +200,7 @@ CURATED: dict[tuple[str, int], dict] = {
     },
     ("PLF-P1", 25): {
         "theme": "refonte_fiscale",
-        "resume": "Abroge cinquante-sept impositions affectées à des opérateurs et organismes (versement mobilité, formation, apprentissage, effort de construction…) : au 1er juillet 2027 pour celles qui se perçoivent par opération ou sur les rémunérations, avec un dernier exercice 2027 pour les taxes annuelles.",
+        "resume": "Abroge soixante-douze impositions affectées à des opérateurs et organismes (versement mobilité, formation, apprentissage, effort de construction, santé au travail, garantie des salaires, médicaments vétérinaires, permis de chasser…) : au 1er juillet 2027 pour celles qui se perçoivent par opération ou sur les rémunérations, avec un dernier exercice 2027 pour les taxes annuelles ; les collectivités sont compensées par la dotation globale de fonctionnement.",
         "dates": [
             ("2027-07-01", J, "Impositions dont le fait générateur est à partir du 1er juillet 2027 et rémunérations versées à partir de cette date", "à compter du 1er juillet 2027 et, pour les contributions assises sur les rémunérations, aux rémunérations versées à compter de cette date"),
             ("2027-12-31", A, "Taxes annuelles : dues une dernière fois au titre de 2027", "sont dues une dernière fois au titre de 2027"),
@@ -218,16 +221,19 @@ CURATED: dict[tuple[str, int], dict] = {
     },
     ("PLF-P1", 28): {
         "theme": "aide_fondamentale",
-        "resume": "Remplace le barème progressif de l'impôt sur le revenu par un taux unique de 23 % diminué d'une aide fondamentale universelle de 6 600 € par adulte et 3 300 € par enfant à charge (majorations pour invalidité et pensions anciennes), l'excédent étant versé ; supprime le quotient familial et la décote.",
+        "resume": "Remplace le barème progressif de l'impôt sur le revenu par un taux unique de 23 % diminué d'une aide fondamentale universelle de 6 600 € par adulte et 3 300 € par enfant à charge, majorée de 6 600 € pour une personne invalide et minorée de 3 300 € pour une pension de retraite servie par un régime obligatoire et liquidée avant 2028 (minoration réduite au prorata des droits acquis avant 2028 pour une pension liquidée ensuite, jusqu'à l'imposition des revenus de 2051), l'excédent étant versé ; supprime le quotient familial et la décote.",
         "dates": [
             ("2028-01-01", J, "Versement mensuel de l'aide par acomptes à partir du 1er janvier 2028 (impôt sur le revenu de 2028)", "s’applique aux acomptes dus à compter du 1er janvier 2028"),
-            ("2051-01-01", A, "Fin de la majoration de 3 300 € pour les pensions liquidées avant le 1er janvier 2028 : jusqu'à l'imposition des revenus de 2051", "Cette majoration s’applique jusqu’à l’imposition des revenus de l’année 2051"),
+            ("2051-01-01", A, "Dernière année de la minoration de 3 300 € des pensions liquidées avant le 1er janvier 2028 : imposition des revenus de 2051", "Cette minoration s’applique jusqu’à l’imposition des revenus de l’année 2051"),
         ],
     },
     ("PLF-P1", 29): {
         "theme": "collectivites",
-        "resume": "Fusionne les impôts fonciers locaux (taxes foncières, taxe d'habitation sur les résidences secondaires, ordures ménagères, taxe d'aménagement) en une taxe communale unique assise sur la valeur locative de marché, au taux voté par la commune entre 10 % et 30 %.",
-        "dates": [("2028-01-01", J, "Entrée en vigueur ; premières impositions au titre de 2028", "Le IV entre en vigueur le 1er janvier 2028")],
+        "resume": "Fusionne les impôts fonciers locaux (taxes foncières, taxe d'habitation sur les résidences secondaires, ordures ménagères, taxe d'aménagement) en une taxe communale unique assise sur la valeur locative de marché, au taux voté par la commune entre 10 % et 30 %, et abroge en outre vingt impositions locales (taxe locale sur la publicité extérieure, taxes sur les surfaces de stationnement et commerciales, taxes sur les remontées mécaniques, prélèvements communaux sur les jeux des casinos…), certaines dès le 1er juillet 2027, les collectivités étant compensées par la dotation globale de fonctionnement.",
+        "dates": [
+            ("2027-07-01", J, "Impositions locales perçues sur une opération ou sur le produit des jeux : abrogées pour les recettes et accès à partir du 1er juillet 2027", "s’applique aux recettes et aux accès réalisés à compter du 1er juillet 2027"),
+            ("2028-01-01", J, "Entrée en vigueur ; premières impositions au titre de 2028", "Le IV entre en vigueur le 1er janvier 2028"),
+        ],
     },
     ("PLF-P1", 30): {
         "theme": "collectivites",
@@ -262,6 +268,11 @@ CURATED: dict[tuple[str, int], dict] = {
         "resume": "Plafonne, à partir de 2028, la fraction de TVA versée aux départements et aux régions à ce qu'ils justifient avoir dépensé pour leurs compétences obligatoires, et fait absorber par la TVA, en dernier recours, les baisses de ressources liées aux compétences retirées.",
         "dates": [("2028-01-01", A, "Plafonnement à partir de 2028", "à compter de 2028, la fraction versée aux départements et aux régions")],
     },
+    ("PLF-P1", 35): {
+        "theme": "refonte_fiscale",
+        "resume": "Supprime l'article du projet de loi de finances qui reconduit un troisième exercice de la contribution exceptionnelle des entreprises de plus d'un milliard d'euros de chiffre d'affaires (taux de 15,7 %, 5,2 Md€ attendus en 2027) et rétablit pour un exercice celle des grandes entreprises de transport maritime ; leur produit est repris par l'impôt sur les sociétés au taux unique de 27 %.",
+        "dates": [],
+    },
     # ------------------------------------------------------------------ PLF 2027, seconde partie (23 à 39)
     ("PLF-P2", 23): {
         "theme": "etat_agences_emplois",
@@ -286,7 +297,7 @@ CURATED: dict[tuple[str, int], dict] = {
     },
     ("PLF-P2", 26): {
         "theme": "etat_agences_emplois",
-        "resume": "Organise la sortie des agents dont l'emploi est supprimé : indemnité mensuelle de 70 % d'une base de traitement pendant 1 à 7 ans selon l'ancienneté, cumulable avec un emploi privé.",
+        "resume": "Organise la sortie des agents dont l'emploi est supprimé : après une proposition d'emploi en CDI lorsqu'il en existe un, indemnité mensuelle de 70 % d'une base de traitement pendant 24 mois plus un mois par trimestre de services (84 mois au plus, et au plus jusqu'à la date d'une pension sans décote), cumulable avec un emploi privé et comptée pour la retraite.",
         "dates": [
             ("2027-07-01", J, "Entrée en vigueur ; indemnité due à partir du 1er juillet 2027", "Le présent article entre en vigueur le 1er juillet 2027"),
             ("2035-01-01", A, "Rapport annuel au Parlement jusqu'en 2035", "chaque année jusqu’en 2035"),
@@ -333,13 +344,17 @@ CURATED: dict[tuple[str, int], dict] = {
     },
     ("PLF-P2", 33): {
         "theme": "logement_aides",
-        "resume": "Fait de l'hébergement d'urgence une faculté temporaire réservée aux personnes en danger ou qui ne peuvent se loger en raison d'une grossesse, d'une incapacité ou de la charge d'un jeune enfant, sous condition de régularité du séjour.",
-        "dates": [("2027-01-01", J, "Entrée en vigueur", "Le I entre en vigueur le 1er janvier 2027")],
+        "resume": "Fait de l'hébergement d'urgence une faculté temporaire réservée aux personnes qui ne peuvent se loger en raison d'une grossesse, d'une incapacité ou de la charge d'un enfant en bas âge ou atteint d'une incapacité, ou qui sont exposées à un danger pour leur intégrité physique, sous condition de régularité du séjour.",
+        "dates": [
+            ("2027-04-01", J, "Entrée en vigueur", "Le I entre en vigueur le 1er avril 2027"),
+        ],
     },
     ("PLF-P2", 34): {
         "theme": "logement_aides",
-        "resume": "Abroge le chèque énergie et le régime qui l'organise : la campagne d'émission de 2027 n'a pas lieu.",
-        "dates": [("2027-01-01", J, "Entrée en vigueur", "Le I entre en vigueur le 1er janvier 2027")],
+        "resume": "Abroge le chèque énergie et le régime qui l'organise : aucun titre n'est émis au titre de 2027 (économie estimée à 300 M€ en 2027 et 600 M€ en année pleine).",
+        "dates": [
+            ("2027-01-01", J, "Entrée en vigueur", "Le I entre en vigueur le 1er janvier 2027"),
+        ],
     },
     ("PLF-P2", 35): {
         "theme": "collectivites",
@@ -424,6 +439,14 @@ CURATED: dict[tuple[str, int], dict] = {
         "dates": [
             ("2027-07-01", J, "Entrée en vigueur", "Les I et II entrent en vigueur le 1er juillet 2027"),
             ("2029-07-01", J, "Engagements en cours exécutés au plus tard jusqu'au 1er juillet 2029", "au plus tard jusqu’au 1er juillet 2029"),
+        ],
+    },
+    ("PLFSS", 9): {
+        "theme": "refonte_fiscale",
+        "resume": "Abroge vingt et une contributions affectées à la sécurité sociale (contribution sociale de solidarité des sociétés, contributions des laboratoires et des grossistes, contribution tarifaire d'acheminement, prélèvements sur les jeux…) à partir du 1er juillet 2027 ; leur produit de 13 Md€ est compensé par la majoration du taux des contributions sur les revenus du patrimoine et des placements.",
+        "dates": [
+            ("2027-07-01", J, "Contributions dont le fait générateur est à partir du 1er juillet 2027 et rémunérations versées à partir de cette date", "Le I s’applique aux contributions dont le fait générateur intervient à compter du 1er juillet 2027"),
+            ("2027-12-31", A, "Contributions annuelles : dues une dernière fois au titre de 2027, ou sur la moitié de leur assiette annuelle", "sont dues une dernière fois au titre de l’année 2027"),
         ],
     },
 }

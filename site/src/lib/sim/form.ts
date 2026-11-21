@@ -33,6 +33,8 @@ export const LIMITS = {
   childSupportMax: 5_000,
   childcareCostMax: 5_000,
   pensionYear: { min: 1970, max: 2040 },
+  /** % of the insurance duration validated before 1 Jan 2028 (PLF-P1 am. 28 minoration, pensions from 2028). */
+  pensionShare: { min: 0, max: 100 },
   moneyAnnualMax: 1_000_000,
 } as const;
 
@@ -70,6 +72,11 @@ export interface FormAdult {
   pensionBasis: 'net' | 'brut';
   /** `null` = already retired (the engine gets a past year). Only asked under « Affiner ». */
   pensionStartYear: number | null;
+  /**
+   * v1.2: % (0–100) of the insurance duration validated before 1 Jan 2028, only asked when the pension starts in
+   * 2028 or later (it scales the 3 300 €/an AFU minoration). `null` = not given: the engine assumes a full career.
+   */
+  pensionShareBefore2028: number | null;
   disability: Disability;
   /** Students only: bourse sur critères sociaux (housing aid resource floor 6 900 € instead of 8 600 €). Default: no. */
   boursier: boolean;
@@ -127,6 +134,7 @@ export function emptyAdult(overrides: Partial<FormAdult> = {}): FormAdult {
     pensionAmount: null,
     pensionBasis: 'net',
     pensionStartYear: null,
+    pensionShareBefore2028: null,
     disability: 'none',
     boursier: false,
     ...overrides,
@@ -317,12 +325,26 @@ export function formToHousehold(f: FormState): {
           `L’année de départ doit être comprise entre ${LIMITS.pensionYear.min} et ${LIMITS.pensionYear.max}.`;
         ok = false;
       }
+      const asksShare = a.pensionStartYear !== null && a.pensionStartYear >= 2028;
+      if (
+        asksShare &&
+        a.pensionShareBefore2028 !== null &&
+        !range(a.pensionShareBefore2028, LIMITS.pensionShare.min, LIMITS.pensionShare.max)
+      ) {
+        errors[`${k}.pensionShare`] = 'Indiquez un pourcentage entre 0 et 100.';
+        ok = false;
+      }
       if (ok) {
         adult.pension = {
           amount: a.pensionAmount!,
           basis: a.pensionBasis,
-          // « déjà à la retraite » : une année passée suffit, le plan ne distingue que « avant 2028 »
+          // « déjà à la retraite » : une année passée suffit (pension liquidée avant 2028 : minoration entière
+          // de l’aide fondamentale) ; à partir de 2028, la minoration suit la part de la durée d’assurance
+          // validée avant 2028.
           startYear: a.pensionStartYear ?? 2020,
+          ...(asksShare && a.pensionShareBefore2028 !== null
+            ? { insuranceShareBefore2028: a.pensionShareBefore2028 / 100 }
+            : {}),
         };
       }
     }
@@ -442,6 +464,8 @@ export function missingLabels(errors: FieldErrors): string[] {
       else if (f === 'salary') add(you ? 'votre salaire' : 'son salaire');
       else if (f === 'are') add(you ? 'votre allocation chômage' : 'son allocation chômage');
       else if (f === 'pension') add(you ? 'votre pension' : 'sa pension');
+      else if (f === 'pensionShare')
+        add(you ? 'votre part de carrière avant 2028' : 'sa part de carrière avant 2028');
       else add(you ? 'votre année de départ' : 'son année de départ');
     } else if (key === 'housing.status') add('votre logement');
     else if (key === 'housing.rent') add('votre loyer');
@@ -481,6 +505,10 @@ export function householdToForm(h: Household): FormState {
             pensionBasis: a.pension.basis,
             // Only keep a year that says something (a future retirement); the default is « déjà retraité·e ».
             pensionStartYear: a.pension.startYear >= 2027 ? a.pension.startYear : null,
+            pensionShareBefore2028:
+              a.pension.startYear >= 2028 && a.pension.insuranceShareBefore2028 !== undefined
+                ? Math.round(a.pension.insuranceShareBefore2028 * 1000) / 10
+                : null,
           }
         : {}),
     });

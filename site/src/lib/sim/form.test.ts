@@ -138,6 +138,42 @@ describe('formToHousehold', () => {
     expect(h.adults[0].salary).toBeUndefined();
   });
 
+  it('v1.2: the share of insurance duration before 2028 is sent only for a pension starting in 2028 or later', () => {
+    const f = filled();
+    f.adults[0] = emptyAdult({ age: 63, activity: 'retraite', pensionAmount: 1500 });
+    f.adults[0] = { ...f.adults[0], pensionStartYear: 2031, pensionShareBefore2028: 85 };
+    expect(formToHousehold(f).household!.adults[0].pension).toEqual({
+      amount: 1500,
+      basis: 'net',
+      startYear: 2031,
+      insuranceShareBefore2028: 0.85,
+    });
+    // left empty: the engine's default (full career) applies
+    f.adults[0] = { ...f.adults[0], pensionShareBefore2028: null };
+    expect(formToHousehold(f).household!.adults[0].pension).toEqual({
+      amount: 1500,
+      basis: 'net',
+      startYear: 2031,
+    });
+    // ignored for a pension liquidated before 2028 (whole minoration)
+    f.adults[0] = { ...f.adults[0], pensionStartYear: 2027, pensionShareBefore2028: 40 };
+    expect(formToHousehold(f).household!.adults[0].pension).toEqual({
+      amount: 1500,
+      basis: 'net',
+      startYear: 2027,
+    });
+    // out of range
+    f.adults[0] = { ...f.adults[0], pensionStartYear: 2030, pensionShareBefore2028: 120 };
+    const r = formToHousehold(f);
+    expect(r.errors['adult0.pensionShare']).toMatch(/entre 0 et 100/);
+    expect(missingLabels(r.errors)).toContain('votre part de carrière avant 2028');
+    // round trip through the URL household
+    f.adults[0] = { ...f.adults[0], pensionShareBefore2028: 62.5 };
+    const back = householdToForm(formToHousehold(f).household!);
+    expect(back.adults[0].pensionStartYear).toBe(2030);
+    expect(back.adults[0].pensionShareBefore2028).toBe(62.5);
+  });
+
   it('unemployed: say whether benefit is received; the amount only when « oui »', () => {
     const f = filled();
     f.adults[0] = emptyAdult({ age: 40, activity: 'chomage' });

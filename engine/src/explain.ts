@@ -83,8 +83,10 @@ function phrase(e: Evaluated, w: WaterfallStep): string {
   const kids = e.nh.children.some((k) => k.age < n('plan.afu_child_max_age'));
   const flat = e.planCore!.tax.regime === 'flat';
   switch (w.id) {
-    case 'afu':
-      return `l’aide universelle de ${eur0(n('plan.afu_adult') / 12)} par adulte${kids ? ` et ${eur0(n('plan.afu_child') / 12)} par enfant` : ''} (aide fondamentale universelle, AFU)`;
+    case 'afu': {
+      const mino = e.planCore!.afu.pensionMinorationAnnual;
+      return `l’aide universelle de ${eur0(n('plan.afu_adult') / 12)} par adulte${kids ? ` et ${eur0(n('plan.afu_child') / 12)} par enfant` : ''} (aide fondamentale universelle, AFU${mino > 0 ? ` ; ${eur0(mino / 12)} de moins par mois pour ${e.planCore!.afu.nPension > 1 ? 'vos pensions' : 'votre pension'} de retraite` : ''})`;
+    }
     case 'salaire_net':
       return w.delta > 0
         ? 'la hausse de votre salaire net (fin de la CSG et de la CRDS, les prélèvements sociaux sur les salaires)'

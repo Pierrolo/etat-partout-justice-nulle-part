@@ -725,7 +725,7 @@ function Refine({
                 ? `Année de départ à la retraite ${i === 0 ? '(vous)' : '(votre conjoint·e)'}`
                 : 'Année de départ à la retraite'
             }
-            hint="Laissez vide si vous êtes déjà à la retraite. Le plan traite différemment les retraites qui ne commenceraient qu’à partir du 1er janvier 2028."
+            hint="Laissez vide si vous êtes déjà à la retraite. Avec le plan, l’aide fondamentale d’un·e retraité·e est diminuée de 3 300 € par an pour une pension liquidée avant le 1er janvier 2028 ; pour une pension liquidée ensuite, la baisse est proportionnelle à la part de la carrière validée avant 2028."
             value={form.adults[i]!.pensionStartYear}
             onChange={(pensionStartYear) => patchAdult(i, { pensionStartYear })}
             min={LIMITS.pensionYear.min}
@@ -735,6 +735,28 @@ function Refine({
             validate={showErrors}
             fieldClassName="w-48 max-w-full"
           />
+          {(form.adults[i]!.pensionStartYear ?? 0) >= 2028 && (
+            <div className="mt-4" data-field={`adult${i}.pensionShare`}>
+              <NumberInput
+                id={`a${i}-pension-share`}
+                label={
+                  couple
+                    ? `Part de la durée d’assurance validée avant 2028 ${i === 0 ? '(vous)' : '(votre conjoint·e)'}`
+                    : 'Part de votre durée d’assurance validée avant 2028'
+                }
+                hint="Trimestres validés avant le 1er janvier 2028 ÷ total des trimestres retenus pour votre retraite (votre relevé de carrière sur info-retraite.fr). Laissez vide : le simulateur suppose une carrière complète de 172 trimestres, terminée au 1er juillet de l’année de départ."
+                unit="%"
+                value={form.adults[i]!.pensionShareBefore2028}
+                onChange={(pensionShareBefore2028) => patchAdult(i, { pensionShareBefore2028 })}
+                min={LIMITS.pensionShare.min}
+                max={LIMITS.pensionShare.max}
+                step={1}
+                error={errors[`adult${i}.pensionShare`]}
+                validate={showErrors}
+                fieldClassName="w-48 max-w-full"
+              />
+            </div>
+          )}
         </div>
       ))}
       {!couple && form.children.length > 0 && (

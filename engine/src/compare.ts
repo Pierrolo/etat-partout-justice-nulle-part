@@ -1,7 +1,8 @@
 /** compare(): baseline vs plan for one household, with waterfall, non-chiffré panels, hypotheses and caveats. */
 import { cmgAgeLimit, isPaidCare } from './core.ts';
 import { buildSummary, explainBaselineBenefits } from './explain.ts';
-import { eur, r2 } from './fmt.ts';
+import { eur, eur0, pct, r2 } from './fmt.ts';
+import { n } from './params/index.ts';
 import { PERIOD_LABEL } from './plan/periods.ts';
 import { evaluate } from './simulate.ts';
 import type {
@@ -109,8 +110,11 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
     {
       id: 'H3',
       label: 'Revenu imposable du plan',
-      value: 'salaire net (sans CSG/CRDS) ; pensions après CSG déductible, sans abattement de 10 %',
-      tier: 'law',
+      value: hyp.H2_fraisPro10
+        ? 'salaire après cotisations sociales (plus de CSG ni de CRDS), moins 10 % de frais professionnels (H2) ; pensions après CSG déductible, sans abattement de 10 %'
+        : 'salaire après cotisations sociales (plus de CSG ni de CRDS), sans déduction de 10 % ; pensions après CSG déductible, sans abattement de 10 %',
+      // PE-9: the 10 % deduction is our hypothesis H2; without it the line is amendment text.
+      tier: hyp.H2_fraisPro10 ? 'hypothesis' : 'law',
     },
     {
       id: 'H4',
@@ -121,8 +125,9 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
     {
       id: 'H12',
       label: 'AFU',
-      value: '6 600 € nominaux appliqués aux revenus 2026 (non indexée)',
-      tier: 'law',
+      value:
+        '6 600 € par adulte, non indexés (amendement), appliqués tels quels aux revenus de 2026 (choix du simulateur)',
+      tier: 'hypothesis',
     },
     {
       id: 'H14',
@@ -135,9 +140,11 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
     activeHypotheses.push({
       id: 'H11',
       label: 'Couple',
-      value: nh.married
-        ? 'marié·e/pacsé·e : une déclaration commune aujourd’hui'
-        : 'non marié·e : deux foyers fiscaux aujourd’hui, enfants rattachés à l’adulte 1 ; un seul ménage pour la CAF',
+      value:
+        (nh.married
+          ? 'marié·e/pacsé·e : une déclaration commune aujourd’hui'
+          : 'non marié·e : deux foyers fiscaux aujourd’hui, enfants rattachés à l’adulte 1 ; un seul ménage pour la CAF') +
+        ' ; avec le plan, le foyer fiscal est maintenu (aucun amendement n’abroge l’imposition commune), mais avec un taux unique, sans quotient familial et une aide par adulte, le montant est le même marié·e ou non',
       tier: 'law',
     });
   if (nh.children.some((k) => k.age >= 18))
@@ -145,7 +152,7 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
       id: 'H13',
       label: 'Jeunes de 18 à 24 ans',
       value:
-        'AFU adulte (550 €/mois) : le rattachement au foyer des parents (art. 196 B) étant abrogé en 2028, la personne majeure reçoit sa propre aide',
+        'AFU adulte (550 €/mois) : l’amendement la verse à « chaque personne majeure composant le foyer fiscal », rattachée ou non au foyer de ses parents',
       tier: 'law',
     });
   if (nh.adults.some((a) => a.activity === 'chomage'))
@@ -199,6 +206,26 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
           ? 'non renseignés : aucun coût supposé pour un enfant de 6 ans ou plus'
           : `non renseignés : ${eur(e.baselineCore.flows.childcareCost)} par mois supposés (${nh.childcare === 'assistante_maternelle' ? 'temps plein, 180 h au tarif médian de 4,85 €/h' : nh.childcare === 'micro_creche' ? 'temps plein, 180 h à 9 €/h' : 'temps plein, 180 h au barème des crèches selon vos revenus'})`,
       tier: 'hypothesis',
+    });
+  const pensionsMino = e.planCore?.afu.pensions ?? [];
+  if (pensionsMino.length)
+    activeHypotheses.push({
+      id: 'H21',
+      label: 'Aide fondamentale des retraité·es',
+      value: pensionsMino
+        .map(
+          (p) =>
+            `${nh.adults.length > 1 ? `adulte ${p.index + 1} : ` : ''}${
+              p.shareSource === 'before_cutoff'
+                ? `pension liquidée avant 2028 : −${eur0(n('plan.afu_pension_minoration'))} par an (aide de ${eur0(n('plan.afu_adult') - n('plan.afu_pension_minoration'))} par an au lieu de ${eur0(n('plan.afu_adult'))})`
+                : `pension liquidée en ${p.startYear} : −${eur0(p.annual)} par an (${pct(Math.round(p.share * 1000) / 1000)} de la durée d’assurance validée avant 2028, ${p.shareSource === 'default' ? 'hypothèse d’une carrière complète' : 'valeur déclarée'})`
+            }`,
+        )
+        .join(' ; ')
+        .concat(
+          ' ; pension supposée servie par un régime obligatoire ; minoration jusqu’à l’impôt sur les revenus de 2051',
+        ),
+      tier: pensionsMino.some((p) => p.shareSource === 'default') ? 'hypothesis' : 'law',
     });
   if (nh.adults.some((a) => a.activity === 'retraite'))
     activeHypotheses.push({
@@ -258,7 +285,7 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
     nm.push('Accession à la propriété : APL accession et prêt à taux zéro non modélisés.');
   if (nh.adults.some((a) => a.activity === 'retraite'))
     nm.push(
-      'Retraites : contribution maladie de 1 % sur les complémentaires, lissage des seuils de CSG, pensions de réversion et minimum contributif non modélisés.',
+      'Retraites : contribution maladie de 1 % sur les complémentaires, lissage des seuils de CSG, pensions de réversion et minimum contributif non modélisés ; la pension est supposée servie par un régime obligatoire (une rente d’épargne retraite ne déclenche pas la minoration de l’aide fondamentale) ; le décret prévu par l’amendement pour la minoration des pensions liquidées à partir de 2028 n’existe pas : la règle « à défaut » de l’amendement (durée d’assurance) est appliquée.',
     );
   if (nh.adults.some((a) => a.age >= 65))
     nm.push('ASPA : récupération sur succession et cumul avec l’AAH simplifiés.');
@@ -285,8 +312,11 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
     warnings.push(
       'Transition : montants mensuels moyens de l’année, en euros 2026, revenus supposés constants.',
     );
-  if (nh.adults.some((a) => a.pension && a.pension.startYear >= 2028))
-    warnings.push('Pension liquidée en 2028 ou après : pas de majoration de 3 300 €/an de l’AFU.');
+  for (const p of e.planCore?.afu.pensions ?? [])
+    if (p.shareSource !== 'before_cutoff')
+      warnings.push(
+        `${nh.adults.length > 1 ? `Adulte ${p.index + 1} : p` : 'P'}ension liquidée en ${p.startYear} : la minoration de ${eur0(n('plan.afu_pension_minoration'))} par an de l’aide fondamentale est réduite à la part de la durée d’assurance validée avant le 1er janvier 2028 (${pct(Math.round(p.share * 1000) / 1000)} retenus${p.shareSource === 'default' ? ` : hypothèse d’une carrière complète de ${n('plan.afu_pension_default_career_quarters')} trimestres terminée au 1er juillet ${p.startYear} ; indiquez votre part réelle pour un calcul exact` : ', valeur déclarée'}), soit −${eur(p.annual / 12)} par mois.`,
+      );
   if (Math.abs(delta) >= 0.005 && baseline.disposable <= DELTA_PCT_MIN_BASELINE)
     warnings.push(
       `Revenu disponible actuel inférieur à ${DELTA_PCT_MIN_BASELINE} € par mois : variation en % non calculée.`,

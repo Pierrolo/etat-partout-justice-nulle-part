@@ -6,18 +6,23 @@ import { eur0 } from './fmt.ts';
 import type { NHousehold } from './normalize.ts';
 import {
   MANIFESTE,
-  PLF_P1,
   SRC_AM19_DMTO,
   SRC_AM1_NICHES,
   SRC_AM20_PV,
+  SRC_AM22_TAXES,
+  SRC_AM25_AFFECTEES,
   SRC_AM27_CEP,
   SRC_AM29_TF,
   SRC_P2_26_FP,
+  SRC_P2_28_INDEX,
+  SRC_P2_29_HLM,
   SRC_P2_32_APL,
   SRC_P2_34_CHEQUE,
+  SRC_PLFSS1_EXO,
   SRC_PLFSS4_BOUCLIER,
   SRC_PLFSS5_INDEX,
   SRC_PLFSS7_PF,
+  SRC_PLFSS9_CONTRIB,
   fiche,
 } from './params/plan.ts';
 import type { UnquantifiedItem } from './types.ts';
@@ -128,7 +133,7 @@ const CATALOGUE: Entry[] = [
       tier: 'law',
       title: 'Bouclier sanitaire : reste à charge plafonné à 5 % du revenu',
       detail:
-        'À partir de 2028 (si l’AFU entre en vigueur), le ticket modérateur et le forfait journalier sont plafonnés à 5 % des ressources du foyer (plancher : 5 % de l’AFU annuelle, soit 330 €).',
+        'À partir de 2028 (si l’AFU entre en vigueur), ce qui reste à votre charge au titre du ticket modérateur, des participations forfaitaires, des franchises et du forfait journalier est plafonné chaque année à 5 % des ressources du foyer fiscal, diminuées de l’impôt sur le revenu (plancher : 5 % du montant annuel de l’aide fondamentale, soit 330 € pour une personne seule).',
       sources: [SRC_PLFSS4_BOUCLIER, fiche('patient', 'Patient')],
     },
   },
@@ -153,8 +158,27 @@ const CATALOGUE: Entry[] = [
       tier: 'announced',
       title: 'Taxes spécifiques supprimées dans les prix',
       detail:
-        '57 taxes affectées et 21 taxes d’État supprimées ; le plan annonce que les produits faits en France deviennent « plus abordables » et une « inflation faciale inférieure à 2 % ». Seule la fin des certificats d’économies d’énergie est estimée ici.',
-      sources: [fiche('consommateur', 'Consommateur'), fiche('citoyen', 'Citoyen'), PLF_P1],
+        'Les amendements suppriment 54 taxes d’État, 72 taxes affectées à des organismes, 21 contributions sociales et 20 impositions locales, « à rendement constant » ; le plan annonce que les produits faits en France deviennent « plus abordables » et une « inflation faciale inférieure à 2 % ». Seule la fin des certificats d’économies d’énergie est estimée ici.',
+      sources: [
+        fiche('consommateur', 'Consommateur'),
+        fiche('citoyen', 'Citoyen'),
+        SRC_AM22_TAXES,
+        SRC_AM25_AFFECTEES,
+        SRC_PLFSS9_CONTRIB,
+        SRC_AM29_TF,
+      ],
+    },
+  },
+  {
+    when: () => true,
+    item: {
+      id: 'accise_electricite',
+      direction: 'promise',
+      tier: 'law',
+      title: 'Accise sur l’électricité ramenée à 1 € par mégawattheure',
+      detail:
+        'Au 1er juillet 2027, les tarifs de l’accise sur l’électricité qui ne sont pas nuls passent à 1 € par mégawattheure pour les ménages (0,5 € pour les autres consommations), le niveau appliqué en 2023 et 2024 selon l’amendement. La baisse de votre facture n’est pas chiffrée ici : le simulateur ne connaît pas votre consommation d’électricité.',
+      sources: [SRC_AM22_TAXES],
     },
   },
   {
@@ -187,9 +211,10 @@ const CATALOGUE: Entry[] = [
       id: 'indemnite_agent_public',
       direction: 'promise',
       tier: 'law',
-      title: 'Si votre poste public est supprimé : 70 % du traitement jusqu’à 7 ans',
+      title:
+        'Fonctionnaire de l’État dont le poste est supprimé : 70 % du traitement jusqu’à 7 ans',
       detail:
-        'Indemnité égale à 70 % du traitement indiciaire (plus une part de primes fixée par décret), durée de 1 à 7 ans selon l’ancienneté, cumulable avec un emploi privé.',
+        'Pour les fonctionnaires de l’État dont le corps exerce une mission supprimée par le plan (les fonctions publiques territoriale et hospitalière ne sont pas visées) : indemnité de 70 % du traitement indiciaire brut, plus une part des primes fixée par décret (nulle à défaut), pendant 24 mois augmentés d’un mois par trimestre de services publics, au plus 84 mois (7 ans) et au plus jusqu’à la date d’une retraite sans décote. Elle se cumule en entier avec un emploi privé et compte pour la retraite comme une période de chômage indemnisé, dans la limite de la durée de l’allocation chômage.',
       sources: [
         SRC_P2_26_FP,
         fiche('agent-public-dont-le-poste-est-supprime', 'Agent public dont le poste est supprimé'),
@@ -208,11 +233,11 @@ const CATALOGUE: Entry[] = [
         tier: 'announced',
         title: 'Indemnisation chômage limitée à six mois',
         detail:
-          'Le plan annonce que l’indemnisation « passe de treize à six mois » (la durée maximale actuelle est de 18 mois selon l’âge). Aucun texte juridique. Le simulateur garde le montant mensuel de l’ARE inchangé (H6).',
+          'Le plan annonce que l’indemnisation « passe de treize à six mois » (la durée maximale actuelle va de 18 à 27 mois selon l’âge : 548 jours avant 55 ans, 685 jours à 55-56 ans, 822 jours à partir de 57 ans ; 15 mois après une rupture conventionnelle depuis le 1er septembre 2026). Aucun texte juridique. Le simulateur garde le montant mensuel de l’ARE inchangé (H6).',
         amountHint:
           are > 0
             ? `à partir du 7e mois d’indemnisation : ARE = 0, soit −${eur0(are)}/mois`
-            : 'en cas de perte d’emploi : 6 mois d’indemnisation au lieu de 13 à 18',
+            : 'en cas de perte d’emploi : 6 mois d’indemnisation au lieu de 6 à 18 mois aujourd’hui (jusqu’à 27 mois à partir de 57 ans)',
         sources: [fiche('personne-sans-emploi', 'Personne sans emploi')],
       };
     },
@@ -270,7 +295,7 @@ const CATALOGUE: Entry[] = [
       tier: 'announced',
       title: 'Reste à charge de 10 % par acte de soin',
       detail:
-        '« Un reste à charge de 10 % par acte apparaît, plafonné à 5 % de votre revenu, et les dépenses de confort sortent du bouclier. » L’ALD disparaît pour les nouvelles affections reconnues à partir de 2028.',
+        '« Un reste à charge de 10 % par acte apparaît, plafonné à 5 % de votre revenu, et les dépenses de confort sortent du bouclier. » (annoncé par la fiche, sans texte). Ce point-ci, en revanche, est écrit dans l’amendement PLFSS n° 4 : pour les affections reconnues à partir du 1er janvier 2028, le plafond de 5 % remplace l’exonération du ticket modérateur des affections de longue durée (ALD) ; les ALD reconnues avant gardent leur exonération.',
       sources: [fiche('patient', 'Patient'), SRC_PLFSS4_BOUCLIER],
     },
   },
@@ -282,8 +307,8 @@ const CATALOGUE: Entry[] = [
       tier: 'law',
       title: 'Fin de la revalorisation automatique des pensions et prestations',
       detail:
-        'À partir de 2027, pensions, AAH, RSA, prime d’activité ne sont plus revalorisées automatiquement (seulement par loi ou si les comptes sont à l’équilibre). L’AFU elle-même n’est pas indexée (6 600 € nominaux). Le simulateur raisonne en euros 2026.',
-      sources: [SRC_PLFSS5_INDEX, fiche('retraite', 'Retraité')],
+        'Pour les revalorisations à partir du 1er janvier 2027, les pensions des régimes de base (amendement PLFSS n° 5), l’AAH, la prime d’activité et le RSA (amendement PLF-P2 n° 28) ne sont plus revalorisés automatiquement : seulement par la loi de finances ou de financement de la sécurité sociale, ou par décret si les comptes sont en excédent. Les retraites complémentaires (Agirc-Arrco) ne sont visées par aucun des deux. L’AFU elle-même n’est pas indexée (6 600 € nominaux). Le simulateur raisonne en euros 2026.',
+      sources: [SRC_PLFSS5_INDEX, SRC_P2_28_INDEX, fiche('retraite', 'Retraité')],
     },
   },
   {
@@ -294,8 +319,8 @@ const CATALOGUE: Entry[] = [
       tier: 'law',
       title: 'Fin des exonérations sur l’épargne (Livret A, assurance-vie, PEA, PEL…)',
       detail:
-        'Tous les produits deviennent des compartiments du compte d’épargne personnel ; les gains sont taxés à 30 % de la plus-value réelle à la sortie. Les plans ouverts ou alimentés à partir du 1er juillet 2027 perdent leurs avantages.',
-      sources: [SRC_AM20_PV, SRC_AM1_NICHES],
+        'Tous les produits deviennent des compartiments du compte d’épargne personnel ; les gains sont taxés à 30 % de la plus-value réelle à la sortie. Les plans ouverts ou alimentés à partir du 1er juillet 2027 perdent leurs avantages. La suppression de vingt et une contributions sociales (amendement PLFSS n° 9) est compensée par une hausse, non chiffrée, de la CSG sur les revenus du patrimoine et des placements.',
+      sources: [SRC_AM20_PV, SRC_AM1_NICHES, SRC_PLFSS9_CONTRIB],
     },
   },
   {
@@ -306,7 +331,7 @@ const CATALOGUE: Entry[] = [
       tier: 'law',
       title: 'Taxe foncière unique : montant inconnu',
       detail:
-        'À partir de 2028 : base = valeur locative de marché (tarifs INSEE à créer), taux communal entre 10 et 30 %. Le plan indique qu’« à 10 %, un logement acquitte à peu près la taxe foncière d’aujourd’hui ». Non chiffrable aujourd’hui (H8).',
+        'À partir de 2028 : base = valeur locative de marché (tarifs INSEE à créer), taux communal entre 10 et 30 %. Le plan indique qu’« à 10 %, un logement acquitte à peu près la taxe foncière d’aujourd’hui ». Le même amendement supprime vingt autres impositions locales (parts locales de l’accise sur l’électricité, taxes spéciales d’équipement, taxe locale sur la publicité extérieure, taxe de balayage…), compensées aux collectivités par la dotation globale de fonctionnement. Non chiffrable aujourd’hui (H8).',
       sources: [SRC_AM29_TF],
     },
   },
@@ -316,9 +341,9 @@ const CATALOGUE: Entry[] = [
       id: 'plus_value_residence',
       direction: 'loss',
       tier: 'law',
-      title: 'Plus-value sur la résidence principale (à vérifier)',
+      title: 'Plus-value sur la résidence principale imposée',
       detail:
-        'Les amendements abrogent toutes les exonérations de l’article 150 U II du CGI, y compris, semble-t-il, celle de la résidence principale : la revente serait taxée à 30 % du gain réel (après inflation). Point à confirmer sur Légifrance.',
+        'L’exonération de la plus-value sur la résidence principale est abrogée (amendement PLF-P1 n° 20, I 3°, qui abroge le 1° du II de l’article 150 U du CGI) pour les cessions à partir du 1er janvier 2027 : la revente serait imposée à 30 % du gain réel (prix d’achat corrigé de l’inflation) ; les droits de mutation payés lors d’un achat fait à partir de 2027 viennent en déduction de cet impôt.',
       sources: [SRC_AM20_PV, SRC_AM1_NICHES],
     },
   },
@@ -330,8 +355,12 @@ const CATALOGUE: Entry[] = [
       tier: 'announced',
       title: '580 000 postes publics fermés, fin du statut (indemnité de 70 % jusqu’à 7 ans)',
       detail:
-        'Le plan annonce 580 000 postes publics fermés et la fin du statut de la fonction publique (droit du travail commun). Si votre poste est supprimé, l’amendement prévoit une indemnité de 70 % du traitement indiciaire pendant 1 à 7 ans selon l’ancienneté (voir « promesses ») : une baisse d’au moins 30 % de votre traitement pendant cette période, puis plus rien.',
-      sources: [MANIFESTE, fiche('agent-public-indispensable', 'Agent public indispensable')],
+        'Le plan annonce 580 000 postes publics fermés et la fin du statut de la fonction publique (droit du travail commun). Pour un fonctionnaire de l’État dont le poste est supprimé, l’amendement prévoit une indemnité de 70 % du traitement indiciaire brut pendant 24 mois plus un mois par trimestre de services (au plus 7 ans, et pas au-delà de la date d’une retraite sans décote ; voir « promesses ») : une baisse d’au moins 30 % de votre traitement pendant cette période, puis plus rien. Cet amendement ne vise pas les fonctionnaires territoriaux et hospitaliers.',
+      sources: [
+        MANIFESTE,
+        fiche('agent-public-indispensable', 'Agent public indispensable'),
+        SRC_P2_26_FP,
+      ],
     },
   },
   {
@@ -342,7 +371,7 @@ const CATALOGUE: Entry[] = [
       tier: 'law',
       title: 'Chèque énergie supprimé au 1er janvier 2027',
       detail:
-        'Le chèque énergie (48 à 277 € par an selon les revenus) est abrogé. Il n’est pas calculé dans la situation actuelle du simulateur.',
+        'Le chèque énergie (48 à 277 € par an selon les revenus) est abrogé : aucun chèque n’est émis au titre de 2027 (ceux de la campagne 2026 restent payés). Il n’est pas calculé dans la situation actuelle du simulateur.',
       amountHint: '48 à 277 €/an aujourd’hui',
       sources: [SRC_P2_34_CHEQUE],
     },
@@ -415,8 +444,8 @@ const CATALOGUE: Entry[] = [
       tier: 'announced',
       title: 'Vente du parc social en trois ans',
       detail:
-        'Les 4,5 millions de logements sociaux seraient proposés à la vente ; plus aucun logement social neuf financé par l’État à partir de 2027.',
-      sources: [fiche('locataire', 'Locataire')],
+        'Les logements sociaux seraient « proposés à la vente en trois ans » (4,5 millions de logements ; annoncé par la fiche, sans texte). Écrit dans l’amendement PLF-P2 n° 29 : à partir du 1er janvier 2027, l’État n’attribue plus aucune aide nouvelle à la construction ou à l’achat de logements sociaux.',
+      sources: [fiche('locataire', 'Locataire'), SRC_P2_29_HLM],
     },
   },
   {
@@ -439,8 +468,8 @@ const CATALOGUE: Entry[] = [
       tier: 'law',
       title: 'Heures supplémentaires, titres-restaurant, intéressement : fin des exonérations',
       detail:
-        'Ces exonérations d’impôt et de cotisations (non modélisées) tombent dès les revenus 2026 (impôt) et le 1er juillet 2027 (cotisations).',
-      sources: [SRC_AM1_NICHES],
+        'Ces exonérations d’impôt et de cotisations (non modélisées) tombent dès les revenus 2026 (heures supplémentaires, titres-restaurant) ou 2028 (intéressement, participation) pour l’impôt, et le 1er juillet 2027 pour les cotisations.',
+      sources: [SRC_AM1_NICHES, SRC_PLFSS1_EXO],
     },
   },
 ];
@@ -456,10 +485,11 @@ const PLAIN: Record<string, string | ((c: Ctx) => string)> = {
   bouclier_sanitaire: 'Vos frais de santé plafonnés à 5 % du revenu',
   frais_gestion_sante: 'Une mutuelle moins chère',
   prix_taxes: 'Des prix allégés de certaines taxes',
+  accise_electricite: 'Une facture d’électricité allégée d’une taxe',
   exonerations_salaire: 'Des salaires bruts qui pourraient monter',
   compte_chomage: 'Un compte alimenté par vos cotisations chômage',
   indemnite_agent_public:
-    'Si votre poste public est supprimé : 70 % de votre salaire jusqu’à 7 ans',
+    'Si votre poste de fonctionnaire de l’État est supprimé : 70 % du traitement jusqu’à 7 ans',
   chomage_6_mois: 'Le chômage payé six mois seulement',
   creche_cmg: (c) =>
     c.nh.childcare === 'creche'
@@ -471,7 +501,7 @@ const PLAIN: Record<string, string | ((c: Ctx) => string)> = {
   gel_indexation: 'Pensions et aides qui ne suivent plus les prix',
   epargne_exonerations: 'Fin du Livret A et de l’assurance-vie sans impôt',
   taxe_fonciere: 'Une nouvelle taxe foncière, montant inconnu',
-  plus_value_residence: 'Un impôt possible en revendant votre logement',
+  plus_value_residence: 'Un impôt sur la plus-value en revendant votre logement',
   postes_publics: 'Votre poste public pourrait être supprimé',
   cheque_energie: 'Plus de chèque énergie',
   droits_connexes: 'Fin des aides liées au RSA (mutuelle gratuite, tarifs sociaux)',

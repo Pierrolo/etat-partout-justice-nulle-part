@@ -10,13 +10,14 @@ tier:
            carried by a Résolution workbook
   calcul   derived by this pipeline; `source.inputs` lists the facts used and `note` gives the formula
 
-Every site / amendment quote is verified verbatim against research/pages/*.md at build time.
+Every site / amendment quote is verified verbatim against research/pages-2026-11-21/*.md at build time (an amendment fact links to
+the PDF page that holds the quote).
 Values read from workbooks are read from the CSV dump at the cited cell (and checked against `expect`
 when given), never typed by hand.
 """
 from __future__ import annotations
 
-from amend import amendment, pdf_url, quote_in_amendment
+from amend import page_label, pdf_url, quote_in_amendment, quote_pages
 from lib import SITE, Sheet, clean, quote_in
 
 TIERS = ("loi", "annonce", "donnee", "calcul")
@@ -48,6 +49,8 @@ def page_url(page: str) -> str:
         return f"{SITE}/fiches/{page[len('fiches__'):]}.html"
     if page.startswith("lettres__"):
         return f"{SITE}/ecrire.html"
+    if page.startswith("graphiques__"):
+        return f"{SITE}/graphiques/{page[len('graphiques__'):]}.html"
     raise KeyError(page)
 
 
@@ -94,8 +97,8 @@ class Facts:
     # -- amendments ----------------------------------------------------------------
     def amend(self, id, value, unit, label_fr, year, liasse, n, quote, tier="loi", note=None, **extra):
         assert quote_in_amendment(liasse, n, quote), f"{id}: quote not found in {liasse} n°{n}: {quote!r}"
-        a = amendment(liasse, n)
-        src = {"kind": "amendment", "ref": f"Amendement {liasse} n° {n} (page {a['page']} du PDF)", "url": pdf_url(liasse, a["page"]), "quote": quote, "liasse": liasse, "number": n}
+        first, last = quote_pages(liasse, n, quote)  # the page that holds the quote, not the amendment's first page
+        src = {"kind": "amendment", "ref": f"Amendement {liasse} n° {n} ({page_label(first, last)} du PDF)", "url": pdf_url(liasse, first), "quote": quote, "liasse": liasse, "number": n, "page": first}
         return self.add(id, value, unit, label_fr, year, src, tier, note, **extra)
 
     # -- external statistics (not through a workbook cell) -------------------------

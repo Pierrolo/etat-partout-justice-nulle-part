@@ -4,7 +4,7 @@
  *  - the site imports this package as source (`exports` → ./src/index.ts, compiled by Vite);
  *  - `Tier` and `SourceRef` are used by the site's UI primitives — keep them stable.
  */
-export const ENGINE_VERSION = '1.1.0';
+export const ENGINE_VERSION = '1.2.0';
 
 export * from './types.ts';
 export { DEFAULT_HYPOTHESES } from './hypotheses.ts';
@@ -26,6 +26,10 @@ export { PARAMS } from './params/index.ts';
 export const PARAMS_META = {
   baselineYear: 'Législation 2026 (état du droit au 24 octobre 2026 ; barème IR LF 2026)',
   planSource:
-    'Amendements Résolution au PLF 2027 (1re et 2de parties) et au PLFSS 2027, 19 octobre 2026 ; fiches et manifeste france-resolution.fr ; classeurs « Synthèse »',
+    'Amendements Résolution au PLF 2027 (1re et 2de parties) et au PLFSS 2027, version publiée les 17 et 18 novembre 2026 (84 amendements) ; fiches et manifeste france-resolution.fr ; classeurs « Synthèse des chiffrages » et « Séries des graphiques »',
+  /** v1.2: short label of the plan version, for display. */
+  planVersionLabel: 'Amendements publiés le 18 novembre 2026',
+  /** v1.2: ISO date of the plan version (last liasse file, PLF 2de partie). */
+  planVersionDate: '2026-11-18',
   engineVersion: ENGINE_VERSION,
 } as const;

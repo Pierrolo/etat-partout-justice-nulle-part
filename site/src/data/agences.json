@@ -6008,8 +6008,8 @@
   ],
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse ETP et agences Résolution_0910.xlsx › FPE › A4:M19",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20ETP%20et%20agences%20R%C3%A9solution_0910.xlsx"
+   "ref": "Emplois publics.xlsx › FPE › A4:M19",
+   "url": "https://france-resolution.fr/donnees/Emplois%20publics.xlsx"
   },
   "unit": "milliers (effectifs physiques au 31 décembre 2023)"
  },
@@ -8514,7 +8514,7 @@
   "source": {
    "kind": "amendment",
    "ref": "Amendement PLF-P2 n° 25, III (liste de 337 personnes morales dissoutes)",
-   "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=29"
+   "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=31"
   },
   "tier": "loi"
  },
@@ -8676,15 +8676,15 @@
   ],
   "source": {
    "also": [
-    "Synthèse ETP et agences Résolution_0910.xlsx › Synthèse agences R › C5:J12",
-    "Synthèse ETP et agences Résolution_0910.xlsx › ODAC-ODAL R",
-    "Synthèse ETP et agences Résolution_0910.xlsx › Commissions R",
-    "Synthèse ETP et agences Résolution_0910.xlsx › Emplois Etat RAP 2024",
-    "Synthèse ETP et agences Résolution_0910.xlsx › FPE"
+    "Agences publiques.xlsx › Synthèse agences R › C5:J12",
+    "Agences publiques.xlsx › ODAC-ODAL R",
+    "Agences publiques.xlsx › Commissions R",
+    "Emplois publics.xlsx › Emplois Etat RAP 2024",
+    "Emplois publics.xlsx › FPE"
    ],
    "kind": "workbook",
-   "ref": "Synthèse ETP et agences Résolution_0910.xlsx › Opérateurs R › A2:R184",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20ETP%20et%20agences%20R%C3%A9solution_0910.xlsx"
+   "ref": "Agences publiques.xlsx › Opérateurs R › A2:R184",
+   "url": "https://france-resolution.fr/donnees/Agences%20publiques.xlsx"
   },
   "tier": "annonce",
   "tier_note": "Les « sorts » (cession, suppression, internalisation, autonomie) sont la proposition de Résolution (colonnes ajoutées au classeur) ; les effectifs et les listes d'organismes viennent de LFI 2025, PLF 2026, Insee (ODAC/ODAL), Jaune 2026, DGAFP, RAP 2024. Seule la liste de l'amendement PLF-P2 n° 25 (337 entités dissoutes au 1er juillet 2027) a valeur de texte de loi.",
@@ -8724,7 +8724,7 @@
   "kind": "amendment",
   "ref": "Amendement PLF-P2 n° 27, I (1° à 7°)",
   "tier": "loi",
-  "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=50"
+  "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=53"
  },
  "operateurs": [
   {

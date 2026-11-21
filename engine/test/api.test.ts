@@ -205,7 +205,7 @@ describe('transition', () => {
     );
     expect(amt(c.plan, 'afu')).toBe(0);
   });
-  it('retiree: 2027 dip (pension abattement gone before the AFU arrives)', () => {
+  it('retiree: 2027 dip (pension abattement gone before the AFU arrives); from 2028 the AFU minoration', () => {
     const h: Household = {
       ...base(),
       adults: [
@@ -219,7 +219,12 @@ describe('transition', () => {
       housing: { status: 'proprietaire' },
     };
     expect(compare(h, { period: 2027 }).delta).toBeLessThan(0);
-    expect(compare(h, { period: 2028 }).delta).toBeGreaterThan(0);
+    // Nov 2026 amendments: a pension liquidated before 2028 now REDUCES the AFU (6 600 − 3 300 = 275 €/mois), so
+    // this retiree (2 500 € brut) keeps losing in 2028 (it gained with the October +3 300 € supplement).
+    const c28 = compare(h, { period: 2028 });
+    expect(amt(c28.plan, 'afu')).toBe(275);
+    expect(c28.delta).toBeLessThan(compare(h, { period: 2027 }).delta);
+    expect(amt(compare(h, { period: 2027 }).plan, 'afu')).toBe(0);
   });
   it('APL: −1/3 from July 2027, −2/3 from July 2028, 0 in 2030', () => {
     const h = base({

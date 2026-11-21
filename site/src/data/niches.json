@@ -31,19 +31,19 @@
   "origin_url": "https://www.budget.gouv.fr/documentation/documents-budgetaires-lois/exercice-2026/plf-2026",
   "source": {
    "also": [
-    "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Chiffrages Résolution › A5:Q471",
-    "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Chiffrages › A3:H469",
-    "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Échéances",
-    "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Bénéficiaires",
-    "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Explication détaillée",
-    "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Méthodologie",
-    "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Références juridiques",
-    "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Programme de rattachement"
+    "Niches fiscales.xls › Chiffrages Résolution › A5:Q471",
+    "Niches fiscales.xls › Chiffrages › A3:H469",
+    "Niches fiscales.xls › Échéances",
+    "Niches fiscales.xls › Bénéficiaires",
+    "Niches fiscales.xls › Explication détaillée",
+    "Niches fiscales.xls › Méthodologie",
+    "Niches fiscales.xls › Références juridiques",
+    "Niches fiscales.xls › Programme de rattachement"
    ],
    "kind": "workbook",
    "origin": "PLF 2026, Évaluation des voies et moyens, tome II, annexe 3 — Dépenses fiscales",
-   "ref": "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Synthèse › A1:D14",
-   "url": "https://france-resolution.fr/donnees/PLF%202026_V%26M%20tome%20II%20-%20Annexe%203%20-%20Depenses%20fiscales%20-%200910.xls"
+   "ref": "Niches fiscales.xls › Synthèse › A1:D14",
+   "url": "https://france-resolution.fr/donnees/Niches%20fiscales.xls"
   },
   "tier": "donnee",
   "title_fr": "Les 465 niches fiscales recensées au PLF 2026",
@@ -30717,8 +30717,8 @@
   "liste_note": "Les sources du dépôt ne publient pas la liste des 21 taux réduits (seulement leur nombre et leur coût agrégé) ; les taux visés par l'amendement PLF-P1 n° 21 sont 10 %, 5,5 % et 2,1 % (alimentation : 10 % au 1er juillet 2028, 15 % en 2029, 20 % en 2030).",
   "source": {
    "kind": "workbook",
-   "ref": "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Synthèse › B11:D14",
-   "url": "https://france-resolution.fr/donnees/PLF%202026_V%26M%20tome%20II%20-%20Annexe%203%20-%20Depenses%20fiscales%20-%200910.xls"
+   "ref": "Niches fiscales.xls › Synthèse › B11:D14",
+   "url": "https://france-resolution.fr/donnees/Niches%20fiscales.xls"
   }
  }
 }

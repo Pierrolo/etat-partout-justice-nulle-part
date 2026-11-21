@@ -68,7 +68,17 @@ function encAdult(a: Adult): unknown[] {
         ]
       : null,
     a.unemployment ? [a.unemployment.areMonthly] : null,
-    a.pension ? [a.pension.amount, a.pension.basis === 'brut' ? 1 : 0, a.pension.startYear] : null,
+    a.pension
+      ? [
+          a.pension.amount,
+          a.pension.basis === 'brut' ? 1 : 0,
+          a.pension.startYear,
+          // v1.2: 4th slot only when given (older hashes stay byte-identical)
+          ...(a.pension.insuranceShareBefore2028 === undefined
+            ? []
+            : [a.pension.insuranceShareBefore2028]),
+        ]
+      : null,
     DIS.indexOf(a.disability),
     // 7th slot only when given (older hashes stay byte-identical)
     ...(a.boursier === undefined ? [] : [a.boursier ? 1 : 0]),
@@ -144,8 +154,10 @@ function decAdult(x: unknown): Adult {
   }
   if (a[3] !== null) out.unemployment = { areMonthly: num(arr(a[3], 1)[0]) };
   if (a[4] !== null) {
-    const p = arr(a[4], 3);
+    const p = arr(a[4]);
+    if (p.length !== 3 && p.length !== 4) fail();
     out.pension = { amount: num(p[0]), basis: flag(p[1]) ? 'brut' : 'net', startYear: num(p[2]) };
+    if (p.length === 4) out.pension.insuranceShareBefore2028 = num(p[3]);
   }
   return out;
 }

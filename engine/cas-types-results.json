@@ -1,13 +1,13 @@
 {
   "_meta": {
     "description": "Cas-types illustratifs, NON pondérés : variation du revenu disponible mensuel (€/mois, hors TVA sauf deltaAfterTva) entre la législation 2026 et le plan complet appliqué à 2026 (hypothèses par défaut : H1 remplacées, H2 frais pro maintenus, H5 répercussion 100 %). transition = variation moyenne mensuelle par année.",
-    "engineVersion": "1.1.0",
+    "engineVersion": "1.2.0",
     "baseline": "Législation 2026 (état du droit au 24 octobre 2026 ; barème IR LF 2026)",
-    "plan": "Amendements Résolution au PLF 2027 (1re et 2de parties) et au PLFSS 2027, 19 octobre 2026 ; fiches et manifeste france-resolution.fr ; classeurs « Synthèse »",
+    "plan": "Amendements Résolution au PLF 2027 (1re et 2de parties) et au PLFSS 2027, version publiée les 17 et 18 novembre 2026 (84 amendements) ; fiches et manifeste france-resolution.fr ; classeurs « Synthèse des chiffrages » et « Séries des graphiques »",
     "generatedBy": "pnpm --filter @epjn/engine gen:cas-types"
   },
-  "winners": 37,
-  "losers": 10,
+  "winners": 30,
+  "losers": 17,
   "cases": [
     {
       "id": "seul-0",
@@ -852,13 +852,13 @@
       "family": "Retraités",
       "label": "Retraité·e seul·e, pension 900 € brut (ASPA), locataire 450 € zone 3",
       "baseline": 1193,
-      "plan": 1518,
-      "delta": 325,
-      "deltaPct": 27.2,
-      "deltaAfterTva": 295,
+      "plan": 968,
+      "delta": -225,
+      "deltaPct": -18.9,
+      "deltaAfterTva": -255,
       "waterfall": {
         "impot_revenu": -207,
-        "afu": 825,
+        "afu": 275,
         "aides_logement": -150,
         "aspa": -144,
         "tva": -41,
@@ -866,14 +866,14 @@
       },
       "transition": {
         "2027": -25,
-        "2028": 400,
-        "2030": 325,
-        "steady": 325
+        "2028": -150,
+        "2030": -225,
+        "steady": -225
       },
       "variants": {
-        "H1_differential": 325,
-        "H2_off": 325,
-        "H5_noPassThroughAfterTva": 325
+        "H1_differential": -225,
+        "H2_off": -225,
+        "H5_noPassThroughAfterTva": -225
       }
     },
     {
@@ -881,28 +881,28 @@
       "family": "Retraités",
       "label": "Retraité·e seul·e, pension 1 200 € brut, locataire 500 € zone 2",
       "baseline": 1266,
-      "plan": 1708,
-      "delta": 442,
-      "deltaPct": 34.9,
-      "deltaAfterTva": 409,
+      "plan": 1158,
+      "delta": -108,
+      "deltaPct": -8.6,
+      "deltaAfterTva": -141,
       "waterfall": {
         "pension_nette": -52,
         "impot_revenu": -266,
-        "afu": 825,
+        "afu": 275,
         "aides_logement": -66,
         "tva": -43,
         "cee": 11
       },
       "transition": {
         "2027": -11,
-        "2028": 516,
-        "2030": 442,
-        "steady": 442
+        "2028": -34,
+        "2030": -108,
+        "steady": -108
       },
       "variants": {
-        "H1_differential": 442,
-        "H2_off": 442,
-        "H5_noPassThroughAfterTva": 442
+        "H1_differential": -108,
+        "H2_off": -108,
+        "H5_noPassThroughAfterTva": -108
       }
     },
     {
@@ -910,26 +910,26 @@
       "family": "Retraités",
       "label": "Retraité·e seul·e, pension 1 800 € brut, propriétaire",
       "baseline": 1667,
-      "plan": 2095,
-      "delta": 428,
-      "deltaPct": 25.7,
-      "deltaAfterTva": 386,
+      "plan": 1545,
+      "delta": -122,
+      "deltaPct": -7.3,
+      "deltaAfterTva": -164,
       "waterfall": {
         "impot_revenu": -397,
-        "afu": 825,
+        "afu": 275,
         "tva": -53,
         "cee": 11
       },
       "transition": {
         "2027": -28,
-        "2028": 428,
-        "2030": 428,
-        "steady": 428
+        "2028": -122,
+        "2030": -122,
+        "steady": -122
       },
       "variants": {
-        "H1_differential": 428,
-        "H2_off": 428,
-        "H5_noPassThroughAfterTva": 428
+        "H1_differential": -122,
+        "H2_off": -122,
+        "H5_noPassThroughAfterTva": -122
       }
     },
     {
@@ -937,26 +937,26 @@
       "family": "Retraités",
       "label": "Retraité·e seul·e, pension 3 000 € brut, propriétaire",
       "baseline": 2539,
-      "plan": 2903,
-      "delta": 363,
-      "deltaPct": 14.3,
-      "deltaAfterTva": 306,
+      "plan": 2353,
+      "delta": -187,
+      "deltaPct": -7.4,
+      "deltaAfterTva": -244,
       "waterfall": {
         "impot_revenu": -462,
-        "afu": 825,
+        "afu": 275,
         "tva": -69,
         "cee": 11
       },
       "transition": {
         "2027": -85,
-        "2028": 363,
-        "2030": 363,
-        "steady": 363
+        "2028": -187,
+        "2030": -187,
+        "steady": -187
       },
       "variants": {
-        "H1_differential": 363,
-        "H2_off": 363,
-        "H5_noPassThroughAfterTva": 363
+        "H1_differential": -187,
+        "H2_off": -187,
+        "H5_noPassThroughAfterTva": -187
       }
     },
     {
@@ -964,26 +964,26 @@
       "family": "Retraités",
       "label": "Couple retraité, pensions 2 000 + 1 200 € brut, propriétaire",
       "baseline": 2955,
-      "plan": 3908,
-      "delta": 953,
-      "deltaPct": 32.3,
-      "deltaAfterTva": 881,
+      "plan": 2808,
+      "delta": -147,
+      "deltaPct": -5,
+      "deltaAfterTva": -219,
       "waterfall": {
         "impot_revenu": -697,
-        "afu": 1650,
+        "afu": 550,
         "tva": -89,
         "cee": 17
       },
       "transition": {
         "2027": -49,
-        "2028": 953,
-        "2030": 953,
-        "steady": 953
+        "2028": -147,
+        "2030": -147,
+        "steady": -147
       },
       "variants": {
-        "H1_differential": 953,
-        "H2_off": 953,
-        "H5_noPassThroughAfterTva": 953
+        "H1_differential": -147,
+        "H2_off": -147,
+        "H5_noPassThroughAfterTva": -147
       }
     },
     {
@@ -991,53 +991,53 @@
       "family": "Retraités",
       "label": "Couple retraité aisé, pensions 3 500 + 2 500 € brut, propriétaire",
       "baseline": 5021,
-      "plan": 5805,
-      "delta": 785,
-      "deltaPct": 15.6,
-      "deltaAfterTva": 678,
+      "plan": 4705,
+      "delta": -315,
+      "deltaPct": -6.3,
+      "deltaAfterTva": -422,
       "waterfall": {
         "impot_revenu": -865,
-        "afu": 1650,
+        "afu": 550,
         "tva": -124,
         "cee": 17
       },
       "transition": {
         "2027": -111,
-        "2028": 785,
-        "2030": 785,
-        "steady": 785
+        "2028": -315,
+        "2030": -315,
+        "steady": -315
       },
       "variants": {
-        "H1_differential": 785,
-        "H2_off": 785,
-        "H5_noPassThroughAfterTva": 785
+        "H1_differential": -315,
+        "H2_off": -315,
+        "H5_noPassThroughAfterTva": -315
       }
     },
     {
       "id": "retraite-2028",
       "family": "Retraités",
-      "label": "Retraité·e seul·e, pension 1 800 € brut liquidée en 2028 (sans majoration AFU)",
+      "label": "Retraité·e seul·e, pension 1 800 € brut liquidée en 2028 (minoration de l’AFU au prorata des trimestres validés avant 2028)",
       "baseline": 1648,
-      "plan": 1820,
-      "delta": 172,
-      "deltaPct": 10.4,
-      "deltaAfterTva": 130,
+      "plan": 1548,
+      "delta": -100,
+      "deltaPct": -6,
+      "deltaAfterTva": -141,
       "waterfall": {
         "impot_revenu": -378,
-        "afu": 550,
+        "afu": 278,
         "tva": -53,
         "cee": 11
       },
       "transition": {
         "2027": -28,
-        "2028": 172,
-        "2030": 172,
-        "steady": 172
+        "2028": -100,
+        "2030": -100,
+        "steady": -100
       },
       "variants": {
-        "H1_differential": 172,
-        "H2_off": 172,
-        "H5_noPassThroughAfterTva": 172
+        "H1_differential": -100,
+        "H2_off": -100,
+        "H5_noPassThroughAfterTva": -100
       }
     },
     {

@@ -1,8 +1,9 @@
 /**
  * v1.1 « Et pour mes salariés ? » — one employee's pay today vs the plan (steady state), from the employer's side.
  * Gross pay is the anchor (H4): the CSG/CRDS on earned income disappears, so the employee's net rises by
- * 9,7 % × 98,25 % of gross; employer contributions are unchanged (the RGDU is kept, PLFSS am. 1 II 3°) so the
- * employer cost is unchanged. The taxe sur les salaires the plan abolishes is only paid by employers not subject
+ * 9,7 % × 98,25 % of gross; ordinary employer contributions are unchanged (the RGDU is kept, PLFSS am. 1 II 3°) so
+ * the employer cost is unchanged for an employee without a specific exemption (PLFSS am. 1 I/III end those from
+ * 1 Jul 2027: overtime, apprentices, emploi à domicile…; not modelled here). The taxe sur les salaires the plan abolishes is only paid by employers not subject
  * to VAT, or subject on less than 90 % of their turnover (CGI 231-1: associations, banks, insurers, health care):
  * not modelled here.
  */
@@ -84,7 +85,7 @@ export function employerView(
   const plan = side(true);
   const notes = [
     'Le salaire brut est supposé inchangé (hypothèse H4) : la suppression de la CSG et de la CRDS sur les salaires augmente le salaire net du montant de ces prélèvements.',
-    'Coût employeur inchangé une fois le plan complet appliqué : le plan ne modifie pas les cotisations patronales et garde la réduction générale des cotisations (amendement PLFSS n° 1, II 3°).',
+    'Pour un salarié sans exonération particulière, coût employeur inchangé une fois le plan complet appliqué : le plan garde la réduction générale des cotisations (amendement PLFSS n° 1, II 3°). En revanche, les exonérations et assiettes particulières (heures supplémentaires, apprentis, emploi à domicile, travailleurs saisonniers agricoles…) disparaissent à partir du 1er juillet 2027 (PLFSS n° 1, I et III ; par tiers jusqu’en 2029 pour l’emploi à domicile et les saisonniers agricoles) : pour ces employeurs, le coût augmente.',
     'La taxe sur les salaires, supprimée par le plan, ne concerne que les employeurs pas ou peu soumis à la TVA (moins de 90 % de leur chiffre d’affaires : associations, banques, assurances, professions de santé) : non modélisée ici.',
     'Le salarié paiera en revanche l’impôt à 23 % et recevra l’aide fondamentale : son revenu disponible dépend de son foyer (utilisez le simulateur pour lui).',
   ];

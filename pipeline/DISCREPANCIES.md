@@ -2,6 +2,8 @@
 
 Chaque section `## Dxx` correspond à un avertissement (`WARN [Dxx]`) émis par `pipeline/validate.py`. `validate.py` échoue si un code émis n'a pas de section ici.
 
+**Version des sources.** Depuis le 21 novembre 2026, le pipeline lit la version republiée par les auteurs les 17 et 18 novembre 2026 : liasses PDF/DOCX (84 amendements : 35 + 40 + 9), classeurs renommés (« Synthèse des chiffrages », « Séries des graphiques », « Emplois publics » et « Agences publiques » — l'ancien classeur ETP a été scindé en deux —, « Niches fiscales », « Dépenses de l'État », « Dépenses locales », « Taxes affectées aux agences ») et pages du site (`research/pages-2026-11-21/`, `data/derived-2026-11-21/`). Les fichiers d'octobre 2026 restent dans le dépôt comme historique (`data/derived/`, `research/pages/`, `data/raw/`) ; le pipeline ne les lit plus. Les sections marquées **Résolu** décrivent un écart d'octobre qui a disparu en novembre ; elles gardent leur code pour que les renvois restent stables et ne sont plus émises par `validate.py`. Les sections D35 à D39 sont nées de la version de novembre.
+
 Règle générale : **aucun chiffre n'est corrigé en silence**. Quand deux sources divergent, les deux valeurs sont conservées (`facts.json`, champ `conflict: true` et liste `conflicts[]` avec `group`, `with`, `note`), et la valeur retenue pour un graphique est indiquée ci-dessous. Les valeurs sont lues dans les cellules du classeur, jamais saisies à la main ; les références sont `feuille!cellule`.
 
 Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la valeur et l'écart est exposé ; **Documenté** = écart conservé tel quel dans les données, à afficher avec sa note ; **Hors périmètre** = non traité par le pipeline.
@@ -43,38 +45,38 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Interprétation : EA20 (20 pays, 2023-2025) couvre 2024-2025 ; EA21 existe depuis l'adhésion de la Bulgarie (1er janvier 2026) ; EA19 a la même valeur que EA20 sur 2024-2025. Choix de convention du pipeline, non fait par la source.
 - Traitement : Documenté. `europe.json › agregats` garde EA19, EA20, EA21 et UE27 ; `is_euro_area_reference: true` sur EA20.
 
-## D08 — 236 Md€ : 236,055 (total colonne C) contre 236,264 (E + F)
-- Constat : dans l'Annexe Manuscrit, la ligne « Patrimoine public valorisé et restitué » vaut 18 en colonne C et 18,209 en colonne F. Le total de la colonne C (236,055) est donc inférieur de 0,209 Md€ à la somme du gain d'année 1 et du gain supplémentaire (236,264). 18,209 = 3 % × 606,973 (Input Capitalisation).
-- Interprétation : la colonne C est arrondie à 18 pour le patrimoine seul.
-- Traitement : Documenté. « 236 Md€ » = 236,055 (colonne C) retenu comme total ; les deux autres valeurs sont des faits distincts (groupe `eco236_total`). Les trois valeurs arrondissent à 236.
+## D08 — 236 Md€ : total colonne C contre somme E + F — **Résolu en novembre 2026**
+- Constat d'octobre : la ligne « Patrimoine public valorisé et restitué » valait 18 en colonne C et 18,209 en colonne F ; le total de la colonne C (236,055) était inférieur de 0,209 Md€ à E + F (236,264).
+- Novembre 2026 : la cellule `Annexe Manuscrit!C28` n'est plus tronquée (`=SUM(E28,F28)` au lieu de `=TRUNC(SUM(E28,F28))`) ; C = E + F sur chacune des 26 lignes, total 236,352699 Md€ (« 236 milliards » inchangé). `validate.py` vérifie l'égalité ligne à ligne.
+- Traitement : plus d'avertissement. Reste l'écart du total avec la feuille Graph236 (D39) et avec la réconciliation Input Capitalisation (D10).
 
-## D09 — Gain de l'année 1 : 127,352 (Annexe) contre 129,4 (feuille Flux)
-- Constat : écart de 2,048 Md€ entre l'Annexe Manuscrit et la feuille Flux.
-- Interprétation : arrondis différents entre les feuilles ; en année pleine, les économies État + collectivités sont de 58,6 (Input Capitalisation : 38,5 + 20,1) contre 60,7025 (Annexe : 27,9025 + 32,8), soit −2,102. Les deux écarts se compensent presque (solde −0,055, cf. D10).
-- Traitement : Documenté (groupe `plan_gain_annee_1`). Le Sankey par catégorie utilise l'Annexe Manuscrit.
+## D09 — Gain de l'année 1 : Annexe Manuscrit contre feuille Flux — **Résolu en novembre 2026**
+- Constat d'octobre : 127,352 (Annexe) contre 129,4 (Flux), écart de 2,048 Md€.
+- Novembre 2026 : l'Annexe donne 129,4593 et la feuille Flux 129,459 (écart de 0,0003 Md€ : arrondi). Les deux onglets s'accordent. « Année 1 » reste une étiquette non datée du classeur (D10, et l'exposé de PLFSS n° 1 écrit 33 Md€ de CSG/CRDS en 2027 et 114 Md€ « en année pleine dès 2028 »).
+- Traitement : plus d'avertissement ; le Sankey par catégorie utilise l'Annexe Manuscrit.
 
-## D10 — Sankey : capitalisation 121,804 (calculée) contre 121,749 (classeur)
-- Constat : en additionnant reliquat d'année 1 et année pleine de l'Annexe, la destination capitalisation vaut 121,804 Md€ ; Input Capitalisation!E2 affirme 121,749 Md€. Résidu de 0,055 Md€.
-- Interprétation : conséquence de D09.
-- Traitement : Corrigé par construction : `plan-flux.json` contient deux Sankeys équilibrés, `sankey` (par catégorie, 236,264 en entrée et en sortie, valeurs de l'Annexe) et `sankey_classeur` (feuille Input Capitalisation, 114,46 + 121,749 = 236,209). Ne jamais mélanger les deux dans un même graphique.
+## D10 — Sankey : capitalisation 121,893 (calculée) contre 121,938 (classeur)
+- Constat : en additionnant reliquat d'année 1 et année pleine de l'Annexe, la destination capitalisation vaut 121,893 Md€ ; Input Capitalisation!E2 affirme 121,938 Md€. Résidu de −0,045 Md€ (octobre : +0,055 Md€ avec 121,804 contre 121,749).
+- Interprétation : les économies État + collectivités en année pleine valent 59,786 Md€ dans Input Capitalisation (39,871 + 19,915) contre 59,741 dans l'Annexe (27,0307 + 32,71) ; la hausse de 1,371 Md€ des taxes affectées a été ajoutée à l'Annexe (F8, F12) mais pas dans les mêmes proportions.
+- Traitement : Corrigé par construction : `plan-flux.json` contient deux Sankeys équilibrés, `sankey` (par catégorie, 236,353 en entrée et en sortie, valeurs de l'Annexe) et `sankey_classeur` (feuille Input Capitalisation, 114,46 + 121,938 = 236,398). Ne jamais mélanger les deux dans un même graphique.
 
 ## D11 — Tableau web arrondi : sous-totaux affichés ≠ somme des lignes affichées
-- Constat : le tableau de donnees.html affiche « structures 67 » mais ses lignes affichées somment à 69 (classeur : 67,007), et « subventions 69 » contre 70 (classeur : 68,948) ; « fonctionnement 39 » contre 37,43 du classeur.
-- Interprétation : chaque ligne est arrondie au Md€ séparément, le sous-total est arrondi indépendamment.
+- Constat : le tableau de donnees.html affiche « structures 67 » mais ses lignes affichées somment à 69 (classeur de novembre : 68,242), et « subventions 69 » contre 70 (classeur : 68,858) ; « fonctionnement 39 » somme ses cinq sous-lignes à 39 (4 + 10 + 9 + 12 + 4) contre 38,117 dans le classeur.
+- Interprétation : chaque ligne est arrondie au Md€ séparément, le sous-total est arrondi indépendamment. Ce tableau n'a pas été mis à jour en novembre 2026 (D36).
 - Traitement : Documenté (groupe `eco236_arrondis_web`). `plan-flux.json › savings_table` fournit les valeurs du classeur (`md_par_an`, 6 décimales de précision source) et les valeurs web arrondies (`web_arrondi`, `web_md_ecart`). Utiliser le classeur pour tout graphique.
 
 ## D12 — Gain CSG/CRDS : 300 €/mois et 13 % contre 275,08 €/mois et 12,56 %
 - Constat : au salaire net médian (2 190 €), le manifeste annonce « 300 € » et « +13 % » ; le classeur donne 275,08 €/mois (12,56 %). 13 % × 2 190 = 284,7 €. Au SMIC : 180 € (fiche) contre 171,72 € (SMIC 2025, 12,04 %), 173,74 € (01/2026) et 177,93 € (06/2026).
-- Interprétation : le « 13 % » est un arrondi de 12,0 à 12,6 % ; l'écart de 300 € à 275 € n'est pas expliqué. Le classeur est la source de calcul.
+- Interprétation : le « 13 % » arrondit les 12,56 % du classeur au salaire net médian (les 12,04 % du SMIC arrondissent à 12 %) ; l'écart de 300 € à 275 € n'est pas expliqué. Depuis novembre 2026 le manifeste écrit « +13 % ». Le classeur est la source de calcul.
 - Traitement : Documenté (groupes `gain_csg_median`, `gain_csg_smic`). Les graphiques « mon gain » doivent partir des courbes du classeur (`plan-flux.json › csg_cas_types`) et non des annonces.
 
 ## D13 — « 600 € par mois » non vérifiable à partir du classeur
-- Constat : « 600 € = 300 € de salaire net + 300 € d'épargne ». Le flux du classeur vers la capitalisation (121,749 Md€) représente ≈ 338 €/mois par foyer (30 M de foyers) ou ≈ 350 € par travailleur (29 M). Les lettres annoncent par ailleurs « 25 % » de hausse en trois ans.
+- Constat : « 600 € = 300 € de salaire net + 300 € d'épargne ». Le flux du classeur vers la capitalisation (121,938 Md€) représente ≈ 339 €/mois par foyer (30 M de foyers) ou ≈ 350 € par travailleur (29 M). Les lettres annoncent par ailleurs « 25 % » de hausse en trois ans.
 - Interprétation : le montant dépend du dénominateur (D16) ; les sources ne donnent pas la décomposition par tête.
 - Traitement : Documenté (groupe `restitution_600_eur`). Ne présenter « 300 € d'épargne » que comme annonce (tier `annonce`).
 
 ## D14 — Quatre impôts (manifeste) contre cinq impôts (lettres)
-- Constat : « quatre impôts » (TVA, revenu, sociétés, foncier) dans le manifeste ; « 5 impôts au lieu de 438 » dans les lettres. L'amendement PLFSS n° 1 maintient en outre la CSG sur les pensions et le capital, et une taxe sur les salaires jusqu'en 2029.
+- Constat : « quatre impôts » (TVA, revenu, sociétés, foncier) dans le manifeste ; « 5 impôts au lieu de 438 » dans les lettres. Les amendements PLFSS n° 1 à 3 maintiennent en outre : n° 1, la CSG sur les pensions, les allocations de chômage et les indemnités journalières ; n° 2, la CSG sur les revenus du capital et les produits de placement (parts « inchangées ») ; n° 3, une taxe sur les salaires jusqu'en 2029 (réduite d'un tiers en 2028, de deux tiers en 2029, abrogée au 1er janvier 2030).
 - Interprétation : le 5e impôt n'est pas nommé dans les sources.
 - Traitement : Documenté (groupe `nb_impots_cibles`). Aucune interprétation n'est imposée dans les données.
 
@@ -84,7 +86,7 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Traitement : Corrigé : `afu_smic_net_calc_eur_mois` (calcul, ≈ 222 €/mois) est distinct des deux annonces ; groupe `afu_smic`.
 
 ## D16 — Quatre « foyers » différents
-- Constat : 30 M de foyers dans les fiches et dans « 600 Md€ soit 20 000 € par foyer » ; 29,507 M implicites dans « 236 Md€ soit 8 000 € par foyer » ; 30,959 M implicites dans « 1 671,794 Md€ soit 54 000 € par foyer » ; 40,2 M de foyers fiscaux dans l'exposé de PLF-P1 n° 28 (dont 18,5 M seulement imposés à l'impôt sur le revenu). L'aide fondamentale est versée par personne.
+- Constat : 30 M de foyers dans les fiches et dans « 600 Md€ soit 20 000 € par foyer » ; 29,544 M implicites dans « 236 Md€ soit 8 000 € par foyer » (29,507 M en octobre) ; 30,959 M implicites dans « 1 671,794 Md€ soit 54 000 € par foyer » ; 40,2 M de foyers fiscaux dans l'exposé de PLF-P1 n° 28 (dont 18,5 M seulement imposés à l'impôt sur le revenu). L'aide fondamentale est versée par personne.
 - Interprétation : le livre ne définit pas son « foyer » ; les « par foyer » du tableau sont arrondis ligne à ligne.
 - Traitement : Documenté. Chaque ré-échelonnement « par foyer » du pipeline (tier `calcul`) indique dans `note` le dénominateur utilisé ; les dénominateurs sont des faits (`foyers_implicites_*`, groupe `foyer_denominateurs`). Ne jamais comparer deux montants « par foyer » de sources différentes.
 
@@ -98,14 +100,14 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Interprétation : périmètres différents ; aucune table de correspondance entre les deux listes n'est publiée.
 - Traitement : Documenté (groupe `agences_fermees_vs_dissoutes`). `agences.json` publie la liste des 337 numérotée (1 à 337) et la matrice de devenir des 1 104 agences (746 + 55 + 303) sans les relier l'une à l'autre.
 
-## D19 — APL : 5,4 Md€ (exposé) contre 8,068 Md€ (état B n° 1)
-- Constat : l'exposé de PLF-P2 n° 32 chiffre l'économie 2027 de l'APL à 5,4 Md€ ; l'amendement n° 1 (état B) retire 8,068 Md€ de crédits de paiement du programme « Aide à l'accès au logement » (16,52 Md€) ; le classeur donne 5,4 Md€ en année 1 puis 10,7 Md€.
-- Interprétation : non expliqué dans les sources (années, périmètre, ou crédits restants non reconduits).
-- Traitement : Documenté (groupe `apl_economie_2027`). `credits-retires.json` utilise l'état B (8,068) comme valeur de loi.
+## D19 — APL : 5,4 Md€ (exposé de n° 32) contre 2,690 Md€ (état B n° 1)
+- Constat : l'exposé de PLF-P2 n° 32 chiffre l'économie 2027 de l'APL à 5,4 Md€ ; l'amendement n° 1 (état B) retire désormais 2,690 Md€ de crédits de paiement du programme « Aide à l'accès au logement » (16,52 Md€ au texte déposé) — 8,068 Md€ dans la version d'octobre, qui dépassait alors les 5,4 Md€ ; le classeur donne 5,4 Md€ en année 1 puis 10,7 Md€. La date d'effet de la ligne est le 1er juillet 2027 pour les « aides personnelles au logement » (exposé de n° 1, version de novembre).
+- Interprétation : non expliqué dans les sources (années, périmètre, crédits restants non reconduits) ; l'écart a changé de sens : l'état B retire moins que l'économie annoncée.
+- Traitement : Documenté (groupe `apl_economie_2027`). `credits-retires.json` utilise l'état B (2,690) comme valeur de loi.
 
 ## D20 — Niches : 79,5 contre 79,613 Md€ ; 143 contre 134,7 contre 89,4 Md€
 - Constat : (a) l'exposé de PLF-P1 n° 1 cite 79,5 Md€ pour 2026 ; la somme des 465 lignes 2026 du classeur vaut 79,613 Md€ (ε et nc comptés pour 0). (b) 134,7 Md€ (486 niches et taux réduits, 2024), 89,406 Md€ (les 465 niches seules, 2024) et « 143 Md€ de niches supprimées » (fiche Contribuable).
-- Interprétation : (b) 143 ≈ 72,3 + 18 + 53 de la feuille Flux (niches fiscales + niches sociales + autre gisement) : inférence ; ce périmètre inclut 18 Md€ de niches sociales hors des 486.
+- Interprétation : (b) le 134,7 Md€ n'est pas une donnée du PLF : 89,406 (les 465 niches) + 11,915 (« TVA toutes APU », calcul des auteurs) + 33,382 (les 21 taux réduits de TVA, estimation du CPO de février 2023 projetée par les auteurs, D32) ; seuls les 89,406 sont le chiffre de l'annexe. 143 ≈ 72,3 + 18 + 53 de la feuille Flux (niches fiscales + niches sociales + autre gisement) : inférence ; ce périmètre inclut 18 Md€ de niches sociales hors des 486.
 - Traitement : Documenté (groupes `niches_cout_2026`, `niches_montant`). `niches.json › synthese` expose chaque périmètre séparément ; 21 taux réduits de TVA sont agrégés (D32).
 
 ## D21 — Postes fermés : 151 000 + 428 500 = 579 500 ≠ 580 000
@@ -123,10 +125,10 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Interprétation : non expliqué par la source.
 - Traitement : Documenté. `fiches.json › fiches[].header_vs_listed` expose les deux comptes pour chaque fiche ; aucun gain n'est ajouté.
 
-## D24 — État B : arrondi de 1 € sur les amendements n° 4, 5 et 13
-- Constat : la somme des programmes dépasse le total publié de 1 € en autorisations d'engagement (n° 4, 5, 13) ; aucun écart en crédits de paiement.
-- Interprétation : arrondi de la source.
-- Traitement : Documenté. `credits-retires.json` exporte `ecart_somme_programmes_vs_total_eur` ; le total général (43 855,4 M€ AE, 39 905,0 M€ CP) correspond à l'annexe A de la source-analyse.
+## D24 — État B : arrondi de 1 € sur les amendements n° 4, 5 et 13 — **Résolu en novembre 2026**
+- Constat d'octobre : la somme des programmes dépassait le total publié de 1 € en autorisations d'engagement (n° 4, 5, 13).
+- Novembre 2026 : tous les états B ont été réécrits (23 missions, 63 programmes, 13 sous-lignes « dont titre 2 ») ; la somme des programmes est égale à la ligne TOTAUX pour les 23 amendements. `validate.py` le vérifie ; `credits-retires.json › ecart_somme_programmes_vs_total_eur` vaut 0 partout.
+- Traitement : plus d'avertissement. Totaux : 24 261,6 M€ d'AE et 21 034,5 M€ de CP (43 855,4 et 39 905,0 en octobre).
 
 ## D25 — GraphAFU : deux séries « Epargne retraite personnelle »
 - Constat : lignes 29 et 30 portent le même libellé (20 064 € et 6 600 € à partir de 64 ans).
@@ -144,7 +146,7 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Traitement : Documenté. Les provisions de calcul de l'impôt concernées sont sorties dans `niches.json › provisions_calcul_impot` et signalées ; les dates ne sont publiées que si la citation est vérifiée mot pour mot dans l'amendement.
 
 ## D28 — Pas de microsimulation de l'aide fondamentale
-- Constat : coût brut 402,006 Md€ − retour d'impôt 135,346 Md€ = 266,66 Md€ net ; aucune répartition gagnants/perdants par décile n'est publiée.
+- Constat : coût brut 402,006 Md€ − dépenses existantes fusionnées dans l'aide 135,346 Md€ (fiscal 21,6 + budgétaire 31,8 + social 81,946, feuille « Refonte fiscalité ») = 266,66 Md€ ; aucune répartition gagnants/perdants par décile n'est publiée.
 - Interprétation : le calcul net est celui du pipeline (tier `calcul`), pas une donnée des sources.
 - Traitement : Hors périmètre. `facts.json` porte `afu_cout_brut_md` et le calcul `afu_cout_net_calc_md` avec ses entrées ; le moteur de simulation est un autre chantier.
 
@@ -165,7 +167,7 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 
 ## D32 — TVA : liste des 21 taux réduits non publiée
 - Constat : 21 taux réduits de TVA (33,382 Md€) ne sont pas comptés comme niches ; seule la somme et le nombre sont publiés.
-- Interprétation : aucune liste individuelle n'existe dans les sources.
+- Interprétation : aucune liste individuelle n'existe dans les sources. Les 33,382 Md€ ne sont pas un chiffre du PLF 2026 : c'est l'estimation du CPO de février 2023 (30 Md€ en 2021, dont 20 Md€ sur l'eau et l'alimentation), projetée sur 2024 au prorata de la TVA des comptes nationaux de l'Insee, par les auteurs (feuille « Synthèse » de leur copie du classeur « Niches fiscales »).
 - Traitement : Documenté. `niches.json › meta › counts.taux_reduits_tva_hors_niches` et `taux_reduits_tva_hors_niches` n'ont que des agrégats ; ne pas inventer de lignes.
 
 ## D33 — Calendrier : CRDS mensuelle déduite, paliers de référence hypothétiques
@@ -177,6 +179,31 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 - Constat : 1 278 M€ en réalisation 2024 (feuille Chiffrages Résolution) contre 1 298,73 M€ (Synthèse) ; avec la colonne « yc TVA APU » : 1 298,732 M€.
 - Interprétation : la différence correspond à la TVA des administrations publiques (APU).
 - Traitement : Documenté ; `niches.json` exporte les deux colonnes.
+
+## D35 — Page « Données » des auteurs : cartes de liasses périmées
+- Constat : la page donnees.html (novembre 2026) annonce « 84 amendements » en en-tête mais ses trois cartes affichent « 35 amendements · 94 pages » (PLF-P1 : 35 amendements et 95 pages dans le PDF), « 39 amendements · 66 pages » (PLF-P2 : 40 et 70) et « 9 amendements · 24 pages » (PLFSS), toutes datées « 10 novembre 2026 » ; la somme des cartes est 83. Les PDF eux-mêmes ont été générés le 17 novembre (PLF-P1, PLFSS) et le 18 novembre 2026 (PLF-P2) et leur couverture dit encore « Résolution — octobre 2026 ».
+- Interprétation : cartes non mises à jour après l'ajout de PLF-P2 n° 40 et de PLF-P1 n° 35.
+- Traitement : Documenté. Les données comptent dans les PDF : 35 + 40 + 9 = 84 amendements et 95 + 70 + 24 = 189 pages ; `amendements.json › meta › donnees_page_cards` garde les deux lectures ; la date affichée sur le site est « 18 novembre 2026 » (date du dernier PDF généré) avec la précision ci-dessus.
+
+## D36 — Tableau des 236 Md€ de donnees.html non mis à jour
+- Constat : le tableau arrondi de donnees.html est identique à celui d'octobre (structures 67, fonctionnement 39, subventions aux entreprises 42…) alors que le classeur de novembre donne 68,242, 38,117 et 41,358 ; la page « Propositions » écrit « 68 Md€ économisés par an · 38 Md€ de fonctionnement · 30 Md€ de masse salariale ». Le « 236 » et le « 8 000 € par foyer » ne changent pas.
+- Interprétation : le tableau n'a pas été régénéré ; les autres lignes arrondissent encore correctement les valeurs du classeur.
+- Traitement : Documenté. `plan-flux.json › savings_checks › web_vs_workbook_mismatches` liste les lignes concernées ; le site utilise le classeur.
+
+## D37 — 434 prélèvements (graphique) contre 438 impôts (manifeste, Propositions, fiches)
+- Constat : le titre du graphique « Fusion des impôts » (graphiques/fusion-des-impots.html, novembre 2026) dit « 434 prélèvements aujourd'hui, 4 grands impôts demain » ; le manifeste, la page « Propositions » et les fiches parlent de « 438 impôts, taxes et contributions ».
+- Interprétation : la source ne dit pas quels prélèvements séparent 434 de 438.
+- Traitement : Documenté (groupe `nb_impots_graphique`). Le site garde « 438 » (manifeste) et expose le « 434 » comme conflit.
+
+## D38 — GraphAFU et fiche Retraité contre la minoration de pension de PLF-P1 n° 28
+- Constat : la version de novembre 2026 de PLF-P1 n° 28 minore l'aide fondamentale de 3 300 € par an « pour chaque membre du foyer fiscal titulaire d'une pension de retraite servie par un régime obligatoire et liquidée avant le 1er janvier 2028 » (au lieu de la majorer, comme en octobre), jusqu'à l'imposition des revenus de 2051 ; pour une pension liquidée ensuite, la minoration est réduite au prorata des droits acquis avant 2028. La feuille GraphAFU (« Solidarité au cours de la vie ») montre toujours 6 600 € d'aide fondamentale à partir de 18 ans, sans minoration ; la fiche Retraité liste deux pertes (abattement de 10 %, indexation) et ne mentionne pas la minoration.
+- Interprétation : le classeur et les fiches n'ont pas été mis en cohérence avec le texte de l'amendement ; pour un retraité d'aujourd'hui, l'aide est de 6 600 − 3 300 = 3 300 € par an (275 € par mois) selon l'amendement.
+- Traitement : Documenté. `lifecycle.json` reprend GraphAFU tel quel (série annoncée) et signale l'écart dans la note de la série ; le texte de l'amendement fait foi.
+
+## D39 — Feuille Graph236 : total 236,402 Md€ contre 236,353 Md€ dans l'Annexe Manuscrit
+- Constat : `Séries des graphiques › Graph236` donne un total de 236,402207 Md€ (D24) et un rendement des actifs publics de 17,602207 Md€ (D34) ; l'Annexe Manuscrit donne 236,352699 et 17,552699. Écart de 0,0495 Md€ (« Administrations non indispensables 68 » y est en revanche à jour).
+- Interprétation : la feuille qui alimente le graphique n'a pas suivi la modification de l'Annexe Manuscrit.
+- Traitement : Documenté (groupe `eco236_total`). `plan-flux.json › reconciliation › graph236` garde les deux valeurs ; le total retenu est celui de l'Annexe Manuscrit.
 
 ---
 

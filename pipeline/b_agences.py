@@ -1,6 +1,7 @@
 """agences.json — le sort des 1 104 agences d'État (et des organismes locaux).
 
-Sources (Synthèse ETP et agences Résolution_0910.xlsx):
+Sources (« Agences publiques.xlsx », which holds the October « ETP et agences » sheets Synthèse agences R,
+Opérateurs R, ODAC-ODAL R and Commissions R; « Emplois publics.xlsx » for Emplois Etat RAP 2024 and FPE):
   Synthèse agences R  fate matrix (1 104 = opérateurs PLF 434 + hors PLF 328 + AAI 24 + commissions 318)
   Opérateurs R        180 lines = 434 operators (« Nb/cat. » entities per line), ETPT LFI 2025 / PLF 2026, fate flags
   ODAC-ODAL R         Insee ODAC (700 organisms, 372 already counted as operators) and ODAL (23 276 local)
@@ -49,7 +50,7 @@ def _int(s):
 
 
 def _operateurs():
-    sh = Sheet.get("etp", "Op_rateurs_R")
+    sh = Sheet.get("agences", "Op_rateurs_R")
     out = []
     for r in range(5, len(sh.rows) + 1):
         row = sh.rows[r - 1]
@@ -78,7 +79,7 @@ def _operateurs():
 
 
 def _odac():
-    sh = Sheet.get("etp", "ODAC_ODAL_R")
+    sh = Sheet.get("agences", "ODAC_ODAL_R")
     recs = []
     fonction = None
     for r in range(6, 725):
@@ -131,7 +132,7 @@ def _odac():
 
 
 def _commissions():
-    sh = Sheet.get("etp", "Commissions_R")
+    sh = Sheet.get("agences", "Commissions_R")
     recs = []
     for r in range(2, len(sh.rows) + 1):
         row = sh.rows[r - 1]
@@ -160,7 +161,7 @@ def _commissions():
 
 
 def _emplois_etat():
-    sh = Sheet.get("etp", "Emplois_Etat_RAP_2024")
+    sh = Sheet.get("emplois", "Emplois_Etat_RAP_2024")
     out = []
     for r in range(4, len(sh.rows) + 1):
         row = sh.rows[r - 1]
@@ -185,7 +186,7 @@ def _emplois_etat():
 
 
 def _fpe():
-    sh = Sheet.get("etp", "FPE")
+    sh = Sheet.get("emplois", "FPE")
     out = []
     for r in range(5, 18):
         label = ws(sh.at(r - 1, 0))

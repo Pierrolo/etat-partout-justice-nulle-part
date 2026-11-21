@@ -79,7 +79,7 @@ def _ministeres():
 
 
 def _agences():
-    sh = Sheet.get("etp", "Synth_se_agences_R")
+    sh = Sheet.get("agences", "Synth_se_agences_R")
     heads = {"cession": "E", "suppression": "F", "internalisation": "G", "epic_musee": "H", "epic_enseignement": "I", "autorite_independante": "J"}
     rows = []
     for r in range(5, 13):
@@ -192,7 +192,7 @@ def _taxes():
 
 def _claims():
     """Verbatim claims of the book / manifeste / letters (tier annonce).  Each quote is
-    verified against research/pages/*.md (manifeste or lettre-depute) by validate.py."""
+    verified against research/pages-2026-11-21/*.md (manifeste or lettre-depute) by validate.py."""
     L = ("lettres__lettre-depute", "france-resolution.fr › lettre type au député (idem maire, sénateur)", f"{SITE}/ecrire.html")
     M = ("manifeste", "france-resolution.fr › manifeste", MANIFESTE)
     claims = [
@@ -269,7 +269,7 @@ def _mots():
 
 
 def _effectifs():
-    sh = Sheet.get("etp", "Synth_se_ETP")
+    sh = Sheet.get("emplois", "Synth_se_ETP")
     st = {"fonctionnaires": "C4", "contractuels": "C5", "militaires": "C6", "autres": "C7"}
     total = sh.num("C8")
     by_status = {k: clean(sh.num(a), 3) for k, a in st.items()}

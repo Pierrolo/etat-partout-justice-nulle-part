@@ -2086,12 +2086,12 @@
   },
   "source": {
    "kind": "insee",
-   "ref": "Insee, comptes nationaux, tableau 3.301 (dépenses des APU par fonction, COFOG) — repris dans Synthèse Graphiques Résolution_0910.xlsx › Graph1672Md",
+   "ref": "Insee, comptes nationaux, tableau 3.301 (dépenses des APU par fonction, COFOG) — repris dans Séries des graphiques.xlsx › Graph1672Md",
    "url": "https://www.insee.fr/fr/statistiques/8574707?sommaire=8574832",
    "workbook": {
     "kind": "workbook",
-    "ref": "Synthèse Graphiques Résolution_0910.xlsx › Graph1672Md › A29:D44, C50:D129",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "ref": "Séries des graphiques.xlsx › Graph1672Md › A29:D44, C50:D129",
+    "url": "https://france-resolution.fr/donnees/S%C3%A9ries%20des%20graphiques.xlsx"
    }
   },
   "tier": "donnee",

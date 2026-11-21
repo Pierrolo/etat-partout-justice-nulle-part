@@ -36,8 +36,19 @@ export interface Adult {
   salary?: { amount: number; basis: 'net' | 'brut'; status: SalaryStatus; workRatio?: number };
   /** Net monthly ARE actually received (indemnisé·e if > 0). Used when activity is 'chomage'. */
   unemployment?: { areMonthly: number };
-  /** Used when activity is 'retraite'. */
-  pension?: { amount: number; basis: 'net' | 'brut'; startYear: number };
+  /**
+   * Used when activity is 'retraite'. Assumed to be served by a régime obligatoire (base + complémentaire).
+   * v1.2 `insuranceShareBefore2028` (optional, 0–1, read only when startYear ≥ 2028): share of the insurance
+   * duration validated before 1 Jan 2028 in the total duration retained for the liquidation. It scales the
+   * 3 300 €/an AFU minoration of PLF-P1 am. 28 for a pension liquidated from 2028. Default: a full career of
+   * 172 quarters ending on 1 July of startYear (hypothesis).
+   */
+  pension?: {
+    amount: number;
+    basis: 'net' | 'brut';
+    startYear: number;
+    insuranceShareBefore2028?: number;
+  };
   disability: Disability;
   /**
    * Engine extension (optional, read only when activity is 'etudiant'): the student holds a bourse sur critères

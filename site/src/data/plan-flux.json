@@ -568,8 +568,8 @@
   "seuil_equilibre_workbook": 28695.65,
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphIR › B26:G31, B33:BW38",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+   "ref": "Séries des graphiques.xlsx › GraphIR › B26:G31, B33:BW38",
+   "url": "https://france-resolution.fr/donnees/S%C3%A9ries%20des%20graphiques.xlsx"
   },
   "taux_unique": 0.23,
   "tier": "loi"
@@ -596,8 +596,8 @@
   "seuil_entree_ir_net_eur": 28695.65,
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › B47:K76",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+   "ref": "Synthèse des chiffrages.xlsx › Refonte fiscalité › B47:K76",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx"
   },
   "taux_legal_pct": 23,
   "taux_moyen_ir_reference_pct": 7.322,
@@ -738,8 +738,8 @@
   ],
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse Chiffres Résolution_0910.xlsx › CSG-CRDS › B2:J16",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+   "ref": "Synthèse des chiffrages.xlsx › CSG-CRDS › B2:J16",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx"
   },
   "tier": "annonce"
  },
@@ -762,61 +762,61 @@
      "cell": "C13",
      "id": "logements_publics",
      "label_fr": "Logements publics",
-     "md": 51.96
+     "md": 51.527
     },
     {
      "cell": "C14",
      "id": "parc_social",
      "label_fr": "Parc social",
-     "md": 152.902294
+     "md": 151.628108
     }
    ],
-   "rendement_md": 18.20918,
-   "rendement_net": 0.03,
+   "rendement_md": 17.552699,
+   "rendement_net": 0.029,
    "source": {
     "kind": "workbook",
-    "ref": "Synthèse Chiffres Résolution_0910.xlsx › Input Capitalisation › B10:E14",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+    "ref": "Synthèse des chiffrages.xlsx › Input Capitalisation › B10:E14",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx"
    },
    "tier": "annonce",
-   "total_md": 606.972666
+   "total_md": 605.26548
   },
   "capitalisation": {
    "composition_md": [
     {
      "id": "eco_budgetaire_pleine",
      "label_fr": "Économie budgétaire en année pleine",
-     "md": 38.5
+     "md": 39.871
     },
     {
      "id": "eco_locale_pleine",
      "label_fr": "Économie locale en année pleine",
-     "md": 20.1
+     "md": 19.915
     },
     {
      "id": "assurance_chomage",
      "label_fr": "Transformation de l'assurance chômage",
-     "md": 30
+     "md": 29.6
     },
     {
      "id": "reliquat_annee_1",
      "label_fr": "Reliquat de l'année 1 après suppression de la CSG",
-     "md": 14.94
+     "md": 14.999
     },
     {
      "id": "rendement_actifs",
      "label_fr": "Rendement net des actifs publics rendus",
-     "md": 18.20918
+     "md": 17.552699
     }
    ],
    "id": "capitalisation",
    "label_fr": "Capitalisation / compte d'épargne personnel",
    "manifeste_300_eur_par_mois": "« 300 euros par mois versés sur un compte épargne retraite personnel d'ici trois ans » : aucune base légale chiffrée (PLF-P1 n° 27 : « aucun montant n'est inscrit ici »)",
-   "md_par_an": 121.74918,
+   "md_par_an": 121.937699,
    "source": {
     "kind": "workbook",
-    "ref": "Synthèse Chiffres Résolution_0910.xlsx › Input Capitalisation › E2:E10",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+    "ref": "Synthèse des chiffrages.xlsx › Input Capitalisation › E2:E10",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx"
    },
    "tier": "annonce"
   },
@@ -863,14 +863,14 @@
    },
    "source": {
     "kind": "workbook",
-    "ref": "Synthèse Chiffres Résolution_0910.xlsx › CSG-CRDS › H3:J3",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+    "ref": "Synthèse des chiffrages.xlsx › CSG-CRDS › H3:J3",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx"
    },
    "tier": "donnee"
   }
  },
  "flux_mesures": {
-  "note": "Autre lecture des mêmes économies, par mesure (feuille Flux) : 129,4 Md€ la première année (niches 52,1 + État 44 + collectivités 33,3), dont 114,46 pour la CSG/CRDS et 14,94 de reliquat. Les niches fiscales ont un « gain supplémentaire à terme » (29,1 + 9 de niches sociales) qui compense la refonte fiscale et n'entre pas dans les 236 Md€.",
+  "note": "Autre lecture des mêmes économies, par mesure (feuille Flux) : 129,459 Md€ la première année (niches 52,1 + État 44 + collectivités 33,359), dont 114,46 pour la CSG/CRDS et 14,999 de reliquat ; c'est, à 0,0003 Md€ près, le gain de l'année 1 de l'Annexe Manuscrit. Les niches fiscales ont un « gain supplémentaire à terme » (29,1 + 9 de niches sociales) qui compense la refonte fiscale et n'entre pas dans les 236 Md€.",
   "rows": [
    {
     "autre_gisement_md": 53,
@@ -963,12 +963,12 @@
     "commentaire_terme_fr": "Fléché sur la capitalisation",
     "effet_annee_1_fr": "Dont taxes affectées",
     "gain_annee_1_md": 44,
-    "gain_supp_terme_md": 38.5,
+    "gain_supp_terme_md": 39.871,
     "label_fr": "Economies Etat",
     "level": 1,
     "parent": null,
     "source_fr": "Calculs Résolution",
-    "total_supprime_a_terme_md": 82.5
+    "total_supprime_a_terme_md": 83.871
    },
    {
     "autre_gisement_md": 0.9,
@@ -977,12 +977,12 @@
     "commentaire_terme_fr": "Effet aides en année pleine",
     "effet_annee_1_fr": "Transfert des secteurs subventionnés et agents publics aux actifs",
     "gain_annee_1_md": 14.5,
-    "gain_supp_terme_md": 13.455,
+    "gain_supp_terme_md": 14.826,
     "label_fr": "Opérateurs (y. c. salaires)",
     "level": 2,
     "parent": "Economies Etat",
     "source_fr": "PLF 2026, données des PAP ; Voies et moyens Tome 1 ; BI 2025 France Compétences, France Travail et Ademe",
-    "total_supprime_a_terme_md": 28
+    "total_supprime_a_terme_md": 29.371
    },
    {
     "autre_gisement_md": 31.8,
@@ -1060,13 +1060,13 @@
     "commentaire_gisement_fr": null,
     "commentaire_terme_fr": "Fléché sur la capitalisation",
     "effet_annee_1_fr": "Dont financements Etat",
-    "gain_annee_1_md": 33.3,
-    "gain_supp_terme_md": 20.1,
+    "gain_annee_1_md": 33.359,
+    "gain_supp_terme_md": 19.915,
     "label_fr": "Economies Collectivités",
     "level": 1,
     "parent": null,
     "source_fr": "Calculs Résolution",
-    "total_supprime_a_terme_md": 53.4
+    "total_supprime_a_terme_md": 53.274
    },
    {
     "autre_gisement_md": null,
@@ -1089,12 +1089,12 @@
     "commentaire_terme_fr": "Effet année pleine à terme",
     "effet_annee_1_fr": "Transfert des secteurs subventionnés vers les actifs",
     "gain_annee_1_md": 9.7,
-    "gain_supp_terme_md": 2.6,
+    "gain_supp_terme_md": 2.51,
     "label_fr": "Aides aux entreprises",
     "level": 2,
     "parent": "Economies Collectivités",
     "source_fr": "Insee, comptes de la nation 2023, données COFOG",
-    "total_supprime_a_terme_md": 12.3
+    "total_supprime_a_terme_md": 12.21
    },
    {
     "autre_gisement_md": null,
@@ -1116,39 +1116,39 @@
     "commentaire_gisement_fr": null,
     "commentaire_terme_fr": null,
     "effet_annee_1_fr": "Transfert des agents publics (compensés à 70 %) vers les actifs",
-    "gain_annee_1_md": 6,
-    "gain_supp_terme_md": 14,
+    "gain_annee_1_md": 5.959,
+    "gain_supp_terme_md": 13.905,
     "label_fr": "Départs fonctionnaires locaux",
     "level": 2,
     "parent": "Economies Collectivités",
     "source_fr": "Insee, comptes de la nation 2023, données COFOG",
-    "total_supprime_a_terme_md": 20
+    "total_supprime_a_terme_md": 19.864
    }
   ],
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Flux › B5:J26",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+   "ref": "Synthèse des chiffrages.xlsx › Flux › B5:J26",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx"
   },
   "tier": "annonce",
   "totaux": {
    "autre_gisement_md": 97,
-   "gain_annee_1_md": 129.4,
-   "gain_supp_terme_md": 96.7,
-   "somme_postes_niveau_1_annee_1_md": 129.4,
-   "total_supprime_a_terme_md": 226.2
+   "gain_annee_1_md": 129.459,
+   "gain_supp_terme_md": 97.886,
+   "somme_postes_niveau_1_annee_1_md": 129.459,
+   "total_supprime_a_terme_md": 227.445
   },
   "unit": "Md€"
  },
  "meta": {
   "notes": [
    "Utiliser le tableau savings_table (26 lignes) pour la table de données ; id/parent_id donnent la hiérarchie.",
-   "Les valeurs « web_arrondi » viennent du tableau arrondi de donnees.html ; leurs sous-totaux ne s'additionnent pas toujours (39 affiché contre 37,43 exact pour le fonctionnement des administrations)."
+   "Les valeurs « web_arrondi » viennent du tableau arrondi de donnees.html ; leurs sous-totaux ne s'additionnent pas toujours (39 affiché contre 38,117 exact pour le fonctionnement des administrations ; 67 affiché contre 68,242 pour les structures facultatives : le tableau de donnees.html n'a pas été mis à jour en novembre 2026)."
   ],
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Annexe Manuscrit › A2:F28",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+   "ref": "Synthèse des chiffrages.xlsx › Annexe Manuscrit › A2:F28",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx"
   },
   "tier": "annonce",
   "tier_note": "Estimations de Résolution (Calculs de Résolution) : aucune de ces valeurs n'est écrite dans un amendement, sauf mention « loi ».",
@@ -1156,80 +1156,82 @@
   "unit": "Md€ par an (régime de croisière) sauf mention contraire"
  },
  "prelevements_obligatoires": {
-  "baisse_md": 191.046,
-  "baisse_pts": 6.543,
+  "baisse_md": 191.105,
+  "baisse_pts": 6.545,
   "fiche_contribuable": "« 36 % de la richesse produite, contre 43 % aujourd'hui »",
   "pib_2024_md": 2919.9,
   "po_2024_md": 1251.8,
-  "po_cible_md": 1060.75436,
+  "po_cible_md": 1060.69536,
   "po_pib_2024_pct": 42.871331,
-  "po_pib_cible_pct": 36.328448,
+  "po_pib_cible_pct": 36.326428,
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › C3:F4",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+   "ref": "Synthèse des chiffrages.xlsx › Refonte fiscalité › C3:F4",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx"
   },
   "tier": "annonce"
  },
  "reconciliation": {
-  "headline_236": "« 236 milliards » (manifeste, lettres) = 236,055 Md€ (colonne C) ; 236,264 si l'on additionne E + F ; 236,209 si l'on additionne les destinations 114,46 + 121,749. Les trois valeurs arrondissent à 236.",
+  "graph236": {
+   "cells": "Graph236!D24, D34",
+   "ecart_vs_annexe_md": 0.049508,
+   "note": "Le graphique « 236 milliards » du livre lit la feuille Graph236 de « Séries des graphiques » : son total (D24) et son rendement des actifs publics (D34) n'ont pas été mis à jour comme l'Annexe Manuscrit (C3 et C28).",
+   "rendement_actifs_md": 17.602207,
+   "total_md": 236.402207
+  },
+  "headline_236": "« 236 milliards » (manifeste, lettres) = 236,353 Md€ (colonne C, égale à E + F depuis la version de novembre 2026) ; 236,398 si l'on additionne les destinations 114,46 + 121,938 (Input Capitalisation) ; 236,402 dans la feuille Graph236 de « Séries des graphiques », dont le total n'a pas suivi l'Annexe Manuscrit. Les quatre valeurs arrondissent à 236.",
   "per_foyer": {
    "eur_par_foyer": 8000,
-   "foyers_implicites_millions": 29.507,
-   "md_par_an": 236.054667,
-   "note": "Dénominateur implicite du tableau « € par foyer » : 236,055 Md€ ÷ 8 000 € = 29,507 M de foyers (les fiches parlent de 30 M, la loi de 40,2 M de foyers fiscaux)."
+   "foyers_implicites_millions": 29.544,
+   "md_par_an": 236.352699,
+   "note": "Dénominateur implicite du tableau « € par foyer » : 236,353 Md€ ÷ 8 000 € = 29,544 M de foyers (les fiches parlent de 30 M, la loi de 40,2 M de foyers fiscaux)."
   },
   "residuels": [
    {
-    "explication": "Dans l'Annexe Manuscrit, la ligne « Patrimoine public valorisé et restitué » vaut 18 en colonne C (et dans le total 236,055) mais 18,209 en colonne F (gain supplémentaire en année pleine) : la somme E + F du tableau (236,264) dépasse donc son propre total de 0,209 Md€. 18,209 = 3 % × 606,973 (Input Capitalisation).",
-    "id": "patrimoine_18_vs_18_209",
-    "md": 0.20918
-   },
-   {
-    "explication": "Les montants de la réconciliation (feuilles Flux et Input Capitalisation) sont arrondis différemment de l'Annexe Manuscrit : gain année 1 de 129,4 (Flux) contre 127,352 (Annexe), et économies État + collectivités en année pleine de 58,6 (Input Capitalisation : 38,5 + 20,1) contre 60,7025 (Annexe : structures 27,9025 + subventions 32,8). Les deux écarts (+2,048 et −2,102) se compensent presque : solde −0,055 Md€.",
+    "explication": "Les montants de la réconciliation (feuilles Flux et Input Capitalisation) diffèrent de l'Annexe Manuscrit : gain année 1 de 129,459 (Flux) contre 129,4593 (Annexe), et économies État + collectivités en année pleine de 59,786 (Input Capitalisation : 39,871 + 19,915) contre 59,7407 (Annexe : structures 27,0307 + subventions 32,71). L'écart sur la première année est résolu (la feuille Flux donne 129,459 contre 129,4593) ; il reste 0,045 Md€ sur l'ensemble, qui vient des économies en année pleine.",
     "id": "annexe_vs_flux",
-    "md": -0.054667
+    "md": 0.045
    },
    {
-    "explication": "Dans le Sankey par catégorie, la destination capitalisation vaut 121,804 Md€ (reliquat année 1 + année pleine, d'après l'Annexe Manuscrit) contre 121,749 Md€ affirmés par Input Capitalisation!E2 : même écart de 0,055 Md€ que ci-dessus.",
+    "explication": "Dans le Sankey par catégorie, la destination capitalisation vaut 121,893 Md€ (reliquat année 1 + année pleine, d'après l'Annexe Manuscrit) contre 121,938 Md€ affirmés par Input Capitalisation!E2 : même écart de 0,045 Md€ que ci-dessus.",
     "id": "capitalisation_calcule_vs_affirme",
-    "md": 0.054667
+    "md": -0.045
    }
   ],
   "totaux": {
-   "annexe_manuscrit_E_plus_F": 236.263847,
-   "annexe_manuscrit_colonne_C": 236.054667,
-   "destinations_classeur_114_46_plus_121_749": 236.20918
+   "annexe_manuscrit_E_plus_F": 236.352699,
+   "annexe_manuscrit_colonne_C": 236.352699,
+   "destinations_classeur_114_46_plus_121_749": 236.397699
   },
   "unit": "Md€",
   "year_1_vs_flux": {
-   "annexe": 127.352167,
-   "ecart_md": 2.0478,
-   "flux": 129.4
+   "annexe": 129.4593,
+   "ecart_md": -0.0003,
+   "flux": 129.459
   }
  },
  "sankey": {
   "balanced": true,
   "destinations": {
-   "capitalisation_md_calcule": 121.803847,
-   "capitalisation_md_classeur": 121.74918,
+   "capitalisation_md_calcule": 121.892699,
+   "capitalisation_md_classeur": 121.937699,
    "salaire_net_md": 114.46
   },
-  "interpretation": "Catégories d'économies (Annexe Manuscrit, colonnes E et F) → calendrier → destination. Conformément à l'onglet « Input Capitalisation », la restitution de la CSG/CRDS sur l'activité (114,46 Md€) est financée par les gains de l'année 1 ; le reliquat de l'année 1, les gains supplémentaires de l'année pleine, l'assurance chômage transformée en épargne et le rendement des actifs publics alimentent la capitalisation. Le classeur n'affecte pas chaque économie à une destination précise : seuls les totaux par destination (114,46 et 121,749 Md€) sont affirmés.",
+  "interpretation": "Catégories d'économies (Annexe Manuscrit, colonnes E et F) → calendrier → destination. Conformément à l'onglet « Input Capitalisation », la restitution de la CSG/CRDS sur l'activité (114,46 Md€) est financée par les gains de l'année 1 ; le reliquat de l'année 1, les gains supplémentaires de l'année pleine, l'assurance chômage transformée en épargne et le rendement des actifs publics alimentent la capitalisation. Le classeur n'affecte pas chaque économie à une destination précise : seuls les totaux par destination (114,46 et 121,938 Md€) sont affirmés.",
   "links": [
    {
     "cell": "E4",
     "kind": "exact_classeur",
     "source": "structures",
     "target": "annee_1",
-    "value_md": 39.104167
+    "value_md": 41.2113
    },
    {
     "cell": "F4",
     "kind": "exact_classeur",
     "source": "structures",
     "target": "annee_pleine",
-    "value_md": 27.9025
+    "value_md": 27.0307
    },
    {
     "cell": "E14",
@@ -1243,7 +1245,7 @@
     "kind": "exact_classeur",
     "source": "subventions",
     "target": "annee_pleine",
-    "value_md": 32.8
+    "value_md": 32.71
    },
    {
     "cell": "E24",
@@ -1257,14 +1259,14 @@
     "kind": "exact_classeur",
     "source": "chomage",
     "target": "annee_pleine",
-    "value_md": 30
+    "value_md": 29.6
    },
    {
     "cell": "F28",
     "kind": "exact_classeur",
     "source": "patrimoine",
     "target": "annee_pleine",
-    "value_md": 18.20918
+    "value_md": 17.552699
    },
    {
     "kind": "montant_affirme_classeur",
@@ -1274,36 +1276,36 @@
     "value_md": 114.46
    },
    {
-    "formula": "gain année 1 (127,352) − CSG/CRDS restituée (114,46)",
+    "formula": "gain année 1 (129,4593) − CSG/CRDS restituée (114,46)",
     "kind": "calcule",
     "source": "annee_1",
     "target": "capitalisation",
-    "value_md": 12.892167
+    "value_md": 14.9993
    },
    {
     "kind": "exact_classeur",
     "source": "annee_pleine",
     "target": "capitalisation",
-    "value_md": 108.91168
+    "value_md": 106.893399
    }
   ],
-  "node_value_note": "value_md des catégories = colonnes E + F de l'Annexe Manuscrit (donc 18,209 pour le patrimoine, alors que la colonne C du même onglet affiche 18) ; md_par_an_classeur = colonne C. La destination « capitalisation » vaut 121,804 Md€ dans ce schéma, contre 121,749 Md€ affirmés (Input Capitalisation!E2) : écart de 0,055 Md€ documenté dans reconciliation.",
+  "node_value_note": "value_md des catégories = colonnes E + F de l'Annexe Manuscrit (égales à la colonne C sur chaque ligne depuis la version de novembre 2026) ; md_par_an_classeur = colonne C. La destination « capitalisation » vaut 121,893 Md€ dans ce schéma, contre 121,938 Md€ affirmés (Input Capitalisation!E2) : écart de 0,045 Md€ documenté dans reconciliation.",
   "nodes": [
    {
     "id": "structures",
     "kind": "categorie",
     "label_fr": "Structures facultatives de l'État et des collectivités",
     "layer": 0,
-    "md_par_an_classeur": 67.006667,
-    "value_md": 67.006667
+    "md_par_an_classeur": 68.242,
+    "value_md": 68.242
    },
    {
     "id": "subventions",
     "kind": "categorie",
     "label_fr": "Subventions aux entreprises, particuliers et associations",
     "layer": 0,
-    "md_par_an_classeur": 68.948,
-    "value_md": 68.948
+    "md_par_an_classeur": 68.858,
+    "value_md": 68.858
    },
    {
     "id": "niches",
@@ -1318,30 +1320,30 @@
     "kind": "categorie",
     "label_fr": "Assurance chômage transformée en épargne",
     "layer": 0,
-    "md_par_an_classeur": 30,
-    "value_md": 30
+    "md_par_an_classeur": 29.6,
+    "value_md": 29.6
    },
    {
     "id": "patrimoine",
     "kind": "categorie",
     "label_fr": "Rendement net du patrimoine public valorisé",
     "layer": 0,
-    "md_par_an_classeur": 18,
-    "value_md": 18.20918
+    "md_par_an_classeur": 17.552699,
+    "value_md": 17.552699
    },
    {
     "id": "annee_1",
     "kind": "calendrier",
     "label_fr": "Gain dès l'année 1",
     "layer": 1,
-    "value_md": 127.352167
+    "value_md": 129.4593
    },
    {
     "id": "annee_pleine",
     "kind": "calendrier",
     "label_fr": "Gain supplémentaire en année pleine",
     "layer": 1,
-    "value_md": 108.91168
+    "value_md": 106.893399
    },
    {
     "id": "salaire_net",
@@ -1356,17 +1358,17 @@
     "kind": "destination",
     "label_fr": "Capitalisation / compte d'épargne",
     "layer": 2,
-    "value_md": 121.803847,
-    "value_md_classeur": 121.74918
+    "value_md": 121.892699,
+    "value_md_classeur": 121.937699
    }
   ],
-  "total_in_md": 236.263847,
-  "total_out_md": 236.263847,
+  "total_in_md": 236.352699,
+  "total_out_md": 236.352699,
   "unit": "Md€ par an (régime de croisière)"
  },
  "sankey_classeur": {
   "balanced": true,
-  "description": "Réconciliation propre au classeur (feuilles Flux, CSG-CRDS et Input Capitalisation) : équilibrée à l'euro près, mais sur 236,209 Md€ et non 236,055.",
+  "description": "Réconciliation propre au classeur (feuilles Flux, CSG-CRDS et Input Capitalisation) : équilibrée à l'euro près, mais sur 236,398 Md€ et non 236,353.",
   "links": [
    {
     "source": "gain_annee_1",
@@ -1377,27 +1379,27 @@
     "note": "reliquat de l'année 1 après suppression de la CSG (Input Capitalisation!E8)",
     "source": "gain_annee_1",
     "target": "capitalisation",
-    "value_md": 14.94
+    "value_md": 14.999
    },
    {
     "source": "eco_budgetaire_pleine",
     "target": "capitalisation",
-    "value_md": 38.5
+    "value_md": 39.871
    },
    {
     "source": "eco_locale_pleine",
     "target": "capitalisation",
-    "value_md": 20.1
+    "value_md": 19.915
    },
    {
     "source": "assurance_chomage",
     "target": "capitalisation",
-    "value_md": 30
+    "value_md": 29.6
    },
    {
     "source": "rendement_actifs",
     "target": "capitalisation",
-    "value_md": 18.20918
+    "value_md": 17.552699
    }
   ],
   "nodes": [
@@ -1406,35 +1408,35 @@
     "id": "gain_annee_1",
     "label_fr": "Gains de l'année 1 (feuille Flux)",
     "layer": 0,
-    "value_md": 129.4
+    "value_md": 129.459
    },
    {
     "cell": "Input Capitalisation!E5",
     "id": "eco_budgetaire_pleine",
     "label_fr": "Économie budgétaire en année pleine",
     "layer": 0,
-    "value_md": 38.5
+    "value_md": 39.871
    },
    {
     "cell": "Input Capitalisation!E6",
     "id": "eco_locale_pleine",
     "label_fr": "Économie locale en année pleine",
     "layer": 0,
-    "value_md": 20.1
+    "value_md": 19.915
    },
    {
     "cell": "Input Capitalisation!E7",
     "id": "assurance_chomage",
     "label_fr": "Assurance chômage transformée en épargne",
     "layer": 0,
-    "value_md": 30
+    "value_md": 29.6
    },
    {
     "cell": "Input Capitalisation!E10",
     "id": "rendement_actifs",
-    "label_fr": "Rendement net des actifs rendus (3 % de 606,97 Md€)",
+    "label_fr": "Rendement net des actifs rendus (2,9 % de 605,27 Md€)",
     "layer": 0,
-    "value_md": 18.20918
+    "value_md": 17.552699
    },
    {
     "cell": "CSG-CRDS!I3",
@@ -1448,28 +1450,28 @@
     "id": "capitalisation",
     "label_fr": "Capitalisation / épargne",
     "layer": 1,
-    "value_md": 121.74918
+    "value_md": 121.937699
    }
   ],
   "parts": {
-   "annee_1": 129.4,
-   "assurance_chomage": 30,
-   "capitalisation_total": 121.74918,
-   "economie_budgetaire_annee_pleine": 38.5,
-   "economie_locale_annee_pleine": 20.1,
-   "flux_economise": 103.54,
-   "reliquat_annee_1": 14.94,
-   "rendement_actifs": 18.20918,
+   "annee_1": 129.459,
+   "assurance_chomage": 29.6,
+   "capitalisation_total": 121.937699,
+   "economie_budgetaire_annee_pleine": 39.871,
+   "economie_locale_annee_pleine": 19.915,
+   "flux_economise": 104.385,
+   "reliquat_annee_1": 14.999,
+   "rendement_actifs": 17.552699,
    "salaire_net": 114.46
   },
-  "total_in_md": 236.20918,
-  "total_out_md": 236.20918,
+  "total_in_md": 236.397699,
+  "total_out_md": 236.397699,
   "vs_annexe_manuscrit": {
-   "annexe_total_E_plus_F_md": 236.263847,
-   "annexe_total_colonne_C_md": 236.054667,
-   "ecart_C_vs_flux_md": 0.154513,
-   "ecart_E_plus_F_vs_flux_md": -0.054667,
-   "flux_et_input_capitalisation_md": 236.20918
+   "annexe_total_E_plus_F_md": 236.352699,
+   "annexe_total_colonne_C_md": 236.352699,
+   "ecart_C_vs_flux_md": 0.045,
+   "ecart_E_plus_F_vs_flux_md": 0.045,
+   "flux_et_input_capitalisation_md": 236.397699
   }
  },
  "savings_checks": {
@@ -1515,34 +1517,42 @@
     "ok": true
    }
   ],
-  "rows_where_C_differs_from_E_plus_F": [
-   {
-    "e_plus_f": 236.263847,
-    "ecart_md": -0.20918,
-    "id": "total",
-    "label_fr": "Total des économies",
-    "md_par_an": 236.054667
-   },
-   {
-    "e_plus_f": 18.20918,
-    "ecart_md": -0.20918,
-    "id": "patrimoine",
-    "label_fr": "Patrimoine public valorisé et restitué (rendement net par an)",
-    "md_par_an": 18
-   }
-  ],
+  "rows_where_C_differs_from_E_plus_F": [],
   "web_rounding_breaks": [
    {
     "id": "structures",
     "web_children_sum": 69,
     "web_subtotal": 67,
-    "workbook_subtotal_md": 67.006667
+    "workbook_subtotal_md": 68.242
    },
    {
     "id": "subventions",
     "web_children_sum": 70,
     "web_subtotal": 69,
-    "workbook_subtotal_md": 68.948
+    "workbook_subtotal_md": 68.858
+   }
+  ],
+  "web_vs_workbook_mismatches": [
+   {
+    "id": "structures",
+    "label_fr": "Économies sur les structures facultatives",
+    "web_md": 67,
+    "workbook_md": 68.242,
+    "workbook_rounded_md": 68
+   },
+   {
+    "id": "fonctionnement",
+    "label_fr": "Économies sur le fonctionnement des administrations",
+    "web_md": 39,
+    "workbook_md": 38.117167,
+    "workbook_rounded_md": 38
+   },
+   {
+    "id": "subv_entreprises",
+    "label_fr": "Économies sur les subventions aux entreprises",
+    "web_md": 42,
+    "workbook_md": 41.358,
+    "workbook_rounded_md": 41
    }
   ]
  },
@@ -1550,62 +1560,62 @@
   {
    "cells": "C3:F3",
    "code": null,
-   "ecart_c_vs_e_plus_f_md": -0.20918,
+   "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 8000,
-   "gain_annee_1_md": 127.352167,
-   "gain_supp_annee_pleine_md": 108.91168,
+   "gain_annee_1_md": 129.4593,
+   "gain_supp_annee_pleine_md": 106.893399,
    "id": "total",
    "kind": "total",
    "label_fr": "Total des économies",
    "level": 0,
-   "md_par_an": 236.054667,
+   "md_par_an": 236.352699,
    "parent_id": null,
    "web_arrondi": {
     "eur_par_foyer": 8000,
     "label_fr": "Total des économies",
     "md": 236
    },
-   "web_md_ecart": -0.055
+   "web_md_ecart": -0.353
   },
   {
    "cells": "C4:F4",
    "code": null,
    "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 2280,
-   "gain_annee_1_md": 39.104167,
-   "gain_supp_annee_pleine_md": 27.9025,
+   "gain_annee_1_md": 41.2113,
+   "gain_supp_annee_pleine_md": 27.0307,
    "id": "structures",
    "kind": "categorie",
    "label_fr": "Economies sur les structures facultatives",
    "level": 1,
-   "md_par_an": 67.006667,
+   "md_par_an": 68.242,
    "parent_id": "total",
    "web_arrondi": {
     "eur_par_foyer": 2280,
     "label_fr": "Économies sur les structures facultatives",
     "md": 67
    },
-   "web_md_ecart": -0.007
+   "web_md_ecart": -1.242
   },
   {
    "cells": "C5:F5",
    "code": null,
    "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 1280,
-   "gain_annee_1_md": 30.231667,
-   "gain_supp_annee_pleine_md": 7.2,
+   "gain_annee_1_md": 32.3795,
+   "gain_supp_annee_pleine_md": 5.737667,
    "id": "fonctionnement",
    "kind": "sous_total",
    "label_fr": "Économies sur le fonctionnement des administrations",
    "level": 2,
-   "md_par_an": 37.431667,
+   "md_par_an": 38.117167,
    "parent_id": "structures",
    "web_arrondi": {
     "eur_par_foyer": 1280,
     "label_fr": "Économies sur le fonctionnement des administrations",
     "md": 39
    },
-   "web_md_ecart": 1.568
+   "web_md_ecart": 0.883
   },
   {
    "cells": "C6:F6",
@@ -1652,20 +1662,20 @@
    "code": "O",
    "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 300,
-   "gain_annee_1_md": 4.931667,
-   "gain_supp_annee_pleine_md": 3.7,
+   "gain_annee_1_md": 7.0795,
+   "gain_supp_annee_pleine_md": 2.237667,
    "id": "agences",
    "kind": "poste",
    "label_fr": "Fermeture des agences non indispensables, dont interventions en logement, culture, écologie, etc.",
    "level": 3,
-   "md_par_an": 8.631667,
+   "md_par_an": 9.317167,
    "parent_id": "fonctionnement",
    "web_arrondi": {
     "eur_par_foyer": 300,
     "label_fr": "Fermeture des agences non indispensables, dont interventions en logement, culture, écologie, etc.",
     "md": 9
    },
-   "web_md_ecart": 0.368
+   "web_md_ecart": -0.317
   },
   {
    "cells": "C9:F9",
@@ -1712,20 +1722,20 @@
    "code": null,
    "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 1000,
-   "gain_annee_1_md": 8.8725,
-   "gain_supp_annee_pleine_md": 20.7025,
+   "gain_annee_1_md": 8.8318,
+   "gain_supp_annee_pleine_md": 21.293033,
    "id": "masse_salariale",
    "kind": "sous_total",
    "label_fr": "Économies sur la masse salariale des administrations",
    "level": 2,
-   "md_par_an": 29.575,
+   "md_par_an": 30.124833,
    "parent_id": "structures",
    "web_arrondi": {
     "eur_par_foyer": 1000,
     "label_fr": "Économies sur la masse salariale des administrations",
     "md": 30
    },
-   "web_md_ecart": 0.425
+   "web_md_ecart": -0.125
   },
   {
    "cells": "C12:F12",
@@ -1733,39 +1743,39 @@
    "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 330,
    "gain_annee_1_md": 2.8725,
-   "gain_supp_annee_pleine_md": 6.7025,
+   "gain_supp_annee_pleine_md": 7.388,
    "id": "depart_agents_etat",
    "kind": "poste",
    "label_fr": "Plan de départ des agents administratifs de l'Etat et ses agences",
    "level": 3,
-   "md_par_an": 9.575,
+   "md_par_an": 10.2605,
    "parent_id": "masse_salariale",
    "web_arrondi": {
     "eur_par_foyer": 330,
     "label_fr": "Plan de départ des agents administratifs de l’État et fermeture de ses agences",
     "md": 10
    },
-   "web_md_ecart": 0.425
+   "web_md_ecart": -0.261
   },
   {
    "cells": "C13:F13",
    "code": null,
    "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 670,
-   "gain_annee_1_md": 6,
-   "gain_supp_annee_pleine_md": 14,
+   "gain_annee_1_md": 5.9593,
+   "gain_supp_annee_pleine_md": 13.905033,
    "id": "depart_agents_locaux",
    "kind": "poste",
    "label_fr": "Plan de départ des agents administratifs locaux",
    "level": 3,
-   "md_par_an": 20,
+   "md_par_an": 19.864333,
    "parent_id": "masse_salariale",
    "web_arrondi": {
     "eur_par_foyer": 670,
     "label_fr": "Plan de départ des agents administratifs locaux",
     "md": 20
    },
-   "web_md_ecart": 0
+   "web_md_ecart": 0.136
   },
   {
    "cells": "C14:F14",
@@ -1773,19 +1783,19 @@
    "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 2330,
    "gain_annee_1_md": 36.148,
-   "gain_supp_annee_pleine_md": 32.8,
+   "gain_supp_annee_pleine_md": 32.71,
    "id": "subventions",
    "kind": "categorie",
    "label_fr": "Economies sur les subventions",
    "level": 1,
-   "md_par_an": 68.948,
+   "md_par_an": 68.858,
    "parent_id": "total",
    "web_arrondi": {
     "eur_par_foyer": 2330,
     "label_fr": "Économies sur les subventions",
     "md": 69
    },
-   "web_md_ecart": 0.052
+   "web_md_ecart": 0.142
   },
   {
    "cells": "C15:F15",
@@ -1793,19 +1803,19 @@
    "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 1400,
    "gain_annee_1_md": 21.448,
-   "gain_supp_annee_pleine_md": 20,
+   "gain_supp_annee_pleine_md": 19.91,
    "id": "subv_entreprises",
    "kind": "sous_total",
    "label_fr": "Économies sur les subventions aux entreprises",
    "level": 2,
-   "md_par_an": 41.448,
+   "md_par_an": 41.358,
    "parent_id": "subventions",
    "web_arrondi": {
     "eur_par_foyer": 1400,
     "label_fr": "Économies sur les subventions aux entreprises",
     "md": 42
    },
-   "web_md_ecart": 0.552
+   "web_md_ecart": 0.642
   },
   {
    "cells": "C16:F16",
@@ -1853,19 +1863,19 @@
    "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 400,
    "gain_annee_1_md": 9.7,
-   "gain_supp_annee_pleine_md": 2.6,
+   "gain_supp_annee_pleine_md": 2.51,
    "id": "aides_locales_entreprises",
    "kind": "poste",
    "label_fr": "Extinction des aides locales aux entreprises",
    "level": 3,
-   "md_par_an": 12.3,
+   "md_par_an": 12.21,
    "parent_id": "subv_entreprises",
    "web_arrondi": {
     "eur_par_foyer": 400,
     "label_fr": "Fin des aides locales aux entreprises",
     "md": 12
    },
-   "web_md_ecart": -0.3
+   "web_md_ecart": -0.21
   },
   {
    "cells": "C19:F19",
@@ -2033,39 +2043,39 @@
    "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 1000,
    "gain_annee_1_md": 0,
-   "gain_supp_annee_pleine_md": 30,
+   "gain_supp_annee_pleine_md": 29.6,
    "id": "chomage",
    "kind": "categorie",
    "label_fr": "Assurance chômage transformée en épargne",
    "level": 1,
-   "md_par_an": 30,
+   "md_par_an": 29.6,
    "parent_id": "total",
    "web_arrondi": {
     "eur_par_foyer": 1000,
     "label_fr": "Assurance-chômage transformée en épargne",
     "md": 30
    },
-   "web_md_ecart": 0
+   "web_md_ecart": 0.4
   },
   {
    "cells": "C28:F28",
    "code": null,
-   "ecart_c_vs_e_plus_f_md": -0.20918,
+   "ecart_c_vs_e_plus_f_md": 0,
    "eur_par_foyer_an": 600,
    "gain_annee_1_md": 0,
-   "gain_supp_annee_pleine_md": 18.20918,
+   "gain_supp_annee_pleine_md": 17.552699,
    "id": "patrimoine",
    "kind": "categorie",
    "label_fr": "Patrimoine public valorisé et restitué (rendement net par an)",
    "level": 1,
-   "md_par_an": 18,
+   "md_par_an": 17.552699,
    "parent_id": "total",
    "web_arrondi": {
     "eur_par_foyer": 600,
     "label_fr": "Patrimoine public valorisé et restitué (rendement net par an)",
     "md": 18
    },
-   "web_md_ecart": 0
+   "web_md_ecart": 0.447
   }
  ],
  "valeur_ajoutee_horaire": {
@@ -2095,8 +2105,8 @@
   ],
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphVA › A25:B28",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+   "ref": "Séries des graphiques.xlsx › GraphVA › A25:B28",
+   "url": "https://france-resolution.fr/donnees/S%C3%A9ries%20des%20graphiques.xlsx"
   },
   "tier": "annonce",
   "titre_fr": "Répartition de la valeur ajoutée créée par une heure de travail",
@@ -2105,23 +2115,23 @@
   "unit": "€ par heure de travail"
  },
  "year_split": {
-  "annee_1_md": 127.352167,
+  "annee_1_md": 129.4593,
   "autre_lecture_flux": {
-   "annee_1_md": 129.4,
-   "note": "feuille Flux : 129,4 Md€ la première année (écart de 2,048 Md€ avec l'Annexe Manuscrit, voir reconciliation)"
+   "annee_1_md": 129.459,
+   "note": "feuille Flux : 129,459 Md€ la première année, égal à l'Annexe Manuscrit à 0,0003 Md€ près (écart de 2,048 Md€ en octobre 2026, résolu)"
   },
   "par_categorie": [
    {
-    "annee_1_md": 39.104167,
+    "annee_1_md": 41.2113,
     "id": "structures",
     "label_fr": "Structures facultatives de l'État et des collectivités",
-    "supplement_annee_pleine_md": 27.9025
+    "supplement_annee_pleine_md": 27.0307
    },
    {
     "annee_1_md": 36.148,
     "id": "subventions",
     "label_fr": "Subventions aux entreprises, particuliers et associations",
-    "supplement_annee_pleine_md": 32.8
+    "supplement_annee_pleine_md": 32.71
    },
    {
     "annee_1_md": 52.1,
@@ -2133,22 +2143,22 @@
     "annee_1_md": 0,
     "id": "chomage",
     "label_fr": "Assurance chômage transformée en épargne",
-    "supplement_annee_pleine_md": 30
+    "supplement_annee_pleine_md": 29.6
    },
    {
     "annee_1_md": 0,
     "id": "patrimoine",
     "label_fr": "Rendement net du patrimoine public valorisé",
-    "supplement_annee_pleine_md": 18.20918
+    "supplement_annee_pleine_md": 17.552699
    }
   ],
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Annexe Manuscrit › E3:F28",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+   "ref": "Synthèse des chiffrages.xlsx › Annexe Manuscrit › E3:F28",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx"
   },
-  "supplement_annee_pleine_md": 108.91168,
-  "total_E_plus_F_md": 236.263847,
+  "supplement_annee_pleine_md": 106.893399,
+  "total_E_plus_F_md": 236.352699,
   "unit": "Md€"
  }
 }

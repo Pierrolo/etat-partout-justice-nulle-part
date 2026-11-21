@@ -16,7 +16,7 @@ export interface Adult {
   activity: Activity;
   salary?: { amount: number; basis: 'net' | 'brut'; status: SalaryStatus; workRatio?: number /* 0..1, default 1 */ };
   unemployment?: { areMonthly: number };            // indemnisé·e if > 0
-  pension?: { amount: number; basis: 'net' | 'brut'; startYear: number };
+  pension?: { amount: number; basis: 'net' | 'brut'; startYear: number; insuranceShareBefore2028?: number /* v1.2, 0..1 */ };
   disability: Disability;
 }
 export interface Child { age: number; aeeh?: boolean; cmiInvalidite?: boolean /* added: read only when aeeh; DEFAULT FALSE since the audit (H15) */ }   // 18–24 = rattaché·e / à charge
@@ -131,7 +131,13 @@ export const CAS_TYPES: Array<{ id: string; label: string; family: string; house
 export function encodeState(h: Household, hyp: Hypotheses, period: Period): string;  // e.g. 'v1.<base64url>'
 export function decodeState(s: string): { household: Household; hypotheses: Hypotheses; period: Period } | null;
 
-export const PARAMS_META: { baselineYear: string; planSource: string; engineVersion: string };
+export const PARAMS_META: {
+  baselineYear: string;
+  planSource: string;        // long label of the plan version used
+  planVersionLabel: string;  // v1.2: « Amendements publiés le 18 novembre 2026 » (for display)
+  planVersionDate: string;   // v1.2: '2026-11-18'
+  engineVersion: string;
+};
 ```
 
 ## Implementation notes (engine 1.0.0 — additions and clarifications, no removal)
@@ -162,7 +168,7 @@ export const PARAMS_META: { baselineYear: string; planSource: string; engineVers
 1. `sum(components.amount) === disposable` (to the cent), both scenarios.
 2. Plan with every reform switch neutralised ≡ baseline (identity test; internal `__planSwitches`).
 3. Baseline reproduces `research/baseline/golden-cases.json` within documented tolerance.
-4. Plan reproduces the book's cas types (CSG gain at SMIC 2025 = 171,72 €/mois; GraphIR table with H2 off; 1 100 €/mois disabled adult (CMI); break-even 28 695,65 € with H2 off).
+4. Plan reproduces the book's cas types (CSG gain at SMIC 2025 = 171,72 €/mois; GraphIR table with H2 off; 1 100 €/mois disabled adult (CMI); break-even 28 695,65 € with H2 off). Since 1.2 (amendments of 17–18 Nov 2026) the retiree with a pre-2028 pension and one child gets 550 + 275 − 275 = 550 €/mois (1 100 € with the October text).
 5. Steady-state plan: marginal retention ≥ 0,77 − ε on net earnings (no cliffs) under default hypotheses.
 6. Plan side independent of `marriedOrPacs`.
 7. `decodeState(encodeState(x))` deep-equals x (fast-check).
@@ -273,7 +279,7 @@ interface Comparison {
 ```ts
 interface HourSplit {
   // …1.0 fields unchanged (impotRevenu = gross 23 % share, youKeep excludes the AFU)…
-  afuPerHour: number;                  // this adult's OWN AFU (6 600 €/an + own CMI / pension supplements, children excluded) ÷ 12 ÷ hours worked; 0 today
+  afuPerHour: number;                  // this adult's OWN AFU (6 600 €/an + own CMI supplement − own pension minoration since 1.2, children excluded) ÷ 12 ÷ hours worked; 0 today
   netIncomeTaxPerHour: number;         // impotRevenu − afuPerHour; < 0 = « l'État vous verse » for each hour
   youKeepIncludingTransfers: number;   // youKeep + afuPerHour (= youKeep today: household-level benefits are not attributed per hour)
   afuMonthly: number;                  // this adult's own AFU per month, unrounded (what afuPerHour spreads over the hours); 0 today
@@ -305,7 +311,7 @@ export const H1_ALTERNATIVE_THRESHOLD = 5;
 // types: DisplayComparison, DisplayLine, EmployerView, EmployerSide, Summary, SummaryLine, BenefitExplained
 ```
 
-`ENGINE_VERSION` = `'1.1.0'`.
+`ENGINE_VERSION` = `'1.1.0'` (1.2.0 since the update below).
 
 ### Behavioural changes
 
@@ -319,3 +325,46 @@ export const H1_ALTERNATIVE_THRESHOLD = 5;
 - The not-modelled bullet on early childhood now lists only what remains unmodelled.
 - No cas type changes in steady state (none declares an AM); `cas-types-results.json` and the snapshot only change
   `engineVersion` and `jeune-22-inactif.deltaPct` (null).
+
+## v1.2 — plan republished on 17–18 Nov 2026 (engine 1.2.0, 2026-11-21)
+
+Source: `research/DIFF-2026-10-to-2026-11.md`. No signature removed; one optional input added.
+
+```ts
+// Adult.pension gains an optional field (URL state: 4th slot of the pension array, only when given):
+pension?: { amount; basis; startYear; insuranceShareBefore2028?: number }; // 0..1, read only when startYear ≥ 2028
+PARAMS_META.planVersionLabel  // 'Amendements publiés le 18 novembre 2026'
+PARAMS_META.planVersionDate   // '2026-11-18'
+```
+
+- **PLF-P1 n° 28, pension rule.** The AFU is now **minored** (was « majoré ») by 3 300 €/an for each member of the
+  foyer holding « une pension de retraite servie par un régime obligatoire et liquidée avant le 1er janvier 2028 ».
+  For a pension liquidated from that date the minoration is reduced « à proportion de la part, dans les droits qui
+  fondent la pension, de ceux acquis avant le 1er janvier 2028, dans des conditions fixées par décret. À défaut, elle
+  est égale à 3 300 € multipliés par le rapport entre la durée d’assurance validée avant le 1er janvier 2028 et la
+  durée d’assurance totale retenue pour la liquidation ». It applies until IR on 2051 incomes (every simulated
+  period). Engine: `afu = 6 600 × adults + 3 300 × children + 6 600 × CMI − Σ 3 300 × share`, share = 1 before 2028,
+  else `insuranceShareBefore2028` (clamped to [0, 1], warning), else the default (hypothesis H21) of a full career
+  of 172 quarters ending on 1 July of `startYear`: `(172 − 4 × (startYear − 2028) − 2) / 172`, floored at 0.
+  Parameters: `plan.afu_pension_minoration` (3 300, replaces `plan.afu_pension`), `plan.afu_pension_cutoff_year`,
+  `plan.afu_pension_last_income_year` (2051), `plan.afu_pension_default_career_quarters` (172, hypothesis).
+  `AfuBreakdown` gains `pensions[]` (index, startYear, share, shareSource, annual) and `pensionMinorationAnnual`;
+  `perAdultAnnual` is net of the adult's own minoration. The `afu` component is tier `hypothesis` when a default
+  share is used, `law` otherwise. New active hypothesis **H21**; the old warning « pas de majoration » is replaced by
+  a warning giving the share used. Not modelled: whether a pension is served by a régime obligatoire (assumed).
+- **Effects.** A retiree's AFU is 275 €/mois instead of 825 €. Seven retiree cas types flip from gain to loss
+  (`retraite-aspa` +325 → −225, `retraite-1200` +442 → −108, `retraite-1800` +428 → −122, `retraite-3000` +363 →
+  −187, `retraite-couple-3200` +953 → −147, `retraite-couple-6000` +785 → −315, `retraite-2028` +172 → −100);
+  winners/losers 37/10 → 30/17. `hourOfWork` is unchanged (a salaried adult has no pension in the engine);
+  `earningsCurve` carries a retired partner's minoration.
+- **Tiers and texts (plan-side fact-check).** `pension_nette` is `hypothesis` in the plan when the CSG tier is
+  recomputed with plan parts (steady, 2030); H3 is `hypothesis` while H2 is on; H12 is `hypothesis`; H11 says the
+  foyer fiscal is maintained; H13 rests on « chaque personne majeure composant le foyer fiscal ». CEE source = am. 16.
+  Employer note: ordinary contributions unchanged, specific exemptions end from 1 Jul 2027 (PLFSS am. 1).
+  `unquantified`: new promise `accise_electricite`; updated `prix_taxes` (54 / 72 / 21 / 20 taxes),
+  `indemnite_agent_public` and `postes_publics` (State civil servants; 24 months + 1 per quarter, ≤ 84 months, ≤
+  pension without décote), `chomage_6_mois`, `bouclier_sanitaire`, `reste_a_charge_10`, `gel_indexation`,
+  `epargne_exonerations`, `taxe_fonciere`, `plus_value_residence`, `parc_social`, `cheque_energie`,
+  `titres_restaurant_heures_sup`.
+
+`ENGINE_VERSION` = `'1.2.0'`.

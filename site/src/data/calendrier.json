@@ -3,7 +3,7 @@
   {
    "horizon_fr": "dès la première année",
    "id": "restitution_300",
-   "label_fr": "« 300 euros par mois restitués dès la première année, soit 13 % de salaire net en plus pour tous » (CSG/CRDS)",
+   "label_fr": "« 300 euros par mois restitués dès la première année, soit +13 % de salaire net en plus pour tous » (CSG/CRDS)",
    "source": {
     "kind": "site",
     "quote": "300 euros par mois restitués dès la première année",
@@ -128,7 +128,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Les dépenses engagées jusqu’au 31 décembre 2026 restent éligibles",
-    "ref": "Amendement PLF-P1 n° 7",
+    "ref": "Amendement PLF-P1 n° 7 (page 31 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=31"
    },
    "subject_fr": "Soutien à la culture : extinction des avantages, enrichissement de tous les travailleurs",
@@ -154,7 +154,7 @@
    "source": {
     "kind": "amendment",
     "quote": "ramène au 31 décembre 2026 la date limite de création ouvrant droit à l’exonération dans les zones de développement prioritaire",
-    "ref": "Amendement PLF-P1 n° 17",
+    "ref": "Amendement PLF-P1 n° 17 (page 47 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=47"
    },
    "subject_fr": "Impôts locaux : les exonérations d’adresse non prorogées, l’avantage rendu à tous",
@@ -180,8 +180,8 @@
    "source": {
     "kind": "amendment",
     "quote": "l’avantage est réduit d’un tiers au titre de 2027 et de deux tiers au titre de 2028",
-    "ref": "Amendement PLF-P1 n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+    "ref": "Amendement PLF-P1 n° 1 (page 21 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
    },
    "subject_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
    "theme": "niches",
@@ -206,8 +206,8 @@
    "source": {
     "kind": "amendment",
     "quote": "aux engagements pris à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+    "ref": "Amendement PLF-P1 n° 1 (page 21 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
    },
    "subject_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
    "theme": "niches",
@@ -232,8 +232,8 @@
    "source": {
     "kind": "amendment",
     "quote": "le I s’applique à l’impôt sur le revenu dû au titre de 2026",
-    "ref": "Amendement PLF-P1 n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+    "ref": "Amendement PLF-P1 n° 1 (page 20 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=20"
    },
    "subject_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
    "theme": "niches",
@@ -258,8 +258,8 @@
    "source": {
     "kind": "amendment",
     "quote": "aux successions ouvertes et aux donations consenties à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+    "ref": "Amendement PLF-P1 n° 1 (page 21 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
    },
    "subject_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
    "theme": "niches",
@@ -284,7 +284,7 @@
    "source": {
     "kind": "amendment",
     "quote": "intervient à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 2",
+    "ref": "Amendement PLF-P1 n° 2 (page 24 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=24"
    },
    "subject_fr": "Titres-restaurant : la valeur périmée rendue au salarié, en salaire",
@@ -310,7 +310,7 @@
    "source": {
     "kind": "amendment",
     "quote": "dont l’offre est émise à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 4",
+    "ref": "Amendement PLF-P1 n° 4 (page 27 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=27"
    },
    "subject_fr": "Prêt à taux zéro : les intérêts payés aux banques rendus à la paie des ménages",
@@ -336,7 +336,7 @@
    "source": {
     "kind": "amendment",
     "quote": "aux investissements dont l’agrément est demandé à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 5",
+    "ref": "Amendement PLF-P1 n° 5 (page 28 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=28"
    },
    "subject_fr": "Suramortissement industriel : guichets fermés, la baisse profite à toutes les entreprises",
@@ -362,7 +362,7 @@
    "source": {
     "kind": "amendment",
     "quote": "réduit d’un tiers pour les dépenses engagées en 2027 et de deux tiers pour les dépenses engagées en 2028",
-    "ref": "Amendement PLF-P1 n° 8",
+    "ref": "Amendement PLF-P1 n° 8 (page 32 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=32"
    },
    "subject_fr": "Suramortissement agricole : fin des régimes particuliers, gain rendu aux actifs",
@@ -388,7 +388,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I s’applique aux dépenses exposées à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 9",
+    "ref": "Amendement PLF-P1 n° 9 (page 34 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=34"
    },
    "subject_fr": "Crédit d’impôt recherche : supprimé, rendu en salaire net",
@@ -414,7 +414,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I s’applique aux exercices ouverts à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 10",
+    "ref": "Amendement PLF-P1 n° 10 (page 36 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=36"
    },
    "subject_fr": "Zones franches : dix exonérations abrogées, l’impôt baisse pour tous",
@@ -434,16 +434,42 @@
    "domain_label_fr": "Impôts et taxes",
    "id": "cal_013",
    "in_timeline_2027_2030": true,
-   "label_fr": "Exercices ouverts à partir du 1er janvier 2027",
+   "label_fr": "Exercices clos à partir du 1er janvier 2027",
    "n_amendments": 1,
    "precision": "jour",
    "source": {
     "kind": "amendment",
-    "quote": "Le I s’applique aux exercices ouverts à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 11",
+    "quote": "Le I s’applique aux exercices clos à compter du 1er janvier 2027",
+    "ref": "Amendement PLF-P1 n° 11 (page 38 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=38"
    },
    "subject_fr": "Taxe au tonnage : les armateurs imposés sur leur bénéfice réel, le produit va au travail",
+   "theme": "niches",
+   "tier": "loi",
+   "year": 2027
+  },
+  {
+   "amendments": [
+    {
+     "liasse": "PLF-P1",
+     "number": 12
+    }
+   ],
+   "date": "2027-01-01",
+   "domain": "impots_taxes",
+   "domain_label_fr": "Impôts et taxes",
+   "id": "cal_014",
+   "in_timeline_2027_2030": true,
+   "label_fr": "Dépenses exposées à partir du 1er janvier 2027",
+   "n_amendments": 1,
+   "precision": "jour",
+   "source": {
+    "kind": "amendment",
+    "quote": "Le I s’applique aux dépenses exposées à compter du 1er janvier 2027",
+    "ref": "Amendement PLF-P1 n° 12 (page 39 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=39"
+   },
+   "subject_fr": "Crédit d’impôt famille : supprimé, le parent reçoit son salaire",
    "theme": "niches",
    "tier": "loi",
    "year": 2027
@@ -458,7 +484,7 @@
    "date": "2027-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_014",
+   "id": "cal_015",
    "in_timeline_2027_2030": true,
    "label_fr": "Biens acquis à partir du 1er janvier 2027",
    "n_amendments": 1,
@@ -466,7 +492,7 @@
    "source": {
     "kind": "amendment",
     "quote": "pris en location avec option d’achat à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 13",
+    "ref": "Amendement PLF-P1 n° 13 (page 40 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=40"
    },
    "subject_fr": "Déductions exceptionnelles : huit régimes éteints, la baisse profite à chaque entreprise",
@@ -484,7 +510,7 @@
    "date": "2027-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_015",
+   "id": "cal_016",
    "in_timeline_2027_2030": true,
    "label_fr": "Tarif réduit du gazole agricole réduit d'un tiers (fait générateur à partir du 1er janvier 2027)",
    "n_amendments": 1,
@@ -492,7 +518,7 @@
    "source": {
     "kind": "amendment",
     "quote": "réduit d’un tiers pour les opérations dont le fait générateur intervient à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 15",
+    "ref": "Amendement PLF-P1 n° 15 (page 43 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=43"
    },
    "subject_fr": "Régimes agricoles : sortie progressive de la dépendance aux subventions",
@@ -510,7 +536,7 @@
    "date": "2027-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_016",
+   "id": "cal_017",
    "in_timeline_2027_2030": true,
    "label_fr": "Investissements dont le fait générateur est à partir du 1er janvier 2027",
    "n_amendments": 1,
@@ -518,7 +544,7 @@
    "source": {
     "kind": "amendment",
     "quote": "aux investissements dont le fait générateur intervient à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 18",
+    "ref": "Amendement PLF-P1 n° 18 (page 48 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=48"
    },
    "subject_fr": "Aides à l’investissement : abrogées plutôt que prorogées, rendues au salaire net",
@@ -536,7 +562,7 @@
    "date": "2027-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_017",
+   "id": "cal_018",
    "in_timeline_2027_2030": true,
    "label_fr": "Actes, mutations et successions à partir du 1er janvier 2027",
    "n_amendments": 1,
@@ -544,8 +570,8 @@
    "source": {
     "kind": "amendment",
     "quote": "aux successions ouvertes à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 19",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=50"
+    "ref": "Amendement PLF-P1 n° 19 (page 51 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=51"
    },
    "subject_fr": "Droits de mutation : ramenés à 1 % et 3 %, l’équilibre tenu",
    "theme": "refonte_fiscale",
@@ -562,7 +588,7 @@
    "date": "2027-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_018",
+   "id": "cal_019",
    "in_timeline_2027_2030": true,
    "label_fr": "Immobilier et biens meubles : cessions à partir du 1er janvier 2027",
    "n_amendments": 1,
@@ -570,8 +596,8 @@
    "source": {
     "kind": "amendment",
     "quote": "aux plus-values réalisées lors des cessions intervenant à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 20",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=53"
+    "ref": "Amendement PLF-P1 n° 20 (page 55 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=55"
    },
    "subject_fr": "Plus-values : le capital imposé sur son gain réel, au service de l’équilibre",
    "theme": "refonte_fiscale",
@@ -588,7 +614,7 @@
    "date": "2027-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_019",
+   "id": "cal_020",
    "in_timeline_2027_2030": true,
    "label_fr": "Plafonds portés à zéro au titre de 2027 (rendement prévisionnel 29 980,5 M€)",
    "n_amendments": 1,
@@ -596,8 +622,8 @@
    "source": {
     "kind": "amendment",
     "quote": "rendement prévisionnel de 29 980,5 millions d’euros au titre de 2027",
-    "ref": "Amendement PLF-P1 n° 24",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=64"
+    "ref": "Amendement PLF-P1 n° 24 (page 67 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=67"
    },
    "subject_fr": "Taxes affectées : plafond à zéro, tout le produit retourne au budget voté par le Parlement",
    "theme": "refonte_fiscale",
@@ -614,7 +640,7 @@
    "date": "2027-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_020",
+   "id": "cal_021",
    "in_timeline_2027_2030": true,
    "label_fr": "Entrée en vigueur",
    "n_amendments": 1,
@@ -622,8 +648,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I, le II, le III et le IV entrent en vigueur le 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 26",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=70"
+    "ref": "Amendement PLF-P1 n° 26 (page 72 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=72"
    },
    "subject_fr": "Refermer les canaux budgétaires hors budget général",
    "theme": "refonte_fiscale",
@@ -640,7 +666,7 @@
    "date": "2027-01-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_021",
+   "id": "cal_022",
    "in_timeline_2027_2030": true,
    "label_fr": "Revalorisations prenant effet à partir du 1er janvier 2027",
    "n_amendments": 1,
@@ -648,8 +674,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Le présent article s’applique aux revalorisations prenant effet à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P2 n° 28",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=52"
+    "ref": "Amendement PLF-P2 n° 28 (page 56 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=56"
    },
    "subject_fr": "Retirer l’automaticité des indexations et rendre la revalorisation au vote",
    "theme": "retraites_indexations",
@@ -666,7 +692,7 @@
    "date": "2027-01-01",
    "domain": "epargne_retraite",
    "domain_label_fr": "Épargne et retraite",
-   "id": "cal_022",
+   "id": "cal_023",
    "in_timeline_2027_2030": true,
    "label_fr": "Revalorisations prenant effet à partir du 1er janvier 2027",
    "n_amendments": 1,
@@ -674,7 +700,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le présent article s’applique aux revalorisations prenant effet à compter du 1er janvier 2027",
-    "ref": "Amendement PLFSS n° 5",
+    "ref": "Amendement PLFSS n° 5 (page 15 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=15"
    },
    "subject_fr": "Indexations sociales : retirer l’automaticité à sa source et rendre la revalorisation au vote",
@@ -692,7 +718,7 @@
    "date": "2027-01-01",
    "domain": "logement_energie",
    "domain_label_fr": "Logement et énergie",
-   "id": "cal_023",
+   "id": "cal_024",
    "in_timeline_2027_2030": true,
    "label_fr": "À partir du 1er janvier 2027",
    "n_amendments": 1,
@@ -700,36 +726,10 @@
    "source": {
     "kind": "amendment",
     "quote": "À compter du 1er janvier 2027, l’État n’attribue aucune aide nouvelle à l’investissement pour la construction",
-    "ref": "Amendement PLF-P2 n° 29",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=54"
+    "ref": "Amendement PLF-P2 n° 29 (page 57 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=57"
    },
    "subject_fr": "Plus un logement social neuf financé par l’État",
-   "theme": "logement_aides",
-   "tier": "loi",
-   "year": 2027
-  },
-  {
-   "amendments": [
-    {
-     "liasse": "PLF-P2",
-     "number": 33
-    }
-   ],
-   "date": "2027-01-01",
-   "domain": "logement_energie",
-   "domain_label_fr": "Logement et énergie",
-   "id": "cal_024",
-   "in_timeline_2027_2030": true,
-   "label_fr": "Entrée en vigueur",
-   "n_amendments": 1,
-   "precision": "jour",
-   "source": {
-    "kind": "amendment",
-    "quote": "Le I entre en vigueur le 1er janvier 2027",
-    "ref": "Amendement PLF-P2 n° 33",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=60"
-   },
-   "subject_fr": "Rendre l’hébergement d’urgence à l’urgence",
    "theme": "logement_aides",
    "tier": "loi",
    "year": 2027
@@ -752,8 +752,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I entre en vigueur le 1er janvier 2027",
-    "ref": "Amendement PLF-P2 n° 34",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=61"
+    "ref": "Amendement PLF-P2 n° 34 (page 64 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=64"
    },
    "subject_fr": "Mettre fin au chèque énergie plutôt que d’en élargir le recours",
    "theme": "logement_aides",
@@ -832,34 +832,165 @@
     },
     {
      "liasse": "PLF-P2",
-     "number": 19
-    },
-    {
-     "liasse": "PLF-P2",
      "number": 20
     },
     {
      "liasse": "PLF-P2",
+     "number": 21
+    },
+    {
+     "liasse": "PLF-P2",
      "number": 22
+    },
+    {
+     "liasse": "PLF-P2",
+     "number": 40
     }
    ],
-   "amount_cp_md_missions_concernees": 39.675,
-   "amount_note": "Somme des crédits de paiement des missions concernées (montants annuels ; le classeur ne ventile pas entre personnes morales et physiques).",
+   "amount_note": "Les montants retirés par mission (credits-retires.json) ne sont pas ventilés par date : une même mission peut avoir plusieurs dates.",
    "date": "2027-01-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
    "id": "cal_026",
    "in_timeline_2027_2030": true,
-   "label_fr": "Crédits retirés pour les personnes morales : 20 missions",
-   "n_amendments": 20,
+   "label_fr": "Crédits retirés à compter du 1er janvier 2027 : 21 missions sur 23 (selon la nature des crédits de chaque mission)",
+   "missions_detail": [
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement, les aides aux entreprises, les transferts aux collectivités et les aides à la rénovation énergétique des logements",
+     "liasse": "PLF-P2",
+     "mission_fr": "Cohésion des territoires",
+     "number": 1
+    },
+    {
+     "applies_to_fr": "le financement des structures de la formation professionnelle, la subvention à France Travail, le fonctionnement courant et l’investissement, les aides à l’insertion, les transferts aux collectivités et les aides aux entreprises",
+     "liasse": "PLF-P2",
+     "mission_fr": "Travail, emploi et administration des ministères sociaux",
+     "number": 2
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement, les aides aux entreprises et les transferts aux collectivités",
+     "liasse": "PLF-P2",
+     "mission_fr": "Aide publique au développement",
+     "number": 3
+    },
+    {
+     "applies_to_fr": "les aides aux entreprises, le fonctionnement courant et l’investissement, les transferts aux collectivités et le chèque énergie",
+     "liasse": "PLF-P2",
+     "mission_fr": "Écologie, développement et mobilité durables",
+     "number": 4
+    },
+    {
+     "applies_to_fr": "tous les crédits de la mission (personnes morales uniquement)",
+     "liasse": "PLF-P2",
+     "mission_fr": "Relations avec les collectivités territoriales",
+     "number": 5
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement, les aides aux entreprises et les transferts aux collectivités",
+     "liasse": "PLF-P2",
+     "mission_fr": "Culture",
+     "number": 6
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement, les transferts aux collectivités et les aides aux entreprises",
+     "liasse": "PLF-P2",
+     "mission_fr": "Sport, jeunesse et vie associative",
+     "number": 7
+    },
+    {
+     "applies_to_fr": "les aides aux entreprises",
+     "liasse": "PLF-P2",
+     "mission_fr": "Immigration, asile et intégration",
+     "number": 8
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement",
+     "liasse": "PLF-P2",
+     "mission_fr": "Santé",
+     "number": 9
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement",
+     "liasse": "PLF-P2",
+     "mission_fr": "Recherche et enseignement supérieur",
+     "number": 10
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement et les aides aux entreprises",
+     "liasse": "PLF-P2",
+     "mission_fr": "Médias, livre et industries culturelles",
+     "number": 11
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement, les aides aux entreprises et les transferts aux collectivités",
+     "liasse": "PLF-P2",
+     "mission_fr": "Économie",
+     "number": 12
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement et les aides aux entreprises",
+     "liasse": "PLF-P2",
+     "mission_fr": "Direction de l’action du Gouvernement",
+     "number": 13
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement",
+     "liasse": "PLF-P2",
+     "mission_fr": "Transformation et fonction publiques",
+     "number": 14
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement",
+     "liasse": "PLF-P2",
+     "mission_fr": "Action extérieure de l’État",
+     "number": 16
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement",
+     "liasse": "PLF-P2",
+     "mission_fr": "Solidarité, insertion et égalité des chances",
+     "number": 17
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement, les aides aux entreprises et les transferts aux collectivités",
+     "liasse": "PLF-P2",
+     "mission_fr": "Agriculture et alimentation",
+     "number": 18
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement et les aides aux entreprises",
+     "liasse": "PLF-P2",
+     "mission_fr": "Sécurités",
+     "number": 20
+    },
+    {
+     "applies_to_fr": "tous les crédits de la mission (personnes morales uniquement)",
+     "liasse": "PLF-P2",
+     "mission_fr": "Justice",
+     "number": 21
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement",
+     "liasse": "PLF-P2",
+     "mission_fr": "Conseil et contrôle de l’État",
+     "number": 22
+    },
+    {
+     "applies_to_fr": "le fonctionnement courant et l’investissement, les aides aux entreprises et les transferts aux collectivités",
+     "liasse": "PLF-P2",
+     "mission_fr": "Outre-mer",
+     "number": 40
+    }
+   ],
+   "n_amendments": 21,
    "precision": "jour",
    "source": {
     "kind": "amendment",
-    "quote": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques",
-    "ref": "Amendements PLF-P2 n° 1 à 22 (exposés : « La mesure prend effet au … »)",
+    "quote": "La mesure prend effet au 1er janvier 2027 pour le fonctionnement courant et l’investissement",
+    "ref": "Amendement PLF-P2 n° 1 (exposé : « prend effet au … »), page 4 du PDF ; les autres missions : même phrase dans leur exposé",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=4"
    },
-   "subject_fr": "Crédits de l'État retirés (état B, 22 amendements)",
+   "subject_fr": "Crédits de l'État retirés (état B, 23 amendements)",
    "theme": "credits_etat",
    "tier": "loi",
    "year": 2027
@@ -882,8 +1013,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Le présent article entre en vigueur le 1er janvier 2027",
-    "ref": "Amendement PLF-P2 n° 23",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=26"
+    "ref": "Amendement PLF-P2 n° 23 (page 28 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=28"
    },
    "subject_fr": "Supprimer la contribution de l’assurance chômage à France Travail",
    "theme": "etat_agences_emplois",
@@ -908,8 +1039,8 @@
    "source": {
     "kind": "amendment",
     "quote": "À compter du lendemain de la publication de la présente loi et avant le 1 er janvier 2028",
-    "ref": "Amendement PLF-P2 n° 27",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=50"
+    "ref": "Amendement PLF-P2 n° 27 (page 53 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=53"
    },
    "subject_fr": "Plus aucune dépense nouvelle de l’État sans une signature qui en réponde",
    "theme": "regles_depense",
@@ -934,8 +1065,8 @@
    "source": {
     "kind": "amendment",
     "quote": "À compter du 1er janvier 2027, les dépenses mentionnées aux c et d du 2° se limitent à l’exécution des engagements juridiques souscrits avant cette date",
-    "ref": "Amendement PLF-P2 n° 30",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=55"
+    "ref": "Amendement PLF-P2 n° 30 (page 58 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=58"
    },
    "subject_fr": "L’État cesse d’acheter, il valorise et il vend",
    "theme": "regles_depense",
@@ -960,8 +1091,8 @@
    "source": {
     "kind": "amendment",
     "quote": "À compter du 1er janvier 2027, les crédits ouverts au budget général",
-    "ref": "Amendement PLF-P2 n° 31",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=56"
+    "ref": "Amendement PLF-P2 n° 31 (page 59 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=59"
    },
    "subject_fr": "Cesser de subventionner, cesser de choisir sur dossier",
    "theme": "regles_depense",
@@ -986,8 +1117,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Il cesse d’être versé à compter de 2027",
-    "ref": "Amendement PLF-P1 n° 30",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=81"
+    "ref": "Amendement PLF-P1 n° 30 (page 84 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=84"
    },
    "subject_fr": "Compensations : fin des versements pour impôts disparus, l’économie rendue au travail",
    "theme": "collectivites",
@@ -1012,8 +1143,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Le présent article s’applique aux retraits de compétences prenant effet à compter du 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 31",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=83"
+    "ref": "Amendement PLF-P1 n° 31 (page 87 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=87"
    },
    "subject_fr": "Dotations : moins de compétences facultatives, moins de charges sur les contribuables",
    "theme": "collectivites",
@@ -1038,8 +1169,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Les I et II entrent en vigueur le 1er janvier 2027",
-    "ref": "Amendement PLF-P1 n° 32",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=85"
+    "ref": "Amendement PLF-P1 n° 32 (page 89 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=89"
    },
    "subject_fr": "Départements et régions : les compétences retirées, le financement retiré d’autant",
    "theme": "collectivites",
@@ -1064,8 +1195,8 @@
    "source": {
     "kind": "amendment",
     "quote": "est minorée, en 2027, d’un montant égal au tiers de la dotation forfaitaire qu’elle a perçue au titre de 2026",
-    "ref": "Amendement PLF-P1 n° 33",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=88"
+    "ref": "Amendement PLF-P1 n° 33 (page 91 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=91"
    },
    "subject_fr": "Dotation forfaitaire : remplacée par l’impôt que la commune vote elle-même",
    "theme": "collectivites",
@@ -1090,8 +1221,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Les A et B entrent en vigueur le 1er janvier 2027",
-    "ref": "Amendement PLF-P2 n° 35",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=62"
+    "ref": "Amendement PLF-P2 n° 35 (page 65 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=65"
    },
    "subject_fr": "Supprimer les subventions que l’État distribue aux collectivités sur dossier",
    "theme": "collectivites",
@@ -1116,11 +1247,72 @@
    "source": {
     "kind": "amendment",
     "quote": "sont restituées à l’État avant le 1er avril 2027",
-    "ref": "Amendement PLF-P1 n° 26",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=70"
+    "ref": "Amendement PLF-P1 n° 26 (page 71 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=71"
    },
    "subject_fr": "Refermer les canaux budgétaires hors budget général",
    "theme": "refonte_fiscale",
+   "tier": "loi",
+   "year": 2027
+  },
+  {
+   "amendments": [
+    {
+     "liasse": "PLF-P2",
+     "number": 33
+    }
+   ],
+   "date": "2027-04-01",
+   "domain": "logement_energie",
+   "domain_label_fr": "Logement et énergie",
+   "id": "cal_037",
+   "in_timeline_2027_2030": true,
+   "label_fr": "Entrée en vigueur",
+   "n_amendments": 1,
+   "precision": "jour",
+   "source": {
+    "kind": "amendment",
+    "quote": "Le I entre en vigueur le 1er avril 2027",
+    "ref": "Amendement PLF-P2 n° 33 (page 63 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=63"
+   },
+   "subject_fr": "Rendre l’hébergement d’urgence à l’urgence",
+   "theme": "logement_aides",
+   "tier": "loi",
+   "year": 2027
+  },
+  {
+   "amendments": [
+    {
+     "liasse": "PLF-P2",
+     "number": 1
+    }
+   ],
+   "amount_note": "Les montants retirés par mission (credits-retires.json) ne sont pas ventilés par date : une même mission peut avoir plusieurs dates.",
+   "date": "2027-04-01",
+   "domain": "etat_agences_agents",
+   "domain_label_fr": "L'État, ses agences et ses agents",
+   "id": "cal_038",
+   "in_timeline_2027_2030": true,
+   "label_fr": "Crédits retirés à compter du 1er avril 2027 : 1 mission sur 23",
+   "missions_detail": [
+    {
+     "applies_to_fr": "l’hébergement d’urgence",
+     "liasse": "PLF-P2",
+     "mission_fr": "Cohésion des territoires",
+     "number": 1
+    }
+   ],
+   "n_amendments": 1,
+   "precision": "jour",
+   "source": {
+    "kind": "amendment",
+    "quote": "Elle prend effet au 1er avril 2027 pour l’hébergement d’urgence",
+    "ref": "Amendement PLF-P2 n° 1 (exposé : « prend effet au … »), page 4 du PDF ; les autres missions : même phrase dans leur exposé",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=4"
+   },
+   "subject_fr": "Crédits de l'État retirés (état B, 23 amendements)",
+   "theme": "credits_etat",
    "tier": "loi",
    "year": 2027
   },
@@ -1134,7 +1326,7 @@
    "date": "2027-06-01",
    "domain": "logement_energie",
    "domain_label_fr": "Logement et énergie",
-   "id": "cal_037",
+   "id": "cal_039",
    "in_timeline_2027_2030": true,
    "label_fr": "Plus aucun droit ouvert pour une demande déposée à partir du 1er juin 2027",
    "n_amendments": 1,
@@ -1142,8 +1334,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Aucune demande d’aide personnelle au logement déposée à compter du 1er juin 2027 n’ouvre droit à l’aide",
-    "ref": "Amendement PLF-P2 n° 32",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=58"
+    "ref": "Amendement PLF-P2 n° 32 (page 61 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=61"
    },
    "subject_fr": "Éteindre l’aide personnelle au logement au rythme des droits en cours",
    "theme": "logement_aides",
@@ -1160,7 +1352,7 @@
    "date": "2027-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_038",
+   "id": "cal_040",
    "in_timeline_2027_2030": true,
    "label_fr": "Dons : avantage réduit de moitié pour les dons faits à partir du 1er juillet 2027",
    "n_amendments": 1,
@@ -1168,8 +1360,8 @@
    "source": {
     "kind": "amendment",
     "quote": "l’avantage est réduit de moitié pour les dons et versements effectués à compter du 1 er juillet 2027",
-    "ref": "Amendement PLF-P1 n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+    "ref": "Amendement PLF-P1 n° 1 (page 21 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
    },
    "subject_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
    "theme": "niches",
@@ -1186,7 +1378,7 @@
    "date": "2027-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_039",
+   "id": "cal_041",
    "in_timeline_2027_2030": true,
    "label_fr": "Plans, comptes, contrats et livrets d'épargne ouverts ou alimentés à partir du 1er juillet 2027 : plus d'avantage fiscal",
    "n_amendments": 1,
@@ -1194,8 +1386,8 @@
    "source": {
     "kind": "amendment",
     "quote": "les versements effectués à compter du 1er juillet 2027 n’ouvrent pas droit au bénéfice de ces dispositions",
-    "ref": "Amendement PLF-P1 n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+    "ref": "Amendement PLF-P1 n° 1 (page 21 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
    },
    "subject_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
    "theme": "niches",
@@ -1212,7 +1404,7 @@
    "date": "2027-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_040",
+   "id": "cal_042",
    "in_timeline_2027_2030": true,
    "label_fr": "TVA, accises et taxes douanières : opérations dont le fait générateur est à partir du 1er juillet 2027",
    "n_amendments": 1,
@@ -1220,8 +1412,8 @@
    "source": {
     "kind": "amendment",
     "quote": "aux opérations dont le fait générateur intervient à compter du 1er juillet 2027",
-    "ref": "Amendement PLF-P1 n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+    "ref": "Amendement PLF-P1 n° 1 (page 18 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=18"
    },
    "subject_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
    "theme": "niches",
@@ -1238,7 +1430,7 @@
    "date": "2027-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_041",
+   "id": "cal_043",
    "in_timeline_2027_2030": true,
    "label_fr": "Taux des réductions d'impôt pour dons réduits de moitié",
    "n_amendments": 1,
@@ -1246,36 +1438,10 @@
    "source": {
     "kind": "amendment",
     "quote": "Pour les dons et versements effectués à compter du 1er juillet 2027, les taux mentionnés aux articles 200, 238 bis et 978 du code général des impôts sont réduits de moitié",
-    "ref": "Amendement PLF-P1 n° 3",
+    "ref": "Amendement PLF-P1 n° 3 (page 25 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=25"
    },
    "subject_fr": "Dons : fin des réductions d’impôt, l’argent rendu à la paie de tous",
-   "theme": "niches",
-   "tier": "loi",
-   "year": 2027
-  },
-  {
-   "amendments": [
-    {
-     "liasse": "PLF-P1",
-     "number": 12
-    }
-   ],
-   "date": "2027-07-01",
-   "domain": "impots_taxes",
-   "domain_label_fr": "Impôts et taxes",
-   "id": "cal_042",
-   "in_timeline_2027_2030": true,
-   "label_fr": "Dépenses exposées à partir du 1er juillet 2027",
-   "n_amendments": 1,
-   "precision": "jour",
-   "source": {
-    "kind": "amendment",
-    "quote": "Le I s’applique aux dépenses exposées à compter du 1er juillet 2027",
-    "ref": "Amendement PLF-P1 n° 12",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=39"
-   },
-   "subject_fr": "Crédit d’impôt famille : supprimé, le parent reçoit son salaire",
    "theme": "niches",
    "tier": "loi",
    "year": 2027
@@ -1290,7 +1456,7 @@
    "date": "2027-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_043",
+   "id": "cal_044",
    "in_timeline_2027_2030": true,
    "label_fr": "Opérations dont le fait générateur est à partir du 1er juillet 2027",
    "n_amendments": 1,
@@ -1298,7 +1464,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I s’applique aux opérations dont le fait générateur intervient à compter du 1er juillet 2027",
-    "ref": "Amendement PLF-P1 n° 14",
+    "ref": "Amendement PLF-P1 n° 14 (page 41 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=41"
    },
    "subject_fr": "Accise sur l’énergie : même tarif pour tous les métiers, tous les revenus d’activité augmentés",
@@ -1316,7 +1482,7 @@
    "date": "2027-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_044",
+   "id": "cal_045",
    "in_timeline_2027_2030": true,
    "label_fr": "Abrogation à partir du 1er juillet 2027",
    "n_amendments": 1,
@@ -1324,7 +1490,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Les I à III s’appliquent à compter du 1er juillet 2027",
-    "ref": "Amendement PLF-P1 n° 16",
+    "ref": "Amendement PLF-P1 n° 16 (page 45 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=45"
    },
    "subject_fr": "Certificats d’économies d’énergie : fin des impôts cachés sur la facture d’énergie",
@@ -1342,7 +1508,33 @@
    "date": "2027-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_045",
+   "id": "cal_046",
+   "in_timeline_2027_2030": true,
+   "label_fr": "Accise sur l'électricité à 1 € (ménages) ou 0,5 € (autres consommations) par mégawattheure : quantités fournies ou consommées à partir du 1er juillet 2027",
+   "n_amendments": 1,
+   "precision": "jour",
+   "source": {
+    "kind": "amendment",
+    "quote": "Le I bis s’applique aux quantités d’électricité fournies ou consommées à compter de la même date",
+    "ref": "Amendement PLF-P1 n° 22 (page 60 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=60"
+   },
+   "subject_fr": "Taxes d’État : cinquante-quatre disparaissent dans l’impôt, sans hausse du total",
+   "theme": "refonte_fiscale",
+   "tier": "loi",
+   "year": 2027
+  },
+  {
+   "amendments": [
+    {
+     "liasse": "PLF-P1",
+     "number": 22
+    }
+   ],
+   "date": "2027-07-01",
+   "domain": "impots_taxes",
+   "domain_label_fr": "Impôts et taxes",
+   "id": "cal_047",
    "in_timeline_2027_2030": true,
    "label_fr": "Impositions dont le fait générateur est à partir du 1er juillet 2027",
    "n_amendments": 1,
@@ -1350,10 +1542,10 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I s’applique aux impositions dont le fait générateur intervient à compter du 1er juillet 2027",
-    "ref": "Amendement PLF-P1 n° 22",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=59"
+    "ref": "Amendement PLF-P1 n° 22 (page 60 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=60"
    },
-   "subject_fr": "Taxes d’État : vingt et une disparaissent dans l’impôt, sans hausse du total",
+   "subject_fr": "Taxes d’État : cinquante-quatre disparaissent dans l’impôt, sans hausse du total",
    "theme": "refonte_fiscale",
    "tier": "loi",
    "year": 2027
@@ -1368,16 +1560,16 @@
    "date": "2027-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_046",
+   "id": "cal_048",
    "in_timeline_2027_2030": true,
    "label_fr": "Exercices ouverts à partir du 1er juillet 2027",
    "n_amendments": 1,
    "precision": "jour",
    "source": {
     "kind": "amendment",
-    "quote": "Les I et II s’appliquent aux exercices ouverts à compter du 1er juillet 2027",
-    "ref": "Amendement PLF-P1 n° 23",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=61"
+    "quote": "s’appliquent aux exercices ouverts à compter du 1er juillet 2027",
+    "ref": "Amendement PLF-P1 n° 23 (page 63 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=63"
    },
    "subject_fr": "Impôt sur les sociétés : un taux unique, pour l’équilibre de la refonte fiscale",
    "theme": "refonte_fiscale",
@@ -1394,7 +1586,7 @@
    "date": "2027-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_047",
+   "id": "cal_049",
    "in_timeline_2027_2030": true,
    "label_fr": "Impositions dont le fait générateur est à partir du 1er juillet 2027 et rémunérations versées à partir de cette date",
    "n_amendments": 1,
@@ -1402,10 +1594,36 @@
    "source": {
     "kind": "amendment",
     "quote": "à compter du 1er juillet 2027 et, pour les contributions assises sur les rémunérations, aux rémunérations versées à compter de cette date",
-    "ref": "Amendement PLF-P1 n° 25",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=67"
+    "ref": "Amendement PLF-P1 n° 25 (page 69 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=69"
    },
-   "subject_fr": "Taxes affectées : cinquante-sept supprimées, fondues en une ressource unique à produit égal",
+   "subject_fr": "Taxes affectées : soixante-douze supprimées, fondues en une ressource unique à produit égal",
+   "theme": "refonte_fiscale",
+   "tier": "loi",
+   "year": 2027
+  },
+  {
+   "amendments": [
+    {
+     "liasse": "PLFSS",
+     "number": 9
+    }
+   ],
+   "date": "2027-07-01",
+   "domain": "impots_taxes",
+   "domain_label_fr": "Impôts et taxes",
+   "id": "cal_050",
+   "in_timeline_2027_2030": true,
+   "label_fr": "Contributions dont le fait générateur est à partir du 1er juillet 2027 et rémunérations versées à partir de cette date",
+   "n_amendments": 1,
+   "precision": "jour",
+   "source": {
+    "kind": "amendment",
+    "quote": "Le I s’applique aux contributions dont le fait générateur intervient à compter du 1er juillet 2027",
+    "ref": "Amendement PLFSS n° 9 (page 23 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=23"
+   },
+   "subject_fr": "Contributions sociales : vingt et une impositions fondues dans l’impôt, sans hausse du total",
    "theme": "refonte_fiscale",
    "tier": "loi",
    "year": 2027
@@ -1420,7 +1638,7 @@
    "date": "2027-07-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_048",
+   "id": "cal_051",
    "in_timeline_2027_2030": true,
    "label_fr": "Abrogation des exonérations de cotisations ; début de la baisse : CSG à 7,6 % (juillet)",
    "n_amendments": 1,
@@ -1428,8 +1646,8 @@
    "source": {
     "kind": "amendment",
     "quote": "7,6 % pour les périodes courant en juillet 2027",
-    "ref": "Amendement PLFSS n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+    "ref": "Amendement PLFSS n° 1 (page 4 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=4"
    },
    "subject_fr": "CSG et CRDS supprimées sur les revenus d’activité : les économies rendues au salaire net, soit +13 %",
    "theme": "csg_salaire_net",
@@ -1446,7 +1664,7 @@
    "date": "2027-07-01",
    "domain": "logement_energie",
    "domain_label_fr": "Logement et énergie",
-   "id": "cal_049",
+   "id": "cal_052",
    "in_timeline_2027_2030": true,
    "label_fr": "Parc conventionné : aide réduite d'un tiers",
    "n_amendments": 1,
@@ -1454,8 +1672,8 @@
    "source": {
     "kind": "amendment",
     "quote": "réduit d’un tiers au titre des mois courant à compter du 1er juillet 2027",
-    "ref": "Amendement PLF-P2 n° 32",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=58"
+    "ref": "Amendement PLF-P2 n° 32 (page 61 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=61"
    },
    "subject_fr": "Éteindre l’aide personnelle au logement au rythme des droits en cours",
    "theme": "logement_aides",
@@ -1479,10 +1697,6 @@
     {
      "liasse": "PLF-P2",
      "number": 4
-    },
-    {
-     "liasse": "PLF-P2",
-     "number": 5
     },
     {
      "liasse": "PLF-P2",
@@ -1538,34 +1752,165 @@
     },
     {
      "liasse": "PLF-P2",
+     "number": 19
+    },
+    {
+     "liasse": "PLF-P2",
      "number": 20
     },
     {
      "liasse": "PLF-P2",
-     "number": 21
+     "number": 22
     },
     {
      "liasse": "PLF-P2",
-     "number": 22
+     "number": 40
     }
    ],
-   "amount_cp_md_missions_concernees": 39.837,
-   "amount_note": "Somme des crédits de paiement des missions concernées (montants annuels ; le classeur ne ventile pas entre personnes morales et physiques).",
+   "amount_note": "Les montants retirés par mission (credits-retires.json) ne sont pas ventilés par date : une même mission peut avoir plusieurs dates.",
    "date": "2027-07-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
-   "id": "cal_050",
+   "id": "cal_053",
    "in_timeline_2027_2030": true,
-   "label_fr": "Crédits retirés pour les personnes physiques : 21 missions",
+   "label_fr": "Crédits retirés à compter du 1er juillet 2027 : 21 missions sur 23 (selon la nature des crédits de chaque mission)",
+   "missions_detail": [
+    {
+     "applies_to_fr": "les aides personnelles au logement, les subventions aux associations, la subvention à l’Agence nationale de l’habitat, les subventions aux opérateurs et les rémunérations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Cohésion des territoires",
+     "number": 1
+    },
+    {
+     "applies_to_fr": "les subventions aux opérateurs, les transferts aux ménages, la compensation des exonérations d’emploi à domicile, les aides à l’emploi et à l’apprentissage et les subventions aux associations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Travail, emploi et administration des ministères sociaux",
+     "number": 2
+    },
+    {
+     "applies_to_fr": "l’aide publique au développement et les transferts aux ménages",
+     "liasse": "PLF-P2",
+     "mission_fr": "Aide publique au développement",
+     "number": 3
+    },
+    {
+     "applies_to_fr": "les subventions aux opérateurs, les subventions aux associations, les transferts aux ménages, les rémunérations et la subvention à l’Agence de la transition écologique. Le chèque énergie s’éteint au 1er janvier 2027 : aucun titre n’est émis au titre de 2027. L’exercice règle encore les titres de la campagne précédente, et la moitié des crédits est retirée",
+     "liasse": "PLF-P2",
+     "mission_fr": "Écologie, développement et mobilité durables",
+     "number": 4
+    },
+    {
+     "applies_to_fr": "les subventions aux opérateurs, les transferts aux ménages, les subventions aux associations et les rémunérations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Culture",
+     "number": 6
+    },
+    {
+     "applies_to_fr": "les subventions aux associations et les subventions aux opérateurs",
+     "liasse": "PLF-P2",
+     "mission_fr": "Sport, jeunesse et vie associative",
+     "number": 7
+    },
+    {
+     "applies_to_fr": "les subventions aux opérateurs, les transferts aux ménages et les subventions aux associations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Immigration, asile et intégration",
+     "number": 8
+    },
+    {
+     "applies_to_fr": "l’aide médicale de l’État, les transferts aux ménages, les subventions aux associations, les subventions aux opérateurs et les rémunérations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Santé",
+     "number": 9
+    },
+    {
+     "applies_to_fr": "les subventions aux opérateurs et les subventions aux associations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Recherche et enseignement supérieur",
+     "number": 10
+    },
+    {
+     "applies_to_fr": "les subventions aux associations et les subventions aux opérateurs",
+     "liasse": "PLF-P2",
+     "mission_fr": "Médias, livre et industries culturelles",
+     "number": 11
+    },
+    {
+     "applies_to_fr": "les subventions aux opérateurs, les subventions aux associations et les rémunérations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Économie",
+     "number": 12
+    },
+    {
+     "applies_to_fr": "les rémunérations, les transferts aux ménages, les subventions aux associations et les subventions aux opérateurs",
+     "liasse": "PLF-P2",
+     "mission_fr": "Direction de l’action du Gouvernement",
+     "number": 13
+    },
+    {
+     "applies_to_fr": "les rémunérations, les subventions aux opérateurs, les transferts aux ménages et les subventions aux associations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Transformation et fonction publiques",
+     "number": 14
+    },
+    {
+     "applies_to_fr": "tous les crédits de la mission (personnes physiques)",
+     "liasse": "PLF-P2",
+     "mission_fr": "Enseignement scolaire",
+     "number": 15
+    },
+    {
+     "applies_to_fr": "les transferts aux ménages et les subventions aux associations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Action extérieure de l’État",
+     "number": 16
+    },
+    {
+     "applies_to_fr": "les subventions aux associations et les subventions aux opérateurs",
+     "liasse": "PLF-P2",
+     "mission_fr": "Solidarité, insertion et égalité des chances",
+     "number": 17
+    },
+    {
+     "applies_to_fr": "les subventions aux opérateurs, les subventions aux associations et les rémunérations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Agriculture et alimentation",
+     "number": 18
+    },
+    {
+     "applies_to_fr": "tous les crédits de la mission (personnes physiques)",
+     "liasse": "PLF-P2",
+     "mission_fr": "Administration générale et territoriale de l’État",
+     "number": 19
+    },
+    {
+     "applies_to_fr": "les subventions aux associations et les transferts aux ménages",
+     "liasse": "PLF-P2",
+     "mission_fr": "Sécurités",
+     "number": 20
+    },
+    {
+     "applies_to_fr": "les rémunérations et les subventions aux associations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Conseil et contrôle de l’État",
+     "number": 22
+    },
+    {
+     "applies_to_fr": "les subventions aux associations",
+     "liasse": "PLF-P2",
+     "mission_fr": "Outre-mer",
+     "number": 40
+    }
+   ],
    "n_amendments": 21,
    "precision": "jour",
    "source": {
     "kind": "amendment",
-    "quote": "La mesure prend effet au 1er janvier 2027 pour les personnes morales et au 1er juillet 2027 pour les personnes physiques",
-    "ref": "Amendements PLF-P2 n° 1 à 22 (exposés : « La mesure prend effet au … »)",
+    "quote": "Elle prend effet au 1er juillet 2027 pour les aides personnelles au logement",
+    "ref": "Amendement PLF-P2 n° 1 (exposé : « prend effet au … »), page 4 du PDF ; les autres missions : même phrase dans leur exposé",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=4"
    },
-   "subject_fr": "Crédits de l'État retirés (état B, 22 amendements)",
+   "subject_fr": "Crédits de l'État retirés (état B, 23 amendements)",
    "theme": "credits_etat",
    "tier": "loi",
    "year": 2027
@@ -1580,7 +1925,7 @@
    "date": "2027-07-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
-   "id": "cal_051",
+   "id": "cal_054",
    "in_timeline_2027_2030": true,
    "label_fr": "Fermeture des 61 400 postes des missions abandonnées",
    "n_amendments": 1,
@@ -1588,8 +1933,8 @@
    "source": {
     "kind": "amendment",
     "quote": "ils ne disparaissent qu’à compter du 1 er juillet 2027",
-    "ref": "Amendement PLF-P2 n° 24",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=27"
+    "ref": "Amendement PLF-P2 n° 24 (page 30 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=30"
    },
    "subject_fr": "Retirer du plafond les emplois des missions que l’État abandonne",
    "theme": "etat_agences_emplois",
@@ -1606,7 +1951,7 @@
    "date": "2027-07-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
-   "id": "cal_052",
+   "id": "cal_055",
    "in_timeline_2027_2030": true,
    "label_fr": "Dissolution des personnes morales listées",
    "n_amendments": 1,
@@ -1614,8 +1959,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Sont dissoutes au 1er juillet 2027 les personnes morales autres que l’État qui exercent une mission facultative",
-    "ref": "Amendement PLF-P2 n° 25",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=29"
+    "ref": "Amendement PLF-P2 n° 25 (page 31 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=31"
    },
    "subject_fr": "Agences de l’État : les structures facultatives fermées, les missions régaliennes rendues aux ministères",
    "theme": "etat_agences_emplois",
@@ -1632,7 +1977,7 @@
    "date": "2027-07-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
-   "id": "cal_053",
+   "id": "cal_056",
    "in_timeline_2027_2030": true,
    "label_fr": "Entrée en vigueur ; indemnité due à partir du 1er juillet 2027",
    "n_amendments": 1,
@@ -1640,8 +1985,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Le présent article entre en vigueur le 1er juillet 2027",
-    "ref": "Amendement PLF-P2 n° 26",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=45"
+    "ref": "Amendement PLF-P2 n° 26 (page 50 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=50"
    },
    "subject_fr": "Organiser la sortie des agents dont l’emploi est supprimé",
    "theme": "etat_agences_emplois",
@@ -1658,7 +2003,7 @@
    "date": "2027-07-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
-   "id": "cal_054",
+   "id": "cal_057",
    "in_timeline_2027_2030": true,
    "label_fr": "Entrée en vigueur",
    "n_amendments": 1,
@@ -1666,11 +2011,37 @@
    "source": {
     "kind": "amendment",
     "quote": "Les I et II entrent en vigueur le 1er juillet 2027",
-    "ref": "Amendement PLFSS n° 8",
+    "ref": "Amendement PLFSS n° 8 (page 21 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=21"
    },
    "subject_fr": "Concours financiers des organismes de sécurité sociale et du fonds d’intervention régional : interdire la subvention sans contrepartie et n’autoriser que l’achat de prestations déterminées",
    "theme": "securite_sociale",
+   "tier": "loi",
+   "year": 2027
+  },
+  {
+   "amendments": [
+    {
+     "liasse": "PLF-P1",
+     "number": 29
+    }
+   ],
+   "date": "2027-07-01",
+   "domain": "collectivites",
+   "domain_label_fr": "Collectivités locales",
+   "id": "cal_058",
+   "in_timeline_2027_2030": true,
+   "label_fr": "Impositions locales perçues sur une opération ou sur le produit des jeux : abrogées pour les recettes et accès à partir du 1er juillet 2027",
+   "n_amendments": 1,
+   "precision": "jour",
+   "source": {
+    "kind": "amendment",
+    "quote": "s’applique aux recettes et aux accès réalisés à compter du 1er juillet 2027",
+    "ref": "Amendement PLF-P1 n° 29 (page 81 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=81"
+   },
+   "subject_fr": "Taxe foncière : cinq impôts en une taxe communale lisible et équitable",
+   "theme": "collectivites",
    "tier": "loi",
    "year": 2027
   },
@@ -1684,7 +2055,7 @@
    "date": "2027-08-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_055",
+   "id": "cal_059",
    "in_timeline_2027_2030": true,
    "label_fr": "CSG à 6,0 % (août)",
    "n_amendments": 1,
@@ -1692,8 +2063,8 @@
    "source": {
     "kind": "amendment",
     "quote": "6,0 % pour les périodes courant en août 2027",
-    "ref": "Amendement PLFSS n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+    "ref": "Amendement PLFSS n° 1 (page 4 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=4"
    },
    "subject_fr": "CSG et CRDS supprimées sur les revenus d’activité : les économies rendues au salaire net, soit +13 %",
    "theme": "csg_salaire_net",
@@ -1710,7 +2081,7 @@
    "date": "2027-09-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_056",
+   "id": "cal_060",
    "in_timeline_2027_2030": true,
    "label_fr": "CSG à 4,3 % (septembre)",
    "n_amendments": 1,
@@ -1718,8 +2089,8 @@
    "source": {
     "kind": "amendment",
     "quote": "4,3 % pour les périodes courant en septembre 2027",
-    "ref": "Amendement PLFSS n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+    "ref": "Amendement PLFSS n° 1 (page 5 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=5"
    },
    "subject_fr": "CSG et CRDS supprimées sur les revenus d’activité : les économies rendues au salaire net, soit +13 %",
    "theme": "csg_salaire_net",
@@ -1736,7 +2107,7 @@
    "date": "2027-10-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_057",
+   "id": "cal_061",
    "in_timeline_2027_2030": true,
    "label_fr": "CSG à 2,7 % (octobre)",
    "n_amendments": 1,
@@ -1744,8 +2115,8 @@
    "source": {
     "kind": "amendment",
     "quote": "2,7 % pour les périodes courant en octobre 2027",
-    "ref": "Amendement PLFSS n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+    "ref": "Amendement PLFSS n° 1 (page 5 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=5"
    },
    "subject_fr": "CSG et CRDS supprimées sur les revenus d’activité : les économies rendues au salaire net, soit +13 %",
    "theme": "csg_salaire_net",
@@ -1762,7 +2133,7 @@
    "date": "2027-11-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_058",
+   "id": "cal_062",
    "in_timeline_2027_2030": true,
    "label_fr": "CSG à 1,1 % (novembre)",
    "n_amendments": 1,
@@ -1770,8 +2141,8 @@
    "source": {
     "kind": "amendment",
     "quote": "1,1 % pour les périodes courant en novembre 2027",
-    "ref": "Amendement PLFSS n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+    "ref": "Amendement PLFSS n° 1 (page 5 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=5"
    },
    "subject_fr": "CSG et CRDS supprimées sur les revenus d’activité : les économies rendues au salaire net, soit +13 %",
    "theme": "csg_salaire_net",
@@ -1788,7 +2159,7 @@
    "date": "2027-12-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_059",
+   "id": "cal_063",
    "in_timeline_2027_2030": true,
    "label_fr": "CSG et CRDS supprimées sur les revenus d'activité",
    "n_amendments": 1,
@@ -1796,8 +2167,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Les V et VI entrent en vigueur le 1er décembre 2027",
-    "ref": "Amendement PLFSS n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+    "ref": "Amendement PLFSS n° 1 (page 5 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=5"
    },
    "subject_fr": "CSG et CRDS supprimées sur les revenus d’activité : les économies rendues au salaire net, soit +13 %",
    "theme": "csg_salaire_net",
@@ -1814,7 +2185,7 @@
    "date": "2027-12-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_060",
+   "id": "cal_064",
    "in_timeline_2027_2030": true,
    "label_fr": "Entrée en vigueur",
    "n_amendments": 1,
@@ -1822,7 +2193,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I entre en vigueur le 1er décembre 2027",
-    "ref": "Amendement PLFSS n° 2",
+    "ref": "Amendement PLFSS n° 2 (page 8 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=8"
    },
    "subject_fr": "Retirer de la clé de répartition la part qui n’a plus de produit",
@@ -1840,7 +2211,7 @@
    "date": "2027-12-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
-   "id": "cal_061",
+   "id": "cal_065",
    "in_timeline_2027_2030": true,
    "label_fr": "Fin des subventions pour charges de service public aux établissements vivant de leur patrimoine",
    "n_amendments": 1,
@@ -1848,8 +2219,8 @@
    "source": {
     "kind": "amendment",
     "quote": "ne reçoivent plus de subvention pour charges de service public à compter du 1er décembre 2027",
-    "ref": "Amendement PLF-P2 n° 25",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=29"
+    "ref": "Amendement PLF-P2 n° 25 (page 32 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=32"
    },
    "subject_fr": "Agences de l’État : les structures facultatives fermées, les missions régaliennes rendues aux ministères",
    "theme": "etat_agences_emplois",
@@ -1866,7 +2237,7 @@
    "date": "2027-12-31",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_062",
+   "id": "cal_066",
    "in_timeline_2027_2030": true,
    "label_fr": "Taxes annuelles : dues une dernière fois au titre de 2027",
    "n_amendments": 1,
@@ -1874,10 +2245,36 @@
    "source": {
     "kind": "amendment",
     "quote": "sont dues une dernière fois au titre de 2027",
-    "ref": "Amendement PLF-P1 n° 25",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=67"
+    "ref": "Amendement PLF-P1 n° 25 (page 70 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=70"
    },
-   "subject_fr": "Taxes affectées : cinquante-sept supprimées, fondues en une ressource unique à produit égal",
+   "subject_fr": "Taxes affectées : soixante-douze supprimées, fondues en une ressource unique à produit égal",
+   "theme": "refonte_fiscale",
+   "tier": "loi",
+   "year": 2027
+  },
+  {
+   "amendments": [
+    {
+     "liasse": "PLFSS",
+     "number": 9
+    }
+   ],
+   "date": "2027-12-31",
+   "domain": "impots_taxes",
+   "domain_label_fr": "Impôts et taxes",
+   "id": "cal_067",
+   "in_timeline_2027_2030": true,
+   "label_fr": "Contributions annuelles : dues une dernière fois au titre de 2027, ou sur la moitié de leur assiette annuelle",
+   "n_amendments": 1,
+   "precision": "annee",
+   "source": {
+    "kind": "amendment",
+    "quote": "sont dues une dernière fois au titre de l’année 2027",
+    "ref": "Amendement PLFSS n° 9 (page 23 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=23"
+   },
+   "subject_fr": "Contributions sociales : vingt et une impositions fondues dans l’impôt, sans hausse du total",
    "theme": "refonte_fiscale",
    "tier": "loi",
    "year": 2027
@@ -1892,7 +2289,7 @@
    "date": "2028-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_063",
+   "id": "cal_068",
    "in_timeline_2027_2030": true,
    "label_fr": "Agriculture, services à la personne, garde de jeunes enfants : avantage réduit de deux tiers au titre de 2028",
    "n_amendments": 1,
@@ -1900,8 +2297,8 @@
    "source": {
     "kind": "amendment",
     "quote": "de deux tiers au titre de 2028",
-    "ref": "Amendement PLF-P1 n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+    "ref": "Amendement PLF-P1 n° 1 (page 21 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
    },
    "subject_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
    "theme": "niches",
@@ -1918,7 +2315,7 @@
    "date": "2028-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_064",
+   "id": "cal_069",
    "in_timeline_2027_2030": true,
    "label_fr": "Dons : plus aucun avantage à partir du 1er janvier 2028",
    "n_amendments": 1,
@@ -1926,8 +2323,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I s’applique en totalité aux dons et versements effectués à compter du 1er janvier 2028",
-    "ref": "Amendement PLF-P1 n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+    "ref": "Amendement PLF-P1 n° 1 (page 21 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
    },
    "subject_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
    "theme": "niches",
@@ -1944,7 +2341,7 @@
    "date": "2028-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_065",
+   "id": "cal_070",
    "in_timeline_2027_2030": true,
    "label_fr": "Décote, nombre de parts et quotient familial, revenus remplacés par l'aide fondamentale, abattements de plus-values, plans et livrets d'épargne : impôt sur le revenu dû au titre de 2028",
    "n_amendments": 1,
@@ -1952,8 +2349,8 @@
    "source": {
     "kind": "amendment",
     "quote": "le I s’applique à l’impôt sur le revenu dû au titre de 2028 et aux opérations réalisées à compter du 1er janvier 2028",
-    "ref": "Amendement PLF-P1 n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+    "ref": "Amendement PLF-P1 n° 1 (page 21 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
    },
    "subject_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
    "theme": "niches",
@@ -1970,7 +2367,7 @@
    "date": "2028-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_066",
+   "id": "cal_071",
    "in_timeline_2027_2030": true,
    "label_fr": "Abrogation des réductions d'impôt pour dons",
    "n_amendments": 1,
@@ -1978,7 +2375,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le présent B s’applique aux dons et versements effectués à compter du 1er janvier 2028",
-    "ref": "Amendement PLF-P1 n° 3",
+    "ref": "Amendement PLF-P1 n° 3 (page 25 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=25"
    },
    "subject_fr": "Dons : fin des réductions d’impôt, l’argent rendu à la paie de tous",
@@ -1996,7 +2393,7 @@
    "date": "2028-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_067",
+   "id": "cal_072",
    "in_timeline_2027_2030": true,
    "label_fr": "Crédit d'impôt de remplacement réduit de deux tiers pour les dépenses engagées en 2028",
    "n_amendments": 1,
@@ -2004,7 +2401,7 @@
    "source": {
     "kind": "amendment",
     "quote": "de deux tiers pour les dépenses engagées en 2028",
-    "ref": "Amendement PLF-P1 n° 8",
+    "ref": "Amendement PLF-P1 n° 8 (page 32 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=32"
    },
    "subject_fr": "Suramortissement agricole : fin des régimes particuliers, gain rendu aux actifs",
@@ -2022,7 +2419,7 @@
    "date": "2028-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_068",
+   "id": "cal_073",
    "in_timeline_2027_2030": true,
    "label_fr": "Tarif réduit du gazole agricole réduit de deux tiers (à partir du 1er janvier 2028)",
    "n_amendments": 1,
@@ -2030,7 +2427,7 @@
    "source": {
     "kind": "amendment",
     "quote": "de deux tiers pour celles dont le fait générateur intervient à compter du 1er janvier 2028",
-    "ref": "Amendement PLF-P1 n° 15",
+    "ref": "Amendement PLF-P1 n° 15 (page 43 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=43"
    },
    "subject_fr": "Régimes agricoles : sortie progressive de la dépendance aux subventions",
@@ -2048,7 +2445,7 @@
    "date": "2028-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_069",
+   "id": "cal_074",
    "in_timeline_2027_2030": true,
    "label_fr": "Titres, compte d'épargne personnel : opérations à partir du 1er janvier 2028",
    "n_amendments": 1,
@@ -2056,8 +2453,8 @@
    "source": {
     "kind": "amendment",
     "quote": "aux plus-values et gains réalisés lors des cessions, rachats et autres opérations intervenant à compter du 1er janvier 2028",
-    "ref": "Amendement PLF-P1 n° 20",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=53"
+    "ref": "Amendement PLF-P1 n° 20 (page 55 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=55"
    },
    "subject_fr": "Plus-values : le capital imposé sur son gain réel, au service de l’équilibre",
    "theme": "refonte_fiscale",
@@ -2074,7 +2471,7 @@
    "date": "2028-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_070",
+   "id": "cal_075",
    "in_timeline_2027_2030": true,
    "label_fr": "Taxes annuelles et contributions sur le revenu",
    "n_amendments": 1,
@@ -2082,10 +2479,10 @@
    "source": {
     "kind": "amendment",
     "quote": "suivent au 1er janvier 2028, avec le taux unique de l’impôt sur le revenu",
-    "ref": "Amendement PLF-P1 n° 22",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=59"
+    "ref": "Amendement PLF-P1 n° 22 (page 61 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=61"
    },
-   "subject_fr": "Taxes d’État : vingt et une disparaissent dans l’impôt, sans hausse du total",
+   "subject_fr": "Taxes d’État : cinquante-quatre disparaissent dans l’impôt, sans hausse du total",
    "theme": "refonte_fiscale",
    "tier": "loi",
    "year": 2028
@@ -2100,7 +2497,7 @@
    "date": "2028-01-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_071",
+   "id": "cal_076",
    "in_timeline_2027_2030": true,
    "label_fr": "Versement mensuel de l'aide par acomptes à partir du 1er janvier 2028 (impôt sur le revenu de 2028)",
    "n_amendments": 1,
@@ -2108,8 +2505,8 @@
    "source": {
     "kind": "amendment",
     "quote": "s’applique aux acomptes dus à compter du 1er janvier 2028",
-    "ref": "Amendement PLF-P1 n° 28",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=75"
+    "ref": "Amendement PLF-P1 n° 28 (page 77 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=77"
    },
    "subject_fr": "Un taux unique finance une aide fondamentale versée à chacun",
    "theme": "aide_fondamentale",
@@ -2126,7 +2523,7 @@
    "date": "2028-01-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_072",
+   "id": "cal_077",
    "in_timeline_2027_2030": true,
    "label_fr": "Exonérations emploi à domicile et assimilées : réduites de deux tiers",
    "n_amendments": 1,
@@ -2134,8 +2531,8 @@
    "source": {
     "kind": "amendment",
     "quote": "de deux tiers au titre des périodes d’activité courant à compter du 1er janvier 2028",
-    "ref": "Amendement PLFSS n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+    "ref": "Amendement PLFSS n° 1 (page 4 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=4"
    },
    "subject_fr": "CSG et CRDS supprimées sur les revenus d’activité : les économies rendues au salaire net, soit +13 %",
    "theme": "csg_salaire_net",
@@ -2152,7 +2549,7 @@
    "date": "2028-01-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_073",
+   "id": "cal_078",
    "in_timeline_2027_2030": true,
    "label_fr": "Réduction d'un tiers (rémunérations versées en 2028)",
    "n_amendments": 1,
@@ -2160,7 +2557,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I entre en vigueur le 1er janvier 2028",
-    "ref": "Amendement PLFSS n° 3",
+    "ref": "Amendement PLFSS n° 3 (page 10 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=10"
    },
    "subject_fr": "Taxe sur les salaires : l’éteindre par marches et l’abroger",
@@ -2178,7 +2575,7 @@
    "date": "2028-01-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_074",
+   "id": "cal_079",
    "in_timeline_2027_2030": true,
    "label_fr": "Entrée en vigueur, à la date d'entrée en vigueur de l'aide fondamentale et sous réserve de celle-ci",
    "n_amendments": 1,
@@ -2186,7 +2583,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I entre en vigueur le 1er janvier 2028, à la date d’entrée en vigueur de l’aide fondamentale universelle et sous réserve de cette entrée en vigueur",
-    "ref": "Amendement PLFSS n° 7",
+    "ref": "Amendement PLFSS n° 7 (page 19 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=19"
    },
    "subject_fr": "Une aide pour toutes : les prestations qu’elle remplace s’éteignent le jour où elle commence",
@@ -2204,7 +2601,7 @@
    "date": "2028-01-01",
    "domain": "epargne_retraite",
    "domain_label_fr": "Épargne et retraite",
-   "id": "cal_075",
+   "id": "cal_080",
    "in_timeline_2027_2030": true,
    "label_fr": "Entrée en vigueur ; les produits d'épargne existants deviennent des compartiments du compte",
    "n_amendments": 1,
@@ -2212,8 +2609,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Les I à VII entrent en vigueur le 1er janvier 2028",
-    "ref": "Amendement PLF-P1 n° 27",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=72"
+    "ref": "Amendement PLF-P1 n° 27 (page 74 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=74"
    },
    "subject_fr": "Un compte d’épargne au nom de chacun, alimenté par la restitution",
    "theme": "epargne",
@@ -2230,7 +2627,7 @@
    "date": "2028-01-01",
    "domain": "epargne_retraite",
    "domain_label_fr": "Épargne et retraite",
-   "id": "cal_076",
+   "id": "cal_081",
    "in_timeline_2027_2030": true,
    "label_fr": "Remplacement des régimes de base",
    "n_amendments": 1,
@@ -2238,7 +2635,7 @@
    "source": {
     "kind": "amendment",
     "quote": "À compter du 1er janvier 2028, les régimes obligatoires de base d’assurance vieillesse fonctionnant par répartition sont remplacés par un régime socle unique par répartition",
-    "ref": "Amendement PLFSS n° 6",
+    "ref": "Amendement PLFSS n° 6 (page 17 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=17"
    },
    "subject_fr": "Un régime socle unique remplace les régimes de base par répartition",
@@ -2256,7 +2653,7 @@
    "date": "2028-01-01",
    "domain": "sante",
    "domain_label_fr": "Santé",
-   "id": "cal_077",
+   "id": "cal_082",
    "in_timeline_2027_2030": true,
    "label_fr": "Entrée en vigueur, à la date d'entrée en vigueur de l'aide fondamentale et sous réserve de celle-ci",
    "n_amendments": 1,
@@ -2264,8 +2661,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I entre en vigueur le 1er janvier 2028, à la date d’entrée en vigueur de l’aide fondamentale universelle et sous réserve de cette entrée en vigueur",
-    "ref": "Amendement PLFSS n° 4",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=12"
+    "ref": "Amendement PLFSS n° 4 (page 13 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=13"
    },
    "subject_fr": "Personne ne paie plus de sa santé qu’une part fixe de ses ressources",
    "theme": "sante",
@@ -2282,7 +2679,7 @@
    "date": "2028-01-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
-   "id": "cal_078",
+   "id": "cal_083",
    "in_timeline_2027_2030": true,
    "label_fr": "Effet entier en 2028 : 61 400 emplois",
    "n_amendments": 1,
@@ -2290,8 +2687,8 @@
    "source": {
     "kind": "amendment",
     "quote": "L’exercice 2028 portera l’effet entier, soit 61 400 emplois",
-    "ref": "Amendement PLF-P2 n° 24",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=27"
+    "ref": "Amendement PLF-P2 n° 24 (page 30 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=30"
    },
    "subject_fr": "Retirer du plafond les emplois des missions que l’État abandonne",
    "theme": "etat_agences_emplois",
@@ -2308,7 +2705,7 @@
    "date": "2028-01-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
-   "id": "cal_079",
+   "id": "cal_084",
    "in_timeline_2027_2030": true,
    "label_fr": "Rapport publié à partir du projet de loi de finances pour 2028",
    "n_amendments": 1,
@@ -2316,8 +2713,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I s’applique à compter du projet de loi de finances pour 2028",
-    "ref": "Amendement PLF-P2 n° 39",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=66"
+    "ref": "Amendement PLF-P2 n° 39 (page 69 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=69"
    },
    "subject_fr": "Rapport annuel sur l’équilibre de la refonte des impositions",
    "theme": "regles_depense",
@@ -2334,7 +2731,7 @@
    "date": "2028-01-01",
    "domain": "collectivites",
    "domain_label_fr": "Collectivités locales",
-   "id": "cal_080",
+   "id": "cal_085",
    "in_timeline_2027_2030": true,
    "label_fr": "Entrée en vigueur ; premières impositions au titre de 2028",
    "n_amendments": 1,
@@ -2342,8 +2739,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Le IV entre en vigueur le 1er janvier 2028",
-    "ref": "Amendement PLF-P1 n° 29",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=77"
+    "ref": "Amendement PLF-P1 n° 29 (page 81 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=81"
    },
    "subject_fr": "Taxe foncière : cinq impôts en une taxe communale lisible et équitable",
    "theme": "collectivites",
@@ -2360,7 +2757,7 @@
    "date": "2028-01-01",
    "domain": "collectivites",
    "domain_label_fr": "Collectivités locales",
-   "id": "cal_081",
+   "id": "cal_086",
    "in_timeline_2027_2030": true,
    "label_fr": "Aides économiques plafonnées aux deux tiers de la moyenne 2024-2026 en 2028",
    "n_amendments": 1,
@@ -2368,8 +2765,8 @@
    "source": {
     "kind": "amendment",
     "quote": "ne peut excéder les deux tiers, en 2028, et le tiers, en 2029",
-    "ref": "Amendement PLF-P1 n° 32",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=85"
+    "ref": "Amendement PLF-P1 n° 32 (page 89 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=89"
    },
    "subject_fr": "Départements et régions : les compétences retirées, le financement retiré d’autant",
    "theme": "collectivites",
@@ -2386,7 +2783,7 @@
    "date": "2028-01-01",
    "domain": "collectivites",
    "domain_label_fr": "Collectivités locales",
-   "id": "cal_082",
+   "id": "cal_087",
    "in_timeline_2027_2030": true,
    "label_fr": "Minorée de deux tiers en 2028",
    "n_amendments": 1,
@@ -2394,8 +2791,8 @@
    "source": {
     "kind": "amendment",
     "quote": "en 2028, d’un montant égal aux deux tiers de cette dotation",
-    "ref": "Amendement PLF-P1 n° 33",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=88"
+    "ref": "Amendement PLF-P1 n° 33 (page 91 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=91"
    },
    "subject_fr": "Dotation forfaitaire : remplacée par l’impôt que la commune vote elle-même",
    "theme": "collectivites",
@@ -2412,7 +2809,7 @@
    "date": "2028-01-01",
    "domain": "collectivites",
    "domain_label_fr": "Collectivités locales",
-   "id": "cal_083",
+   "id": "cal_088",
    "in_timeline_2027_2030": true,
    "label_fr": "Plafonnement à partir de 2028",
    "n_amendments": 1,
@@ -2420,8 +2817,8 @@
    "source": {
     "kind": "amendment",
     "quote": "à compter de 2028, la fraction versée aux départements et aux régions",
-    "ref": "Amendement PLF-P1 n° 34",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=90"
+    "ref": "Amendement PLF-P1 n° 34 (page 94 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=94"
    },
    "subject_fr": "TVA des collectivités : plafonnée au coût de leurs compétences",
    "theme": "collectivites",
@@ -2438,7 +2835,7 @@
    "date": "2028-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_084",
+   "id": "cal_089",
    "in_timeline_2027_2030": true,
    "label_fr": "Taux réduits alignés sur 20 % ; alimentation à 10 %",
    "n_amendments": 1,
@@ -2446,7 +2843,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I s’applique aux opérations dont le fait générateur intervient à compter du 1er juillet 2028",
-    "ref": "Amendement PLF-P1 n° 21",
+    "ref": "Amendement PLF-P1 n° 21 (page 57 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=57"
    },
    "subject_fr": "TVA : les trois taux réduits réunis en un seul, à rendement constant",
@@ -2464,7 +2861,7 @@
    "date": "2028-07-01",
    "domain": "logement_energie",
    "domain_label_fr": "Logement et énergie",
-   "id": "cal_085",
+   "id": "cal_090",
    "in_timeline_2027_2030": true,
    "label_fr": "Parc conventionné : aide réduite de deux tiers",
    "n_amendments": 1,
@@ -2472,8 +2869,8 @@
    "source": {
     "kind": "amendment",
     "quote": "des deux tiers au titre des mois courant à compter du 1er juillet 2028",
-    "ref": "Amendement PLF-P2 n° 32",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=58"
+    "ref": "Amendement PLF-P2 n° 32 (page 61 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=61"
    },
    "subject_fr": "Éteindre l’aide personnelle au logement au rythme des droits en cours",
    "theme": "logement_aides",
@@ -2490,7 +2887,7 @@
    "date": "2029-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_086",
+   "id": "cal_091",
    "in_timeline_2027_2030": true,
    "label_fr": "Agriculture, services à la personne, garde de jeunes enfants : abolition totale à partir de 2029",
    "n_amendments": 1,
@@ -2498,8 +2895,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Le I s’applique en totalité aux impositions dues au titre de 2029",
-    "ref": "Amendement PLF-P1 n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+    "ref": "Amendement PLF-P1 n° 1 (page 21 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
    },
    "subject_fr": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
    "theme": "niches",
@@ -2516,7 +2913,7 @@
    "date": "2029-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_087",
+   "id": "cal_092",
    "in_timeline_2027_2030": true,
    "label_fr": "Abrogation pour les dépenses engagées à partir du 1er janvier 2029",
    "n_amendments": 1,
@@ -2524,7 +2921,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le B du II s’applique aux dépenses engagées à compter du 1er janvier 2029",
-    "ref": "Amendement PLF-P1 n° 8",
+    "ref": "Amendement PLF-P1 n° 8 (page 32 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=32"
    },
    "subject_fr": "Suramortissement agricole : fin des régimes particuliers, gain rendu aux actifs",
@@ -2542,7 +2939,7 @@
    "date": "2029-01-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_088",
+   "id": "cal_093",
    "in_timeline_2027_2030": true,
    "label_fr": "Abrogation complète à partir du 1er janvier 2029",
    "n_amendments": 1,
@@ -2550,7 +2947,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le II s’applique aux opérations dont le fait générateur intervient à compter du 1er janvier 2029",
-    "ref": "Amendement PLF-P1 n° 15",
+    "ref": "Amendement PLF-P1 n° 15 (page 43 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=43"
    },
    "subject_fr": "Régimes agricoles : sortie progressive de la dépendance aux subventions",
@@ -2568,7 +2965,7 @@
    "date": "2029-01-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_089",
+   "id": "cal_094",
    "in_timeline_2027_2030": true,
    "label_fr": "Exonérations emploi à domicile et assimilées : abrogées",
    "n_amendments": 1,
@@ -2576,8 +2973,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Les 10° et 24° du III s’appliquent aux périodes d’activité courant à compter du 1er janvier 2029",
-    "ref": "Amendement PLFSS n° 1",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+    "ref": "Amendement PLFSS n° 1 (page 4 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=4"
    },
    "subject_fr": "CSG et CRDS supprimées sur les revenus d’activité : les économies rendues au salaire net, soit +13 %",
    "theme": "csg_salaire_net",
@@ -2594,7 +2991,7 @@
    "date": "2029-01-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_090",
+   "id": "cal_095",
    "in_timeline_2027_2030": true,
    "label_fr": "Réduction de deux tiers (rémunérations versées en 2029)",
    "n_amendments": 1,
@@ -2602,7 +2999,7 @@
    "source": {
     "kind": "amendment",
     "quote": "de deux tiers pour les rémunérations versées en 2029",
-    "ref": "Amendement PLFSS n° 3",
+    "ref": "Amendement PLFSS n° 3 (page 10 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=10"
    },
    "subject_fr": "Taxe sur les salaires : l’éteindre par marches et l’abroger",
@@ -2620,7 +3017,7 @@
    "date": "2029-01-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
-   "id": "cal_091",
+   "id": "cal_096",
    "in_timeline_2027_2030": true,
    "label_fr": "Engagements antérieurs : terme au plus tard le 1er janvier 2029",
    "n_amendments": 1,
@@ -2628,8 +3025,8 @@
    "source": {
     "kind": "amendment",
     "quote": "au plus tard jusqu’au 1er janvier 2029",
-    "ref": "Amendement PLF-P2 n° 31",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=56"
+    "ref": "Amendement PLF-P2 n° 31 (page 59 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=59"
    },
    "subject_fr": "Cesser de subventionner, cesser de choisir sur dossier",
    "theme": "regles_depense",
@@ -2646,7 +3043,7 @@
    "date": "2029-01-01",
    "domain": "collectivites",
    "domain_label_fr": "Collectivités locales",
-   "id": "cal_092",
+   "id": "cal_097",
    "in_timeline_2027_2030": true,
    "label_fr": "Suppression totale en 2029",
    "n_amendments": 1,
@@ -2654,8 +3051,8 @@
    "source": {
     "kind": "amendment",
     "quote": "la totalité en 2029",
-    "ref": "Amendement PLF-P1 n° 33",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=88"
+    "ref": "Amendement PLF-P1 n° 33 (page 92 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=92"
    },
    "subject_fr": "Dotation forfaitaire : remplacée par l’impôt que la commune vote elle-même",
    "theme": "collectivites",
@@ -2672,7 +3069,7 @@
    "date": "2029-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_093",
+   "id": "cal_098",
    "in_timeline_2027_2030": true,
    "label_fr": "Les projets déjà agréés gardent leur crédit s'ils sont réalisés avant le 1er juillet 2029",
    "n_amendments": 1,
@@ -2680,7 +3077,7 @@
    "source": {
     "kind": "amendment",
     "quote": "réalisés avant le 1er juillet 2029",
-    "ref": "Amendement PLF-P1 n° 5",
+    "ref": "Amendement PLF-P1 n° 5 (page 28 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=28"
    },
    "subject_fr": "Suramortissement industriel : guichets fermés, la baisse profite à toutes les entreprises",
@@ -2698,7 +3095,7 @@
    "date": "2029-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_094",
+   "id": "cal_099",
    "in_timeline_2027_2030": true,
    "label_fr": "Les opérations déjà engagées et achevées avant le 1er juillet 2029 restent régies par le droit ancien",
    "n_amendments": 1,
@@ -2706,7 +3103,7 @@
    "source": {
     "kind": "amendment",
     "quote": "achevés avant le 1er juillet 2029",
-    "ref": "Amendement PLF-P1 n° 18",
+    "ref": "Amendement PLF-P1 n° 18 (page 48 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=48"
    },
    "subject_fr": "Aides à l’investissement : abrogées plutôt que prorogées, rendues au salaire net",
@@ -2724,7 +3121,7 @@
    "date": "2029-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_095",
+   "id": "cal_100",
    "in_timeline_2027_2030": true,
    "label_fr": "Alimentation à 15 %",
    "n_amendments": 1,
@@ -2732,7 +3129,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le II s’applique aux opérations dont le fait générateur intervient à compter du 1er juillet 2029",
-    "ref": "Amendement PLF-P1 n° 21",
+    "ref": "Amendement PLF-P1 n° 21 (page 57 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=57"
    },
    "subject_fr": "TVA : les trois taux réduits réunis en un seul, à rendement constant",
@@ -2750,7 +3147,7 @@
    "date": "2029-07-01",
    "domain": "logement_energie",
    "domain_label_fr": "Logement et énergie",
-   "id": "cal_096",
+   "id": "cal_101",
    "in_timeline_2027_2030": true,
    "label_fr": "Parc conventionné : l'aide cesse",
    "n_amendments": 1,
@@ -2758,8 +3155,8 @@
    "source": {
     "kind": "amendment",
     "quote": "L’aide cesse d’être due à compter du 1er juillet 2029",
-    "ref": "Amendement PLF-P2 n° 32",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=58"
+    "ref": "Amendement PLF-P2 n° 32 (page 61 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=61"
    },
    "subject_fr": "Éteindre l’aide personnelle au logement au rythme des droits en cours",
    "theme": "logement_aides",
@@ -2776,7 +3173,7 @@
    "date": "2029-07-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
-   "id": "cal_097",
+   "id": "cal_102",
    "in_timeline_2027_2030": true,
    "label_fr": "Engagements en cours exécutés au plus tard jusqu'au 1er juillet 2029",
    "n_amendments": 1,
@@ -2784,7 +3181,7 @@
    "source": {
     "kind": "amendment",
     "quote": "au plus tard jusqu’au 1er juillet 2029",
-    "ref": "Amendement PLFSS n° 8",
+    "ref": "Amendement PLFSS n° 8 (page 21 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=21"
    },
    "subject_fr": "Concours financiers des organismes de sécurité sociale et du fonds d’intervention régional : interdire la subvention sans contrepartie et n’autoriser que l’achat de prestations déterminées",
@@ -2802,7 +3199,7 @@
    "date": "2030-01-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_098",
+   "id": "cal_103",
    "in_timeline_2027_2030": true,
    "label_fr": "Abrogation",
    "n_amendments": 1,
@@ -2810,7 +3207,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Les II et III entrent en vigueur le 1er janvier 2030",
-    "ref": "Amendement PLFSS n° 3",
+    "ref": "Amendement PLFSS n° 3 (page 10 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=10"
    },
    "subject_fr": "Taxe sur les salaires : l’éteindre par marches et l’abroger",
@@ -2828,7 +3225,7 @@
    "date": "2030-01-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_099",
+   "id": "cal_104",
    "in_timeline_2027_2030": true,
    "label_fr": "Abrogation de l'article L. 511-1 (allocation de logement)",
    "n_amendments": 1,
@@ -2836,7 +3233,7 @@
    "source": {
     "kind": "amendment",
     "quote": "est abrogé à compter du 1er janvier 2030",
-    "ref": "Amendement PLFSS n° 7",
+    "ref": "Amendement PLFSS n° 7 (page 19 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=19"
    },
    "subject_fr": "Une aide pour toutes : les prestations qu’elle remplace s’éteignent le jour où elle commence",
@@ -2854,7 +3251,7 @@
    "date": "2030-01-01",
    "domain": "logement_energie",
    "domain_label_fr": "Logement et énergie",
-   "id": "cal_100",
+   "id": "cal_105",
    "in_timeline_2027_2030": true,
    "label_fr": "Toutes les aides personnelles au logement supprimées",
    "n_amendments": 1,
@@ -2862,8 +3259,8 @@
    "source": {
     "kind": "amendment",
     "quote": "Les aides personnelles au logement ne sont plus dues à compter du 1er janvier 2030",
-    "ref": "Amendement PLF-P2 n° 32",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=58"
+    "ref": "Amendement PLF-P2 n° 32 (page 61 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=61"
    },
    "subject_fr": "Éteindre l’aide personnelle au logement au rythme des droits en cours",
    "theme": "logement_aides",
@@ -2880,7 +3277,7 @@
    "date": "2030-01-01",
    "domain": "collectivites",
    "domain_label_fr": "Collectivités locales",
-   "id": "cal_101",
+   "id": "cal_106",
    "in_timeline_2027_2030": true,
    "label_fr": "Abrogation des pouvoirs d'aide aux entreprises",
    "n_amendments": 1,
@@ -2888,8 +3285,8 @@
    "source": {
     "kind": "amendment",
     "quote": "sont abrogés à compter du 1er janvier 2030",
-    "ref": "Amendement PLF-P1 n° 32",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=85"
+    "ref": "Amendement PLF-P1 n° 32 (page 89 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=89"
    },
    "subject_fr": "Départements et régions : les compétences retirées, le financement retiré d’autant",
    "theme": "collectivites",
@@ -2906,7 +3303,7 @@
    "date": "2030-07-01",
    "domain": "impots_taxes",
    "domain_label_fr": "Impôts et taxes",
-   "id": "cal_102",
+   "id": "cal_107",
    "in_timeline_2027_2030": true,
    "label_fr": "Alimentation à 20 %",
    "n_amendments": 1,
@@ -2914,7 +3311,7 @@
    "source": {
     "kind": "amendment",
     "quote": "Le III s’applique aux opérations dont le fait générateur intervient à compter du 1er juillet 2030",
-    "ref": "Amendement PLF-P1 n° 21",
+    "ref": "Amendement PLF-P1 n° 21 (page 57 du PDF)",
     "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=57"
    },
    "subject_fr": "TVA : les trois taux réduits réunis en un seul, à rendement constant",
@@ -2932,7 +3329,7 @@
    "date": "2035-01-01",
    "domain": "etat_agences_agents",
    "domain_label_fr": "L'État, ses agences et ses agents",
-   "id": "cal_103",
+   "id": "cal_108",
    "in_timeline_2027_2030": false,
    "label_fr": "Rapport annuel au Parlement jusqu'en 2035",
    "n_amendments": 1,
@@ -2940,8 +3337,8 @@
    "source": {
     "kind": "amendment",
     "quote": "chaque année jusqu’en 2035",
-    "ref": "Amendement PLF-P2 n° 26",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=45"
+    "ref": "Amendement PLF-P2 n° 26 (page 50 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=50"
    },
    "subject_fr": "Organiser la sortie des agents dont l’emploi est supprimé",
    "theme": "etat_agences_emplois",
@@ -2958,16 +3355,16 @@
    "date": "2051-01-01",
    "domain": "revenu_salaire_aides",
    "domain_label_fr": "Revenu, salaire net et aides",
-   "id": "cal_104",
+   "id": "cal_109",
    "in_timeline_2027_2030": false,
-   "label_fr": "Fin de la majoration de 3 300 € pour les pensions liquidées avant le 1er janvier 2028 : jusqu'à l'imposition des revenus de 2051",
+   "label_fr": "Dernière année de la minoration de 3 300 € des pensions liquidées avant le 1er janvier 2028 : imposition des revenus de 2051",
    "n_amendments": 1,
    "precision": "annee",
    "source": {
     "kind": "amendment",
-    "quote": "Cette majoration s’applique jusqu’à l’imposition des revenus de l’année 2051",
-    "ref": "Amendement PLF-P1 n° 28",
-    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=75"
+    "quote": "Cette minoration s’applique jusqu’à l’imposition des revenus de l’année 2051",
+    "ref": "Amendement PLF-P1 n° 28 (page 76 du PDF)",
+    "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=76"
    },
    "subject_fr": "Un taux unique finance une aide fondamentale versée à chacun",
    "theme": "aide_fondamentale",
@@ -3014,13 +3411,24 @@
     "cal_035"
    ],
    "n_events": 33,
-   "summary_fr": "Crédits d'État retirés pour les personnes morales, chèque énergie et aides au logement social neuf supprimés, mutations à 1 % / 3 %, plus-values immobilières au réel, indexations gelées, premières niches supprimées (revenus 2026).",
+   "summary_fr": "Crédits d'État retirés pour le fonctionnement courant, l'investissement, les aides aux entreprises et les transferts aux collectivités, chèque énergie et aides au logement social neuf supprimés, mutations à 1 % / 3 %, plus-values immobilières au réel, indexations gelées, crédit d'impôt famille abrogé, premières niches supprimées (revenus 2026, successions et donations, Pacte Dutreil).",
    "title_fr": "Premières coupes"
+  },
+  {
+   "date": "2027-04-01",
+   "event_ids": [
+    "cal_036",
+    "cal_037",
+    "cal_038"
+   ],
+   "n_events": 3,
+   "summary_fr": "L'hébergement d'urgence devient une faculté temporaire ; les crédits d'hébergement d'urgence sont retirés à cette date.",
+   "title_fr": "Hébergement d'urgence recentré"
   },
   {
    "date": "2027-06-01",
    "event_ids": [
-    "cal_037"
+    "cal_039"
    ],
    "n_events": 1,
    "summary_fr": "Aucune demande d'aide personnelle au logement déposée à partir de cette date n'ouvre de droit.",
@@ -3029,8 +3437,6 @@
   {
    "date": "2027-07-01",
    "event_ids": [
-    "cal_038",
-    "cal_039",
     "cal_040",
     "cal_041",
     "cal_042",
@@ -3045,18 +3451,22 @@
     "cal_051",
     "cal_052",
     "cal_053",
-    "cal_054"
+    "cal_054",
+    "cal_055",
+    "cal_056",
+    "cal_057",
+    "cal_058"
    ],
-   "n_events": 17,
-   "summary_fr": "Début de la baisse de la CSG/CRDS sur les revenus d'activité, abrogation des exonérations de cotisations, dissolution de 337 entités, 61 400 postes d'État fermés, IS à 27 %, 21 taxes d'État et 57 taxes affectées supprimées, TVA dérogatoire, accises et CEE, dons réduits de moitié.",
+   "n_events": 19,
+   "summary_fr": "Début de la baisse de la CSG/CRDS sur les revenus d'activité, abrogation des exonérations de cotisations, dissolution de 337 entités, 61 400 postes d'État fermés, IS à 27 %, 54 taxes d'État, 72 taxes affectées et 21 contributions sociales supprimées, accise sur l'électricité à 1 € par mégawattheure, TVA dérogatoire, accises et CEE, dons réduits de moitié, et, dans les crédits d'État retirés, les aides au logement, les subventions aux associations, aux opérateurs et les rémunérations.",
    "title_fr": "Gros bloc de l'été 2027"
   },
   {
    "date": "2027-12-01",
    "event_ids": [
-    "cal_059",
-    "cal_060",
-    "cal_061"
+    "cal_063",
+    "cal_064",
+    "cal_065"
    ],
    "n_events": 3,
    "summary_fr": "CSG et CRDS à zéro sur les revenus d'activité.",
@@ -3065,11 +3475,6 @@
   {
    "date": "2028-01-01",
    "event_ids": [
-    "cal_063",
-    "cal_064",
-    "cal_065",
-    "cal_066",
-    "cal_067",
     "cal_068",
     "cal_069",
     "cal_070",
@@ -3085,7 +3490,12 @@
     "cal_080",
     "cal_081",
     "cal_082",
-    "cal_083"
+    "cal_083",
+    "cal_084",
+    "cal_085",
+    "cal_086",
+    "cal_087",
+    "cal_088"
    ],
    "n_events": 21,
    "summary_fr": "Impôt à 23 % et aide fondamentale universelle (revenus 2028), compte d'épargne personnel, bouclier sanitaire (sous réserve de l'aide), régime socle unique, prestations familiales abrogées, taxe foncière unique, dons sans réduction.",
@@ -3094,8 +3504,8 @@
   {
    "date": "2028-07-01",
    "event_ids": [
-    "cal_084",
-    "cal_085"
+    "cal_089",
+    "cal_090"
    ],
    "n_events": 2,
    "summary_fr": "Taux réduits de TVA alignés sur 20 % ; alimentation à 10 % ; APL du parc conventionné réduite de deux tiers.",
@@ -3104,11 +3514,11 @@
   {
    "date": "2029-07-01",
    "event_ids": [
-    "cal_093",
-    "cal_094",
-    "cal_095",
-    "cal_096",
-    "cal_097"
+    "cal_098",
+    "cal_099",
+    "cal_100",
+    "cal_101",
+    "cal_102"
    ],
    "n_events": 5,
    "summary_fr": "Alimentation à 15 % ; fin de l'APL du parc conventionné.",
@@ -3117,10 +3527,10 @@
   {
    "date": "2030-01-01",
    "event_ids": [
-    "cal_098",
-    "cal_099",
-    "cal_100",
-    "cal_101"
+    "cal_103",
+    "cal_104",
+    "cal_105",
+    "cal_106"
    ],
    "n_events": 4,
    "summary_fr": "Toutes les aides personnelles au logement supprimées, taxe sur les salaires abrogée, allocation de logement abrogée du CSS, pouvoirs d'aide aux entreprises des départements et régions abrogés.",
@@ -3129,7 +3539,7 @@
   {
    "date": "2030-07-01",
    "event_ids": [
-    "cal_102"
+    "cal_107"
    ],
    "n_events": 1,
    "summary_fr": "L'alimentation rejoint le taux normal.",
@@ -3138,11 +3548,11 @@
   {
    "date": "2051-01-01",
    "event_ids": [
-    "cal_104"
+    "cal_109"
    ],
    "n_events": 1,
-   "summary_fr": "La majoration de 3 300 € pour les pensions liquidées avant 2028 s'applique jusqu'à l'imposition des revenus de 2051.",
-   "title_fr": "Fin de la majoration de pension de l'aide fondamentale"
+   "summary_fr": "La minoration de 3 300 € pour les pensions liquidées avant 2028 s'applique jusqu'à l'imposition des revenus de 2051 (réduite au prorata pour les pensions liquidées ensuite).",
+   "title_fr": "Dernière année de la minoration de pension de l'aide fondamentale"
   }
  ],
  "meta": {
@@ -3152,17 +3562,17 @@
   ],
   "counts": {
    "annonces_sans_date": 9,
-   "events": 104,
+   "events": 109,
    "events_par_annee": {
     "2026": 2,
-    "2027": 60,
+    "2027": 65,
     "2028": 23,
     "2029": 12,
     "2030": 5,
     "2035": 1,
     "2051": 1
    },
-   "jalons": 10,
+   "jalons": 11,
    "trajectoires": 10
   },
   "domains": [
@@ -3195,15 +3605,26 @@
     "label_fr": "Collectivités locales"
    }
   ],
-  "etat_b_note": "Pour les 22 amendements d'état B, l'effet est le 1er janvier 2027 pour les personnes morales et le 1er juillet 2027 pour les personnes physiques (demi-exercice) selon la nature des crédits de chaque mission.",
+  "etat_b_note": "Pour les 23 amendements d'état B (PLF-P2 n° 1 à 22 et n° 40), l'exposé de chaque mission date séparément chaque nature de crédit : 1er janvier 2027 (fonctionnement courant, investissement, aides aux entreprises, transferts aux collectivités…), 1er avril 2027 (hébergement d'urgence, mission « Cohésion des territoires ») ou 1er juillet 2027 (rémunérations, subventions aux associations et aux opérateurs, transferts aux ménages…). La version d'octobre 2026 ne distinguait que les personnes morales (1er janvier) et les personnes physiques (1er juillet).",
   "precision": {
    "annee": "année (ou année fiscale) sans jour : date = 1er janvier par convention",
    "approx": "point de départ non écrit (ex. « lendemain de la publication de la loi »)",
    "jour": "jour écrit dans le texte"
   },
   "tier": "loi",
-  "tier_note": "Les dates viennent exclusivement du texte des 81 amendements (projets non adoptés). Chaque événement cite un extrait vérifié mot à mot. Les promesses sans base légale datée sont séparées dans annonces_sans_date (tier annonce).",
-  "title_fr": "La transition 2027 → 2030 : chaque mesure datée du plan"
+  "tier_note": "Les dates viennent exclusivement du texte des 84 amendements (rédigés et publiés par Résolution, pas en vigueur). Chaque événement cite un extrait vérifié mot à mot et renvoie à la page du PDF qui le contient. Les promesses sans base légale datée sont séparées dans annonces_sans_date (tier annonce).",
+  "title_fr": "La transition 2027 → 2030 : chaque mesure datée du plan",
+  "version": {
+   "cover_fr": "Résolution — octobre 2026",
+   "date_fr": "18 novembre 2026",
+   "date_iso": "2026-11-18",
+   "pdf_dates_fr": {
+    "PLF-P1": "17 novembre 2026",
+    "PLF-P2": "18 novembre 2026",
+    "PLFSS": "17 novembre 2026"
+   },
+   "previous_fr": "version d'octobre 2026 (81 amendements)"
+  }
  },
  "trajectoires": [
   {
@@ -3227,9 +3648,9 @@
       {
        "liasse": "PLFSS",
        "number": 1,
-       "page": 3,
+       "page": 5,
        "quote": "9,7 points partent au titre de deux contributions uniformes",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=5"
       }
      ],
      "to": "2027-06-30",
@@ -3244,9 +3665,9 @@
       {
        "liasse": "PLFSS",
        "number": 1,
-       "page": 3,
+       "page": 4,
        "quote": "7,6 % pour les périodes courant en juillet 2027",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=4"
       }
      ],
      "to": "2027-07-31",
@@ -3261,9 +3682,9 @@
       {
        "liasse": "PLFSS",
        "number": 1,
-       "page": 3,
+       "page": 4,
        "quote": "6,0 % pour les périodes courant en août 2027",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=4"
       }
      ],
      "to": "2027-08-31",
@@ -3278,9 +3699,9 @@
       {
        "liasse": "PLFSS",
        "number": 1,
-       "page": 3,
+       "page": 5,
        "quote": "4,3 % pour les périodes courant en septembre 2027",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=5"
       }
      ],
      "to": "2027-09-30",
@@ -3295,9 +3716,9 @@
       {
        "liasse": "PLFSS",
        "number": 1,
-       "page": 3,
+       "page": 5,
        "quote": "2,7 % pour les périodes courant en octobre 2027",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=5"
       }
      ],
      "to": "2027-10-31",
@@ -3312,9 +3733,9 @@
       {
        "liasse": "PLFSS",
        "number": 1,
-       "page": 3,
+       "page": 5,
        "quote": "1,1 % pour les périodes courant en novembre 2027",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=5"
       }
      ],
      "to": "2027-11-30",
@@ -3329,9 +3750,9 @@
       {
        "liasse": "PLFSS",
        "number": 1,
-       "page": 3,
+       "page": 5,
        "quote": "Les V et VI entrent en vigueur le 1er décembre 2027",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=5"
       }
      ],
      "to": null,
@@ -3369,9 +3790,9 @@
       {
        "liasse": "PLF-P1",
        "number": 21,
-       "page": 57,
+       "page": 58,
        "quote": "elle passe à 10 % au 1er juillet 2028",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=57"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=58"
       }
      ],
      "to": "2029-06-30",
@@ -3384,9 +3805,9 @@
       {
        "liasse": "PLF-P1",
        "number": 21,
-       "page": 57,
+       "page": 58,
        "quote": "à 15 % au 1er juillet 2029",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=57"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=58"
       }
      ],
      "to": "2030-06-30",
@@ -3399,9 +3820,9 @@
       {
        "liasse": "PLF-P1",
        "number": 21,
-       "page": 57,
+       "page": 58,
        "quote": "puis rejoint le taux normal au 1er juillet 2030",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=57"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=58"
       }
      ],
      "to": null,
@@ -3423,9 +3844,9 @@
       {
        "liasse": "PLF-P1",
        "number": 21,
-       "page": 57,
+       "page": 58,
        "quote": "au 1er juillet 2028, sur tout le territoire métropolitain, Corse comprise",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=57"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=58"
       }
      ],
      "to": null,
@@ -3447,9 +3868,9 @@
       {
        "liasse": "PLF-P2",
        "number": 32,
-       "page": 58,
+       "page": 62,
        "quote": "l’aide ne peut plus remonter",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=58"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=62"
       }
      ],
      "to": "2027-06-30",
@@ -3463,9 +3884,9 @@
       {
        "liasse": "PLF-P2",
        "number": 32,
-       "page": 58,
+       "page": 61,
        "quote": "réduit d’un tiers au titre des mois courant à compter du 1er juillet 2027",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=58"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=61"
       }
      ],
      "to": "2028-06-30",
@@ -3479,9 +3900,9 @@
       {
        "liasse": "PLF-P2",
        "number": 32,
-       "page": 58,
+       "page": 61,
        "quote": "des deux tiers au titre des mois courant à compter du 1er juillet 2028",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=58"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=61"
       }
      ],
      "to": "2029-06-30",
@@ -3494,9 +3915,9 @@
       {
        "liasse": "PLF-P2",
        "number": 32,
-       "page": 58,
+       "page": 61,
        "quote": "L’aide cesse d’être due à compter du 1er juillet 2029",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=58"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=61"
       }
      ],
      "to": null,
@@ -3645,9 +4066,9 @@
       {
        "liasse": "PLF-P1",
        "number": 1,
-       "page": 4,
+       "page": 21,
        "quote": "l’avantage est réduit d’un tiers au titre de 2027 et de deux tiers au titre de 2028",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
       }
      ],
      "to": "2026-12-31",
@@ -3661,9 +4082,9 @@
       {
        "liasse": "PLF-P1",
        "number": 1,
-       "page": 4,
+       "page": 21,
        "quote": "l’avantage est réduit d’un tiers au titre de 2027",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
       }
      ],
      "to": "2027-12-31",
@@ -3677,9 +4098,9 @@
       {
        "liasse": "PLF-P1",
        "number": 1,
-       "page": 4,
+       "page": 21,
        "quote": "de deux tiers au titre de 2028",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
       }
      ],
      "to": "2028-12-31",
@@ -3692,9 +4113,9 @@
       {
        "liasse": "PLF-P1",
        "number": 1,
-       "page": 4,
+       "page": 21,
        "quote": "Le I s’applique en totalité aux impositions dues au titre de 2029",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=4"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=21"
       }
      ],
      "to": null,
@@ -3717,9 +4138,9 @@
       {
        "liasse": "PLFSS",
        "number": 1,
-       "page": 3,
+       "page": 4,
        "quote": "réduites d’un tiers au titre des périodes d’activité courant à compter du 1er juillet 2027",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=4"
       }
      ],
      "to": "2027-06-30",
@@ -3733,9 +4154,9 @@
       {
        "liasse": "PLFSS",
        "number": 1,
-       "page": 3,
+       "page": 4,
        "quote": "réduites d’un tiers au titre des périodes d’activité courant à compter du 1er juillet 2027",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=4"
       }
      ],
      "to": "2027-12-31",
@@ -3749,9 +4170,9 @@
       {
        "liasse": "PLFSS",
        "number": 1,
-       "page": 3,
+       "page": 4,
        "quote": "de deux tiers au titre des périodes d’activité courant à compter du 1er janvier 2028",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=4"
       }
      ],
      "to": "2028-12-31",
@@ -3764,9 +4185,9 @@
       {
        "liasse": "PLFSS",
        "number": 1,
-       "page": 3,
+       "page": 4,
        "quote": "Les 10° et 24° du III s’appliquent aux périodes d’activité courant à compter du 1er janvier 2029",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=3"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLFSS.pdf#page=4"
       }
      ],
      "to": null,
@@ -3789,9 +4210,9 @@
       {
        "liasse": "PLF-P1",
        "number": 33,
-       "page": 88,
+       "page": 91,
        "quote": "au titre de 2026",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=88"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=91"
       }
      ],
      "to": "2026-12-31",
@@ -3805,9 +4226,9 @@
       {
        "liasse": "PLF-P1",
        "number": 33,
-       "page": 88,
+       "page": 91,
        "quote": "est minorée, en 2027, d’un montant égal au tiers de la dotation forfaitaire qu’elle a perçue au titre de 2026",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=88"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=91"
       }
      ],
      "to": "2027-12-31",
@@ -3821,9 +4242,9 @@
       {
        "liasse": "PLF-P1",
        "number": 33,
-       "page": 88,
+       "page": 91,
        "quote": "en 2028, d’un montant égal aux deux tiers de cette dotation",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=88"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=91"
       }
      ],
      "to": "2028-12-31",
@@ -3836,9 +4257,9 @@
       {
        "liasse": "PLF-P1",
        "number": 33,
-       "page": 88,
+       "page": 92,
        "quote": "la totalité en 2029",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=88"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P1.pdf#page=92"
       }
      ],
      "to": null,
@@ -3851,7 +4272,7 @@
   {
    "id": "emplois_etat_plafond",
    "label_fr": "Emplois de l'État supprimés (fermeture de 61 400 postes à partir du 1er juillet 2027)",
-   "note": "Sorties d'agents : indemnité de 70 % de la base pendant 1 à 7 ans selon l'ancienneté (PLF-P2 n° 26). Hors collectivités locales et opérateurs.",
+   "note": "Sorties d'agents : indemnité de 70 % de la base pendant 24 mois plus un mois par trimestre de services, 84 mois au plus (PLF-P2 n° 26). Hors collectivités locales et opérateurs.",
    "steps": [
     {
      "from": "2027-07-01",
@@ -3860,9 +4281,9 @@
       {
        "liasse": "PLF-P2",
        "number": 24,
-       "page": 27,
+       "page": 29,
        "quote": "Cet amendement abaisse de 30 698 emplois le plafond d’autorisation des emplois de l’État",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=27"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=29"
       }
      ],
      "to": "2027-12-31",
@@ -3875,9 +4296,9 @@
       {
        "liasse": "PLF-P2",
        "number": 24,
-       "page": 27,
+       "page": 30,
        "quote": "L’exercice 2028 portera l’effet entier, soit 61 400 emplois",
-       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=27"
+       "url": "https://france-resolution.fr/amendements/Liasse_PLF_P2.pdf#page=30"
       }
      ],
      "to": null,

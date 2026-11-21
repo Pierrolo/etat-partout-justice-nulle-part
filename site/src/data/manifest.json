@@ -2,8 +2,8 @@
  "_comment": "Généré par pipeline/build.py ; sha256 du texte JSON de chaque fichier (hors manifest.json). Sortie déterministe : deux exécutions donnent les mêmes empreintes.",
  "files": {
   "agences.json": {
-   "bytes": 675758,
-   "sha256": "b02cd3a0984ae900e551984dd7f254471153bcd3ebb1e337301f141733e68b6c",
+   "bytes": 675506,
+   "sha256": "54c1112e97c138eb28e44429b334f2377b20e1f004317ef211666c0a0cee9a0d",
    "top_level_lists": {
     "autorites_independantes": 24,
     "commissions": 324,
@@ -20,32 +20,32 @@
    }
   },
   "amendements.json": {
-   "bytes": 119088,
-   "sha256": "790e5d940f9c448732ef3c1084cd0108195729c881e34d04f55c038111315a25",
+   "bytes": 151109,
+   "sha256": "d93992c9692e416150a96ca2dfbaa36ebbf6f6946563da03935cf98a716412c4",
    "top_level_lists": {
-    "amendements": 81
+    "amendements": 84
    }
   },
   "calendrier.json": {
-   "bytes": 116514,
-   "sha256": "5b7c381f2f828f131879efcc916b494c51dc3554b22c43f4d6983fba283ca3df",
+   "bytes": 134506,
+   "sha256": "2abcd469a9fba5ffa61079afb8ec5bcfa512ed5331fcc912b51e50220bfb7439",
    "top_level_lists": {
     "annonces_sans_date": 9,
-    "events": 104,
-    "jalons": 10,
+    "events": 109,
+    "jalons": 11,
     "trajectoires": 10
    }
   },
   "credits-retires.json": {
-   "bytes": 46028,
-   "sha256": "659091461cbc875ec335bc605a6b1dd65bd16c4a9699bc8c0757ba0005906ebc",
+   "bytes": 69387,
+   "sha256": "0caf5fa7fa62d01335ea0a54c60ba276cb9afc352403563ea213ba74e2f55a67",
    "top_level_lists": {
-    "missions": 22
+    "missions": 23
    }
   },
   "depenses-cofog.json": {
-   "bytes": 78307,
-   "sha256": "485eb113e55fc86b5cfb0beacde372bd0b2d2cdc3209086b7cea3189ed4fb594",
+   "bytes": 78258,
+   "sha256": "797b77894f94d2af742434f687087099b85f1b2cd8a06629b3b3111cbe8bf24f",
    "top_level_lists": {
     "cofog_divisions": 10,
     "cofog_subfunctions": 69,
@@ -55,15 +55,15 @@
    }
   },
   "etat-partout.json": {
-   "bytes": 52368,
-   "sha256": "3db5dd3a0220c5232c1d42f800420be8dd07e8377a393d485778553363fcced7",
+   "bytes": 51862,
+   "sha256": "23b7db81f05f32ead56acbcbb368d74e732bcdc97f57124475d26ee0fd486238",
    "top_level_lists": {
     "revendications_manifeste": 12
    }
   },
   "europe.json": {
-   "bytes": 118675,
-   "sha256": "145aec7f4c6171692b9f02be7b0f739edda4c67d2ed773ac7c20497cbeb8f862",
+   "bytes": 118592,
+   "sha256": "b508a82f99cfe402408921a101f4a074dc6a12c0557dd2bc1a4b6245009a7a7c",
    "top_level_lists": {
     "agregats": 4,
     "depenses_publiques_pib": 68,
@@ -74,22 +74,22 @@
    }
   },
   "facts.json": {
-   "bytes": 237919,
-   "sha256": "96ec7f49a584a322b49cb955f628c0716b49e3896952576c9aa69f32bb0b9ea1",
+   "bytes": 237752,
+   "sha256": "a3b4510b802056dbc7079d762faa9f469e239d4977f971b43e20df968d99f4e2",
    "top_level_lists": {
-    "facts": 414
+    "facts": 420
    }
   },
   "fiches.json": {
-   "bytes": 47411,
-   "sha256": "bd4bc9a51f6c6dd1fe91772d9d141eae7a99fd903f6f77f43a7e8dcafdf2340e",
+   "bytes": 47838,
+   "sha256": "af46d3cafee6faf8a5921af481b0f85316783f5397ac33e64e5cc64f9b5b98ee",
    "top_level_lists": {
     "fiches": 18
    }
   },
   "lifecycle.json": {
-   "bytes": 72760,
-   "sha256": "294b31fa7e367dbac1a2a758b5c2b5c17aad5bee3f048eba1853c6882f04223b",
+   "bytes": 72726,
+   "sha256": "80f1a862bfb28a14f919e616c34fecd11d7291f5bb55cfab5fa1c82d990e01c3",
    "top_level_lists": {
     "by_age": 86,
     "records": 321,
@@ -97,16 +97,16 @@
    }
   },
   "niches.json": {
-   "bytes": 967208,
-   "sha256": "f488f1b8eee560143c0fbfa3788a881188e09a83886c72bb06800120f55c643c",
+   "bytes": 966648,
+   "sha256": "63283357b0970b34483d635416cef910c3f2a95733b5c080c963f723ac153629",
    "top_level_lists": {
     "niches": 465,
     "provisions_calcul_impot": 81
    }
   },
   "plan-flux.json": {
-   "bytes": 61621,
-   "sha256": "3552d0379366373571232f025a6e689bd2065b07801525dd6fdd7681d01d666a",
+   "bytes": 62136,
+   "sha256": "e4b557713978143e8a3d8432a9d95de14808081750d9860914f590496cda3752",
    "top_level_lists": {
     "savings_table": 26
    }

@@ -108,8 +108,8 @@
   "note": "Agences d'État 1 104 = opérateurs PLF 434 + organismes hors PLF 328 + autorités indépendantes 24 + commissions 318. La ligne « Organismes hors PLF » sous « Agences locales » répète les 23 264 agences locales (même nombre) : ne pas la sommer deux fois. Détail dans agences.json.",
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse ETP et agences Résolution_0910.xlsx › Synthèse agences R › C5:J12",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20ETP%20et%20agences%20R%C3%A9solution_0910.xlsx"
+   "ref": "Agences publiques.xlsx › Synthèse agences R › C5:J12",
+   "url": "https://france-resolution.fr/donnees/Agences%20publiques.xlsx"
   },
   "suppression": 668,
   "total_avec_locales": 24368
@@ -264,19 +264,19 @@
    "restants_si_580000_fermes_milliers": 5223.862,
    "source": {
     "kind": "workbook",
-    "ref": "Synthèse Chiffres Résolution_0910.xlsx › Détail Economies › I2:J43",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+    "ref": "Synthèse des chiffrages.xlsx › Détail Economies › I2:J43",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx"
    },
    "total_apu": 580000
   },
   "source": {
    "kind": "dgafp",
-   "ref": "DGAFP, Rapport annuel sur l'état de la fonction publique, édition 2025 — repris dans Synthèse ETP et agences Résolution_0910.xlsx › Synthèse ETP › A3:C21 et Synthèse Graphiques Résolution_0910.xlsx › GraphETP › A27:C35",
+   "ref": "DGAFP, Rapport annuel sur l'état de la fonction publique, édition 2025 — repris dans Emplois publics.xlsx › Synthèse ETP › A3:C21 et Séries des graphiques.xlsx › GraphETP › A27:C35",
    "url": "https://www.fonction-publique.gouv.fr/toutes-les-publications/rapport-annuel-sur-letat-de-la-fonction-publique-edition-2025",
    "workbook": {
     "kind": "workbook",
-    "ref": "Synthèse ETP et agences Résolution_0910.xlsx › Synthèse ETP › C4:C21",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20ETP%20et%20agences%20R%C3%A9solution_0910.xlsx"
+    "ref": "Emplois publics.xlsx › Synthèse ETP › C4:C21",
+    "url": "https://france-resolution.fr/donnees/Emplois%20publics.xlsx"
    }
   },
   "tier": "donnee",
@@ -316,13 +316,13 @@
    "insee_ref": "https://www.insee.fr/fr/statistiques/8988845?sommaire=8988934",
    "pib_2024_md": 2919.9,
    "po_2024_md": 1251.8,
-   "po_cible_md": 1060.75436,
+   "po_cible_md": 1060.69536,
    "po_pib_2024_pct": 42.871331,
-   "po_pib_cible_pct": 36.328448,
+   "po_pib_cible_pct": 36.326428,
    "source": {
     "kind": "workbook",
-    "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › B13:K42",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
+    "ref": "Synthèse des chiffrages.xlsx › Refonte fiscalité › B13:K42",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20des%20chiffrages.xlsx"
    },
    "table": [
     {
@@ -694,8 +694,8 @@
    "note": "Taxes affectées à des opérateurs « non indispensables » (PLF 2026, V&M tome I annexe 2).",
    "source": {
     "kind": "workbook",
-    "ref": "PLF 2026_V&M tome I - Annexe 2 - Taxes affectees_0910.xls › Synthèse TA › C7:G15",
-    "url": "https://france-resolution.fr/donnees/PLF%202026_V%26M%20tome%20I%20-%20Annexe%202%20-%20Taxes%20affectees_0910.xls"
+    "ref": "Taxes affectées aux agences.xls › Synthèse TA › C7:G15",
+    "url": "https://france-resolution.fr/donnees/Taxes%20affect%C3%A9es%20aux%20agences.xls"
    },
    "table": [
     {
@@ -1130,8 +1130,8 @@
   "regroupes_dans_les_sept": 16,
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphAgences › A47:I69",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+   "ref": "Séries des graphiques.xlsx › GraphAgences › A47:I69",
+   "url": "https://france-resolution.fr/donnees/S%C3%A9ries%20des%20graphiques.xlsx"
   },
   "supprimes_integralement": 19,
   "supprimes_net": 28
@@ -1785,12 +1785,12 @@
   "series_break_note": "Rupture probable dans la série « réglementaire non codifié » en 2010-2011 (≈14 M → 20,9 M → 21,6 M puis retour à 15,8 M en 2012) : non expliquée par la source (Légifrance) ni par le classeur ; à signaler en note de graphique plutôt qu'à corriger.",
   "source": {
    "kind": "legifrance",
-   "ref": "Légifrance, statistiques de la norme — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphCodes › C2:X14",
+   "ref": "Légifrance, statistiques de la norme — repris dans Séries des graphiques.xlsx › GraphCodes › C2:X14",
    "url": "https://www.legifrance.gouv.fr/contenu/menu/autour-de-la-loi/legislatif-et-reglementaire/statistiques-de-la-norme",
    "workbook": {
     "kind": "workbook",
-    "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphCodes › C2:X14",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "ref": "Séries des graphiques.xlsx › GraphCodes › C2:X14",
+    "url": "https://france-resolution.fr/donnees/S%C3%A9ries%20des%20graphiques.xlsx"
    }
   },
   "tier": "donnee",
@@ -1821,8 +1821,8 @@
   "nombre_recensees_plf2026": 465,
   "source": {
    "kind": "workbook",
-   "ref": "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls › Synthèse › B4:D14",
-   "url": "https://france-resolution.fr/donnees/PLF%202026_V%26M%20tome%20II%20-%20Annexe%203%20-%20Depenses%20fiscales%20-%200910.xls"
+   "ref": "Niches fiscales.xls › Synthèse › B4:D14",
+   "url": "https://france-resolution.fr/donnees/Niches%20fiscales.xls"
   },
   "taux_reduits_tva_hors_niches": {
    "cout_md": 33.382,
@@ -1839,8 +1839,8 @@
   "rule": "Chaque étape = 51 % de la précédente (100 → 51 → 26,01 → 13,27 → 6,77 → 3,45) : la chaîne est une construction du livre (calcul de Résolution), pas une statistique observée.",
   "source": {
    "kind": "workbook",
-   "ref": "Synthèse Graphiques Résolution_0910.xlsx › Graph51pc › C25:H26",
-   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+   "ref": "Séries des graphiques.xlsx › Graph51pc › C25:H26",
+   "url": "https://france-resolution.fr/donnees/S%C3%A9ries%20des%20graphiques.xlsx"
   },
   "steps": [
    {

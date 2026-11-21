@@ -13,7 +13,8 @@ import b_plan
 
 G = "graphiques"
 C = "chiffres"
-E = "etp"
+EM = "emplois"  # Emplois publics.xlsx
+AG = "agences"  # Agences publiques.xlsx
 
 
 def build_facts() -> Facts:
@@ -203,8 +204,8 @@ def _d_etat_partout(F: Facts):
     F.wb("agences_etat_avant", G, a, "B26", "agences", "Agences nationales aujourd'hui", 2023, "annonce", expect=1104, nd=0,
          note="434 opérateurs PLF + 328 organismes hors PLF + 24 autorités indépendantes + 318 commissions.")
     F.wb("agences_fermees", G, a, "B28", "agences", "Agences nationales supprimées ou cédées", None, "annonce", expect=746, nd=0, note="78 cessions d'actif + 668 suppressions.")
-    F.wb("agences_cession", E, ag, "E5", "agences", "Agences nationales : cessions d'actif", None, "annonce", expect=78, nd=0)
-    F.wb("agences_suppression", E, ag, "F5", "agences", "Agences nationales : suppressions", None, "annonce", expect=668, nd=0)
+    F.wb("agences_cession", AG, ag, "E5", "agences", "Agences nationales : cessions d'actif", None, "annonce", expect=78, nd=0)
+    F.wb("agences_suppression", AG, ag, "F5", "agences", "Agences nationales : suppressions", None, "annonce", expect=668, nd=0)
     F.wb("agences_internalisation", G, a, "B29", "agences", "Agences nationales internalisées dans un ministère", None, "annonce", expect=55, nd=0)
     F.wb("agences_epic_musees", G, a, "B32", "agences", "Agences nationales maintenues : EPIC musées et patrimoine", None, "annonce", expect=40, nd=0)
     F.wb("agences_epic_enseignement", G, a, "B33", "agences", "Agences nationales maintenues : EPIC universités et recherche", None, "annonce", expect=258, nd=0)
@@ -212,25 +213,29 @@ def _d_etat_partout(F: Facts):
     F.calc("agences_etat_apres", ["agences_epic_musees", "agences_epic_enseignement", "agences_autorites_independantes"], lambda *x: sum(x), "agences", "Agences nationales après réforme", None,
            "40 + 258 + 5", nd=0, note="Le manifeste écrit « 303 agences nationales au lieu de 1 104 ».")
     F.site("agences_apres_manifeste", 303, "agences", "« 303 agences nationales au lieu de 1 104 »", 2026, "manifeste", "303 agences nationales au lieu de 1 104")
-    F.wb("agences_operateurs_plf", E, ag, "D6", "organismes", "Opérateurs de l'État (PLF)", 2023, "donnee", expect=434, nd=0, note="Le PLF 2026 en liste 434 ; l'exposé de PLF-P2 n° 25 en cite 431.")
-    F.wb("agences_hors_plf", E, ag, "D7", "organismes", "Organismes hors PLF (ODAC non opérateurs)", 2023, "donnee", expect=328, nd=0)
-    F.wb("agences_autorites_total", E, ag, "D8", "organismes", "Autorités administratives et publiques indépendantes", 2023, "donnee", expect=24, nd=0)
-    F.wb("agences_commissions_matrice", E, ag, "D9", "organismes", "Commissions et instances consultatives (matrice)", 2023, "donnee", expect=318, nd=0)
-    F.wb("agences_locales", E, ag, "D10", "organismes", "Organismes locaux (ODAL, hors agences et offices de l'eau déjà comptés)", 2023, "donnee", expect=23264, nd=0)
-    F.wb("agences_total_avec_locales", E, ag, "D12", "organismes", "Total des agences, nationales et locales", 2023, "annonce", expect=24368, nd=0)
-    F.wb("agences_locales_suppression", E, ag, "F10", "organismes", "Organismes locaux : suppressions", None, "annonce", expect=13481, nd=0)
-    F.wb("agences_locales_epic_enseignement", E, ag, "I10", "organismes", "Organismes locaux maintenus : EPIC enseignement et recherche", None, "annonce", expect=9140, nd=0)
+    F.wb("agences_operateurs_plf", AG, ag, "D6", "organismes", "Opérateurs de l'État (PLF)", 2023, "donnee", expect=434, nd=0, note="Le PLF 2026 en liste 434 ; l'exposé de PLF-P2 n° 25 en cite 431.")
+    F.wb("agences_hors_plf", AG, ag, "D7", "organismes", "Organismes hors PLF (ODAC non opérateurs)", 2023, "donnee", expect=328, nd=0)
+    F.wb("agences_autorites_total", AG, ag, "D8", "organismes", "Autorités administratives et publiques indépendantes", 2023, "donnee", expect=24, nd=0)
+    F.wb("agences_commissions_matrice", AG, ag, "D9", "organismes", "Commissions et instances consultatives (matrice)", 2023, "donnee", expect=318, nd=0)
+    F.wb("agences_locales", AG, ag, "D10", "organismes", "Organismes locaux (ODAL, hors agences et offices de l'eau et sociétés de grands projets déjà comptés)", 2023, "annonce", expect=23264, nd=0,
+         note="Compte des auteurs (feuille « Synthèse agences R », construite sur la liste ODAL de l'Insee avec leur classement) : même classeur et même statut que les 1 104 agences et le total de 24 368.")
+    F.wb("agences_total_avec_locales", AG, ag, "D12", "organismes", "Total des agences, nationales et locales", 2023, "annonce", expect=24368, nd=0)
+    F.wb("agences_locales_suppression", AG, ag, "F10", "organismes", "Organismes locaux : suppressions", None, "annonce", expect=13481, nd=0)
+    F.wb("agences_locales_epic_enseignement", AG, ag, "I10", "organismes", "Organismes locaux maintenus : EPIC enseignement et recherche", None, "annonce", expect=9140, nd=0)
     F.amend("agences_operateurs_loi", 431, "opérateurs", "Opérateurs de l'État cités par l'exposé de PLF-P2 n° 25", 2026, "PLF-P2", 25, "431 opérateurs", tier="loi",
-            note="Le classeur en compte 434 (433 en sommant ses lignes).")
+            note="Le classeur en compte 434 (somme de la colonne « Nb/cat. » de ses 180 lignes) ; 433 est le chiffre cité par la source-analyse du dépôt, pas une somme des lignes du classeur.")
     n_dissous = len(b_agences_list())
     F.amend("agences_dissoutes_loi", n_dissous, "personnes morales", "Entités dissoutes au 1er juillet 2027 par PLF-P2 n° 25 (liste nominative)", 2027, "PLF-P2", 25,
             "Sont dissoutes en application du A du I les personnes morales suivantes", tier="loi",
             note="Périmètre différent des 746 fermetures du livre : 337 personnes morales nommées dans l'amendement. Aucune table de correspondance entre les deux listes n'est publiée.")
-    F.wb("operateurs_etpt_lfi_2025", E, "Op_rateurs_R", "G4", "ETPT", "Emplois (ETPT) des opérateurs, LFI 2025", 2025, "donnee", expect=479514, nd=0)
-    F.wb("operateurs_etpt_plf_2026", E, "Op_rateurs_R", "J4", "ETPT", "Emplois (ETPT) des opérateurs, PLF 2026", 2026, "donnee", expect=478026, nd=0)
-    F.wb("operateurs_etpt_plf_2026_sous_plafond", E, "Op_rateurs_R", "K4", "ETPT", "Emplois (ETPT) des opérateurs sous plafond, PLF 2026", 2026, "donnee", expect=401310, nd=0)
+    F.wb("operateurs_etpt_lfi_2025", AG, "Op_rateurs_R", "G4", "ETPT", "Emplois (ETPT) des opérateurs, LFI 2025", 2025, "donnee", expect=479514, nd=0)
+    F.wb("operateurs_etpt_plf_2026", AG, "Op_rateurs_R", "J4", "ETPT", "Emplois (ETPT) des opérateurs, PLF 2026", 2026, "donnee", expect=478026, nd=0)
+    F.wb("operateurs_etpt_plf_2026_sous_plafond", AG, "Op_rateurs_R", "K4", "ETPT", "Emplois (ETPT) des opérateurs sous plafond, PLF 2026", 2026, "donnee", expect=401310, nd=0)
     # taxes
     F.site("impots_nombre_manifeste", 438, "impôts", "« 438 impôts »", 2026, "manifeste", "438 impôts", note="Aucune liste des 438 impôts dans les données publiées.")
+    F.site("impots_nombre_graphique_fusion", 434, "prélèvements", "« 434 prélèvements aujourd'hui, 4 grands impôts demain » (page graphique « Fusion des impôts »)", 2026, "graphiques__fusion-des-impots",
+           "434 prélèvements aujourd’hui, 4 grands impôts demain",
+           note="Titre du graphique de la page graphiques/fusion-des-impots.html, publiée en novembre 2026 ; le manifeste, la page « Propositions » et les fiches disent « 438 ». La source ne dit pas quels prélèvements font la différence.")
     F.site("niches_nombre_manifeste", 486, "niches fiscales", "« 486 niches fiscales »", 2026, "manifeste", "486 niches fiscales")
     F.site("cerfa_nombre_manifeste", 2000, "formulaires", "« 2 000 CERFA »", 2026, "manifeste", "2 000 CERFA", note="Ordre de grandeur du manifeste ; aucun jeu de données n'accompagne ce chiffre.")
     F.site("charges_sociales_combinaisons_manifeste", 1.7, "milliards de combinaisons", "« 1,7 milliard de combinaisons pour calculer un taux de charges sociales »", 2026, "manifeste",
@@ -239,8 +244,10 @@ def _d_etat_partout(F: Facts):
            "Quatre impôts pour fusionner toute la fiscalité")
     F.site("impots_cibles_lettres", 5, "impôts", "« 5 impôts au lieu de 438 » (lettres aux élus)", 2026, "lettres__lettre-depute", "5 impôts au lieu de 438")
     F.site("impots_75pct_recettes_manifeste", 75, "% des recettes", "Les quatre impôts « portent déjà 75 % des recettes »", 2026, "manifeste", "Ils portent déjà 75 % des recettes")
-    F.amend("taxes_etat_supprimees_loi", 21, "impositions", "Impositions de l'État supprimées par PLF-P1 n° 22", 2027, "PLF-P1", 22, "Cet amendement supprime vingt et une impositions de l’État, au 1er juillet 2027", note="Valeur : « vingt et une ».")
-    F.amend("taxes_affectees_supprimees_loi", 57, "impositions", "Impositions affectées supprimées par PLF-P1 n° 25", 2027, "PLF-P1", 25, "Cet amendement supprime cinquante-sept impositions affectées", note="Valeur : « cinquante-sept ».")
+    F.amend("taxes_etat_supprimees_loi", 54, "impositions", "Impositions de l'État supprimées par PLF-P1 n° 22", 2027, "PLF-P1", 22, "Cet amendement supprime cinquante-quatre impositions de l’État", note="Valeur : « cinquante-quatre » (vingt et une dans la version d'octobre 2026) ; l'amendement ramène aussi l'accise sur l'électricité à 1 € par mégawattheure (ménages) et 0,5 € (autres consommations) à partir du 1er juillet 2027.")
+    F.amend("taxes_affectees_supprimees_loi", 72, "impositions", "Impositions affectées supprimées par PLF-P1 n° 25", 2027, "PLF-P1", 25, "Cet amendement supprime soixante-douze impositions affectées", note="Valeur : « soixante-douze » (cinquante-sept dans la version d'octobre 2026).")
+    F.amend("contributions_sociales_supprimees_loi", 21, "contributions", "Contributions affectées à la sécurité sociale supprimées par PLFSS n° 9", 2027, "PLFSS", 9, "Cet amendement supprime vingt et une contributions affectées à la sécurité sociale", note="Valeur : « vingt et une ». Nouvel amendement de novembre 2026 ; leur produit atteint 13 Md€ et la perte est compensée par la majoration du taux des contributions sur les revenus du patrimoine et des placements (L. 136-6 et L. 136-7 du code de la sécurité sociale).")
+    F.amend("contributions_sociales_produit_expose_md", 13, "Md€", "Produit des 21 contributions supprimées par PLFSS n° 9 (exposé)", 2027, "PLFSS", 9, "Leur produit atteint 13 milliards d’euros", tier="donnee")
     F.amend("taxes_affectees_plafond_zero_loi", 82, "lignes de ressources affectées", "Ressources affectées dont le plafond est porté à zéro par PLF-P1 n° 24", 2027, "PLF-P1", 24, "plafonne à zéro l’affectation de quatre-vingt-deux ressources", note="Valeur : « quatre-vingt-deux ».")
     F.amend("taxes_affectees_plafond_zero_rendement_meur", 29980.5, "M€", "Rendement prévisionnel 2027 des 82 lignes dont le plafond est porté à zéro", 2027, "PLF-P1", 24, "rendement prévisionnel de 29 980,5 millions d’euros au titre de 2027")
     ta = "Synth_se_TA"
@@ -294,16 +301,16 @@ def _d_etat_partout(F: Facts):
     # effectifs
     se = "Synth_se_ETP"
     dg = dict(kind="dgafp", url=DGAFP, ref_prefix="DGAFP, rapport annuel sur l'état de la fonction publique, édition 2025 (effectifs physiques au 31 décembre 2023)")
-    F.wb("fp_effectifs_2023_k", E, se, "C8", "milliers de personnes", "Effectifs des trois fonctions publiques", 2023, "donnee", expect=5803.862, nd=3, **dg, note="5,80 millions de personnes (physiques, au 31 décembre 2023).")
-    F.wb("fp_fpe_2023_k", E, se, "C13", "milliers de personnes", "Fonction publique de l'État", 2023, "donnee", expect=2570.237, nd=3, **dg)
-    F.wb("fp_fpt_2023_k", E, se, "C17", "milliers de personnes", "Fonction publique territoriale", 2023, "donnee", expect=1994.19, nd=3, **dg)
-    F.wb("fp_fph_2023_k", E, se, "C21", "milliers de personnes", "Fonction publique hospitalière", 2023, "donnee", expect=1239.435, nd=3, **dg)
-    F.wb("fp_fonctionnaires_2023_k", E, se, "C4", "milliers de personnes", "Fonctionnaires", 2023, "donnee", nd=3, **dg)
-    F.wb("fp_contractuels_2023_k", E, se, "C5", "milliers de personnes", "Contractuels", 2023, "donnee", nd=3, **dg)
-    F.wb("fp_militaires_2023_k", E, se, "C6", "milliers de personnes", "Militaires", 2023, "donnee", nd=3, **dg)
-    F.wb("fp_autres_statuts_2023_k", E, se, "C7", "milliers de personnes", "Autres catégories et statuts", 2023, "donnee", nd=3, **dg)
-    F.wb("fp_etat_ministeres_2023_k", E, "FPE", "M18", "milliers de personnes", "Agents de l'État dans les ministères (hors opérateurs)", 2023, "donnee", nd=3, **dg)
-    F.wb("fp_etat_operateurs_2023_k", E, "FPE", "F27", "milliers de personnes", "Agents des opérateurs de l'État (EPA)", 2023, "donnee", nd=3, **dg)
+    F.wb("fp_effectifs_2023_k", EM, se, "C8", "milliers de personnes", "Effectifs des trois fonctions publiques", 2023, "donnee", expect=5803.862, nd=3, **dg, note="5,80 millions de personnes (physiques, au 31 décembre 2023).")
+    F.wb("fp_fpe_2023_k", EM, se, "C13", "milliers de personnes", "Fonction publique de l'État", 2023, "donnee", expect=2570.237, nd=3, **dg)
+    F.wb("fp_fpt_2023_k", EM, se, "C17", "milliers de personnes", "Fonction publique territoriale", 2023, "donnee", expect=1994.19, nd=3, **dg)
+    F.wb("fp_fph_2023_k", EM, se, "C21", "milliers de personnes", "Fonction publique hospitalière", 2023, "donnee", expect=1239.435, nd=3, **dg)
+    F.wb("fp_fonctionnaires_2023_k", EM, se, "C4", "milliers de personnes", "Fonctionnaires", 2023, "donnee", nd=3, **dg)
+    F.wb("fp_contractuels_2023_k", EM, se, "C5", "milliers de personnes", "Contractuels", 2023, "donnee", nd=3, **dg)
+    F.wb("fp_militaires_2023_k", EM, se, "C6", "milliers de personnes", "Militaires", 2023, "donnee", nd=3, **dg)
+    F.wb("fp_autres_statuts_2023_k", EM, se, "C7", "milliers de personnes", "Autres catégories et statuts", 2023, "donnee", nd=3, **dg)
+    F.wb("fp_etat_ministeres_2023_k", EM, "FPE", "M18", "milliers de personnes", "Agents de l'État dans les ministères (hors opérateurs)", 2023, "donnee", nd=3, **dg)
+    F.wb("fp_etat_operateurs_2023_k", EM, "FPE", "F27", "milliers de personnes", "Agents des opérateurs de l'État (EPA)", 2023, "donnee", nd=3, **dg)
     F.site("postes_publics_fermes_manifeste", 580000, "postes", "« 580 000 postes publics fermés, 70 % du traitement conservé jusqu'à sept ans »", 2026, "manifeste", "580 000 postes publics fermés")
     de = "D_tail_Economies"
     F.wb("postes_fermes_total_classeur", C, de, "J2", "postes", "Baisse d'ETP, toutes administrations publiques (classeur)", None, "annonce", expect=580000, nd=0)
@@ -347,16 +354,18 @@ def _e_plan(F: Facts):
             F.wb(f"eco236_{rid}_an1_md", C, am, f"E{row}", "Md€", f"236 Md€, gain dès l'année 1 : {lbl}", None, "annonce", nd=6)
         if sh.num(f"F{row}") is not None:
             F.wb(f"eco236_{rid}_supp_md", C, am, f"F{row}", "Md€", f"236 Md€, gain supplémentaire en année pleine : {lbl}", None, "annonce", nd=6)
-    F.d["eco236_total_md"]["note"] = "236,055 Md€ (« 236 milliards »)."
-    F.d["eco236_patrimoine_supp_md"]["note"] = "18,209 en colonne F, alors que la colonne C du même onglet indique 18 pour cette ligne."
+    F.d["eco236_total_md"]["note"] = "236,353 Md€ (« 236 milliards ») ; 236,055 Md€ dans la version d'octobre 2026 du classeur."
+    F.d["eco236_patrimoine_supp_md"]["note"] = "17,553 en colonne F, égal à la colonne C de la même ligne depuis la version de novembre 2026 (octobre : 18 en colonne C et 18,209 en colonne F)."
+    F.wb("eco236_graph236_total_md", G, "Graph236", "D24", "Md€ par an", "Total des économies dans la feuille Graph236 (série du graphique « 236 milliards »)", None, "annonce", nd=6,
+         note="236,402 Md€ : la feuille Graph236 de « Séries des graphiques » n'a pas été mise à jour comme l'Annexe Manuscrit (236,353) ; son rendement des actifs publics (D34) est 17,602 contre 17,553.")
     F.site("eco236_manifeste_md", 236, "Md€ par an", "« 236 milliards d'euros économisés chaque année » (manifeste)", 2026, "manifeste", "236 milliards d’euros économisés chaque année")
     F.site("eco236_web_total_md", 236, "Md€ par an", "Tableau des 236 milliards de donnees.html : total des économies (arrondi)", 2026, "donnees", "Total des économies | 236 | 8 000", note="Le tableau du site est arrondi ; voir eco236_*_md pour les valeurs exactes du classeur.")
     F.site("eco236_web_eur_foyer", 8000, "€ par foyer et par an", "Tableau des 236 milliards de donnees.html : total par foyer", 2026, "donnees", "Total des économies | 236 | 8 000")
     F.site("eco236_web_fonctionnement_md", 39, "Md€ par an", "Tableau de donnees.html : économies sur le fonctionnement des administrations (arrondi)", 2026, "donnees",
-           "Économies sur le fonctionnement des administrations | 39 | 1 280", note="Les cinq sous-lignes affichées (4 + 10 + 9 + 12 + 4) font 39 ; le classeur donne 37,432.")
+           "Économies sur le fonctionnement des administrations | 39 | 1 280", note="Les cinq sous-lignes affichées (4 + 10 + 9 + 12 + 4) font 39 ; le classeur de novembre 2026 donne 38,117 (37,432 en octobre).")
     F.site("eco236_web_subventions_md", 69, "Md€ par an", "Tableau de donnees.html : économies sur les subventions (arrondi)", 2026, "donnees", "Économies sur les subventions | 69 | 2 330")
     F.calc("eco236_somme_e_plus_f_md", ["eco236_total_an1_md", "eco236_total_supp_md"], lambda a, b: a + b, "Md€ par an", "236 Md€ : somme du gain d'année 1 et du gain supplémentaire en année pleine", None,
-           "eco236_total_an1_md + eco236_total_supp_md", nd=6, note="236,264 Md€ : dépasse de 0,209 Md€ le total de la colonne C (patrimoine : 18 contre 18,209).")
+           "eco236_total_an1_md + eco236_total_supp_md", nd=6, note="236,353 Md€ : égale au total de la colonne C (236,353 Md€) depuis la version de novembre 2026 ; en octobre, 236,264 dépassait de 0,209 Md€ le total (patrimoine : 18 contre 18,209).")
     F.calc("foyers_implicites_236_m", ["eco236_total_md", "eco236_total_eur_foyer"], lambda a, b: a * 1000 / b, "millions de foyers", "Nombre de foyers implicite du tableau des 236 Md€ (8 000 € par foyer)", None,
            "eco236_total_md × 1 000 ÷ eco236_total_eur_foyer", nd=3, note="Dénominateur du tableau « € par foyer » du livre.")
     F.calc("eco236_par_foyer_mois_eur", ["eco236_total_eur_foyer"], lambda x: x / 12, "€ par foyer et par mois", "Économies de 236 Md€ par foyer et par mois", None, "eco236_total_eur_foyer ÷ 12", nd=0,
@@ -364,8 +373,8 @@ def _e_plan(F: Facts):
     F.calc("eco236_par_foyer_jour_eur", ["eco236_total_eur_foyer"], lambda x: x / 365, "€ par foyer et par jour", "Économies de 236 Md€ par foyer et par jour", None, "eco236_total_eur_foyer ÷ 365", nd=2,
            note="Dénominateur : 29,5 M de foyers (celui du tableau des 236 Md€).")
     # year-1 per Flux
-    F.wb("plan_gain_annee_1_flux_md", C, "Flux", "C6", "Md€", "Gain de la première année selon la feuille Flux", None, "annonce", expect=129.4, nd=3,
-         note="127,352 Md€ dans l'Annexe Manuscrit : écart de 2,048 Md€ entre deux onglets du même classeur.")
+    F.wb("plan_gain_annee_1_flux_md", C, "Flux", "C6", "Md€", "Gain de la première année selon la feuille Flux", None, "annonce", expect=129.459, nd=3,
+         note="129,459 Md€, égal à 0,0003 Md€ près au gain de l'année 1 de l'Annexe Manuscrit (129,4593) : l'écart de 2,048 Md€ d'octobre 2026 est résolu. « Année 1 » n'est pas datée dans le classeur.")
     # CSG / CRDS
     cs = "CSG_CRDS"
     plac = dict(kind="workbook")
@@ -396,7 +405,7 @@ def _e_plan(F: Facts):
     F.wb("csg_gain_median_an_eur", C, cs, "I13", "€ par an", "Gain annuel de la fin de la CSG/CRDS au salaire net médian", 2024, "annonce", nd=2)
     F.wb("csg_gain_moyen_mois_eur", C, cs, "F14", "€ par mois", "Gain mensuel de la fin de la CSG/CRDS au salaire moyen (brut 3 602 €)", 2024, "annonce", nd=2)
     F.site("csg_gain_median_manifeste_eur_mois", 300, "€ par mois", "« 300 euros par mois restitués dès la première année » (manifeste)", 2026, "manifeste", "300 euros par mois restitués dès la première année")
-    F.site("csg_gain_pct_manifeste", 13, "%", "« 13 % de salaire net en plus pour tous » (manifeste)", 2026, "manifeste", "soit 13 % de salaire net en plus pour tous")
+    F.site("csg_gain_pct_manifeste", 13, "%", "« +13 % de salaire net en plus pour tous » (manifeste)", 2026, "manifeste", "soit +13 % de salaire net en plus pour tous")
     F.site("csg_gain_smic_fiche_eur_mois", 180, "€ par mois", "« 180 euros de plus par mois au SMIC » (fiche Travailleur)", 2026, "fiches__travailleur", "180 euros de plus par mois au SMIC")
     F.site("csg_gain_pct_fiche", 13, "%", "« +13 % votre salaire net en un an, au salaire médian » (fiche Travailleur)", 2026, "fiches__travailleur", "Votre salaire net en un an, au salaire médian")
     F.site("restitution_totale_manifeste_eur_mois", 600, "€ par mois", "« 600 euros par mois rendus aux travailleurs » (300 € de salaire net + 300 € d'épargne)", 2026, "manifeste", "600 euros par mois rendus aux travailleurs")
@@ -406,8 +415,9 @@ def _e_plan(F: Facts):
     F.amend("afu_adulte_eur_an", 6600, "€ par an", "Aide fondamentale universelle par adulte", 2028, "PLF-P1", 28, "6 600 € par an et par adulte")
     F.amend("afu_enfant_eur_an", 3300, "€ par an", "Aide fondamentale universelle par enfant à charge", 2028, "PLF-P1", 28, "3 300 € par enfant à charge")
     F.amend("afu_invalidite_eur_an", 6600, "€ par an", "Majoration invalidité de l'aide fondamentale", 2028, "PLF-P1", 28, "majorés de 6 600 € pour une personne invalide")
-    F.amend("afu_pension_eur_an", 3300, "€ par an", "Majoration de l'aide fondamentale pour une pension liquidée avant le 1er janvier 2028", 2028, "PLF-P1", 28,
-            "majorés de 6 600 € pour une personne invalide et de 3 300 € pour une pension liquidée avant le 1er janvier 2028", note="Jusqu'à l'imposition des revenus de 2051.")
+    F.amend("afu_pension_minoration_eur_an", 3300, "€ par an", "Minoration de l'aide fondamentale pour une pension de retraite liquidée avant le 1er janvier 2028", 2028, "PLF-P1", 28,
+            "minorés de 3 300 € pour une pension de retraite liquidée avant le 1er janvier 2028",
+            note="Dans la version d'octobre 2026 de l'amendement, ce montant était une majoration (« majoré de 3 300 € »). Version de novembre 2026 : « minoré », pour une pension servie par un régime obligatoire ; pour une pension liquidée à compter de 2028 la minoration est réduite au prorata des droits acquis avant cette date ; elle s'applique jusqu'à l'imposition des revenus de 2051.")
     F.amend("ir_taux_unique_pct", 23, "%", "Taux unique de l'impôt sur le revenu", 2028, "PLF-P1", 28, "un taux unique de 23 %")
     F.calc("afu_adulte_eur_mois", ["afu_adulte_eur_an"], lambda x: x / 12, "€ par mois", "Aide fondamentale universelle par adulte et par mois", 2028, "afu_adulte_eur_an ÷ 12", nd=0, note="550 €/mois.")
     F.calc("afu_enfant_eur_mois", ["afu_enfant_eur_an"], lambda x: x / 12, "€ par mois", "Aide fondamentale universelle par enfant et par mois", 2028, "afu_enfant_eur_an ÷ 12", nd=2, note="275 €/mois.")
@@ -438,16 +448,16 @@ def _e_plan(F: Facts):
                  note="≈ 222 €/mois, proche des « +220 € » de la fiche. Hypothèse : revenu net imposable = salaire net (la définition du revenu net imposable après réforme n'est pas écrite ; voir DISCREPANCIES.md).")
     # CEP and assets
     cap = "Input_Capitalisation"
-    F.wb("cep_flux_capitalisation_md", C, cap, "E2", "Md€ par an", "Flux annuels affectés à la capitalisation", None, "annonce", nd=3, note="121,75 Md€ = 103,54 d'économies + 18,21 de rendement des actifs.")
+    F.wb("cep_flux_capitalisation_md", C, cap, "E2", "Md€ par an", "Flux annuels affectés à la capitalisation", None, "annonce", nd=3, note="121,94 Md€ = 104,385 d'économies + 17,553 de rendement des actifs (121,75 = 103,54 + 18,21 en octobre 2026).")
     F.wb("cep_flux_economise_md", C, cap, "E4", "Md€ par an", "Flux économisé affecté à la capitalisation", None, "annonce", nd=3)
     F.wb("cep_eco_budgetaire_pleine_md", C, cap, "E5", "Md€ par an", "Économie budgétaire en année pleine affectée à la capitalisation", None, "annonce", nd=3)
     F.wb("cep_eco_locale_pleine_md", C, cap, "E6", "Md€ par an", "Économie locale en année pleine affectée à la capitalisation", None, "annonce", nd=3)
     F.wb("cep_assurance_chomage_md", C, cap, "E7", "Md€ par an", "Assurance chômage transformée en épargne", None, "annonce", nd=3, note="Base de dépenses : 37,1 Md€.")
     F.wb("cep_reliquat_annee_1_md", C, cap, "E8", "Md€", "Reliquat de l'année 1 après suppression de la CSG, affecté à la capitalisation", None, "annonce", nd=3)
     F.wb("actifs_a_restituer_md", C, cap, "C10", "Md€", "Actifs publics à restituer (participations, foncier, logements publics, parc social)", 2024, "annonce", nd=3,
-         note="606,97 Md€ ; le manifeste : « 600 milliards d'euros de patrimoine public rendus aux Français ».")
+         note="605,27 Md€ (606,97 en octobre 2026) ; le manifeste : « 600 milliards d'euros de patrimoine public rendus aux Français ».")
     F.wb("actifs_rendement_net_pct", C, cap, "D10", "%", "Rendement net annuel supposé des actifs rendus", None, "annonce", scale=100, nd=2)
-    F.wb("actifs_rendement_md", C, cap, "E10", "Md€ par an", "Rendement net annuel des actifs rendus", None, "annonce", nd=3, note="18,209 Md€ ; affiché « 18 » dans le tableau des 236 Md€.")
+    F.wb("actifs_rendement_md", C, cap, "E10", "Md€ par an", "Rendement net annuel des actifs rendus", None, "annonce", nd=3, note="17,553 Md€ (18,209 en octobre 2026), égal à la ligne « patrimoine » de l'Annexe Manuscrit ; affiché « 18 » dans le tableau de donnees.html.")
     F.wb("actifs_participations_md", C, cap, "C11", "Md€", "Actifs à restituer : participations financières", 2024, "annonce", nd=3)
     F.wb("actifs_foncier_public_md", C, cap, "C12", "Md€", "Actifs à restituer : patrimoine foncier public", 2024, "annonce", nd=3)
     F.wb("actifs_logements_publics_md", C, cap, "C13", "Md€", "Actifs à restituer : logements publics", 2024, "annonce", nd=3)
@@ -460,7 +470,7 @@ def _e_plan(F: Facts):
            "actifs_manifeste_md × 1 000 ÷ actifs_par_foyer_manifeste_eur", nd=3, note="30 M : le même dénominateur que le « 30 M de foyers » des fiches.")
     F.calc_value("cep_implicite_classeur_eur_mois_30m", clean(F.v("cep_flux_capitalisation_md") * 1e9 / 12 / 30e6, 0), ["cep_flux_capitalisation_md"],
                  "€ par foyer et par mois", "Flux vers la capitalisation du classeur, par foyer et par mois (30 M de foyers)", None,
-                 "cep_flux_capitalisation_md × 10⁹ ÷ 12 ÷ 30 000 000", note="≈ 338 €/mois avec 30 M de foyers (nombre des fiches), 344 € avec les 29,5 M du tableau des 236 Md€, 350 € si l'on divise par les 29 M de travailleurs : le « 300 € » du manifeste n'est pas directement vérifiable. 121,75 Md€ comprend 30 Md€ d'assurance chômage, qui ne vont pas tous aux travailleurs en emploi.")
+                 "cep_flux_capitalisation_md × 10⁹ ÷ 12 ÷ 30 000 000", note="≈ 339 €/mois avec 30 M de foyers (nombre des fiches), 344 € avec les 29,5 M du tableau des 236 Md€, 350 € si l'on divise par les 29 M de travailleurs : le « 300 € » du manifeste n'est pas directement vérifiable. 121,94 Md€ comprend 29,6 Md€ d'assurance chômage, qui ne vont pas tous aux travailleurs en emploi.")
     # value added per hour
     va = "GraphVA"
     F.wb("va_heure_total_eur", G, va, "B25", "€ par heure", "Valeur ajoutée créée par une heure de travail", None, "annonce", expect=63, nd=0, note="Calcul de Résolution, sans source externe dans l'onglet.")
@@ -476,15 +486,16 @@ def _e_plan(F: Facts):
     # état B
     cr = b_credits.build()
     t = cr["meta"]["totals"]
-    from amend import amendment, pdf_url
-    src_b = {"kind": "amendment", "ref": "Amendements PLF-P2 n° 1 à 22 (article 58, état B) — totaux extraits dans data/derived/etat_b_credits_retires_plf2027.csv", "url": pdf_url("PLF-P2", 4)}
-    F.add("credits_retires_cp_md", t["cp_retirees_md"], "Md€", "Crédits de paiement retirés par les 22 amendements d'état B", 2027, dict(src_b), "loi",
-          note="39 905,0 M€ ; effet au 1er janvier 2027 (personnes morales) et au 1er juillet 2027 (personnes physiques).")
-    F.add("credits_retires_ae_md", t["ae_retirees_md"], "Md€", "Autorisations d'engagement retirées par les 22 amendements d'état B", 2027, dict(src_b), "loi", note="43 855,4 M€.")
-    F.amend("credits_retires_amendements_nombre", 22, "amendements", "Amendements d'état B qui retirent les crédits des missions", 2027, "PLF-P2", 1, "les crédits des dispositifs que la présente loi interrompt", note="Valeur : 22 amendements, un par mission (n° 1 à 22).")
+    from amend import pdf_url, quote_pages
+    from lib import ETAT_B_CSV_REL
+    src_b = {"kind": "amendment", "ref": "Amendements PLF-P2 n° 1 à 22 et n° 40 (article 58, état B) — lignes TOTAUX extraites dans " + ETAT_B_CSV_REL, "url": pdf_url("PLF-P2", 4)}
+    F.add("credits_retires_cp_md", t["cp_retirees_md"], "Md€", "Crédits de paiement retirés par les 23 amendements d'état B", 2027, dict(src_b), "loi",
+          note="21 034,5 M€ (39 905,0 M€ pour les 22 amendements de la version d'octobre 2026) ; effet au 1er janvier, au 1er avril ou au 1er juillet 2027 selon la nature des crédits de chaque mission.")
+    F.add("credits_retires_ae_md", t["ae_retirees_md"], "Md€", "Autorisations d'engagement retirées par les 23 amendements d'état B", 2027, dict(src_b), "loi", note="24 261,6 M€ (43 855,4 M€ en octobre 2026).")
+    F.amend("credits_retires_amendements_nombre", len(cr["missions"]), "amendements", "Amendements d'état B qui retirent les crédits des missions", 2027, "PLF-P2", 40, "Cet amendement retire de la mission « Outre-mer » les crédits des dispositifs que la présente loi interrompt", note="Valeur : 23 amendements, un par mission (n° 1 à 22, plus le n° 40 « Outre-mer » ajouté en novembre 2026).")
     apl_cp = next(p for p in cr["missions"][0]["programmes"] if p["programme_fr"].startswith("Aide à l’accès au logement"))
     F.add("apl_etat_b_cp_md", apl_cp["cp_retirees_md"], "Md€", "Crédits de paiement retirés du programme « Aide à l'accès au logement » (PLF-P2 n° 1)", 2027,
-          {"kind": "amendment", "ref": "Amendement PLF-P2 n° 1 (état B), ligne « Aide à l'accès au logement » : 8 067 767 822 €", "url": pdf_url("PLF-P2", amendment("PLF-P2", 1)["page"])}, "loi")
+          {"kind": "amendment", "ref": "Amendement PLF-P2 n° 1 (état B), ligne « Aide à l'accès au logement » : 2 690 349 921 € (8 067 767 822 € en octobre 2026), page " + str(quote_pages("PLF-P2", 1, "2 690 349 921")[0]) + " du PDF", "url": pdf_url("PLF-P2", quote_pages("PLF-P2", 1, "2 690 349 921")[0])}, "loi")
     F.amend("apl_economie_2027_expose_md", 5.4, "Md€", "Économie 2027 sur l'aide personnelle au logement selon l'exposé de PLF-P2 n° 32", 2027, "PLF-P2", 32, "L’économie de l’exercice 2027 est de 5,4 milliards d’euros")
     F.wb("apl_economie_annee_1_classeur_md", C, "D_tail_Economies", "D18", "Md€", "APL : économie de la première année (classeur)", None, "annonce", nd=1, note="5,4 Md€ en année 1 + 10,7 Md€ ensuite = 16,1 Md€ (Détail Economies).")
 
@@ -513,11 +524,14 @@ def _f_loi(F: Facts):
     F.amend("taxe_sur_salaires_rendement_md", 17.9, "Md€", "Rendement de la taxe sur les salaires", 2026, "PLFSS", 3, "La taxe sur les salaires rapporte 17,9 milliards d’euros")
     F.amend("bouclier_sanitaire_taux_pct", 5, "% des ressources", "Plafond annuel du reste à charge en santé", 2028, "PLFSS", 4, "IV. – Ce taux est de 5 %")
     F.amend("indemnite_sortie_taux_pct", 70, "% de l'assiette", "Indemnité de sortie des agents publics dont l'emploi est supprimé", 2027, "PLF-P2", 26, "Le taux de l’indemnité est de 70 % de l’assiette")
-    F.amend("indemnite_sortie_duree_max_ans", 7, "années", "Durée maximale de l'indemnité de sortie (agents de 25 ans d'ancienneté et plus)", 2027, "PLF-P2", 26, "qui atteint sept années pour les agents les plus anciens")
+    F.amend("indemnite_sortie_duree_max_ans", 7, "années", "Durée maximale de l'indemnité de sortie (84 mois)", 2027, "PLF-P2", 26, "Cet amendement indemnise jusqu’à sept ans le fonctionnaire de l’État dont l’emploi est supprimé",
+            note="Version de novembre 2026 : 24 mois plus un mois par trimestre de services, 84 mois au plus (voir indemnite_sortie_duree_max_mois), et au plus jusqu'à la date à laquelle une pension sans coefficient de minoration peut être obtenue. En octobre : 1 à 7 ans selon l'ancienneté.")
+    F.amend("indemnite_sortie_duree_max_mois", 84, "mois", "Durée maximale de l'indemnité de sortie des agents publics dont l'emploi est supprimé", 2027, "PLF-P2", 26, "Elle est au plus égale à quatre-vingt-quatre mois")
+    F.amend("indemnite_sortie_duree_base_mois", 24, "mois", "Durée de base de l'indemnité de sortie (avant l'ajout d'un mois par trimestre de services)", 2027, "PLF-P2", 26, "Sa durée est de vingt-quatre mois, augmentée d’un mois par trimestre de services publics effectifs")
     F.amend("foyers_fiscaux_loi_m", 40.2, "millions de foyers fiscaux", "Foyers fiscaux (exposé de PLF-P1 n° 28, source CPO octobre 2024)", 2023, "PLF-P1", 28, "Sur 40,2 millions de foyers fiscaux", tier="donnee")
     F.amend("foyers_fiscaux_irpp_loi_m", 18.5, "millions de foyers fiscaux", "Foyers fiscaux ayant acquitté l'impôt sur le revenu au titre de 2023", 2023, "PLF-P1", 28, "18,5 millions seulement ont acquitté l’impôt sur le revenu au titre de 2023", tier="donnee")
-    F.amend("cep_montant_loi_eur", 0, "€", "Montant inscrit dans l'amendement pour le compte d'épargne personnel (versements fixés chaque année par la loi de finances ; nuls à défaut)", 2028, "PLF-P1", 27,
-            "aucun montant n’est inscrit ici", note="Valeur 0 : l'amendement n'inscrit aucun montant ; les 300 €/mois et 20 000 €/foyer sont des annonces sans base légale chiffrée.")
+    F.amend("cep_montant_loi_eur", 0, "€", "Compte d'épargne personnel : aucun montant n'est inscrit dans l'amendement (versements fixés chaque année par la loi de finances, nuls à défaut)", 2028, "PLF-P1", 27,
+            "aucun montant n’est inscrit ici", note="Valeur 0 = valeur par défaut, pas un montant inscrit : « À défaut de montant global fixé au titre d’une année, ce montant est nul » ; les 300 €/mois et 20 000 €/foyer sont des annonces sans base légale chiffrée.")
 
 
 # ======================================================================================
@@ -543,7 +557,7 @@ def _g_fiches(F: Facts):
     F.site("fiche_consommateur_81_pct", 81, "%", "« 81 % : les produits faits en France que vous consommez deviennent plus abordables » (fiche Consommateur, sans source)", 2026, "fiches__consommateur", "Les produits faits en France que vous consommez deviennent plus abordables")
     F.site("fiche_inflation_faciale_pct", 2, "% (borne haute)", "« inflation faciale inférieure à 2 % » (fiche Citoyen)", 2026, "fiches__citoyen", "inflation faciale inférieure à 2 %")
     F.site("fiche_niches_supprimees_md", 143, "Md€", "« 143 Md€ de niches supprimées, dont 52 milliards vous reviennent » (fiche Contribuable)", 2026, "fiches__contribuable", "**143 Md€** : De niches supprimées")
-    F.site("fiche_niches_baisse_charges_md", 52, "Md€", "« dont 52 milliards vous reviennent en baisse de charges et de taxes » (fiche Contribuable)", 2026, "fiches__contribuable", "dont 52 milliards vous reviennent en baisse de charges et de taxes")
+    F.site("fiche_niches_baisse_charges_md", 52, "Md€", "« dont 52 milliards d'euros vous reviennent en baisse de charges et de taxes » (fiche Contribuable)", 2026, "fiches__contribuable", "dont 52 milliards d'euros vous reviennent en baisse de charges et de taxes")
     F.site("fiche_parc_social_actif_net_md", 340, "Md€", "Actif net des organismes de logement social estimé à « 340 milliards d'euros » (fiche Locataire)", 2026, "fiches__locataire", "L’actif net des organismes de logement social est estimé à 340 milliards d’euros")
     F.site("fiche_parc_social_logements_m", 4.5, "millions de logements", "« quatre millions et demi de logements » remis sur le marché par la vente du parc social (fiche Locataire)", 2026, "fiches__locataire", "remet quatre millions et demi de logements sur le marché")
 
@@ -577,29 +591,29 @@ def _i_conflicts(F: Facts):
     F.conflict("gain_csg_smic", ["csg_gain_smic_fiche_eur_mois", "csg_gain_smic_mois_eur"],
                "Au SMIC, la fiche Travailleur annonce « 180 euros de plus par mois » ; le classeur donne 171,72 €/mois (SMIC 2025, 12,04 %), 173,74 € (01/2026) et 177,93 € (06/2026).")
     F.conflict("restitution_600_eur", ["restitution_epargne_manifeste_eur_mois", "cep_implicite_classeur_eur_mois_30m"],
-               "« 600 € par mois » = 300 € de salaire net + 300 € d'épargne. Les flux du classeur vers la capitalisation (121,75 Md€) représentent ≈ 338 €/mois par foyer (30 M de foyers) ou 350 € par travailleur (29 M) : le 300 € n'est pas directement vérifiable, et les lettres aux élus annoncent « 25 % » de hausse en trois ans.")
+               "« 600 € par mois » = 300 € de salaire net + 300 € d'épargne. Les flux du classeur vers la capitalisation (121,94 Md€) représentent ≈ 339 €/mois par foyer (30 M de foyers) ou 350 € par travailleur (29 M) : le 300 € n'est pas directement vérifiable, et les lettres aux élus annoncent « 25 % » de hausse en trois ans.")
     F.conflict("nb_impots_cibles", ["impots_cibles_manifeste", "impots_cibles_lettres"],
-               "« Quatre impôts » (TVA, revenu, sociétés, foncier) dans le manifeste ; « 5 impôts au lieu de 438 » dans les lettres aux élus. L'amendement PLFSS n° 1 maintient en outre la CSG sur les pensions et le capital et une taxe sur les salaires jusqu'en 2029.")
+               "« Quatre impôts » (TVA, revenu, sociétés, foncier) dans le manifeste ; « 5 impôts au lieu de 438 » dans les lettres aux élus. Les amendements PLFSS n° 1 à 3 maintiennent en outre la CSG sur les pensions, le chômage et les indemnités journalières (n° 1) et sur les revenus du capital (n° 2), et une taxe sur les salaires jusqu'en 2029 (n° 3, abrogée au 1er janvier 2030).")
     F.conflict("afu_smic", ["afu_smic_amendement_eur_mois", "afu_smic_net_fiche_eur_mois", "afu_smic_net_calc_eur_mois"],
                "L'exposé de PLF-P1 n° 28 dit que le salarié au SMIC « reçoit 550 € par mois de l'administration fiscale » (aide brute) ; la fiche annonce « +220 € » et le classeur (GraphIR) raisonne en versement net : aide 6 600 € − 23 % du revenu, soit ≈ 220 €/mois au niveau du SMIC.")
     F.conflict("foyer_denominateurs", ["fiche_pop_foyers", "foyers_implicites_dep_m", "foyers_implicites_236_m", "foyers_implicites_actifs_m", "foyers_fiscaux_loi_m"],
                "Le livre utilise quatre « foyers » différents : 30 M dans les fiches et dans « 600 Md€ soit 20 000 € par foyer » ; 31,0 M implicites dans « 54 000 € par foyer » ; 29,5 M implicites dans « 8 000 € par foyer » ; et 40,2 M de foyers fiscaux dans l'exposé de PLF-P1 n° 28 (dont 18,5 M seulement ont payé l'impôt sur le revenu au titre de 2023). L'aide fondamentale est versée par personne.")
     F.conflict("operateurs_nombre", ["agences_operateurs_plf", "agences_operateurs_loi"],
-               "L'exposé de PLF-P2 n° 25 cite 431 opérateurs ; le classeur en compte 434 (433 en sommant ses lignes).")
+               "L'exposé de PLF-P2 n° 25 cite 431 opérateurs ; le classeur en compte 434 (somme de ses 180 lignes ; 433 selon la source-analyse du dépôt).")
     F.conflict("agences_fermees_vs_dissoutes", ["agences_fermees", "agences_dissoutes_loi"],
                "746 agences d'État supprimées ou cédées dans le livre (périmètre : 1 104 agences d'État) contre 337 personnes morales nommées dans la liste de dissolution de PLF-P2 n° 25 (au 1er juillet 2027) : périmètres différents, pas de table de correspondance publiée.")
     F.conflict("apl_economie_2027", ["apl_economie_2027_expose_md", "apl_etat_b_cp_md", "apl_economie_annee_1_classeur_md"],
-               "L'exposé de PLF-P2 n° 32 chiffre l'économie 2027 de l'APL à 5,4 Md€ ; l'amendement n° 1 (état B) retire 8,068 Md€ de crédits de paiement du programme « Aide à l'accès au logement » (16,52 Md€) ; le classeur donne 5,4 Md€ en année 1 puis 10,7 Md€ ensuite. Écart non expliqué dans les sources.")
+               "L'exposé de PLF-P2 n° 32 chiffre l'économie 2027 de l'APL à 5,4 Md€ ; l'amendement n° 1 (état B) retire désormais 2,690 Md€ de crédits de paiement du programme « Aide à l'accès au logement » (16,52 Md€ au texte déposé ; 8,068 Md€ retirés dans la version d'octobre 2026) ; le classeur donne 5,4 Md€ en année 1 puis 10,7 Md€ ensuite. L'écart n'est pas expliqué dans les sources et a changé de sens : l'état B retire moins que l'économie annoncée.")
     F.conflict("record_mondial", ["eu_dep_rang_fr_2024", "eu_dep_pib_fi_2024_pct", "eu_dep_pib_fr_2024_pct"],
                "Le manifeste parle de « record mondial » de dépense publique. Dans les données Eurostat (mise à jour du 21 octobre 2026), la Finlande (57,9 % du PIB en 2024 ; 57,5 % en 2025) dépasse la France (57,0 % ; 57,3 %) : la France est 2e sur 30 pays. Le classeur du livre, d'un millésime antérieur, donnait déjà la Finlande devant (57,7 % ; 57,5 %, contre 57,0 % ; 57,2 %).")
     F.conflict("depenses_pib_france_2024", ["eu_dep_pib_fr_2024_pct", "dep_pib_insee_calc_pct"],
                "57,0 % (Eurostat tec00023) contre 57,26 % en rapportant le total COFOG Insee (1 671,794 Md€) au PIB 2024 du classeur (2 919,9 Md€, « Refonte fiscalité », C3). Pour obtenir 57,0 % avec cette dépense, il faudrait un PIB d'environ 2 933 Md€ (13 Md€, soit 0,4 %, de plus) : l'écart tient au PIB pris au dénominateur, la dépense étant la même.")
-    F.conflict("eco236_total", ["eco236_total_md", "eco236_somme_e_plus_f_md"],
-               "Dans l'Annexe Manuscrit, le total de la colonne C (236,055 Md€) est inférieur de 0,209 Md€ à la somme du gain d'année 1 et du gain supplémentaire (236,264 Md€) : la ligne patrimoine affiche 18 en colonne C et 18,209 en colonne F.")
-    F.conflict("plan_gain_annee_1", ["eco236_total_an1_md", "plan_gain_annee_1_flux_md"],
-               "Gain de la première année : 127,352 Md€ dans l'Annexe Manuscrit, 129,4 Md€ dans la feuille Flux (écart 2,048 Md€).")
+    F.conflict("eco236_total", ["eco236_total_md", "eco236_graph236_total_md"],
+               "Le total des économies est 236,353 Md€ dans l'Annexe Manuscrit (colonne C, égale à E + F depuis novembre 2026), 236,402 Md€ dans la feuille Graph236 de « Séries des graphiques » qui alimente le graphique du livre (écart 0,050 Md€ : la ligne patrimoine y vaut 17,602 au lieu de 17,553), et 236,398 Md€ en additionnant les destinations de la feuille Input Capitalisation (114,46 + 121,938). Les quatre valeurs arrondissent à 236.")
+    F.conflict("nb_impots_graphique", ["impots_nombre_manifeste", "impots_nombre_graphique_fusion"],
+               "« 438 impôts » (manifeste, page Propositions, fiches) contre « 434 prélèvements aujourd'hui » dans le titre du graphique « Fusion des impôts » (novembre 2026) : la source ne dit pas quels prélèvements séparent 434 de 438.")
     F.conflict("eco236_arrondis_web", ["eco236_web_fonctionnement_md", "eco236_fonctionnement_md", "eco236_web_subventions_md", "eco236_subventions_md"],
-               "Le tableau arrondi du site (donnees.html) affiche 39 Md€ pour le fonctionnement des administrations (4 + 10 + 9 + 12 + 4) et 69 pour les subventions ; le classeur donne 37,432 et 68,948. Utiliser le classeur.")
+               "Le tableau arrondi du site (donnees.html) affiche 39 Md€ pour le fonctionnement des administrations (4 + 10 + 9 + 12 + 4) et 69 pour les subventions ; le classeur de novembre 2026 donne 38,117 et 68,858 (37,432 et 68,948 en octobre) ; le tableau de donnees.html n'a pas été mis à jour par les auteurs. Utiliser le classeur.")
     F.conflict("niches_cout_2026", ["niches_cout_2026_expose_md", "niches_cout_2026_somme_md"],
                "L'exposé de PLF-P1 n° 1 cite 79,5 Md€ pour 2026 ; la somme des 465 lignes 2026 du classeur est 79,613 Md€ (écart 0,113 Md€, ε et nc comptés pour 0).")
     F.conflict("niches_montant", ["niches_total_md", "fiche_niches_supprimees_md", "niches_cout_2024_md"],

@@ -113,7 +113,10 @@ describe('Disabled adult with the CMI « invalidité » (fiche Personne handicap
 });
 
 describe('Other book figures', () => {
-  it('child part 275 €/mois, pension supplement 275 €/mois before 2028 only', () => {
+  // Amendments of 17–18 Nov 2026: the pension supplement (+3 300 €/an) became a MINORATION (−3 300 €/an), pro rata
+  // of the insurance duration validated before 2028 for a pension liquidated later. The book's October figure
+  // « 550 + 275 + 275 = 1 100 € » for a retiree with a child is now 550 + 275 − 275 = 550 €.
+  it('child part 275 €/mois; pension minoration −275 €/mois before 2028, pro rata after', () => {
     const h: Household = {
       adults: [
         {
@@ -128,14 +131,25 @@ describe('Other book figures', () => {
       housing: { status: 'proprietaire' },
       benefits: { nonRecours: false },
     };
-    expect(amount(simulate(h, 'plan'), 'afu')).toBe(550 + 275 + 275);
-    const after = {
+    expect(amount(simulate(h, 'plan'), 'afu')).toBe(550 + 275 - 275);
+    const after = (pension: NonNullable<Household['adults'][0]['pension']>): Household => ({
       ...h,
-      adults: [
-        { ...h.adults[0], pension: { amount: 1500, basis: 'brut' as const, startYear: 2028 } },
-      ] as Household['adults'],
-    };
-    expect(amount(simulate(after, 'plan'), 'afu')).toBe(550 + 275);
+      adults: [{ ...h.adults[0], pension }] as Household['adults'],
+    });
+    // default: full career of 172 quarters ending on 1 July 2028 → 170 / 172 validated before 2028
+    expect(
+      amount(simulate(after({ amount: 1500, basis: 'brut', startYear: 2028 }), 'plan'), 'afu'),
+    ).toBeCloseTo(550 + 275 - (275 * 170) / 172, 1);
+    // declared share: 40 % of the insurance duration validated before 2028
+    expect(
+      amount(
+        simulate(
+          after({ amount: 1500, basis: 'brut', startYear: 2045, insuranceShareBefore2028: 0.4 }),
+          'plan',
+        ),
+        'afu',
+      ),
+    ).toBeCloseTo(550 + 275 - 275 * 0.4, 1);
   });
   it('young adults 18–24 get the adult AFU (H13)', () => {
     const h = { ...single(null), children: [{ age: 19 }] };

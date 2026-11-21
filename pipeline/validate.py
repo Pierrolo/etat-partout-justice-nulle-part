@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate site/src/data/*.json: totals reconcile, every fact is sourced, quotes are verbatim,
+"""Validate site/src/data/*.json (built from the November 2026 version of the plan): totals reconcile, every fact is sourced, quotes are verbatim,
 cross-file figures agree, every discrepancy is documented.
 
     python3 -I pipeline/validate.py
@@ -302,7 +302,8 @@ def check_plan(R, d, facts):
             if kids:
                 worst = max(worst, abs(sum(k[key] for k in kids) - r[key]))
         R.check(worst <= 1e-6, area, f"236 Md€ table: every parent = sum of its children for {key} (max gap {worst:.1e})")
-    R.check(close(by["total"]["md_par_an"], 236.054667, 1e-6), area, "total 236,055 Md€")
+    R.check(close(by["total"]["md_par_an"], 236.352699, 1e-6), area, "total 236,353 Md€ (Annexe Manuscrit!C3, version de novembre 2026)")
+    R.check(all(abs(r["ecart_c_vs_e_plus_f_md"]) < 1e-6 for r in t) and d["savings_checks"]["rows_where_C_differs_from_E_plus_F"] == [], area, "236 Md€ table: C = E + F on all 26 rows (D08, résolu en novembre 2026)")
     R.check(close(facts["eco236_total_md"]["value"], by["total"]["md_par_an"]), area, "fact eco236_total_md = savings_table total")
     sk = d["sankey"]
     R.check(sk["balanced"] and close(sk["total_in_md"], sk["total_out_md"]), area, f"Sankey (par catégorie): in = out = {sk['total_in_md']} Md€")
@@ -316,17 +317,22 @@ def check_plan(R, d, facts):
         else:
             R.check(close(inflow, n["value_md"], 1e-6), area, f"Sankey node {n['id']}: in = value")
     sc = d["sankey_classeur"]
-    R.check(sc["balanced"] and close(sc["total_in_md"], sc["total_out_md"]), area, f"Sankey du classeur (Input Capitalisation): in = out = {sc['total_in_md']} Md€ (114,46 + 121,749)")
-    R.check(close(sk["destinations"]["salaire_net_md"], 114.46) and close(sc["parts"]["capitalisation_total"], 121.749180, 1e-5), area, "destinations: salaire net 114,46 ; capitalisation 121,749 (classeur)")
+    R.check(sc["balanced"] and close(sc["total_in_md"], sc["total_out_md"]), area, f"Sankey du classeur (Input Capitalisation): in = out = {sc['total_in_md']} Md€ (114,46 + 121,938)")
+    R.check(close(sk["destinations"]["salaire_net_md"], 114.46) and close(sc["parts"]["capitalisation_total"], 121.937699, 1e-5), area, "destinations: salaire net 114,46 ; capitalisation 121,938 (classeur)")
     rec = d["reconciliation"]
     resid = {r["id"]: r["md"] for r in rec["residuels"]}
-    if resid.get("patrimoine_18_vs_18_209"):
-        R.warn("D08", f"236 Md€ : total colonne C = {fr(rec['totaux']['annexe_manuscrit_colonne_C'], 3)}, E+F = {fr(rec['totaux']['annexe_manuscrit_E_plus_F'], 3)} (patrimoine 18 vs 18,209 ; écart {fr(resid['patrimoine_18_vs_18_209'], 3)} Md€).")
-    if rec["year_1_vs_flux"]["ecart_md"]:
-        R.warn("D09", f"Gain année 1 : Annexe Manuscrit {fr(rec['year_1_vs_flux']['annexe'], 3)} vs feuille Flux {fr(rec['year_1_vs_flux']['flux'], 3)} Md€ (écart {fr(rec['year_1_vs_flux']['ecart_md'], 3)}).")
+    R.check(not resid.get("patrimoine_18_vs_18_209") and close(rec["totaux"]["annexe_manuscrit_colonne_C"], rec["totaux"]["annexe_manuscrit_E_plus_F"], 1e-6), area,
+            f"236 Md€ : total colonne C = E + F = {fr(rec['totaux']['annexe_manuscrit_colonne_C'], 3)} (D08 résolu)")
+    R.check(abs(rec["year_1_vs_flux"]["ecart_md"]) < 0.001, area, f"gain année 1 : Annexe Manuscrit {fr(rec['year_1_vs_flux']['annexe'], 4)} = feuille Flux {fr(rec['year_1_vs_flux']['flux'], 3)} (D09 résolu)")
+    g236 = rec["graph236"]
+    if abs(g236["ecart_vs_annexe_md"]) > 1e-6:
+        R.warn("D39", f"Graph236 : total {fr(g236['total_md'], 3)} Md€ (D24) et patrimoine {fr(g236['rendement_actifs_md'], 3)} Md€ (D34) contre {fr(rec['totaux']['annexe_manuscrit_colonne_C'], 3)} et 17,553 dans l'Annexe Manuscrit (écart {fr(g236['ecart_vs_annexe_md'], 3)} Md€).")
     if resid.get("capitalisation_calcule_vs_affirme"):
         R.warn("D10", f"Sankey : capitalisation {fr(sk['destinations']['capitalisation_md_calcule'], 3)} (calculée) vs {fr(sk['destinations']['capitalisation_md_classeur'], 3)} Md€ (classeur) : résidu {fr(resid['capitalisation_calcule_vs_affirme'], 3)} Md€.")
     brk = d["savings_checks"]["web_rounding_breaks"]
+    mis = d["savings_checks"]["web_vs_workbook_mismatches"]
+    if mis:
+        R.warn("D36", "Tableau des 236 Md€ de donnees.html non mis à jour : " + " ; ".join(f"{m['label_fr'][:46]} affiché {m['web_md']} vs {fr(m['workbook_md'], 3)} (classeur)" for m in mis) + ".")
     if brk:
         R.warn("D11", "Tableau web arrondi : " + " ; ".join(f"{b['id']} affiché {b['web_subtotal']} vs somme des lignes affichées {b['web_children_sum']} (classeur {fr(b['workbook_subtotal_md'], 3)})" for b in brk))
     va = d["valeur_ajoutee_horaire"]
@@ -336,7 +342,7 @@ def check_plan(R, d, facts):
     R.check(close(facts["csg_crds_activite_md"]["value"], d["destinations"]["salaire_net"]["md_par_an"]), area, "fact csg_crds_activite_md = destination salaire net")
     R.check(close(facts["actifs_a_restituer_md"]["value"], d["destinations"]["actifs_a_restituer"]["total_md"]), area, "fact actifs_a_restituer_md = file")
     R.check(close(facts["po_pib_2024_pct"]["value"], d["prelevements_obligatoires"]["po_pib_2024_pct"]), area, "fact po_pib_2024_pct = file")
-    R.warn("D28", "Coût net de l'aide fondamentale (402,0 − 135,3 = 266,7 Md€) : aucune microsimulation (gagnants/perdants par décile) publiée dans les sources.")
+    R.warn("D28", "Coût net de l'aide fondamentale (402,0 Md€ brut − 135,3 Md€ de dépenses existantes fusionnées = 266,7 Md€) : aucune microsimulation (gagnants/perdants par décile) publiée dans les sources.")
 
 
 def check_niches(R, d, facts):
@@ -389,7 +395,7 @@ def check_agences(R, d, facts):
 def check_credits(R, d, facts):
     area = "credits-retires"
     ms = d["missions"]
-    R.check(len(ms) == 22, area, "22 état B amendments")
+    R.check(len(ms) == 23 and [m["amendment"] for m in ms] == list(range(1, 23)) + [40], area, "23 état B amendments (n° 1 à 22 et n° 40)")
     for m in ms:
         s_ae = sum(p["ae_retirees_eur"] for p in m["programmes"])
         s_cp = sum(p["cp_retirees_eur"] for p in m["programmes"])
@@ -398,22 +404,25 @@ def check_credits(R, d, facts):
         gap = m["ecart_somme_programmes_vs_total_eur"]
         if gap["ae"] or gap["cp"]:
             R.warn("D24", f"État B n° {m['amendment']} : somme des programmes − total publié = {gap} € (arrondi de la source).")
+        if not m["effets"] or any(e["date"] not in ("2027-01-01", "2027-04-01", "2027-07-01") for e in m["effets"]):
+            R.fail(area, f"n°{m['amendment']}: effect dates")
     T = d["meta"]["totals"]
-    R.check(sum(m["ae_retirees_eur"] for m in ms) == T["ae_retirees_eur"] and sum(m["cp_retirees_eur"] for m in ms) == T["cp_retirees_eur"], area, "22 totals sum to the grand total")
-    R.check(T["ae_retirees_meur"] == 43855.4 and T["cp_retirees_meur"] == 39905.0, area, "totals match Appendix A of source-analysis: 43 855,4 M€ AE / 39 905,0 M€ CP")
+    R.check(sum(m["ae_retirees_eur"] for m in ms) == T["ae_retirees_eur"] and sum(m["cp_retirees_eur"] for m in ms) == T["cp_retirees_eur"], area, "23 totals sum to the grand total")
+    R.check(T["ae_retirees_eur"] == 24261621967 and T["cp_retirees_eur"] == 21034477811, area, "totals = TOTAUX rows summed in research/diff-2026-10-to-2026-11 § 3.7.1: 24 261 621 967 € AE / 21 034 477 811 € CP")
+    R.check(all(not (m["ecart_somme_programmes_vs_total_eur"]["ae"] or m["ecart_somme_programmes_vs_total_eur"]["cp"]) for m in ms), area, "programme lines add up exactly to every TOTAUX row (D24, résolu en novembre 2026)")
     R.check(close(facts["credits_retires_cp_md"]["value"], T["cp_retirees_md"]), area, "fact credits_retires_cp_md = file")
     apl = ms[0]["programmes"][0]
     R.warn("D19", f"APL 2027 : exposé PLF-P2 n° 32 « 5,4 Md€ » vs état B n° 1 : {fr(apl['cp_retirees_md'], 3)} Md€ retirés du programme « Aide à l'accès au logement » (classeur : 5,4 + 10,7 Md€).")
-    R.check(all(m["rang_par_cp"] >= 1 for m in ms) and sorted(m["rang_par_cp"] for m in ms) == list(range(1, 23)), area, "ranks by CP are 1..22")
+    R.check(all(m["rang_par_cp"] >= 1 for m in ms) and sorted(m["rang_par_cp"] for m in ms) == list(range(1, 24)), area, "ranks by CP are 1..23")
 
 
 def check_amendements(R, d, facts, themes):
     area = "amendements"
     am = d["amendements"]
     ids = [a["id"] for a in am]
-    R.check(len(am) == 81 and len(set(ids)) == 81, area, "81 amendments, unique ids")
+    R.check(len(am) == 84 and len(set(ids)) == 84, area, "84 amendments, unique ids")
     cnt = {l: sum(1 for a in am if a["liasse"] == l) for l in LIASSES}
-    R.check(cnt == {"PLF-P1": 34, "PLF-P2": 39, "PLFSS": 8}, area, f"34 + 39 + 8 ({cnt})")
+    R.check(cnt == {"PLF-P1": 35, "PLF-P2": 40, "PLFSS": 9}, area, f"35 + 40 + 9 ({cnt})")
     ok = True
     for a in am:
         try:
@@ -424,6 +433,10 @@ def check_amendements(R, d, facts, themes):
             assert a["theme"] in themes and a["resume_fr"].strip().endswith(".") and a["title_fr"] and a["objet_expose_fr"]
             assert re.fullmatch(r"https://france-resolution\.fr/amendements/Liasse_[A-Z_0-9]+\.pdf#page=\d+", a["pdf_url"])
             assert 1 <= a["pdf_page"] <= LIASSES[a["liasse"]]["pages"]
+            assert a["pdf_page"] == all_amendments()[a["liasse"]][a["number"]]["page"], "pdf_page is the amendment's first page"
+            for dt in a["dates"]:
+                assert a["pdf_page"] <= dt["pdf_page"] <= all_amendments()[a["liasse"]][a["number"]]["page_end"], ("date page outside the amendment", dt)
+                assert dt["pdf_url"].endswith(f"#page={dt['pdf_page']}")
         except Exception as e:  # noqa: BLE001
             ok = False
             R.fail(area, f"{a['id']}: {e!r}")
@@ -431,9 +444,14 @@ def check_amendements(R, d, facts, themes):
         R.ok(area, "every amendment: ISO dates, valid theme, summary sentence, title, PDF page link within the liasse")
     A = all_amendments()
     R.check(all(a["number"] in A[a["liasse"]] for a in am), area, "every record maps to a parsed amendment of the liasse")
-    R.check(sum(1 for a in am if a["theme"] == "credits_etat") == 22, area, "22 amendments on theme credits_etat")
+    R.check(sum(1 for a in am if a["theme"] == "credits_etat") == 23, area, "23 amendments on theme credits_etat")
     R.check(sum(len(a["dates"]) for a in am) >= 100, area, f"{sum(len(a['dates']) for a in am)} dated effects (each verified verbatim at build time)")
-    R.check(sum(m["n"] for m in d["meta"]["themes"]) == 81, area, "theme counts sum to 81")
+    R.check(sum(m["n"] for m in d["meta"]["themes"]) == 84, area, "theme counts sum to 84")
+    cards = d["meta"]["donnees_page_cards"]
+    stale = {k: v for k, v in cards.items() if k != "_header_total" and not v["match"]}
+    R.check(cards["_header_total"] == 84, area, "donnees.html header says 84 amendments")
+    if stale:
+        R.warn("D35", "Page « Données » des auteurs : cartes de liasses non mises à jour (" + " ; ".join(f"{k} : {v['n_amendements_page']} amendements · {v['n_pages_page']} pages affichés, {v['n_amendements_pdf']} · {v['n_pages_pdf']} dans le PDF" for k, v in stale.items()) + f") ; elles datent toutes du « {next(iter(cards.values()))['date_page_fr']} » alors que les PDF ont été générés les 17 et 18 novembre 2026 ; l'en-tête de la page dit {cards['_header_total']} amendements, la somme des cartes en donne {sum(v['n_amendements_page'] for k, v in cards.items() if k != '_header_total')}.")
 
 
 def check_calendrier(R, d, amend_ids):
@@ -445,6 +463,11 @@ def check_calendrier(R, d, amend_ids):
         try:
             datetime.date.fromisoformat(e["date"])
             assert e["tier"] in TIERS and e["source"]["quote"] and e["source"]["url"]
+            lid0, n0 = e["amendments"][0]["liasse"], e["amendments"][0]["number"]
+            pg = int(e["source"]["url"].rsplit("#page=", 1)[1])
+            am0 = all_amendments()[lid0][n0]
+            assert am0["page"] <= pg <= am0["page_end"], f"source page {pg} outside n° {n0} ({am0['page']}-{am0['page_end']})"
+            assert quote_in_amendment(lid0, n0, e["source"]["quote"]), "event quote not verbatim in the first amendment of the event"
             for r in e["amendments"]:
                 assert f"{r['liasse']}-{r['number']}" in amend_ids
         except Exception as x:  # noqa: BLE001
@@ -459,6 +482,11 @@ def check_calendrier(R, d, amend_ids):
         good = all(steps[i]["from"] <= (steps[i]["to"] or "9999") for i in range(len(steps))) and all(steps[i]["to"] is None or steps[i]["to"] < steps[i + 1]["from"] for i in range(len(steps) - 1))
         if not good:
             R.fail(area, f"trajectory {t['id']}: steps overlap or are unordered")
+        for st in steps:
+            for src in st.get("sources", []):
+                am0 = all_amendments()[src["liasse"]][src["number"]]
+                if not (am0["page"] <= src["page"] <= am0["page_end"]) or not quote_in_amendment(src["liasse"], src["number"], src["quote"]):
+                    R.fail(area, f"trajectory {t['id']}: source page or quote outside the amendment")
         if not all(s.get("sources") for s in steps):
             R.fail(area, f"trajectory {t['id']}: a step has no verified quote")
     R.ok(area, f"{len(d['trajectoires'])} trajectories: ordered, non-overlapping, one verified quote per step")
@@ -488,10 +516,21 @@ def check_lifecycle(R, d):
     R.warn("D25", "GraphAFU : deux séries portent le libellé « Epargne retraite personnelle » (20 064 € et 6 600 € à partir de 64 ans), sens non documenté.")
 
 
+def check_conflicts_from_facts(R, facts, data):
+    """New conflicts of the November 2026 version, raised from the data (not typed)."""
+    a, b = facts["impots_nombre_manifeste"]["value"], facts["impots_nombre_graphique_fusion"]["value"]
+    if a != b:
+        R.warn("D37", f"Nombre de prélèvements : « {a} impôts » (manifeste, page Propositions, fiches) contre « {b} prélèvements aujourd'hui » (titre du graphique « Fusion des impôts », novembre 2026).")
+    lc = data["lifecycle.json"]
+    aide_adulte = {r["age"]: r.get("aide_fondamentale") for r in lc["by_age"]}
+    if aide_adulte[70] == facts["afu_adulte_eur_an"]["value"]:
+        R.warn("D38", f"GraphAFU (« Solidarité au cours de la vie ») : aide fondamentale de {fr(aide_adulte[70])} € à 70 ans, sans la minoration de {fr(facts['afu_pension_minoration_eur_an']['value'])} € que PLF-P1 n° 28 (version de novembre 2026) applique aux pensions de retraite liquidées avant 2028 (soit {fr(aide_adulte[70] - facts['afu_pension_minoration_eur_an']['value'])} € par an) ; la fiche Retraité ne la liste pas parmi les pertes.")
+
+
 def check_static_warns(R):
     R.warn("D27", "Textes de loi : le « revenu net imposable » après réforme (déduction de 10 %, CSG) n'est pas défini ; l'abrogation de 150 U-II-1° (exonération de la résidence principale) découle de PLF-P1 n° 20 et n° 1 [inférence de la source-analyse] ; calendrier de l'abattement de 10 % sur les pensions déduit.")
     R.warn("D12", "Gain CSG/CRDS : 300 €/mois et 13 % (manifeste) vs 275,08 €/mois et 12,56 % (classeur) au salaire médian ; 180 € (fiche) vs 171,72 € au SMIC.")
-    R.warn("D13", "« 600 €/mois » : flux du classeur vers la capitalisation ≈ 338 €/mois/foyer (30 M) ; lettres : « 25 % » en trois ans.")
+    R.warn("D13", "« 600 €/mois » : flux du classeur vers la capitalisation ≈ 339 €/mois/foyer (30 M) ; lettres : « 25 % » en trois ans.")
     R.warn("D14", "« Quatre impôts » (manifeste) vs « 5 impôts » (lettres).")
     R.warn("D15", "AFU au SMIC : 550 € brut (exposé n° 28) vs ≈ 220 € net (fiche, GraphIR).")
     R.warn("D16", "« Foyer » : 29,5 / 30 / 31,0 M implicites (8 000 € / 600 Md€→20 000 € / 54 000 €) vs 40,2 M de foyers fiscaux.")
@@ -528,8 +567,10 @@ def check_cross_files(R, data, facts):
 
 
 def check_reform_params(R, data, facts):
-    """research/reform_parameters.json is an independent, hand-curated extract of the plan's parameters:
-    every parameter it shares with the pipeline must agree with facts.json / the page files."""
+    """research/reform_parameters.json is an independent, hand-curated extract of the plan's parameters
+    (retrieved 24 October 2026, i.e. the October version): every parameter it shares with the pipeline must agree
+    with facts.json / the page files, except the ones the authors changed in November 2026, which are listed below
+    with their October value (still asserted against the file) and the November value (asserted against the facts)."""
     area = "reform_parameters"
     params = load_reform_params()
     plan = data["plan-flux.json"]
@@ -538,29 +579,38 @@ def check_reform_params(R, data, facts):
         ("income_tax_and_fundamental_aid.afu_per_adult_per_year_eur", facts["afu_adulte_eur_an"]["value"], 1e-9),
         ("income_tax_and_fundamental_aid.afu_per_dependent_child_per_year_eur", facts["afu_enfant_eur_an"]["value"], 1e-9),
         ("income_tax_and_fundamental_aid.afu_supplement_invalidity_per_year_eur", facts["afu_invalidite_eur_an"]["value"], 1e-9),
-        ("income_tax_and_fundamental_aid.afu_supplement_pension_per_year_eur", facts["afu_pension_eur_an"]["value"], 1e-9),
+        # the sign flipped in November 2026 (« majoré » → « minoré » de 3 300 €): same amount, compared in absolute value
+        ("income_tax_and_fundamental_aid.afu_supplement_pension_per_year_eur", facts["afu_pension_minoration_eur_an"]["value"], 1e-9),
         ("income_tax_and_fundamental_aid.flat_rate_on_net_taxable_income", plan["afu_courbe"]["taux_unique"], 1e-9),
         ("income_tax_and_fundamental_aid.break_even_income_single_adult_eur_per_year", facts["afu_seuil_equilibre_eur_an"]["value"], 0.005),
-        ("aggregate_savings_workbook_Md_per_year.total", facts["eco236_total_md"]["value"], 1e-6),
-        ("aggregate_savings_workbook_Md_per_year.gain_year1_Md", facts["eco236_total_an1_md"]["value"], 1e-6),
         ("aggregate_savings_workbook_Md_per_year.per_foyer_eur", plan["savings_table"][0]["eur_par_foyer_an"], 1e-9),
         ("macro_targets_workbook.GDP_2024_Md", facts["po_pib_2024_md"]["value"], 1e-6),
         ("macro_targets_workbook.PO_2024_Md", facts["po_2024_md"]["value"], 1e-6),
-        ("macro_targets_workbook.PO_target_Md", facts["po_cible_md"]["value"], 1e-6),
         ("macro_targets_workbook.PO_rate_2024", facts["po_pib_2024_pct"]["value"] / 100, 1e-6),
-        ("macro_targets_workbook.PO_rate_target", facts["po_pib_cible_pct"]["value"] / 100, 1e-6),
         ("public_employment_exit.jobs_closed_full_year", facts["emplois_etat_fermes_annee_pleine_loi"]["value"], 1e-9),
         ("public_employment_exit.etpt_ceiling_cut_2027", facts["emplois_etat_plafond_baisse_2027_loi"]["value"], 1e-9),
         ("public_employment_exit.etpt_ceiling_state_2027_total", facts["emplois_etat_plafond_apres_loi"]["value"], 1e-9),
         ("housing_aids.first_year_saving_Md", facts["apl_economie_2027_expose_md"]["value"], 1e-9),
         ("vat.normal_rate_pct", facts["tva_taux_normal_pct"]["value"], 1e-9),
     ]
+    # parameters of the October extract that moved with the November 2026 workbooks: (October value in the file, November value in the facts)
+    moved = [
+        ("aggregate_savings_workbook_Md_per_year.total", 236.05466666666666, facts["eco236_total_md"]["value"], 236.352699),
+        ("aggregate_savings_workbook_Md_per_year.gain_year1_Md", 127.35216666666668, facts["eco236_total_an1_md"]["value"], 129.4593),
+        ("macro_targets_workbook.PO_target_Md", 1060.75436, facts["po_cible_md"]["value"], 1060.69536),
+        ("macro_targets_workbook.PO_rate_target", 0.3632844823452858, facts["po_pib_cible_pct"]["value"] / 100, 0.36326428),
+    ]
     bad = []
+    for path, mine_oct, mine_nov, expect_nov in moved:
+        if abs(rp(params, path) - mine_oct) > 1e-9:
+            bad.append(f"{path}: October extract changed ({rp(params, path)} != {mine_oct})")
+        if abs(mine_nov - expect_nov) > 1e-6:
+            bad.append(f"{path}: facts.json = {mine_nov}, expected November value {expect_nov}")
     for path, mine, tol in pairs:
         theirs = rp(params, path)
-        if abs(theirs - mine) > tol:
+        if abs(abs(theirs) - abs(mine)) > tol:
             bad.append(f"{path}: reform_parameters = {theirs}, pipeline = {mine}")
-    R.check(not bad, area, f"{len(pairs)} parameters of research/reform_parameters.json agree with facts.json / page files", "; ".join(bad))
+    R.check(not bad, area, f"{len(pairs)} parameters of research/reform_parameters.json (October extract) agree with facts.json / page files; {len(moved)} moved in November 2026 (asserted both ways)", "; ".join(bad))
     traj = rp(params, "csg_crds_on_earned_income.monthly_trajectory_2027")
     steps = cal["csg_crds_activite_2027"]["steps"]
     a = [(t["csg_pct"], t["crds_pct"], t["total_pct"]) for t in traj]
@@ -604,6 +654,7 @@ def main(argv):
     check_lifecycle(R, data["lifecycle.json"])
     check_cross_files(R, data, facts)
     check_reform_params(R, data, facts)
+    check_conflicts_from_facts(R, facts, data)
     check_static_warns(R)
     check_manifest(R, data)
     # determinism: a fresh in-memory build must equal what is on disk

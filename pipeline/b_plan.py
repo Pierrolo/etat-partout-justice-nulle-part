@@ -1,8 +1,9 @@
 """plan-flux.json — « Le plan en un schéma » : 236 Md€ → salaire net + épargne.
 
-Sources: Synthèse Chiffres (Annexe Manuscrit, Flux, CSG-CRDS, Input Capitalisation,
-Refonte fiscalité), Synthèse Graphiques (GraphVA, GraphIR), donnees.md (rounded web
-table), PLFSS amendment 2 (where the 114 Md€ of CSG/CRDS go).
+Sources (version of the authors' workbooks republished in November 2026): Synthèse des chiffrages
+(Annexe Manuscrit, Flux, CSG-CRDS, Input Capitalisation, Refonte fiscalité), Séries des graphiques
+(GraphVA, GraphIR), donnees.md (rounded web table, not updated by the authors in November),
+PLFSS amendment 2 (where the 114 Md€ of CSG/CRDS go).
 
 Interpretation of the Sankey (documented in `sankey.interpretation`):
   catégorie d'économie  →  calendrier (année 1 | gain supplémentaire en année pleine)
@@ -12,13 +13,17 @@ Interpretation of the Sankey (documented in `sankey.interpretation`):
 * The workbook's own reconciliation (sheet Input Capitalisation) funds the CSG/CRDS
   restitution (114,46 Md€) from the year-1 gains and sends everything else — the year-1
   leftover, the later gains, the unemployment-insurance savings and the asset yield —
-  to the capitalisation / savings account (121,749 Md€).  The year-1 → salaire net link
+  to the capitalisation / savings account (121,938 Md€).  The year-1 → salaire net link
   is therefore the stated 114,46 Md€; the year-1 → capitalisation link is the remainder.
+* « Année 1 » is the workbook's undated label: the Annexe Manuscrit does not say which calendar
+  year it is.  The PLFSS n° 1 writes 33 Md€ for 2027 and 114 Md€ « en année pleine dès 2028 »;
+  the workbook's 114,46 Md€ of CSG/CRDS is therefore a full-year (2028) figure.
 * Residuals are never hidden: see `reconciliation`.
 """
 from __future__ import annotations
 
 import re
+from decimal import Decimal, ROUND_HALF_UP
 
 from lib import Sheet, clean, fr, parse_num, quote_in, read_page, ws, SITE
 
@@ -112,7 +117,7 @@ def _savings():
         recs.append(rec)
     by_id = {x["id"]: x for x in recs}
 
-    checks = {"children_sums": [], "rows_where_C_differs_from_E_plus_F": [], "web_rounding_breaks": []}
+    checks = {"children_sums": [], "rows_where_C_differs_from_E_plus_F": [], "web_rounding_breaks": [], "web_vs_workbook_mismatches": []}
     for rec in recs:
         kids = [k for k in recs if k["parent_id"] == rec["id"]]
         if not kids:
@@ -125,12 +130,19 @@ def _savings():
         if s_web != rec["web_arrondi"]["md"]:
             checks["web_rounding_breaks"].append({"id": rec["id"], "web_subtotal": rec["web_arrondi"]["md"], "web_children_sum": s_web,
                                                   "workbook_subtotal_md": rec["md_par_an"]})
+    for rec in recs:  # rows of the rounded web table (donnees.html, not updated in November 2026) that no longer round the workbook value
+        rounded = int(Decimal(repr(rec["md_par_an"])).quantize(Decimal(1), rounding=ROUND_HALF_UP))
+        if rounded != rec["web_arrondi"]["md"]:
+            checks["web_vs_workbook_mismatches"].append({"id": rec["id"], "label_fr": rec["web_arrondi"]["label_fr"], "web_md": rec["web_arrondi"]["md"],
+                                                         "workbook_md": rec["md_par_an"], "workbook_rounded_md": rounded})
     for rec in recs:
         if abs(rec["ecart_c_vs_e_plus_f_md"]) > 1e-6:
             checks["rows_where_C_differs_from_E_plus_F"].append({"id": rec["id"], "label_fr": rec["label_fr"], "md_par_an": rec["md_par_an"],
                                                                  "e_plus_f": clean(rec["gain_annee_1_md"] + rec["gain_supp_annee_pleine_md"], 6),
                                                                  "ecart_md": rec["ecart_c_vs_e_plus_f_md"]})
-    assert sorted(x["id"] for x in checks["rows_where_C_differs_from_E_plus_F"]) == ["patrimoine", "total"], checks["rows_where_C_differs_from_E_plus_F"]
+    # November 2026: the workbook now truncates nothing (Annexe Manuscrit!C28 = SUM(E28,F28)): C = E + F holds on every row
+    # (October: « C ≠ E + F » on the patrimoine row and on the total, 0,209 Md€ apart)
+    assert checks["rows_where_C_differs_from_E_plus_F"] == [], checks["rows_where_C_differs_from_E_plus_F"]
     return sh, recs, by_id, checks
 
 
@@ -168,7 +180,7 @@ def _sankey(sh, recs, by_id):
     links.append({"source": "annee_1", "target": "salaire_net", "value_md": clean(salaire, 6), "kind": "montant_affirme_classeur",
                   "ref": "Synthèse Chiffres › CSG-CRDS!I3 (114,46 Md€, PLACSS 2024 annexe 1)"})
     links.append({"source": "annee_1", "target": "capitalisation", "value_md": cap_from_y1, "kind": "calcule",
-                  "formula": "gain année 1 (127,352) − CSG/CRDS restituée (114,46)"})
+                  "formula": f"gain année 1 ({fr(y1_tot, 4)}) − CSG/CRDS restituée ({fr(salaire, 2)})"})
     links.append({"source": "annee_pleine", "target": "capitalisation", "value_md": full_tot, "kind": "exact_classeur"})
     # balance checks
     for n in nodes:
@@ -191,12 +203,12 @@ def _sankey(sh, recs, by_id):
             "Catégories d'économies (Annexe Manuscrit, colonnes E et F) → calendrier → destination. "
             "Conformément à l'onglet « Input Capitalisation », la restitution de la CSG/CRDS sur l'activité (114,46 Md€) est financée par les gains de l'année 1 ; "
             "le reliquat de l'année 1, les gains supplémentaires de l'année pleine, l'assurance chômage transformée en épargne et le rendement des actifs publics alimentent la capitalisation. "
-            "Le classeur n'affecte pas chaque économie à une destination précise : seuls les totaux par destination (114,46 et 121,749 Md€) sont affirmés."
+            "Le classeur n'affecte pas chaque économie à une destination précise : seuls les totaux par destination (114,46 et 121,938 Md€) sont affirmés."
         ),
         "node_value_note": (
-            "value_md des catégories = colonnes E + F de l'Annexe Manuscrit (donc 18,209 pour le patrimoine, alors que la colonne C du même onglet affiche 18) ; "
-            "md_par_an_classeur = colonne C. La destination « capitalisation » vaut 121,804 Md€ dans ce schéma, contre 121,749 Md€ affirmés (Input Capitalisation!E2) : "
-            "écart de 0,055 Md€ documenté dans reconciliation."
+            "value_md des catégories = colonnes E + F de l'Annexe Manuscrit (égales à la colonne C sur chaque ligne depuis la version de novembre 2026) ; "
+            "md_par_an_classeur = colonne C. La destination « capitalisation » vaut " + fr(cap_total, 3) + " Md€ dans ce schéma, contre " + fr(stated_cap, 3) + " Md€ affirmés (Input Capitalisation!E2) : "
+            "écart de " + fr(abs(clean(cap_total - stated_cap, 3)), 3) + " Md€ documenté dans reconciliation."
         ),
         "destinations": {
             "salaire_net_md": clean(salaire, 6),
@@ -241,7 +253,7 @@ def _classeur_reconciliation(by_id):
         {"id": "eco_budgetaire_pleine", "label_fr": "Économie budgétaire en année pleine", "layer": 0, "value_md": parts["economie_budgetaire_annee_pleine"], "cell": "Input Capitalisation!E5"},
         {"id": "eco_locale_pleine", "label_fr": "Économie locale en année pleine", "layer": 0, "value_md": parts["economie_locale_annee_pleine"], "cell": "Input Capitalisation!E6"},
         {"id": "assurance_chomage", "label_fr": "Assurance chômage transformée en épargne", "layer": 0, "value_md": parts["assurance_chomage"], "cell": "Input Capitalisation!E7"},
-        {"id": "rendement_actifs", "label_fr": "Rendement net des actifs rendus (3 % de 606,97 Md€)", "layer": 0, "value_md": parts["rendement_actifs"], "cell": "Input Capitalisation!E10"},
+        {"id": "rendement_actifs", "label_fr": f"Rendement net des actifs rendus ({fr(cap.num('D10') * 100, 1)} % de {fr(cap.num('C10'), 2)} Md€)", "layer": 0, "value_md": parts["rendement_actifs"], "cell": "Input Capitalisation!E10"},
         {"id": "salaire_net", "label_fr": "Salaire net (fin CSG/CRDS activité)", "layer": 1, "value_md": parts["salaire_net"], "cell": "CSG-CRDS!I3"},
         {"id": "capitalisation", "label_fr": "Capitalisation / épargne", "layer": 1, "value_md": parts["capitalisation_total"], "cell": "Input Capitalisation!E2"},
     ]
@@ -258,7 +270,7 @@ def _classeur_reconciliation(by_id):
     c_total = by_id["total"]["md_par_an"]
     ef_total = clean(by_id["total"]["gain_annee_1_md"] + by_id["total"]["gain_supp_annee_pleine_md"], 6)
     return {
-        "description": "Réconciliation propre au classeur (feuilles Flux, CSG-CRDS et Input Capitalisation) : équilibrée à l'euro près, mais sur 236,209 Md€ et non 236,055.",
+        "description": "Réconciliation propre au classeur (feuilles Flux, CSG-CRDS et Input Capitalisation) : équilibrée à l'euro près, mais sur " + fr(total_out, 3) + " Md€ et non " + fr(c_total, 3) + ".",
         "nodes": nodes, "links": links, "total_in_md": tot_in, "total_out_md": total_out, "balanced": True,
         "parts": parts,
         "vs_annexe_manuscrit": {
@@ -272,6 +284,8 @@ def _classeur_reconciliation(by_id):
 
 
 def _reconciliation(by_id, sk, classeur):
+    g = Sheet.get("graphiques", "Graph236")
+    graph236_total, graph236_actifs = g.num("D24"), g.num("D34")
     c_total = by_id["total"]["md_par_an"]
     ef_total = classeur["vs_annexe_manuscrit"]["annexe_total_E_plus_F_md"]
     flux_total = classeur["total_out_md"]
@@ -288,22 +302,21 @@ def _reconciliation(by_id, sk, classeur):
         },
         "residuels": [
             {
-                "id": "patrimoine_18_vs_18_209", "md": clean(ef_total - c_total, 6),
-                "explication": "Dans l'Annexe Manuscrit, la ligne « Patrimoine public valorisé et restitué » vaut 18 en colonne C (et dans le total 236,055) mais 18,209 en colonne F (gain supplémentaire en année pleine) : la somme E + F du tableau (236,264) dépasse donc son propre total de 0,209 Md€. 18,209 = 3 % × 606,973 (Input Capitalisation).",
-            },
-            {
                 "id": "annexe_vs_flux", "md": clean(flux_total - ef_total, 6),
-                "explication": f"Les montants de la réconciliation (feuilles Flux et Input Capitalisation) sont arrondis différemment de l'Annexe Manuscrit : gain année 1 de {fr(a1_flux)} (Flux) contre {fr(a1, 3)} (Annexe), et économies État + collectivités en année pleine de {fr(eco_state_loc_flux)} (Input Capitalisation : 38,5 + 20,1) contre {fr(eco_state_loc_annexe, 4)} (Annexe : structures 27,9025 + subventions 32,8). Les deux écarts (+{fr(a1_flux - a1, 3)} et −{fr(eco_state_loc_annexe - eco_state_loc_flux, 3)}) se compensent presque : solde {fr(flux_total - ef_total, 3)} Md€.",
+                "explication": f"Les montants de la réconciliation (feuilles Flux et Input Capitalisation) diffèrent de l'Annexe Manuscrit : gain année 1 de {fr(a1_flux)} (Flux) contre {fr(a1, 4)} (Annexe), et économies État + collectivités en année pleine de {fr(eco_state_loc_flux)} (Input Capitalisation : {fr(classeur['parts']['economie_budgetaire_annee_pleine'])} + {fr(classeur['parts']['economie_locale_annee_pleine'])}) contre {fr(eco_state_loc_annexe, 4)} (Annexe : structures {fr(by_id['structures']['gain_supp_annee_pleine_md'], 4)} + subventions {fr(by_id['subventions']['gain_supp_annee_pleine_md'], 2)}). L'écart sur la première année est résolu (la feuille Flux donne {fr(a1_flux)} contre {fr(a1, 4)}) ; il reste {fr(flux_total - ef_total, 3)} Md€ sur l'ensemble, qui vient des économies en année pleine.",
             },
             {
                 "id": "capitalisation_calcule_vs_affirme", "md": clean(sk["destinations"]["capitalisation_md_calcule"] - sk["destinations"]["capitalisation_md_classeur"], 6),
-                "explication": "Dans le Sankey par catégorie, la destination capitalisation vaut 121,804 Md€ (reliquat année 1 + année pleine, d'après l'Annexe Manuscrit) contre 121,749 Md€ affirmés par Input Capitalisation!E2 : même écart de 0,055 Md€ que ci-dessus.",
+                "explication": f"Dans le Sankey par catégorie, la destination capitalisation vaut {fr(sk['destinations']['capitalisation_md_calcule'], 3)} Md€ (reliquat année 1 + année pleine, d'après l'Annexe Manuscrit) contre {fr(sk['destinations']['capitalisation_md_classeur'], 3)} Md€ affirmés par Input Capitalisation!E2 : même écart de {fr(abs(clean(flux_total - ef_total, 3)), 3)} Md€ que ci-dessus.",
             },
         ],
-        "headline_236": "« 236 milliards » (manifeste, lettres) = 236,055 Md€ (colonne C) ; 236,264 si l'on additionne E + F ; 236,209 si l'on additionne les destinations 114,46 + 121,749. Les trois valeurs arrondissent à 236.",
+        "headline_236": f"« 236 milliards » (manifeste, lettres) = {fr(c_total, 3)} Md€ (colonne C, égale à E + F depuis la version de novembre 2026) ; {fr(flux_total, 3)} si l'on additionne les destinations 114,46 + {fr(classeur['parts']['capitalisation_total'], 3)} (Input Capitalisation) ; {fr(graph236_total, 3)} dans la feuille Graph236 de « Séries des graphiques », dont le total n'a pas suivi l'Annexe Manuscrit. Les quatre valeurs arrondissent à 236.",
+        "graph236": {"total_md": clean(graph236_total, 6), "rendement_actifs_md": clean(graph236_actifs, 6), "cells": "Graph236!D24, D34",
+                     "ecart_vs_annexe_md": clean(graph236_total - c_total, 6),
+                     "note": "Le graphique « 236 milliards » du livre lit la feuille Graph236 de « Séries des graphiques » : son total (D24) et son rendement des actifs publics (D34) n'ont pas été mis à jour comme l'Annexe Manuscrit (C3 et C28)."},
         "year_1_vs_flux": {"annexe": a1, "flux": a1_flux, "ecart_md": clean(a1_flux - a1, 4)},
         "per_foyer": {"md_par_an": c_total, "eur_par_foyer": by_id["total"]["eur_par_foyer_an"], "foyers_implicites_millions": clean(c_total * 1000 / by_id["total"]["eur_par_foyer_an"], 3),
-                      "note": "Dénominateur implicite du tableau « € par foyer » : 236,055 Md€ ÷ 8 000 € = 29,507 M de foyers (les fiches parlent de 30 M, la loi de 40,2 M de foyers fiscaux)."},
+                      "note": f"Dénominateur implicite du tableau « € par foyer » : {fr(c_total, 3)} Md€ ÷ 8 000 € = {fr(c_total * 1000 / by_id['total']['eur_par_foyer_an'], 3)} M de foyers (les fiches parlent de 30 M, la loi de 40,2 M de foyers fiscaux)."},
     }
 
 
@@ -493,7 +506,7 @@ def _flux_mesures():
         "rows": rows,
         "totaux": {"gain_annee_1_md": clean(sh.num("C6"), 3), "gain_supp_terme_md": clean(sh.num("E6"), 3), "total_supprime_a_terme_md": clean(sh.num("G6"), 3), "autre_gisement_md": clean(sh.num("H6"), 3),
                    "somme_postes_niveau_1_annee_1_md": s1},
-        "note": "Autre lecture des mêmes économies, par mesure (feuille Flux) : 129,4 Md€ la première année (niches 52,1 + État 44 + collectivités 33,3), dont 114,46 pour la CSG/CRDS et 14,94 de reliquat. Les niches fiscales ont un « gain supplémentaire à terme » (29,1 + 9 de niches sociales) qui compense la refonte fiscale et n'entre pas dans les 236 Md€.",
+        "note": f"Autre lecture des mêmes économies, par mesure (feuille Flux) : {fr(sh.num('C6'), 3)} Md€ la première année (niches 52,1 + État 44 + collectivités {fr(sh.num('C22'), 3)}), dont 114,46 pour la CSG/CRDS et {fr(Sheet.get('chiffres', 'Input_Capitalisation').num('E8'), 3)} de reliquat ; c'est, à 0,0003 Md€ près, le gain de l'année 1 de l'Annexe Manuscrit. Les niches fiscales ont un « gain supplémentaire à terme » (29,1 + 9 de niches sociales) qui compense la refonte fiscale et n'entre pas dans les 236 Md€.",
         "source": sh.source("B5:J26"), "tier": "annonce",
     }
 
@@ -543,7 +556,7 @@ def build() -> dict:
             "tier_note": "Estimations de Résolution (Calculs de Résolution) : aucune de ces valeurs n'est écrite dans un amendement, sauf mention « loi ».",
             "notes": [
                 "Utiliser le tableau savings_table (26 lignes) pour la table de données ; id/parent_id donnent la hiérarchie.",
-                "Les valeurs « web_arrondi » viennent du tableau arrondi de donnees.html ; leurs sous-totaux ne s'additionnent pas toujours (39 affiché contre 37,43 exact pour le fonctionnement des administrations).",
+                "Les valeurs « web_arrondi » viennent du tableau arrondi de donnees.html ; leurs sous-totaux ne s'additionnent pas toujours (39 affiché contre 38,117 exact pour le fonctionnement des administrations ; 67 affiché contre 68,242 pour les structures facultatives : le tableau de donnees.html n'a pas été mis à jour en novembre 2026).",
             ],
         },
         "savings_table": recs,
@@ -559,7 +572,7 @@ def build() -> dict:
                 {"id": c, "label_fr": CATEGORY_LABELS[c], "annee_1_md": by_id[c]["gain_annee_1_md"], "supplement_annee_pleine_md": by_id[c]["gain_supp_annee_pleine_md"]}
                 for c in ("structures", "subventions", "niches", "chomage", "patrimoine")
             ],
-            "autre_lecture_flux": {"annee_1_md": classeur["parts"]["annee_1"], "note": "feuille Flux : 129,4 Md€ la première année (écart de 2,048 Md€ avec l'Annexe Manuscrit, voir reconciliation)"},
+            "autre_lecture_flux": {"annee_1_md": classeur["parts"]["annee_1"], "note": f"feuille Flux : {fr(classeur['parts']['annee_1'], 3)} Md€ la première année, égal à l'Annexe Manuscrit à 0,0003 Md€ près (écart de 2,048 Md€ en octobre 2026, résolu)"},
             "source": sh.source("E3:F28"),
         },
         "destinations": _destinations(),

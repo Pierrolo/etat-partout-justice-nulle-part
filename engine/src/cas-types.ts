@@ -302,7 +302,8 @@ export const CAS_TYPES: CasType[] = [
   {
     id: 'retraite-2028',
     family: 'Retraités',
-    label: 'Retraité·e seul·e, pension 1 800 € brut liquidée en 2028 (sans majoration AFU)',
+    label:
+      'Retraité·e seul·e, pension 1 800 € brut liquidée en 2028 (minoration de l’AFU au prorata des trimestres validés avant 2028)',
     household: hh([retiree(1800, 64, 2028)], [], OWNER),
   },
 

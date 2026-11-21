@@ -26,34 +26,42 @@ from pathlib import Path
 from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
-CSV_DIR = ROOT / "data" / "derived" / "csv"
-PAGES_DIR = ROOT / "research" / "pages"
+# Inputs: the authors' republication of 17-18 Nov 2026 (re-crawled 2026-11-21).  The October 2026 snapshot
+# (data/derived/, research/pages/, data/raw/) stays in the repository as history; the pipeline no longer reads it.
+SNAPSHOT = "2026-11-21"
+CSV_DIR = ROOT / "data" / f"derived-{SNAPSHOT}" / "csv"
+PAGES_DIR = ROOT / "research" / f"pages-{SNAPSHOT}"
 OUT_DIR = ROOT / "site" / "src" / "data"
-ETAT_B_CSV = ROOT / "data" / "derived" / "etat_b_credits_retires_plf2027.csv"
+ETAT_B_CSV = ROOT / "data" / f"derived-{SNAPSHOT}" / "etat_b_credits_retires_plf2027.csv"
+ETAT_B_CSV_REL = f"data/derived-{SNAPSHOT}/etat_b_credits_retires_plf2027.csv"
 REFORM_PARAMS = ROOT / "research" / "reform_parameters.json"
 
 SITE = "https://france-resolution.fr"
+
+# Version of the plan the data rest on (shown on /comprendre/amendements, /calendrier, /le-plan and /methode).
+# The liasse PDFs were generated on 17 Nov (PLF-P1, PLFSS) and 18 Nov 2026 (PLF-P2); their cover still reads « octobre 2026 ».
+PLAN_VERSION = {
+    "date_iso": "2026-11-18",
+    "date_fr": "18 novembre 2026",
+    "pdf_dates_fr": {"PLF-P1": "17 novembre 2026", "PLF-P2": "18 novembre 2026", "PLFSS": "17 novembre 2026"},
+    "cover_fr": "Résolution — octobre 2026",
+    "snapshot": SNAPSHOT,
+    "previous_fr": "version d'octobre 2026 (81 amendements)",
+}
 
 # --------------------------------------------------------------------------
 # Workbooks (CSV dumps).  key -> (csv folder, original file name on the site)
 # --------------------------------------------------------------------------
 WORKBOOKS = {
-    "chiffres": ("Synth_se_Chiffres_R_solution_0910", "Synthèse Chiffres Résolution_0910.xlsx"),
-    "graphiques": ("Synth_se_Graphiques_R_solution_0910", "Synthèse Graphiques Résolution_0910.xlsx"),
-    "etp": ("Synth_se_ETP_et_agences_R_solution_0910", "Synthèse ETP et agences Résolution_0910.xlsx"),
-    "niches": (
-        "PLF_2026_V_M_tome_II_Annexe_3_Depenses_fiscales_0910",
-        "PLF 2026_V&M tome II - Annexe 3 - Depenses fiscales - 0910.xls",
-    ),
-    "taxes_aff": (
-        "PLF_2026_V_M_tome_I_Annexe_2_Taxes_affectees_0910",
-        "PLF 2026_V&M tome I - Annexe 2 - Taxes affectees_0910.xls",
-    ),
-    "budget": (
-        "PLF26_Depenses_2026_du_BG_et_des_BA_selon_nomenclatures_dest",
-        "PLF26 - Depenses 2026 du BG et des BA selon nomenclatures destination et nature_0910.xls",
-    ),
-    "apul": ("T_3305_APUL_R_solution_0910", "T_3305_APUL_Résolution_0910.xlsx"),
+    "chiffres": ("Synth_se_des_chiffrages", "Synthèse des chiffrages.xlsx"),
+    "graphiques": ("S_ries_des_graphiques", "Séries des graphiques.xlsx"),
+    # the October « Synthèse ETP et agences » workbook was split in two on the site
+    "emplois": ("Emplois_publics", "Emplois publics.xlsx"),
+    "agences": ("Agences_publiques", "Agences publiques.xlsx"),
+    "niches": ("Niches_fiscales", "Niches fiscales.xls"),
+    "taxes_aff": ("Taxes_affect_es_aux_agences", "Taxes affectées aux agences.xls"),
+    "budget": ("D_penses_de_l_tat", "Dépenses de l'État.xls"),
+    "apul": ("D_penses_locales", "Dépenses locales.xlsx"),
 }
 
 # CSV slug -> real sheet title (only for sheets we cite)

@@ -5,8 +5,9 @@ Le simulateur compare, pour **votre ménage**, deux situations :
 - **Aujourd'hui** : la législation en vigueur au 24 octobre 2026 (barème de l'impôt de la loi de finances pour 2026,
   prestations revalorisées en avril 2026, aides au logement revalorisées en octobre 2026, SMIC de juin 2026 :
   12,31 €/h, 1 867,02 € brut par mois) ;
-- **Avec le plan** de l'association Résolution, tel qu'il est écrit dans les 81 amendements qu'elle a publiés (PLF 2027,
-  1re et 2de parties ; PLFSS 2027), complétés par ses fiches et son manifeste quand le texte juridique est muet.
+- **Avec le plan** de l'association Résolution, tel qu'il est écrit dans les 84 amendements qu'elle a publiés (PLF 2027,
+  1re et 2de parties ; PLFSS 2027 ; version publiée les 17 et 18 novembre 2026), complétés par ses fiches et son
+  manifeste quand le texte juridique est muet.
 
 **Note du 21 novembre 2026 sur le SMIC.** Le gouvernement a annoncé le 9 novembre 2026 une hausse du SMIC de 1,6 %
 au 1er décembre 2026. Le décret n'est pas encore publié et cette hausse n'est pas en vigueur : le simulateur garde
@@ -22,7 +23,7 @@ votre navigateur ; rien n'est envoyé nulle part.
 ## En deux minutes {#en-clair}
 
 - **Ce que fait le simulateur.** Il calcule ce qui vous reste pour vivre chaque mois (le [revenu disponible](#calcul)) aujourd'hui, puis avec le plan complet, et vous montre l'écart ligne par ligne.
-- **D'où viennent les règles du plan.** Des 81 amendements rédigés et publiés par l'association Résolution (aucun n'est en vigueur), complétés par ses fiches et son manifeste quand le texte est muet. Chaque ligne dit de quel type de source elle vient.
+- **D'où viennent les règles du plan.** Des 84 amendements rédigés et publiés par l'association Résolution (version des 17 et 18 novembre 2026 ; aucun n'est en vigueur), complétés par ses fiches et son manifeste quand le texte est muet. Chaque ligne dit de quel type de source elle vient.
 - **Ce qui est compté par défaut.** Les mesures chiffrées dans les amendements, et le remplacement du RSA, de la prime d'activité et de l'AAH par l'AFU, que le plan annonce sans l'écrire dans un amendement (hypothèse [H1](#h1), réglable).
 - **Ce qui est montré à part.** Les promesses sans montant (compte d'épargne, patrimoine rendu, compte éducation) et les pertes que le simulateur ne sait pas chiffrer. Elles ne sont jamais additionnées au résultat.
 - **Ce qui est vérifié.** La situation d'aujourd'hui est comparée à OpenFisca, le moteur de référence, sur 40 ménages types : au pire quelques euros par mois d'écart ([détail](#openfisca)).
@@ -40,7 +41,7 @@ revenu (+ crédits d'impôt) + aide fondamentale. La TVA est estimée à part (�
 | Chômage | ARE nette déclarée ; CSG 6,2 % + CRDS 0,5 % au-delà du SMIC (écrêtement ; taux réduit 3,8 % ou exonération selon le revenu fiscal de référence : non modélisé) | ARE inchangée (H6), imposée à 23 % |
 | Retraite | CSG des pensions par tranche de revenu fiscal (0 / 4,3 / 7,4 / 9,1 %) | CSG maintenue ; tranche recalculée (H16) |
 | Impôt sur le revenu | barème 2026, quotient familial et son plafonnement, décote, abattements 10 % (salaires et pensions), abattement « 65 ans ou invalide » (art. 157 bis, par personne, doublé pour un couple), demi-part par titulaire de la CMI « invalidité » (art. 195), seuil de recouvrement de 61 € (après réductions, avant crédits d'impôt ; sous le seuil, seul l'excédent d'un crédit sur l'impôt est remboursé) ; crédits garde d'enfants et emploi à domicile, réduction pour dons | **23 % du revenu net imposable**, sans quotient ni décote ; revenu imposable = salaire net (− 10 % de frais professionnels, H2) + pensions après CSG déductible **sans abattement de 10 %** ; niches supprimées |
-| Aide fondamentale (AFU) | — | 6 600 €/an par personne majeure, 3 300 €/an par enfant de moins de 18 ans, +6 600 € par titulaire de la carte mobilité inclusion « invalidité », +3 300 € par pension liquidée avant 2028 ; l'excédent sur l'impôt est versé |
+| Aide fondamentale (AFU) | — | 6 600 €/an par personne majeure, 3 300 €/an par enfant de moins de 18 ans, +6 600 € par titulaire de la carte mobilité inclusion « invalidité », **−3 300 €** par titulaire d'une pension de retraite d'un régime obligatoire liquidée avant 2028 ; pour une pension liquidée à partir de 2028, −3 300 € × part de la durée d'assurance validée avant 2028 (hypothèse [H21](#h21) si vous ne l'indiquez pas) ; minoration jusqu'à l'impôt sur les revenus de 2051 ; l'excédent sur l'impôt est versé |
 | RSA, prime d'activité | barèmes 2026, forfait logement, majoration parent isolé | remplacés par l'AFU (H1, réglable) |
 | AAH, ASPA | AAH individuelle (abattements sur revenus d'activité), ASPA (seul / couple) | remplacées par l'AFU (H1, réglable) |
 | Aides au logement | barème APL/AL du parc privé, zones 1/2/3 ; ressources d'un·e étudiant·e comptées au moins 8 600 €/an (6 900 € pour un·e boursier·e) | supprimées (droits existants réduits puis éteints) |
@@ -70,17 +71,17 @@ Deux règles découlent de ces niveaux :
 |---|---|---|---|---|
 | H1 | RSA, prime d'activité, AAH, ASPA, bourses remplacés par l'AFU ? Le manifeste dit « à la place de toutes les aides », les classeurs comptent 135 Md€ d'aides fusionnées, mais aucun amendement ne les abroge | **Remplacés** | Annoncé | Oui : « maintenus en différentiel » (l'AFU compte comme ressource, l'aide complète jusqu'au niveau actuel, elle devient imposable à 23 %) |
 | H2 | La déduction de 10 % pour frais professionnels survit-elle ? (art. 83 3° CGI non abrogé) | **Maintenue** : 0,793 € gardé par euro gagné, seuil d'équilibre ≈ 31 884 € de salaire net annuel | Estimation | Oui : supprimée = lecture du plan (0,77 € ; 28 695,65 €) |
-| H3 | Revenu imposable | Aujourd'hui : net + CSG non déductible + CRDS ; plan : salaire net (plus de CSG) − 10 % ; pensions : CSG déductible maintenue, abattement de 10 % supprimé | Amendement proposé | — |
-| H4 | Qui capte la baisse de CSG et la fin des exonérations patronales ? | 100 % au salarié (incidence légale de court terme), salaire brut et coût employeur inchangés | Annoncé | — |
+| H3 | Revenu imposable | Aujourd'hui : net + CSG non déductible + CRDS ; plan : salaire après cotisations (plus de CSG ni de CRDS), moins 10 % de frais professionnels si H2 ; pensions : CSG déductible maintenue, abattement de 10 % supprimé | Estimation (la déduction de 10 % est l'hypothèse H2 ; sans elle : amendement proposé) | Par H2 |
+| H4 | Qui capte la baisse de CSG ? | 100 % au salarié (incidence légale de court terme), salaire brut inchangé ; coût employeur inchangé pour un salarié sans exonération particulière. Les exonérations patronales spécifiques (heures supplémentaires, apprentis, emploi à domicile, saisonniers agricoles…) disparaissent à partir du 1er juillet 2027 (PLFSS am. 1, I et III) : pour ces employeurs, le coût augmente ; le plan annonce que ces sommes iront au salaire net, ce que le simulateur ne suppose pas | Annoncé | — |
 | H5 | Répercussion de la TVA et de la fin des CEE sur les prix | **100 %**, panier fixe lissé selon le niveau de vie | Estimation | Oui : 0 %, 50 %, 100 % |
 | H6 | Chômage « de treize à six mois » (aucun texte) | Montant mensuel de l'ARE inchangé ; « au 7e mois : ARE = 0 » montré dans les pertes non chiffrées | Annoncé | — |
 | H7 | Compte d'épargne, patrimoine, compte éducation | Montrés à part aux montants annoncés | Annoncé | — |
 | H8 | Taxe foncière unique | Non modélisée (les tarifs INSEE n'existent pas encore) | — | — |
 | H9 | Gel de l'indexation | En euros 2026 : non modélisé ; signalé | Amendement proposé | — |
 | H10 | Garde alternée, partage de l'AFU entre parents séparés | Non modélisé (enfants dans un seul ménage) | — | — |
-| H11 | Couples | Aujourd'hui : impôt commun si marié·e/pacsé·e, sinon deux foyers fiscaux (enfants rattachés à l'adulte 1) ; CAF : un seul ménage. Plan : individuel, indépendant du mariage | Amendement proposé | — |
-| H12 | AFU non indexée | 6 600 € nominaux appliqués aux revenus 2026 | Amendement proposé | — |
-| H13 | Jeunes de 18 à 24 ans | Toute personne majeure reçoit l'AFU adulte (550 €/mois) ; le rattachement (art. 196 B) étant abrogé en 2028 (am. 1, 130°), elle forme son propre foyer et reçoit sa propre aide — même total pour le ménage | Amendement proposé | — |
+| H11 | Couples | Aujourd'hui : impôt commun si marié·e/pacsé·e, sinon deux foyers fiscaux (enfants rattachés à l'adulte 1) ; CAF : un seul ménage. Plan : foyer fiscal maintenu (aucun amendement n'abroge l'imposition commune) ; taux proportionnel et aide fondamentale par adulte ⇒ montant indépendant du mariage | Amendement proposé | — |
+| H12 | AFU non indexée | 6 600 € nominaux (amendement), appliqués tels quels aux revenus 2026 (choix du simulateur) | Estimation | — |
+| H13 | Jeunes de 18 à 24 ans | Toute personne majeure reçoit l'AFU adulte (550 €/mois), rattachée ou non : l'am. 28 la verse à « chaque personne majeure composant le foyer fiscal » (l'abrogation de l'art. 196 B par l'am. 1, 130°, supprime l'avantage fiscal du rattachement, pas le rattachement lui-même) | Amendement proposé | — |
 | H14 | Non-recours | Aides perçues si éligible | Estimation | Oui : « je ne touche pas ces aides » ; total CAF déclaré |
 | H15 | Enfant bénéficiaire de l'AEEH | **Pas** supposé titulaire de la CMI « invalidité » : l'AEEH peut être versée dès 50 % d'incapacité, la CMI exige 80 %. Si la CMI est déclarée : +6 600 €/an d'AFU, et ½ part aujourd'hui | Estimation | Oui (défaut : non) |
 | H16 | Taux de CSG des pensions quand les parts fiscales disparaissent (l'art. L136-8 CSS renvoie aux « parts de quotient familial » de l'art. 194 CGI, abrogé, et n'est pas modifié) | RFR N-2 : taux actuel en 2027 ; en 2028, RFR 2026 calculé sans l'abattement de 10 % sur les pensions ; ensuite revenu imposable du plan, 1 part par adulte + ½ par enfant. Lecture littérale alternative (1 part par foyer) : un couple de retraités passerait souvent au taux plein | Estimation | — |
@@ -88,6 +89,7 @@ Deux règles découlent de ces niveaux :
 | H18 | Baisse progressive de la CSG en 2027 | Part déductible = min(taux, 6,8 points) : l'art. 154 quinquies CGI (« à hauteur de 6,8 points ») n'est pas modifié | Amendement proposé | — |
 | H19 | Pension alimentaire d'un parent isolé | Non déclarée : supposée non versée, l'allocation de soutien familial est versée en entier ; déclarée : l'ASF est réduite d'autant | Estimation | Oui (montant reçu) |
 | H20 | Frais de garde non renseignés | Assistante maternelle : 873 €/mois par enfant (180 h au tarif médian de 4,85 €/h) ; micro-crèche : 1 620 € (180 h à 9 €/h) ; crèche : 180 h au barème national selon vos revenus. Mêmes frais avec le plan | Estimation | Oui (montant réel) |
+| H21 | Aide fondamentale d'un·e retraité·e (am. 28, version de novembre 2026) | Pension supposée servie par un régime obligatoire. Liquidée avant 2028 : −3 300 €/an (amendement). Liquidée à partir de 2028 : le décret prévu n'existe pas ; la règle « à défaut » de l'amendement s'applique (3 300 € × durée d'assurance validée avant 2028 ÷ durée totale). Sans réponse, le simulateur suppose une carrière complète de 172 trimestres terminée au 1er juillet de l'année de départ (liquidée en 2028 : 170/172 ; en 2035 : 142/172) | Amendement proposé ; Estimation pour la part par défaut | Oui (part déclarée) |
 
 ## 4. TVA : une estimation lissée {#tva}
 
@@ -118,7 +120,7 @@ Repère : la TVA représente ≈ 10,7 % de la consommation des ménages (INSEE) 
 | 1er janvier 2027 | Crédits garde d'enfants et emploi à domicile réduits d'un tiers (2027), deux tiers (2028), supprimés (2029) ; chèque énergie supprimé |
 | 1er juillet 2027 | CSG sur les revenus d'activité : 7,6 % (juillet), 6,0 %, 4,3 %, 2,7 %, 1,1 % (novembre) ; CRDS 0,5 % jusqu'en novembre (PLFSS am. 1) ; taux réduits de TVA « niches » à 20 % ; fin des CEE ; dons : avantage divisé par deux ; APL des baux en cours −1/3 |
 | 1er décembre 2027 | CSG et CRDS = 0 sur les revenus d'activité |
-| 1er janvier 2028 | Impôt à 23 % et aide fondamentale (PLF-P1 am. 28) ; fin des prestations familiales (PLFSS am. 7) ; fin du RSA, de la prime d'activité, de l'AAH, de l'ASPA (H1) ; réduction pour dons supprimée |
+| 1er janvier 2028 | Impôt à 23 % et aide fondamentale (PLF-P1 am. 28), diminuée de 3 300 €/an pour une pension de retraite liquidée avant 2028 ; fin des prestations familiales (PLFSS am. 7) ; fin du RSA, de la prime d'activité, de l'AAH, de l'ASPA (H1) ; réduction pour dons supprimée |
 | 1er juillet 2028 | Taux réduits de TVA à 20 %, alimentation à 10 % (PLF-P1 am. 21) ; APL des baux en cours −2/3 |
 | 1er juillet 2029 | Alimentation à 15 % ; APL des baux en cours supprimée |
 | 1er janvier 2030 | Toutes les aides personnelles au logement abrogées |
@@ -126,7 +128,9 @@ Repère : la TVA représente ≈ 10,7 % de la consommation des ménages (INSEE) 
 
 Chaque « photo » (2027, 2028, 2030) est la moyenne des 12 mois de l'année ; l'impôt est calculé une fois sur le
 revenu imposable de l'année. Les retraités voient un **creux en 2027** : l'abattement de 10 % disparaît avant
-l'arrivée de l'aide fondamentale.
+l'arrivée de l'aide fondamentale. Depuis la version de novembre 2026 des amendements, cette aide leur est versée
+**diminuée de 3 300 € par an** (275 € par mois au lieu de 550 € pour une pension liquidée avant 2028) : un·e
+retraité·e sans autre revenu perd aussi à partir de 2028, puisque l'impôt à 23 % s'applique à toute sa pension.
 
 ## 6. Simplifications assumées {#simplifications}
 
@@ -201,7 +205,8 @@ dons et l'emploi à domicile ne sont **pas** couverts par ces cas : ce sont des 
 
 Le plan est vérifié sur les chiffres publiés : gain de CSG au SMIC 2025 (1 801,80 € brut) = **171,72 €/mois** ;
 table « GraphIR » (revenu imposable 0 / 8 000 / 21 000 / 34 000 / 48 000 €) avec la lecture du plan (H2
-désactivée) ; seuil 28 695,65 € ; 0,77 € gardé par euro ; adulte handicapé : 1 100 €/mois.
+désactivée) ; seuil 28 695,65 € ; 0,77 € gardé par euro ; adulte handicapé : 1 100 €/mois. Retraité·e (pension liquidée avant 2028)
+avec un enfant : 550 + 275 − 275 = 550 €/mois d'aide fondamentale (1 100 € avant la version de novembre 2026).
 
 ## 8. Ce que le simulateur ne compte pas {#non-compte}
 
@@ -230,9 +235,10 @@ publiés dans le fichier [`cas-types-results.json`](https://github.com/Pierrolo/
 
 ## 10. Sources principales {#sources}
 
-- Plan : liasses d'amendements Résolution (PLF 2027 1re partie, 2de partie, PLFSS 2027, 19 octobre 2026) —
-  france-resolution.fr/amendements ; fiches et manifeste — france-resolution.fr ; classeurs « Synthèse Chiffres » et
-  « Synthèse Graphiques ».
+- Plan : liasses d'amendements Résolution (PLF 2027 1re partie, 2de partie, PLFSS 2027 ; version publiée les 17 et
+  18 novembre 2026, 84 amendements) — france-resolution.fr/amendements ; fiches et manifeste — france-resolution.fr ;
+  classeurs « Synthèse des chiffrages » et « Séries des graphiques » (anciennement « Synthèse Chiffres » et
+  « Synthèse Graphiques »).
 - Législation 2026 : service-public.gouv.fr (F2300 SMIC, F2971 CSG, F1419 impôt, F2882 prime d'activité, F19778
   RSA, F12006 APL, F13213 allocations familiales, F12242 AAH, F16871 ASPA…), Légifrance, URSSAF (taux 2026),
   BOFiP (barème 2026), solidarites.gouv.fr (revalorisation du 1er avril 2026), arrêté du 28 septembre 2026 (APL).
@@ -252,6 +258,7 @@ Le manifeste, les amendements et les classeurs ne disent pas toujours la même c
 
 | Date | Version | Ce qui a changé |
 |---|---|---|
+| 21 novembre 2026 | moteur 1.2.0 | Plan mis à jour sur les amendements republiés les 17 et 18 novembre 2026 (84 au lieu de 81) : l'aide fondamentale d'un·e retraité·e est **diminuée** de 3 300 € par an pour une pension liquidée avant 2028 (elle était majorée d'autant), au prorata de la durée d'assurance validée avant 2028 pour une pension liquidée ensuite (nouvelle question, hypothèse H21) ; les cas types retraités passent de gagnants à perdants. Indemnité des fonctionnaires de l'État dont le poste est supprimé : 24 mois plus un mois par trimestre de services, au plus 84 mois et jusqu'à la retraite sans décote. 54 taxes d'État, 72 taxes affectées, 21 contributions sociales et 20 impositions locales supprimées ; accise sur l'électricité à 1 €/MWh au 1er juillet 2027. Vérification des textes du plan : sources et niveaux de certitude corrigés (CEE, revalorisation, logement social, ALD, bouclier sanitaire, coût employeur, H3, H11, H12, H13, pensions). |
 | 21 novembre 2026 | moteur et site | Vérification de la législation actuelle : CMG jusqu'aux 12 ans de l'enfant pour un parent seul qui emploie une assistante maternelle ; forfait étudiant des aides au logement (8 600 €, 6 900 € pour un·e boursier·e, question ajoutée) ; seuil de recouvrement de l'impôt appliqué après les réductions et avant les crédits ; majoration « isolement » décrite sur 12 mois ; total après TVA arrondi au multiple de 5 € le plus proche ; zones APL et durées d'indemnisation du chômage corrigées ; comparaisons européennes mises à jour d'après Eurostat (21 octobre 2026). |
 | 26 octobre 2026 | site | Le site parle du plan avec ses propres mots ; un seul vocabulaire pour les trois niveaux (« Proposé dans un amendement », « Annoncé », « Notre estimation ») ; les amendements sont décrits comme rédigés et publiés, en vigueur nulle part ; questionnaire « À votre avis, où va l’argent public ? », où les chiffres du plan sont marqués « Annoncé » ; une seule identité visuelle. |
 | 24 octobre 2026 | moteur 1.1.0 | Complément de libre choix du mode de garde (CMG) et crédit d'impôt garde d'enfants ; pension alimentaire et allocation de soutien familial ; phrase de synthèse en clair ; raison de chaque aide à 0 € ; heure de travail cohérente avec le revenu du foyer ; seconde lecture de H1 ; dirigeants assimilés salariés et travailleurs non salariés ; arrondi d'affichage à 5 € qui préserve les totaux. |

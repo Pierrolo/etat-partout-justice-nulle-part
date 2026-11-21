@@ -5,8 +5,9 @@
  * TVA is attributed at the household's average TVA / disposable-income ratio.
  *
  * v1.1 (user testing: « je garde moins par heure alors que mon ménage gagne » looked contradictory):
- * - afuPerHour = this adult's OWN AFU (6 600 €/an + own supplements: CMI invalidité, pension before 2028 — the
- *   children's share is NOT included) ÷ 12 ÷ hours worked by this adult; 0 today;
+ * - afuPerHour = this adult's OWN AFU (6 600 €/an + CMI invalidité supplement − own pension minoration, v1.2;
+ *   a salaried adult has no pension in the engine, so the minoration never applies here — the children's share is
+ *   NOT included) ÷ 12 ÷ hours worked by this adult; 0 today;
  * - netIncomeTaxPerHour = impotRevenu − afuPerHour (negative = « l'État vous verse » for each hour);
  * - youKeepIncludingTransfers = youKeep + afuPerHour. Today it equals youKeep: means-tested benefits (prime
  *   d'activité, APL…) are household-level and are not attributed per hour.

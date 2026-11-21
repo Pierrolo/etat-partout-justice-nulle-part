@@ -44,12 +44,16 @@ export const adultArb = (
         basis: fc.constantFrom(...(opts.pensionBasis ?? (['net', 'brut'] as const))),
         startYear: fc.integer({ min: 2000, max: 2035 }),
       }),
+      // v1.2: share of the insurance duration validated before 2028 (optional, read from 2028 on)
+      share: fc.option(fc.integer({ min: 0, max: 100 }), { nil: null }),
     })
     .map((r) => {
       const a: Adult = { age: r.age, activity: r.activity, disability: r.disability };
       if (r.activity === 'salarie' || r.activity === 'etudiant') a.salary = r.salary;
       if (r.activity === 'chomage') a.unemployment = { areMonthly: r.are };
-      if (r.activity === 'retraite') a.pension = r.pension;
+      if (r.activity === 'retraite')
+        a.pension =
+          r.share === null ? r.pension : { ...r.pension, insuranceShareBefore2028: r.share / 100 };
       return a;
     });
 
