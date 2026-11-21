@@ -359,12 +359,15 @@ describe('questionnaire', () => {
     if (dette?.kind === 'choice') expect(dette.correctId).toBe('both');
     if (niches?.kind === 'choice') {
       expect(niches.body.join(' ')).toContain('taux réduits');
-      expect(niches.correctId).toBe('yes');
+      // Insee COFOG 09 « Enseignement » (148,6 Md€) > niches et taux réduits (134,7 Md€): « non »
+      expect(niches.correctId).toBe('no');
+      expect(niches.sources.some((c) => c.label.includes('COFOG 09'))).toBe(true);
     }
     if (combinaisons?.kind === 'choice') expect(combinaisons.correctId).toBe('billion');
     if (agents?.kind === 'choice') expect(agents.correctId).toBe('no');
     expect(num('dep_retraites_2024_md') / num('dep_total_2024_md')).toBeGreaterThan(
-      num('dep_part_securite_pct') / 100 + num('dep_education_2024_md') / num('dep_total_2024_md'),
+      num('dep_part_securite_pct') / 100 +
+        num('dep_cofog09_enseignement_2024_md') / num('dep_total_2024_md'),
     );
   });
 

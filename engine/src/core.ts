@@ -205,6 +205,32 @@ export function cmgActivityOk(nh: NHousehold): boolean {
   );
 }
 
+/**
+ * Age limit (strict) of the children whose care opens the CMG: 6, or 12 for a lone parent who employs an
+ * assistante maternelle (CMG « emploi direct », F39152 — since Sept 2025). The micro-crèche (CMG « structure »,
+ * F345) stays < 6 for everyone.
+ */
+export function cmgAgeLimit(nh: NHousehold): number {
+  return nh.adults.length === 1 &&
+    nh.children.length > 0 &&
+    nh.childcare === 'assistante_maternelle'
+    ? n('x.cmg.max_child_age_isole_emploi_direct')
+    : n('x.cmg.max_child_age');
+}
+
+/**
+ * Annual resources retained by today's housing aid: the household's revenu net catégoriel, but at least the
+ * « forfait étudiant » when every adult is a student (8 600 €/an, 6 900 €/an when every adult is boursier ;
+ * ordinary rented housing assumed).
+ */
+export function aplResources(nh: NHousehold, rncHousehold: number): number {
+  if (!nh.adults.every((a) => a.activity === 'etudiant')) return rncHousehold;
+  const floor = nh.adults.every((a) => a.boursier)
+    ? n('x.apl.student_resources_floor_boursier')
+    : n('x.apl.student_resources_floor');
+  return Math.max(rncHousehold, floor);
+}
+
 export const PAID_CARE = ['creche', 'assistante_maternelle', 'micro_creche'] as const;
 export const isPaidCare = (m: NHousehold['childcare']): boolean =>
   m === 'creche' || m === 'assistante_maternelle' || m === 'micro_creche';
@@ -223,9 +249,14 @@ export function creditsOf(
   if (!f.main) return { garde: 0, emploiDomicile: 0, dons: 0 };
   let garde = 0;
   const under6 = f.children.filter((a) => a < 6).length;
+  // a declared bill covers every child in care (up to 12 for a lone parent with an assistante maternelle); only
+  // the share of the children < 6 opens the credit. The default bill only covers the children < 6.
+  const inCare = nh.childcareCostProvided
+    ? Math.max(under6, f.children.filter((a) => a < cmgAgeLimit(nh)).length)
+    : under6;
   const netCare = Math.max(0, care.cost - care.cmg);
   if (isPaidCare(nh.childcare) && netCare > 0 && under6 > 0) {
-    const perChild = (12 * netCare) / under6;
+    const perChild = (12 * netCare) / inCare;
     garde =
       n('income_tax.garde_enfant_credit_rate') *
       Math.min(perChild, n('income_tax.garde_enfant_credit_expense_cap')) *
@@ -359,11 +390,14 @@ export function computeMonth(ctx: MonthContext): MonthFlows {
 
   // ---- childcare: bill (input or default) and CMG ------------------------------------------------------------
   const under6 = ages.filter((a) => a < n('x.cmg.max_child_age'));
+  // children whose care opens the CMG: < 6, or < 12 for a lone parent with an assistante maternelle
+  const inCare = ages.filter((a) => a < cmgAgeLimit(nh));
   const nDep = ages.filter((a) => a < n('benefits.family.af_max_child_age')).length;
   let childcareCost = 0;
-  if (isPaidCare(nh.childcare) && under6.length > 0) {
+  if (isPaidCare(nh.childcare) && inCare.length > 0) {
     if (base) childcareCost = base.childcareCost;
     else if (nh.childcareCostProvided) childcareCost = nh.childcareCostMonthly;
+    // no default for a child of 6 or more (school-age care varies too much): only the children < 6 count
     else if (nh.childcare === 'assistante_maternelle')
       childcareCost = n('x.cmg.default_cost_am') * under6.length;
     else if (nh.childcare === 'micro_creche')
@@ -396,7 +430,7 @@ export function computeMonth(ctx: MonthContext): MonthFlows {
         nA === 2,
         ages.filter((a) => a < 21).length,
         nh.housing.rent,
-        rncHousehold,
+        aplResources(nh, rncHousehold),
       ).gross;
     else aplGross = (base?.aplGross ?? 0) * m.apl.factor;
   }

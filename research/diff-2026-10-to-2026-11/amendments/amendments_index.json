@@ -1,0 +1,1519 @@
+{
+ "Liasse_PLF_P1": {
+  "1": {
+   "old_n": 1,
+   "new_n": 1,
+   "title_old": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
+   "title_new": "Niches fiscales : tous les avantages particuliers abolis, le gain rendu aux salaires",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 2, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 2, insérer l’article suivant :",
+   "pdf_pages_old": [
+    4,
+    23
+   ],
+   "pdf_pages_new": [
+    4,
+    23
+   ],
+   "status": "CHANGED",
+   "dispositif_words_changed": 33,
+   "expose_words_changed": 9
+  },
+  "2": {
+   "old_n": 2,
+   "new_n": 2,
+   "title_old": "Titres-restaurant : la valeur périmée rendue au salarié, en salaire",
+   "title_new": "Titres-restaurant : la valeur périmée rendue au salarié, en salaire",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 2, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 2, insérer l’article suivant :",
+   "pdf_pages_old": [
+    24,
+    24
+   ],
+   "pdf_pages_new": [
+    24,
+    24
+   ],
+   "status": "UNCHANGED"
+  },
+  "3": {
+   "old_n": 3,
+   "new_n": 3,
+   "title_old": "Dons : fin des réductions d’impôt, l’argent rendu à la paie de tous",
+   "title_new": "Dons : fin des réductions d’impôt, l’argent rendu à la paie de tous",
+   "article_old": "ARTICLE 4",
+   "article_new": "ARTICLE 4",
+   "pdf_pages_old": [
+    25,
+    26
+   ],
+   "pdf_pages_new": [
+    25,
+    26
+   ],
+   "status": "UNCHANGED"
+  },
+  "4": {
+   "old_n": 4,
+   "new_n": 4,
+   "title_old": "Prêt à taux zéro : les intérêts payés aux banques rendus à la paie des ménages",
+   "title_new": "Prêt à taux zéro : les intérêts payés aux banques rendus à la paie des ménages",
+   "article_old": "ARTICLE 7",
+   "article_new": "ARTICLE 7",
+   "pdf_pages_old": [
+    27,
+    27
+   ],
+   "pdf_pages_new": [
+    27,
+    27
+   ],
+   "status": "UNCHANGED"
+  },
+  "5": {
+   "old_n": 5,
+   "new_n": 5,
+   "title_old": "Suramortissement industriel : guichets fermés, la baisse profite à toutes les entreprises",
+   "title_new": "Suramortissement industriel : guichets fermés, la baisse profite à toutes les entreprises",
+   "article_old": "ARTICLE 9",
+   "article_new": "ARTICLE 9",
+   "pdf_pages_old": [
+    28,
+    29
+   ],
+   "pdf_pages_new": [
+    28,
+    29
+   ],
+   "status": "UNCHANGED"
+  },
+  "6": {
+   "old_n": 6,
+   "new_n": 6,
+   "title_old": "Cessions d’entreprise : aucun avantage nouveau, la ressource va aux salaires",
+   "title_new": "Cessions d’entreprise : aucun avantage nouveau, la ressource va aux salaires",
+   "article_old": "ARTICLE 10",
+   "article_new": "ARTICLE 10",
+   "pdf_pages_old": [
+    30,
+    30
+   ],
+   "pdf_pages_new": [
+    30,
+    30
+   ],
+   "status": "UNCHANGED"
+  },
+  "7": {
+   "old_n": 7,
+   "new_n": 7,
+   "title_old": "Soutien à la culture : extinction des avantages, enrichissement de tous les travailleurs",
+   "title_new": "Soutien à la culture : extinction des avantages, enrichissement de tous les travailleurs",
+   "article_old": "ARTICLE 12",
+   "article_new": "ARTICLE 12",
+   "pdf_pages_old": [
+    31,
+    31
+   ],
+   "pdf_pages_new": [
+    31,
+    31
+   ],
+   "status": "UNCHANGED"
+  },
+  "8": {
+   "old_n": 8,
+   "new_n": 8,
+   "title_old": "Suramortissement agricole : fin des régimes particuliers, gain rendu aux actifs",
+   "title_new": "Suramortissement agricole : fin des régimes particuliers, gain rendu aux actifs",
+   "article_old": "ARTICLE 13",
+   "article_new": "ARTICLE 13",
+   "pdf_pages_old": [
+    32,
+    33
+   ],
+   "pdf_pages_new": [
+    32,
+    33
+   ],
+   "status": "UNCHANGED"
+  },
+  "9": {
+   "old_n": 9,
+   "new_n": 9,
+   "title_old": "Crédit d’impôt recherche : supprimé, rendu en salaire net",
+   "title_new": "Crédit d’impôt recherche : supprimé, rendu en salaire net",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "pdf_pages_old": [
+    34,
+    35
+   ],
+   "pdf_pages_new": [
+    34,
+    35
+   ],
+   "status": "UNCHANGED"
+  },
+  "10": {
+   "old_n": 10,
+   "new_n": 10,
+   "title_old": "Zones franches : dix exonérations abrogées, l’impôt baisse pour tous",
+   "title_new": "Zones franches : dix exonérations abrogées, l’impôt baisse pour tous",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "pdf_pages_old": [
+    36,
+    37
+   ],
+   "pdf_pages_new": [
+    36,
+    37
+   ],
+   "status": "CHANGED",
+   "expose_words_changed": 21
+  },
+  "11": {
+   "old_n": 11,
+   "new_n": 11,
+   "title_old": "Taxe au tonnage : les armateurs imposés sur leur bénéfice réel, le produit va au travail",
+   "title_new": "Taxe au tonnage : les armateurs imposés sur leur bénéfice réel, le produit va au travail",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "pdf_pages_old": [
+    38,
+    38
+   ],
+   "pdf_pages_new": [
+    38,
+    38
+   ],
+   "status": "CHANGED",
+   "dispositif_words_changed": 1,
+   "expose_words_changed": 57
+  },
+  "12": {
+   "old_n": 12,
+   "new_n": 12,
+   "title_old": "Crédit d’impôt famille : supprimé, le parent reçoit son salaire",
+   "title_new": "Crédit d’impôt famille : supprimé, le parent reçoit son salaire",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "pdf_pages_old": [
+    39,
+    39
+   ],
+   "pdf_pages_new": [
+    39,
+    39
+   ],
+   "status": "CHANGED",
+   "dispositif_words_changed": 1,
+   "expose_words_changed": 23
+  },
+  "13": {
+   "old_n": 13,
+   "new_n": 13,
+   "title_old": "Déductions exceptionnelles : huit régimes éteints, la baisse profite à chaque entreprise",
+   "title_new": "Déductions exceptionnelles : huit régimes éteints, la baisse profite à chaque entreprise",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "pdf_pages_old": [
+    40,
+    40
+   ],
+   "pdf_pages_new": [
+    40,
+    40
+   ],
+   "status": "CHANGED",
+   "expose_words_changed": 21
+  },
+  "14": {
+   "old_n": 14,
+   "new_n": 14,
+   "title_old": "Accise sur l’énergie : même tarif pour tous les métiers, tous les revenus d’activité augmentés",
+   "title_new": "Accise sur l’énergie : même tarif pour tous les métiers, tous les revenus d’activité augmentés",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "pdf_pages_old": [
+    41,
+    42
+   ],
+   "pdf_pages_new": [
+    41,
+    42
+   ],
+   "status": "CHANGED",
+   "expose_words_changed": 21
+  },
+  "15": {
+   "old_n": 15,
+   "new_n": 15,
+   "title_old": "Régimes agricoles : sortie progressive de la dépendance aux subventions",
+   "title_new": "Régimes agricoles : sortie progressive de la dépendance aux subventions",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 13, insérer l’article suivant :",
+   "pdf_pages_old": [
+    43,
+    44
+   ],
+   "pdf_pages_new": [
+    43,
+    44
+   ],
+   "status": "CHANGED",
+   "expose_words_changed": 21
+  },
+  "16": {
+   "old_n": 16,
+   "new_n": 16,
+   "title_old": "Certificats d’économies d’énergie : fin des impôts cachés sur la facture d’énergie",
+   "title_new": "Certificats d’économies d’énergie : fin des impôts cachés sur la facture d’énergie",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 24, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 24, insérer l’article suivant :",
+   "pdf_pages_old": [
+    45,
+    46
+   ],
+   "pdf_pages_new": [
+    45,
+    46
+   ],
+   "status": "UNCHANGED"
+  },
+  "17": {
+   "old_n": 17,
+   "new_n": 17,
+   "title_old": "Impôts locaux : les exonérations d’adresse non prorogées, l’avantage rendu à tous",
+   "title_new": "Impôts locaux : les exonérations d’adresse non prorogées, l’avantage rendu à tous",
+   "article_old": "ARTICLE 26",
+   "article_new": "ARTICLE 26",
+   "pdf_pages_old": [
+    47,
+    47
+   ],
+   "pdf_pages_new": [
+    47,
+    47
+   ],
+   "status": "UNCHANGED"
+  },
+  "18": {
+   "old_n": 18,
+   "new_n": 18,
+   "title_old": "Aides à l’investissement : abrogées plutôt que prorogées, rendues au salaire net",
+   "title_new": "Aides à l’investissement : abrogées plutôt que prorogées, rendues au salaire net",
+   "article_old": "ARTICLE 28",
+   "article_new": "ARTICLE 28",
+   "pdf_pages_old": [
+    48,
+    49
+   ],
+   "pdf_pages_new": [
+    48,
+    49
+   ],
+   "status": "UNCHANGED"
+  },
+  "19": {
+   "old_n": 19,
+   "new_n": 19,
+   "title_old": "Droits de mutation : ramenés à 1 % et 3 %, l’équilibre tenu",
+   "title_new": "Droits de mutation : ramenés à 1 % et 3 %, l’équilibre tenu",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 4, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 4, insérer l’article suivant :",
+   "pdf_pages_old": [
+    50,
+    52
+   ],
+   "pdf_pages_new": [
+    50,
+    52
+   ],
+   "status": "UNCHANGED"
+  },
+  "20": {
+   "old_n": 20,
+   "new_n": 20,
+   "title_old": "Plus-values : le capital imposé sur son gain réel, au service de l’équilibre",
+   "title_new": "Plus-values : le capital imposé sur son gain réel, au service de l’équilibre",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 8, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 8, insérer l’article suivant :",
+   "pdf_pages_old": [
+    53,
+    56
+   ],
+   "pdf_pages_new": [
+    53,
+    56
+   ],
+   "status": "UNCHANGED"
+  },
+  "21": {
+   "old_n": 21,
+   "new_n": 21,
+   "title_old": "TVA : les trois taux réduits réunis en un seul, à rendement constant",
+   "title_new": "TVA : les trois taux réduits réunis en un seul, à rendement constant",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 16, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 16, insérer l’article suivant :",
+   "pdf_pages_old": [
+    57,
+    58
+   ],
+   "pdf_pages_new": [
+    57,
+    58
+   ],
+   "status": "UNCHANGED"
+  },
+  "22": {
+   "old_n": 22,
+   "new_n": 22,
+   "title_old": "Taxes d’État : vingt et une disparaissent dans l’impôt, sans hausse du total",
+   "title_new": "Taxes d’État : cinquante-quatre disparaissent dans l’impôt, sans hausse du total",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 19, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 19, insérer l’article suivant :",
+   "pdf_pages_old": [
+    59,
+    60
+   ],
+   "pdf_pages_new": [
+    59,
+    61
+   ],
+   "status": "CHANGED",
+   "dispositif_words_changed": 392,
+   "expose_words_changed": 278
+  },
+  "23": {
+   "old_n": 23,
+   "new_n": 23,
+   "title_old": "Impôt sur les sociétés : un taux unique, pour l’équilibre de la refonte fiscale",
+   "title_new": "Impôt sur les sociétés : un taux unique, pour l’équilibre de la refonte fiscale",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 32, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 32, insérer l’article suivant :",
+   "pdf_pages_old": [
+    61,
+    63
+   ],
+   "pdf_pages_new": [
+    62,
+    64
+   ],
+   "status": "CHANGED",
+   "dispositif_words_changed": 95,
+   "expose_words_changed": 23
+  },
+  "24": {
+   "old_n": 24,
+   "new_n": 24,
+   "title_old": "Taxes affectées : plafond à zéro, tout le produit retourne au budget voté par le Parlement",
+   "title_new": "Taxes affectées : plafond à zéro, tout le produit retourne au budget voté par le Parlement",
+   "article_old": "ARTICLE 42",
+   "article_new": "ARTICLE 42",
+   "pdf_pages_old": [
+    64,
+    66
+   ],
+   "pdf_pages_new": [
+    65,
+    67
+   ],
+   "status": "UNCHANGED"
+  },
+  "25": {
+   "old_n": 25,
+   "new_n": 25,
+   "title_old": "Taxes affectées : cinquante-sept supprimées, fondues en une ressource unique à produit égal",
+   "title_new": "Taxes affectées : soixante-douze supprimées, fondues en une ressource unique à produit égal",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 42, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 42, insérer l’article suivant :",
+   "pdf_pages_old": [
+    67,
+    69
+   ],
+   "pdf_pages_new": [
+    68,
+    70
+   ],
+   "status": "CHANGED",
+   "dispositif_words_changed": 207,
+   "expose_words_changed": 61
+  },
+  "26": {
+   "old_n": 26,
+   "new_n": 26,
+   "title_old": "Refermer les canaux budgétaires hors budget général",
+   "title_new": "Refermer les canaux budgétaires hors budget général",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 42, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 42, insérer l’article suivant :",
+   "pdf_pages_old": [
+    70,
+    71
+   ],
+   "pdf_pages_new": [
+    71,
+    72
+   ],
+   "status": "UNCHANGED"
+  },
+  "27": {
+   "old_n": 27,
+   "new_n": 27,
+   "title_old": "Un compte d’épargne au nom de chacun, alimenté par la restitution",
+   "title_new": "Un compte d’épargne au nom de chacun, alimenté par la restitution",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 6, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 6, insérer l’article suivant :",
+   "pdf_pages_old": [
+    72,
+    74
+   ],
+   "pdf_pages_new": [
+    73,
+    75
+   ],
+   "status": "UNCHANGED"
+  },
+  "28": {
+   "old_n": 28,
+   "new_n": 28,
+   "title_old": "Un taux unique finance une aide fondamentale versée à chacun",
+   "title_new": "Un taux unique finance une aide fondamentale versée à chacun",
+   "article_old": "ARTICLE 2",
+   "article_new": "ARTICLE 2",
+   "pdf_pages_old": [
+    75,
+    76
+   ],
+   "pdf_pages_new": [
+    76,
+    78
+   ],
+   "status": "CHANGED",
+   "dispositif_words_changed": 79,
+   "expose_words_changed": 17
+  },
+  "29": {
+   "old_n": 29,
+   "new_n": 29,
+   "title_old": "Taxe foncière : cinq impôts en une taxe communale lisible et équitable",
+   "title_new": "Taxe foncière : cinq impôts en une taxe communale lisible et équitable",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 27, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 27, insérer l’article suivant :",
+   "pdf_pages_old": [
+    77,
+    80
+   ],
+   "pdf_pages_new": [
+    79,
+    83
+   ],
+   "status": "CHANGED",
+   "dispositif_words_changed": 424,
+   "expose_words_changed": 116
+  },
+  "30": {
+   "old_n": 30,
+   "new_n": 30,
+   "title_old": "Compensations : fin des versements pour impôts disparus, l’économie rendue au travail",
+   "title_new": "Compensations : fin des versements pour impôts disparus, l’économie rendue au travail",
+   "article_old": "ARTICLE 34",
+   "article_new": "ARTICLE 34",
+   "pdf_pages_old": [
+    81,
+    82
+   ],
+   "pdf_pages_new": [
+    84,
+    85
+   ],
+   "status": "UNCHANGED"
+  },
+  "31": {
+   "old_n": 31,
+   "new_n": 31,
+   "title_old": "Dotations : moins de compétences facultatives, moins de charges sur les contribuables",
+   "title_new": "Dotations : moins de compétences facultatives, moins de charges sur les contribuables",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 34, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 34, insérer l’article suivant :",
+   "pdf_pages_old": [
+    83,
+    84
+   ],
+   "pdf_pages_new": [
+    86,
+    87
+   ],
+   "status": "UNCHANGED"
+  },
+  "32": {
+   "old_n": 32,
+   "new_n": 32,
+   "title_old": "Départements et régions : les compétences retirées, le financement retiré d’autant",
+   "title_new": "Départements et régions : les compétences retirées, le financement retiré d’autant",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 34, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 34, insérer l’article suivant :",
+   "pdf_pages_old": [
+    85,
+    87
+   ],
+   "pdf_pages_new": [
+    88,
+    90
+   ],
+   "status": "UNCHANGED"
+  },
+  "33": {
+   "old_n": 33,
+   "new_n": 33,
+   "title_old": "Dotation forfaitaire : remplacée par l’impôt que la commune vote elle-même",
+   "title_new": "Dotation forfaitaire : remplacée par l’impôt que la commune vote elle-même",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 34, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 34, insérer l’article suivant :",
+   "pdf_pages_old": [
+    88,
+    89
+   ],
+   "pdf_pages_new": [
+    91,
+    92
+   ],
+   "status": "UNCHANGED"
+  },
+  "34": {
+   "old_n": 34,
+   "new_n": 34,
+   "title_old": "TVA des collectivités : plafonnée au coût de leurs compétences",
+   "title_new": "TVA des collectivités : plafonnée au coût de leurs compétences",
+   "article_old": "ARTICLE 36",
+   "article_new": "ARTICLE 36",
+   "pdf_pages_old": [
+    90,
+    91
+   ],
+   "pdf_pages_new": [
+    93,
+    94
+   ],
+   "status": "UNCHANGED"
+  },
+  "35": {
+   "old_n": null,
+   "new_n": 35,
+   "title_old": null,
+   "title_new": "Contribution exceptionnelle : pas de troisième exercice, le bénéfice imposé au taux unique",
+   "article_old": null,
+   "article_new": "ARTICLE 15",
+   "pdf_pages_old": null,
+   "pdf_pages_new": [
+    95,
+    95
+   ],
+   "status": "NEW"
+  }
+ },
+ "Liasse_PLF_P2": {
+  "1": {
+   "old_n": 1,
+   "new_n": 1,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Cohésion des territoires »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Cohésion des territoires »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    4,
+    4
+   ],
+   "pdf_pages_new": [
+    4,
+    5
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 13 292 801 242 €, CP− 13 129 046 079 €",
+   "etat_b_totaux_new": "AE− 6 541 823 027 €, CP− 6 447 224 218 €",
+   "expose_words_changed": 125
+  },
+  "2": {
+   "old_n": 2,
+   "new_n": 2,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Travail, emploi et administration des ministères sociaux »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Travail, emploi et administration des ministères sociaux »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    5,
+    5
+   ],
+   "pdf_pages_new": [
+    6,
+    6
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 12 065 359 297 €, CP− 10 695 643 750 €",
+   "etat_b_totaux_new": "AE− 3 006 071 590 €, CP− 2 736 589 938 €",
+   "expose_words_changed": 122
+  },
+  "3": {
+   "old_n": 3,
+   "new_n": 3,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Aide publique au développement »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Aide publique au développement »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    6,
+    6
+   ],
+   "pdf_pages_new": [
+    7,
+    7
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 2 334 755 315 €, CP− 2 185 603 430 €",
+   "etat_b_totaux_new": "AE− 792 888 607 €, CP− 547 882 318 €",
+   "expose_words_changed": 89
+  },
+  "4": {
+   "old_n": 4,
+   "new_n": 4,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Écologie, développement et mobilité durables »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Écologie, développement et mobilité durables »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    7,
+    7
+   ],
+   "pdf_pages_new": [
+    8,
+    9
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 3 772 521 584 €, CP− 3 269 826 313 €",
+   "etat_b_totaux_new": "AE− 5 144 593 091 €, CP− 4 120 409 827 €",
+   "expose_words_changed": 154
+  },
+  "5": {
+   "old_n": 5,
+   "new_n": 5,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Relations avec les collectivités territoriales »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Relations avec les collectivités territoriales »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    8,
+    8
+   ],
+   "pdf_pages_new": [
+    10,
+    10
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 3 760 085 442 €, CP− 2 814 605 562 €",
+   "etat_b_totaux_new": "AE− 1 260 211 929 €, CP− 940 619 175 €",
+   "expose_words_changed": 32
+  },
+  "6": {
+   "old_n": 6,
+   "new_n": 6,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Culture »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Culture »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    9,
+    9
+   ],
+   "pdf_pages_new": [
+    11,
+    11
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 2 027 866 360 €, CP− 1 743 251 527 €",
+   "etat_b_totaux_new": "AE− 1 254 322 621 €, CP− 997 389 096 €",
+   "expose_words_changed": 97
+  },
+  "7": {
+   "old_n": 7,
+   "new_n": 7,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Sport, jeunesse et vie associative »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Sport, jeunesse et vie associative »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    10,
+    10
+   ],
+   "pdf_pages_new": [
+    12,
+    12
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 1 005 644 806 €, CP− 974 423 297 €",
+   "etat_b_totaux_new": "AE− 490 047 570 €, CP− 441 565 654 €",
+   "expose_words_changed": 88
+  },
+  "8": {
+   "old_n": 8,
+   "new_n": 8,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Immigration, asile et intégration »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Immigration, asile et intégration »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    11,
+    11
+   ],
+   "pdf_pages_new": [
+    13,
+    13
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 1 259 249 135 €, CP− 1 257 002 837 €",
+   "etat_b_totaux_new": "AE− 637 876 981 €, CP− 635 855 313 €",
+   "expose_words_changed": 71
+  },
+  "9": {
+   "old_n": 9,
+   "new_n": 9,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Santé »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Santé »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    12,
+    12
+   ],
+   "pdf_pages_new": [
+    14,
+    14
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 781 560 604 €, CP− 779 217 127 €",
+   "etat_b_totaux_new": "AE− 860 025 110 €, CP− 825 186 199 €",
+   "expose_words_changed": 78
+  },
+  "10": {
+   "old_n": 10,
+   "new_n": 10,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Recherche et enseignement supérieur »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Recherche et enseignement supérieur »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    13,
+    13
+   ],
+   "pdf_pages_new": [
+    15,
+    15
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 772 662 106 €, CP− 670 132 264 €",
+   "etat_b_totaux_new": "AE− 397 901 573 €, CP− 310 535 414 €",
+   "expose_words_changed": 66
+  },
+  "11": {
+   "old_n": 11,
+   "new_n": 11,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Médias, livre et industries culturelles »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Médias, livre et industries culturelles »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    14,
+    14
+   ],
+   "pdf_pages_new": [
+    16,
+    16
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 674 689 892 €, CP− 568 920 102 €",
+   "etat_b_totaux_new": "AE− 495 369 539 €, CP− 387 685 347 €",
+   "expose_words_changed": 71
+  },
+  "12": {
+   "old_n": 12,
+   "new_n": 12,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Économie »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Économie »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    15,
+    15
+   ],
+   "pdf_pages_new": [
+    17,
+    17
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 630 363 522 €, CP− 556 598 409 €",
+   "etat_b_totaux_new": "AE− 1 262 607 486 €, CP− 919 992 004 €",
+   "expose_words_changed": 92
+  },
+  "13": {
+   "old_n": 13,
+   "new_n": 13,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Direction de l’action du Gouvernement »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Direction de l’action du Gouvernement »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    16,
+    16
+   ],
+   "pdf_pages_new": [
+    18,
+    18
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 513 541 366 €, CP− 368 209 896 €",
+   "etat_b_totaux_new": "AE− 523 843 885 €, CP− 380 572 377 €",
+   "expose_words_changed": 79
+  },
+  "14": {
+   "old_n": 14,
+   "new_n": 14,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Transformation et fonction publiques »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Transformation et fonction publiques »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    17,
+    17
+   ],
+   "pdf_pages_new": [
+    19,
+    19
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 207 779 344 €, CP− 168 004 952 €",
+   "etat_b_totaux_new": "AE− 244 829 463 €, CP− 183 905 287 €",
+   "expose_words_changed": 78
+  },
+  "15": {
+   "old_n": 15,
+   "new_n": 15,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Enseignement scolaire »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Enseignement scolaire »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    18,
+    18
+   ],
+   "pdf_pages_new": [
+    20,
+    20
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 225 417 181 €, CP− 225 417 181 €",
+   "etat_b_totaux_new": "AE− 202 875 463 €, CP− 202 875 463 €",
+   "expose_words_changed": 42
+  },
+  "16": {
+   "old_n": 16,
+   "new_n": 16,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Action extérieure de l’État »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Action extérieure de l’État »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    19,
+    19
+   ],
+   "pdf_pages_new": [
+    21,
+    21
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 205 826 724 €, CP− 200 134 647 €",
+   "etat_b_totaux_new": "AE− 182 819 897 €, CP− 173 143 366 €",
+   "expose_words_changed": 66
+  },
+  "17": {
+   "old_n": 17,
+   "new_n": 17,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Solidarité, insertion et égalité des chances »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Solidarité, insertion et égalité des chances »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    20,
+    20
+   ],
+   "pdf_pages_new": [
+    22,
+    22
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 102 086 614 €, CP− 101 987 363 €",
+   "etat_b_totaux_new": "AE− 46 766 072 €, CP− 46 597 345 €",
+   "expose_words_changed": 66
+  },
+  "18": {
+   "old_n": 18,
+   "new_n": 18,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Agriculture, alimentation, forêt et affaires rurales »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Agriculture et alimentation »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    21,
+    21
+   ],
+   "pdf_pages_new": [
+    23,
+    23
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 92 065 085 €, CP− 78 679 546 €",
+   "etat_b_totaux_new": "AE− 762 669 923 €, CP− 604 298 507 €",
+   "dispositif_words_changed": 5,
+   "expose_words_changed": 124
+  },
+  "19": {
+   "old_n": 19,
+   "new_n": 19,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Administration générale et territoriale de l’État »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Administration générale et territoriale de l’État »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    22,
+    22
+   ],
+   "pdf_pages_new": [
+    24,
+    24
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 68 670 672 €, CP− 68 670 672 €",
+   "etat_b_totaux_new": "AE− 30 901 802 €, CP− 30 901 802 €",
+   "expose_words_changed": 41
+  },
+  "20": {
+   "old_n": 20,
+   "new_n": 20,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Sécurités »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Sécurités »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    23,
+    23
+   ],
+   "pdf_pages_new": [
+    25,
+    25
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 49 278 164 €, CP− 37 946 354 €",
+   "etat_b_totaux_new": "AE− 66 892 142 €, CP− 52 729 405 €",
+   "expose_words_changed": 71
+  },
+  "21": {
+   "old_n": 21,
+   "new_n": 21,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Justice »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Justice »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    24,
+    24
+   ],
+   "pdf_pages_new": [
+    26,
+    26
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 6 924 880 €, CP− 5 886 148 €",
+   "etat_b_totaux_new": "AE− 11 772 297 €, CP− 10 006 452 €",
+   "expose_words_changed": 14
+  },
+  "22": {
+   "old_n": 22,
+   "new_n": 22,
+   "title_old": "Retirer les crédits que la présente loi interrompt, mission « Conseil et contrôle de l’État »",
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Conseil et contrôle de l’État »",
+   "article_old": "ARTICLE 58",
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": [
+    25,
+    25
+   ],
+   "pdf_pages_new": [
+    27,
+    27
+   ],
+   "status": "CHANGED",
+   "etat_b_totaux_old": "AE− 6 289 599 €, CP− 5 812 720 €",
+   "etat_b_totaux_new": "AE− 9 189 680 €, CP− 8 378 985 €",
+   "expose_words_changed": 66
+  },
+  "23": {
+   "old_n": 23,
+   "new_n": 23,
+   "title_old": "Supprimer la contribution de l’assurance chômage à France Travail",
+   "title_new": "Supprimer la contribution de l’assurance chômage à France Travail",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 58, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 58, insérer l’article suivant :",
+   "pdf_pages_old": [
+    26,
+    26
+   ],
+   "pdf_pages_new": [
+    28,
+    28
+   ],
+   "status": "UNCHANGED"
+  },
+  "24": {
+   "old_n": 24,
+   "new_n": 24,
+   "title_old": "Retirer du plafond les emplois des missions que l’État abandonne",
+   "title_new": "Retirer du plafond les emplois des missions que l’État abandonne",
+   "article_old": "ARTICLE 63",
+   "article_new": "ARTICLE 63",
+   "pdf_pages_old": [
+    27,
+    28
+   ],
+   "pdf_pages_new": [
+    29,
+    30
+   ],
+   "status": "UNCHANGED"
+  },
+  "25": {
+   "old_n": 25,
+   "new_n": 25,
+   "title_old": "Agences de l’État : les structures facultatives fermées, les missions régaliennes rendues aux ministères",
+   "title_new": "Agences de l’État : les structures facultatives fermées, les missions régaliennes rendues aux ministères",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 65, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 65, insérer l’article suivant :",
+   "pdf_pages_old": [
+    29,
+    44
+   ],
+   "pdf_pages_new": [
+    31,
+    46
+   ],
+   "status": "UNCHANGED"
+  },
+  "26": {
+   "old_n": 26,
+   "new_n": 26,
+   "title_old": "Organiser la sortie des agents dont l’emploi est supprimé",
+   "title_new": "Organiser la sortie des agents dont l’emploi est supprimé",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 66, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 66, insérer l’article suivant :",
+   "pdf_pages_old": [
+    45,
+    49
+   ],
+   "pdf_pages_new": [
+    47,
+    52
+   ],
+   "status": "CHANGED",
+   "dispositif_words_changed": 394,
+   "expose_words_changed": 1042
+  },
+  "27": {
+   "old_n": 27,
+   "new_n": 27,
+   "title_old": "Plus aucune dépense nouvelle de l’État sans une signature qui en réponde",
+   "title_new": "Plus aucune dépense nouvelle de l’État sans une signature qui en réponde",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 67, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 67, insérer l’article suivant :",
+   "pdf_pages_old": [
+    50,
+    51
+   ],
+   "pdf_pages_new": [
+    53,
+    54
+   ],
+   "status": "UNCHANGED"
+  },
+  "28": {
+   "old_n": 28,
+   "new_n": 28,
+   "title_old": "Retirer l’automaticité des indexations et rendre la revalorisation au vote",
+   "title_new": "Retirer l’automaticité des indexations et rendre la revalorisation au vote",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 74, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 74, insérer l’article suivant :",
+   "pdf_pages_old": [
+    52,
+    53
+   ],
+   "pdf_pages_new": [
+    55,
+    56
+   ],
+   "status": "UNCHANGED"
+  },
+  "29": {
+   "old_n": 29,
+   "new_n": 29,
+   "title_old": "Plus un logement social neuf financé par l’État",
+   "title_new": "Plus un logement social neuf financé par l’État",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 74, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 74, insérer l’article suivant :",
+   "pdf_pages_old": [
+    54,
+    54
+   ],
+   "pdf_pages_new": [
+    57,
+    57
+   ],
+   "status": "UNCHANGED"
+  },
+  "30": {
+   "old_n": 30,
+   "new_n": 30,
+   "title_old": "L’État cesse d’acheter, il valorise et il vend",
+   "title_new": "L’État cesse d’acheter, il valorise et il vend",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 75, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 75, insérer l’article suivant :",
+   "pdf_pages_old": [
+    55,
+    55
+   ],
+   "pdf_pages_new": [
+    58,
+    58
+   ],
+   "status": "UNCHANGED"
+  },
+  "31": {
+   "old_n": 31,
+   "new_n": 31,
+   "title_old": "Cesser de subventionner, cesser de choisir sur dossier",
+   "title_new": "Cesser de subventionner, cesser de choisir sur dossier",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 75, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 75, insérer l’article suivant :",
+   "pdf_pages_old": [
+    56,
+    57
+   ],
+   "pdf_pages_new": [
+    59,
+    60
+   ],
+   "status": "UNCHANGED"
+  },
+  "32": {
+   "old_n": 32,
+   "new_n": 32,
+   "title_old": "Éteindre l’aide personnelle au logement au rythme des droits en cours",
+   "title_new": "Éteindre l’aide personnelle au logement au rythme des droits en cours",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 78, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 78, insérer l’article suivant :",
+   "pdf_pages_old": [
+    58,
+    59
+   ],
+   "pdf_pages_new": [
+    61,
+    62
+   ],
+   "status": "UNCHANGED"
+  },
+  "33": {
+   "old_n": 33,
+   "new_n": 33,
+   "title_old": "Rendre l’hébergement d’urgence à l’urgence",
+   "title_new": "Rendre l’hébergement d’urgence à l’urgence",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 78, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 78, insérer l’article suivant :",
+   "pdf_pages_old": [
+    60,
+    60
+   ],
+   "pdf_pages_new": [
+    63,
+    63
+   ],
+   "status": "CHANGED",
+   "dispositif_words_changed": 1,
+   "expose_words_changed": 1
+  },
+  "34": {
+   "old_n": 34,
+   "new_n": 34,
+   "title_old": "Mettre fin au chèque énergie plutôt que d’en élargir le recours",
+   "title_new": "Mettre fin au chèque énergie plutôt que d’en élargir le recours",
+   "article_old": "ARTICLE 81",
+   "article_new": "ARTICLE 81",
+   "pdf_pages_old": [
+    61,
+    61
+   ],
+   "pdf_pages_new": [
+    64,
+    64
+   ],
+   "status": "CHANGED",
+   "expose_words_changed": 75
+  },
+  "35": {
+   "old_n": 35,
+   "new_n": 35,
+   "title_old": "Supprimer les subventions que l’État distribue aux collectivités sur dossier",
+   "title_new": "Supprimer les subventions que l’État distribue aux collectivités sur dossier",
+   "article_old": "ARTICLE 83",
+   "article_new": "ARTICLE 83",
+   "pdf_pages_old": [
+    62,
+    62
+   ],
+   "pdf_pages_new": [
+    65,
+    65
+   ],
+   "status": "UNCHANGED"
+  },
+  "36": {
+   "old_n": 36,
+   "new_n": 36,
+   "title_old": "Refuser le concours nouveau créé par l’article 85",
+   "title_new": "Refuser le concours nouveau créé par l’article 85",
+   "article_old": "ARTICLE 85",
+   "article_new": "ARTICLE 85",
+   "pdf_pages_old": [
+    63,
+    63
+   ],
+   "pdf_pages_new": [
+    66,
+    66
+   ],
+   "status": "UNCHANGED"
+  },
+  "37": {
+   "old_n": 37,
+   "new_n": 37,
+   "title_old": "Refuser l’extension créée par l’article 86",
+   "title_new": "Refuser l’extension créée par l’article 86",
+   "article_old": "ARTICLE 86",
+   "article_new": "ARTICLE 86",
+   "pdf_pages_old": [
+    64,
+    64
+   ],
+   "pdf_pages_new": [
+    67,
+    67
+   ],
+   "status": "UNCHANGED"
+  },
+  "38": {
+   "old_n": 38,
+   "new_n": 38,
+   "title_old": "Refuser le fonds de soutien créé par l’article 87",
+   "title_new": "Refuser le fonds de soutien créé par l’article 87",
+   "article_old": "ARTICLE 87",
+   "article_new": "ARTICLE 87",
+   "pdf_pages_old": [
+    65,
+    65
+   ],
+   "pdf_pages_new": [
+    68,
+    68
+   ],
+   "status": "UNCHANGED"
+  },
+  "39": {
+   "old_n": 39,
+   "new_n": 39,
+   "title_old": "Rapport annuel sur l’équilibre de la refonte des impositions",
+   "title_new": "Rapport annuel sur l’équilibre de la refonte des impositions",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 75, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 75, insérer l’article suivant :",
+   "pdf_pages_old": [
+    66,
+    66
+   ],
+   "pdf_pages_new": [
+    69,
+    69
+   ],
+   "status": "UNCHANGED"
+  },
+  "40": {
+   "old_n": null,
+   "new_n": 40,
+   "title_old": null,
+   "title_new": "Retirer les crédits que la présente loi interrompt, mission « Outre-mer »",
+   "article_old": null,
+   "article_new": "ARTICLE 58",
+   "pdf_pages_old": null,
+   "pdf_pages_new": [
+    70,
+    70
+   ],
+   "status": "NEW"
+  }
+ },
+ "Liasse_PLFSS": {
+  "1": {
+   "old_n": 1,
+   "new_n": 1,
+   "title_old": "CSG et CRDS supprimées sur les revenus d’activité : les économies rendues au salaire net, soit +13 %",
+   "title_new": "CSG et CRDS supprimées sur les revenus d’activité : les économies rendues au salaire net, soit +13 %",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 7, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 7, insérer l’article suivant :",
+   "pdf_pages_old": [
+    3,
+    7
+   ],
+   "pdf_pages_new": [
+    3,
+    7
+   ],
+   "status": "UNCHANGED"
+  },
+  "2": {
+   "old_n": 2,
+   "new_n": 2,
+   "title_old": "Retirer de la clé de répartition la part qui n’a plus de produit",
+   "title_new": "Retirer de la clé de répartition la part qui n’a plus de produit",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 14, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 14, insérer l’article suivant :",
+   "pdf_pages_old": [
+    8,
+    9
+   ],
+   "pdf_pages_new": [
+    8,
+    9
+   ],
+   "status": "UNCHANGED"
+  },
+  "3": {
+   "old_n": 3,
+   "new_n": 3,
+   "title_old": "Taxe sur les salaires : l’éteindre par marches et l’abroger",
+   "title_new": "Taxe sur les salaires : l’éteindre par marches et l’abroger",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 14, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 14, insérer l’article suivant :",
+   "pdf_pages_old": [
+    10,
+    11
+   ],
+   "pdf_pages_new": [
+    10,
+    11
+   ],
+   "status": "UNCHANGED"
+  },
+  "4": {
+   "old_n": 4,
+   "new_n": 4,
+   "title_old": "Personne ne paie plus de sa santé qu’une part fixe de ses ressources",
+   "title_new": "Personne ne paie plus de sa santé qu’une part fixe de ses ressources",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 30, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 30, insérer l’article suivant :",
+   "pdf_pages_old": [
+    12,
+    14
+   ],
+   "pdf_pages_new": [
+    12,
+    14
+   ],
+   "status": "UNCHANGED"
+  },
+  "5": {
+   "old_n": 5,
+   "new_n": 5,
+   "title_old": "Indexations sociales : retirer l’automaticité à sa source et rendre la revalorisation au vote",
+   "title_new": "Indexations sociales : retirer l’automaticité à sa source et rendre la revalorisation au vote",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 35, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 35, insérer l’article suivant :",
+   "pdf_pages_old": [
+    15,
+    16
+   ],
+   "pdf_pages_new": [
+    15,
+    16
+   ],
+   "status": "UNCHANGED"
+  },
+  "6": {
+   "old_n": 6,
+   "new_n": 6,
+   "title_old": "Un régime socle unique remplace les régimes de base par répartition",
+   "title_new": "Un régime socle unique remplace les régimes de base par répartition",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 35, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 35, insérer l’article suivant :",
+   "pdf_pages_old": [
+    17,
+    18
+   ],
+   "pdf_pages_new": [
+    17,
+    18
+   ],
+   "status": "UNCHANGED"
+  },
+  "7": {
+   "old_n": 7,
+   "new_n": 7,
+   "title_old": "Une aide pour toutes : les prestations qu’elle remplace s’éteignent le jour où elle commence",
+   "title_new": "Une aide pour toutes : les prestations qu’elle remplace s’éteignent le jour où elle commence",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 37, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 37, insérer l’article suivant :",
+   "pdf_pages_old": [
+    19,
+    20
+   ],
+   "pdf_pages_new": [
+    19,
+    20
+   ],
+   "status": "UNCHANGED"
+  },
+  "8": {
+   "old_n": 8,
+   "new_n": 8,
+   "title_old": "Concours financiers des organismes de sécurité sociale et du fonds d’intervention régional : interdire la subvention sans contrepartie et n’autoriser que l’achat de prestations déterminées",
+   "title_new": "Concours financiers des organismes de sécurité sociale et du fonds d’intervention régional : interdire la subvention sans contrepartie et n’autoriser que l’achat de prestations déterminées",
+   "article_old": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 43, insérer l’article suivant :",
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 43, insérer l’article suivant :",
+   "pdf_pages_old": [
+    21,
+    22
+   ],
+   "pdf_pages_new": [
+    21,
+    22
+   ],
+   "status": "UNCHANGED"
+  },
+  "9": {
+   "old_n": null,
+   "new_n": 9,
+   "title_old": null,
+   "title_new": "Contributions sociales : vingt et une impositions fondues dans l’impôt, sans hausse du total",
+   "article_old": null,
+   "article_new": "ARTICLE ADDITIONNEL — APRÈS L’ARTICLE 14, insérer l’article suivant :",
+   "pdf_pages_old": null,
+   "pdf_pages_new": [
+    23,
+    24
+   ],
+   "status": "NEW"
+  }
+ }
+}

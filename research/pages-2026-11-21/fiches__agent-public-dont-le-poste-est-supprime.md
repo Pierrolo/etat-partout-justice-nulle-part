@@ -25,7 +25,7 @@ Votre administration ferme, et votre poste avec elle. Une agence n’est pas un 
 - **70 %** : De votre traitement, sans condition, jusqu'à sept ans. Cumulable avec un emploi privé.
 - **Votre temps** : Il vous revient. Le métier d'après, vous le choisissez.
 - **Le privé** : Une entreprise, une association, un projet à vous — et des salaires nets qui montent de 13 %.
-[Télécharger cette fiche (PDF)](agent-public-dont-le-poste-est-supprime.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

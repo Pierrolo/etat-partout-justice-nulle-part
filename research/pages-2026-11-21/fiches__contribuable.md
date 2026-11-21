@@ -16,7 +16,7 @@ Ce que l’État vous prend, et de combien ça baisse.
 
 ### Ce que vous gagnez
 
-- **36 %** : De la richesse produite, contre 43 % aujourd'hui : c'est ce que vous verserez.
+- **36 %** : De la richesse produite, contre 43 % aujourd'hui : c'est ce que vous verserez. La refonte fiscale se fait sans augmenter les impôts : elle les baisse, grâce à la restitution des économies sur la feuille de paie.
 - **143 Md€** : De niches supprimées, dont 52 milliards d'euros vous reviennent en baisse de charges et de taxes.
 - **68,9 Md€** : Par an de subventions et d'aides que vous ne financez plus.
 - **29,6 Md€** : Par an de masse salariale publique en moins sur votre feuille d'impôt.
@@ -25,7 +25,7 @@ Ce que l’État vous prend, et de combien ça baisse.
 
 _Et comme chacun_ : Un seul impôt · Les taxes
 
-[Télécharger cette fiche (PDF)](contribuable.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

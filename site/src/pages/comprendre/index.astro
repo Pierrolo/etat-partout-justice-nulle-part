@@ -20,6 +20,7 @@ import {
 import { READING_HYPOTHESES, readingTime } from '@/lib/reading';
 import { COMPRENDRE_PAGES, withBase } from '@/lib/site';
 import { GROUP_SHORT, GROUP_SLOT, cofogTree } from '@/lib/story-data';
+import { squaresByGroup } from '@/lib/story-shared';
 import { line, scaleLinear } from 'd3';
 
 // ── 1. Dépenses ─────────────────────────────────────────────────────────────
@@ -28,6 +29,8 @@ const total = num('dep_total_2024_md');
 const foyers = FOYERS;
 const perDay = perFoyerDay(total);
 const groups = [...(tree.children ?? [])].sort((a, b) => b.value - a.value);
+// largest remainder, like HundredSquares: the six shares add up to exactly one hundred
+const hundred = squaresByGroup(groups, total);
 const year = fact('dep_total_2024_md').year ?? 2024;
 
 // ── 2. Prédiction ───────────────────────────────────────────────────────────
@@ -128,7 +131,7 @@ const planDay = perFoyerDay(num('eco236_total_md'));
           <div
             class="max-w-2xl space-y-2"
             role="img"
-            aria-label={`Répartition de 100 € de dépenses : ${groups.map((g) => `${formatNumber((g.value / total) * 100, { decimals: 0 })} € ${GROUP_SHORT[g.id]}`).join(', ')}`}
+            aria-label={`Répartition de 100 € de dépenses : ${hundred.map((g) => `${formatNumber(g.squares)} € ${GROUP_SHORT[g.id]}`).join(', ')}`}
           >
             <div class="flex gap-0.5" aria-hidden="true">
               {groups.map((g, i) => (

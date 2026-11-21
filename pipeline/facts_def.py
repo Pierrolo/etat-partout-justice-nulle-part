@@ -48,6 +48,11 @@ def _a_depenses(F: Facts):
     for mid, label, row in members:
         F.wb(f"dep_{mid}_2024_md", G, "Graph1672Md", f"D{row}", "Md€", f"Dépenses publiques 2024 : {label}", 2024, "donnee", nd=3, **ins,
              note="Regroupement du livre (graphique « 1 672 Md€ ») ; mapping vers les sous-fonctions COFOG dans depenses-cofog.json.")
+    # COFOG division 09 « Enseignement » as published by the Insee (the book's « Éducation » leaves out 09.6, « services
+    # annexes à l'enseignement », counted in its « Administrations »)
+    F.wb("dep_cofog09_enseignement_2024_md", G, "Graph1672Md", "D111", "Md€", "Dépenses publiques 2024 : Enseignement (division COFOG 09 de l'Insee)", 2024, "donnee",
+         expect=148.64, nd=3, **ins,
+         note="Fonction « Enseignement » entière (division 09 de la COFOG), services annexes compris (cantine, transport et internat scolaires : 20,0 Md€). Le regroupement « Éducation » du livre (128,6 Md€) les compte dans « Administrations ».")
     groups = [
         ("securite", "Sécurité (défense, intérieur, justice)", ["defense", "interieur", "justice"]),
         ("depenses_collectives", "Dépenses collectives (administrations, infrastructures, environnement)", ["administrations", "infrastructures", "environnement"]),
@@ -89,19 +94,38 @@ def _a_depenses(F: Facts):
 # B. Europe
 # ======================================================================================
 def _b_europe(F: Facts):
-    ge = dict(kind="eurostat", url=EUROSTAT["tec00023"], ref_prefix="Eurostat tec00023, dépenses des administrations publiques, % du PIB")
-    gd = dict(kind="eurostat", url=EUROSTAT["tec00127"], ref_prefix="Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB")
-    rm = dict(kind="eurostat", url=EUROSTAT["ilc_di03"], ref_prefix="Eurostat ilc_di03, revenu médian équivalent")
-    F.wb("eu_dep_pib_fr_2024_pct", G, "GraphGov", "B10", "% du PIB", "Dépenses publiques de la France en 2024", 2024, "donnee", expect=57.0, nd=1, **ge)
-    F.wb("eu_dep_pib_fr_2025_pct", G, "GraphGov", "C10", "% du PIB", "Dépenses publiques de la France en 2025", 2025, "donnee", expect=57.2, nd=1, **ge)
-    F.wb("eu_dep_pib_fi_2024_pct", G, "GraphGov", "B9", "% du PIB", "Dépenses publiques de la Finlande en 2024", 2024, "donnee", expect=57.7, nd=1, **ge)
-    F.wb("eu_dep_pib_fi_2025_pct", G, "GraphGov", "C9", "% du PIB", "Dépenses publiques de la Finlande en 2025", 2025, "donnee", expect=57.5, nd=1, **ge)
-    F.wb("eu_dep_pib_ea20_2024_pct", G, "GraphGov", "B16", "% du PIB", "Dépenses publiques de la zone euro (20 pays) en 2024", 2024, "donnee", expect=49.4, nd=1, **ge)
-    F.wb("eu_dep_pib_ea20_2025_pct", G, "GraphGov", "C16", "% du PIB", "Dépenses publiques de la zone euro (20 pays) en 2025", 2025, "donnee", expect=49.8, nd=1, **ge)
-    F.wb("eu_dep_pib_de_2024_pct", G, "GraphGov", "B18", "% du PIB", "Dépenses publiques de l'Allemagne en 2024", 2024, "donnee", expect=49.4, nd=1, **ge)
-    F.wb("eu_dep_pib_de_2025_pct", G, "GraphGov", "C18", "% du PIB", "Dépenses publiques de l'Allemagne en 2025", 2025, "donnee", expect=50.5, nd=1, **ge)
-    F.wb("eu_dep_pib_ch_2024_pct", G, "GraphGov", "B41", "% du PIB", "Dépenses publiques de la Suisse en 2024", 2024, "donnee", expect=33.6, nd=1, **ge)
-    F.wb("eu_dep_pib_ie_2024_pct", G, "GraphGov", "B42", "% du PIB", "Dépenses publiques de l'Irlande en 2024", 2024, "donnee", expect=22.3, nd=1, **ge)
+    """Eurostat, vintage of 21 October 2026 (data/eurostat/, see eurostat.py); the workbook cell the book used
+    is kept as `source.also` with its own (older) value."""
+    import eurostat
+
+    def es(id, key, geo, year, sheet, cell, unit, label, expect, nd, wb_expect):
+        ds = eurostat.dataset_of(key)
+        names = {
+            "tec00023": "Eurostat tec00023, dépenses des administrations publiques, % du PIB",
+            "tec00127": "Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB",
+            "ilc_di03": "Eurostat ilc_di03, revenu médian équivalent (enquête SILC 2024, revenus 2023)",
+        }
+        v = eurostat.value(key, geo, year)
+        assert v is not None and abs(v - expect) < 1e-6, (id, v, expect)
+        sh = Sheet.get(G, sheet)
+        wbv = clean(sh.num(cell), 6)
+        assert abs(wbv - wb_expect) < 1e-6, (id, wbv, wb_expect)
+        src = {"kind": "eurostat", "ref": f"{names[ds]} (mise à jour du {eurostat.vintage_fr(ds)})", "url": EUROSTAT[ds],
+               "snapshot": eurostat.snapshot_ref(key, geo, year),
+               "also": {"kind": "workbook", "ref": sh.ref(cell), "url": sh.source(cell)["url"], "value": wbv}}
+        note = None if abs(wbv - v) < 1e-6 else f"Le classeur des auteurs (millésime antérieur) donne {str(wbv).replace('.', ',')}."
+        return F.add(id, clean(v, nd), unit, label, year, src, "donnee", note)
+
+    es("eu_dep_pib_fr_2024_pct", "tec00023", "FR", 2024, "GraphGov", "B10", "% du PIB", "Dépenses publiques de la France en 2024", expect=57.0, nd=1, wb_expect=57.0)
+    es("eu_dep_pib_fr_2025_pct", "tec00023", "FR", 2025, "GraphGov", "C10", "% du PIB", "Dépenses publiques de la France en 2025", expect=57.3, nd=1, wb_expect=57.2)
+    es("eu_dep_pib_fi_2024_pct", "tec00023", "FI", 2024, "GraphGov", "B9", "% du PIB", "Dépenses publiques de la Finlande en 2024", expect=57.9, nd=1, wb_expect=57.7)
+    es("eu_dep_pib_fi_2025_pct", "tec00023", "FI", 2025, "GraphGov", "C9", "% du PIB", "Dépenses publiques de la Finlande en 2025", expect=57.5, nd=1, wb_expect=57.5)
+    es("eu_dep_pib_ea20_2024_pct", "tec00023", "EA20", 2024, "GraphGov", "B16", "% du PIB", "Dépenses publiques de la zone euro (20 pays) en 2024", expect=49.3, nd=1, wb_expect=49.4)
+    es("eu_dep_pib_ea20_2025_pct", "tec00023", "EA20", 2025, "GraphGov", "C16", "% du PIB", "Dépenses publiques de la zone euro (20 pays) en 2025", expect=49.8, nd=1, wb_expect=49.8)
+    es("eu_dep_pib_de_2024_pct", "tec00023", "DE", 2024, "GraphGov", "B18", "% du PIB", "Dépenses publiques de l'Allemagne en 2024", expect=49.0, nd=1, wb_expect=49.4)
+    es("eu_dep_pib_de_2025_pct", "tec00023", "DE", 2025, "GraphGov", "C18", "% du PIB", "Dépenses publiques de l'Allemagne en 2025", expect=50.1, nd=1, wb_expect=50.5)
+    es("eu_dep_pib_ch_2024_pct", "tec00023", "CH", 2024, "GraphGov", "B41", "% du PIB", "Dépenses publiques de la Suisse en 2024", expect=32.8, nd=1, wb_expect=33.6)
+    es("eu_dep_pib_ie_2024_pct", "tec00023", "IE", 2024, "GraphGov", "B42", "% du PIB", "Dépenses publiques de l'Irlande en 2024", expect=22.4, nd=1, wb_expect=22.3)
     F.calc("eu_dep_pib_ecart_fr_ea20_2024_pts", ["eu_dep_pib_fr_2024_pct", "eu_dep_pib_ea20_2024_pct"], lambda a, b: a - b, "points de PIB",
            "Écart de dépenses publiques entre la France et la zone euro en 2024", 2024, "eu_dep_pib_fr_2024_pct − eu_dep_pib_ea20_2024_pct", nd=1)
     import b_europe
@@ -109,20 +133,20 @@ def _b_europe(F: Facts):
     F.calc_value("eu_dep_rang_fr_2024", rk, ["eu_dep_pib_fr_2024_pct", "eu_dep_pib_fi_2024_pct"], "rang sur 30 pays",
                  "Rang de la France pour les dépenses publiques (% du PIB) en 2024, parmi les 30 pays de la table", 2024,
                  "classement décroissant des 30 pays de GraphGov!B9:B42 (hors agrégats)",
-                 note="La Finlande est première en 2024 (57,7 %) et en 2025 (57,5 %) ; la France est deuxième.")
-    F.wb("eu_deficit_fr_2024_pct", G, "GraphGov", "B52", "% du PIB", "Solde public de la France en 2024 (déficit)", 2024, "donnee", expect=-5.8, nd=1, **gd)
-    F.wb("eu_deficit_fr_2025_pct", G, "GraphGov", "C52", "% du PIB", "Solde public de la France en 2025 (déficit)", 2025, "donnee", expect=-5.1, nd=1, **gd)
-    F.wb("eu_deficit_ea20_2024_pct", G, "GraphGov", "B64", "% du PIB", "Solde public de la zone euro (20 pays) en 2024", 2024, "donnee", expect=-3.0, nd=1, **gd)
-    F.wb("eu_deficit_ea20_2025_pct", G, "GraphGov", "C64", "% du PIB", "Solde public de la zone euro (20 pays) en 2025", 2025, "donnee", expect=-2.9, nd=1, **gd)
-    F.wb("eu_deficit_de_2024_pct", G, "GraphGov", "B67", "% du PIB", "Solde public de l'Allemagne en 2024", 2024, "donnee", expect=-2.7, nd=1, **gd)
-    F.wb("eu_revenu_median_fr_eur", G, "GraphRDB", "B28", "€ par an", "Revenu médian équivalent en France", 2024, "donnee", expect=25557, nd=0, **rm)
-    F.wb("eu_revenu_median_ch_eur", G, "GraphRDB", "B39", "€ par an", "Revenu médian équivalent en Suisse", 2024, "donnee", expect=51926, nd=0, **rm)
-    F.wb("eu_revenu_median_lu_eur", G, "GraphRDB", "B38", "€ par an", "Revenu médian équivalent au Luxembourg", 2024, "donnee", expect=50799, nd=0, **rm)
-    F.wb("eu_revenu_median_ea20_eur", G, "GraphRDB", "B27", "€ par an", "Revenu médian équivalent, zone euro (20 pays)", 2024, "donnee", expect=23767, nd=0, **rm)
-    F.wb("eu_revenu_median_eu27_eur", G, "GraphRDB", "B26", "€ par an", "Revenu médian équivalent, Union européenne (27 pays)", 2024, "donnee", expect=21582, nd=0, **rm)
-    F.wb("eu_revenu_median_fr_spa", G, "GraphRDB", "B56", "SPA par an", "Revenu médian équivalent en France, en standards de pouvoir d'achat", 2024, "donnee", expect=23222, nd=0, **rm)
-    F.wb("eu_revenu_median_ch_spa", G, "GraphRDB", "B48", "SPA par an", "Revenu médian équivalent en Suisse, en standards de pouvoir d'achat", 2024, "donnee", expect=29828, nd=0, **rm)
-    F.wb("eu_revenu_median_lu_spa", G, "GraphRDB", "B46", "SPA par an", "Revenu médian équivalent au Luxembourg, en standards de pouvoir d'achat", 2024, "donnee", expect=37781, nd=0, **rm)
+                 note="La Finlande est première en 2024 (57,9 %) et en 2025 (57,5 %) ; la France est deuxième (Eurostat, mise à jour du 21 octobre 2026).")
+    es("eu_deficit_fr_2024_pct", "tec00127", "FR", 2024, "GraphGov", "B52", "% du PIB", "Solde public de la France en 2024 (déficit)", expect=-5.8, nd=1, wb_expect=-5.8)
+    es("eu_deficit_fr_2025_pct", "tec00127", "FR", 2025, "GraphGov", "C52", "% du PIB", "Solde public de la France en 2025 (déficit)", expect=-5.1, nd=1, wb_expect=-5.1)
+    es("eu_deficit_ea20_2024_pct", "tec00127", "EA20", 2024, "GraphGov", "B64", "% du PIB", "Solde public de la zone euro (20 pays) en 2024", expect=-3.0, nd=1, wb_expect=-3.0)
+    es("eu_deficit_ea20_2025_pct", "tec00127", "EA20", 2025, "GraphGov", "C64", "% du PIB", "Solde public de la zone euro (20 pays) en 2025", expect=-3.0, nd=1, wb_expect=-2.9)
+    es("eu_deficit_de_2024_pct", "tec00127", "DE", 2024, "GraphGov", "B67", "% du PIB", "Solde public de l'Allemagne en 2024", expect=-2.7, nd=1, wb_expect=-2.7)
+    es("eu_revenu_median_fr_eur", "ilc_di03_eur", "FR", 2024, "GraphRDB", "B28", "€ par an", "Revenu médian équivalent en France", expect=25557, nd=0, wb_expect=25557)
+    es("eu_revenu_median_ch_eur", "ilc_di03_eur", "CH", 2024, "GraphRDB", "B39", "€ par an", "Revenu médian équivalent en Suisse", expect=51926, nd=0, wb_expect=51926)
+    es("eu_revenu_median_lu_eur", "ilc_di03_eur", "LU", 2024, "GraphRDB", "B38", "€ par an", "Revenu médian équivalent au Luxembourg", expect=50799, nd=0, wb_expect=50799)
+    es("eu_revenu_median_ea20_eur", "ilc_di03_eur", "EA20", 2024, "GraphRDB", "B27", "€ par an", "Revenu médian équivalent, zone euro (20 pays)", expect=23767, nd=0, wb_expect=23767)
+    es("eu_revenu_median_eu27_eur", "ilc_di03_eur", "EU27_2020", 2024, "GraphRDB", "B26", "€ par an", "Revenu médian équivalent, Union européenne (27 pays)", expect=21582, nd=0, wb_expect=21582)
+    es("eu_revenu_median_fr_spa", "ilc_di03_pps", "FR", 2024, "GraphRDB", "B56", "SPA par an", "Revenu médian équivalent en France, en standards de pouvoir d'achat", expect=23222, nd=0, wb_expect=23222)
+    es("eu_revenu_median_ch_spa", "ilc_di03_pps", "CH", 2024, "GraphRDB", "B48", "SPA par an", "Revenu médian équivalent en Suisse, en standards de pouvoir d'achat", expect=29828, nd=0, wb_expect=29828)
+    es("eu_revenu_median_lu_spa", "ilc_di03_pps", "LU", 2024, "GraphRDB", "B46", "SPA par an", "Revenu médian équivalent au Luxembourg, en standards de pouvoir d'achat", expect=37781, nd=0, wb_expect=37781)
     F.calc("eu_revenu_median_fr_mois_eur", ["eu_revenu_median_fr_eur"], lambda x: x / 12, "€ par mois", "Revenu médian équivalent en France par mois", 2024, "eu_revenu_median_fr_eur ÷ 12", nd=2)
     F.calc("eu_revenu_median_ch_mois_eur", ["eu_revenu_median_ch_eur"], lambda x: x / 12, "€ par mois", "Revenu médian équivalent en Suisse par mois", 2024, "eu_revenu_median_ch_eur ÷ 12", nd=2)
     F.calc("eu_revenu_median_ratio_ch_fr", ["eu_revenu_median_ch_eur", "eu_revenu_median_fr_eur"], lambda a, b: a / b, "ratio", "Revenu médian suisse rapporté au revenu médian français (euros courants)", 2024,
@@ -140,10 +164,21 @@ def _b_europe(F: Facts):
 # C. prélèvements obligatoires
 # ======================================================================================
 def _c_prelevements(F: Facts):
-    ins = dict(kind="insee", url=INSEE_3217, ref_prefix="Insee, comptes nationaux, tableau 3.217 (extraits)")
-    F.wb("po_pib_2024_md", C, "Refonte_fiscalit", "C3", "Md€", "PIB 2024", 2024, "donnee", expect=2919.9, nd=1, **ins)
-    F.wb("po_2024_md", C, "Refonte_fiscalit", "F3", "Md€", "Prélèvements obligatoires 2024", 2024, "donnee", expect=1251.8, nd=1, **ins)
-    F.wb("po_pib_2024_pct", C, "Refonte_fiscalit", "E3", "% du PIB", "Taux de prélèvements obligatoires 2024", 2024, "donnee", scale=100, nd=6, **ins, note="42,87 %.")
+    # The workbook's PIB is the May-2025 edition of the national accounts; its PO total (1 251,8 Md€, 42,87 %) is in
+    # neither the May-2025 nor the May-2026 edition: sourced to the authors' workbook, with the Insee figures beside.
+    F.wb("po_pib_2024_md", C, "Refonte_fiscalit", "C3", "Md€", "PIB 2024", 2024, "donnee", expect=2919.9, nd=1,
+         note="PIB 2024 de l'édition de mai 2025 des comptes nationaux de l'Insee, repris par le classeur des auteurs ; l'édition de mai 2026 le porte à 2 935,2 Md€ (fait pib_2024_insee_2026_md).")
+    F.wb("po_2024_md", C, "Refonte_fiscalit", "F3", "Md€", "Prélèvements obligatoires 2024", 2024, "donnee", expect=1251.8, nd=1,
+         note="Valeur du classeur des auteurs, de millésime non précisé. L'édition de mai 2026 des comptes nationaux de l'Insee (tableau 3.217) donne 1 254,0 Md€, soit 42,7 % du PIB.")
+    F.wb("po_pib_2024_pct", C, "Refonte_fiscalit", "E3", "% du PIB", "Taux de prélèvements obligatoires 2024", 2024, "donnee", scale=100, nd=6,
+         note="42,87 % : valeur du classeur des auteurs, de millésime non précisé. L'édition de mai 2026 des comptes nationaux de l'Insee donne 42,7 % (1 254,0 Md€ pour un PIB de 2 935,2 Md€).")
+    import eurostat
+    gdp = eurostat.value("nama_10_gdp", "FR", 2024)
+    assert gdp is not None and abs(gdp - 2935236.2) < 1e-6, gdp
+    F.add("pib_2024_insee_2026_md", clean(gdp / 1000, 1), "Md€", "PIB 2024 (Insee, édition de mai 2026)", 2024,
+          {"kind": "eurostat", "ref": f"Eurostat nama_10_gdp (PIB aux prix courants, France), mise à jour du {eurostat.vintage_fr('nama_10_gdp')}, qui reprend l'édition de mai 2026 des comptes nationaux de l'Insee",
+           "url": "https://ec.europa.eu/eurostat/databrowser/view/nama_10_gdp/default/table", "snapshot": eurostat.snapshot_ref("nama_10_gdp", "FR", 2024), "scale": 0.001},
+          "donnee")
     F.wb("po_pib_cible_pct", C, "Refonte_fiscalit", "E4", "% du PIB", "Taux de prélèvements obligatoires cible du plan", None, "annonce", scale=100, nd=6, note="36,33 % : cible calculée par Résolution (schéma PO Résolution).")
     F.wb("po_cible_md", C, "Refonte_fiscalit", "F4", "Md€", "Prélèvements obligatoires cible du plan (sur le PIB 2024)", None, "annonce", nd=5)
     F.calc("po_baisse_pts", ["po_pib_2024_pct", "po_pib_cible_pct"], lambda a, b: a - b, "points de PIB", "Baisse du taux de prélèvements obligatoires visée", None,
@@ -538,7 +573,7 @@ def _h_reframings(F: Facts):
 # ======================================================================================
 def _i_conflicts(F: Facts):
     F.conflict("gain_csg_median", ["csg_gain_median_manifeste_eur_mois", "csg_gain_median_mois_eur", "csg_gain_pct_manifeste", "csg_gain_median_pct", "csg_gain_pct_fiche"],
-               "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » est un arrondi de 12,0 à 12,6 %.")
+               "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » arrondit les 12,56 % du classeur au salaire net médian (12,04 % au SMIC).")
     F.conflict("gain_csg_smic", ["csg_gain_smic_fiche_eur_mois", "csg_gain_smic_mois_eur"],
                "Au SMIC, la fiche Travailleur annonce « 180 euros de plus par mois » ; le classeur donne 171,72 €/mois (SMIC 2025, 12,04 %), 173,74 € (01/2026) et 177,93 € (06/2026).")
     F.conflict("restitution_600_eur", ["restitution_epargne_manifeste_eur_mois", "cep_implicite_classeur_eur_mois_30m"],
@@ -556,7 +591,7 @@ def _i_conflicts(F: Facts):
     F.conflict("apl_economie_2027", ["apl_economie_2027_expose_md", "apl_etat_b_cp_md", "apl_economie_annee_1_classeur_md"],
                "L'exposé de PLF-P2 n° 32 chiffre l'économie 2027 de l'APL à 5,4 Md€ ; l'amendement n° 1 (état B) retire 8,068 Md€ de crédits de paiement du programme « Aide à l'accès au logement » (16,52 Md€) ; le classeur donne 5,4 Md€ en année 1 puis 10,7 Md€ ensuite. Écart non expliqué dans les sources.")
     F.conflict("record_mondial", ["eu_dep_rang_fr_2024", "eu_dep_pib_fi_2024_pct", "eu_dep_pib_fr_2024_pct"],
-               "Le manifeste parle de « record mondial » de dépense publique. Dans les données Eurostat reprises par le classeur du livre, la Finlande (57,7 % du PIB en 2024 ; 57,5 % en 2025) dépasse la France (57,0 % ; 57,2 %) : la France est 2e sur 30 pays.")
+               "Le manifeste parle de « record mondial » de dépense publique. Dans les données Eurostat (mise à jour du 21 octobre 2026), la Finlande (57,9 % du PIB en 2024 ; 57,5 % en 2025) dépasse la France (57,0 % ; 57,3 %) : la France est 2e sur 30 pays. Le classeur du livre, d'un millésime antérieur, donnait déjà la Finlande devant (57,7 % ; 57,5 %, contre 57,0 % ; 57,2 %).")
     F.conflict("depenses_pib_france_2024", ["eu_dep_pib_fr_2024_pct", "dep_pib_insee_calc_pct"],
                "57,0 % (Eurostat tec00023) contre 57,26 % en rapportant le total COFOG Insee (1 671,794 Md€) au PIB 2024 du classeur (2 919,9 Md€, « Refonte fiscalité », C3). Pour obtenir 57,0 % avec cette dépense, il faudrait un PIB d'environ 2 933 Md€ (13 Md€, soit 0,4 %, de plus) : l'écart tient au PIB pris au dénominateur, la dépense étant la même.")
     F.conflict("eco236_total", ["eco236_total_md", "eco236_somme_e_plus_f_md"],

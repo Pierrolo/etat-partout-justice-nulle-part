@@ -63,9 +63,9 @@ def fmt(s):
 
 def label(rb, ra):
     for row in (rb, ra):
-        for c in row[:4]:
-            if c.strip() and num(c) is None:
-                return c.strip()
+        cands = [c.strip().replace("\n", " ") for c in row[:4] if c.strip() and num(c) is None]
+        if cands:
+            return max(cands, key=len)   # the long text, not the one-letter code of column A
     return ""
 
 

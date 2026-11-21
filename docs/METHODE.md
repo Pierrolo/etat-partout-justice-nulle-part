@@ -3,9 +3,14 @@
 Le simulateur compare, pour **votre ménage**, deux situations :
 
 - **Aujourd'hui** : la législation en vigueur au 24 octobre 2026 (barème de l'impôt de la loi de finances pour 2026,
-  prestations revalorisées en avril 2026, aides au logement revalorisées en octobre 2026, SMIC de juin 2026) ;
+  prestations revalorisées en avril 2026, aides au logement revalorisées en octobre 2026, SMIC de juin 2026 :
+  12,31 €/h, 1 867,02 € brut par mois) ;
 - **Avec le plan** de l'association Résolution, tel qu'il est écrit dans les 81 amendements qu'elle a publiés (PLF 2027,
   1re et 2de parties ; PLFSS 2027), complétés par ses fiches et son manifeste quand le texte juridique est muet.
+
+**Note du 21 novembre 2026 sur le SMIC.** Le gouvernement a annoncé le 9 novembre 2026 une hausse du SMIC de 1,6 %
+au 1er décembre 2026. Le décret n'est pas encore publié et cette hausse n'est pas en vigueur : le simulateur garde
+le SMIC du 1er juin 2026 (12,31 €/h, 1 867,02 € brut par mois pour 35 h).
 
 Par défaut, le résultat est le **plan complet appliqué à 2026** : toutes les mesures en vigueur, appliquées à vos
 revenus de 2026, en euros de 2026. Trois « photos » de la transition (2027, 2028, 2030) donnent la moyenne mensuelle
@@ -32,15 +37,15 @@ revenu (+ crédits d'impôt) + aide fondamentale. La TVA est estimée à part (�
 |---|---|---|
 | Salaire | brut → net : cotisations salariales, CSG 9,2 % (dont 6,8 % déductible) et CRDS 0,5 % sur 98,25 % du brut ; coût employeur avec la réduction générale dégressive (RGDU) | même brut, **CSG et CRDS supprimées** sur les revenus d'activité (gain = brut × 98,25 % × 9,7 %) |
 | Statuts | privé non-cadre ; cadre (+ APEC) ; fonctionnaire (**approximation**, voir §6) | idem |
-| Chômage | ARE nette déclarée ; CSG 6,2 % + CRDS 0,5 % au-delà du SMIC (écrêtement) | ARE inchangée (H6), imposée à 23 % |
+| Chômage | ARE nette déclarée ; CSG 6,2 % + CRDS 0,5 % au-delà du SMIC (écrêtement ; taux réduit 3,8 % ou exonération selon le revenu fiscal de référence : non modélisé) | ARE inchangée (H6), imposée à 23 % |
 | Retraite | CSG des pensions par tranche de revenu fiscal (0 / 4,3 / 7,4 / 9,1 %) | CSG maintenue ; tranche recalculée (H16) |
-| Impôt sur le revenu | barème 2026, quotient familial et son plafonnement, décote, abattements 10 % (salaires et pensions), abattement « 65 ans ou invalide » (art. 157 bis, par personne, doublé pour un couple), demi-part par titulaire de la CMI « invalidité » (art. 195), seuil de recouvrement ; crédits garde d'enfants et emploi à domicile, réduction pour dons | **23 % du revenu net imposable**, sans quotient ni décote ; revenu imposable = salaire net (− 10 % de frais professionnels, H2) + pensions après CSG déductible **sans abattement de 10 %** ; niches supprimées |
+| Impôt sur le revenu | barème 2026, quotient familial et son plafonnement, décote, abattements 10 % (salaires et pensions), abattement « 65 ans ou invalide » (art. 157 bis, par personne, doublé pour un couple), demi-part par titulaire de la CMI « invalidité » (art. 195), seuil de recouvrement de 61 € (après réductions, avant crédits d'impôt ; sous le seuil, seul l'excédent d'un crédit sur l'impôt est remboursé) ; crédits garde d'enfants et emploi à domicile, réduction pour dons | **23 % du revenu net imposable**, sans quotient ni décote ; revenu imposable = salaire net (− 10 % de frais professionnels, H2) + pensions après CSG déductible **sans abattement de 10 %** ; niches supprimées |
 | Aide fondamentale (AFU) | — | 6 600 €/an par personne majeure, 3 300 €/an par enfant de moins de 18 ans, +6 600 € par titulaire de la carte mobilité inclusion « invalidité », +3 300 € par pension liquidée avant 2028 ; l'excédent sur l'impôt est versé |
 | RSA, prime d'activité | barèmes 2026, forfait logement, majoration parent isolé | remplacés par l'AFU (H1, réglable) |
 | AAH, ASPA | AAH individuelle (abattements sur revenus d'activité), ASPA (seul / couple) | remplacées par l'AFU (H1, réglable) |
-| Aides au logement | barème APL/AL du parc privé, zones 1/2/3 | supprimées (droits existants réduits puis éteints) |
+| Aides au logement | barème APL/AL du parc privé, zones 1/2/3 ; ressources d'un·e étudiant·e comptées au moins 8 600 €/an (6 900 € pour un·e boursier·e) | supprimées (droits existants réduits puis éteints) |
 | Prestations familiales | allocations familiales (modulation, majoration d'âge, complément dégressif), complément familial, PAJE de base, allocation de rentrée scolaire, ASF (diminuée de la pension alimentaire déclarée), AEEH de base | abrogées au 1er janvier 2028 |
-| Garde des enfants de moins de 6 ans | complément de libre choix du mode de garde (CMG) : assistante maternelle, barème « linéarisé » du 1er septembre 2025 (frais × (1 − ressources × taux d'effort ÷ 4,85 €)) ; micro-crèche, montants 2026 par tranche (moitié de 3 à 6 ans, au plus 85 % de la facture) ; crèche municipale ou associative : pas de CMG. Crédit d'impôt de 50 % des frais diminués du CMG (plafond 3 500 € par enfant) | CMG abrogé au 1er janvier 2028 ; crédit d'impôt réduit d'un tiers (2027), de deux tiers (2028), supprimé (2029) |
+| Garde des enfants de moins de 6 ans (12 ans pour un parent seul qui emploie une assistante maternelle) | complément de libre choix du mode de garde (CMG) : assistante maternelle (jusqu'aux 12 ans de l'enfant pour un parent seul), barème « linéarisé » du 1er septembre 2025 (frais × (1 − ressources × taux d'effort ÷ 4,85 €)) ; micro-crèche, montants 2026 par tranche (moitié de 3 à 6 ans, au plus 85 % de la facture) ; crèche municipale ou associative : pas de CMG. Crédit d'impôt de 50 % des frais diminués du CMG (plafond 3 500 € par enfant) | CMG abrogé au 1er janvier 2028 ; crédit d'impôt réduit d'un tiers (2027), de deux tiers (2028), supprimé (2029) |
 | TVA | estimation lissée (§4) | taux réduits portés à 20 % (alimentation 10 → 15 → 20 %) ; fin des certificats d'économies d'énergie |
 
 Chaque ligne du résultat affiche **sa formule avec vos chiffres** et **sa source** (amendement, page
@@ -136,12 +141,18 @@ l'arrivée de l'aide fondamentale.
   du plan est exact ; le coût employeur est indicatif.
 - **Cadres** : seule la cotisation APEC distingue le calcul (la prévoyance cadre n'est pas modélisée).
 - **Chômage** : vous saisissez l'ARE nette ; CSG 6,2 % (dont 3,8 % déductible) et CRDS 0,5 % sur 98,25 % de l'ARE,
-  écrêtées pour ne jamais ramener l'allocation sous le SMIC brut mensuel. L'ARE est imposable comme un salaire et
+  écrêtées pour ne jamais ramener l'allocation sous le SMIC brut mensuel (taux réduit 3,8 % ou exonération selon le
+  revenu fiscal de référence : non modélisé). L'ARE est imposable comme un salaire et
   compte comme ressource (pas comme revenu d'activité) pour le RSA et la prime d'activité.
-- **Étudiant·es** : pas de RSA ; prime d'activité seulement si le salaire atteint 78 % du SMIC net ; **pas de bourses**
-  dans cette version.
+- **Étudiant·es** : pas de RSA ; prime d'activité seulement si le salaire atteint 78 % du SMIC net ; le montant des
+  **bourses** n'est pas compté. Pour l'aide au logement, la CAF compte au moins un forfait de ressources de
+  **8 600 € par an** (**6 900 €** pour un·e boursier·e sur critères sociaux), non revalorisé en 2026 : le simulateur
+  l'applique quand tous les adultes du foyer sont étudiants, en logement ordinaire (le forfait plus bas d'une
+  résidence universitaire, 6 600 € / 5 400 €, n'est pas modélisé). Le formulaire demande si l'étudiant·e est
+  boursier·e ; sans réponse, « non boursier·e » est retenu.
 - **Couples non mariés** : deux déclarations d'impôt, enfants rattachés à l'adulte 1, un seul ménage pour la CAF.
-- **AAH** : individuelle, taux ≥ 80 % (carte mobilité inclusion « invalidité ») ou 50–79 % (jusqu'à 62 ans) ;
+- **AAH** : individuelle, taux ≥ 80 % (carte mobilité inclusion « invalidité ») ou 50–79 % (jusqu'à l'âge légal de départ : 62 ans et 9 mois pour les personnes nées entre 1963 et
+  mars 1965 ; simplifié à 62 ans dans le simulateur) ;
   ressources propres, abattements sur les revenus d'activité ; couples, ESAT et majoration pour la vie autonome non
   modélisés.
 - **Aides au logement** : barème du parc privé pour tous (pas de distinction HLM / conventionné, pas de réduction de
@@ -149,8 +160,13 @@ l'arrivée de l'aide fondamentale.
 - **Parent isolé** : pension alimentaire supposée non versée (l'allocation de soutien familial est donc perçue)
   sauf si vous la déclarez : l'ASF est alors diminuée de la pension, qui compte aussi dans les ressources du RSA et
   de la prime d'activité (elle n'est pas ajoutée au revenu disponible, identique dans les deux situations) ;
-  majoration « isolement » si le plus jeune enfant a moins de 3 ans ou si la séparation est récente.
-- **Garde d'enfants** : le CMG de l'assistante maternelle suit le barème du 1er septembre 2025 (taux d'effort des
+  majoration « isolement » si le plus jeune enfant a moins de 3 ans ou si la séparation date de moins de 12 mois
+  (dans ce second cas, la loi la verse pendant 12 mois, dans les 18 mois qui suivent la séparation ; le simulateur
+  l'applique à toute l'année).
+- **Garde d'enfants** : depuis septembre 2025, un parent seul qui emploie une assistante maternelle (ou une garde à
+  domicile) touche le CMG jusqu'aux 12 ans de l'enfant ; la micro-crèche reste réservée aux moins de 6 ans. Pour un
+  enfant de 6 à 11 ans, le simulateur ne suppose aucun coût de garde : il faut l'indiquer. Le CMG de l'assistante
+  maternelle suit le barème du 1er septembre 2025 (taux d'effort des
   crèches : 0,0619 % pour 1 enfant, 0,0516 % pour 2, 0,0413 % pour 3 ; ressources entre 815 € et 8 500 € par mois ;
   tarif de référence 4,85 €/h, valeur 2025 ; tarif horaire supposé ≤ 8 €/h). Non modélisés : la part
   « cotisations » (100 % des cotisations de l'assistante maternelle, payée par Pajemploi), la garde à domicile, le
@@ -220,7 +236,8 @@ publiés dans le fichier [`cas-types-results.json`](https://github.com/Pierrolo/
 - Législation 2026 : service-public.gouv.fr (F2300 SMIC, F2971 CSG, F1419 impôt, F2882 prime d'activité, F19778
   RSA, F12006 APL, F13213 allocations familiales, F12242 AAH, F16871 ASPA…), Légifrance, URSSAF (taux 2026),
   BOFiP (barème 2026), solidarites.gouv.fr (revalorisation du 1er avril 2026), arrêté du 28 septembre 2026 (APL).
-- Statistiques : INSEE (niveau de vie 2023, unités de consommation, Économie et Statistique n° 522-523), Conseil des
+- Statistiques : Eurostat (dépenses et solde publics, mise à jour du 21 octobre 2026 ; revenu médian, enquête SILC 2024,
+  mise à jour du 20 octobre 2026), INSEE (niveau de vie 2023, unités de consommation, Économie et Statistique n° 522-523), Conseil des
   prélèvements obligatoires (note TVA 2023), Cour des comptes (CEE).
 - Vérification : OpenFisca-France 176.1.3.
 
@@ -235,6 +252,7 @@ Le manifeste, les amendements et les classeurs ne disent pas toujours la même c
 
 | Date | Version | Ce qui a changé |
 |---|---|---|
+| 21 novembre 2026 | moteur et site | Vérification de la législation actuelle : CMG jusqu'aux 12 ans de l'enfant pour un parent seul qui emploie une assistante maternelle ; forfait étudiant des aides au logement (8 600 €, 6 900 € pour un·e boursier·e, question ajoutée) ; seuil de recouvrement de l'impôt appliqué après les réductions et avant les crédits ; majoration « isolement » décrite sur 12 mois ; total après TVA arrondi au multiple de 5 € le plus proche ; zones APL et durées d'indemnisation du chômage corrigées ; comparaisons européennes mises à jour d'après Eurostat (21 octobre 2026). |
 | 26 octobre 2026 | site | Le site parle du plan avec ses propres mots ; un seul vocabulaire pour les trois niveaux (« Proposé dans un amendement », « Annoncé », « Notre estimation ») ; les amendements sont décrits comme rédigés et publiés, en vigueur nulle part ; questionnaire « À votre avis, où va l’argent public ? », où les chiffres du plan sont marqués « Annoncé » ; une seule identité visuelle. |
 | 24 octobre 2026 | moteur 1.1.0 | Complément de libre choix du mode de garde (CMG) et crédit d'impôt garde d'enfants ; pension alimentaire et allocation de soutien familial ; phrase de synthèse en clair ; raison de chaque aide à 0 € ; heure de travail cohérente avec le revenu du foyer ; seconde lecture de H1 ; dirigeants assimilés salariés et travailleurs non salariés ; arrondi d'affichage à 5 € qui préserve les totaux. |
 | 24 octobre 2026 | site | Niveaux de certitude renommés (« Proposé dans un amendement », « Annoncé », « Notre estimation ») ; page Méthode complète ; glossaire des sigles ; page « Ce que le plan prévoit pour… ». |

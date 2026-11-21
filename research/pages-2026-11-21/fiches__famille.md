@@ -27,7 +27,7 @@ Le quotient familial
 
 Le quotient familial et les majorations pour enfants s’arrêtent. Le quotient familial rapporte d’autant plus que le revenu est élevé : c’est une aide à l’enfance qui croît avec l’aisance. Une aide égale par enfant la remplace.
 
-[Télécharger cette fiche (PDF)](famille.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

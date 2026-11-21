@@ -276,6 +276,7 @@ interface HourSplit {
   afuPerHour: number;                  // this adult's OWN AFU (6 600 €/an + own CMI / pension supplements, children excluded) ÷ 12 ÷ hours worked; 0 today
   netIncomeTaxPerHour: number;         // impotRevenu − afuPerHour; < 0 = « l'État vous verse » for each hour
   youKeepIncludingTransfers: number;   // youKeep + afuPerHour (= youKeep today: household-level benefits are not attributed per hour)
+  afuMonthly: number;                  // this adult's own AFU per month, unrounded (what afuPerHour spreads over the hours); 0 today
 }
 ```
 

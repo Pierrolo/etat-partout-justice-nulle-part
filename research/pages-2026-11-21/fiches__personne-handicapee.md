@@ -18,7 +18,7 @@ Une part supplémentaire d’aide, et un reste à charge plafonné.
 
 - **1 100 €** : Par mois, versés automatiquement : vous ne refaites plus de dossier.
 - **Le bouclier sanitaire** : Votre reste à charge est plafonné à 5 % de votre revenu annuel : la dépense lourde ne vous atteint pas.
-[Télécharger cette fiche (PDF)](personne-handicapee.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

@@ -3,7 +3,7 @@
  * method, so that the shown lines add up exactly to the shown totals and every screen (desktop, mobile, share
  * card) shows the same numbers.
  *
- * Rules: headline totals are rounded directly (baseline, delta, indirect taxes before/after); the per-line
+ * Rules: headline totals are rounded directly (baseline, delta, and the after-TVA baseline and delta); the per-line
  * amounts are then distributed by largest remainder so that Σ lines = the rounded total; after = before + delta.
  */
 import type { Comparison, ComponentGroup, ComponentId } from './types.ts';
@@ -76,10 +76,13 @@ export function roundForDisplay(c: Comparison, step = 5): DisplayComparison {
 
   const baseline = roundStep(c.baseline.disposable, step);
   const delta = roundStep(c.delta, step);
-  const indBeforeRaw = c.baseline.disposableAfterTva - c.baseline.disposable;
-  const indDeltaRaw = c.deltaAfterTva - c.delta;
-  const indBefore = roundStep(indBeforeRaw, step);
-  const indDelta = roundStep(indDeltaRaw, step);
+  // The after-TVA totals are rounded directly too (the headline is the nearest multiple of `step` of the exact
+  // value, like every component that rounds it on its own); the indirect-tax lines are then distributed to the
+  // difference, so they still add up.
+  const baselineAfterTva = roundStep(c.baseline.disposableAfterTva, step);
+  const deltaAfterTva = roundStep(c.deltaAfterTva, step);
+  const indBefore = zero(baselineAfterTva - baseline);
+  const indDelta = zero(deltaAfterTva - delta);
 
   const distribute = (pick: (r: (typeof rows)[number]) => number, ind: boolean, target: number) => {
     const idx = rows.map((r, i) => (isInd(r.group) === ind ? i : -1)).filter((i) => i >= 0);
@@ -111,9 +114,9 @@ export function roundForDisplay(c: Comparison, step = 5): DisplayComparison {
     baseline,
     plan: zero(baseline + delta),
     delta,
-    baselineAfterTva: zero(baseline + indBefore),
-    planAfterTva: zero(baseline + delta + indBefore + indDelta),
-    deltaAfterTva: zero(delta + indDelta),
+    baselineAfterTva,
+    planAfterTva: zero(baselineAfterTva + deltaAfterTva),
+    deltaAfterTva,
     deltaPct: c.deltaPct,
     lines,
     waterfall: c.waterfall.map((w) => ({ id: w.id, delta: byId.get(w.id) ?? 0 })),

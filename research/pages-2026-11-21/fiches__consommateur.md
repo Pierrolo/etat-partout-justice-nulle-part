@@ -25,7 +25,7 @@ Les taux réduits
 
 Les taux réduits de TVA disparaissent : tout passe à 20 %. Un taux réduit est une niche qui se cache dans un prix : il fait payer par tous l’avantage consenti à quelques-uns. Un taux unique se voit, se discute et se baisse.
 
-[Télécharger cette fiche (PDF)](consommateur.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

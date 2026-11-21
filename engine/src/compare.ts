@@ -1,5 +1,5 @@
 /** compare(): baseline vs plan for one household, with waterfall, non-chiffré panels, hypotheses and caveats. */
-import { isPaidCare } from './core.ts';
+import { cmgAgeLimit, isPaidCare } from './core.ts';
 import { buildSummary, explainBaselineBenefits } from './explain.ts';
 import { eur, r2 } from './fmt.ts';
 import { PERIOD_LABEL } from './plan/periods.ts';
@@ -189,13 +189,15 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
           : 'non déclarée : supposée non versée, l’allocation de soutien familial est donc versée en entier (à corriger si vous recevez une pension)',
       tier: 'hypothesis',
     });
-  if (isPaidCare(nh.childcare) && nh.children.some((k) => k.age < 6))
+  if (isPaidCare(nh.childcare) && nh.children.some((k) => k.age < cmgAgeLimit(nh)))
     activeHypotheses.push({
       id: 'H20',
-      label: 'Frais de garde des enfants de moins de 6 ans',
+      label: `Frais de garde des enfants de moins de ${cmgAgeLimit(nh)} ans`,
       value: nh.childcareCostProvided
         ? `${eur(nh.childcareCostMonthly)} par mois déclarés, inchangés avec le plan`
-        : `non renseignés : ${eur(e.baselineCore.flows.childcareCost)} par mois supposés (${nh.childcare === 'assistante_maternelle' ? 'temps plein, 180 h au tarif médian de 4,85 €/h' : nh.childcare === 'micro_creche' ? 'temps plein, 180 h à 9 €/h' : 'temps plein, 180 h au barème des crèches selon vos revenus'})`,
+        : e.baselineCore.flows.childcareCost <= 0
+          ? 'non renseignés : aucun coût supposé pour un enfant de 6 ans ou plus'
+          : `non renseignés : ${eur(e.baselineCore.flows.childcareCost)} par mois supposés (${nh.childcare === 'assistante_maternelle' ? 'temps plein, 180 h au tarif médian de 4,85 €/h' : nh.childcare === 'micro_creche' ? 'temps plein, 180 h à 9 €/h' : 'temps plein, 180 h au barème des crèches selon vos revenus'})`,
       tier: 'hypothesis',
     });
   if (nh.adults.some((a) => a.activity === 'retraite'))
@@ -288,6 +290,15 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
   if (Math.abs(delta) >= 0.005 && baseline.disposable <= DELTA_PCT_MIN_BASELINE)
     warnings.push(
       `Revenu disponible actuel inférieur à ${DELTA_PCT_MIN_BASELINE} € par mois : variation en % non calculée.`,
+    );
+  if (
+    isPaidCare(nh.childcare) &&
+    !nh.childcareCostProvided &&
+    !nh.children.some((k) => k.age < 6) &&
+    nh.children.some((k) => k.age < cmgAgeLimit(nh))
+  )
+    warnings.push(
+      'Frais de garde non renseignés : aucun coût n’est supposé pour un enfant de 6 ans ou plus. Indiquez ce que vous payez à l’assistante maternelle pour calculer le complément de mode de garde.',
     );
   if (isPaidCare(nh.childcare) && !nh.childcareCostProvided && nh.children.some((k) => k.age < 6))
     warnings.push(

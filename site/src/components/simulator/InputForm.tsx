@@ -12,7 +12,9 @@ import { IconPlus } from '@/components/ui/icons';
 import { cn } from '@/lib/cn';
 import type { HousingStatus } from '@/lib/engine-types';
 import {
+  asksChildcare,
   asksChildSupport,
+  hasKidUnder6,
   LIMITS,
   newChildId,
   stepOfError,
@@ -152,7 +154,11 @@ export function InputForm({
     }
   }, [form.children.length]);
 
-  const hasKidUnder6 = form.children.some((c) => c.age !== null && c.age < 6);
+  const kidUnder6 = hasKidUnder6(form);
+  const showChildcare = asksChildcare(form);
+  const childcareOptions = kidUnder6
+    ? CHILDCARE
+    : CHILDCARE.filter((o) => o.value !== 'creche' && o.value !== 'micro_creche');
   const isLast = step >= STEPS.length - 1;
   const set = (patch: Partial<FormState>) => setForm((f) => ({ ...f, ...patch }));
   const err = (key: string) => (showErrors ? errors[key] : undefined);
@@ -218,7 +224,7 @@ export function InputForm({
             <div data-field="foyer.married">
               <SegmentedControl
                 legend="Êtes-vous marié·e ou pacsé·e ?"
-                hint="Mariés ou pacsés, vous payez l’impôt d’aujourd’hui ensemble ; sinon, chacun le sien. Cela change le point de départ. Avec le plan, l’impôt est individuel."
+                hint="Mariés ou pacsés, vous payez l’impôt d’aujourd’hui ensemble ; sinon, chacun le sien. Cela change le point de départ. Avec le plan, l’impôt reste calculé par foyer fiscal, mais à un taux unique et sans quotient familial : se marier ne change plus le montant."
                 options={[
                   { value: 'oui', label: 'Oui' },
                   { value: 'non', label: 'Non' },
@@ -331,18 +337,25 @@ export function InputForm({
             </Button>
           </fieldset>
 
-          {hasKidUnder6 && (
+          {showChildcare && (
             <div className="space-y-4">
               <SegmentedControl
-                legend="Comment sont gardés vos enfants de moins de 6 ans ?"
+                legend={
+                  kidUnder6
+                    ? 'Comment sont gardés vos enfants de moins de 6 ans ?'
+                    : 'Comment sont gardés vos enfants de moins de 12 ans ?'
+                }
                 layout="stack"
                 hint={
                   <>
                     Le plan supprime l’aide à la garde (<Term id="cmg">CMG</Term>) : la réponse
                     compte dans le résultat.
+                    {kidUnder6
+                      ? ''
+                      : ' Un parent seul qui emploie une assistante maternelle y a droit jusqu’aux 12 ans de l’enfant.'}
                   </>
                 }
-                options={CHILDCARE}
+                options={childcareOptions}
                 value={form.extras.childcare}
                 onChange={(childcare) =>
                   setForm((f) => ({ ...f, extras: { ...f.extras, childcare } }))
@@ -353,7 +366,11 @@ export function InputForm({
                   <NumberInput
                     id="childcare-cost"
                     label="Ce que coûte la garde, par mois"
-                    hint="Le total payé avant les aides (salaire et indemnités de l’assistante maternelle, ou facture de la structure). Laissez vide si vous ne savez pas : le simulateur retient un coût moyen et vous le dit dans le résultat."
+                    hint={
+                      kidUnder6
+                        ? 'Le total payé avant les aides (salaire et indemnités de l’assistante maternelle, ou facture de la structure). Laissez vide si vous ne savez pas : le simulateur retient un coût moyen et vous le dit dans le résultat.'
+                        : 'Le total payé avant les aides (salaire et indemnités de l’assistante maternelle). Pour un enfant de 6 ans ou plus, le simulateur ne suppose aucun coût : indiquez-le pour calculer l’aide.'
+                    }
                     unit="€/mois"
                     value={form.extras.childcareCostMonthly}
                     onChange={(childcareCostMonthly) =>
@@ -626,14 +643,15 @@ function ZoneHelp() {
       <p className="font-semibold text-ink">Dans quelle zone est votre commune ?</p>
       <ul className="list-disc space-y-1 ps-5">
         <li>
-          <strong className="text-ink">Zone 1</strong>&#8239;: Paris et la petite couronne
-          (Montreuil, Saint-Denis, Boulogne-Billancourt…), plus quelques communes proches de Paris.
+          <strong className="text-ink">Zone 1</strong>&#8239;: Paris, la petite couronne (Montreuil,
+          Saint-Denis, Boulogne-Billancourt…) et une grande partie de la grande couronne
+          (Versailles, Argenteuil, Cergy, Évry, Meaux, villes nouvelles…).
         </li>
         <li>
           <strong className="text-ink">Zone 2</strong>&#8239;: les villes de plus de 100 000
           habitants et leur agglomération (Lille, Lyon, Marseille, Toulouse, Nantes, Bordeaux,
-          Strasbourg…), le reste de l’Île-de-France. Roubaix et Tourcoing : zone 2 (agglomération
-          lilloise).
+          Strasbourg…), le reste de l’Île-de-France (environ 500 communes rurales ou périurbaines).
+          Roubaix et Tourcoing : zone 2 (agglomération lilloise).
         </li>
         <li>
           <strong className="text-ink">Zone 3</strong>&#8239;: le reste de la France — villes
@@ -721,8 +739,8 @@ function Refine({
       ))}
       {!couple && form.children.length > 0 && (
         <Checkbox
-          label="Je me suis séparé·e il y a moins de 18 mois"
-          hint="Le RSA et la prime d’activité sont alors majorés, même si le plus jeune enfant a plus de 3 ans."
+          label="Je me suis séparé·e il y a moins de 12 mois"
+          hint="Le RSA et la prime d’activité sont alors majorés pendant 12 mois, même si le plus jeune enfant a plus de 3 ans."
           checked={form.isolementRecent}
           onChange={(isolementRecent) => setForm((f) => ({ ...f, isolementRecent }))}
         />

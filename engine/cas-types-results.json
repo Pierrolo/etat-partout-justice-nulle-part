@@ -1160,27 +1160,27 @@
       "id": "etudiant",
       "family": "Jeunes",
       "label": "Étudiant·e de 20 ans, sans revenu, locataire 400 € zone 2",
-      "baseline": 308,
+      "baseline": 203,
       "plan": 550,
-      "delta": 242,
-      "deltaPct": 78.3,
-      "deltaAfterTva": 241,
+      "delta": 347,
+      "deltaPct": 170.3,
+      "deltaAfterTva": 350,
       "waterfall": {
         "afu": 550,
-        "aides_logement": -308,
-        "tva": -11,
+        "aides_logement": -203,
+        "tva": -8,
         "cee": 11
       },
       "transition": {
-        "2027": -51,
-        "2028": 396,
-        "2030": 242,
-        "steady": 242
+        "2027": -34,
+        "2028": 448,
+        "2030": 347,
+        "steady": 347
       },
       "variants": {
-        "H1_differential": 242,
-        "H2_off": 242,
-        "H5_noPassThroughAfterTva": 242
+        "H1_differential": 347,
+        "H2_off": 347,
+        "H5_noPassThroughAfterTva": 347
       }
     },
     {

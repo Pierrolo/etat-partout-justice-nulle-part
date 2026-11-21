@@ -46,7 +46,7 @@ function config(metric: Metric, unit: IncomeUnit): Cfg {
     };
   return unit === 'eur'
     ? {
-        title: 'Revenu médian, en euros par an (2024)',
+        title: 'Revenu médian, en euros par an (enquête SILC 2024, revenus 2023)',
         subtitle:
           'Revenu disponible médian par équivalent adulte, euros courants : il ne tient pas compte des écarts de prix entre pays.',
         domain: [0, 55000],
@@ -55,7 +55,7 @@ function config(metric: Metric, unit: IncomeUnit): Cfg {
         tick: (v) => formatEuro(v),
       }
     : {
-        title: 'Revenu médian, en pouvoir d’achat (SPA, 2024)',
+        title: 'Revenu médian, en pouvoir d’achat (SPA ; enquête SILC 2024, revenus 2023)',
         subtitle:
           'Même revenu en « standards de pouvoir d’achat » (SPA) : un euro fictif qui achète la même chose dans tous les pays.',
         domain: [0, 40000],
@@ -168,13 +168,13 @@ export function EuropeSection({ rows, ea20, eu27, sources }: EuropeSectionProps)
     },
     {
       key: 'med',
-      label: 'Revenu médian 2024, €',
+      label: 'Revenu médian (enquête SILC 2024, revenus 2023), €',
       numeric: true,
       format: (v) => (v === null ? '—' : formatEuro(Number(v))),
     },
     {
       key: 'spa',
-      label: 'Revenu médian 2024, SPA',
+      label: 'Revenu médian (enquête SILC 2024, revenus 2023), SPA',
       numeric: true,
       format: (v) => (v === null ? '—' : formatNumber(Number(v))),
     },

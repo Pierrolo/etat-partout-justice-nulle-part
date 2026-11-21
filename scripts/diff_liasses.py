@@ -12,15 +12,34 @@ CTX = 12          # words of unchanged context kept around each hunk
 MERGE = 2 * CTX   # unchanged runs shorter than this merge neighbouring hunks
 
 
-def flat(blocks):
+def flat(blocks, tables=True):
     out = []
     for b in blocks:
         if isinstance(b, str):
             out.append(b)
-        else:
+        elif tables:
             for r in b["table"]:
                 out.append(" | ".join(r))
+        else:
+            out.append("[tableau des crédits : voir etat_b.md]")
     return out
+
+
+def tables_of(blocks):
+    return [b["table"] for b in blocks if isinstance(b, dict)]
+
+
+def totaux(blocks):
+    for b in blocks:
+        if isinstance(b, dict):
+            for r in b["table"]:
+                if r[0] == "TOTAUX":
+                    return f"AE− {r[2]} €, CP− {r[4]} €"
+    return "—"
+
+
+def is_etat_b(a):
+    return a["title"].startswith("Retirer les crédits que la présente loi interrompt, mission")
 
 
 def tokens(paras):
@@ -82,9 +101,11 @@ def main(old_json, new_json, out_dir):
             elif b and not a:
                 status = "NEW"
             else:
-                dd = wdiff(tokens(flat(a["dispositif"])), tokens(flat(b["dispositif"])))
+                tb = not (is_etat_b(a) or is_etat_b(b))
+                dd = wdiff(tokens(flat(a["dispositif"], tb)), tokens(flat(b["dispositif"], tb)))
                 ee = wdiff(tokens(flat(a["expose"])), tokens(flat(b["expose"])))
-                ch = dd[1] or ee[1] or a["title"] != b["title"] or a["article"] != b["article"]
+                tabs_changed = (not tb) and tables_of(a["dispositif"]) != tables_of(b["dispositif"])
+                ch = dd[1] or ee[1] or tabs_changed or a["title"] != b["title"] or a["article"] != b["article"]
                 status = "CHANGED" if ch else "UNCHANGED"
             rec = {"old_n": int(k) if a else None, "new_n": int(k) if b else None,
                    "title_old": a and a["title"], "title_new": b and b["title"],
@@ -102,11 +123,16 @@ def main(old_json, new_json, out_dir):
                     lines.append(f"- **Title**: `[-{a['title']}-]` → `{{+{b['title']}+}}`")
                 if a["article"] != b["article"]:
                     lines.append(f"- **Article visé**: {a['article']} → {b['article']}")
+                if tabs_changed:
+                    lines.append(f"- **Dispositif, tableau des crédits (état B)**: CHANGED — TOTAUX old: {totaux(a['dispositif'])} → new: {totaux(b['dispositif'])} ; lignes de programme: voir etat_b.md")
+                    rec["etat_b_totaux_old"], rec["etat_b_totaux_new"] = totaux(a["dispositif"]), totaux(b["dispositif"])
                 if dd[1]:
-                    lines += [f"- **Dispositif**: {dd[1]} hunks, ~{dd[2]} words changed", "", dd[0], ""]
+                    lines += [f"- **Dispositif (texte hors tableau)**: {dd[1]} hunks, ~{dd[2]} words changed", "", dd[0], ""]
                     rec["dispositif_words_changed"] = dd[2]
-                else:
+                elif not tabs_changed:
                     lines.append("- **Dispositif**: unchanged")
+                else:
+                    lines.append("- **Dispositif (texte hors tableau)**: unchanged")
                 if ee[1]:
                     lines += [f"- **Exposé**: {ee[1]} hunks, ~{ee[2]} words changed", "", ee[0], ""]
                     rec["expose_words_changed"] = ee[2]

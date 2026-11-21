@@ -228,6 +228,23 @@ export function AdultFields({
         </div>
       )}
 
+      {a.activity === 'etudiant' && (
+        <SegmentedControl
+          legend={
+            you
+              ? 'Avez-vous une bourse sur critères sociaux ?'
+              : 'Cette personne a-t-elle une bourse sur critères sociaux ?'
+          }
+          hint="Pour l’aide au logement, la caisse d’allocations familiales compte au moins 8 600 € de ressources par an pour un étudiant, 6 900 € pour un boursier. Sans réponse, le simulateur retient « Non »."
+          options={[
+            { value: 'non', label: 'Non' },
+            { value: 'oui', label: 'Oui' },
+          ]}
+          value={a.boursier ? 'oui' : 'non'}
+          onChange={(v) => onChange({ boursier: v === 'oui' })}
+        />
+      )}
+
       {(a.activity === 'etudiant' || a.activity === 'inactif') && (
         <Hint>
           Aucun revenu à indiquer pour {you ? 'vous' : 'cette personne'}. Les aides sont calculées à

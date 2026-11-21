@@ -225,7 +225,7 @@ Sources: `self_employed_micro.*` (OpenFisca parameters; Légifrance refs in the 
 for each salaried adult:   salNet_i = S_i − min(max(10 % × S_i, 509), 14 555)   [abattement ≤ S_i],   S_i = 12 × netTaxable_i
 pensions (household):      pensNet  = Σ pTax_i − min(max(10 % × Σ pTax_i, 454 × #pension holders), 4 439)     pTax_i = 12 × pensionTaxable_i
 rng = Σ salNet_i + pensNet
-age-65 abattement (CGI 157 bis): if the declarant or the spouse is ≥ 65:  rng ≤ 17 670 → 2 822 ; rng ≤ 28 430 → 1 411 ; else 0   (applied once per foyer — OpenFisca)
+age-65 abattement (CGI 157 bis): if the declarant or the spouse is ≥ 65:  rng ≤ 17 670 → 2 822 ; rng ≤ 28 430 → 1 411 ; else 0   (par personne remplissant la condition : doublé si les deux conjoints la remplissent)
 rni = max(0, rng − ageAbattement)          // revenu net imposable ; rfr ≈ rni (no other items)
 ```
 (Réel frais, déductions PER, pensions alimentaires etc. are not modelled.)

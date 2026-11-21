@@ -31,7 +31,7 @@ La vérité des prix
 
 Les prix se réajustent, avec une inflation faciale inférieure à 2 %. Les prix disent enfin ce que les choses coûtent. La surtaxe disparaît, l’impôt se déplace sur le résultat, les certificats d’économie d’énergie s’arrêtent, et ces prix-là baissent. Le solde tient dans une inflation faciale inférieure à 2 %.
 
-[Télécharger cette fiche (PDF)](citoyen.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

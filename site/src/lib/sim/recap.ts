@@ -62,7 +62,8 @@ function adultText(a: Adult): string {
         ? `retraité·e, pension de ${formatEuro(p.amount)} ${p.basis === 'net' ? 'nette' : 'brute'} par mois`
         : 'retraité·e',
     );
-  } else if (a.activity === 'etudiant') parts.push('étudiant·e');
+  } else if (a.activity === 'etudiant')
+    parts.push(a.boursier ? 'étudiant·e boursier·e' : 'étudiant·e');
   else if (a.activity === 'inactif') parts.push('inactif·ve');
   else parts.push('salarié·e');
   const dis = DISABILITY[a.disability];
@@ -115,7 +116,7 @@ export function buildRecap(h: Household): RecapGroup[] {
         : 'pas de pension alimentaire',
     );
   }
-  if (h.benefits.isolementRecent) foyer.push('séparé·e depuis moins de 18 mois');
+  if (h.benefits.isolementRecent) foyer.push('séparé·e depuis moins de 12 mois');
   out.push({ id: 'foyer', step: 'foyer', label: 'Foyer', text: foyer.join(' · ') });
 
   out.push({ id: 'vous', step: 'adults', label: 'Vous', text: adultText(h.adults[0]) });

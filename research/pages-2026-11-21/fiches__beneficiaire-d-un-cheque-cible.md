@@ -25,7 +25,7 @@ Les chèques ciblés — pass culture, chèque restaurant — s’arrêtent. Le 
 - **550 €** : Par mois en argent libre : vous en disposez en totalité, pour ce que vous voulez.
 - **+220 €** : De plus par mois au salaire type : le revenu remplace le guichet.
 - **Un payeur** : L'État reprend les solidarités : un seul payeur pour vous, plus de guichet à chercher.
-[Télécharger cette fiche (PDF)](beneficiaire-d-un-cheque-cible.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

@@ -25,7 +25,7 @@ La grille
 
 Le statut et l’avancement à la grille prennent fin. Le sens du métier ne dépend pas d’une grille. Une rémunération qui suit le travail fait mieux qu’un avancement à l’ancienneté, et l’école qui vous recrute vous choisit pour ce que vous savez faire.
 
-[Télécharger cette fiche (PDF)](enseignant.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

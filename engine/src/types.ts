@@ -39,6 +39,12 @@ export interface Adult {
   /** Used when activity is 'retraite'. */
   pension?: { amount: number; basis: 'net' | 'brut'; startYear: number };
   disability: Disability;
+  /**
+   * Engine extension (optional, read only when activity is 'etudiant'): the student holds a bourse sur critères
+   * sociaux. Today's housing aid then takes the student's resources at least at 6 900 €/an instead of 8 600 €/an
+   * (forfait étudiant of the CAF, frozen for 2026). Default: false (non-boursier).
+   */
+  boursier?: boolean;
 }
 
 /** 18–24 = rattaché·e / à charge. */
@@ -72,8 +78,9 @@ export interface Household {
     /** single override of the computed total CAF today */
     cafOverrideMonthly?: number;
     /**
-     * Engine extension (optional): lone parent separated recently (< 18 months) ⇒ RSA / prime
-     * d'activité « majoré » even when the youngest child is 3 or older.
+     * Engine extension (optional): lone parent separated less than 12 months ago ⇒ RSA / prime d'activité
+     * « majoré » even when the youngest child is 3 or older. In law the majoration then lasts 12 months, paid
+     * within the 18 months that follow the separation (F19778); the simulator applies it to the whole year.
      */
     isolementRecent?: boolean;
     /**
@@ -86,12 +93,13 @@ export interface Household {
   };
   extras?: {
     /**
-     * for children < 6. v1.1 adds 'micro_creche' (micro-crèche PAJE, CMG « structure »). 'creche' = crèche PSU
+     * for children < 6 (< 12 for a lone parent employing an assistante maternelle: CMG « emploi direct »). v1.1 adds 'micro_creche' (micro-crèche PAJE, CMG « structure »). 'creche' = crèche PSU
      * (municipal / associative): no CMG.
      */
     childcare?: 'parent' | 'creche' | 'assistante_maternelle' | 'micro_creche';
     /**
-     * Total monthly childcare bill for the children < 6 (net salary + indemnités for an assistante maternelle,
+     * Total monthly childcare bill for the children in care (< 6; < 12 for a lone parent with an assistante
+     * maternelle — no default cost is assumed for a child of 6 or more) (net salary + indemnités for an assistante maternelle,
      * hors cotisations). v1.1: when missing, a documented default is used and a warning says so.
      */
     childcareCostMonthly?: number;

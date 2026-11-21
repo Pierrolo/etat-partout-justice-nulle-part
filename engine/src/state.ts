@@ -70,6 +70,8 @@ function encAdult(a: Adult): unknown[] {
     a.unemployment ? [a.unemployment.areMonthly] : null,
     a.pension ? [a.pension.amount, a.pension.basis === 'brut' ? 1 : 0, a.pension.startYear] : null,
     DIS.indexOf(a.disability),
+    // 7th slot only when given (older hashes stay byte-identical)
+    ...(a.boursier === undefined ? [] : [a.boursier ? 1 : 0]),
   ];
 }
 
@@ -130,8 +132,10 @@ const optBit = (x: unknown): boolean | undefined =>
 const flag = (x: unknown): boolean => (x === 1 ? true : x === 0 ? false : fail());
 
 function decAdult(x: unknown): Adult {
-  const a = arr(x, 6);
+  const a = arr(x);
+  if (a.length !== 6 && a.length !== 7) fail();
   const out: Adult = { age: num(a[0]), activity: idx(ACT, a[1]), disability: idx(DIS, a[5]) };
+  if (a.length === 7) out.boursier = flag(a[6]);
   if (a[2] !== null) {
     const s = arr(a[2], 4);
     out.salary = { amount: num(s[0]), basis: flag(s[1]) ? 'brut' : 'net', status: idx(STA, s[2]) };

@@ -88,13 +88,13 @@ export function HourOfWork({ household, hypotheses, headlineText }: HourOfWorkPr
   );
 
   if (!data) return null;
-  const { baseline: b, plan: p, hoursPerMonth } = data;
+  const { baseline: b, plan: p } = data;
   const keepB = b.youKeepIncludingTransfers;
   const keepP = p.youKeepIncludingTransfers;
   const gain = keepP - keepB;
   const dir = gain > 0.004 ? 'gain' : gain < -0.004 ? 'loss' : 'flat';
   const cost = Math.max(b.employerCostPerHour, p.employerCostPerHour);
-  const afuMonthly = p.afuPerHour * hoursPerMonth;
+  const afuMonthly = p.afuMonthly;
   const stateGives = p.netIncomeTaxPerHour < -0.004;
 
   const summary = (

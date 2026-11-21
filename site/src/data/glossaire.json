@@ -79,7 +79,7 @@
   },
   "cmg": {
     "term": "Complément de libre choix du mode de garde (CMG)",
-    "definition": "Aide de la CAF qui rembourse une partie du coût d’une assistante maternelle ou d’une micro-crèche pour un enfant de moins de 6 ans."
+    "definition": "Aide de la CAF qui rembourse une partie du coût d’une assistante maternelle ou d’une micro-crèche pour un enfant de moins de 6 ans (12 ans pour un parent seul qui emploie une assistante maternelle ou une garde à domicile)."
   },
   "cmi": {
     "term": "Carte mobilité inclusion (CMI) « invalidité »",
@@ -168,7 +168,7 @@
   },
   "menage": {
     "term": "Ménage",
-    "definition": "Toutes les personnes qui vivent ensemble dans le même logement. C’est l’unité du simulateur, parce que les aides de la CAF se calculent pour le ménage."
+    "definition": "Toutes les personnes qui vivent ensemble dans le même logement (définition Insee). Le simulateur, lui, raisonne sur une famille : un ou deux adultes en couple et leurs enfants à charge, comme la CAF."
   },
   "niche-fiscale": {
     "term": "Niche fiscale",
@@ -185,7 +185,7 @@
   },
   "paje": {
     "term": "Prestation d’accueil du jeune enfant (PAJE)",
-    "definition": "Ensemble d’aides pour les enfants de moins de 3 ans : prime à la naissance, allocation de base, aide à la garde (CMG)."
+    "definition": "Aides pour les jeunes enfants : prime à la naissance, allocation de base (moins de 3 ans), aide à la garde (CMG, moins de 6 ans ; jusqu’à 12 ans pour un parent seul qui emploie une assistante maternelle ou une garde à domicile)."
   },
   "plf": {
     "term": "Projet de loi de finances (PLF)",

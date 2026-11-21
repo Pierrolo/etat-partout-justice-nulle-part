@@ -29,7 +29,7 @@ Les logements sociaux sont proposés à la vente en trois ans. L’actif net des
 - **+25 %** : D'offre locative privée en plus, et l'APL qui cesse de pousser les prix : les loyers baissent.
 - **+13 %** : De salaire net en plus, pendant que le loyer, lui, cesse de monter.
 - **L'achat** : Les frais de notaire s'effondrent : acheter cesse d'être hors d'atteinte.
-[Télécharger cette fiche (PDF)](locataire.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

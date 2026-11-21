@@ -1170,7 +1170,7 @@
   "conflicts": [
    {
     "group": "gain_csg_median",
-    "note": "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » est un arrondi de 12,0 à 12,6 %.",
+    "note": "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » arrondit les 12,56 % du classeur au salaire net médian (12,04 % au SMIC).",
     "with": [
      "csg_gain_median_mois_eur",
      "csg_gain_pct_manifeste",
@@ -1197,7 +1197,7 @@
   "conflicts": [
    {
     "group": "gain_csg_median",
-    "note": "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » est un arrondi de 12,0 à 12,6 %.",
+    "note": "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » arrondit les 12,56 % du classeur au salaire net médian (12,04 % au SMIC).",
     "with": [
      "csg_gain_median_manifeste_eur_mois",
      "csg_gain_pct_manifeste",
@@ -1223,7 +1223,7 @@
   "conflicts": [
    {
     "group": "gain_csg_median",
-    "note": "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » est un arrondi de 12,0 à 12,6 %.",
+    "note": "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » arrondit les 12,56 % du classeur au salaire net médian (12,04 % au SMIC).",
     "with": [
      "csg_gain_median_manifeste_eur_mois",
      "csg_gain_median_mois_eur",
@@ -1276,7 +1276,7 @@
   "conflicts": [
    {
     "group": "gain_csg_median",
-    "note": "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » est un arrondi de 12,0 à 12,6 %.",
+    "note": "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » arrondit les 12,56 % du classeur au salaire net médian (12,04 % au SMIC).",
     "with": [
      "csg_gain_median_manifeste_eur_mois",
      "csg_gain_median_mois_eur",
@@ -1303,7 +1303,7 @@
   "conflicts": [
    {
     "group": "gain_csg_median",
-    "note": "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » est un arrondi de 12,0 à 12,6 %.",
+    "note": "Au salaire net médian (2 190 €), le manifeste annonce 300 €/mois et +13 % ; le classeur du livre donne 275,08 €/mois (12,56 %). 13 % × 2 190 € = 284,7 €. Le « 13 % » arrondit les 12,56 % du classeur au salaire net médian (12,04 % au SMIC).",
     "with": [
      "csg_gain_median_manifeste_eur_mois",
      "csg_gain_median_mois_eur",
@@ -1703,6 +1703,24 @@
   "tier": "calcul",
   "unit": "€ par foyer et par an",
   "value": 1567,
+  "year": 2024
+ },
+ "dep_cofog09_enseignement_2024_md": {
+  "label_fr": "Dépenses publiques 2024 : Enseignement (division COFOG 09 de l'Insee)",
+  "note": "Fonction « Enseignement » entière (division 09 de la COFOG), services annexes compris (cantine, transport et internat scolaires : 20,0 Md€). Le regroupement « Éducation » du livre (128,6 Md€) les compte dans « Administrations ».",
+  "source": {
+   "also": {
+    "kind": "workbook",
+    "ref": "Synthèse Graphiques Résolution_0910.xlsx › Graph1672Md › D111",
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+   },
+   "kind": "insee",
+   "ref": "Insee, comptes nationaux, tableau 3.301 (COFOG, 2024) — repris dans Synthèse Graphiques Résolution_0910.xlsx › Graph1672Md › D111",
+   "url": "https://www.insee.fr/fr/statistiques/8574707?sommaire=8574832"
+  },
+  "tier": "donnee",
+  "unit": "Md€",
+  "value": 148.64,
   "year": 2024
  },
  "dep_defense_2024_md": {
@@ -3934,10 +3952,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B67",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": -2.7
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B67",
+   "ref": "Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "DE",
+    "key": "tec00127",
+    "updated": "2026-10-21",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00127/default/table?lang=en"
   },
   "tier": "donnee",
@@ -3951,10 +3976,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B64",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": -3
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B64",
+   "ref": "Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "EA20",
+    "key": "tec00127",
+    "updated": "2026-10-21",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00127/default/table?lang=en"
   },
   "tier": "donnee",
@@ -3964,19 +3996,27 @@
  },
  "eu_deficit_ea20_2025_pct": {
   "label_fr": "Solde public de la zone euro (20 pays) en 2025",
+  "note": "Le classeur des auteurs (millésime antérieur) donne -2,9.",
   "source": {
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C64",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": -2.9
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C64",
+   "ref": "Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "EA20",
+    "key": "tec00127",
+    "updated": "2026-10-21",
+    "year": 2025
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00127/default/table?lang=en"
   },
   "tier": "donnee",
   "unit": "% du PIB",
-  "value": -2.9,
+  "value": -3,
   "year": 2025
  },
  "eu_deficit_fr_2024_pct": {
@@ -3985,10 +4025,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B52",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": -5.8
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B52",
+   "ref": "Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "FR",
+    "key": "tec00127",
+    "updated": "2026-10-21",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00127/default/table?lang=en"
   },
   "tier": "donnee",
@@ -4002,10 +4049,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C52",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": -5.1
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C52",
+   "ref": "Eurostat tec00127, capacité (+) / besoin (−) de financement, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "FR",
+    "key": "tec00127",
+    "updated": "2026-10-21",
+    "year": 2025
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00127/default/table?lang=en"
   },
   "tier": "donnee",
@@ -4015,70 +4069,102 @@
  },
  "eu_dep_pib_ch_2024_pct": {
   "label_fr": "Dépenses publiques de la Suisse en 2024",
+  "note": "Le classeur des auteurs (millésime antérieur) donne 33,6.",
   "source": {
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B41",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 33.6
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B41",
+   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "CH",
+    "key": "tec00023",
+    "updated": "2026-10-21",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table"
   },
   "tier": "donnee",
   "unit": "% du PIB",
-  "value": 33.6,
+  "value": 32.8,
   "year": 2024
  },
  "eu_dep_pib_de_2024_pct": {
   "label_fr": "Dépenses publiques de l'Allemagne en 2024",
+  "note": "Le classeur des auteurs (millésime antérieur) donne 49,4.",
   "source": {
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B18",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 49.4
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B18",
+   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "DE",
+    "key": "tec00023",
+    "updated": "2026-10-21",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table"
   },
   "tier": "donnee",
   "unit": "% du PIB",
-  "value": 49.4,
+  "value": 49,
   "year": 2024
  },
  "eu_dep_pib_de_2025_pct": {
   "label_fr": "Dépenses publiques de l'Allemagne en 2025",
+  "note": "Le classeur des auteurs (millésime antérieur) donne 50,5.",
   "source": {
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C18",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 50.5
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C18",
+   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "DE",
+    "key": "tec00023",
+    "updated": "2026-10-21",
+    "year": 2025
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table"
   },
   "tier": "donnee",
   "unit": "% du PIB",
-  "value": 50.5,
+  "value": 50.1,
   "year": 2025
  },
  "eu_dep_pib_ea20_2024_pct": {
   "label_fr": "Dépenses publiques de la zone euro (20 pays) en 2024",
+  "note": "Le classeur des auteurs (millésime antérieur) donne 49,4.",
   "source": {
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B16",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 49.4
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B16",
+   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "EA20",
+    "key": "tec00023",
+    "updated": "2026-10-21",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table"
   },
   "tier": "donnee",
   "unit": "% du PIB",
-  "value": 49.4,
+  "value": 49.3,
   "year": 2024
  },
  "eu_dep_pib_ea20_2025_pct": {
@@ -4087,10 +4173,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C16",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 49.8
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C16",
+   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "EA20",
+    "key": "tec00023",
+    "updated": "2026-10-21",
+    "year": 2025
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table"
   },
   "tier": "donnee",
@@ -4112,7 +4205,7 @@
   },
   "tier": "calcul",
   "unit": "points de PIB",
-  "value": 7.6,
+  "value": 7.7,
   "year": 2024
  },
  "eu_dep_pib_fi_2024_pct": {
@@ -4120,7 +4213,7 @@
   "conflicts": [
    {
     "group": "record_mondial",
-    "note": "Le manifeste parle de « record mondial » de dépense publique. Dans les données Eurostat reprises par le classeur du livre, la Finlande (57,7 % du PIB en 2024 ; 57,5 % en 2025) dépasse la France (57,0 % ; 57,2 %) : la France est 2e sur 30 pays.",
+    "note": "Le manifeste parle de « record mondial » de dépense publique. Dans les données Eurostat (mise à jour du 21 octobre 2026), la Finlande (57,9 % du PIB en 2024 ; 57,5 % en 2025) dépasse la France (57,0 % ; 57,3 %) : la France est 2e sur 30 pays. Le classeur du livre, d'un millésime antérieur, donnait déjà la Finlande devant (57,7 % ; 57,5 %, contre 57,0 % ; 57,2 %).",
     "with": [
      "eu_dep_rang_fr_2024",
      "eu_dep_pib_fr_2024_pct"
@@ -4128,19 +4221,27 @@
    }
   ],
   "label_fr": "Dépenses publiques de la Finlande en 2024",
+  "note": "Le classeur des auteurs (millésime antérieur) donne 57,7.",
   "source": {
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B9",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 57.7
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B9",
+   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "FI",
+    "key": "tec00023",
+    "updated": "2026-10-21",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table"
   },
   "tier": "donnee",
   "unit": "% du PIB",
-  "value": 57.7,
+  "value": 57.9,
   "year": 2024
  },
  "eu_dep_pib_fi_2025_pct": {
@@ -4149,10 +4250,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C9",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 57.5
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C9",
+   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "FI",
+    "key": "tec00023",
+    "updated": "2026-10-21",
+    "year": 2025
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table"
   },
   "tier": "donnee",
@@ -4165,7 +4273,7 @@
   "conflicts": [
    {
     "group": "record_mondial",
-    "note": "Le manifeste parle de « record mondial » de dépense publique. Dans les données Eurostat reprises par le classeur du livre, la Finlande (57,7 % du PIB en 2024 ; 57,5 % en 2025) dépasse la France (57,0 % ; 57,2 %) : la France est 2e sur 30 pays.",
+    "note": "Le manifeste parle de « record mondial » de dépense publique. Dans les données Eurostat (mise à jour du 21 octobre 2026), la Finlande (57,9 % du PIB en 2024 ; 57,5 % en 2025) dépasse la France (57,0 % ; 57,3 %) : la France est 2e sur 30 pays. Le classeur du livre, d'un millésime antérieur, donnait déjà la Finlande devant (57,7 % ; 57,5 %, contre 57,0 % ; 57,2 %).",
     "with": [
      "eu_dep_rang_fr_2024",
      "eu_dep_pib_fi_2024_pct"
@@ -4184,10 +4292,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B10",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 57
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B10",
+   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "FR",
+    "key": "tec00023",
+    "updated": "2026-10-21",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table"
   },
   "tier": "donnee",
@@ -4197,36 +4312,52 @@
  },
  "eu_dep_pib_fr_2025_pct": {
   "label_fr": "Dépenses publiques de la France en 2025",
+  "note": "Le classeur des auteurs (millésime antérieur) donne 57,2.",
   "source": {
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C10",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 57.2
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › C10",
+   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "FR",
+    "key": "tec00023",
+    "updated": "2026-10-21",
+    "year": 2025
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table"
   },
   "tier": "donnee",
   "unit": "% du PIB",
-  "value": 57.2,
+  "value": 57.3,
   "year": 2025
  },
  "eu_dep_pib_ie_2024_pct": {
   "label_fr": "Dépenses publiques de l'Irlande en 2024",
+  "note": "Le classeur des auteurs (millésime antérieur) donne 22,3.",
   "source": {
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B42",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 22.3
    },
    "kind": "eurostat",
-   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov › B42",
+   "ref": "Eurostat tec00023, dépenses des administrations publiques, % du PIB (mise à jour du 21 octobre 2026)",
+   "snapshot": {
+    "geo": "IE",
+    "key": "tec00023",
+    "updated": "2026-10-21",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table"
   },
   "tier": "donnee",
   "unit": "% du PIB",
-  "value": 22.3,
+  "value": 22.4,
   "year": 2024
  },
  "eu_dep_rang_fr_2024": {
@@ -4234,7 +4365,7 @@
   "conflicts": [
    {
     "group": "record_mondial",
-    "note": "Le manifeste parle de « record mondial » de dépense publique. Dans les données Eurostat reprises par le classeur du livre, la Finlande (57,7 % du PIB en 2024 ; 57,5 % en 2025) dépasse la France (57,0 % ; 57,2 %) : la France est 2e sur 30 pays.",
+    "note": "Le manifeste parle de « record mondial » de dépense publique. Dans les données Eurostat (mise à jour du 21 octobre 2026), la Finlande (57,9 % du PIB en 2024 ; 57,5 % en 2025) dépasse la France (57,0 % ; 57,3 %) : la France est 2e sur 30 pays. Le classeur du livre, d'un millésime antérieur, donnait déjà la Finlande devant (57,7 % ; 57,5 %, contre 57,0 % ; 57,2 %).",
     "with": [
      "eu_dep_pib_fi_2024_pct",
      "eu_dep_pib_fr_2024_pct"
@@ -4242,7 +4373,7 @@
    }
   ],
   "label_fr": "Rang de la France pour les dépenses publiques (% du PIB) en 2024, parmi les 30 pays de la table",
-  "note": "La Finlande est première en 2024 (57,7 %) et en 2025 (57,5 %) ; la France est deuxième. Formule : classement décroissant des 30 pays de GraphGov!B9:B42 (hors agrégats)",
+  "note": "La Finlande est première en 2024 (57,9 %) et en 2025 (57,5 %) ; la France est deuxième (Eurostat, mise à jour du 21 octobre 2026). Formule : classement décroissant des 30 pays de GraphGov!B9:B42 (hors agrégats)",
   "source": {
    "inputs": [
     "eu_dep_pib_fr_2024_pct",
@@ -4263,10 +4394,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B39",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 51926
    },
    "kind": "eurostat",
-   "ref": "Eurostat ilc_di03, revenu médian équivalent — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B39",
+   "ref": "Eurostat ilc_di03, revenu médian équivalent (enquête SILC 2024, revenus 2023) (mise à jour du 20 octobre 2026)",
+   "snapshot": {
+    "geo": "CH",
+    "key": "ilc_di03_eur",
+    "updated": "2026-10-20",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_di03/default/table?lang=fr&category=qol.qol_mlc.qol_mlc_i"
   },
   "tier": "donnee",
@@ -4311,10 +4449,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B48",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 29828
    },
    "kind": "eurostat",
-   "ref": "Eurostat ilc_di03, revenu médian équivalent — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B48",
+   "ref": "Eurostat ilc_di03, revenu médian équivalent (enquête SILC 2024, revenus 2023) (mise à jour du 20 octobre 2026)",
+   "snapshot": {
+    "geo": "CH",
+    "key": "ilc_di03_pps",
+    "updated": "2026-10-20",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_di03/default/table?lang=fr&category=qol.qol_mlc.qol_mlc_i"
   },
   "tier": "donnee",
@@ -4328,10 +4473,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B27",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 23767
    },
    "kind": "eurostat",
-   "ref": "Eurostat ilc_di03, revenu médian équivalent — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B27",
+   "ref": "Eurostat ilc_di03, revenu médian équivalent (enquête SILC 2024, revenus 2023) (mise à jour du 20 octobre 2026)",
+   "snapshot": {
+    "geo": "EA20",
+    "key": "ilc_di03_eur",
+    "updated": "2026-10-20",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_di03/default/table?lang=fr&category=qol.qol_mlc.qol_mlc_i"
   },
   "tier": "donnee",
@@ -4345,10 +4497,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B26",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 21582
    },
    "kind": "eurostat",
-   "ref": "Eurostat ilc_di03, revenu médian équivalent — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B26",
+   "ref": "Eurostat ilc_di03, revenu médian équivalent (enquête SILC 2024, revenus 2023) (mise à jour du 20 octobre 2026)",
+   "snapshot": {
+    "geo": "EU27_2020",
+    "key": "ilc_di03_eur",
+    "updated": "2026-10-20",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_di03/default/table?lang=fr&category=qol.qol_mlc.qol_mlc_i"
   },
   "tier": "donnee",
@@ -4362,10 +4521,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B28",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 25557
    },
    "kind": "eurostat",
-   "ref": "Eurostat ilc_di03, revenu médian équivalent — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B28",
+   "ref": "Eurostat ilc_di03, revenu médian équivalent (enquête SILC 2024, revenus 2023) (mise à jour du 20 octobre 2026)",
+   "snapshot": {
+    "geo": "FR",
+    "key": "ilc_di03_eur",
+    "updated": "2026-10-20",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_di03/default/table?lang=fr&category=qol.qol_mlc.qol_mlc_i"
   },
   "tier": "donnee",
@@ -4410,10 +4576,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B56",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 23222
    },
    "kind": "eurostat",
-   "ref": "Eurostat ilc_di03, revenu médian équivalent — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B56",
+   "ref": "Eurostat ilc_di03, revenu médian équivalent (enquête SILC 2024, revenus 2023) (mise à jour du 20 octobre 2026)",
+   "snapshot": {
+    "geo": "FR",
+    "key": "ilc_di03_pps",
+    "updated": "2026-10-20",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_di03/default/table?lang=fr&category=qol.qol_mlc.qol_mlc_i"
   },
   "tier": "donnee",
@@ -4427,10 +4600,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B38",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 50799
    },
    "kind": "eurostat",
-   "ref": "Eurostat ilc_di03, revenu médian équivalent — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B38",
+   "ref": "Eurostat ilc_di03, revenu médian équivalent (enquête SILC 2024, revenus 2023) (mise à jour du 20 octobre 2026)",
+   "snapshot": {
+    "geo": "LU",
+    "key": "ilc_di03_eur",
+    "updated": "2026-10-20",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_di03/default/table?lang=fr&category=qol.qol_mlc.qol_mlc_i"
   },
   "tier": "donnee",
@@ -4444,10 +4624,17 @@
    "also": {
     "kind": "workbook",
     "ref": "Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B46",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx"
+    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Graphiques%20R%C3%A9solution_0910.xlsx",
+    "value": 37781
    },
    "kind": "eurostat",
-   "ref": "Eurostat ilc_di03, revenu médian équivalent — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphRDB › B46",
+   "ref": "Eurostat ilc_di03, revenu médian équivalent (enquête SILC 2024, revenus 2023) (mise à jour du 20 octobre 2026)",
+   "snapshot": {
+    "geo": "LU",
+    "key": "ilc_di03_pps",
+    "updated": "2026-10-20",
+    "year": 2024
+   },
    "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_di03/default/table?lang=fr&category=qol.qol_mlc.qol_mlc_i"
   },
   "tier": "donnee",
@@ -5660,6 +5847,25 @@
   "value": 401310,
   "year": 2026
  },
+ "pib_2024_insee_2026_md": {
+  "label_fr": "PIB 2024 (Insee, édition de mai 2026)",
+  "source": {
+   "kind": "eurostat",
+   "ref": "Eurostat nama_10_gdp (PIB aux prix courants, France), mise à jour du 11 novembre 2026, qui reprend l'édition de mai 2026 des comptes nationaux de l'Insee",
+   "scale": 0.001,
+   "snapshot": {
+    "geo": "FR",
+    "key": "nama_10_gdp",
+    "updated": "2026-11-11",
+    "year": 2024
+   },
+   "url": "https://ec.europa.eu/eurostat/databrowser/view/nama_10_gdp/default/table"
+  },
+  "tier": "donnee",
+  "unit": "Md€",
+  "value": 2935.2,
+  "year": 2024
+ },
  "plan_gain_annee_1_flux_md": {
   "conflict": true,
   "conflicts": [
@@ -5700,15 +5906,11 @@
  },
  "po_2024_md": {
   "label_fr": "Prélèvements obligatoires 2024",
+  "note": "Valeur du classeur des auteurs, de millésime non précisé. L'édition de mai 2026 des comptes nationaux de l'Insee (tableau 3.217) donne 1 254,0 Md€, soit 42,7 % du PIB.",
   "source": {
-   "also": {
-    "kind": "workbook",
-    "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › F3",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
-   },
-   "kind": "insee",
-   "ref": "Insee, comptes nationaux, tableau 3.217 (extraits) — repris dans Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › F3",
-   "url": "https://www.insee.fr/fr/statistiques/8988845?sommaire=8988934"
+   "kind": "workbook",
+   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › F3",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
   },
   "tier": "donnee",
   "unit": "Md€",
@@ -5808,15 +6010,11 @@
  },
  "po_pib_2024_md": {
   "label_fr": "PIB 2024",
+  "note": "PIB 2024 de l'édition de mai 2025 des comptes nationaux de l'Insee, repris par le classeur des auteurs ; l'édition de mai 2026 le porte à 2 935,2 Md€ (fait pib_2024_insee_2026_md).",
   "source": {
-   "also": {
-    "kind": "workbook",
-    "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › C3",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
-   },
-   "kind": "insee",
-   "ref": "Insee, comptes nationaux, tableau 3.217 (extraits) — repris dans Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › C3",
-   "url": "https://www.insee.fr/fr/statistiques/8988845?sommaire=8988934"
+   "kind": "workbook",
+   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › C3",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
   },
   "tier": "donnee",
   "unit": "Md€",
@@ -5825,16 +6023,11 @@
  },
  "po_pib_2024_pct": {
   "label_fr": "Taux de prélèvements obligatoires 2024",
-  "note": "42,87 %.",
+  "note": "42,87 % : valeur du classeur des auteurs, de millésime non précisé. L'édition de mai 2026 des comptes nationaux de l'Insee donne 42,7 % (1 254,0 Md€ pour un PIB de 2 935,2 Md€).",
   "source": {
-   "also": {
-    "kind": "workbook",
-    "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › E3",
-    "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
-   },
-   "kind": "insee",
-   "ref": "Insee, comptes nationaux, tableau 3.217 (extraits) — repris dans Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › E3",
-   "url": "https://www.insee.fr/fr/statistiques/8988845?sommaire=8988934"
+   "kind": "workbook",
+   "ref": "Synthèse Chiffres Résolution_0910.xlsx › Refonte fiscalité › E3",
+   "url": "https://france-resolution.fr/donnees/Synth%C3%A8se%20Chiffres%20R%C3%A9solution_0910.xlsx"
   },
   "tier": "donnee",
   "unit": "% du PIB",

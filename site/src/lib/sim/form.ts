@@ -71,6 +71,8 @@ export interface FormAdult {
   /** `null` = already retired (the engine gets a past year). Only asked under « Affiner ». */
   pensionStartYear: number | null;
   disability: Disability;
+  /** Students only: bourse sur critères sociaux (housing aid resource floor 6 900 € instead of 8 600 €). Default: no. */
+  boursier: boolean;
 }
 
 export interface FormChild {
@@ -96,7 +98,7 @@ export interface FormState {
     zone: ZoneAnswer | null;
   };
   nonRecours: boolean;
-  /** Lone parent separated less than 18 months ago (RSA / prime d'activité « majoré »). */
+  /** Lone parent separated less than 12 months ago (RSA / prime d'activité « majoré » for 12 months). */
   isolementRecent: boolean;
   cafOverrideOn: boolean;
   cafOverrideMonthly: number | null;
@@ -126,6 +128,7 @@ export function emptyAdult(overrides: Partial<FormAdult> = {}): FormAdult {
     pensionBasis: 'net',
     pensionStartYear: null,
     disability: 'none',
+    boursier: false,
     ...overrides,
   };
 }
@@ -178,6 +181,14 @@ export function stepOfError(key: string): StepId {
 const hasChildUnder20 = (f: FormState) => f.children.some((c) => c.age !== null && c.age < 20);
 /** The question « pension alimentaire » concerns a lone parent of a child under 20. */
 export const asksChildSupport = (f: FormState) => f.couple === false && hasChildUnder20(f);
+
+/**
+ * Childcare is asked for a child < 6, or < 12 for a lone parent: since Sept 2025 a lone parent who employs an
+ * assistante maternelle keeps the CMG until the child is 12 (the micro-crèche stays < 6).
+ */
+export const hasKidUnder6 = (f: FormState) => f.children.some((c) => c.age !== null && c.age < 6);
+export const asksChildcare = (f: FormState) =>
+  hasKidUnder6(f) || (f.couple === false && f.children.some((c) => c.age !== null && c.age < 12));
 
 export function formToHousehold(f: FormState): {
   household: Household | null;
@@ -232,6 +243,7 @@ export function formToHousehold(f: FormState): {
     const poss = you ? 'votre' : 'son';
     const A = you ? 'Votre' : 'Son';
     const adult: Adult = { age: 0, activity: a.activity ?? 'inactif', disability: a.disability };
+    if (a.activity === 'etudiant' && a.boursier) adult.boursier = true;
 
     if (a.age === null) {
       errors[`${k}.age`] = you
@@ -350,8 +362,14 @@ export function formToHousehold(f: FormState): {
   }
 
   const extras: NonNullable<Household['extras']> = {};
-  const hasKidUnder6 = children.some((c) => c.age < 6);
-  if (hasKidUnder6 && f.extras.childcare !== 'none') {
+  const under6 = children.some((c) => c.age < 6);
+  const loneUnder12 = !couple && children.some((c) => c.age < 12);
+  // without a child < 6, only an assistante maternelle (or « un parent ») is meaningful for a lone parent
+  const careOk =
+    under6 ||
+    (loneUnder12 &&
+      (f.extras.childcare === 'assistante_maternelle' || f.extras.childcare === 'parent'));
+  if (careOk && f.extras.childcare !== 'none') {
     extras.childcare = f.extras.childcare;
     if (f.extras.childcare !== 'parent' && f.extras.childcareCostMonthly !== null) {
       if (
@@ -443,6 +461,7 @@ export function householdToForm(h: Household): FormState {
       age: a.age,
       activity: a.activity,
       disability: a.disability,
+      boursier: a.boursier === true,
       ...(a.salary
         ? {
             salaryAmount: a.salary.status === 'tns' ? null : a.salary.amount,

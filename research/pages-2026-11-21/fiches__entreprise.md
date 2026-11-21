@@ -16,7 +16,7 @@ Produire sans être taxé avant d’avoir gagné.
 
 ### Ce que vous gagnez
 
-- **0 € avant profit** : Les impôts de production disparaissent : vous ne payez plus rien avant d'avoir gagné.
+- **0 € avant profit** : Les impôts de production disparaissent : vous ne payez plus rien avant d'avoir gagné. La refonte fiscale se fait sans augmenter les impôts : elle les baisse, grâce à la restitution des économies sur la feuille de paie.
 - **Un seul impôt** : Un impôt unique sur les bénéfices remplace l'empilement, et nul ne le contourne à votre place.
 - **Le formulaire** : Vous entreprenez d'abord : l'autorisation préalable disparaît, l'abus se sanctionne.
 - **La paperasse** : Un principe court remplace les milliers de pages que vous subissez, et le coût qui allait avec.
@@ -35,7 +35,7 @@ Le gain net
 
 Le gain de la suppression des taxes sur les salaires va au salarié, non à l’entreprise. Deux niveaux de lecture, tous deux assumés. L’entreprise est neutre : ses prélèvements nets de subventions et d’aides sont stables. Le propriétaire porte le solde par la marge, parce que c’est lui qui percevait la subvention.
 
-[Télécharger cette fiche (PDF)](entreprise.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

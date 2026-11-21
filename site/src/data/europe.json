@@ -1,17 +1,17 @@
 {
  "agregats": [
   {
-   "depenses_pib_2024": 49.4,
+   "depenses_pib_2024": 49.3,
    "depenses_pib_2025": 49.8,
    "geo": "EA19",
    "is_euro_area": true,
    "is_euro_area_reference": false,
    "name_fr": "Zone euro (19 pays, 2015-2022)",
    "solde_pib_2024": -3,
-   "solde_pib_2025": -2.9
+   "solde_pib_2025": -3
   },
   {
-   "depenses_pib_2024": 49.4,
+   "depenses_pib_2024": 49.3,
    "depenses_pib_2025": 49.8,
    "geo": "EA20",
    "is_euro_area": true,
@@ -20,21 +20,21 @@
    "revenu_median_eur_2024": 23767,
    "revenu_median_spa_2024": 22456,
    "solde_pib_2024": -3,
-   "solde_pib_2025": -2.9
+   "solde_pib_2025": -3
   },
   {
-   "depenses_pib_2024": 49.4,
+   "depenses_pib_2024": 49.2,
    "depenses_pib_2025": 49.7,
    "geo": "EA21",
    "is_euro_area": true,
    "is_euro_area_reference": false,
    "name_fr": "Zone euro (21 pays, depuis 2026)",
    "solde_pib_2024": -3,
-   "solde_pib_2025": -2.9
+   "solde_pib_2025": -3
   },
   {
-   "depenses_pib_2024": 49.1,
-   "depenses_pib_2025": 49.5,
+   "depenses_pib_2024": 48.9,
+   "depenses_pib_2025": 49.4,
    "geo": "EU27_2020",
    "is_euro_area": false,
    "is_euro_area_reference": false,
@@ -63,7 +63,9 @@
    "rank_asc": 30,
    "rank_desc": 1,
    "unit": "% du PIB",
-   "value": 57.7,
+   "value": 57.9,
+   "value_classeur": 57.7,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -78,12 +80,14 @@
    "kind": "country",
    "label_source": "Finland",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Finlande",
-   "rank_asc": 29,
+   "rank_asc": 30,
    "rank_desc": 1,
    "unit": "% du PIB",
    "value": 57.5,
+   "value_classeur": 57.5,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -104,6 +108,8 @@
    "rank_desc": 2,
    "unit": "% du PIB",
    "value": 57,
+   "value_classeur": 57,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -118,12 +124,14 @@
    "kind": "country",
    "label_source": "France",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "France",
-   "rank_asc": 28,
+   "rank_asc": 29,
    "rank_desc": 2,
    "unit": "% du PIB",
-   "value": 57.2,
+   "value": 57.3,
+   "value_classeur": 57.2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -143,7 +151,9 @@
    "rank_asc": 28,
    "rank_desc": 3,
    "unit": "% du PIB",
-   "value": 55.3,
+   "value": 54.6,
+   "value_classeur": 55.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -158,12 +168,14 @@
    "kind": "country",
    "label_source": "Austria",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Autriche",
-   "rank_asc": 27,
+   "rank_asc": 28,
    "rank_desc": 3,
    "unit": "% du PIB",
-   "value": 55.2,
+   "value": 54.6,
+   "value_classeur": 55.2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -184,6 +196,8 @@
    "rank_desc": 4,
    "unit": "% du PIB",
    "value": 54.1,
+   "value_classeur": 54.1,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -198,12 +212,14 @@
    "kind": "country",
    "label_source": "Belgium",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Belgique",
-   "rank_asc": 26,
+   "rank_asc": 27,
    "rank_desc": 4,
    "unit": "% du PIB",
-   "value": 54.2,
+   "value": 54.4,
+   "value_classeur": 54.2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -220,10 +236,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Suède",
-   "rank_asc": 26,
-   "rank_desc": 5,
+   "rank_asc": 25,
+   "rank_desc": 6,
    "unit": "% du PIB",
-   "value": 50.5,
+   "value": 50,
+   "value_classeur": 50.5,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -238,12 +256,14 @@
    "kind": "country",
    "label_source": "Sweden",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Suède",
    "rank_asc": 21,
-   "rank_desc": 9,
+   "rank_desc": 10,
    "unit": "% du PIB",
-   "value": 49.9,
+   "value": 49.3,
+   "value_classeur": 49.9,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -260,10 +280,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Italie",
-   "rank_asc": 25,
-   "rank_desc": 6,
+   "rank_asc": 26,
+   "rank_desc": 5,
    "unit": "% du PIB",
-   "value": 50.4,
+   "value": 50.3,
+   "value_classeur": 50.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -278,12 +300,14 @@
    "kind": "country",
    "label_source": "Italy",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Italie",
-   "rank_asc": 25,
+   "rank_asc": 26,
    "rank_desc": 5,
    "unit": "% du PIB",
-   "value": 51.2,
+   "value": 51.1,
+   "value_classeur": 51.2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -303,7 +327,9 @@
    "rank_asc": null,
    "rank_desc": null,
    "unit": "% du PIB",
-   "value": 49.4,
+   "value": 49.2,
+   "value_classeur": 49.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -324,6 +350,8 @@
    "rank_desc": null,
    "unit": "% du PIB",
    "value": 49.7,
+   "value_classeur": 49.7,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -343,7 +371,9 @@
    "rank_asc": null,
    "rank_desc": null,
    "unit": "% du PIB",
-   "value": 49.4,
+   "value": 49.3,
+   "value_classeur": 49.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -364,6 +394,8 @@
    "rank_desc": null,
    "unit": "% du PIB",
    "value": 49.8,
+   "value_classeur": 49.8,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -383,7 +415,9 @@
    "rank_asc": null,
    "rank_desc": null,
    "unit": "% du PIB",
-   "value": 49.4,
+   "value": 49.3,
+   "value_classeur": 49.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -404,6 +438,8 @@
    "rank_desc": null,
    "unit": "% du PIB",
    "value": 49.8,
+   "value_classeur": 49.8,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -420,10 +456,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Allemagne",
-   "rank_asc": 24,
-   "rank_desc": 7,
+   "rank_asc": 23,
+   "rank_desc": 8,
    "unit": "% du PIB",
-   "value": 49.4,
+   "value": 49,
+   "value_classeur": 49.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -438,12 +476,14 @@
    "kind": "country",
    "label_source": "Allemagne",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Allemagne",
-   "rank_asc": 23,
+   "rank_asc": 24,
    "rank_desc": 7,
    "unit": "% du PIB",
-   "value": 50.5,
+   "value": 50.1,
+   "value_classeur": 50.5,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -460,10 +500,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Pologne",
-   "rank_asc": 23,
-   "rank_desc": 8,
+   "rank_asc": 24,
+   "rank_desc": 7,
    "unit": "% du PIB",
    "value": 49.2,
+   "value_classeur": 49.2,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -478,12 +520,14 @@
    "kind": "country",
    "label_source": "Poland",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Pologne",
-   "rank_asc": 24,
+   "rank_asc": 25,
    "rank_desc": 6,
    "unit": "% du PIB",
    "value": 50.9,
+   "value_classeur": 50.9,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -503,7 +547,9 @@
    "rank_asc": null,
    "rank_desc": null,
    "unit": "% du PIB",
-   "value": 49.1,
+   "value": 48.9,
+   "value_classeur": 49.1,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -523,7 +569,9 @@
    "rank_asc": null,
    "rank_desc": null,
    "unit": "% du PIB",
-   "value": 49.5,
+   "value": 49.4,
+   "value_classeur": 49.5,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -540,10 +588,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Croatie",
-   "rank_asc": 22,
+   "rank_asc": 20,
    "rank_desc": 9,
    "unit": "% du PIB",
-   "value": 48.4,
+   "value": 47.8,
+   "value_classeur": 48.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -558,12 +608,14 @@
    "kind": "country",
    "label_source": "Croatia",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Croatie",
    "rank_asc": 22,
    "rank_desc": 8,
    "unit": "% du PIB",
-   "value": 50.1,
+   "value": 49.4,
+   "value_classeur": 50.1,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -580,10 +632,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Grèce",
-   "rank_asc": 21,
-   "rank_desc": 10,
+   "rank_asc": 20,
+   "rank_desc": 9,
    "unit": "% du PIB",
-   "value": 48.1,
+   "value": 47.8,
+   "value_classeur": 48.1,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -598,12 +652,14 @@
    "kind": "country",
    "label_source": "Greece",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Grèce",
-   "rank_asc": 17,
+   "rank_asc": 18,
    "rank_desc": 13,
    "unit": "% du PIB",
-   "value": 48.3,
+   "value": 47.8,
+   "value_classeur": 48.3,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -621,9 +677,11 @@
    "n_countries_ranked": 30,
    "name_fr": "Norvège",
    "rank_asc": 20,
-   "rank_desc": 11,
+   "rank_desc": 9,
    "unit": "% du PIB",
    "value": 47.8,
+   "value_classeur": 47.8,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -638,12 +696,14 @@
    "kind": "country",
    "label_source": "Norway",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Norvège",
-   "rank_asc": 19,
-   "rank_desc": 11,
+   "rank_asc": 22,
+   "rank_desc": 8,
    "unit": "% du PIB",
-   "value": 49.5,
+   "value": 49.4,
+   "value_classeur": 49.5,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -660,10 +720,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Slovaquie",
-   "rank_asc": 19,
-   "rank_desc": 12,
+   "rank_asc": 16,
+   "rank_desc": 14,
    "unit": "% du PIB",
-   "value": 47.4,
+   "value": 46.8,
+   "value_classeur": 47.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -678,12 +740,14 @@
    "kind": "country",
    "label_source": "Slovakia",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Slovaquie",
-   "rank_asc": 15,
+   "rank_asc": 16,
    "rank_desc": 15,
    "unit": "% du PIB",
-   "value": 47.9,
+   "value": 47.3,
+   "value_classeur": 47.9,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -700,10 +764,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Danemark",
-   "rank_asc": 17,
-   "rank_desc": 13,
+   "rank_asc": 15,
+   "rank_desc": 16,
    "unit": "% du PIB",
-   "value": 47.3,
+   "value": 46.5,
+   "value_classeur": 47.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -718,12 +784,14 @@
    "kind": "country",
    "label_source": "Danemark",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Danemark",
-   "rank_asc": 16,
-   "rank_desc": 14,
+   "rank_asc": 15,
+   "rank_desc": 16,
    "unit": "% du PIB",
-   "value": 48,
+   "value": 47.2,
+   "value_classeur": 48,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -740,10 +808,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Hongrie",
-   "rank_asc": 17,
-   "rank_desc": 13,
+   "rank_asc": 19,
+   "rank_desc": 12,
    "unit": "% du PIB",
-   "value": 47.3,
+   "value": 47.2,
+   "value_classeur": 47.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -758,12 +828,14 @@
    "kind": "country",
    "label_source": "Hungary",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Hongrie",
-   "rank_asc": 14,
-   "rank_desc": 16,
+   "rank_asc": 17,
+   "rank_desc": 14,
    "unit": "% du PIB",
-   "value": 47.3,
+   "value": 47.6,
+   "value_classeur": 47.3,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -780,10 +852,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Islande",
-   "rank_asc": 16,
-   "rank_desc": 15,
+   "rank_asc": 18,
+   "rank_desc": 13,
    "unit": "% du PIB",
    "value": 47.1,
+   "value_classeur": 47.1,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -798,12 +872,14 @@
    "kind": "country",
    "label_source": "Iceland",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Islande",
-   "rank_asc": 10,
-   "rank_desc": 20,
+   "rank_asc": 14,
+   "rank_desc": 17,
    "unit": "% du PIB",
-   "value": 45,
+   "value": 45.7,
+   "value_classeur": 45,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -820,10 +896,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Luxembourg",
-   "rank_asc": 15,
-   "rank_desc": 16,
+   "rank_asc": 16,
+   "rank_desc": 14,
    "unit": "% du PIB",
    "value": 46.8,
+   "value_classeur": 46.8,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -838,12 +916,14 @@
    "kind": "country",
    "label_source": "Luxembourg",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Luxembourg",
-   "rank_asc": 18,
+   "rank_asc": 19,
    "rank_desc": 12,
    "unit": "% du PIB",
-   "value": 49.1,
+   "value": 48.7,
+   "value_classeur": 49.1,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -863,7 +943,9 @@
    "rank_asc": 14,
    "rank_desc": 17,
    "unit": "% du PIB",
-   "value": 46.5,
+   "value": 46.4,
+   "value_classeur": 46.5,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -878,12 +960,14 @@
    "kind": "country",
    "label_source": "Slovenia",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Slovénie",
    "rank_asc": 20,
-   "rank_desc": 10,
+   "rank_desc": 11,
    "unit": "% du PIB",
-   "value": 49.6,
+   "value": 48.9,
+   "value_classeur": 49.6,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -903,7 +987,9 @@
    "rank_asc": 13,
    "rank_desc": 18,
    "unit": "% du PIB",
-   "value": 45.5,
+   "value": 45.4,
+   "value_classeur": 45.5,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -918,12 +1004,14 @@
    "kind": "country",
    "label_source": "Spain",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Espagne",
    "rank_asc": 11,
    "rank_desc": 19,
    "unit": "% du PIB",
    "value": 45.3,
+   "value_classeur": 45.3,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -943,7 +1031,9 @@
    "rank_asc": 12,
    "rank_desc": 19,
    "unit": "% du PIB",
-   "value": 45.3,
+   "value": 44.7,
+   "value_classeur": 45.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -958,12 +1048,14 @@
    "kind": "country",
    "label_source": "Latvia",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Lettonie",
-   "rank_asc": 13,
-   "rank_desc": 17,
+   "rank_asc": 11,
+   "rank_desc": 19,
    "unit": "% du PIB",
-   "value": 46.1,
+   "value": 45.3,
+   "value_classeur": 46.1,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -983,7 +1075,9 @@
    "rank_asc": 11,
    "rank_desc": 20,
    "unit": "% du PIB",
-   "value": 44.3,
+   "value": 44.6,
+   "value_classeur": 44.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -998,12 +1092,14 @@
    "kind": "country",
    "label_source": "Pays-Bas",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Pays-Bas",
-   "rank_asc": 9,
+   "rank_asc": 10,
    "rank_desc": 21,
    "unit": "% du PIB",
-   "value": 44.9,
+   "value": 45.2,
+   "value_classeur": 44.9,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -1023,7 +1119,9 @@
    "rank_asc": 10,
    "rank_desc": 21,
    "unit": "% du PIB",
-   "value": 44,
+   "value": 44.2,
+   "value_classeur": 44,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -1038,12 +1136,14 @@
    "kind": "country",
    "label_source": "Estonie",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Estonie",
-   "rank_asc": 12,
+   "rank_asc": 13,
    "rank_desc": 18,
    "unit": "% du PIB",
-   "value": 45.4,
+   "value": 45.6,
+   "value_classeur": 45.4,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -1063,7 +1163,9 @@
    "rank_asc": 9,
    "rank_desc": 22,
    "unit": "% du PIB",
-   "value": 43.3,
+   "value": 43.2,
+   "value_classeur": 43.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -1078,12 +1180,14 @@
    "kind": "country",
    "label_source": "Romania",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Roumanie",
-   "rank_asc": 8,
+   "rank_asc": 9,
    "rank_desc": 22,
    "unit": "% du PIB",
-   "value": 43.3,
+   "value": 43.4,
+   "value_classeur": 43.3,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -1103,7 +1207,9 @@
    "rank_asc": 8,
    "rank_desc": 23,
    "unit": "% du PIB",
-   "value": 43.2,
+   "value": 43.1,
+   "value_classeur": 43.2,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -1118,12 +1224,14 @@
    "kind": "country",
    "label_source": "Czechia",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Tchéquie",
-   "rank_asc": 7,
+   "rank_asc": 8,
    "rank_desc": 23,
    "unit": "% du PIB",
-   "value": 43.2,
+   "value": 43.3,
+   "value_classeur": 43.2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -1143,7 +1251,9 @@
    "rank_asc": 7,
    "rank_desc": 24,
    "unit": "% du PIB",
-   "value": 42.4,
+   "value": 42.2,
+   "value_classeur": 42.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -1158,12 +1268,14 @@
    "kind": "country",
    "label_source": "Portugal",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Portugal",
-   "rank_asc": 6,
+   "rank_asc": 7,
    "rank_desc": 24,
    "unit": "% du PIB",
-   "value": 42.7,
+   "value": 42.3,
+   "value_classeur": 42.7,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -1183,7 +1295,9 @@
    "rank_asc": 6,
    "rank_desc": 25,
    "unit": "% du PIB",
-   "value": 39.4,
+   "value": 39.3,
+   "value_classeur": 39.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -1198,12 +1312,14 @@
    "kind": "country",
    "label_source": "Lithuania",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Lituanie",
-   "rank_asc": 4,
+   "rank_asc": 5,
    "rank_desc": 26,
    "unit": "% du PIB",
-   "value": 41.2,
+   "value": 41.1,
+   "value_classeur": 41.2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -1223,7 +1339,9 @@
    "rank_asc": 5,
    "rank_desc": 26,
    "unit": "% du PIB",
-   "value": 39.2,
+   "value": 39,
+   "value_classeur": 39.2,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -1238,12 +1356,14 @@
    "kind": "country",
    "label_source": "Bulgaria",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Bulgarie",
-   "rank_asc": 5,
+   "rank_asc": 6,
    "rank_desc": 25,
    "unit": "% du PIB",
-   "value": 41.7,
+   "value": 42.1,
+   "value_classeur": 41.7,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -1260,10 +1380,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Chypre",
-   "rank_asc": 4,
-   "rank_desc": 27,
+   "rank_asc": 3,
+   "rank_desc": 28,
    "unit": "% du PIB",
-   "value": 38.3,
+   "value": 36.7,
+   "value_classeur": 38.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -1278,12 +1400,14 @@
    "kind": "country",
    "label_source": "Cyprus",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Chypre",
-   "rank_asc": 3,
+   "rank_asc": 4,
    "rank_desc": 27,
    "unit": "% du PIB",
-   "value": 40.2,
+   "value": 37.9,
+   "value_classeur": 40.2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -1300,10 +1424,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Malte",
-   "rank_asc": 3,
-   "rank_desc": 28,
+   "rank_asc": 4,
+   "rank_desc": 27,
    "unit": "% du PIB",
-   "value": 37.2,
+   "value": 37.4,
+   "value_classeur": 37.2,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -1318,12 +1444,14 @@
    "kind": "country",
    "label_source": "Malta",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Malte",
-   "rank_asc": 2,
+   "rank_asc": 3,
    "rank_desc": 28,
    "unit": "% du PIB",
-   "value": 37,
+   "value": 37.1,
+   "value_classeur": 37,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -1343,7 +1471,9 @@
    "rank_asc": 2,
    "rank_desc": 29,
    "unit": "% du PIB",
-   "value": 33.6,
+   "value": 32.8,
+   "value_classeur": 33.6,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -1357,13 +1487,15 @@
    "is_france": false,
    "kind": "country",
    "label_source": "Suisse",
-   "missing": true,
-   "n_countries_ranked": 29,
+   "missing": false,
+   "n_countries_ranked": 30,
    "name_fr": "Suisse",
-   "rank_asc": null,
-   "rank_desc": null,
+   "rank_asc": 2,
+   "rank_desc": 29,
    "unit": "% du PIB",
-   "value": null,
+   "value": 33.6,
+   "value_classeur": null,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -1383,7 +1515,9 @@
    "rank_asc": 1,
    "rank_desc": 30,
    "unit": "% du PIB",
-   "value": 22.3,
+   "value": 22.4,
+   "value_classeur": 22.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -1398,12 +1532,14 @@
    "kind": "country",
    "label_source": "Ireland",
    "missing": false,
-   "n_countries_ranked": 29,
+   "n_countries_ranked": 30,
    "name_fr": "Irlande",
    "rank_asc": 1,
-   "rank_desc": 29,
+   "rank_desc": 30,
    "unit": "% du PIB",
-   "value": 21,
+   "value": 22.3,
+   "value_classeur": 21,
+   "vintage": "eurostat",
    "year": 2025
   }
  ],
@@ -1434,13 +1570,17 @@
    "euro_area_reference": "EA20",
    "france": "FR"
   },
+  "income_year": {
+   "revenu_median": 2023
+  },
   "notes": [
    "Les libellés pays du classeur mélangent anglais et français ; geo = code Eurostat (EL = Grèce).",
    "Quatre agrégats par table : zone euro à 21 pays (depuis 2026), à 20 pays (2023-2025, valeurs 2024-2025 de référence), à 19 pays (2015-2022, même valeur que EA20 en 2024-2025) et UE27. Utiliser EA20 pour « la zone euro » ; EA21 et EA19 sont conservés tels que dans le classeur.",
-   "Suisse 2025 : ':' dans la source (donnée non disponible) → value = null, missing = true.",
+   "Valeurs : Eurostat, mise à jour du 21 octobre 2026 (dépenses, solde) et du 20 octobre 2026 (revenu médian), téléchargées le 21 novembre 2026 (data/eurostat/). value_classeur = valeur du classeur des auteurs (millésime antérieur) ; vintage = « eurostat », ou « classeur » quand Eurostat ne publie plus la cellule (solde public de l'Islande, de la Norvège et de la Suisse : valeur du classeur conservée).",
+   "Revenu médian : enquête SILC 2024, qui mesure les revenus de 2023 (Irlande : les 12 mois précédant l'entretien).",
    "Appartenance à la zone euro (euro_area_member_2024) : métadonnée ajoutée par le pipeline d'après l'agrégat Eurostat « Euro area – 20 countries (2023-2025) » ; la Bulgarie rejoint la zone euro le 1er janvier 2026 (agrégat « 21 pays, depuis 2026 » de la même feuille).",
    "rank_desc : rang décroissant (1 = valeur la plus haute) et rank_asc : rang croissant (1 = valeur la plus basse), parmi les pays de la table (hors agrégats ; 30 pour les dépenses et le solde, 31 pour le revenu médian). Pour le solde public, rank_asc = 3 signifie « 3e plus mauvais solde » (France 2024).",
-   "« Record mondial » (manifeste) : dans ce jeu de données la Finlande (57,7 %) dépasse la France (57,0 %) en 2024 ; la France est 2e sur 30 en 2024 et 2e en 2025 (Finlande 57,5 %, France 57,2 %) — voir facts.json, conflit « record_mondial ».",
+   "« Record mondial » (manifeste) : dans ce jeu de données la Finlande (57,9 %) dépasse la France (57,0 %) en 2024 ; la France est 2e sur 30 en 2024 et 2e en 2025 (Finlande 57,5 %, France 57,3 %) — voir facts.json, conflit « record_mondial ».",
    "revenu_median_eur : revenu médian équivalent, euros courants par an ; revenu_median_spa : en standards de pouvoir d'achat (SPA/PPS). Manifeste : « 2 100 euros par mois en France, contre 4 300 en Suisse » = 25 557 / 12 = 2 130 € et 51 926 / 12 = 4 327 € arrondis."
   ],
   "source": {
@@ -1449,9 +1589,16 @@
     "tec00023": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table",
     "tec00127": "https://ec.europa.eu/eurostat/databrowser/view/tec00127/default/table?lang=en"
    },
+   "downloaded": "2026-11-21",
    "kind": "eurostat",
-   "ref": "Eurostat tec00023 (dépenses des administrations publiques, % du PIB), tec00127 (capacité/besoin de financement, % du PIB), ilc_di03 (revenu médian équivalent) — repris dans Synthèse Graphiques Résolution_0910.xlsx › GraphGov, GraphRDB",
+   "ref": "Eurostat tec00023 (dépenses des administrations publiques, % du PIB) et tec00127 (capacité/besoin de financement, % du PIB), mise à jour du 21 octobre 2026 ; ilc_di03 (revenu médian équivalent, enquête SILC), mise à jour du 20 octobre 2026. Lignes (pays, agrégats) d'après Synthèse Graphiques Résolution_0910.xlsx › GraphGov, GraphRDB",
    "url": "https://ec.europa.eu/eurostat/databrowser/view/tec00023/default/table",
+   "vintage": {
+    "ilc_di03": "2026-10-20",
+    "tec00023": "2026-10-21",
+    "tec00127": "2026-10-21"
+   },
+   "vintage_fr": "21 octobre 2026",
    "workbook": {
     "also": {
      "kind": "workbook",
@@ -1481,8 +1628,8 @@
  },
  "pays": [
   {
-   "depenses_pib_2024": 49.4,
-   "depenses_pib_2025": 50.5,
+   "depenses_pib_2024": 49,
+   "depenses_pib_2025": 50.1,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "DE",
@@ -1491,11 +1638,11 @@
    "revenu_median_eur_2024": 27619,
    "revenu_median_spa_2024": 25192,
    "solde_pib_2024": -2.7,
-   "solde_pib_2025": -2.7
+   "solde_pib_2025": -2.9
   },
   {
-   "depenses_pib_2024": 55.3,
-   "depenses_pib_2025": 55.2,
+   "depenses_pib_2024": 54.6,
+   "depenses_pib_2025": 54.6,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "AT",
@@ -1504,11 +1651,11 @@
    "revenu_median_eur_2024": 33210,
    "revenu_median_spa_2024": 29758,
    "solde_pib_2024": -4.6,
-   "solde_pib_2025": -4.2
+   "solde_pib_2025": -4.1
   },
   {
    "depenses_pib_2024": 54.1,
-   "depenses_pib_2025": 54.2,
+   "depenses_pib_2025": 54.4,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "BE",
@@ -1520,8 +1667,8 @@
    "solde_pib_2025": -5.2
   },
   {
-   "depenses_pib_2024": 39.2,
-   "depenses_pib_2025": 41.7,
+   "depenses_pib_2024": 39,
+   "depenses_pib_2025": 42.1,
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "BG",
@@ -1530,11 +1677,11 @@
    "revenu_median_eur_2024": 7811,
    "revenu_median_spa_2024": 13079,
    "solde_pib_2024": -3,
-   "solde_pib_2025": -3.5
+   "solde_pib_2025": -4
   },
   {
-   "depenses_pib_2024": 38.3,
-   "depenses_pib_2025": 40.2,
+   "depenses_pib_2024": 36.7,
+   "depenses_pib_2025": 37.9,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "CY",
@@ -1542,12 +1689,12 @@
    "name_fr": "Chypre",
    "revenu_median_eur_2024": 20666,
    "revenu_median_spa_2024": 22817,
-   "solde_pib_2024": 4.1,
-   "solde_pib_2025": 3.4
+   "solde_pib_2024": 4,
+   "solde_pib_2025": 3.6
   },
   {
-   "depenses_pib_2024": 48.4,
-   "depenses_pib_2025": 50.1,
+   "depenses_pib_2024": 47.8,
+   "depenses_pib_2025": 49.4,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "HR",
@@ -1555,12 +1702,12 @@
    "name_fr": "Croatie",
    "revenu_median_eur_2024": 12344,
    "revenu_median_spa_2024": 16277,
-   "solde_pib_2024": -2.3,
+   "solde_pib_2024": -2.5,
    "solde_pib_2025": -3
   },
   {
-   "depenses_pib_2024": 47.3,
-   "depenses_pib_2025": 48,
+   "depenses_pib_2024": 46.5,
+   "depenses_pib_2025": 47.2,
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "DK",
@@ -1568,11 +1715,11 @@
    "name_fr": "Danemark",
    "revenu_median_eur_2024": 34843,
    "revenu_median_spa_2024": 24297,
-   "solde_pib_2024": 4.5,
+   "solde_pib_2024": 4.1,
    "solde_pib_2025": 2.9
   },
   {
-   "depenses_pib_2024": 45.5,
+   "depenses_pib_2024": 45.4,
    "depenses_pib_2025": 45.3,
    "eu27_member": true,
    "euro_area_member_2024": true,
@@ -1585,8 +1732,8 @@
    "solde_pib_2025": -2.4
   },
   {
-   "depenses_pib_2024": 44,
-   "depenses_pib_2025": 45.4,
+   "depenses_pib_2024": 44.2,
+   "depenses_pib_2025": 45.6,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "EE",
@@ -1594,11 +1741,11 @@
    "name_fr": "Estonie",
    "revenu_median_eur_2024": 16140,
    "revenu_median_spa_2024": 16482,
-   "solde_pib_2024": -1.1,
+   "solde_pib_2024": -1.6,
    "solde_pib_2025": -2
   },
   {
-   "depenses_pib_2024": 57.7,
+   "depenses_pib_2024": 57.9,
    "depenses_pib_2025": 57.5,
    "eu27_member": true,
    "euro_area_member_2024": true,
@@ -1608,11 +1755,11 @@
    "revenu_median_eur_2024": 28693,
    "revenu_median_spa_2024": 23055,
    "solde_pib_2024": -4.4,
-   "solde_pib_2025": -3.4
+   "solde_pib_2025": -3.8
   },
   {
    "depenses_pib_2024": 57,
-   "depenses_pib_2025": 57.2,
+   "depenses_pib_2025": 57.3,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "FR",
@@ -1624,8 +1771,8 @@
    "solde_pib_2025": -5.1
   },
   {
-   "depenses_pib_2024": 48.1,
-   "depenses_pib_2025": 48.3,
+   "depenses_pib_2024": 47.8,
+   "depenses_pib_2025": 47.8,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "EL",
@@ -1633,12 +1780,12 @@
    "name_fr": "Grèce",
    "revenu_median_eur_2024": 10850,
    "revenu_median_spa_2024": 12436,
-   "solde_pib_2024": 1.3,
-   "solde_pib_2025": 1.7
+   "solde_pib_2024": 1.4,
+   "solde_pib_2025": 2
   },
   {
-   "depenses_pib_2024": 47.3,
-   "depenses_pib_2025": 47.3,
+   "depenses_pib_2024": 47.2,
+   "depenses_pib_2025": 47.6,
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "HU",
@@ -1650,8 +1797,8 @@
    "solde_pib_2025": -4.7
   },
   {
-   "depenses_pib_2024": 22.3,
-   "depenses_pib_2025": 21,
+   "depenses_pib_2024": 22.4,
+   "depenses_pib_2025": 22.3,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "IE",
@@ -1659,12 +1806,12 @@
    "name_fr": "Irlande",
    "revenu_median_eur_2024": 33013,
    "revenu_median_spa_2024": 23288,
-   "solde_pib_2024": 4.1,
+   "solde_pib_2024": 4.2,
    "solde_pib_2025": 1.8
   },
   {
    "depenses_pib_2024": 47.1,
-   "depenses_pib_2025": 45,
+   "depenses_pib_2025": 45.7,
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "IS",
@@ -1674,8 +1821,8 @@
    "solde_pib_2025": -2.8
   },
   {
-   "depenses_pib_2024": 50.4,
-   "depenses_pib_2025": 51.2,
+   "depenses_pib_2024": 50.3,
+   "depenses_pib_2025": 51.1,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "IT",
@@ -1687,8 +1834,8 @@
    "solde_pib_2025": -3.1
   },
   {
-   "depenses_pib_2024": 45.3,
-   "depenses_pib_2025": 46.1,
+   "depenses_pib_2024": 44.7,
+   "depenses_pib_2025": 45.3,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LV",
@@ -1700,8 +1847,8 @@
    "solde_pib_2025": -2.5
   },
   {
-   "depenses_pib_2024": 39.4,
-   "depenses_pib_2025": 41.2,
+   "depenses_pib_2024": 39.3,
+   "depenses_pib_2025": 41.1,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LT",
@@ -1714,7 +1861,7 @@
   },
   {
    "depenses_pib_2024": 46.8,
-   "depenses_pib_2025": 49.1,
+   "depenses_pib_2025": 48.7,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "LU",
@@ -1722,25 +1869,25 @@
    "name_fr": "Luxembourg",
    "revenu_median_eur_2024": 50799,
    "revenu_median_spa_2024": 37781,
-   "solde_pib_2024": 0.9,
-   "solde_pib_2025": -2
+   "solde_pib_2024": 0.6,
+   "solde_pib_2025": -1.8
   },
   {
-   "depenses_pib_2024": 37.2,
-   "depenses_pib_2025": 37,
+   "depenses_pib_2024": 37.4,
+   "depenses_pib_2025": 37.1,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "MT",
    "is_france": false,
    "name_fr": "Malte",
-   "revenu_median_eur_2024": 20430,
-   "revenu_median_spa_2024": 22894,
-   "solde_pib_2024": -3.4,
-   "solde_pib_2025": -2.2
+   "revenu_median_eur_2024": 19701,
+   "revenu_median_spa_2024": 22077,
+   "solde_pib_2024": -3.5,
+   "solde_pib_2025": -2.1
   },
   {
    "depenses_pib_2024": 47.8,
-   "depenses_pib_2025": 49.5,
+   "depenses_pib_2025": 49.4,
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "NO",
@@ -1752,8 +1899,8 @@
    "solde_pib_2025": 10.4
   },
   {
-   "depenses_pib_2024": 44.3,
-   "depenses_pib_2025": 44.9,
+   "depenses_pib_2024": 44.6,
+   "depenses_pib_2025": 45.2,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "NL",
@@ -1775,11 +1922,11 @@
    "revenu_median_eur_2024": 11921,
    "revenu_median_spa_2024": 18064,
    "solde_pib_2024": -6.4,
-   "solde_pib_2025": -7.3
+   "solde_pib_2025": -7.2
   },
   {
-   "depenses_pib_2024": 42.4,
-   "depenses_pib_2025": 42.7,
+   "depenses_pib_2024": 42.2,
+   "depenses_pib_2025": 42.3,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "PT",
@@ -1787,12 +1934,12 @@
    "name_fr": "Portugal",
    "revenu_median_eur_2024": 12646,
    "revenu_median_spa_2024": 14446,
-   "solde_pib_2024": 0.6,
+   "solde_pib_2024": 0.7,
    "solde_pib_2025": 0.7
   },
   {
-   "depenses_pib_2024": 43.3,
-   "depenses_pib_2025": 43.3,
+   "depenses_pib_2024": 43.2,
+   "depenses_pib_2025": 43.4,
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "RO",
@@ -1800,8 +1947,8 @@
    "name_fr": "Roumanie",
    "revenu_median_eur_2024": 7837,
    "revenu_median_spa_2024": 13023,
-   "solde_pib_2024": -9.3,
-   "solde_pib_2025": -7.9
+   "solde_pib_2024": -9.2,
+   "solde_pib_2025": -7.8
   },
   {
    "eu27_member": false,
@@ -1813,8 +1960,8 @@
    "revenu_median_spa_2024": 8971
   },
   {
-   "depenses_pib_2024": 47.4,
-   "depenses_pib_2025": 47.9,
+   "depenses_pib_2024": 46.8,
+   "depenses_pib_2025": 47.3,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "SK",
@@ -1822,12 +1969,12 @@
    "name_fr": "Slovaquie",
    "revenu_median_eur_2024": 10171,
    "revenu_median_spa_2024": 11433,
-   "solde_pib_2024": -5.3,
-   "solde_pib_2025": -4.5
+   "solde_pib_2024": -5.4,
+   "solde_pib_2025": -4.4
   },
   {
-   "depenses_pib_2024": 46.5,
-   "depenses_pib_2025": 49.6,
+   "depenses_pib_2024": 46.4,
+   "depenses_pib_2025": 48.9,
    "eu27_member": true,
    "euro_area_member_2024": true,
    "geo": "SI",
@@ -1835,12 +1982,12 @@
    "name_fr": "Slovénie",
    "revenu_median_eur_2024": 19620,
    "revenu_median_spa_2024": 21572,
-   "solde_pib_2024": -0.9,
+   "solde_pib_2024": -0.8,
    "solde_pib_2025": -2.5
   },
   {
-   "depenses_pib_2024": 33.6,
-   "depenses_pib_2025": null,
+   "depenses_pib_2024": 32.8,
+   "depenses_pib_2025": 33.6,
    "eu27_member": false,
    "euro_area_member_2024": false,
    "geo": "CH",
@@ -1852,8 +1999,8 @@
    "solde_pib_2025": null
   },
   {
-   "depenses_pib_2024": 50.5,
-   "depenses_pib_2025": 49.9,
+   "depenses_pib_2024": 50,
+   "depenses_pib_2025": 49.3,
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "SE",
@@ -1861,12 +2008,12 @@
    "name_fr": "Suède",
    "revenu_median_eur_2024": 26915,
    "revenu_median_spa_2024": 23693,
-   "solde_pib_2024": -1.5,
-   "solde_pib_2025": -1.3
+   "solde_pib_2024": -1.6,
+   "solde_pib_2025": -1.6
   },
   {
-   "depenses_pib_2024": 43.2,
-   "depenses_pib_2025": 43.2,
+   "depenses_pib_2024": 43.1,
+   "depenses_pib_2025": 43.3,
    "eu27_member": true,
    "euro_area_member_2024": false,
    "geo": "CZ",
@@ -1875,7 +2022,7 @@
    "revenu_median_eur_2024": 15133,
    "revenu_median_spa_2024": 16972,
    "solde_pib_2024": -2,
-   "solde_pib_2025": -2.1
+   "solde_pib_2025": -2.2
   },
   {
    "eu27_member": false,
@@ -1888,10 +2035,10 @@
   }
  ],
  "points_cles": {
-  "finlande_depenses_pib_2024": 57.7,
+  "finlande_depenses_pib_2024": 57.9,
   "finlande_depenses_pib_2025": 57.5,
   "france_depenses_pib_2024": 57,
-  "france_depenses_pib_2025": 57.2,
+  "france_depenses_pib_2025": 57.3,
   "france_rang_deficit_2024_plus_mauvais": 3,
   "france_rang_depenses_2024": 2,
   "france_revenu_median_eur_2024": 25557,
@@ -1917,6 +2064,8 @@
    "rank_desc": 31,
    "unit": "€ par an",
    "value": 4029,
+   "value_classeur": 4029,
+   "vintage": "eurostat",
    "vs_france_pct": -84.24,
    "year": 2024
   },
@@ -1937,6 +2086,8 @@
    "rank_desc": 30,
    "unit": "€ par an",
    "value": 6073,
+   "value_classeur": 6073,
+   "vintage": "eurostat",
    "vs_france_pct": -76.24,
    "year": 2024
   },
@@ -1957,6 +2108,8 @@
    "rank_desc": 29,
    "unit": "€ par an",
    "value": 7811,
+   "value_classeur": 7811,
+   "vintage": "eurostat",
    "vs_france_pct": -69.44,
    "year": 2024
   },
@@ -1977,6 +2130,8 @@
    "rank_desc": 28,
    "unit": "€ par an",
    "value": 7837,
+   "value_classeur": 7837,
+   "vintage": "eurostat",
    "vs_france_pct": -69.34,
    "year": 2024
   },
@@ -1997,6 +2152,8 @@
    "rank_desc": 27,
    "unit": "€ par an",
    "value": 8488,
+   "value_classeur": 8488,
+   "vintage": "eurostat",
    "vs_france_pct": -66.79,
    "year": 2024
   },
@@ -2017,6 +2174,8 @@
    "rank_desc": 26,
    "unit": "€ par an",
    "value": 10171,
+   "value_classeur": 10171,
+   "vintage": "eurostat",
    "vs_france_pct": -60.2,
    "year": 2024
   },
@@ -2037,6 +2196,8 @@
    "rank_desc": 25,
    "unit": "€ par an",
    "value": 10850,
+   "value_classeur": 10850,
+   "vintage": "eurostat",
    "vs_france_pct": -57.55,
    "year": 2024
   },
@@ -2057,6 +2218,8 @@
    "rank_desc": 24,
    "unit": "€ par an",
    "value": 11921,
+   "value_classeur": 11921,
+   "vintage": "eurostat",
    "vs_france_pct": -53.36,
    "year": 2024
   },
@@ -2077,6 +2240,8 @@
    "rank_desc": 23,
    "unit": "€ par an",
    "value": 12325,
+   "value_classeur": 12325,
+   "vintage": "eurostat",
    "vs_france_pct": -51.77,
    "year": 2024
   },
@@ -2097,6 +2262,8 @@
    "rank_desc": 22,
    "unit": "€ par an",
    "value": 12344,
+   "value_classeur": 12344,
+   "vintage": "eurostat",
    "vs_france_pct": -51.7,
    "year": 2024
   },
@@ -2117,6 +2284,8 @@
    "rank_desc": 21,
    "unit": "€ par an",
    "value": 12646,
+   "value_classeur": 12646,
+   "vintage": "eurostat",
    "vs_france_pct": -50.52,
    "year": 2024
   },
@@ -2137,6 +2306,8 @@
    "rank_desc": 20,
    "unit": "€ par an",
    "value": 12821,
+   "value_classeur": 12821,
+   "vintage": "eurostat",
    "vs_france_pct": -49.83,
    "year": 2024
   },
@@ -2157,6 +2328,8 @@
    "rank_desc": 19,
    "unit": "€ par an",
    "value": 15133,
+   "value_classeur": 15133,
+   "vintage": "eurostat",
    "vs_france_pct": -40.79,
    "year": 2024
   },
@@ -2177,6 +2350,8 @@
    "rank_desc": 18,
    "unit": "€ par an",
    "value": 16140,
+   "value_classeur": 16140,
+   "vintage": "eurostat",
    "vs_france_pct": -36.85,
    "year": 2024
   },
@@ -2197,6 +2372,8 @@
    "rank_desc": 17,
    "unit": "€ par an",
    "value": 19307,
+   "value_classeur": 19307,
+   "vintage": "eurostat",
    "vs_france_pct": -24.46,
    "year": 2024
   },
@@ -2217,6 +2394,8 @@
    "rank_desc": 16,
    "unit": "€ par an",
    "value": 19620,
+   "value_classeur": 19620,
+   "vintage": "eurostat",
    "vs_france_pct": -23.23,
    "year": 2024
   },
@@ -2236,8 +2415,10 @@
    "rank_asc": 17,
    "rank_desc": 15,
    "unit": "€ par an",
-   "value": 20430,
-   "vs_france_pct": -20.06,
+   "value": 19701,
+   "value_classeur": 20430,
+   "vintage": "eurostat",
+   "vs_france_pct": -22.91,
    "year": 2024
   },
   {
@@ -2257,6 +2438,8 @@
    "rank_desc": 14,
    "unit": "€ par an",
    "value": 20605,
+   "value_classeur": 20605,
+   "vintage": "eurostat",
    "vs_france_pct": -19.38,
    "year": 2024
   },
@@ -2277,6 +2460,8 @@
    "rank_desc": 13,
    "unit": "€ par an",
    "value": 20666,
+   "value_classeur": 20666,
+   "vintage": "eurostat",
    "vs_france_pct": -19.14,
    "year": 2024
   },
@@ -2297,6 +2482,8 @@
    "rank_desc": null,
    "unit": "€ par an",
    "value": 21582,
+   "value_classeur": 21582,
+   "vintage": "eurostat",
    "vs_france_pct": -15.55,
    "year": 2024
   },
@@ -2317,6 +2504,8 @@
    "rank_desc": null,
    "unit": "€ par an",
    "value": 23767,
+   "value_classeur": 23767,
+   "vintage": "eurostat",
    "vs_france_pct": -7,
    "year": 2024
   },
@@ -2337,6 +2526,8 @@
    "rank_desc": 12,
    "unit": "€ par an",
    "value": 25557,
+   "value_classeur": 25557,
+   "vintage": "eurostat",
    "vs_france_pct": 0,
    "year": 2024
   },
@@ -2357,6 +2548,8 @@
    "rank_desc": 11,
    "unit": "€ par an",
    "value": 26915,
+   "value_classeur": 26915,
+   "vintage": "eurostat",
    "vs_france_pct": 5.31,
    "year": 2024
   },
@@ -2377,6 +2570,8 @@
    "rank_desc": 10,
    "unit": "€ par an",
    "value": 27619,
+   "value_classeur": 27619,
+   "vintage": "eurostat",
    "vs_france_pct": 8.07,
    "year": 2024
   },
@@ -2397,6 +2592,8 @@
    "rank_desc": 9,
    "unit": "€ par an",
    "value": 28693,
+   "value_classeur": 28693,
+   "vintage": "eurostat",
    "vs_france_pct": 12.27,
    "year": 2024
   },
@@ -2417,6 +2614,8 @@
    "rank_desc": 8,
    "unit": "€ par an",
    "value": 30446,
+   "value_classeur": 30446,
+   "vintage": "eurostat",
    "vs_france_pct": 19.13,
    "year": 2024
   },
@@ -2437,6 +2636,8 @@
    "rank_desc": 7,
    "unit": "€ par an",
    "value": 31981,
+   "value_classeur": 31981,
+   "vintage": "eurostat",
    "vs_france_pct": 25.14,
    "year": 2024
   },
@@ -2457,6 +2658,8 @@
    "rank_desc": 6,
    "unit": "€ par an",
    "value": 33013,
+   "value_classeur": 33013,
+   "vintage": "eurostat",
    "vs_france_pct": 29.17,
    "year": 2024
   },
@@ -2477,6 +2680,8 @@
    "rank_desc": 5,
    "unit": "€ par an",
    "value": 33210,
+   "value_classeur": 33210,
+   "vintage": "eurostat",
    "vs_france_pct": 29.94,
    "year": 2024
   },
@@ -2497,6 +2702,8 @@
    "rank_desc": 4,
    "unit": "€ par an",
    "value": 34843,
+   "value_classeur": 34843,
+   "vintage": "eurostat",
    "vs_france_pct": 36.33,
    "year": 2024
   },
@@ -2517,6 +2724,8 @@
    "rank_desc": 3,
    "unit": "€ par an",
    "value": 40432,
+   "value_classeur": 40432,
+   "vintage": "eurostat",
    "vs_france_pct": 58.2,
    "year": 2024
   },
@@ -2537,6 +2746,8 @@
    "rank_desc": 2,
    "unit": "€ par an",
    "value": 50799,
+   "value_classeur": 50799,
+   "vintage": "eurostat",
    "vs_france_pct": 98.77,
    "year": 2024
   },
@@ -2557,6 +2768,8 @@
    "rank_desc": 1,
    "unit": "€ par an",
    "value": 51926,
+   "value_classeur": 51926,
+   "vintage": "eurostat",
    "vs_france_pct": 103.18,
    "year": 2024
   }
@@ -2579,6 +2792,8 @@
    "rank_desc": 1,
    "unit": "SPA par an",
    "value": 37781,
+   "value_classeur": 37781,
+   "vintage": "eurostat",
    "vs_france_pct": 62.69,
    "year": 2024
   },
@@ -2599,6 +2814,8 @@
    "rank_desc": 2,
    "unit": "SPA par an",
    "value": 32338,
+   "value_classeur": 32338,
+   "vintage": "eurostat",
    "vs_france_pct": 39.26,
    "year": 2024
   },
@@ -2619,6 +2836,8 @@
    "rank_desc": 3,
    "unit": "SPA par an",
    "value": 29828,
+   "value_classeur": 29828,
+   "vintage": "eurostat",
    "vs_france_pct": 28.45,
    "year": 2024
   },
@@ -2639,6 +2858,8 @@
    "rank_desc": 4,
    "unit": "SPA par an",
    "value": 29758,
+   "value_classeur": 29758,
+   "vintage": "eurostat",
    "vs_france_pct": 28.15,
    "year": 2024
   },
@@ -2659,6 +2880,8 @@
    "rank_desc": 5,
    "unit": "SPA par an",
    "value": 27091,
+   "value_classeur": 27091,
+   "vintage": "eurostat",
    "vs_france_pct": 16.66,
    "year": 2024
   },
@@ -2679,6 +2902,8 @@
    "rank_desc": 6,
    "unit": "SPA par an",
    "value": 26361,
+   "value_classeur": 26361,
+   "vintage": "eurostat",
    "vs_france_pct": 13.52,
    "year": 2024
   },
@@ -2699,6 +2924,8 @@
    "rank_desc": 7,
    "unit": "SPA par an",
    "value": 25192,
+   "value_classeur": 25192,
+   "vintage": "eurostat",
    "vs_france_pct": 8.48,
    "year": 2024
   },
@@ -2719,6 +2946,8 @@
    "rank_desc": 8,
    "unit": "SPA par an",
    "value": 24297,
+   "value_classeur": 24297,
+   "vintage": "eurostat",
    "vs_france_pct": 4.63,
    "year": 2024
   },
@@ -2739,6 +2968,8 @@
    "rank_desc": 9,
    "unit": "SPA par an",
    "value": 23693,
+   "value_classeur": 23693,
+   "vintage": "eurostat",
    "vs_france_pct": 2.03,
    "year": 2024
   },
@@ -2759,6 +2990,8 @@
    "rank_desc": 10,
    "unit": "SPA par an",
    "value": 23288,
+   "value_classeur": 23288,
+   "vintage": "eurostat",
    "vs_france_pct": 0.28,
    "year": 2024
   },
@@ -2779,6 +3012,8 @@
    "rank_desc": 11,
    "unit": "SPA par an",
    "value": 23222,
+   "value_classeur": 23222,
+   "vintage": "eurostat",
    "vs_france_pct": 0,
    "year": 2024
   },
@@ -2799,6 +3034,8 @@
    "rank_desc": 12,
    "unit": "SPA par an",
    "value": 23055,
+   "value_classeur": 23055,
+   "vintage": "eurostat",
    "vs_france_pct": -0.72,
    "year": 2024
   },
@@ -2815,11 +3052,13 @@
    "label_source": "Malte",
    "n_countries_ranked": 31,
    "name_fr": "Malte",
-   "rank_asc": 19,
-   "rank_desc": 13,
+   "rank_asc": 18,
+   "rank_desc": 14,
    "unit": "SPA par an",
-   "value": 22894,
-   "vs_france_pct": -1.41,
+   "value": 22077,
+   "value_classeur": 22894,
+   "vintage": "eurostat",
+   "vs_france_pct": -4.93,
    "year": 2024
   },
   {
@@ -2835,10 +3074,12 @@
    "label_source": "Chypre",
    "n_countries_ranked": 31,
    "name_fr": "Chypre",
-   "rank_asc": 18,
-   "rank_desc": 14,
+   "rank_asc": 19,
+   "rank_desc": 13,
    "unit": "SPA par an",
    "value": 22817,
+   "value_classeur": 22817,
+   "vintage": "eurostat",
    "vs_france_pct": -1.74,
    "year": 2024
   },
@@ -2859,6 +3100,8 @@
    "rank_desc": null,
    "unit": "SPA par an",
    "value": 22456,
+   "value_classeur": 22456,
+   "vintage": "eurostat",
    "vs_france_pct": -3.3,
    "year": 2024
   },
@@ -2879,6 +3122,8 @@
    "rank_desc": 15,
    "unit": "SPA par an",
    "value": 21572,
+   "value_classeur": 21572,
+   "vintage": "eurostat",
    "vs_france_pct": -7.11,
    "year": 2024
   },
@@ -2899,6 +3144,8 @@
    "rank_desc": null,
    "unit": "SPA par an",
    "value": 21245,
+   "value_classeur": 21245,
+   "vintage": "eurostat",
    "vs_france_pct": -8.51,
    "year": 2024
   },
@@ -2919,6 +3166,8 @@
    "rank_desc": 16,
    "unit": "SPA par an",
    "value": 20804,
+   "value_classeur": 20804,
+   "vintage": "eurostat",
    "vs_france_pct": -10.41,
    "year": 2024
   },
@@ -2939,6 +3188,8 @@
    "rank_desc": 17,
    "unit": "SPA par an",
    "value": 20800,
+   "value_classeur": 20800,
+   "vintage": "eurostat",
    "vs_france_pct": -10.43,
    "year": 2024
   },
@@ -2959,6 +3210,8 @@
    "rank_desc": 18,
    "unit": "SPA par an",
    "value": 18064,
+   "value_classeur": 18064,
+   "vintage": "eurostat",
    "vs_france_pct": -22.21,
    "year": 2024
   },
@@ -2979,6 +3232,8 @@
    "rank_desc": 19,
    "unit": "SPA par an",
    "value": 16972,
+   "value_classeur": 16972,
+   "vintage": "eurostat",
    "vs_france_pct": -26.91,
    "year": 2024
   },
@@ -2999,6 +3254,8 @@
    "rank_desc": 20,
    "unit": "SPA par an",
    "value": 16482,
+   "value_classeur": 16482,
+   "vintage": "eurostat",
    "vs_france_pct": -29.02,
    "year": 2024
   },
@@ -3019,6 +3276,8 @@
    "rank_desc": 21,
    "unit": "SPA par an",
    "value": 16277,
+   "value_classeur": 16277,
+   "vintage": "eurostat",
    "vs_france_pct": -29.91,
    "year": 2024
   },
@@ -3039,6 +3298,8 @@
    "rank_desc": 22,
    "unit": "SPA par an",
    "value": 15110,
+   "value_classeur": 15110,
+   "vintage": "eurostat",
    "vs_france_pct": -34.93,
    "year": 2024
   },
@@ -3059,6 +3320,8 @@
    "rank_desc": 23,
    "unit": "SPA par an",
    "value": 14721,
+   "value_classeur": 14721,
+   "vintage": "eurostat",
    "vs_france_pct": -36.61,
    "year": 2024
   },
@@ -3079,6 +3342,8 @@
    "rank_desc": 24,
    "unit": "SPA par an",
    "value": 14446,
+   "value_classeur": 14446,
+   "vintage": "eurostat",
    "vs_france_pct": -37.79,
    "year": 2024
   },
@@ -3099,6 +3364,8 @@
    "rank_desc": 25,
    "unit": "SPA par an",
    "value": 13079,
+   "value_classeur": 13079,
+   "vintage": "eurostat",
    "vs_france_pct": -43.68,
    "year": 2024
   },
@@ -3119,6 +3386,8 @@
    "rank_desc": 26,
    "unit": "SPA par an",
    "value": 13023,
+   "value_classeur": 13023,
+   "vintage": "eurostat",
    "vs_france_pct": -43.92,
    "year": 2024
   },
@@ -3139,6 +3408,8 @@
    "rank_desc": 27,
    "unit": "SPA par an",
    "value": 12436,
+   "value_classeur": 12436,
+   "vintage": "eurostat",
    "vs_france_pct": -46.45,
    "year": 2024
   },
@@ -3159,6 +3430,8 @@
    "rank_desc": 28,
    "unit": "SPA par an",
    "value": 11433,
+   "value_classeur": 11433,
+   "vintage": "eurostat",
    "vs_france_pct": -50.77,
    "year": 2024
   },
@@ -3179,6 +3452,8 @@
    "rank_desc": 29,
    "unit": "SPA par an",
    "value": 11199,
+   "value_classeur": 11199,
+   "vintage": "eurostat",
    "vs_france_pct": -51.77,
    "year": 2024
   },
@@ -3199,6 +3474,8 @@
    "rank_desc": 30,
    "unit": "SPA par an",
    "value": 9527,
+   "value_classeur": 9527,
+   "vintage": "eurostat",
    "vs_france_pct": -58.97,
    "year": 2024
   },
@@ -3219,6 +3496,8 @@
    "rank_desc": 31,
    "unit": "SPA par an",
    "value": 8971,
+   "value_classeur": 8971,
+   "vintage": "eurostat",
    "vs_france_pct": -61.37,
    "year": 2024
   }
@@ -3241,7 +3520,9 @@
    "rank_asc": 1,
    "rank_desc": 30,
    "unit": "% du PIB",
-   "value": -9.3,
+   "value": -9.2,
+   "value_classeur": -9.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3261,7 +3542,9 @@
    "rank_asc": 1,
    "rank_desc": 29,
    "unit": "% du PIB",
-   "value": -7.9,
+   "value": -7.8,
+   "value_classeur": -7.9,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3282,6 +3565,8 @@
    "rank_desc": 29,
    "unit": "% du PIB",
    "value": -6.4,
+   "value_classeur": -6.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3301,7 +3586,9 @@
    "rank_asc": 2,
    "rank_desc": 28,
    "unit": "% du PIB",
-   "value": -7.3,
+   "value": -7.2,
+   "value_classeur": -7.3,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3322,6 +3609,8 @@
    "rank_desc": 28,
    "unit": "% du PIB",
    "value": -5.8,
+   "value_classeur": -5.8,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3342,6 +3631,8 @@
    "rank_desc": 26,
    "unit": "% du PIB",
    "value": -5.1,
+   "value_classeur": -5.1,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3361,7 +3652,9 @@
    "rank_asc": 4,
    "rank_desc": 27,
    "unit": "% du PIB",
-   "value": -5.3,
+   "value": -5.4,
+   "value_classeur": -5.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3381,7 +3674,9 @@
    "rank_asc": 6,
    "rank_desc": 24,
    "unit": "% du PIB",
-   "value": -4.5,
+   "value": -4.4,
+   "value_classeur": -4.5,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3402,6 +3697,8 @@
    "rank_desc": 26,
    "unit": "% du PIB",
    "value": -5.1,
+   "value_classeur": -5.1,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3422,6 +3719,8 @@
    "rank_desc": 25,
    "unit": "% du PIB",
    "value": -4.7,
+   "value_classeur": -4.7,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3442,6 +3741,8 @@
    "rank_desc": 25,
    "unit": "% du PIB",
    "value": -4.6,
+   "value_classeur": -4.6,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3461,7 +3762,9 @@
    "rank_asc": 7,
    "rank_desc": 23,
    "unit": "% du PIB",
-   "value": -4.2,
+   "value": -4.1,
+   "value_classeur": -4.2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3482,6 +3785,8 @@
    "rank_desc": 23,
    "unit": "% du PIB",
    "value": -4.4,
+   "value_classeur": -4.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3502,6 +3807,8 @@
    "rank_desc": 27,
    "unit": "% du PIB",
    "value": -5.2,
+   "value_classeur": -5.2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3522,6 +3829,8 @@
    "rank_desc": 23,
    "unit": "% du PIB",
    "value": -4.4,
+   "value_classeur": -4.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3541,7 +3850,9 @@
    "rank_asc": 9,
    "rank_desc": 21,
    "unit": "% du PIB",
-   "value": -3.4,
+   "value": -3.8,
+   "value_classeur": -3.4,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3562,6 +3873,8 @@
    "rank_desc": 22,
    "unit": "% du PIB",
    "value": -3.7,
+   "value_classeur": -3.7,
+   "vintage": "classeur",
    "year": 2024
   },
   {
@@ -3578,10 +3891,12 @@
    "missing": false,
    "n_countries_ranked": 29,
    "name_fr": "Islande",
-   "rank_asc": 12,
-   "rank_desc": 18,
+   "rank_asc": 13,
+   "rank_desc": 17,
    "unit": "% du PIB",
    "value": -2.8,
+   "value_classeur": -2.8,
+   "vintage": "classeur",
    "year": 2025
   },
   {
@@ -3598,10 +3913,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Italie",
-   "rank_asc": 10,
+   "rank_asc": 11,
    "rank_desc": 20,
    "unit": "% du PIB",
    "value": -3.4,
+   "value_classeur": -3.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3622,6 +3939,8 @@
    "rank_desc": 20,
    "unit": "% du PIB",
    "value": -3.1,
+   "value_classeur": -3.1,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3639,9 +3958,11 @@
    "n_countries_ranked": 30,
    "name_fr": "Malte",
    "rank_asc": 10,
-   "rank_desc": 20,
+   "rank_desc": 21,
    "unit": "% du PIB",
-   "value": -3.4,
+   "value": -3.5,
+   "value_classeur": -3.4,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3658,10 +3979,12 @@
    "missing": false,
    "n_countries_ranked": 29,
    "name_fr": "Malte",
-   "rank_asc": 17,
-   "rank_desc": 13,
+   "rank_asc": 18,
+   "rank_desc": 12,
    "unit": "% du PIB",
-   "value": -2.2,
+   "value": -2.1,
+   "value_classeur": -2.2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3682,6 +4005,8 @@
    "rank_desc": 19,
    "unit": "% du PIB",
    "value": -3.2,
+   "value_classeur": -3.2,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3702,6 +4027,8 @@
    "rank_desc": 14,
    "unit": "% du PIB",
    "value": -2.4,
+   "value_classeur": -2.4,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3722,6 +4049,8 @@
    "rank_desc": null,
    "unit": "% du PIB",
    "value": -3.1,
+   "value_classeur": -3.1,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3742,6 +4071,8 @@
    "rank_desc": null,
    "unit": "% du PIB",
    "value": -3.1,
+   "value_classeur": -3.1,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3762,6 +4093,8 @@
    "rank_desc": null,
    "unit": "% du PIB",
    "value": -3,
+   "value_classeur": -3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3781,7 +4114,9 @@
    "rank_asc": null,
    "rank_desc": null,
    "unit": "% du PIB",
-   "value": -2.9,
+   "value": -3,
+   "value_classeur": -2.9,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3802,6 +4137,8 @@
    "rank_desc": null,
    "unit": "% du PIB",
    "value": -3,
+   "value_classeur": -3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3821,7 +4158,9 @@
    "rank_asc": null,
    "rank_desc": null,
    "unit": "% du PIB",
-   "value": -2.9,
+   "value": -3,
+   "value_classeur": -2.9,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3842,6 +4181,8 @@
    "rank_desc": null,
    "unit": "% du PIB",
    "value": -3,
+   "value_classeur": -3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3861,7 +4202,9 @@
    "rank_asc": null,
    "rank_desc": null,
    "unit": "% du PIB",
-   "value": -2.9,
+   "value": -3,
+   "value_classeur": -2.9,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3882,6 +4225,8 @@
    "rank_desc": 18,
    "unit": "% du PIB",
    "value": -3,
+   "value_classeur": -3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3901,7 +4246,9 @@
    "rank_asc": 8,
    "rank_desc": 22,
    "unit": "% du PIB",
-   "value": -3.5,
+   "value": -4,
+   "value_classeur": -3.5,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3922,6 +4269,8 @@
    "rank_desc": 17,
    "unit": "% du PIB",
    "value": -2.7,
+   "value_classeur": -2.7,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3938,10 +4287,12 @@
    "missing": false,
    "n_countries_ranked": 29,
    "name_fr": "Allemagne",
-   "rank_asc": 13,
-   "rank_desc": 17,
+   "rank_asc": 12,
+   "rank_desc": 18,
    "unit": "% du PIB",
-   "value": -2.7,
+   "value": -2.9,
+   "value_classeur": -2.7,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -3961,7 +4312,9 @@
    "rank_asc": 15,
    "rank_desc": 16,
    "unit": "% du PIB",
-   "value": -2.3,
+   "value": -2.5,
+   "value_classeur": -2.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -3982,6 +4335,8 @@
    "rank_desc": 19,
    "unit": "% du PIB",
    "value": -3,
+   "value_classeur": -3,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4002,6 +4357,8 @@
    "rank_desc": 15,
    "unit": "% du PIB",
    "value": -2,
+   "value_classeur": -2,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4018,10 +4375,12 @@
    "missing": false,
    "n_countries_ranked": 29,
    "name_fr": "Tchéquie",
-   "rank_asc": 18,
-   "rank_desc": 12,
+   "rank_asc": 17,
+   "rank_desc": 13,
    "unit": "% du PIB",
-   "value": -2.1,
+   "value": -2.2,
+   "value_classeur": -2.1,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4042,6 +4401,8 @@
    "rank_desc": 14,
    "unit": "% du PIB",
    "value": -1.8,
+   "value_classeur": -1.8,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4062,6 +4423,8 @@
    "rank_desc": 15,
    "unit": "% du PIB",
    "value": -2.5,
+   "value_classeur": -2.5,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4079,9 +4442,11 @@
    "n_countries_ranked": 30,
    "name_fr": "Suède",
    "rank_asc": 18,
-   "rank_desc": 13,
+   "rank_desc": 12,
    "unit": "% du PIB",
-   "value": -1.5,
+   "value": -1.6,
+   "value_classeur": -1.5,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4098,10 +4463,12 @@
    "missing": false,
    "n_countries_ranked": 29,
    "name_fr": "Suède",
-   "rank_asc": 23,
+   "rank_asc": 22,
    "rank_desc": 7,
    "unit": "% du PIB",
-   "value": -1.3,
+   "value": -1.6,
+   "value_classeur": -1.3,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4118,10 +4485,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Lituanie",
-   "rank_asc": 19,
-   "rank_desc": 12,
+   "rank_asc": 20,
+   "rank_desc": 11,
    "unit": "% du PIB",
    "value": -1.3,
+   "value_classeur": -1.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4138,10 +4507,12 @@
    "missing": false,
    "n_countries_ranked": 29,
    "name_fr": "Lituanie",
-   "rank_asc": 21,
+   "rank_asc": 20,
    "rank_desc": 9,
    "unit": "% du PIB",
    "value": -1.8,
+   "value_classeur": -1.8,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4158,10 +4529,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Estonie",
-   "rank_asc": 20,
-   "rank_desc": 11,
+   "rank_asc": 18,
+   "rank_desc": 12,
    "unit": "% du PIB",
-   "value": -1.1,
+   "value": -1.6,
+   "value_classeur": -1.1,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4179,9 +4552,11 @@
    "n_countries_ranked": 29,
    "name_fr": "Estonie",
    "rank_asc": 19,
-   "rank_desc": 10,
+   "rank_desc": 11,
    "unit": "% du PIB",
    "value": -2,
+   "value_classeur": -2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4201,7 +4576,9 @@
    "rank_asc": 21,
    "rank_desc": 10,
    "unit": "% du PIB",
-   "value": -0.9,
+   "value": -0.8,
+   "value_classeur": -0.9,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4222,6 +4599,8 @@
    "rank_desc": 15,
    "unit": "% du PIB",
    "value": -2.5,
+   "value_classeur": -2.5,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4242,6 +4621,8 @@
    "rank_desc": 9,
    "unit": "% du PIB",
    "value": -0.7,
+   "value_classeur": -0.7,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4259,9 +4640,11 @@
    "n_countries_ranked": 29,
    "name_fr": "Pays-Bas",
    "rank_asc": 22,
-   "rank_desc": 8,
+   "rank_desc": 7,
    "unit": "% du PIB",
    "value": -1.6,
+   "value_classeur": -1.6,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4282,6 +4665,8 @@
    "rank_desc": 8,
    "unit": "% du PIB",
    "value": 0.5,
+   "value_classeur": 0.5,
+   "vintage": "classeur",
    "year": 2024
   },
   {
@@ -4302,6 +4687,8 @@
    "rank_desc": null,
    "unit": "% du PIB",
    "value": null,
+   "value_classeur": null,
+   "vintage": null,
    "year": 2025
   },
   {
@@ -4318,10 +4705,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Portugal",
-   "rank_asc": 24,
-   "rank_desc": 7,
+   "rank_asc": 25,
+   "rank_desc": 6,
    "unit": "% du PIB",
-   "value": 0.6,
+   "value": 0.7,
+   "value_classeur": 0.6,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4342,6 +4731,8 @@
    "rank_desc": 6,
    "unit": "% du PIB",
    "value": 0.7,
+   "value_classeur": 0.7,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4358,10 +4749,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Luxembourg",
-   "rank_asc": 25,
-   "rank_desc": 6,
+   "rank_asc": 24,
+   "rank_desc": 7,
    "unit": "% du PIB",
-   "value": 0.9,
+   "value": 0.6,
+   "value_classeur": 0.9,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4378,10 +4771,12 @@
    "missing": false,
    "n_countries_ranked": 29,
    "name_fr": "Luxembourg",
-   "rank_asc": 19,
-   "rank_desc": 10,
+   "rank_asc": 20,
+   "rank_desc": 9,
    "unit": "% du PIB",
-   "value": -2,
+   "value": -1.8,
+   "value_classeur": -2,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4401,7 +4796,9 @@
    "rank_asc": 26,
    "rank_desc": 5,
    "unit": "% du PIB",
-   "value": 1.3,
+   "value": 1.4,
+   "value_classeur": 1.3,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4418,10 +4815,12 @@
    "missing": false,
    "n_countries_ranked": 29,
    "name_fr": "Grèce",
-   "rank_asc": 25,
-   "rank_desc": 5,
+   "rank_asc": 26,
+   "rank_desc": 4,
    "unit": "% du PIB",
-   "value": 1.7,
+   "value": 2,
+   "value_classeur": 1.7,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4438,10 +4837,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Irlande",
-   "rank_asc": 27,
-   "rank_desc": 3,
+   "rank_asc": 29,
+   "rank_desc": 2,
    "unit": "% du PIB",
-   "value": 4.1,
+   "value": 4.2,
+   "value_classeur": 4.1,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4458,10 +4859,12 @@
    "missing": false,
    "n_countries_ranked": 29,
    "name_fr": "Irlande",
-   "rank_asc": 26,
-   "rank_desc": 4,
+   "rank_asc": 25,
+   "rank_desc": 5,
    "unit": "% du PIB",
    "value": 1.8,
+   "value_classeur": 1.8,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4479,9 +4882,11 @@
    "n_countries_ranked": 30,
    "name_fr": "Chypre",
    "rank_asc": 27,
-   "rank_desc": 3,
+   "rank_desc": 4,
    "unit": "% du PIB",
-   "value": 4.1,
+   "value": 4,
+   "value_classeur": 4.1,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4501,7 +4906,9 @@
    "rank_asc": 28,
    "rank_desc": 2,
    "unit": "% du PIB",
-   "value": 3.4,
+   "value": 3.6,
+   "value_classeur": 3.4,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4518,10 +4925,12 @@
    "missing": false,
    "n_countries_ranked": 30,
    "name_fr": "Danemark",
-   "rank_asc": 29,
-   "rank_desc": 2,
+   "rank_asc": 28,
+   "rank_desc": 3,
    "unit": "% du PIB",
-   "value": 4.5,
+   "value": 4.1,
+   "value_classeur": 4.5,
+   "vintage": "eurostat",
    "year": 2024
   },
   {
@@ -4542,6 +4951,8 @@
    "rank_desc": 3,
    "unit": "% du PIB",
    "value": 2.9,
+   "value_classeur": 2.9,
+   "vintage": "eurostat",
    "year": 2025
   },
   {
@@ -4562,6 +4973,8 @@
    "rank_desc": 1,
    "unit": "% du PIB",
    "value": 12.7,
+   "value_classeur": 12.7,
+   "vintage": "classeur",
    "year": 2024
   },
   {
@@ -4582,6 +4995,8 @@
    "rank_desc": 1,
    "unit": "% du PIB",
    "value": 10.4,
+   "value_classeur": 10.4,
+   "vintage": "classeur",
    "year": 2025
   }
  ]

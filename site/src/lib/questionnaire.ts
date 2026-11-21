@@ -126,8 +126,10 @@ export function questionnaire(): Question[] {
   const retraitesPct = share('dep_retraites_2024_md', totalMd);
   const santeMd = num('dep_sante_2024_md');
   const santePct = share('dep_sante_2024_md', totalMd);
-  const eduMd = num('dep_education_2024_md');
-  const eduPct = share('dep_education_2024_md', totalMd);
+  // The Insee's whole « Enseignement » function (COFOG 09, services annexes included), not the book's narrower
+  // « Éducation » grouping (COFOG 09 minus 09.6): the figure the chips name.
+  const eduMd = num('dep_cofog09_enseignement_2024_md');
+  const eduPct = share('dep_cofog09_enseignement_2024_md', totalMd);
   const nichesMd = num('niches_total_md');
   const nichesSeulesMd = num('niches_cout_2024_md');
 
@@ -263,12 +265,12 @@ export function questionnaire(): Question[] {
     ...COMPTES,
     body: [
       shareLine(retraitesMd, retraitesPct, totalMd),
-      `La sécurité fait ${formatPercentPoints(secuPct, { decimals: 1 })}, l’éducation ${formatPercentPoints(eduPct, { decimals: 1 })}. La santé, à côté des retraites, fait ${md(santeMd)}, soit ${formatPercentPoints(santePct, { decimals: 1 })}.`,
+      `La sécurité fait ${formatPercentPoints(secuPct, { decimals: 1 })}, l’enseignement (fonction « Enseignement » de l’Insee, cantine et transport scolaires compris) ${formatPercentPoints(eduPct, { decimals: 1 })}. La santé, à côté des retraites, fait ${md(santeMd)}, soit ${formatPercentPoints(santePct, { decimals: 1 })}.`,
       foyerLine(retraitesMd),
     ],
     sources: [
       chip('dep_retraites_2024_md', { label: 'Insee, retraites' }),
-      chip('dep_education_2024_md', { label: 'Insee, éducation' }),
+      chip('dep_cofog09_enseignement_2024_md', { label: 'Insee, enseignement (COFOG 09)' }),
       chip('dep_sante_2024_md', { label: 'Insee, santé' }),
       chip('dep_part_securite_pct', { label: 'Insee, calcul du site' }),
     ],
@@ -290,21 +292,21 @@ export function questionnaire(): Question[] {
     missText: 'Le total large va dans l’autre sens.',
     answerLead: 'Le décompte',
     body: [
-      `${formatInteger(num('niches_nombre'))} niches fiscales coûtent ${md(nichesSeulesMd)}. L’éducation fait ${md(eduMd)}.`,
+      `${formatInteger(num('niches_nombre'))} niches fiscales coûtent ${md(nichesSeulesMd)}. L’enseignement (fonction « Enseignement » de l’Insee) fait ${md(eduMd)}.`,
       `${formatInteger(num('niches_total_nombre'))} en ajoutant les taux réduits de TVA, pour ${md(nichesMd)}.`,
       foyerLine(nichesMd),
     ],
     caveat: {
       tone: 'note',
       title: 'Deux périmètres',
-      text: 'Les niches seules ont un coût. Niches et taux réduits de TVA réunis en ont un autre. Les deux figurent ici. Le nombre arrondi du plan et le tableau du projet de loi détaillent chacun leur périmètre.',
+      text: `Les niches seules ont un coût. Niches et taux réduits de TVA réunis en ont un autre. Les deux figurent ici. Le nombre arrondi du plan et le tableau du projet de loi détaillent chacun leur périmètre. L’enseignement compté ici est la fonction entière de l’Insee ; le regroupement « Éducation » du livre, qui laisse de côté les services annexes (cantine, transport scolaire), fait ${md(num('dep_education_2024_md'))} : avec lui, la réponse serait ${nichesMd > num('dep_education_2024_md') ? 'oui' : 'non'}.`,
     },
     sources: [
       chip('niches_nombre', { label: 'PLF, niches' }),
       chip('niches_cout_2024_md', { label: 'PLF, coût des niches' }),
       chip('niches_total_nombre', { label: 'Niches et taux réduits' }),
       chip('niches_total_md', { label: 'Coût du total large' }),
-      chip('dep_education_2024_md', { label: 'Insee, éducation' }),
+      chip('dep_cofog09_enseignement_2024_md', { label: 'Insee, enseignement (COFOG 09)' }),
     ],
     more: { href: '/comprendre/niches/', label: 'Voir les niches, une par une' },
   };

@@ -30,7 +30,7 @@ L’emploi à domicile
 
 L’exonération sur l’emploi à domicile s’arrête. Une exonération sur l’emploi à domicile est une niche : elle réduit l’impôt de ceux qui peuvent employer, et le fait payer aux autres.
 
-[Télécharger cette fiche (PDF)](foyer.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

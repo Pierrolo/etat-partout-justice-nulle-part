@@ -43,6 +43,10 @@ const SP_CMG_STRUCTURE = {
   label: 'service-public.gouv.fr F345 (micro-crèche : montants 2026 selon les revenus 2024)',
   url: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F345',
 };
+const SP_APL_ETUDIANT = {
+  label:
+    'Aides au logement des étudiant·es : évaluation forfaitaire des ressources (8 600 € non boursier, 6 900 € boursier, en logement ordinaire), non revalorisée en 2026 (décret publié le 30/12/2025)',
+};
 const CPO_TVA = {
   label: 'CPO, note n° 6 « La TVA est-elle un impôt juste ? » (sept. 2023)',
   url: 'https://www.ccomptes.fr/sites/default/files/2023-10/20230928-TVA-est-elle-impot-juste.pdf',
@@ -418,7 +422,16 @@ export const EXTRA_PARAMS = {
   },
   'x.cmg.max_child_age': {
     value: 6,
-    unit: 'years (strict; 12 for a lone parent since Sept 2025 — the simulator asks about children < 6 only)',
+    unit: 'years (strict; micro-crèche and couples — see x.cmg.max_child_age_isole_emploi_direct)',
+    effective: '2025-09-01',
+    source: SP_CMG_ED,
+    status: 'official',
+  },
+  // Since Sept 2025 a lone parent keeps the CMG « emploi direct » (assistante maternelle, garde à domicile) until
+  // the child is 12 (F39152). The CMG « structure » (micro-crèche) stays < 6 for everyone (F345).
+  'x.cmg.max_child_age_isole_emploi_direct': {
+    value: 12,
+    unit: 'years (strict; lone parent employing an assistante maternelle — emploi direct only)',
     effective: '2025-09-01',
     source: SP_CMG_ED,
     status: 'official',
@@ -486,6 +499,23 @@ export const EXTRA_PARAMS = {
         'Hypothèse du simulateur : temps plein de 180 h/mois à 9 €/h (la micro-crèche PAJE ne peut dépasser 10 €/h)',
     },
     status: 'hypothesis',
+  },
+  // Aides au logement: resources of a student are taken at least at a flat amount (« forfait étudiant »), frozen
+  // for 2026 at 8 600 € (non-boursier) / 6 900 € (boursier) in ordinary housing (6 600 / 5 400 in a residence —
+  // not modelled: the simulator assumes ordinary rented housing).
+  'x.apl.student_resources_floor': {
+    value: 8600,
+    unit: 'EUR/year (ressources plancher d’un·e étudiant·e non boursier·e, logement ordinaire)',
+    effective: '2026-01-01',
+    source: SP_APL_ETUDIANT,
+    status: 'official',
+  },
+  'x.apl.student_resources_floor_boursier': {
+    value: 6900,
+    unit: 'EUR/year (ressources plancher d’un·e étudiant·e boursier·e, logement ordinaire)',
+    effective: '2026-01-01',
+    source: SP_APL_ETUDIANT,
+    status: 'official',
   },
 } as const satisfies Record<string, ParamMeta>;
 

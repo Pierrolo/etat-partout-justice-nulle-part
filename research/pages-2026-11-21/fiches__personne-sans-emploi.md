@@ -36,7 +36,7 @@ Les dispositifs d’insertion financés par l’État s’arrêtent. L’inserti
 
 _Et comme chacun_ : +220 € · +13 % · 550 € · 0,77 €
 
-[Télécharger cette fiche (PDF)](personne-sans-emploi.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

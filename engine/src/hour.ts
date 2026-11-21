@@ -32,6 +32,8 @@ export interface HourSplit {
   netIncomeTaxPerHour: number;
   /** v1.1: youKeep + afuPerHour */
   youKeepIncludingTransfers: number;
+  /** this adult's own AFU per month, unrounded (0 today) — what afuPerHour spreads over the hours */
+  afuMonthly: number;
 }
 
 export function hourOfWork(
@@ -51,6 +53,7 @@ export function hourOfWork(
     afuPerHour: 0,
     netIncomeTaxPerHour: 0,
     youKeepIncludingTransfers: 0,
+    afuMonthly: 0,
   };
   const a = e.nh.adults[adultIndex];
   if (!a || !a.salary) return { hoursPerMonth: 0, baseline: zero, plan: { ...zero } };
@@ -87,6 +90,7 @@ export function hourOfWork(
       afuPerHour: 0,
       netIncomeTaxPerHour: 0,
       youKeepIncludingTransfers: 0,
+      afuMonthly: 0,
     };
     out.youKeep = r2(
       out.employerCostPerHour -
@@ -97,7 +101,8 @@ export function hourOfWork(
         out.tva,
     );
     const afuShare = core.afu.annual > 0 ? core.afuAnnualPaid / core.afu.annual : 0;
-    out.afuPerHour = per(((core.afu.perAdultAnnual[adultIndex] ?? 0) * afuShare) / 12);
+    out.afuMonthly = ((core.afu.perAdultAnnual[adultIndex] ?? 0) * afuShare) / 12;
+    out.afuPerHour = per(out.afuMonthly);
     out.netIncomeTaxPerHour = r2(out.impotRevenu - out.afuPerHour);
     out.youKeepIncludingTransfers = r2(out.youKeep + out.afuPerHour);
     return out;

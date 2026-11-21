@@ -6,7 +6,7 @@
  * ambiguous, e.g. income vs rent for the housing aid), never guessed.
  */
 import { apl } from './baseline/aides-logement.ts';
-import { cmgActivityOk } from './core.ts';
+import { aplResources, cmgActivityOk, cmgAgeLimit } from './core.ts';
 import { eur0 } from './fmt.ts';
 import { n } from './params/index.ts';
 import type { Evaluated } from './simulate.ts';
@@ -216,7 +216,13 @@ export function explainBaselineBenefits(e: Evaluated): BenefitExplained[] {
             : 'réservée aux locataires dans le simulateur (vous êtes propriétaire ; l’aide à l’accession n’est pas modélisée)';
         if (nh.housing.rent <= 0) return 'loyer non renseigné';
         const kids21 = ages.filter((a) => a < 21).length;
-        const withoutIncome = apl(nh.housing.zone, nA === 2, kids21, nh.housing.rent, 0).gross;
+        const withoutIncome = apl(
+          nh.housing.zone,
+          nA === 2,
+          kids21,
+          nh.housing.rent,
+          aplResources(nh, 0),
+        ).gross;
         return withoutIncome > 0
           ? `${ressources} dépassent le plafond pour votre loyer et votre zone`
           : 'votre loyer dépasse nettement le plafond de votre zone (l’aide diminue puis s’annule quand le loyer est trop élevé)';
@@ -233,13 +239,16 @@ export function explainBaselineBenefits(e: Evaluated): BenefitExplained[] {
         if (!ages.some((a) => a < 3)) return 'versée pour un enfant de moins de 3 ans';
         return `${ressources} dépassent le plafond`;
       case 'cmg':
-        if (!ages.some((a) => a < n('x.cmg.max_child_age')))
-          return 'versé pour faire garder un enfant de moins de 6 ans';
+        if (!ages.some((a) => a < cmgAgeLimit(nh)))
+          return 'versé pour faire garder un enfant de moins de 6 ans (12 ans pour un parent seul qui emploie une assistante maternelle ou une garde à domicile)';
         if (nh.childcare === 'creche')
           return 'pas pour une crèche municipale ou associative : la caisse d’allocations familiales finance directement la crèche';
         if (nh.childcare !== 'assistante_maternelle' && nh.childcare !== 'micro_creche')
           return 'seulement si vous payez une assistante maternelle, une garde à domicile ou une micro-crèche';
-        if (f.childcareCost <= 0) return 'frais de garde à 0 €';
+        if (f.childcareCost <= 0)
+          return nh.childcareCostProvided
+            ? 'frais de garde à 0 €'
+            : 'frais de garde non renseignés (aucun coût n’est supposé pour un enfant de 6 ans ou plus)';
         if (!cmgActivityOk(nh))
           return 'chaque parent doit travailler, être indemnisé par France Travail, étudier ou toucher l’allocation aux adultes handicapés';
         return `${ressources} sont trop élevés : la part laissée à votre charge couvre tout le coût de la garde`;

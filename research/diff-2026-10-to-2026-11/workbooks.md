@@ -82,9 +82,9 @@ Values are the cached cell values dumped by `scripts/dump_workbooks.py`; A1 refs
 | C5 | Économies sur le fonctionnement des administrations | En Md€ par an | `37.431667` | `38.117167` | +0.6855 |
 | E5 | Économies sur le fonctionnement des administrations | En Md€ | `30.231667` | `32.3795` | +2.14783 |
 | F5 | Économies sur le fonctionnement des administrations | En Md€ | `7.2` | `5.737667` | -1.46233 |
-| C8 | O | En Md€ par an | `8.631667` | `9.317167` | +0.6855 |
-| E8 | O | En Md€ | `4.931667` | `7.0795` | +2.14783 |
-| F8 | O | En Md€ | `3.7` | `2.237667` | -1.46233 |
+| C8 | Fermeture des agences non indispensables, dont interventions | En Md€ par an | `8.631667` | `9.317167` | +0.6855 |
+| E8 | Fermeture des agences non indispensables, dont interventions | En Md€ | `4.931667` | `7.0795` | +2.14783 |
+| F8 | Fermeture des agences non indispensables, dont interventions | En Md€ | `3.7` | `2.237667` | -1.46233 |
 | C11 | Économies sur la masse salariale des administrations | En Md€ par an | `29.575` | `30.124833` | +0.549833 |
 | E11 | Économies sur la masse salariale des administrations | En Md€ | `8.8725` | `8.8318` | -0.0407 |
 | F11 | Économies sur la masse salariale des administrations | En Md€ | `20.7025` | `21.293033` | +0.590533 |
@@ -113,9 +113,9 @@ Values are the cached cell values dumped by `scripts/dump_workbooks.py`; A1 refs
 | S3 | Economies Etat | Actifs | `-10.15` | `-10.1093` | +0.0407 |
 | E4 | Opérateurs (y. c. salaires) | Solde à restituer | `13.454667` | `14.825667` | +1.371 |
 | F4 | Opérateurs (y. c. salaires) | Total supprimé | `28` | `29.371` | +1.371 |
-| E16 | O | Solde à restituer | `0.2` | `1.571` | +1.371 |
-| F16 | O | Total supprimé | `2.745333` | `4.116333` | +1.371 |
-| G37 | CG | Hypothèses | `Hors régalien et éducation, 80 % d'économies` | `Hors régalien, éducation et entretien des routes nationales, 85 % d'économies` |  |
+| E16 | autres | Solde à restituer | `0.2` | `1.571` | +1.371 |
+| F16 | autres | Total supprimé | `2.745333` | `4.116333` | +1.371 |
+| G37 | Charges courantes et achats | Hypothèses | `Hors régalien et éducation, 80 % d'économies` | `Hors régalien, éducation et entretien des routes nationales, 85 % d'économies` |  |
 | D39 | Economies Collectivités locales | Restitué en CSG | `33.3` | `33.359` | +0.059 |
 | E39 | Economies Collectivités locales | Solde à restituer | `20.1` | `19.915` | -0.185 |
 | F39 | Economies Collectivités locales | Total supprimé | `53.4` | `53.274` | -0.126 |
@@ -133,18 +133,18 @@ Values are the cached cell values dumped by `scripts/dump_workbooks.py`; A1 refs
 | C6 | en Md€ | CSG+CRDS activité | `129.4` | `129.459` | +0.059 |
 | E6 | en Md€ | Gain supp. à terme | `96.7` | `97.886` | +1.186 |
 | G6 | en Md€ | Total supprimé à terme | `226.2` | `227.445` | +1.245 |
-| E15 | Economies Etat | Gain supp. à terme | `38.5` | `39.871` | +1.371 |
-| G15 | Economies Etat | Total supprimé à terme | `82.5` | `83.871` | +1.371 |
-| E16 | Opérateurs (y. c. salaires) | Gain supp. à terme | `13.454667` | `14.825667` | +1.371 |
-| G16 | Opérateurs (y. c. salaires) | Total supprimé à terme | `28` | `29.371` | +1.371 |
+| E15 | Dont taxes affectées | Gain supp. à terme | `38.5` | `39.871` | +1.371 |
+| G15 | Dont taxes affectées | Total supprimé à terme | `82.5` | `83.871` | +1.371 |
+| E16 | Transfert des secteurs subventionnés et agents publics aux a | Gain supp. à terme | `13.454667` | `14.825667` | +1.371 |
+| G16 | Transfert des secteurs subventionnés et agents publics aux a | Total supprimé à terme | `28` | `29.371` | +1.371 |
 | C22 | Economies Collectivités | CSG+CRDS activité | `33.3` | `33.359` | +0.059 |
 | E22 | Economies Collectivités | Gain supp. à terme | `20.1` | `19.915` | -0.185 |
 | G22 | Economies Collectivités | Total supprimé à terme | `53.4` | `53.274` | -0.126 |
-| E24 | Aides aux entreprises | Gain supp. à terme | `2.6` | `2.51` | -0.09 |
-| G24 | Aides aux entreprises | Total supprimé à terme | `12.3` | `12.21` | -0.09 |
-| C26 | Départs fonctionnaires locaux | CSG+CRDS activité | `6` | `5.9593` | -0.0407 |
-| E26 | Départs fonctionnaires locaux | Gain supp. à terme | `14` | `13.905033` | -0.0949667 |
-| G26 | Départs fonctionnaires locaux | Total supprimé à terme | `20` | `19.864` | -0.136 |
+| E24 | Transfert des secteurs subventionnés vers les actifs | Gain supp. à terme | `2.6` | `2.51` | -0.09 |
+| G24 | Transfert des secteurs subventionnés vers les actifs | Total supprimé à terme | `12.3` | `12.21` | -0.09 |
+| C26 | Transfert des agents publics (compensés à 70 %) vers les act | CSG+CRDS activité | `6` | `5.9593` | -0.0407 |
+| E26 | Transfert des agents publics (compensés à 70 %) vers les act | Gain supp. à terme | `14` | `13.905033` | -0.0949667 |
+| G26 | Transfert des agents publics (compensés à 70 %) vers les act | Total supprimé à terme | `20` | `19.864` | -0.136 |
 
 ### Synthèse des chiffrages.xlsx — sheet `Input_Capitalisation.csv` (from `Synthèse Chiffres Résolution_0910.xlsx`), shape 95×38 → 95×38
 
@@ -177,7 +177,7 @@ Values are the cached cell values dumped by `scripts/dump_workbooks.py`; A1 refs
 | B26 | Administrations non indispensables 68 |  | `Administrations non indispensables 67` | `Administrations non indispensables 68` |  |
 | D26 | Administrations non indispensables 68 |  | `37.431667` | `38.117167` | +0.6855 |
 | D27 | Masse salariale |  | `29.575` | `30.124833` | +0.549833 |
-| D28 | Subventions 69 |  | `41.448` | `41.358` | -0.09 |
+| D28 | Aides aux entreprises |  | `41.448` | `41.358` | -0.09 |
 | D33 | Cotisations chômage |  | `30` | `29.6` | -0.4 |
 | D34 | Rendement des actifs publics |  | `18` | `17.602207` | -0.397793 |
 

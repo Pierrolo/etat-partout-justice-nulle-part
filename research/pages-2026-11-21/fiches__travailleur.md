@@ -27,7 +27,7 @@ Ce que votre travail vous rapporte enfin.
 
 _Et comme chacun_ : La restitution
 
-[Télécharger cette fiche (PDF)](travailleur.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

@@ -53,11 +53,33 @@ export const cofogMeta = {
 
 import europe from '@/data/europe.json';
 
+const MONTHS = [
+  'janvier',
+  'février',
+  'mars',
+  'avril',
+  'mai',
+  'juin',
+  'juillet',
+  'août',
+  'septembre',
+  'octobre',
+  'novembre',
+  'décembre',
+];
+/** « 2026-10-21 » → « 21 octobre 2026 » */
+function frDate(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${d === 1 ? '1er' : d} ${MONTHS[m! - 1]} ${y}`;
+}
+
 export function europeData(): {
   rows: EuroRow[];
   ea20: EuroAgg;
   eu27: EuroAgg;
   datasets: Record<string, string>;
+  /** Eurostat vintage of the expenditure / balance tables and of the median income (« 21 octobre 2026 ») */
+  vintage: { gov: string; income: string };
 } {
   type P = (typeof europe.pays)[number];
   const rows: EuroRow[] = (europe.pays as P[]).map((p) => ({
@@ -86,5 +108,9 @@ export function europeData(): {
     ea20: agg('EA20'),
     eu27: agg('EU27_2020'),
     datasets: europe.meta.source.datasets as Record<string, string>,
+    vintage: {
+      gov: frDate(europe.meta.source.vintage.tec00023),
+      income: frDate(europe.meta.source.vintage.ilc_di03),
+    },
   };
 }

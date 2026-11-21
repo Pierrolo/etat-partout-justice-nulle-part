@@ -26,7 +26,7 @@ Le reste à charge
 
 Un reste à charge de 10 % par acte apparaît, plafonné à 5 % de votre revenu, et les dépenses de confort sortent du bouclier. Un reste à charge de 10 % rend visible le coût du soin sans le rendre inaccessible : il est plafonné à 5 % du revenu annuel, de sorte que la maladie grave ne ruine personne.
 
-[Télécharger cette fiche (PDF)](patient.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

@@ -31,6 +31,7 @@ const europeSources = [
 ];
 const gapPts = num('eu_dep_pib_ecart_fr_ea20_2024_pts');
 const pib = mdToEuro('po_pib_2024_md');
+const pib2026 = num('pib_2024_insee_2026_md');
 const gapEuroYear = ((gapPts / 100) * pib) / foyersN;
 const rank = num('eu_dep_rang_fr_2024');
 const frDep = num('eu_dep_pib_fr_2024_pct');
@@ -51,6 +52,10 @@ const nRanked = eu.rows.filter((r) => r.dep24 !== null).length;
     <p class="text-ink-2">
       Pour juger une dépense, il faut un repère. Voici la France face à ses voisins, en points de
       PIB (la richesse produite en un an), pour la dépense, le déficit et le revenu médian.
+    </p>
+    <p class="text-sm text-ink-3" data-testid="europe-vintage">
+      Données Eurostat, mise à jour du {eu.vintage.gov} pour la dépense et le déficit, du{' '}
+      {eu.vintage.income} pour le revenu médian (enquête SILC 2024, qui mesure les revenus de 2023).
     </p>
   </div>
 
@@ -94,11 +99,12 @@ const nRanked = eu.rows.filter((r) => r.dep24 !== null).length;
   >
     <p>
       L’annonce dit que l’État dépense {formatEuro(perYearBook)} par foyer et par an, « record
-      mondial ». Dans les données Eurostat reprises par le chiffrage publié lui-même, la Finlande
-      dépasse la France : <strong>{sharePct(fiDep)}</strong> du PIB contre
+      mondial ». Dans les données d’Eurostat (mise à jour du {eu.vintage.gov}), la Finlande dépasse
+      la France : <strong>{sharePct(fiDep)}</strong> du PIB contre
       <strong>{sharePct(frDep)}</strong> en {year} ({sharePct(fiDep25)} contre {sharePct(frDep25)}{' '}
       en 2025). La France est {rank}e sur {nRanked} pays, et très au-dessus de la zone euro (
-      {sharePct(eaDep)}).
+      {sharePct(eaDep)}). Le chiffrage publié, qui reprend un millésime antérieur, plaçait déjà la
+      Finlande devant.
     </p>
     <p class="mt-2 text-sm text-ink-3">
       L’annonce ne précise pas la source du « record » : il porte peut-être sur un autre périmètre
@@ -124,9 +130,10 @@ const nRanked = eu.rows.filter((r) => r.dep24 !== null).length;
       <strong>La dépense est la même : l’écart vient du PIB.</strong> Pour obtenir {sharePct(frDep)}
       avec {formatMdEuro(total)}, il faudrait un PIB d’environ{' '}
       {formatMdEuro(gdp.implied, { decimals: 0 })}, soit {formatMdEuro(gdp.gap, { decimals: 0 })} de
-      plus que celui du classeur (cellule C3 de la feuille « Refonte fiscalité »), dont le millésime
-      ou le périmètre n’est pas précisé. Cette page utilise Eurostat pour comparer les pays entre
-      eux, et l’Insee pour répartir la dépense française.
+      plus que celui du classeur (cellule C3 de la feuille « Refonte fiscalité »), qui est le PIB de
+      l’édition de mai 2025 des comptes nationaux ; l’édition de mai 2026 le porte à{' '}
+      {formatMdEuro(pib2026, { decimals: 0 })}. Cette page utilise Eurostat pour comparer les pays
+      entre eux, et l’Insee pour répartir la dépense française.
       <a href={withBase('/methode/#pib-57')}>Le détail dans la Méthode</a>.
     </p>
   </Disclosure>

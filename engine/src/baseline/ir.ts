@@ -127,8 +127,17 @@ export function incomeTax(x: IncomeTaxInput): IncomeTaxResult {
   const rate = n('income_tax.decote_rate');
   const decote = ir < decBase / rate ? Math.max(0, decBase - rate * ir) : 0;
   let after = Math.max(0, ir - decote);
-  if (after < n('income_tax.recouvrement_minimum') && x.refundableCredits === 0) after = 0;
-  const reduction = Math.min(Math.max(0, x.reductionDons), after);
+  let reduction = Math.min(Math.max(0, x.reductionDons), after);
+  let credits = x.refundableCredits;
+  // Seuil de recouvrement (CGI 1657 ; BOI-IR-LIQ-20-20-40 §80-90): tested after the décote and the réductions
+  // d'impôt but before the crédits d'impôt. Below it the tax is not collected and a crédit d'impôt is refunded
+  // only for its excess over that tax (not in full).
+  const due = after - reduction;
+  if (due < n('income_tax.recouvrement_minimum')) {
+    credits = Math.max(0, credits - due);
+    after = 0;
+    reduction = 0;
+  }
   return {
     parts,
     ageAbattement: ageAb,
@@ -138,7 +147,7 @@ export function incomeTax(x: IncomeTaxInput): IncomeTaxResult {
     decote,
     irAfterDecote: after,
     reduction,
-    credits: x.refundableCredits,
-    irNet: after - reduction - x.refundableCredits,
+    credits,
+    irNet: after - reduction - credits,
   };
 }

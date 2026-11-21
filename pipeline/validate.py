@@ -21,6 +21,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
     sys.path.insert(0, HERE)
 
+import eurostat  # noqa: E402
 from amend import LIASSES, all_amendments, quote_in_amendment  # noqa: E402
 from lib import OUT_DIR, ROOT, SHEET_TITLES, WORKBOOKS, Sheet, fr, load_reform_params, quote_in, rp  # noqa: E402
 
@@ -146,6 +147,16 @@ def check_facts(R: Report, facts: dict):
         elif s.get("kind") == "site":
             if not s.get("quote") or not quote_in(s["page"], s["quote"]):
                 errs.append("site quote not found")
+        elif s.get("kind") == "eurostat" and "snapshot" in s:
+            # value taken from the Eurostat API snapshot of data/eurostat/ (see eurostat.py)
+            snap = s["snapshot"]
+            raw = eurostat.value(snap["key"], snap["geo"], snap["year"])
+            if raw is None:
+                errs.append("snapshot value missing")
+            elif snap["updated"] != eurostat.updated(eurostat.dataset_of(snap["key"])):
+                errs.append("snapshot vintage changed")
+            elif abs(f["value"] - raw * s.get("scale", 1)) > 0.05 + 1e-9:
+                errs.append(f"value {f['value']} != snapshot {raw}")
         elif s.get("kind") in ("workbook", "insee", "eurostat", "dgafp", "legifrance"):
             raw = _reread_cell(s["ref"].split(" — repris dans ")[-1])
             if raw is None:

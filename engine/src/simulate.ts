@@ -12,7 +12,14 @@ import {
   tvaToday,
   type Basket,
 } from './baseline/tva.ts';
-import { cmgActivityOk, runScenario, snapshotOf, type ScenarioCore } from './core.ts';
+import {
+  aplResources,
+  cmgActivityOk,
+  cmgAgeLimit,
+  runScenario,
+  snapshotOf,
+  type ScenarioCore,
+} from './core.ts';
 import { eur, eur0, pct, r2 } from './fmt.ts';
 import { resolveHypotheses } from './hypotheses.ts';
 import { normalize, type NHousehold } from './normalize.ts';
@@ -399,10 +406,15 @@ function build(c: BuildCtx): ScenarioResult {
           : `${pre}montant de décembre 2026 ${eur((c.baselineCore?.flows.aplGross ?? 0) * (1 - CRDS))} × ${pct(avgF)} en moyenne sur l’année (bail en cours ; calendrier du parc conventionné −1/3 au 1er juillet 2027, −2/3 au 1er juillet 2028 ; dans le parc privé l’aide s’arrête au terme du bail, même moyenne pour un bail de 3 ans d’échéance inconnue) = ${eur(f.aplGross * (1 - CRDS))}`;
       sources = [SRC_P2_32_APL];
     } else {
+      const res = aplResources(nh, f.rncHousehold);
+      const aplRes =
+        res > f.rncHousehold
+          ? `${eur0(res)} (forfait étudiant de la CAF${nh.adults.every((a) => a.boursier) ? ', boursier·e' : ', non boursier·e'} ; revenus ${eur0(f.rncHousehold)})`
+          : eur0(f.rncHousehold);
       formula =
         f.aplGross > 0
-          ? `${pre}barème APL zone ${nh.housing.zone}, loyer ${eur(nh.housing.rent)}, ressources ${eur0(f.rncHousehold)} → ${eur(f.aplGross)}, net de CRDS 0,5 %`
-          : `Loyer ${eur(nh.housing.rent)}, ressources ${eur0(f.rncHousehold)} : droit nul.`;
+          ? `${pre}barème APL zone ${nh.housing.zone}, loyer ${eur(nh.housing.rent)}, ressources ${aplRes} → ${eur(f.aplGross)}, net de CRDS 0,5 %`
+          : `Loyer ${eur(nh.housing.rent)}, ressources ${aplRes} : droit nul.`;
     }
     if (
       plan &&
@@ -462,7 +474,9 @@ function build(c: BuildCtx): ScenarioResult {
   {
     const ci = f.cmgInfo;
     let computed: string;
-    if (!nh.children.some((k) => k.age < 6)) computed = 'Pas d’enfant de moins de 6 ans.';
+    if (!nh.children.some((k) => k.age < cmgAgeLimit(nh)))
+      computed =
+        'Pas d’enfant de moins de 6 ans (12 ans pour un parent seul qui emploie une assistante maternelle).';
     else if (nh.childcare === 'creche')
       computed =
         'Crèche municipale ou associative (PSU) : pas de CMG, la CAF finance directement la crèche.';

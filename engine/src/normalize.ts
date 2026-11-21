@@ -19,6 +19,8 @@ export interface NAdult {
   } | null;
   areNet: number;
   pension: { amount: number; basis: 'net' | 'brut'; startYear: number } | null;
+  /** student holding a bourse sur critères sociaux (only read when activity is 'etudiant') */
+  boursier: boolean;
 }
 export interface NChild {
   age: number;
@@ -165,7 +167,8 @@ export function normalize(h: Household): NHousehold {
     }
     if (activity === 'retraite' && pension === null)
       pension = { amount: 0, basis: 'net', startYear: 2020 };
-    return { index, age, activity, disability, salary, areNet, pension };
+    const boursier = activity === 'etudiant' && a.boursier === true;
+    return { index, age, activity, disability, salary, areNet, pension, boursier };
   });
 
   const childrenIn = Array.isArray(hh.children) ? (hh.children as unknown[]) : [];

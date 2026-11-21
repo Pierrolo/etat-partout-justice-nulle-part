@@ -33,7 +33,7 @@ La gratuité
 
 Vos études se paient sur votre compte éducation. Des études gratuites en apparence sont payées par les jeunes travailleurs modestes qui n’y accèdent pas. Payer avec l’argent de son propre compte fait choisir, et fait choisir mieux.
 
-[Télécharger cette fiche (PDF)](jeune-adulte.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

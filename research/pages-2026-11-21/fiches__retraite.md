@@ -32,7 +32,7 @@ L’indexation automatique des pensions est suspendue. L’indexation automatiqu
 
 _Et comme chacun_ : 20 000 € · Le bouclier sanitaire
 
-[Télécharger cette fiche (PDF)](retraite.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

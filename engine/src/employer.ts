@@ -3,7 +3,8 @@
  * Gross pay is the anchor (H4): the CSG/CRDS on earned income disappears, so the employee's net rises by
  * 9,7 % × 98,25 % of gross; employer contributions are unchanged (the RGDU is kept, PLFSS am. 1 II 3°) so the
  * employer cost is unchanged. The taxe sur les salaires the plan abolishes is only paid by employers not subject
- * to VAT (associations, banks, insurers, health care): not modelled here.
+ * to VAT, or subject on less than 90 % of their turnover (CGI 231-1: associations, banks, insurers, health care):
+ * not modelled here.
  */
 import { CSG_NONE, grossFromNet, salaryChain } from './baseline/salaire.ts';
 import { r2 } from './fmt.ts';
@@ -84,7 +85,7 @@ export function employerView(
   const notes = [
     'Le salaire brut est supposé inchangé (hypothèse H4) : la suppression de la CSG et de la CRDS sur les salaires augmente le salaire net du montant de ces prélèvements.',
     'Coût employeur inchangé une fois le plan complet appliqué : le plan ne modifie pas les cotisations patronales et garde la réduction générale des cotisations (amendement PLFSS n° 1, II 3°).',
-    'La taxe sur les salaires, supprimée par le plan, ne concerne que les employeurs qui ne paient pas la TVA (associations, banques, assurances, professions de santé) : non modélisée ici.',
+    'La taxe sur les salaires, supprimée par le plan, ne concerne que les employeurs pas ou peu soumis à la TVA (moins de 90 % de leur chiffre d’affaires : associations, banques, assurances, professions de santé) : non modélisée ici.',
     'Le salarié paiera en revanche l’impôt à 23 % et recevra l’aide fondamentale : son revenu disponible dépend de son foyer (utilisez le simulateur pour lui).',
   ];
   if (status === 'fonctionnaire')

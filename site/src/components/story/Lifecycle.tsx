@@ -72,6 +72,8 @@ export function Lifecycle({
     r.rendement_patrimoine;
   const birth = rows[0]!;
   const adult = rows.find((r) => r.age === adultAge)!;
+  // the compte éducation is paid at 18 only: from the next year on, the yearly amount is lower
+  const adultNext = rows.find((r) => r.age === adultAge + 1)!;
   const retired = rows.find((r) => r.age === retireAge)!;
   const x = scaleLinear()
     .domain([0, maxAge + 1])
@@ -141,7 +143,7 @@ export function Lifecycle({
         headingLevel={2}
         title="Ce que le plan verserait à une personne, de 0 à 85 ans"
         subtitle="Euros par an et par personne, empilés par dispositif. Plein = proposé dans un amendement ; hachuré = annoncé, sans texte précis."
-        summary={`Une personne sans handicap recevrait ${formatEuro(sum(birth))} par an à la naissance, dont ${formatEuro(birth.aide_fondamentale)} proposés dans un amendement (l’aide fondamentale de l’enfant) ; dès ${adultAge} ans, ${formatEuro(sum(adult))} par an, dont ${formatEuro(adult.aide_fondamentale)} dans un amendement ; dès ${retireAge} ans, ${formatEuro(sum(retired))} par an, avec une part contributive de retraite promise. Tout ce qui est hachuré repose sur des promesses non chiffrées dans les textes.`}
+        summary={`Une personne sans handicap recevrait ${formatEuro(sum(birth))} par an à la naissance, dont ${formatEuro(birth.aide_fondamentale)} proposés dans un amendement (l’aide fondamentale de l’enfant) ; à ${adultAge} ans, ${formatEuro(sum(adult))} (compte éducation compris), puis ${formatEuro(sum(adultNext))} par an de ${adultAge + 1} à ${retireAge - 1} ans, dont ${formatEuro(adultNext.aide_fondamentale)} dans un amendement ; dès ${retireAge} ans, ${formatEuro(sum(retired))} par an, avec une part contributive de retraite promise. Tout ce qui est hachuré repose sur des promesses non chiffrées dans les textes.`}
         sources={sources.map((s) => ({ ...s }))}
         table={{
           columns: [

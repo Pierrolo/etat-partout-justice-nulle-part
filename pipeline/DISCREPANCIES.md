@@ -25,18 +25,18 @@ Légende des traitements : **Corrigé** = le pipeline calcule ou choisit la vale
 
 ## D04 — Dépenses publiques 2024 : 57,0 % (Eurostat) contre 57,26 % (INSEE ÷ PIB du classeur)
 - Constat : Eurostat tec00023 donne 57,0 % du PIB ; le total COFOG INSEE (1 671,794 Md€) rapporté au PIB 2024 du classeur (2 919,9 Md€, feuille « Refonte fiscalité », cellule C3, d'après l'INSEE, tableau 3.217, extraits) donne 57,26 %.
-- Interprétation : la dépense est la même ; l'écart vient du PIB pris au dénominateur. Avec 1 671,794 Md€, un taux de 57,0 % correspond à un PIB d'environ 2 933 Md€, soit 13 Md€ (0,4 %) de plus que celui du classeur (à l'arrondi de 57,0 % près : 2 930 à 2 936 Md€). Le classeur ne dit pas de quel millésime ou périmètre de PIB il s'agit ; nous n'avons pas la table qui l'expliquerait.
+- Interprétation : la dépense est la même ; l'écart vient du PIB pris au dénominateur. Avec 1 671,794 Md€, un taux de 57,0 % correspond à un PIB d'environ 2 933 Md€, soit 13 Md€ (0,4 %) de plus que celui du classeur (à l'arrondi de 57,0 % près : 2 930 à 2 936 Md€). Le PIB du classeur est celui de l'édition de mai 2025 des comptes nationaux ; l'édition de mai 2026 le porte à 2 935,2 Md€ (Eurostat nama_10_gdp, fait `pib_2024_insee_2026_md`), ce qui donne 56,96 % avec la même dépense COFOG.
 - Traitement : Documenté. `europe.json` utilise Eurostat (comparabilité entre pays) ; `facts.json` expose les deux (groupe `depenses_pib_france_2024`, le second est un calcul) et la note donne le PIB implicite.
 
 ## D05 — « Record mondial » : la Finlande dépasse la France
-- Constat : dans les données Eurostat du classeur, 2024 : Finlande 57,7 %, France 57,0 % (France 2e sur 30) ; 2025 : 57,5 % contre 57,2 %. Le manifeste parle de « record mondial ».
-- Interprétation : la France est bien très au-dessus de la zone euro (EA20 : 49,4 % en 2024) mais seconde, pas première, sur ces données ; la source du « record » n'est pas précisée dans le manifeste.
+- Constat : dans les données Eurostat (mise à jour du 21 octobre 2026), 2024 : Finlande 57,9 %, France 57,0 % (France 2e sur 30) ; 2025 : 57,5 % contre 57,3 %. Le classeur, d'un millésime antérieur, donnait 57,7 % et 57,0 % ; 57,5 % et 57,2 %. Le manifeste parle de « record mondial ».
+- Interprétation : la France est bien très au-dessus de la zone euro (EA20 : 49,3 % en 2024) mais seconde, pas première, sur ces données ; la source du « record » n'est pas précisée dans le manifeste.
 - Traitement : Documenté. `europe.json › points_cles` fournit le rang, la Finlande et la France ; groupe de conflit `record_mondial`. À ne pas afficher « 1re » sans nuance.
 
 ## D06 — Eurostat : valeur manquante (« : ») pour la Suisse en 2025
-- Constat : une cellule vide (« : », donnée non disponible) pour CH 2025.
+- Constat : une cellule vide (« : », donnée non disponible) pour CH 2025 dans le classeur. Depuis le rafraîchissement d'après la mise à jour Eurostat du 21 octobre 2026, la dépense suisse 2025 est publiée (33,6 %) ; en revanche, l'API ne publie plus le solde public de l'Islande, de la Norvège et de la Suisse (tec00127).
 - Interprétation : donnée non disponible dans la source.
-- Traitement : Corrigé en `null` (jamais 0). Les graphiques doivent gérer `null` (classement sur 2024 pour ce pays).
+- Traitement : `null` jamais 0 quand aucune source ne donne la valeur ; pour les soldes islandais, norvégien et suisse, la valeur du classeur est conservée et marquée `vintage: "classeur"` dans `europe.json`. Les graphiques doivent gérer `null`.
 
 ## D07 — Trois agrégats « zone euro » dans le classeur
 - Constat : EA19, EA20, EA21 coexistent.

@@ -26,7 +26,7 @@ Le statut
 
 Le statut de la fonction publique prend fin. Emploi garanti, carrière et règles propres cèdent au droit du travail commun. Le sens de l’intérêt général ne dépend pas d’un statut. La Suisse a supprimé le sien en 2002 sans que son administration s’effondre, et la Déclaration des droits ne connaît d’autre distinction que les vertus et les talents.
 
-[Télécharger cette fiche (PDF)](agent-public-indispensable.pdf)
+Télécharger cette fiche (PDF)
 
 Les propositions
 

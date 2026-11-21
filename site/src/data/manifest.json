@@ -62,8 +62,8 @@
    }
   },
   "europe.json": {
-   "bytes": 107196,
-   "sha256": "f6d741cc2004bf53ec827e0d6e39e21d2dca591bcf96b4a2568aadbe5dad91bf",
+   "bytes": 118675,
+   "sha256": "145aec7f4c6171692b9f02be7b0f739edda4c67d2ed773ac7c20497cbeb8f862",
    "top_level_lists": {
     "agregats": 4,
     "depenses_publiques_pib": 68,
@@ -74,10 +74,10 @@
    }
   },
   "facts.json": {
-   "bytes": 233185,
-   "sha256": "e3c73daa5c6ad7c496750ac97fbb01f3d4c2fb6a8de15950a744b53aeb7ee131",
+   "bytes": 237919,
+   "sha256": "96ec7f49a584a322b49cb955f628c0716b49e3896952576c9aa69f32bb0b9ea1",
    "top_level_lists": {
-    "facts": 412
+    "facts": 414
    }
   },
   "fiches.json": {
