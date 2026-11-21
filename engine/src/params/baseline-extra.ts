@@ -349,7 +349,7 @@ export const EXTRA_PARAMS = {
     effective: '2026',
     source: {
       label:
-        'Classeur « Synthèse Chiffres », onglet Détail Niches : taux réduits niches 9,9 Md€ vs taux réduits non comptabilisés 33,4 Md€ (arrondi)',
+        'Classeur « Synthèse des chiffrages », onglet Détail Niches : taux réduits niches 9,9 Md€ vs taux réduits non comptabilisés 33,4 Md€ (arrondi)',
     },
     status: 'hypothesis',
   },

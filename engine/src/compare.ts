@@ -317,6 +317,19 @@ export function compare(h: Household, opts: SimulateOptions = {}): Comparison {
       warnings.push(
         `${nh.adults.length > 1 ? `Adulte ${p.index + 1} : p` : 'P'}ension liquidée en ${p.startYear} : la minoration de ${eur0(n('plan.afu_pension_minoration'))} par an de l’aide fondamentale est réduite à la part de la durée d’assurance validée avant le 1er janvier 2028 (${pct(Math.round(p.share * 1000) / 1000)} retenus${p.shareSource === 'default' ? ` : hypothèse d’une carrière complète de ${n('plan.afu_pension_default_career_quarters')} trimestres terminée au 1er juillet ${p.startYear} ; indiquez votre part réelle pour un calcul exact` : ', valeur déclarée'}), soit −${eur(p.annual / 12)} par mois.`,
       );
+  for (const a of nh.adults) {
+    const p = a.pension;
+    if (p === null || p.amount <= 0) continue;
+    const who = nh.adults.length > 1 ? `Adulte ${a.index + 1} : p` : 'P';
+    if (p.startYear > n('plan.afu_pension_last_income_year'))
+      warnings.push(
+        `${who}ension liquidée en ${p.startYear} : la minoration de l’aide fondamentale pour pension ne s’applique que jusqu’à l’impôt sur les revenus de ${n('plan.afu_pension_last_income_year')} ; aucune minoration n’est appliquée.`,
+      );
+    else if (typeof e.period === 'number' && e.period >= 2028 && p.startYear > e.period)
+      warnings.push(
+        `${who}ension liquidée en ${p.startYear}, après l’année affichée (${e.period}) : cette année-là, la pension n’est pas encore servie, donc l’aide fondamentale n’est pas minorée ; vos revenus restent ceux que vous avez déclarés (pension comptée comme si elle était versée).`,
+      );
+  }
   if (Math.abs(delta) >= 0.005 && baseline.disposable <= DELTA_PCT_MIN_BASELINE)
     warnings.push(
       `Revenu disponible actuel inférieur à ${DELTA_PCT_MIN_BASELINE} € par mois : variation en % non calculée.`,

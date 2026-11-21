@@ -8,7 +8,9 @@
  * - pension liquidated from 1 Jan 2028: 3 300 € × (insurance duration validated before 1 Jan 2028 ÷ total insurance
  *   duration retained for the liquidation) — the text's rule « à défaut » of the decree. When the share is not
  *   given, the simulator assumes a full career of 172 quarters ending on 1 July of the start year (hypothesis).
- * The minoration applies until IR on 2051 incomes, i.e. in every simulated period.
+ * The minoration applies until IR on 2051 incomes: every simulated period is earlier, but a pension liquidated
+ * after 2051 never carries it (R2E-11). In a transition year (2028, 2030), a pension liquidated in a later year is
+ * not yet held, so it carries no minoration that year (R2V-3); the steady state shows the household once retired.
  */
 import { n } from '../params/index.ts';
 import type { NAdult, NHousehold } from '../normalize.ts';
@@ -50,9 +52,18 @@ export function defaultShareBefore2028(startYear: number): number {
   return Math.min(1, Math.max(0, (total - after) / total));
 }
 
-export function pensionMinorationOf(a: NAdult): PensionMinoration | null {
+/**
+ * @param incomeYear the income year of a transition period; undefined for the steady state (household as declared,
+ *   pension held).
+ */
+export function pensionMinorationOf(a: NAdult, incomeYear?: number): PensionMinoration | null {
   const p = a.pension;
   if (p === null || p.amount <= 0) return null;
+  // not yet liquidated in this income year: no pension held, no minoration
+  if (incomeYear !== undefined && p.startYear > incomeYear) return null;
+  // « Cette minoration s’applique jusqu’à l’imposition des revenus de l’année 2051 »
+  const last = n('plan.afu_pension_last_income_year');
+  if (p.startYear > last || (incomeYear !== undefined && incomeYear > last)) return null;
   const cutoff = n('plan.afu_pension_cutoff_year');
   const full = n('plan.afu_pension_minoration');
   let share: number;
@@ -70,14 +81,14 @@ export function pensionMinorationOf(a: NAdult): PensionMinoration | null {
   return { index: a.index, startYear: p.startYear, share, shareSource, annual: full * share };
 }
 
-export function afuOf(nh: NHousehold): AfuBreakdown {
+export function afuOf(nh: NHousehold, incomeYear?: number): AfuBreakdown {
   const adultAge = n('plan.afu_child_max_age');
   const kidsAdult = nh.children.filter((c) => c.age >= adultAge).length;
   const kidsChild = nh.children.length - kidsAdult;
   const invalidAdults = nh.adults.filter((a) => a.disability === 'aah_80').length;
   const invalidKids = nh.children.filter((c) => c.cmiInvalidite).length;
   const pensions = nh.adults
-    .map(pensionMinorationOf)
+    .map((a) => pensionMinorationOf(a, incomeYear))
     .filter((x): x is PensionMinoration => x !== null);
   const minoOf = (i: number) => pensions.find((p) => p.index === i)?.annual ?? 0;
   const pensionMinorationAnnual = pensions.reduce((s, p) => s + p.annual, 0);

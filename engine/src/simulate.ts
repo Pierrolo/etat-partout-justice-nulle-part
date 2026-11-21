@@ -413,7 +413,7 @@ function build(c: BuildCtx): ScenarioResult {
       const avgF = factors.reduce((s, x) => s + x, 0) / factors.length;
       formula =
         avgF === 0
-          ? 'Supprimée : plus de droit nouveau après le 1er juin 2027 ; droits existants réduits d’un tiers (07/2027), de deux tiers (07/2028) et éteints au 1er juillet 2029 dans le parc conventionné, éteints au terme du bail dans le parc privé ; toutes les aides personnelles au logement abrogées au 1er janvier 2030.'
+          ? 'Supprimée : plus de droit nouveau pour une demande déposée à partir du 1er juin 2027 ; droits existants réduits d’un tiers (07/2027), de deux tiers (07/2028) et éteints au 1er juillet 2029 dans le parc conventionné, éteints au terme du bail dans le parc privé ; toutes les aides personnelles au logement abrogées au 1er janvier 2030.'
           : `${pre}montant de décembre 2026 ${eur((c.baselineCore?.flows.aplGross ?? 0) * (1 - CRDS))} × ${pct(avgF)} en moyenne sur l’année (bail en cours ; calendrier du parc conventionné −1/3 au 1er juillet 2027, −2/3 au 1er juillet 2028 ; dans le parc privé l’aide s’arrête au terme du bail, même moyenne pour un bail de 3 ans d’échéance inconnue) = ${eur(f.aplGross * (1 - CRDS))}`;
       sources = [SRC_P2_32_APL];
     } else {

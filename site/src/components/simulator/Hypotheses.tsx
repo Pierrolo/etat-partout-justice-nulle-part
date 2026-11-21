@@ -26,7 +26,7 @@ export function HypothesisControls({ value, onChange, idPrefix = 'hyp' }: Hypoth
       <Row tier="announced">
         <SegmentedControl
           name={`${idPrefix}-h1`}
-          legend="H1 · Le RSA, la prime d’activité, l’AAH et les bourses sont-ils remplacés ?"
+          legend="H1 · Le RSA, la prime d’activité, l’AAH et le minimum vieillesse (ASPA) sont-ils remplacés ?"
           hint={
             <>
               Le programme parle de les remplacer par l’aide universelle (<Term id="afu">AFU</Term>

@@ -27,7 +27,7 @@ export interface ResultViewProps {
   getUrl: () => string;
   engineVersion: string;
   baselineYear: string;
-  /** e.g. « Amendements publiés le 18 novembre 2026 » (engine PARAMS_META.planVersionLabel) */
+  /** e.g. « Amendements publiés les 17 et 18 novembre 2026 » (engine PARAMS_META.planPublishedLabel) */
   planVersion?: string;
   onEdit: (step?: StepId) => void;
   onRestart: () => void;

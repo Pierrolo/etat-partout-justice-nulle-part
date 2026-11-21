@@ -48,6 +48,8 @@ export interface YearRules {
   fraisPro: boolean;
   /** share of each credit/reduction kept */
   credits: { garde: number; emploiDomicile: number; dons: number };
+  /** income year of a transition period (2027, 2028, 2030); absent for the steady state and the baseline */
+  incomeYear?: number;
 }
 
 export interface Rules {
@@ -187,6 +189,7 @@ function yearRules(year: 2027 | 2028 | 2030, h: Hypotheses, sw: PlanSwitches): R
       credits: sw.niches
         ? { ...cf, dons: donsFactor(year) }
         : { garde: 1, emploiDomicile: 1, dons: 1 },
+      incomeYear: year,
     },
   };
 }

@@ -193,7 +193,7 @@ export const PLAN_PARAMS = {
   },
   'plan.prestations_familiales_end': {
     value: '2028-01-01',
-    unit: 'date (9 prestations familiales of L.511-1 CSS + action sociale CAF)',
+    unit: 'date (8 of the 9 prestations familiales of L.511-1 CSS + action sociale CAF; the allocation de logement is kept until 2030, P2 am. 32)',
     effective: '2028-01-01',
     source: SRC_PLFSS7_PF,
     status: 'legal_text',

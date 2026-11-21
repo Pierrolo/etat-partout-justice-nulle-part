@@ -201,7 +201,9 @@ describe('Plan-side fact-check findings (plan-engine.md), checked against the No
     expect(inactiveWorker.detail).toContain(
       '548 jours avant 55 ans, 685 jours à 55-56 ans, 822 jours à partir de 57 ans',
     );
-    expect(inactiveWorker.detail).toContain('15 mois après une rupture conventionnelle');
+    expect(inactiveWorker.detail).toContain(
+      'rupture conventionnelle depuis le 1er septembre 2026 : 15 mois avant 55 ans, 20,5 mois ensuite',
+    );
     expect(inactiveWorker.amountHint).toBe(
       'en cas de perte d’emploi : 6 mois d’indemnisation au lieu de 6 à 18 mois aujourd’hui (jusqu’à 27 mois à partir de 57 ans)',
     );
@@ -275,18 +277,24 @@ describe('Plan-side fact-check findings (plan-engine.md), checked against the No
     expect(r.tier).toBe('announced');
     expect(r.detail).toContain('écrit dans l’amendement PLFSS n° 4');
   });
-  it('PE-12b + PLF-P2 n° 26 (Nov 2026): State civil servants only; 24 months + 1 per quarter, ≤ 84 months', () => {
+  it('PE-12b + PLF-P2 n° 26 (Nov 2026) + R2E-1: State of right, territorial by deliberation; 24 months + 1 per quarter, ≤ 84 months', () => {
     const fp = cas('seul-1');
     fp.adults[0]!.salary!.status = 'fonctionnaire';
     const ind = item(promises(fp), 'indemnite_agent_public');
-    expect(ind.title).toContain('Fonctionnaire de l’État');
+    expect(ind.title).toContain('État ; territorial sur délibération');
+    expect(ind.detail).toContain('une collectivité territoriale (ou son établissement public)');
+    expect(ind.detail).toContain('la fonction publique hospitalière n’est pas visée');
+    expect(ind.detail).not.toMatch(/territoriale et hospitalière ne sont pas visées/);
     expect(ind.detail).toContain('24 mois augmentés d’un mois par trimestre de services publics');
     expect(ind.detail).toContain('au plus 84 mois (7 ans)');
     expect(ind.detail).toContain('retraite sans décote');
     expect(ind.detail).not.toMatch(/1 à 7 ans|selon l’ancienneté/);
     const postes = item(losses(fp), 'postes_publics');
     expect(postes.detail).toContain('fonctionnaire de l’État');
-    expect(postes.detail).toContain('ne vise pas les fonctionnaires territoriaux et hospitaliers');
+    expect(postes.detail).toContain(
+      'une collectivité territoriale peut, par délibération, l’appliquer à ses fonctionnaires',
+    );
+    expect(postes.detail).not.toMatch(/ne vise pas les fonctionnaires territoriaux/);
     expect(postes.detail).not.toMatch(/1 à 7 ans/);
   });
   it('E2 / H11 (VERIFIED row 10): the foyer fiscal is maintained; only the amount is independent of marriage', () => {

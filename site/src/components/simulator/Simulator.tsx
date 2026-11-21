@@ -373,7 +373,7 @@ export default function Simulator() {
             getUrl={buildUrl}
             engineVersion={engine!.PARAMS_META.engineVersion}
             baselineYear={engine!.PARAMS_META.baselineYear}
-            planVersion={engine!.PARAMS_META.planVersionLabel}
+            planVersion={engine!.PARAMS_META.planPublishedLabel}
             onEdit={editAnswers}
             onRestart={restart}
             onHyp={setHyp}

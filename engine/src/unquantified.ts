@@ -3,6 +3,7 @@
  * household. Never summed into disposable income. Amount hints are text only.
  */
 import { eur0 } from './fmt.ts';
+import { afuOf } from './plan/afu.ts';
 import type { NHousehold } from './normalize.ts';
 import {
   MANIFESTE,
@@ -12,6 +13,7 @@ import {
   SRC_AM22_TAXES,
   SRC_AM25_AFFECTEES,
   SRC_AM27_CEP,
+  SRC_AM28,
   SRC_AM29_TF,
   SRC_P2_26_FP,
   SRC_P2_28_INDEX,
@@ -44,6 +46,8 @@ const retirees = (c: Ctx) => has(c, (a) => a.activity === 'retraite');
 const renters = (c: Ctx) => c.nh.housing.status === 'locataire';
 const owners = (c: Ctx) =>
   c.nh.housing.status === 'proprietaire' || c.nh.housing.status === 'proprietaire_credit';
+/** PLFSS am. 4, L. 160-13-1 IV: « Ce taux est de 5 % ». */
+const BOUCLIER_RATE = 0.05;
 const kids = (c: Ctx, max = 25) => c.nh.children.some((k) => k.age < max);
 
 const CATALOGUE: Entry[] = [
@@ -95,9 +99,9 @@ const CATALOGUE: Entry[] = [
       tier: 'announced',
       title: 'Retraités : complément viager « 500 € par an au moins »',
       detail:
-        'Part du patrimoine restitué versée en rente. Aucun mécanisme juridique dans les amendements.',
-      amountHint: '500 €/an annoncés',
-      sources: [fiche('retraite', 'Retraité')],
+        'Le mécanisme est écrit (amendement PLF-P1 n° 27, III et IV) : un « versement de patrimoine » est porté chaque année au compartiment de restitution du compte d’épargne personnel, puis servi en rente viagère à partir de l’âge légal de départ ou de la liquidation de la pension. Mais son montant est un montant global voté chaque année par la loi de finances, nul à défaut ; aucun plancher de 500 € ne figure dans le texte : les 500 € sont annoncés par la fiche.',
+      amountHint: '500 €/an au moins annoncés par la fiche ; 0 € par défaut dans le texte',
+      sources: [fiche('retraite', 'Retraité'), SRC_AM27_CEP],
     },
   },
   {
@@ -118,23 +122,38 @@ const CATALOGUE: Entry[] = [
       id: 'droits_mutation',
       direction: 'promise',
       tier: 'law',
-      title: 'Frais de notaire : 1 % / 3 % payés par le vendeur',
+      title: 'Frais de notaire : barème unique de 1 % / 3 %',
       detail:
-        'Barème unique au 1er janvier 2027 : rien sous 10 000 €, 1 % de 10 000 à 100 000 €, 3 % au-delà, à la charge de celui qui réalise la plus-value. Exemple de l’amendement : appartement de 200 000 € → 3 900 € payés par le vendeur, au lieu d’environ 10 000 € par l’acheteur aujourd’hui.',
-      amountHint: '−6 100 € sur un achat à 200 000 € (exemple de l’amendement)',
-      sources: [SRC_AM19_DMTO, fiche('locataire', 'Locataire')],
+        'Barème unique au 1er janvier 2027 : rien sous 10 000 €, 1 % de 10 000 à 100 000 €, 3 % au-delà, soit 3 900 € pour un appartement de 200 000 € (exemple de l’amendement). Aujourd’hui, l’exposé de l’amendement compte « 10 000 euros » ; en fait, depuis la hausse permise par la loi de finances pour 2025 (art. 116, à partir du 1er avril 2025), 88 départements appliquent le taux de 5 % (situation au 1er juin 2026), soit environ 6,32 % avec la taxe communale et les frais d’assiette : environ 12 640 € sur 200 000 €, ou environ 11 610 € dans un département resté à 4,50 % et pour un premier achat de résidence principale (exclu de la hausse). Qui paie le nouveau droit ? Les sources divergent : l’exposé de l’amendement n° 19 dit « le vendeur pour une vente » ; le texte de loi dit qu’il est « supporté par celui qui liquide la plus-value sur laquelle [il] s’impute », et l’amendement n° 20 l’impute sur l’impôt de plus-value du cédant pour les droits payés « lors de l’acquisition » : lu ainsi, l’acheteur le paie à l’achat, en acompte de l’impôt sur sa future plus-value. Les parties peuvent en convenir autrement.',
+      amountHint:
+        'sur un achat à 200 000 € : 3 900 € au lieu d’environ 12 640 € aujourd’hui dans la plupart des départements (≈ −8 700 €)',
+      sources: [
+        SRC_AM19_DMTO,
+        SRC_AM20_PV,
+        {
+          label:
+            'BOFiP 14771-PGP (17 juin 2026) : taux départemental porté jusqu’à 5 % pour trois ans à partir du 1er avril 2025 (LF 2025, art. 116), sauf premier achat de résidence principale ; 88 départements à 5 % au 1er juin 2026 (Banque des Territoires, jechange.fr)',
+          url: 'https://bofip.impots.gouv.fr/bofip/14771-PGP.html',
+        },
+        fiche('locataire', 'Locataire'),
+      ],
     },
   },
   {
     when: () => true,
-    item: {
-      id: 'bouclier_sanitaire',
-      direction: 'promise',
-      tier: 'law',
-      title: 'Bouclier sanitaire : reste à charge plafonné à 5 % du revenu',
-      detail:
-        'À partir de 2028 (si l’AFU entre en vigueur), ce qui reste à votre charge au titre du ticket modérateur, des participations forfaitaires, des franchises et du forfait journalier est plafonné chaque année à 5 % des ressources du foyer fiscal, diminuées de l’impôt sur le revenu (plancher : 5 % du montant annuel de l’aide fondamentale, soit 330 € pour une personne seule).',
-      sources: [SRC_PLFSS4_BOUCLIER, fiche('patient', 'Patient')],
+    item: (c) => {
+      // L. 160-13-1 III: floor = 5 % × « le montant annuel de l’aide fondamentale universelle ». PLF-P1 am. 28
+      // defines « le montant de l’aide fondamentale » per foyer (6 600 € per adult, « Il est minoré de 3 300 € »
+      // per pensioner…), and the resources are « celles du foyer fiscal » ⇒ the foyer's own AFU (R2V-2).
+      const floor = BOUCLIER_RATE * afuOf(c.nh).annual;
+      return {
+        id: 'bouclier_sanitaire',
+        direction: 'promise',
+        tier: 'law',
+        title: 'Bouclier sanitaire : reste à charge plafonné à 5 % du revenu',
+        detail: `À partir de 2028 (si l’AFU entre en vigueur), ce qui reste à votre charge au titre du ticket modérateur, des participations forfaitaires, des franchises et du forfait journalier est plafonné chaque année à 5 % des ressources du foyer fiscal, diminuées de l’impôt sur le revenu. Plancher : 5 % du montant annuel de l’aide fondamentale, lu comme celle de votre foyer (minoration pour pension comprise), soit ${eur0(floor)} par an pour vous (330 € pour une personne seule, 165 € pour un retraité seul dont la pension a été liquidée avant 2028).`,
+        sources: [SRC_PLFSS4_BOUCLIER, SRC_AM28, fiche('patient', 'Patient')],
+      };
     },
   },
   {
@@ -189,8 +208,8 @@ const CATALOGUE: Entry[] = [
       tier: 'announced',
       title: '« 9 Md€ rendus au salaire net » (fin des exonérations patronales)',
       detail:
-        'Le plan affirme que la suppression des exonérations de cotisations et de la taxe sur les salaires « va au salarié, non à l’entreprise ». Le simulateur ne suppose aucune hausse de salaire brut (H4).',
-      sources: [fiche('entreprise', 'Entreprise'), MANIFESTE],
+        'L’exposé de l’amendement PLFSS n° 1 affirme que la suppression des exonérations de cotisations « rend 9 milliards d’euros au salaire net ». La fiche Entreprise ajoute que le gain de la suppression des taxes sur les salaires « va au salarié, non à l’entreprise ». Le simulateur ne suppose aucune hausse de salaire brut (H4).',
+      sources: [SRC_PLFSS1_EXO, fiche('entreprise', 'Entreprise')],
     },
   },
   {
@@ -212,9 +231,9 @@ const CATALOGUE: Entry[] = [
       direction: 'promise',
       tier: 'law',
       title:
-        'Fonctionnaire de l’État dont le poste est supprimé : 70 % du traitement jusqu’à 7 ans',
+        'Fonctionnaire dont le poste est supprimé (État ; territorial sur délibération) : 70 % du traitement jusqu’à 7 ans',
       detail:
-        'Pour les fonctionnaires de l’État dont le corps exerce une mission supprimée par le plan (les fonctions publiques territoriale et hospitalière ne sont pas visées) : indemnité de 70 % du traitement indiciaire brut, plus une part des primes fixée par décret (nulle à défaut), pendant 24 mois augmentés d’un mois par trimestre de services publics, au plus 84 mois (7 ans) et au plus jusqu’à la date d’une retraite sans décote. Elle se cumule en entier avec un emploi privé et compte pour la retraite comme une période de chômage indemnisé, dans la limite de la durée de l’allocation chômage.',
+        'De plein droit pour les fonctionnaires de l’État dont le corps exerce une mission supprimée par le plan ; une collectivité territoriale (ou son établissement public) qui supprime un emploi pour cette raison peut, par une délibération motivée, l’appliquer à ses fonctionnaires, et paie alors l’indemnité ; la fonction publique hospitalière n’est pas visée. Indemnité de 70 % d’une assiette égale au traitement indiciaire brut plus une part des primes fixée par décret (au plus un quart du traitement ; nulle à défaut de décret, donc 70 % du traitement), le montant mensuel restant au plus égal au traitement, pendant 24 mois augmentés d’un mois par trimestre de services publics, au plus 84 mois (7 ans) et au plus jusqu’à la date d’une retraite sans décote. Elle se cumule en entier avec un emploi privé et compte pour la retraite comme une période de chômage indemnisé, dans la limite de la durée de l’allocation chômage.',
       sources: [
         SRC_P2_26_FP,
         fiche('agent-public-dont-le-poste-est-supprime', 'Agent public dont le poste est supprimé'),
@@ -233,7 +252,7 @@ const CATALOGUE: Entry[] = [
         tier: 'announced',
         title: 'Indemnisation chômage limitée à six mois',
         detail:
-          'Le plan annonce que l’indemnisation « passe de treize à six mois » (la durée maximale actuelle va de 18 à 27 mois selon l’âge : 548 jours avant 55 ans, 685 jours à 55-56 ans, 822 jours à partir de 57 ans ; 15 mois après une rupture conventionnelle depuis le 1er septembre 2026). Aucun texte juridique. Le simulateur garde le montant mensuel de l’ARE inchangé (H6).',
+          'Le plan annonce que l’indemnisation « passe de treize à six mois » (la durée maximale actuelle va de 18 à 27 mois selon l’âge : 548 jours avant 55 ans, 685 jours à 55-56 ans, 822 jours à partir de 57 ans ; après une rupture conventionnelle depuis le 1er septembre 2026 : 15 mois avant 55 ans, 20,5 mois ensuite). Aucun texte juridique. Le simulateur garde le montant mensuel de l’ARE inchangé (H6).',
         amountHint:
           are > 0
             ? `à partir du 7e mois d’indemnisation : ARE = 0, soit −${eur0(are)}/mois`
@@ -355,7 +374,7 @@ const CATALOGUE: Entry[] = [
       tier: 'announced',
       title: '580 000 postes publics fermés, fin du statut (indemnité de 70 % jusqu’à 7 ans)',
       detail:
-        'Le plan annonce 580 000 postes publics fermés et la fin du statut de la fonction publique (droit du travail commun). Pour un fonctionnaire de l’État dont le poste est supprimé, l’amendement prévoit une indemnité de 70 % du traitement indiciaire brut pendant 24 mois plus un mois par trimestre de services (au plus 7 ans, et pas au-delà de la date d’une retraite sans décote ; voir « promesses ») : une baisse d’au moins 30 % de votre traitement pendant cette période, puis plus rien. Cet amendement ne vise pas les fonctionnaires territoriaux et hospitaliers.',
+        'Le plan annonce 580 000 postes publics fermés et la fin du statut de la fonction publique (droit du travail commun). Pour un fonctionnaire de l’État dont le poste est supprimé, l’amendement prévoit une indemnité de 70 % du traitement indiciaire brut (plus une part des primes si un décret la fixe) pendant 24 mois plus un mois par trimestre de services (au plus 7 ans, et pas au-delà de la date d’une retraite sans décote ; voir « promesses ») : une baisse de 30 % de votre traitement tant qu’aucun décret ne fixe la part des primes, puis plus rien. Ce régime s’applique de plein droit aux fonctionnaires de l’État ; une collectivité territoriale peut, par délibération, l’appliquer à ses fonctionnaires ; la fonction publique hospitalière n’est pas visée.',
       sources: [
         MANIFESTE,
         fiche('agent-public-indispensable', 'Agent public indispensable'),
@@ -389,7 +408,7 @@ const CATALOGUE: Entry[] = [
       sources: [
         {
           label:
-            'Classeur « Synthèse Chiffres », onglet Refonte fiscalité (aides sociales locales 36,1 Md€)',
+            'Classeur « Synthèse des chiffrages », onglet Refonte fiscalité (aides sociales locales 36,1 Md€)',
         },
       ],
     },
@@ -432,7 +451,7 @@ const CATALOGUE: Entry[] = [
       tier: 'law',
       title: 'Plus d’APL en cas de déménagement',
       detail:
-        'Aucun droit nouveau pour une demande déposée à partir du 1er juin 2027 ; un droit existant s’éteint au départ du logement (et au terme du bail pour les logements non conventionnés, au plus tard le 1er janvier 2030).',
+        'Aucun droit nouveau pour une demande déposée à partir du 1er juin 2027, et un droit ouvert sur une demande déposée à partir du 1er janvier 2027 n’est servi que douze mois au plus ; un droit existant s’éteint au départ du logement (et au terme du bail pour les logements non conventionnés, au plus tard le 1er janvier 2030).',
       sources: [SRC_P2_32_APL],
     },
   },
@@ -481,7 +500,7 @@ const PLAIN: Record<string, string | ((c: Ctx) => string)> = {
   compte_education: 'Un compte pour payer l’école de vos enfants',
   complement_viager: 'Un petit complément de retraite promis',
   loyers_baisse: 'Des loyers qui baisseraient',
-  droits_mutation: 'Des frais de notaire payés par le vendeur',
+  droits_mutation: 'Des frais de notaire bien plus bas',
   bouclier_sanitaire: 'Vos frais de santé plafonnés à 5 % du revenu',
   frais_gestion_sante: 'Une mutuelle moins chère',
   prix_taxes: 'Des prix allégés de certaines taxes',
@@ -489,7 +508,7 @@ const PLAIN: Record<string, string | ((c: Ctx) => string)> = {
   exonerations_salaire: 'Des salaires bruts qui pourraient monter',
   compte_chomage: 'Un compte alimenté par vos cotisations chômage',
   indemnite_agent_public:
-    'Si votre poste de fonctionnaire de l’État est supprimé : 70 % du traitement jusqu’à 7 ans',
+    'Si votre poste de fonctionnaire est supprimé : 70 % du traitement jusqu’à 7 ans',
   chomage_6_mois: 'Le chômage payé six mois seulement',
   creche_cmg: (c) =>
     c.nh.childcare === 'creche'

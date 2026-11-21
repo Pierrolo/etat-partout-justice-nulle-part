@@ -27,8 +27,10 @@ export const PARAMS_META = {
   baselineYear: 'Législation 2026 (état du droit au 24 octobre 2026 ; barème IR LF 2026)',
   planSource:
     'Amendements Résolution au PLF 2027 (1re et 2de parties) et au PLFSS 2027, version publiée les 17 et 18 novembre 2026 (84 amendements) ; fiches et manifeste france-resolution.fr ; classeurs « Synthèse des chiffrages » et « Séries des graphiques »',
-  /** v1.2: short label of the plan version, for display. */
+  /** v1.2: short label of the plan version (same as site/src/data/amendements.json meta.version.label_fr). */
   planVersionLabel: 'Amendements publiés le 18 novembre 2026',
+  /** R2E-12: publication dates shown in the simulator footer (P1 and PLFSS PDFs of 17 Nov, P2 of 18 Nov 2026). */
+  planPublishedLabel: 'Amendements publiés les 17 et 18 novembre 2026',
   /** v1.2: ISO date of the plan version (last liasse file, PLF 2de partie). */
   planVersionDate: '2026-11-18',
   engineVersion: ENGINE_VERSION,

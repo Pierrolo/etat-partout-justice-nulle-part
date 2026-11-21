@@ -618,7 +618,7 @@ export function runScenario(
   rules: Rules,
   base: BaselineSnapshot | null,
 ): ScenarioCore {
-  const afu = afuOf(nh);
+  const afu = afuOf(nh, rules.year.incomeYear);
   const months = rules.months.map((m) =>
     computeMonth({ nh, rules: m, year: rules.year, base, afu }),
   );
