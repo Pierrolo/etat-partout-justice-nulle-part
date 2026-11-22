@@ -1,0 +1,21 @@
+---
+import { Button } from '@/components/ui';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase } from '@/lib/site';
+---
+
+<BaseLayout title="Page introuvable" noindex>
+  <section class="wrap py-20 sm:py-28">
+    <p class="eyebrow eyebrow-accent mb-3">Erreur 404</p>
+    <h1 class="display max-w-[14ch]">Cette page n’existe pas.</h1>
+    <p class="lede mt-5">
+      Le lien est peut-être ancien ou mal recopié. Voici deux bons points de départ.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <Button href={withBase('/')}>Retour à l’accueil</Button>
+      <Button href={withBase('/simulateur/')} variant="secondary">
+        Lancer le simulateur
+      </Button>
+    </div>
+  </section>
+</BaseLayout>

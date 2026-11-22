@@ -1,0 +1,80 @@
+/*
+ * Toggletip du glossaire (React `<Term>` et Astro `<GlossaryTerm>` partagent ce balisage).
+ * Uniquement des jetons de tokens.css : le thème (clair, sombre, marque) s’applique tout seul.
+ */
+.gloss {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+.gloss-btn {
+  display: inline-block;
+  min-width: 1.5rem; /* 24 px (WCAG 2.5.8) */
+  min-height: 1.5rem;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--ink-3);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+}
+.gloss-btn:hover,
+.gloss-btn[aria-expanded='true'] {
+  text-decoration-style: solid;
+  text-decoration-color: var(--accent);
+}
+.gloss-live {
+  display: contents;
+}
+.gloss-bubble {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 6px);
+  left: 0;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(22rem, calc(100vw - 2rem));
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--rule-strong);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.16);
+  font-family: var(--ff-sans);
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-align: start;
+  text-transform: none;
+  white-space: normal;
+}
+.gloss-bubble strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-weight: 600;
+}
+.gloss-bubble a {
+  display: inline-block;
+  margin-top: 0.35rem;
+  min-height: 1.5rem;
+  font-weight: 600;
+}
+@media (forced-colors: active) {
+  .gloss-bubble {
+    border-color: CanvasText;
+  }
+  .gloss-btn {
+    text-decoration-color: LinkText;
+  }
+}

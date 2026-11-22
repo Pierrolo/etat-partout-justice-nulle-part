@@ -1,0 +1,195 @@
+/*
+ * DESIGN TOKENS — « Et moi, dans tout ça ? »
+ *
+ * Single source of truth for colour, type and shape. Everything is a CSS custom property so that
+ * Astro pages, React islands, Tailwind utilities and Observable Plot charts all read the same values.
+ *
+ * THEMING
+ *   Each colour is declared once with `light-dark(<light>, <dark>)`. Which side wins is decided by
+ *   `color-scheme`:  OS preference by default, forced by <html data-theme="light|dark"> (toggle).
+ *   Never write `dark:` utilities or hard-coded hex in components: use the semantic tokens below.
+ *
+ * TWO LAYERS, ONE LOOK
+ *   This file is the base layer: it names every token and gives each one a value, so that a token the
+ *   look does not override still resolves. The site ships ONE look, <html data-brand="ci"> (lib/look.ts):
+ *   brand-ci.css overrides the colours, fonts, shapes and chart palettes below, and that file's header
+ *   holds the identity (paper / ink, one signal accent, teal gain, grotesque type) and the contrast and
+ *   colour-blindness figures that were validated. The values here that brand-ci.css overrides are not
+ *   what visitors see. There is no switch, no second look.
+ *
+ * CONTRAST (WCAG 2.2 AA) — computed on the MERGE of this file and brand-ci.css by
+ * `pnpm --filter @epjn/site contrast` and enforced in src/lib/contrast.test.ts (every guaranteed pair,
+ * both modes).
+ *
+ * Hex values are 6-digit on purpose: src/lib/contrast.ts parses these files, and
+ * src/lib/chart-theme.ts mirrors the chart tokens (a test keeps both in sync).
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* ── Surfaces ─────────────────────────────────────────────────────────── */
+  --paper: light-dark(#faf8f4, #14151a); /* page background */
+  --surface: light-dark(#ffffff, #1c1d24); /* cards, inputs, chart plates */
+  --sunken: light-dark(#f2efe8, #101116); /* table heads, code, quiet wells */
+
+  /* ── Ink (text) ───────────────────────────────────────────────────────── */
+  --ink: light-dark(#15171c, #edece7); /* body + headings */
+  --ink-2: light-dark(#434852, #c4c3bc); /* secondary text */
+  --ink-3: light-dark(#5c616c, #9a9ca6); /* muted text (≥ 4.5 : 1 — still real text) */
+
+  /* ── Rules ────────────────────────────────────────────────────────────── */
+  --rule: light-dark(#e2ded3, #2f3039); /* decorative hairlines */
+  --rule-strong: light-dark(#8a867b, #6b6d78); /* control borders (≥ 3 : 1) */
+
+  /* ── The one accent: « le plan » ──────────────────────────────────────── */
+  --accent: light-dark(#602e9d, #d4bcff);
+  --accent-hover: light-dark(#4a2280, #e6d6ff);
+  --accent-soft: light-dark(#f0e8f9, #2a2140);
+  --on-accent: light-dark(#ffffff, #14151a); /* text on solid accent */
+
+  /* ── Polarity: gain (teal-blue) vs loss (vermilion). Never red/green. ── */
+  --gain: light-dark(#00737a, #28bac1);
+  --gain-soft: light-dark(#e1f1f3, #12302f);
+  --loss: light-dark(#bc3f06, #ef8959);
+  --loss-soft: light-dark(#fbe9e0, #3a2118);
+  --on-gain: light-dark(#ffffff, #0b1d1e);
+  --on-loss: light-dark(#ffffff, #2a1209);
+  /* The same poles as GRAPHICAL MARKS (bars, lines, dots: ≥ 3 : 1). Here one value does both jobs
+     (text ≥ 4.5 : 1 implies mark ≥ 3 : 1); brand-ci.css splits them. */
+  --gain-mark: light-dark(#00737a, #28bac1);
+  --loss-mark: light-dark(#bc3f06, #ef8959);
+
+  /* ── Tiers of evidence (see TierBadge) ────────────────────────────────── */
+  --tier-law-bg: light-dark(#15171c, #edece7); /* solid: written in the law */
+  --tier-law-fg: light-dark(#faf8f4, #14151a);
+  --tier-announced-bd: light-dark(#434852, #c4c3bc); /* dashed + hatched: announced */
+  --tier-hypothesis-bd: light-dark(#5c616c, #9a9ca6); /* dotted, sunken: our hypothesis */
+  --hatch: light-dark(rgb(21 23 28 / 0.17), rgb(237 236 231 / 0.2)); /* hatch line colour */
+
+  /* ── Focus ────────────────────────────────────────────────────────────── */
+  --focus: var(--accent);
+
+  /* ── Chart chrome ─────────────────────────────────────────────────────── */
+  --chart-grid: light-dark(#e4e0d6, #2c2d35);
+  --chart-axis: light-dark(#b9b5a9, #4a4c57);
+
+  /* ── Chart · categorical (identity). Fixed order, never cycled. ───────── */
+  --series-1: light-dark(#2d6bbb, #4f8ddf); /* blue */
+  --series-2: light-dark(#df662f, #de6a35); /* orange */
+  --series-3: light-dark(#00918b, #00aaa3); /* teal */
+  --series-4: light-dark(#bb8603, #b88715); /* ochre */
+  --series-5: light-dark(#d66098, #d6679a); /* rose */
+  --series-6: light-dark(#6f8f20, #80a236); /* olive */
+  --series-7: light-dark(#7255cf, #8a6ee2); /* violet */
+  --series-8: light-dark(#a0522c, #b66946); /* sienna */
+  --series-other: light-dark(#8a867b, #6b6d78); /* « Autres » */
+
+  /* ── Text on chart fills (pure white or near-black, whichever contrasts more: ≥ 4.5 : 1) ───────── */
+  --on-series-1: light-dark(#ffffff, #0b0b0b);
+  --on-series-2: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-3: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-4: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-5: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-6: light-dark(#0b0b0b, #0b0b0b);
+  --on-series-7: light-dark(#ffffff, #0b0b0b);
+  --on-series-8: light-dark(#ffffff, #0b0b0b);
+  --on-hour-keep: light-dark(#ffffff, #0c1424); /* « Vous gardez » segment of the hour of work */
+  /* …and on the greys « ink n % over the card » of the hour of work (chart-theme.test.ts checks them). */
+  --on-tint-90: light-dark(#ffffff, #000000);
+  --on-tint-78: light-dark(#ffffff, #000000);
+  --on-tint-66: light-dark(#ffffff, #000000);
+  --on-tint-56: light-dark(#000000, #000000);
+  --on-tint-48: light-dark(#000000, #000000);
+
+  /* ── Chart · sequential (magnitude): one hue (blue), light → dark. ────── */
+  --seq-1: light-dark(#e4f0ff, #202f42);
+  --seq-2: light-dark(#b4d1f7, #29456a);
+  --seq-3: light-dark(#87b2eb, #325c94);
+  --seq-4: light-dark(#5c92db, #3e75bd);
+  --seq-5: light-dark(#3473c4, #4f8fe3);
+  --seq-6: light-dark(#0a55a8, #66aaff);
+  --seq-7: light-dark(#003889, #81c6ff);
+
+  /* ── Chart · diverging (polarity): gain arm | neutral | loss arm. ─────── */
+  --div-gain-4: light-dark(#00737a, #58d0d6);
+  --div-gain-3: light-dark(#33a0aa, #35a3a9);
+  --div-gain-2: light-dark(#85c4cc, #2a7a7f);
+  --div-gain-1: light-dark(#c3e0e5, #1f4a4d);
+  --div-mid: light-dark(#ebe8e0, #2c2e37);
+  --div-loss-1: light-dark(#f3cdbb, #5a3426);
+  --div-loss-2: light-dark(#e9a07f, #92522f);
+  --div-loss-3: light-dark(#d36d43, #c9703f);
+  --div-loss-4: light-dark(#bc3f06, #f2956a);
+
+  /* ── Type ─────────────────────────────────────────────────────────────── */
+  /* 'EPJN Narrow Space' supplies U+202F (narrow no-break space), absent from the fontsource subsets. */
+  --ff-sans:
+    'EPJN Narrow Space', 'Schibsted Grotesk', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --ff-serif: var(--ff-sans); /* the display face is the same grotesque */
+  --ff-mono:
+    'EPJN Narrow Space', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas,
+    monospace;
+
+  /* ── Shape & layout ───────────────────────────────────────────────────── */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 14px;
+  --wrap: 72rem; /* page container */
+  --measure: 40rem; /* comfortable reading column (≈ 68 characters) */
+  --tap: 2.75rem; /* 44 px comfortable touch target (WCAG 2.5.8 needs only 24 px) */
+
+  /* ── Shape & type tokens of the base layer (brand-ci.css overrides them) ───── */
+  --field-bg: var(--surface); /* text inputs, selects, segmented options */
+  --card-bg: var(--surface);
+  --card-bw: 1px;
+  --card-bc: var(--rule);
+  --card-r: var(--r-lg);
+  --btn-r: var(--r-md);
+  --btn-primary-bg: var(--accent);
+  --btn-primary-fg: var(--on-accent);
+  --btn-primary-hover: var(--accent-hover);
+  --btn-secondary-bg: var(--surface);
+  --btn-secondary-bc: var(--rule-strong);
+  --r-tag: var(--r-sm); /* tier badges, source chips' inner label */
+  --rule-w: 1px; /* hairline rules between blocks */
+  --bar-w: 4px; /* left bar of callouts */
+  --nav-mark: var(--accent); /* current-page mark in the header */
+  --focus-w: 3px;
+  --focus-offset: 2px;
+
+  --link: var(--accent);
+  --link-hover: var(--accent-hover);
+  --link-underline: color-mix(in oklab, var(--accent) 45%, transparent);
+  --link-underline-w: 1px;
+  --link-underline-hover-w: 2px;
+
+  --ff-label: var(--ff-sans); /* eyebrows, small captions in capitals */
+  --fs-label: var(--text-xs);
+  --fw-label: 650;
+  --ls-label: 0.09em;
+  --ff-figure: var(--ff-serif); /* big standalone numbers */
+  --fw-figure: 500;
+  --ls-figure: -0.03em;
+  --fw-h1: 500; /* h1, h2 and .display */
+  --ls-h1: -0.018em;
+  --ls-display: -0.03em;
+  --fw-h3: 650; /* h3, h4 */
+  --ls-h3: -0.005em;
+  --fw-strong: 650;
+  --font-features: 'cv11' 1, 'ss03' 0;
+
+  --hatch-angle: 135deg; /* « annoncé » hatching */
+  --hatch-w: 1.5px;
+  --hatch-gap: 7px;
+  --hatch-fine-w: 1px;
+  --hatch-fine-gap: 4.5px;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}

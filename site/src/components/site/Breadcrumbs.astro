@@ -1,0 +1,31 @@
+---
+import { withBase } from '@/lib/site';
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  items: Crumb[];
+}
+const { items } = Astro.props;
+---
+
+<nav aria-label="Fil d’Ariane" class="mb-4 text-sm text-ink-3">
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
+    {items.map((c, i) => (
+      <li class="flex items-center gap-2">
+        {i > 0 && <span aria-hidden="true">/</span>}
+        {c.href ? (
+          <a href={withBase(c.href)} class="text-ink-2">
+            {c.label}
+          </a>
+        ) : (
+          <span aria-current="page" class="text-ink">
+            {c.label}
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

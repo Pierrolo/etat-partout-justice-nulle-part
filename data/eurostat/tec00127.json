@@ -1,0 +1,468 @@
+{
+ "class": "dataset",
+ "dimension": {
+  "freq": {
+   "category": {
+    "index": {
+     "A": 0
+    },
+    "label": {
+     "A": "Annual"
+    }
+   },
+   "label": "Time frequency"
+  },
+  "geo": {
+   "category": {
+    "index": {
+     "AL": 38,
+     "AT": 23,
+     "BE": 4,
+     "BG": 5,
+     "CH": 34,
+     "CY": 16,
+     "CZ": 6,
+     "DE": 8,
+     "DK": 7,
+     "EA19": 3,
+     "EA20": 2,
+     "EA21": 1,
+     "EE": 9,
+     "EL": 11,
+     "ES": 12,
+     "EU27_2020": 0,
+     "FI": 29,
+     "FR": 13,
+     "HR": 14,
+     "HU": 20,
+     "IE": 10,
+     "IS": 31,
+     "IT": 15,
+     "LI": 32,
+     "LT": 18,
+     "LU": 19,
+     "LV": 17,
+     "ME": 36,
+     "MK": 37,
+     "MT": 21,
+     "NL": 22,
+     "NO": 33,
+     "PL": 24,
+     "PT": 25,
+     "RO": 26,
+     "RS": 39,
+     "SE": 30,
+     "SI": 27,
+     "SK": 28,
+     "TR": 40,
+     "UK": 35
+    },
+    "label": {
+     "AL": "Albania",
+     "AT": "Austria",
+     "BE": "Belgium",
+     "BG": "Bulgaria",
+     "CH": "Switzerland",
+     "CY": "Cyprus",
+     "CZ": "Czechia",
+     "DE": "Germany",
+     "DK": "Denmark",
+     "EA19": "Euro area - 19 countries  (2015-2022)",
+     "EA20": "Euro area – 20 countries (2023-2025)",
+     "EA21": "Euro area – 21 countries (from 2026)",
+     "EE": "Estonia",
+     "EL": "Greece",
+     "ES": "Spain",
+     "EU27_2020": "European Union - 27 countries (from 2020)",
+     "FI": "Finland",
+     "FR": "France",
+     "HR": "Croatia",
+     "HU": "Hungary",
+     "IE": "Ireland",
+     "IS": "Iceland",
+     "IT": "Italy",
+     "LI": "Liechtenstein",
+     "LT": "Lithuania",
+     "LU": "Luxembourg",
+     "LV": "Latvia",
+     "ME": "Montenegro",
+     "MK": "North Macedonia",
+     "MT": "Malta",
+     "NL": "Netherlands",
+     "NO": "Norway",
+     "PL": "Poland",
+     "PT": "Portugal",
+     "RO": "Romania",
+     "RS": "Serbia",
+     "SE": "Sweden",
+     "SI": "Slovenia",
+     "SK": "Slovakia",
+     "TR": "Türkiye",
+     "UK": "United Kingdom"
+    }
+   },
+   "label": "Geopolitical entity (reporting)"
+  },
+  "na_item": {
+   "category": {
+    "index": {
+     "B9": 0
+    },
+    "label": {
+     "B9": "Net lending (+)/net borrowing (-)"
+    }
+   },
+   "label": "National accounts indicator (ESA 2010)"
+  },
+  "sector": {
+   "category": {
+    "index": {
+     "S13": 0
+    },
+    "label": {
+     "S13": "General government"
+    }
+   },
+   "label": "Sector"
+  },
+  "time": {
+   "category": {
+    "index": {
+     "2024": 0,
+     "2025": 1
+    },
+    "label": {
+     "2024": "2024",
+     "2025": "2025"
+    }
+   },
+   "label": "Time"
+  },
+  "unit": {
+   "category": {
+    "index": {
+     "MIO_EUR": 1,
+     "MIO_NAC": 2,
+     "PC_GDP": 0
+    },
+    "label": {
+     "MIO_EUR": "Million euro",
+     "MIO_NAC": "Million units of national currency",
+     "PC_GDP": "Percentage of gross domestic product (GDP)"
+    }
+   },
+   "label": "Unit of measure"
+  }
+ },
+ "extension": {
+  "agencyId": "ESTAT",
+  "annotation": [
+   {
+    "date": "2014-11-11T17:46:56+0100",
+    "type": "CREATED"
+   },
+   {
+    "title": "<adms:identifier xmlns:adms=\"http://www.w3.org/ns/adms#\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core.html\" xmlns:dct=\"http://purl.org/dc/terms/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"><adms:Identifier rdf:about=\"https://doi.org/10.2908/TEC00127\"><skos:notation rdf:datatype=\"http://purl.org/spar/datacite/doi\">10.2908/TEC00127</skos:notation><dct:creator rdf:resource=\"http://publications.europa.eu/resource/authority/corporate-body/ESTAT\"/><dct:issued rdf:datatype=\"http://www.w3.org/2001/XMLSchema#date\">2023-01-19</dct:issued></adms:Identifier></adms:identifier>",
+    "type": "DISSEMINATION_DOI_XML"
+   },
+   {
+    "title": "DATASET",
+    "type": "DISSEMINATION_OBJECT_TYPE"
+   },
+   {
+    "title": "[{\"names\":{\"de\":{\"locale\":\"de\",\"value\":\"Standardpräsentation\",\"html\":false},\"en\":{\"locale\":\"en\",\"value\":\"Default presentation\",\"html\":false},\"fr\":{\"locale\":\"fr\",\"value\":\"Présentation par défaut\",\"html\":false}},\"descriptions\":{},\"code\":\"default\",\"useAsDefault\":true,\"order\":0,\"defaultView\":\"view.table\",\"jsonFormat\":null,\"preselection\":[{\"code\":\"freq\",\"multipleSelection\":null,\"singleSelection\":\"A\"},{\"code\":\"unit\",\"multipleSelection\":null,\"singleSelection\":null},{\"code\":\"sector\",\"multipleSelection\":null,\"singleSelection\":\"S13\"},{\"code\":\"na_item\",\"multipleSelection\":null,\"singleSelection\":\"B9\"},{\"code\":\"geo\",\"multipleSelection\":null,\"singleSelection\":null}],\"preselectionTimeFilter\":{\"code\":\"time\",\"multipleSelection\":null,\"singleSelection\":null,\"mode\":\"ALL\",\"from\":null,\"to\":null,\"fixed\":null},\"layoutFormat\":{\"layoutAxes\":{\"y1\":\"time\",\"x1\":\"geo\"},\"fixedMinMax\":false,\"mapProjection\":null,\"mapShowAllGeo\":true,\"mapNumberOfColors\":0,\"rankingMode\":false,\"highlightMode\":false,\"labelOption\":null,\"labelByDimension\":null,\"businessRulesStrategy\":null,\"mapClassificartionMethode\":null}}]",
+    "type": "DISSEMINATION_PRESENTATIONS"
+   },
+   {
+    "title": "v0_4_X",
+    "type": "DISSEMINATION_PRESENTATIONS_VERSION"
+   },
+   {
+    "title": "GOV_10DD_EDPT1",
+    "type": "DISSEMINATION_SOURCE_DATASET"
+   },
+   {
+    "date": "2026-10-21T11:00:00+0200",
+    "type": "DISSEMINATION_TIMESTAMP_DATA"
+   },
+   {
+    "date": "2026-10-21T11:00:00+0200",
+    "type": "DISSEMINATION_TIMESTAMP_GLOBAL"
+   },
+   {
+    "date": "2026-10-21T11:00:00+0200",
+    "type": "DISSEMINATION_TIMESTAMP_PLANNED"
+   },
+   {
+    "href": "https://ec.europa.eu/eurostat/cache/metadata/en/gov_10dd_esms.htm",
+    "title": "Explanatory texts (metadata)",
+    "type": "ESMS_HTML"
+   },
+   {
+    "href": "https://ec.europa.eu/eurostat/api/dissemination/files?file=metadata/gov_10dd_esms.sdmx.zip",
+    "title": "Explanatory texts (metadata)",
+    "type": "ESMS_SDMX"
+   },
+   {
+    "title": "1116",
+    "type": "OBS_COUNT"
+   },
+   {
+    "title": "2025",
+    "type": "OBS_PERIOD_OVERALL_LATEST"
+   },
+   {
+    "title": "2014",
+    "type": "OBS_PERIOD_OVERALL_OLDEST"
+   },
+   {
+    "text": "Eurostat",
+    "type": "SOURCE_INSTITUTIONS"
+   },
+   {
+    "date": "2026-10-21T11:00:00+0200",
+    "type": "UPDATE_DATA"
+   },
+   {
+    "date": "2026-04-22T11:00:00+0200",
+    "type": "UPDATE_STRUCTURE"
+   }
+  ],
+  "datastructure": {
+   "agencyId": "ESTAT",
+   "id": "TEC00127",
+   "version": "58.0"
+  },
+  "description": "The general government deficit/surplus is defined in the Maastricht Treaty as general government net lending (+)/net borrowing (-) according to the European System of Accounts. The general government sector comprises central government, state government, local government, and social security funds. The relevant definitions are provided in Council Regulation 479/2009, as amended.",
+  "id": "TEC00127",
+  "lang": "EN",
+  "positions-with-no-data": {
+   "freq": [],
+   "geo": [
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40
+   ],
+   "na_item": [],
+   "sector": [],
+   "time": [],
+   "unit": []
+  },
+  "version": "1.0"
+ },
+ "id": [
+  "freq",
+  "unit",
+  "sector",
+  "na_item",
+  "geo",
+  "time"
+ ],
+ "label": "General government deficit/surplus",
+ "size": [
+  1,
+  3,
+  1,
+  1,
+  41,
+  2
+ ],
+ "source": "ESTAT",
+ "updated": "2026-10-21T11:00:00+0200",
+ "value": {
+  "0": -3.1,
+  "1": -3.1,
+  "10": -3.0,
+  "100": -652.2,
+  "101": -839.3,
+  "102": 23433.3,
+  "103": 10666.9,
+  "104": 3326.0,
+  "105": 4935.0,
+  "106": -50807.0,
+  "107": -40641.0,
+  "108": -169118.0,
+  "109": -151592.0,
+  "11": -4.0,
+  "110": -2140.9,
+  "111": -2827.3,
+  "112": -74835.0,
+  "113": -69736.0,
+  "114": 1444.7,
+  "115": 1360.2,
+  "116": -744.8,
+  "117": -1085.3,
+  "118": -1025.0,
+  "119": -1498.2,
+  "12": -2.0,
+  "120": 513.4,
+  "121": -1604.1,
+  "122": -10588.3,
+  "123": -10420.6,
+  "124": -814.9,
+  "125": -505.7,
+  "126": -8075.0,
+  "127": -18895.0,
+  "128": -22952.6,
+  "129": -21372.4,
+  "13": -2.2,
+  "130": -54940.3,
+  "131": -66895.1,
+  "132": 2107.3,
+  "133": 2045.4,
+  "134": -32511.9,
+  "135": -29694.3,
+  "136": -571.9,
+  "137": -1812.0,
+  "138": -7162.1,
+  "139": -6145.9,
+  "14": 4.1,
+  "140": -12277.0,
+  "141": -10745.0,
+  "142": -8738.6,
+  "143": -9316.5,
+  "15": 2.9,
+  "16": -2.7,
+  "164": -566570.8,
+  "165": -592232.5,
+  "166": -469930.9,
+  "167": -480482.5,
+  "168": -466739.4,
+  "169": -475818.2,
+  "17": -2.9,
+  "170": -464598.5,
+  "171": -472990.9,
+  "172": -27241.6,
+  "173": -33422.6,
+  "174": -3191.5,
+  "175": -4664.3,
+  "176": -159222.0,
+  "177": -185469.0,
+  "178": 122904.9,
+  "179": 90224.3,
+  "18": -1.6,
+  "180": -119146.0,
+  "181": -132104.0,
+  "182": -652.2,
+  "183": -839.3,
+  "184": 23433.3,
+  "185": 10666.9,
+  "186": 3326.0,
+  "187": 4935.0,
+  "188": -50807.0,
+  "189": -40641.0,
+  "19": -2.0,
+  "190": -169118.0,
+  "191": -151592.0,
+  "192": -2140.9,
+  "193": -2827.3,
+  "194": -74835.0,
+  "195": -69736.0,
+  "196": 1444.7,
+  "197": 1360.2,
+  "198": -744.8,
+  "199": -1085.3,
+  "2": -3.0,
+  "20": 4.2,
+  "200": -1025.0,
+  "201": -1498.2,
+  "202": 513.4,
+  "203": -1604.1,
+  "204": -4185561.4,
+  "205": -4144994.8,
+  "206": -814.9,
+  "207": -505.7,
+  "208": -8075.0,
+  "209": -18895.0,
+  "21": 1.8,
+  "210": -22952.6,
+  "211": -21372.4,
+  "212": -236562.0,
+  "213": -283615.0,
+  "214": 2107.3,
+  "215": 2045.4,
+  "216": -161733.7,
+  "217": -149730.5,
+  "218": -571.9,
+  "219": -1812.0,
+  "22": 1.4,
+  "220": -7162.1,
+  "221": -6145.9,
+  "222": -12277.0,
+  "223": -10745.0,
+  "224": -99904.0,
+  "225": -103099.0,
+  "23": 2.0,
+  "24": -3.2,
+  "25": -2.4,
+  "26": -5.8,
+  "27": -5.1,
+  "28": -2.5,
+  "29": -3.0,
+  "3": -3.0,
+  "30": -3.4,
+  "31": -3.1,
+  "32": 4.0,
+  "33": 3.6,
+  "34": -1.8,
+  "35": -2.5,
+  "36": -1.3,
+  "37": -1.8,
+  "38": 0.6,
+  "39": -1.8,
+  "4": -3.0,
+  "40": -5.1,
+  "41": -4.7,
+  "42": -3.5,
+  "43": -2.1,
+  "44": -0.7,
+  "45": -1.6,
+  "46": -4.6,
+  "47": -4.1,
+  "48": -6.4,
+  "49": -7.2,
+  "5": -3.0,
+  "50": 0.7,
+  "51": 0.7,
+  "52": -9.2,
+  "53": -7.8,
+  "54": -0.8,
+  "55": -2.5,
+  "56": -5.4,
+  "57": -4.4,
+  "58": -4.4,
+  "59": -3.8,
+  "6": -3.0,
+  "60": -1.6,
+  "61": -1.6,
+  "7": -3.0,
+  "8": -4.4,
+  "82": -566570.8,
+  "83": -592232.5,
+  "84": -469930.9,
+  "85": -480482.5,
+  "86": -466739.4,
+  "87": -475818.2,
+  "88": -464598.5,
+  "89": -472990.9,
+  "9": -5.2,
+  "90": -27241.6,
+  "91": -33422.6,
+  "92": -3191.5,
+  "93": -4664.3,
+  "94": -6338.5,
+  "95": -7512.5,
+  "96": 16477.6,
+  "97": 12088.9,
+  "98": -119146.0,
+  "99": -132104.0
+ },
+ "version": "2.0"
+}

@@ -1,0 +1,115 @@
+{
+ "_comment": "Généré par pipeline/build.py ; sha256 du texte JSON de chaque fichier (hors manifest.json). Sortie déterministe : deux exécutions donnent les mêmes empreintes.",
+ "files": {
+  "agences.json": {
+   "bytes": 723548,
+   "sha256": "5cad0481d07f308d8410f94b303bf1169ecfa5ebadbcdf3db9fd6415a6dfd1e3",
+   "top_level_lists": {
+    "autorites_independantes": 24,
+    "commissions": 324,
+    "commissions_par_ministere": 16,
+    "emplois_etat_rap_2024": 26,
+    "matrice_sorts": 8,
+    "missions_conservees": 7,
+    "operateurs": 180,
+    "operateurs_par_mission": 24,
+    "organismes_odac": 700,
+    "organismes_odal_categories": 23,
+    "sorts_agences_etat": 6,
+    "sorts_groupes": 3
+   }
+  },
+  "amendements.json": {
+   "bytes": 152261,
+   "sha256": "023139e1aeba518c366ea5f005810f81410ce190bd572211377fcd6aa1a8016c",
+   "top_level_lists": {
+    "amendements": 84
+   }
+  },
+  "calendrier.json": {
+   "bytes": 135231,
+   "sha256": "b009b2bd87951980dea9697e259cf49651f7456117b6393831daa7720b5b11d5",
+   "top_level_lists": {
+    "annonces_sans_date": 9,
+    "events": 109,
+    "jalons": 11,
+    "trajectoires": 10
+   }
+  },
+  "credits-retires.json": {
+   "bytes": 69387,
+   "sha256": "0caf5fa7fa62d01335ea0a54c60ba276cb9afc352403563ea213ba74e2f55a67",
+   "top_level_lists": {
+    "missions": 23
+   }
+  },
+  "depenses-cofog.json": {
+   "bytes": 78258,
+   "sha256": "797b77894f94d2af742434f687087099b85f1b2cd8a06629b3b3111cbe8bf24f",
+   "top_level_lists": {
+    "cofog_divisions": 10,
+    "cofog_subfunctions": 69,
+    "flat": 90,
+    "groups": 6,
+    "unassigned_subfunctions": 2
+   }
+  },
+  "etat-partout.json": {
+   "bytes": 51862,
+   "sha256": "23b7db81f05f32ead56acbcbb368d74e732bcdc97f57124475d26ee0fd486238",
+   "top_level_lists": {
+    "revendications_manifeste": 12
+   }
+  },
+  "europe.json": {
+   "bytes": 123601,
+   "sha256": "3a29944ff3d6fd8f5efa301d4abf75057c85201628f9d0685662d1098f718563",
+   "top_level_lists": {
+    "agregats": 4,
+    "depenses_publiques_pib": 68,
+    "pays": 32,
+    "revenu_median_eur": 33,
+    "revenu_median_spa": 33,
+    "solde_public_pib": 68
+   }
+  },
+  "facts.json": {
+   "bytes": 242691,
+   "sha256": "7ba5ab62f4f09884548c769ef8af4b7ce065e67eb134087e8ea27d20917b0494",
+   "top_level_lists": {
+    "facts": 423
+   }
+  },
+  "fiches.json": {
+   "bytes": 47856,
+   "sha256": "eaeb02e8fea191a2bc3ba9e6e7b509a067ace3b789f42e3d0fbf4d6bfbcdf71b",
+   "top_level_lists": {
+    "fiches": 18
+   }
+  },
+  "lifecycle.json": {
+   "bytes": 73327,
+   "sha256": "060bb7d8492e26f49ea303c34760b8e95abbbaa02bd8ffb48b6763b1050af0d0",
+   "top_level_lists": {
+    "by_age": 86,
+    "records": 321,
+    "series": 7
+   }
+  },
+  "niches.json": {
+   "bytes": 1227123,
+   "sha256": "b48002c734ee70a3c7ca8df4ea07e3490cf359cbbc6795aa183234d46bec0027",
+   "top_level_lists": {
+    "niches": 465,
+    "provisions_calcul_impot": 81
+   }
+  },
+  "plan-flux.json": {
+   "bytes": 62158,
+   "sha256": "d332876716140d122ed28cac2e1b874aebf96f3ee5da1a8a54754b29ae5ab503",
+   "top_level_lists": {
+    "savings_table": 26
+   }
+  }
+ }
+}

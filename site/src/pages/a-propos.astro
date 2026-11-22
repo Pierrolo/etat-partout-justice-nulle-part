@@ -1,0 +1,230 @@
+---
+import PageHeader from '@/components/site/PageHeader.astro';
+import { Callout } from '@/components/ui';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { SITE, withBase } from '@/lib/site';
+
+/** Dépôt public du projet : code, données, pipeline, suivi des erreurs. */
+const REPO = 'https://github.com/Pierrolo/etat-partout-justice-nulle-part';
+
+const sections = [
+  { id: 'independance', label: 'Indépendance' },
+  { id: 'qui', label: 'Qui fait ce site' },
+  { id: 'fabrication', label: 'Comment il est fait' },
+  { id: 'licences', label: 'Licences' },
+  { id: 'vie-privee', label: 'Vie privée' },
+  { id: 'accessibilite', label: 'Accessibilité' },
+  { id: 'contact', label: 'Contact et corrections' },
+];
+
+/** Conditions de réutilisation de chaque famille de sources (voir aussi site/src/data/README.md). */
+const sources = [
+  {
+    who: 'Association Résolution — france-resolution.fr (classeurs de données, amendements, fiches, manifeste)',
+    terms: 'Aucune licence indiquée par la source',
+    use: 'Citées avec attribution, liens vers la source, aucun logo ni aucune charte reprise. Si vous êtes l’auteur d’un contenu et souhaitez un retrait ou une correction, ouvrez une issue.',
+  },
+  {
+    who: 'Insee (comptes nationaux, budget de famille)',
+    terms: 'Licence Ouverte 2.0 (Etalab)',
+    use: 'Réutilisation libre, avec mention de la source et de la date.',
+  },
+  {
+    who: 'DGFiP, Direction du budget (PLF 2026, voies et moyens, dépenses fiscales)',
+    terms: 'Licence Ouverte 2.0 (Etalab)',
+    use: 'Réutilisation libre, avec mention de la source et de la date.',
+  },
+  {
+    who: 'Eurostat (dépenses publiques, solde public, revenu médian)',
+    terms: 'CC BY 4.0',
+    use: 'Réutilisation libre, avec attribution.',
+  },
+  {
+    who: 'Polices Schibsted Grotesk et JetBrains Mono',
+    terms: 'SIL Open Font License 1.1',
+    use: 'Servies depuis ce site, jamais depuis un service tiers.',
+  },
+];
+---
+
+<BaseLayout
+  title="À propos"
+  description="Un outil indépendant, open source, sans traceur : qui le fait, comment, sous quelle licence, et comment signaler une erreur."
+>
+  <PageHeader eyebrow="À propos" title="Un outil indépendant, ouvert et sans traceur" />
+
+  <div class="wrap grid gap-10 lg:grid-cols-[14rem_1fr] lg:gap-16">
+    <nav aria-label="Sur cette page" class="lg:sticky lg:top-6 lg:self-start">
+      <p class="eyebrow mb-2">Sur cette page</p>
+      <ul class="flex flex-wrap gap-x-4 gap-y-1 text-sm lg:block lg:space-y-1">
+        {sections.map((s) => (
+          <li>
+            <a href={`#${s.id}`} class="inline-flex min-h-8 items-center">
+              {s.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="prose-epjn min-w-0">
+      <section id="independance" aria-labelledby="independance-t" class="scroll-mt-20">
+        <h2 id="independance-t" class="!mt-0">
+          Indépendance
+        </h2>
+        <Callout tone="plan" title="Un explicatif du plan, pas un site officiel">
+          <p>
+            {SITE.independence} Ce site explique le plan avec ses propres mots, ses amendements et
+            ses chiffres. Il n’est pas le site de l’association Résolution ni celui des auteurs du
+            livre, et il ne parle pas à leur place. Il n’émane d’aucune administration. Logos,
+            chartes officielles et Système de design de l’État restent dehors.
+          </p>
+        </Callout>
+        <p>
+          Le plan présenté ici est celui publié par l’association Résolution (france-resolution.fr),
+          exposé dans le livre « État partout, justice nulle part ». Le site le présente tel qu’il
+          est écrit, sans cacher ceux qui y perdraient. Chaque chiffre est relié à sa source, et
+          tous les calculs se font dans votre navigateur. Trois statuts accompagnent les chiffres :
+          « proposé dans un amendement » (texte rédigé et publié, pas en vigueur), « annoncé » (une
+          annonce du plan, sans texte précis) et « notre estimation » (un choix du simulateur là où
+          le texte est muet). La <a href={withBase('/methode/')}>méthode</a> les détaille.
+        </p>
+      </section>
+
+      <section id="qui" aria-labelledby="qui-t" class="scroll-mt-20">
+        <h2 id="qui-t">Qui fait ce site</h2>
+        <p>
+          Un projet collectif et ouvert à toute contribution : le copyright est détenu par les
+          « Contributeurs du projet « Et moi, dans tout ça ? » ». Le site ne contient aucune
+          publicité, ne défend aucun parti et ne demande rien à ses visiteurs.
+        </p>
+        <p>
+          Il montre ce que le plan changerait pour un foyer donné, et il met en images les données
+          qui l’appuient. Les amendements, les fiches et les chiffrages sont ceux publiés par
+          l’association Résolution ; les lignes « notre estimation » sont les choix du site, pas les
+          siens.
+        </p>
+      </section>
+
+      <section id="fabrication" aria-labelledby="fabrication-t" class="scroll-mt-20">
+        <h2 id="fabrication-t">Comment il est fait</h2>
+        <ul>
+          <li>
+            <strong>Données ouvertes, reconstruites à l’identique.</strong> Les classeurs et les
+            textes de Résolution, les statistiques de l’Insee, de la DGFiP et d’Eurostat sont lus
+            par un script (<code>pipeline/</code>) qui produit les fichiers de données du site. Il
+            est déterministe : deux exécutions donnent les mêmes octets.
+          </li>
+          <li>
+            <strong>Chaque chiffre a une source.</strong> Les nombres affichés viennent d’un fichier
+            de faits qui garde la valeur, l’unité, l’année, le niveau de preuve et la cellule ou la
+            page d’origine. Quand deux sources divergent, les deux valeurs sont conservées et
+            expliquées — rien n’est corrigé en silence.
+          </li>
+          <li>
+            <strong>Code ouvert.</strong> Le site statique (Astro, React, Observable Plot), le
+            moteur de calcul et le pipeline sont publiés sur <a href={REPO}>le dépôt du projet</a>.
+            Le moteur est testé contre des cas de référence ; chaque page publiée passe des tests
+            d’accessibilité automatiques.
+          </li>
+          <li>
+            <strong>Développé avec l’aide d’assistants d’IA</strong>, puis relu et testé. Aucune
+            intelligence artificielle ne tourne sur le site ni dans le calcul.
+          </li>
+        </ul>
+      </section>
+
+      <section id="licences" aria-labelledby="licences-t" class="scroll-mt-20">
+        <h2 id="licences-t">Licences</h2>
+        <p>
+          <strong>Le code</strong> est publié sous <strong>licence MIT</strong>&#8239;:{' '}
+          <a href={`${REPO}/blob/main/LICENSE`}>texte de la licence</a>, copyright « Contributeurs
+          du projet « Et moi, dans tout ça ? » ». Vous pouvez le réutiliser, le modifier et le
+          redistribuer, y compris pour un autre usage.
+        </p>
+        <p>
+          <strong>Les données</strong> ne sont pas à nous : chacune garde les conditions de sa
+          source. Chaque fichier de données et chaque graphique nomment la leur.
+        </p>
+        <div
+          role="region"
+          aria-label="Tableau : conditions de réutilisation des sources"
+          tabindex="0"
+          class="my-4 max-w-full overflow-x-auto rounded-md border border-rule bg-surface"
+        >
+          <table class="data-table min-w-[36rem]">
+            <caption class="sr-only">Conditions de réutilisation des sources de données</caption>
+            <thead>
+              <tr>
+                <th scope="col">Source</th>
+                <th scope="col">Licence ou conditions</th>
+                <th scope="col">Ce que nous en faisons</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sources.map((s) => (
+                <tr>
+                  <th scope="row" class="!align-top !font-medium text-ink">
+                    {s.who}
+                  </th>
+                  <td class="!align-top">{s.terms}</td>
+                  <td class="!align-top">{s.use}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Les bibliothèques logicielles (Astro, React, Tailwind CSS, d3, Observable Plot…) gardent
+          leurs propres licences libres.
+        </p>
+      </section>
+
+      <section id="vie-privee" aria-labelledby="vie-privee-t" class="scroll-mt-20">
+        <h2 id="vie-privee-t">Vie privée</h2>
+        <ul>
+          <li>Aucun cookie, aucun traceur, aucune statistique de visite.</li>
+          <li>
+            Aucune requête vers un service tiers : polices et scripts sont servis par ce site.
+          </li>
+          <li>
+            Tout se calcule dans votre navigateur. Ce que vous saisissez dans le simulateur ne
+            quitte jamais votre appareil : l’état d’une simulation se range dans la partie de
+            l’adresse après le « # », que les navigateurs n’envoient pas aux serveurs.
+          </li>
+          <li>
+            Le choix du thème clair ou sombre est mémorisé dans le stockage local de votre
+            navigateur, sans jamais en sortir.
+          </li>
+          <li>
+            Le site est un ensemble de fichiers statiques servis par son hébergeur (aujourd’hui
+            GitHub Pages). Comme tout hébergeur, il peut conserver des journaux techniques de
+            connexion ; ce projet n’y a pas accès et n’ajoute aucun outil de mesure.
+          </li>
+        </ul>
+      </section>
+
+      <section id="accessibilite" aria-labelledby="accessibilite-t" class="scroll-mt-20">
+        <h2 id="accessibilite-t">Accessibilité</h2>
+        <p>
+          Le site vise le niveau AA des règles WCAG 2.2 : navigation au clavier, contrastes vérifiés
+          en thème clair et sombre, lecture possible à 320 px de large, chaque graphique accompagné
+          d’un résumé en clair et d’un tableau de ses données. L’information reste lisible sans la
+          couleur seule et sans le survol. Des tests automatiques suivent cet objectif. Si quelque
+          chose vous bloque, dites-le : c’est un défaut à corriger.
+        </p>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-t" class="scroll-mt-20">
+        <h2 id="contact-t">Contact et corrections</h2>
+        <p>
+          Pour signaler une erreur, un chiffre douteux ou un problème d’accessibilité, ou proposer
+          une amélioration, ouvrez une « issue » sur{' '}
+          <a href={`${REPO}/issues`}>le suivi du dépôt</a>. Indiquez la page et, si possible, la
+          source du chiffre contesté. Les règles de calcul sont décrites dans la{' '}
+          <a href={withBase('/methode/')}>méthode</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

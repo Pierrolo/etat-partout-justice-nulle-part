@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propositions — Résolution</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap');
+/* Design du proto du 20260924, inchangé. Seuls changent :
+   - les couleurs, prises aux variables de site/fiche.css. La brique est la
+     vraie, #b23a10, et non le #8C3315 du relevé au pixel.
+   - les fontes : --titre aux titres, --chif partout ailleurs, à la place
+     d'Helvetica.
+   - la colonne : 40 rem, celle du site.
+   --dor et --crm ne sont pas au :root de fiche.css (ils y vivent dans
+   .s-retour et .s-pied) : redéclarés ici à leur valeur de production. */
+:root{
+ --brique:#b23a10; --dor:#ffd24a; --crm:#fffdf2;
+ --fil:#ddd7cd; --ocre:#6b5b3e; --gris:#6d6a64;
+ --enc:#1a1a1a; --pap:#fdfcfa; --sable:#f7f3e8;
+ --titre:Archivo,'Helvetica Neue',Arial,sans-serif;
+ --chif:Archivo,'Helvetica Neue',Arial,sans-serif;
+ --texte:'Source Serif 4','Source Serif Pro',Georgia,serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--crm);color:var(--brique);
+     font-family:var(--chif);-webkit-font-smoothing:antialiased;font-size:16px;
+     -webkit-text-size-adjust:100%;text-size-adjust:100%;
+     /* le pied tient le bas de l'ecran : pas de vide sous lui (20261103) */
+     min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
+.wrap{max-width:40rem;margin:0 auto;padding:22px 16px 28px;flex:1 0 auto;width:100%}
+.fil{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gris);margin-bottom:14px}
+.fil b{color:var(--brique)}
+.q{font-family:var(--titre);font-size:19px;font-weight:800;margin:0 0 18px;text-transform:uppercase;letter-spacing:.02em;line-height:1.3;max-width:44ch}
+.q:has(i){max-width:none}
+/* Le total se lit AVANT son detail : c'est lui qui donne la mesure, la
+   decomposition n'est qu'une justification. */
+.q b{display:block;font-size:27px;letter-spacing:.01em}
+.q i{display:block;font-style:normal;font-size:23px;font-weight:700;text-transform:none;
+     letter-spacing:0;margin-top:7px;color:var(--brique);white-space:nowrap}
+.retour{background:none;border:none;color:var(--gris);font-size:11.5px;letter-spacing:.18em;
+        text-transform:uppercase;cursor:pointer;padding:0;margin-bottom:14px;font-weight:800}
+.retour:hover{color:var(--brique)}
+
+/* La racine : deux moitiés contrastées, comme au proto d'origine. Chacune
+   porte sa propre fresque, dans sa propre langue de couleur : le fronton sur
+   papier crème à gauche, l'argent en vrac sur brique à droite. */
+.duo{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--brique);
+ border-radius:12px;overflow:hidden;min-height:300px;
+ /* la racine prend la hauteur disponible au lieu de laisser un vide en bas */
+ min-height:clamp(300px, calc(100svh - 330px), 560px)}
+.moitie{position:relative;padding:28px 24px 0;cursor:pointer;display:flex;
+ flex-direction:column;justify-content:flex-start;overflow:hidden}
+/* Les deux « État » se lisent sur la même ligne : le texte est en tête des deux
+   moitiés, le dessin occupe le bas. */
+.moitie .dit{min-height:9.5rem}
+.moitie .toile{position:absolute;inset:0;pointer-events:none;background-repeat:no-repeat}
+.moitie .dit{position:relative}
+.claire{background:var(--crm);border-right:1.5px solid var(--brique)}
+.sombre{background:var(--brique);color:var(--dor)}
+.moitie .n{font-family:var(--titre);font-size:23px;font-weight:800;line-height:1.05;text-transform:uppercase;min-height:2.1em}
+.moitie .c{font-size:19px;font-weight:800;margin:12px 0 8px}
+.moitie .p{font-size:15.5px;line-height:1.5;max-width:34ch}
+.moitie:hover{outline:3px solid var(--dor);outline-offset:-3px}
+
+.grille{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+/* Lignes egales : les cartes d'une meme grille ont la meme hauteur, y compris
+   celle qui est seule sur sa ligne. Contrepartie obligatoire : un dessin en
+   colonne doit porter sa propre hauteur (flex-grow:0), sinon il s'etire avec
+   la carte et passe derriere l'ecriture. */
+.grille.bas{grid-auto-rows:1fr}
+.carte{position:relative;overflow:hidden;border:1.5px solid var(--brique);border-radius:12px;
+       padding:20px;cursor:pointer;min-height:168px;display:flex;flex-direction:column;
+       justify-content:space-between;background:var(--crm)}
+/* Disposition d'origine : le texte tient toute la largeur, comme sans dessin.
+   Le dessin se pose dans le vide du bas à droite, entier et visible, et ne
+   remonte pas jusqu'au titre : son bord gauche et son bord haut se fondent
+   dans le papier. Le texte ne porte qu'un halo crème, le strict minimum. */
+/* La zone de dessin est IDENTIQUE sur toutes les cartes, et le fondu aussi.
+   Les dessins sont normalisés en amont — même rapport de toile, même part de
+   hauteur occupée par le sujet — de sorte qu'ils paraissent de même taille et
+   se fondent de la même façon. Rien ne se calcule ici. */
+.carte .toile{position:absolute;top:auto;left:auto;right:0;bottom:0;
+       width:90%;aspect-ratio:3/2;height:auto;max-height:92%;pointer-events:none;
+       background-repeat:no-repeat;background-position:right bottom;background-size:contain;
+       -webkit-mask-image:linear-gradient(90deg,transparent,#000 17%),linear-gradient(180deg,transparent,#000 20%);
+       -webkit-mask-composite:source-in;
+       mask-image:linear-gradient(90deg,transparent,#000 17%),linear-gradient(180deg,transparent,#000 20%);
+       mask-composite:intersect}
+/* Grilles Economies : le texte y est long et la carte garde sa hauteur. La
+   place libre n'est donc pas SOUS l'ecriture mais A COTE — le texte prend la
+   colonne de gauche, le dessin celle de droite, sur toute la hauteur. Aucun
+   recouvrement, donc aucun fondu, donc aucun flou. */
+.grille.bas .carte{flex-direction:row;align-items:stretch;gap:14px}
+.grille.bas .carte .dit{flex:1 1 auto;min-width:0;order:1}
+.grille.bas .carte .toile{position:static;order:2;flex:0 0 42%;width:42%;height:auto;align-self:stretch;margin-top:16px;
+       aspect-ratio:auto;max-height:none;background-position:right bottom;background-size:contain;
+       -webkit-mask-image:none;mask-image:none}
+/* Une frise n'est pas une colonne : en lui donnant la moitie de la largeur on
+   etrangle le texte sans la rendre lisible. Elle se pose en bandeau, sur toute
+   la largeur de la carte, sous l'ecriture. */
+.grille.bas .carte.haut .toile{flex-basis:46%;width:46%;align-self:flex-end;height:195px;flex-grow:0}
+.grille.bas .carte.moyen .toile{flex-basis:48%;width:48%}
+.grille.bas .carte.allonge .toile{flex-basis:52%;width:52%}
+.grille.bas .carte .c{font-size:19px}
+.grille.bas .carte.large,.grille.bas .carte.bandeau{flex-direction:column}
+/* Carte a dessin flottant : le dessin se pose a droite SOUS le titre et le
+   chiffre, qui gardent toute la largeur, et la legende coule a sa gauche. */
+.grille.bas .carte.flot{flex-direction:column}
+.grille.bas .carte.flot .dit{width:100%;display:flow-root}
+.grille.bas .carte.flot .toile{float:right;position:static;width:72%;height:215px;
+       margin:4px 0 0 14px;background-position:right bottom;background-size:contain;
+       -webkit-mask-image:none;mask-image:none}
+.grille.bas .carte.bandeau .toile{flex:1 1 auto;width:100%;min-height:126px;height:auto;align-self:auto;background-position:center center}
+.grille.bas .carte.bandeau .dit{flex:0 0 auto}
+.grille.bas .carte.large .toile{flex:0 0 auto;width:100%;height:76px;align-self:auto;
+       background-position:center bottom}
+.carte .dit{position:relative;text-shadow:0 0 6px var(--crm),0 0 12px var(--crm)}
+.carte:hover .toile{opacity:.45}
+.carte:hover{background:var(--dor)}
+.carte .t{font-family:var(--titre);font-size:19px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;line-height:1.3}
+.carte .c{font-size:21px;font-weight:800;margin-top:12px;line-height:1.15}
+.carte .lg{font-size:16.5px;line-height:1.45;margin-top:7px;max-width:32ch}
+
+.concl{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+       margin-top:14px;padding:12px 20px;border:1.5px solid var(--brique);border-radius:12px;
+       background:var(--brique);color:var(--crm)}
+.concl span{font-family:var(--titre);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.concl b{font-size:21px;font-weight:800;color:var(--dor);white-space:nowrap}
+
+.miroir{display:grid;grid-template-columns:1fr auto 1fr;border:1.5px solid var(--brique);border-radius:12px;overflow:hidden}
+.col{padding:24px 20px;display:flex;flex-direction:column;min-width:0}
+/* Sur la colonne brique, l'or ne passe le contraste qu'en grand : 4,16 contre
+   la brique, soit AA pour du gras de 19 px et plus, pas pour du texte courant.
+   Le courant est donc en crème (5,87), et l'or est reserve aux montants et aux
+   totaux, qui sont tous en gras de 19 px. */
+.col.sombre{background:var(--brique);color:var(--crm)}
+.col.sombre .n,.col.sombre .tot,.col.sombre li b,.col.sombre .apart b,
+.col.sombre .unite,.col.sombre .part .apart span{color:var(--dor)}
+.col.claire{background:var(--crm);color:var(--brique)}
+.col .n{font-family:var(--titre);font-size:19px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+/* Le total se pose sur la MEME colonne que les montants du detail : nom a
+   gauche, chiffre a droite, comme une ligne de la liste. Pose en tete de bloc,
+   il ne se lisait pas comme la somme de ce qui suit. */
+.col .tete{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.col .tot{font-size:19px;font-weight:800;line-height:1.25;text-align:right;white-space:nowrap}
+.col .tot em{display:none}
+.col .unite{text-align:right;font-size:13.5px;font-weight:700;margin:2px 0 18px;white-space:nowrap}
+/* Les deux colonnes n'ont pas le meme nombre de lignes — cinq postes a gauche,
+   deux a droite. A hauteur de bloc egale, la liste courte se tassait en haut et
+   laissait un vide en bas. Elle se centre donc dans la hauteur disponible : le
+   vide se partage au-dessus et au-dessous, au lieu de tomber tout entier sous la
+   derniere ligne. L'ecarter aux extremites (space-evenly) a ete essaye et rejete
+   sur piece — les deux lignes se diluaient au lieu de former un bloc. */
+.col ul{list-style:none;margin:0;padding:0;flex:1 1 auto;
+        display:flex;flex-direction:column;justify-content:center}
+/* La colonne restituee ne porte que deux lignes. Centrees, elles flottaient
+   loin de leur titre : elles remontent sous la tete, ou le titre les tient, et
+   s'ecartent d'un cran l'une de l'autre pour ne pas se lire comme une seule
+   masse. Reglage porte par la seule colonne claire : la colonne sombre est
+   pleine, un gap commun l'allongerait. */
+.col.claire ul{justify-content:flex-start;gap:10px;padding-top:2px}
+.col li{display:flex;justify-content:space-between;gap:12px;font-size:15.5px;cursor:pointer;
+        padding:9px 0;border-bottom:1px solid rgba(178,58,16,.18)}
+/* Taille commune des libelles et des montants, sur toutes les lignes des deux
+   colonnes, pave du patrimoine compris (20261110 : les tailles differaient). */
+.col li span,.col li span.long{font-size:16px;line-height:1.3}
+.col.sombre li{border-color:rgba(255,210,74,.22)}
+.col li:hover{padding-left:6px}
+.col li b{font-weight:800;white-space:nowrap;font-size:19px}
+/* Le patrimoine n'est pas de meme nature : un stock cede une fois, hors du
+   total annuel. Un filet pointille ne suffisait pas a le dire — il prend son
+   propre pave, titre. */
+/* Le pave deborde de la gouttiere de la colonne, de la largeur de son propre
+   rembourrage : son montant tombe alors exactement sur la colonne des autres
+   montants, et rien ne depasse. */
+.col .part{margin:14px -10px 0;padding:11px 10px;border-radius:9px}
+/* Le pave ne marque qu'une difference de nature : trop appuye, il devient le
+   premier point de fixation du regard, avant les montants annuels, ce qui est
+   l'inverse de la hierarchie voulue. */
+.col.sombre .part{background:rgba(0,0,0,.08)}
+.col.claire .part{background:rgba(178,58,16,.035)}
+.col .reste{flex:0 0 0}
+.col .apart{margin:0;padding:0;font-size:15.5px;cursor:pointer;line-height:1.4;
+            display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+/* Dans le pave « hors total », l'etiquette se pose AU-DESSUS du montant : en
+   vis-a-vis, la colonne est trop etroite et le montant se brise en deux. */
+.col .apart b{font-weight:800;font-size:19px;white-space:nowrap}
+/* Le montant du pave reste sur la meme colonne que les autres. A droite il est
+   plus long d'un tiers : il s'y rend d'un cran plus petit, ce que la colonne
+   creme permet sans perdre le contraste. */
+/* Le patrimoine se rend a la MEME taille des deux cotes. Le libelle ne tient
+   pas sur une ligne : sa coupure est ECRITE, pour qu'elle tombe au meme mot a
+   gauche et a droite — laissee au moteur, elle differe d'une colonne a l'autre.
+   Le montant se centre sur la hauteur du pave, pas sur la premiere ligne. */
+.col .part .apart{align-items:center;gap:8px}
+.col .part .apart b{font-size:19px}
+.col .part .apart span{font-size:16px;line-height:1.3;white-space:nowrap}
+/* Le signe egal porte sur les deux TOTAUX, 236 Md€ = +600 €, pas sur la paire
+   de lignes qui se trouve a mi-hauteur. Centre sur la colonne, il tombait en
+   face du pave « patrimoine public rendu » des deux cotes et semblait dire
+   patrimoine = patrimoine, quand le patrimoine est justement hors du total.
+   Il se cale donc sur la ligne de tete, au meme rembourrage haut que les
+   colonnes, et a la hauteur de ligne du total. */
+.egal{display:flex;align-items:flex-start;justify-content:center;padding:24px 12px 0;
+      background:var(--dor);color:var(--brique);font-size:24px;font-weight:800;
+      line-height:1.25}
+
+.verso{border:1.5px solid var(--brique);border-radius:12px;overflow:hidden;position:relative;background:var(--crm)}
+/* La fresque : une couche d'image sous le texte, masquée au moment du rendu
+   par la fonction fresque(). Voir methode/fresque_de_carte.md. */
+.toile{position:absolute;inset:0;pointer-events:none;background-repeat:no-repeat}
+.vtete{padding:20px 24px;position:relative}
+.vtete h2{margin:0;font-family:var(--titre);font-size:19px;font-weight:800;letter-spacing:.05em;
+ text-transform:uppercase;color:var(--brique)}
+.vtete .c{font-size:19px;font-weight:800;margin-top:8px;line-height:1.25;color:var(--ocre)}
+.filet{height:3px;margin:0 24px;background:linear-gradient(90deg,#000091,#fff 50%,#e1000f);position:relative}
+.vcorps{padding:22px 24px;position:relative}
+.bloc{padding-bottom:18px}
+.bloc .lab{display:inline-block;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+           padding:4px 11px;margin-bottom:10px;font-weight:800;border:1.5px solid var(--brique);border-radius:20px}
+.avant .lab{background:var(--brique);color:var(--crm)}
+.apres .lab{background:var(--dor);color:var(--brique)}
+.bloc p{margin:0 0 9px;line-height:1.6;font-size:15.5px}
+.src{color:var(--gris);font-size:12.5px;border-top:1px solid var(--fil);padding-top:12px;line-height:1.6}
+.src b{font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ocre);margin-right:6px}
+.src a{color:var(--ocre);text-underline-offset:2px}
+.src a:hover{color:var(--brique)}
+.liens{padding:14px 24px;border-top:1.5px solid var(--brique);display:flex;gap:10px;flex-wrap:wrap;
+ align-items:center;position:relative;background:var(--crm)}
+.lien{border:1.5px solid var(--brique);border-radius:20px;padding:8px 15px;font-size:12px;
+      letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-weight:800;
+      text-decoration:none;color:var(--brique);display:inline-block}
+.lien:hover{background:var(--dor)}
+/* Les renvois vers le site : une liste en colonnes, le genre au-dessus du nom,
+   aux corps des étiquettes et du texte de la carte. */
+.vgraph{flex:1 1 100%;margin:4px 0 0;font-size:14px;line-height:1.4;color:var(--ocre)}
+.vgraph a{color:var(--brique);font-weight:700;text-underline-offset:3px}
+.vgraph a:hover{background:var(--dor)}
+.renvois{list-style:none;margin:4px 0 0;padding:0;flex:1 1 100%;display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px 16px}
+/* Chaque renvoi est une petite fiche : sa vignette (le graphique, l'image de la
+   video), son genre, son nom. Le genre se lit d'abord a l'image. */
+.renvois li{min-width:0}
+.renvois a{display:grid;grid-template-columns:84px 1fr;grid-template-rows:auto 1fr;gap:2px 12px;
+ align-items:start;text-decoration:none;color:var(--brique);padding:6px;border:1.5px solid var(--fil);border-radius:9px;background:var(--crm)}
+.renvois a:hover{border-color:var(--brique);background:var(--dor)}
+.renvois img,.renvois .vide{grid-row:1 / span 2;width:84px;height:62px;object-fit:cover;object-position:top;border-radius:5px;background:var(--sable)}
+.renvois .r-chiffres .vide{background:var(--sable) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 54'%3E%3Cpath d='M3 1h27l11 11v39a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z' fill='%23fff' stroke='%236b5b3e' stroke-width='2'/%3E%3Cpath d='M8 20h28M8 27h28M8 34h28M18 16v22M28 16v22' stroke='%236b5b3e' stroke-width='1.4'/%3E%3C/svg%3E") center/26px no-repeat}
+.renvois .genre{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:800;color:var(--ocre)}
+.renvois .nom{font-size:14.5px;line-height:1.3;font-weight:700}
+/* Les amendements, a part : la liste des textes qui portent la carte. */
+.amendements{flex:1 1 100%;margin:6px 0 0;padding:10px 0 0;border-top:1px dashed var(--fil)}
+.amendements .genre{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:800;color:var(--ocre)}
+.amendements ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:4px}
+.amendements a{font-size:13.5px;line-height:1.35;color:var(--gris);text-underline-offset:2px}
+.amendements a:hover{color:var(--brique)}
+/* Les mots a cliquer dans le texte de la carte : ils s'eclairent d'or. */
+/* Lisible d'abord : le mot garde l'encre du texte, en gras, souligne d'un
+   trait or epais ; l'or plein ne vient qu'au survol. */
+.mot{color:inherit;font-weight:800;cursor:pointer;text-decoration:underline;
+ text-decoration-color:var(--dor);text-decoration-thickness:3px;text-underline-offset:4px}
+.mot:hover{background:var(--dor);text-decoration-color:var(--brique)}
+.fiche{border:none;text-decoration:underline;color:var(--gris);font-weight:400;text-transform:none;letter-spacing:0;font-size:13px}
+.fiche:hover{background:none;color:var(--brique)}
+.arrondi{color:var(--gris);font-size:11.5px;font-style:italic;margin:8px 2px 0;line-height:1.4}
+.note{color:var(--gris);font-size:12.5px;margin-top:32px;border-top:1px solid var(--fil);padding-top:12px;line-height:1.5}
+/* La racine ne s'empile JAMAIS. Les deux etats se lisent l'un en face de
+   l'autre : c'est la dichotomie elle-meme, et empiles ils deviennent une suite.
+   Les deux moities restent donc cote a cote a toute largeur, et c'est le corps
+   du texte qui cede. Le miroir, lui, s'empile : son signe egal porte le lien,
+   pas la mise en page. */
+/* Sur ordinateur (20261104) : la carto prend la largeur de l'écran au lieu de
+   rester dans la colonne du mobile ; les grilles passent à trois ou quatre
+   cartes par ligne, le verso garde une ligne de lecture raisonnable. */
+@media(min-width:1100px){
+ .wrap{max-width:min(78rem,94vw);padding-top:28px}
+ .q{font-size:22px;max-width:60ch}
+ .grille{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+ .verso{max-width:62rem;margin:0 auto}
+}
+@media(max-width:640px){.miroir{grid-template-columns:1fr}
+  .egal{padding:8px}
+  /* Mobile : les deux moitiés s'empilent, pleine largeur, et se partagent
+     la hauteur de l'écran ; le texte garde un corps de lecture. */
+  .duo{grid-template-columns:1fr;grid-auto-rows:1fr;min-height:clamp(440px,calc(100svh - 330px),680px)}
+  .moitie.claire{border-right:0;border-bottom:1.5px solid var(--brique)}
+  .moitie{padding:20px 18px 18px}
+  .moitie .dit{min-height:0}
+  .moitie .n{font-size:24px;min-height:0}
+  .moitie .c{font-size:18px;margin:10px 0 6px}
+  .moitie .p{font-size:15px;line-height:1.45;max-width:24ch}}
+</style>
+</head>
+<body>
+<div class=site-bande><template shadowrootmode="open"><link rel=stylesheet href="fiche.css"><style>:host{display:block;background:#b23a10;padding:1.4rem 1rem;--nuit:#b23a10;--sable:#f7f3e8;--pap:#fdfcfa;--chif:Archivo,'Helvetica Neue',Arial,sans-serif;}.s-retour{margin-bottom:0}.s-pied{margin:0 auto}@media(max-width:600px){:host{padding:.8rem .5rem}}</style><div class=s-retour><a class=s-marque href="index.html">← Résolution</a><ul class=a-rub><li><a href="manifeste.html">Manifeste</a></li><li><a href="propositions.html" aria-current="page">Propositions</a></li><li><a href="videos.html">Vidéos</a></li><li><a href="graphiques.html">Graphiques</a></li><li><a href="donnees.html">Données</a></li></ul></div></template></div>
+<div class="wrap">
+  <p class="fil" id="fil"></p>
+  <button class="retour" id="retour" style="display:none">← revenir</button>
+  <h1 class="q" id="q"></h1>
+  <div id="vue"></div>
+  <p class="note"><a class="lien fiche" href="fiches.html">Votre situation, fiche par fiche</a></p>
+</div>
+<script>
+/* ---------------------------------------------------------------------------
+   RENVOIS — les liens de chaque carte vers le site : « Le graphique » et, là
+   où le plan d'intégration le prévoit, « Les chiffres ». Aucun lien vers une
+   fiche « quoi pour qui ». Une carte absente ne produit aucun lien : aucun
+   bouton mort ne se rend.
+   Le bloc entre les deux marques est produit par outils/renvois.py depuis
+   site/renvois.json, la seule table des renvois : il ne s'édite pas ici.
+--------------------------------------------------------------------------- */
+const SITE="";          /* racine du site : la carto est servie à la racine */
+/* renvois:début */
+const RENVOIS={"indisp":[["graphiques/depense-publique.html","Graphique","À quoi sert la dépense publique ?","graphiques/depense-publique.png"],["videos.html#video-instant-christine-kelly-20-novembre","Vidéo","L’instant Christine Kelly, podcast, 20 novembre","img/video-instant-christine-kelly-20-novembre.webp"],["videos.html#video-senat-prospective-10-novembre","Vidéo","Sénat, Délégation à la prospective, 10 novembre","img/video-senat-prospective-10-novembre.webp"],["videos.html#video-yt-conference-lancement","Vidéo","Résolution, la conférence de lancement","img/video-yt-conference-lancement.webp"],["videos.html#video-europe1-christine-kelly","Vidéo","Europe 1, Christine Kelly et vous, 13 octobre","img/video-europe1-christine-kelly.webp"],["videos.html#video-lci-brunet-sans-filtre","Vidéo","LCI, Brunet sans filtre, 7 octobre","img/video-lci-brunet-sans-filtre.webp"],["videos.html#video-rmc-grandes-gueules","Vidéo","RMC, Les Grandes Gueules, 11 septembre","img/video-rmc-grandes-gueules.webp"]],"resti":[["graphiques/economies.html","Graphique","Où sont les 236 milliards d’euros d’économies par an ?","graphiques/economies.png"],["graphiques/depense-pays.html","Graphique","La France dépense plus que ses pairs","graphiques/depense-pays.png"],["graphiques/deficit-pays.html","Graphique","Le déficit français, le plus creusé de ses pairs","graphiques/deficit-pays.png"],["videos.html#video-instant-christine-kelly-20-novembre","Vidéo","L’instant Christine Kelly, podcast, 20 novembre","img/video-instant-christine-kelly-20-novembre.webp"],["videos.html#video-senat-prospective-10-novembre","Vidéo","Sénat, Délégation à la prospective, 10 novembre","img/video-senat-prospective-10-novembre.webp"],["videos.html#video-yt-conference-lancement","Vidéo","Résolution, la conférence de lancement","img/video-yt-conference-lancement.webp"],["videos.html#video-bfm-experts-25-septembre","Vidéo","BFM Business, Les Experts, 25 septembre","img/video-bfm-experts-25-septembre.webp"],["videos.html#video-europe1-christine-kelly","Vidéo","Europe 1, Christine Kelly et vous, 13 octobre","img/video-europe1-christine-kelly.webp"],["videos.html#video-lci-brunet-sans-filtre","Vidéo","LCI, Brunet sans filtre, 7 octobre","img/video-lci-brunet-sans-filtre.webp"],["videos.html#video-rmc-grandes-gueules","Vidéo","RMC, Les Grandes Gueules, 11 septembre","img/video-rmc-grandes-gueules.webp"]],"struct":[["graphiques/economies.html","Graphique","Où sont les 236 milliards d’euros d’économies par an ?","graphiques/economies.png"]],"chom":[["graphiques/economies.html","Graphique","Où sont les 236 milliards d’euros d’économies par an ?","graphiques/economies.png"]],"reg":[["graphiques/agences.html","Graphique","1 104 agences aujourd’hui, 303 demain","graphiques/agences.png"]],"agences":[["graphiques/agences.html","Graphique","1 104 agences aujourd’hui, 303 demain","graphiques/agences.png"],["onglets/agences-operateurs-r.html","Chiffres","Agences publiques",""]],"com":[["graphiques/representation.html","Graphique","Cinq étages séparent le citoyen de la décision","graphiques/representation.png"]],"code":[["graphiques/volume-du-droit.html","Graphique","Le droit a presque doublé en vingt ans","graphiques/volume-du-droit.png"]],"aide":[["graphiques/solidarite-vie.html","Graphique","Solidarité au cours de la vie","graphiques/solidarite-vie.png"]],"eparg":[["graphiques/solidarite-vie.html","Graphique","Solidarité au cours de la vie","graphiques/solidarite-vie.png"]],"cpte":[["graphiques/solidarite-vie.html","Graphique","Solidarité au cours de la vie","graphiques/solidarite-vie.png"]],"etud":[["graphiques/solidarite-vie.html","Graphique","Solidarité au cours de la vie","graphiques/solidarite-vie.png"]],"sal":[["graphiques/valeur-ajoutee.html","Graphique","À qui va le produit créé par une heure de travail ?","graphiques/valeur-ajoutee.png"],["graphiques/revenu-median.html","Graphique","Le revenu médian français, affaibli par rapport à ses pairs","graphiques/revenu-median.png"],["videos.html#video-bfm-experts-24-aout","Vidéo","BFM Business, Les Experts, 24 août","img/video-bfm-experts-24-aout.webp"],["videos.html#video-bfm-experts-22-juin","Vidéo","BFM Business, Les Experts, 22 juin","img/video-bfm-experts-22-juin.webp"],["videos.html#video-bfm-experts-15-mai","Vidéo","BFM Business, Les Experts, 15 mai","img/video-bfm-experts-15-mai.webp"]],"pat":[["graphiques/patrimoine-public.html","Graphique","Patrimoine public","graphiques/patrimoine-public.png"]],"rend":[["graphiques/patrimoine-public.html","Graphique","Patrimoine public","graphiques/patrimoine-public.png"],["onglets/calculs-input-capitalisation.html","Chiffres","Synthèse des chiffrages",""]],"ech":[["graphiques/emplois-publics.html","Graphique","Où travaillent les agents publics ?","graphiques/emplois-publics.png"]],"agents":[["graphiques/emplois-publics.html","Graphique","Où travaillent les agents publics ?","graphiques/emplois-publics.png"],["graphiques/economies.html","Graphique","Où sont les 236 milliards d’euros d’économies par an ?","graphiques/economies.png"]],"subv":[["graphiques/economies.html","Graphique","Où sont les 236 milliards d’euros d’économies par an ?","graphiques/economies.png"],["onglets/calculs-annexe-manuscrit.html","Chiffres","Synthèse des chiffrages",""],["videos.html#video-france5-c-ce-soir-19-novembre","Vidéo","France 5, C ce soir, 19 novembre","img/video-france5-c-ce-soir-19-novembre.webp"]],"subvent":[["graphiques/economies.html","Graphique","Où sont les 236 milliards d’euros d’économies par an ?","graphiques/economies.png"],["onglets/calculs-annexe-manuscrit.html","Chiffres","Synthèse des chiffrages",""]],"subvpart":[["graphiques/economies.html","Graphique","Où sont les 236 milliards d’euros d’économies par an ?","graphiques/economies.png"],["onglets/calculs-annexe-manuscrit.html","Chiffres","Synthèse des chiffrages",""]],"subvasso":[["graphiques/economies.html","Graphique","Où sont les 236 milliards d’euros d’économies par an ?","graphiques/economies.png"],["onglets/calculs-annexe-manuscrit.html","Chiffres","Synthèse des chiffrages",""],["videos.html#video-france5-c-ce-soir-19-novembre","Vidéo","France 5, C ce soir, 19 novembre","img/video-france5-c-ce-soir-19-novembre.webp"]],"niches":[["graphiques/economies.html","Graphique","Où sont les 236 milliards d’euros d’économies par an ?","graphiques/economies.png"],["graphiques/niches-fiscales.html","Graphique","486 niches fiscales aujourd’hui, 0 demain","graphiques/niches-fiscales.png"],["onglets/calculs-flux.html","Chiffres","Synthèse des chiffrages",""]],"nichrev":[["graphiques/economies.html","Graphique","Où sont les 236 milliards d’euros d’économies par an ?","graphiques/economies.png"],["graphiques/niches-fiscales.html","Graphique","486 niches fiscales aujourd’hui, 0 demain","graphiques/niches-fiscales.png"],["onglets/calculs-flux.html","Chiffres","Synthèse des chiffrages",""]],"nichtva":[["graphiques/economies.html","Graphique","Où sont les 236 milliards d’euros d’économies par an ?","graphiques/economies.png"],["graphiques/niches-fiscales.html","Graphique","486 niches fiscales aujourd’hui, 0 demain","graphiques/niches-fiscales.png"],["onglets/calculs-flux.html","Chiffres","Synthèse des chiffrages",""]],"secu":[["graphiques/depense-publique.html","Graphique","À quoi sert la dépense publique ?","graphiques/depense-publique.png"],["videos.html#video-bfm-experts-21-octobre","Vidéo","BFM Business, Les Experts, 21 octobre","img/video-bfm-experts-21-octobre.webp"]],"soli":[["graphiques/solidarite-vie.html","Graphique","Solidarité au cours de la vie","graphiques/solidarite-vie.png"]],"educ":[["graphiques/solidarite-vie.html","Graphique","Solidarité au cours de la vie","graphiques/solidarite-vie.png"]],"imp":[["graphiques/valeur-ajoutee.html","Graphique","À qui va le produit créé par une heure de travail ?","graphiques/valeur-ajoutee.png"],["graphiques/fusion-des-impots.html","Graphique","434 prélèvements aujourd’hui, 4 grands impôts demain","graphiques/fusion-des-impots.png"],["videos.html#video-europe1-impot","Vidéo","Europe 1, « On ne s’en sortira pas par l’impôt », 4 septembre","img/video-france5-c-ce-soir-19-novembre.webp"]],"sante":[["graphiques/depense-publique.html","Graphique","À quoi sert la dépense publique ?","graphiques/depense-publique.png"]],"minis":[["graphiques/emplois-publics.html","Graphique","Où travaillent les agents publics ?","graphiques/emplois-publics.png"]]};
+const AMENDEMENTS={"struct":[["amendements/Liasse_PLF_P2.pdf#page=8","PLF, 2de partie, n° 4 — Retirer les crédits que la présente loi interrompt, mission « Écologie, développement et mobilité durables »"],["amendements/Liasse_PLF_P2.pdf#page=19","PLF, 2de partie, n° 14 — Retirer les crédits que la présente loi interrompt, mission « Transformation et fonction publiques »"],["amendements/Liasse_PLF_P2.pdf#page=23","PLF, 2de partie, n° 18 — Retirer les crédits que la présente loi interrompt, mission « Agriculture et alimentation »"]],"chom":[["amendements/Liasse_PLF_P2.pdf#page=28","PLF, 2de partie, n° 23 — Supprimer la contribution de l’assurance chômage à France Travail"]],"reg":[["amendements/Liasse_PLF_P2.pdf#page=31","PLF, 2de partie, n° 25 — Agences de l’État"]],"agences":[["amendements.html#c-agences","Les 4 amendements « Agences »"]],"com":[["amendements.html#c-com","Les 7 amendements « Commune autonome »"]],"aide":[["amendements/Liasse_PLF_P1.pdf#page=76","PLF, 1re partie, n° 28 — Un taux unique finance une aide fondamentale versée à chacun"],["amendements/Liasse_PLFSS.pdf#page=19","PLFSS, n° 7 — Une aide pour toutes"]],"eparg":[["amendements/Liasse_PLF_P1.pdf#page=73","PLF, 1re partie, n° 27 — Un compte d’épargne au nom de chacun, alimenté par la restitution"],["amendements/Liasse_PLFSS.pdf#page=17","PLFSS, n° 6 — Un régime socle unique remplace les régimes de base par répartition"]],"etud":[["amendements/Liasse_PLF_P2.pdf#page=15","PLF, 2de partie, n° 10 — Retirer les crédits que la présente loi interrompt, mission « Recherche et enseignement supérieur »"]],"sal":[["amendements/Liasse_PLFSS.pdf#page=3","PLFSS, n° 1 — CSG et CRDS supprimées sur les revenus d’activité"],["amendements/Liasse_PLFSS.pdf#page=8","PLFSS, n° 2 — Retirer de la clé de répartition la part qui n’a plus de produit"]],"pat":[["amendements/Liasse_PLF_P1.pdf#page=73","PLF, 1re partie, n° 27 — Un compte d’épargne au nom de chacun, alimenté par la restitution"],["amendements/Liasse_PLF_P2.pdf#page=58","PLF, 2de partie, n° 30 — L’État cesse d’acheter, il valorise et il vend"]],"ech":[["amendements/Liasse_PLF_P1.pdf#page=86","PLF, 1re partie, n° 31 — Dotations"],["amendements/Liasse_PLF_P1.pdf#page=88","PLF, 1re partie, n° 32 — Départements et régions"],["amendements/Liasse_PLF_P1.pdf#page=93","PLF, 1re partie, n° 34 — TVA des collectivités"]],"agents":[["amendements/Liasse_PLF_P2.pdf#page=29","PLF, 2de partie, n° 24 — Retirer du plafond les emplois des missions que l’État abandonne"],["amendements/Liasse_PLF_P2.pdf#page=47","PLF, 2de partie, n° 26 — Organiser la sortie des agents dont l’emploi est supprimé"]],"subv":[["amendements/Liasse_PLF_P2.pdf#page=8","PLF, 2de partie, n° 4 — Retirer les crédits que la présente loi interrompt, mission « Écologie, développement et mobilité durables »"],["amendements/Liasse_PLF_P2.pdf#page=59","PLF, 2de partie, n° 31 — Cesser de subventionner, cesser de choisir sur dossier"]],"subvent":[["amendements/Liasse_PLF_P2.pdf#page=6","PLF, 2de partie, n° 2 — Retirer les crédits que la présente loi interrompt, mission « Travail, emploi et administration des ministères sociaux »"],["amendements/Liasse_PLF_P2.pdf#page=16","PLF, 2de partie, n° 11 — Retirer les crédits que la présente loi interrompt, mission « Médias, livre et industries culturelles »"],["amendements/Liasse_PLF_P2.pdf#page=17","PLF, 2de partie, n° 12 — Retirer les crédits que la présente loi interrompt, mission « Économie »"]],"subvpart":[["amendements.html#c-subvpart","Les 6 amendements « Chèques aux particuliers »"]],"subvasso":[["amendements.html#c-subvasso","Les 9 amendements « Subventions aux associations »"]],"niches":[["amendements/Liasse_PLF_P1.pdf#page=4","PLF, 1re partie, n° 1 — Niches fiscales"]],"nichrev":[["amendements.html#c-nichrev","Les 4 amendements « Niches sur les revenus »"]],"nichtva":[["amendements.html#c-nichtva","Les 17 amendements « Niches sur la TVA et les sociétés »"]],"imp":[["amendements.html#c-imp","Les 11 amendements « Fusion des impôts »"]],"sante":[["amendements/Liasse_PLFSS.pdf#page=12","PLFSS, n° 4 — Personne ne paie plus de sa santé qu’une part fixe de ses ressources"]],"minis":[["amendements/Liasse_PLF_P2.pdf#page=11","PLF, 2de partie, n° 6 — Retirer les crédits que la présente loi interrompt, mission « Culture »"],["amendements/Liasse_PLF_P2.pdf#page=53","PLF, 2de partie, n° 27 — Plus aucune dépense nouvelle de l’État sans une signature qui en réponde"]]};
+const MOTS={"reg":[["746 agences","","graphiques/agences.html"],["303 opérateurs","agences",""]],"com":[["l'intercommunalité, le département et la région","ech",""],["Toute la taxe foncière","imp",""]],"code":[["49 millions de mots","","graphiques/volume-du-droit.html"],["les atteintes aux enfants attendent parmi les dossiers en souffrance","","https://www.youtube.com/shorts/jKJeYNxuoE0"],["La loi redevient l'exception qui sanctionne la nuisance, la liberté la règle","","https://www.youtube.com/shorts/edai4_pZWS0"]],"imp":[["486 niches","niches",""],["taxe foncière unifiée","com",""],["l'aide fondamentale universelle","aide",""],["Personne ne sait plus ce qu'il paie ni pourquoi","","https://www.youtube.com/shorts/mAgXMdx4AIw"],["peut augmenter la richesse produite de 5 %","","https://www.youtube.com/shorts/e2-uqs8oqK0"],["La refonte fiscale se fait sans augmenter les impôts","","https://www.youtube.com/shorts/YEuYWR8BmD4"]],"aide":[["550 € par mois par adulte valide","","graphiques/solidarite-vie.html"],["taux unique d'impôt sur le revenu de 23 %","imp",""],["un salarié augmenté peut perdre plus en aide sociale qu'il ne gagne","","coin-marginal.html"]],"eparg":[["Le patrimoine public facultatif","pat",""],["300 € par mois","","graphiques/solidarite-vie.html"]],"cpte":[["6 600 € par an pour chaque enfant","","graphiques/solidarite-vie.html"],["augmenté de +13 %","sal",""]],"etud":[["le compte éducation","cpte",""],["L'aide fondamentale de 550 € par mois","aide",""]],"sal":[["63 € de richesse","","graphiques/valeur-ajoutee.html"],["Les économies faites par l'Etat","resti",""],["Le travail ne paie plus.","","https://www.youtube.com/shorts/ZtYLPs5aWbc"]],"pat":[["600 Md€ de biens et de titres","","graphiques/patrimoine-public.html"],["votre compte épargne personnel","eparg",""],["18 Md€ par an","rend",""]],"agences":[["1 104 agences","","graphiques/agences.html"],["55 fonctions régaliennes","reg",""],["les dépenses associées","","onglets/agences-operateurs-r.html"],["Trois critères suffisent pourtant à reconnaître une mission facultative","","https://www.youtube.com/shorts/gV1ZQdFgfYU"]],"ech":[["Toute la taxe foncière revient à la commune","com",""]],"agents":[["5,8 millions d'agents publics","","graphiques/emplois-publics.html"]],"subvent":[["sous forme de salaire net","sal",""],["L'État taxe l'activité, puis rend une part du produit aux entreprises","","https://www.youtube.com/shorts/c-SRRzhfKAw"]],"subvpart":[["Leur salaire net augmente de +13 %","sal",""]],"subvasso":[["3 Md€ d'aide publique au développement","","graphiques/economies.html"]],"nichrev":[["486 niches fiscales","","graphiques/economies.html"],["Un seul impôt sur le revenu, à 23 %","imp",""]],"nichtva":[["Une TVA unique","imp",""]],"chom":[["votre compte épargne","eparg",""]],"rend":[["18 Md€ par an","","graphiques/patrimoine-public.html"],["les comptes épargne","eparg",""]],"sante":[["L’assurance et la solidarité sont à géométrie variable","","https://www.youtube.com/shorts/maxgtkLTzcc"]]};
+/* renvois:fin */
+/* ---------------------------------------------------------------------------
+   ILLUSTRATIONS — une image par carte, servie depuis le dossier du site.
+   Une entrée absente (null) : la carte se rend sans fresque, ce qui est son
+   état normal tant que le dessin n'est pas tiré. Le tirage suit la charte
+   des illustrations et la contrainte de la fresque : un seul objet, gros,
+   centré, flottant, beaucoup de vide, fond au crème de la carte.
+--------------------------------------------------------------------------- */
+const ILLUS={
+ /* Une entrée peut porter son propre réglage : {src, echelle, ecran}.
+    La racine est un paysage, pas un objet — elle se cadre entière, sans
+    débordement, et son écran est plus doux. */
+ /* La racine porte DEUX fresques, une par moitié : le fronton sur la moitié
+    crème, l'argent en vrac sur la moitié brique. Le contraste de couleur est
+    celui du proto d'origine. */
+ racine_g:{src:"illustrations/racine_g.png", echelle:1.25, ecran:0.26, paliers:"doux"},
+ racine_d:{src:"illustrations/racine_d.png", echelle:1.22, ecran:0.30, paliers:"doux"},
+
+/* Un sujet plus haut que large ne se cale pas sur la LARGEUR : a echelle egale,
+   sa hauteur rendue depasse plusieurs fois celle de la carte et l'on n'en voit
+   qu'une tranche - pour le personnage de `sal`, les jambes. Ces entrees portent
+   donc `cadre:"tenir"`, qui porte l'echelle sur la HAUTEUR, a 1,0 : le sujet
+   tient la carte entiere sans etre coupe. Regle : l'echelle se pose sur la plus
+   grande dimension du sujet. */
+ reg:"illustrations/reg.png",
+ com:"illustrations/com.png",
+ code:{src:"illustrations/code.png", cadre:"tenir", echelle:1.0},
+ imp:{src:"illustrations/imp.png", cadre:"tenir", echelle:1.0},
+ aide:{src:"illustrations/aide.png", cadre:"tenir", echelle:1.0},
+ sante:"illustrations/sante.png",
+ eparg:{src:"illustrations/eparg.png", cadre:"tenir", echelle:1.0},
+ cpte:"illustrations/cpte.png",
+ etud:{src:"illustrations/etud.png", cadre:"tenir", echelle:1.0},
+ sal:{src:"illustrations/sal.png", cadre:"tenir", echelle:1.0},
+ pat:"illustrations/pat.png",
+ agences:"illustrations/agences.png",
+ minis:"illustrations/minis.png",
+ ech:{src:"illustrations/ech.png", cadre:"tenir", echelle:1.0},
+ agents:{src:"illustrations/agents.png", cadre:"tenir", echelle:1.0},
+ subvent:{src:"illustrations/subvent.png", cadre:"tenir", echelle:1.0},
+ subvpart:"illustrations/subvpart.png",
+ subvasso:"illustrations/subvasso.png",
+ nichrev:{src:"illustrations/nichrev.png", cadre:"tenir", echelle:1.0},
+ nichtva:{src:"illustrations/nichtva.png", cadre:"tenir", echelle:1.0},
+ chom:"illustrations/chom.png",
+ rend:{src:"illustrations/rend.png", cadre:"tenir", echelle:1.0}
+};
+
+/* ---------------------------------------------------------------------------
+   ILLUS_CARTE — les fresques des petites cartes à retourner, dans les grilles.
+   Clef = la carte visée par le clic. Le gabarit diffère du verso : la carte
+   est courte, le texte tient le haut, donc la rampe monte du bas et le
+   débordement est faible. Une clef absente : carte nue.
+--------------------------------------------------------------------------- */
+/* Une carte de grille : le dessin occupe le vide laissé par l'écriture, à
+   pleine force, et ne s'éteint qu'aux bords et sous les lettres. Il ne tient
+   donc pas toute la carte — deux tiers de largeur, posés dans la plage libre. */
+/* Gabarit d'une carte de grille : le dessin se pose dans le vide à côté du
+   texte, comme sur un verso, et se fond là où il y a de l'écriture. */
+const TETE={echelle:1.25, ecran:0.07, paliers:"doux"};
+const SIL_AIDE="data:image/png;base64,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";
+const BAS={...TETE, sousTexte:true};        /* grilles Economies : dessin sous le texte */
+const ILLUS_CARTE={
+ secu:{src:"illustrations/secu.png", ...TETE},
+ soli:{src:"illustrations/soli.png", ...TETE},
+ educ:{src:"illustrations/educ.png", ...TETE},
+ /* Les grilles du facultatif. Memes encres et meme gabarit que la carte 2,
+    mais c'est l'AIRE qui y est commune, pas la part de hauteur : la serie
+    melange une tour de quatre etages et un ministere, et a hauteur egale la
+    tour devient un baton. Voir appareil/harmoniser_carte.py. */
+ agences:{src:"illustrations/agences.png", ...BAS},
+ minis:{src:"illustrations/minis.png", ...BAS},
+ ech:{src:"illustrations/ech.png", ...BAS},
+ agents:{src:"illustrations/agents.png", ...BAS},
+ subvent:{src:"illustrations/subvent.png", ...BAS},
+ subvpart:{src:"illustrations/subvpart.png", ...BAS},
+ subvasso:{src:"illustrations/subvasso.png", ...BAS},
+ nichrev:{src:"illustrations/nichrev.png", ...BAS},
+ nichtva:{src:"illustrations/nichtva.png", ...BAS},
+ /* La branche indispensable : memes regles de carte que la branche Economies. */
+ reg:{src:"illustrations/reg.png", ...BAS},
+ com:{src:"illustrations/com.png", ...BAS},
+ code:{src:"illustrations/code.png", ...BAS},
+ imp:{src:"illustrations/imp.png", ...BAS},
+ aide:{src:"illustrations/aide.png", ...BAS, flot:true, silhouette:SIL_AIDE},
+ sante:{src:"illustrations/sante.png", ...BAS, bandeau:true},
+ eparg:{src:"illustrations/eparg.png", ...BAS, flot:true, hauteur:296, colonne:"36%"},
+ /* Éducation. L'école est une frise — large et basse : posée en colonne elle se
+    rend en bâtonnet, donc elle prend le bandeau du bas, sur toute la largeur.
+    Le panneau est haut : il garde sa colonne, avec sa propre hauteur, sinon il
+    s'étire avec la carte et passe derrière l'écriture.
+    Deux fichiers par dessin, et non un : la fresque du verso veut le vide
+    autour du sujet, la carte de grille veut le sujet seul. Le même fichier
+    servi aux deux rend le panneau en bandes floues sur le verso.
+    Les deux cartes prennent le bandeau pleine largeur : en colonne, l'école
+    se rend en bâtonnet et le panneau trop petit. */
+ cpte:{src:"illustrations/cpte_carte.png", ...BAS, bandeau:true, hauteur:200},
+ etud:{src:"illustrations/etud_carte.png", ...BAS, bandeau:true, hauteur:200}
+};
+
+/* ---------------------------------------------------------------------------
+   LA FRESQUE — méthode arrêtée le 20261019, voir methode/fresque_de_carte.md.
+   Réglage retenu : ecran 0,16 · echelle 1,75.
+--------------------------------------------------------------------------- */
+/* L'échelle porte sur la LARGEUR du fichier, pas sur celle du sujet. Tant que
+   les fichiers portaient des cadrages différents, la même échelle rendait le
+   sujet de 30 % à 174 % de la largeur de carte — cinq fois et demie d'écart,
+   mesuré sur les vingt-deux. Tous les fichiers sont désormais serrés sur leur
+   sujet, donc l'échelle rend la même largeur apparente partout. 1,08 : le
+   dessin affleure les deux bords et déborde à peine. */
+const FRESQUE={ecran:0.16, ecranClef:0.05, echelle:1.08, flou:22,
+ /* Rampe par défaut : forte en haut, éteinte en bas — le texte d'un verso
+    commence en haut. Une carte dont le texte est en tête inverse la rampe :
+    le dessin monte du bas. */
+ paliers:[[0,.78],[.16,.18],[.30,.60],[.46,.14],[.60,.48],[.76,.12],[.90,.30],[1,0]],
+ paliersBas:[[0,0],[.14,.26],[.28,.12],[.42,.46],[.58,.16],[.72,.62],[.86,.22],[1,.82]],
+ /* Sur une carte basse, la rampe à paliers se lit comme des bandes blanches en
+    travers du dessin : il n'y a pas assez de hauteur pour que l'alternance
+    devienne une fresque. Une carte de grille prend donc un fondu continu. */
+ paliersDoux:[[0,.10],[.35,.52],[.72,.86],[1,1]]};
+
+/* Les mots clefs — titre, chiffre, étiquette — ne se négocient pas : le dessin
+   s'efface presque entièrement dessous. Le texte courant garde l'écran normal.
+   Sans cette distinction, un « +600 € » passe sous un billet et disparaît. */
+const CLEFS="h2,.n,.c,.t,.lab,.tot";
+function boitesTexte(carte){
+  const r0=carte.getBoundingClientRect(), out=[];
+  carte.querySelectorAll("h2,.n,.c,.t,.lg,.p,.lab,.tot,p,.src").forEach(el=>{
+    if(!el.textContent.trim()) return;
+    const fort=el.matches(CLEFS);
+    // ligne à ligne : la fin de la dernière ligne est du vide exploitable
+    const rg=document.createRange(); rg.selectNodeContents(el);
+    const rects=el.children.length?[el.getBoundingClientRect()]:Array.from(rg.getClientRects());
+    rects.forEach(r=>{ if(r.width>4&&r.height>4)
+      out.push({x:r.left-r0.left,y:r.top-r0.top,w:r.width,h:r.height,fort:fort}); });
+  });
+  return out;
+}
+function plageLibre(boites,W){
+  // Les deux bandes de marge de chaque bord sont exclues : toujours vides,
+  // elles attireraient le dessin dans la gouttière. À égalité, on va à droite.
+  const N=24, poids=new Array(N).fill(0), i0=2, i1=N-3;
+  boites.forEach(b=>{
+    const a=Math.max(0,Math.floor(b.x/W*N)), z=Math.min(N-1,Math.floor((b.x+b.w)/W*N));
+    for(let i=a;i<=z;i++) poids[i]+=b.h;
+  });
+  let best=i1,bestv=Infinity;
+  for(let i=i0;i<=i1;i++){
+    const v=poids[i]+(poids[i-1]||0)*.5+(poids[i+1]||0)*.5;
+    if(v<=bestv){bestv=v;best=i;}
+  }
+  return (best+0.5)/N;
+}
+function masque(boites,W,H,ecran,paliers){
+  const c=document.createElement("canvas"); c.width=W; c.height=H;
+  const x=c.getContext("2d");
+  const g=x.createLinearGradient(0,0,0,H);
+  (paliers||FRESQUE.paliers).forEach(([p,a])=>g.addColorStop(p,"rgba(255,255,255,"+a+")"));
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+  const lat=x.createLinearGradient(0,0,W,0);
+  lat.addColorStop(0,"rgba(0,0,0,1)"); lat.addColorStop(.06,"rgba(0,0,0,0)");
+  lat.addColorStop(.94,"rgba(0,0,0,0)"); lat.addColorStop(1,"rgba(0,0,0,1)");
+  x.globalCompositeOperation="destination-out"; x.fillStyle=lat; x.fillRect(0,0,W,H);
+  x.filter="blur("+(FRESQUE.flou/2)+"px)";
+  const e=(ecran!==undefined?ecran:FRESQUE.ecran);
+  // deux passes : le texte courant à l'écran demandé, les mots clefs au ras
+  x.fillStyle="rgba(0,0,0,"+(1-e)+")";
+  boites.filter(b=>!b.fort).forEach(b=>x.fillRect(b.x-6,b.y-3,b.w+12,b.h+6));
+  x.fillStyle="rgba(0,0,0,"+(1-FRESQUE.ecranClef)+")";
+  boites.filter(b=>b.fort).forEach(b=>x.fillRect(b.x-10,b.y-6,b.w+20,b.h+12));
+  x.filter="none"; x.globalCompositeOperation="source-over";
+  return c.toDataURL("image/png");
+}
+/* ---------------------------------------------------------------------------
+   L'ÉCRAN D'UNE CARTE DE GRILLE.
+   Une carte de grille ne prend pas la fresque du verso : son dessin ne tient
+   pas la carte mais une zone du bas à droite, et la fresque masque la carte
+   entière. Le fondu de la zone était donc fixe — deux rampes, à gauche et en
+   haut — et ne savait rien du texte : un titre long passait sur le bâtiment.
+   On garde ces deux rampes, qui font le gabarit arrêté, et on leur ajoute le
+   seul temps qui manquait : l'écran sous chaque ligne écrite, relevé ligne à
+   ligne comme au verso, puis ramené dans le repère de la zone.
+--------------------------------------------------------------------------- */
+function ecranCarte(carte,ecr,sousTexte){
+  const toile=carte.querySelector(".toile"); if(!toile) return;
+  /* Sur une carte haute, laisser le dessin passer derriere le texte est un
+     gachis : la bande libre sous le dernier mot suffit. On y cale le haut de
+     la zone, et le dessin s'y rend entier. */
+  /* Rien a masquer quand le dessin est dans sa propre colonne. */
+  if(sousTexte) return;
+  const rc=carte.getBoundingClientRect(), rz=toile.getBoundingClientRect();
+  const W=Math.round(rz.width), H=Math.round(rz.height); if(!W||!H) return;
+  const dx=rz.left-rc.left, dy=rz.top-rc.top;
+  const c=document.createElement("canvas"); c.width=W; c.height=H;
+  const x=c.getContext("2d");
+  const gh=x.createLinearGradient(0,0,W,0);
+  gh.addColorStop(0,"rgba(255,255,255,0)"); gh.addColorStop(.17,"rgba(255,255,255,1)");
+  x.fillStyle=gh; x.fillRect(0,0,W,H);
+  const gv=x.createLinearGradient(0,0,0,H);
+  gv.addColorStop(0,"rgba(255,255,255,0)"); gv.addColorStop(.20,"rgba(255,255,255,1)");
+  x.globalCompositeOperation="destination-in"; x.fillStyle=gv; x.fillRect(0,0,W,H);
+  x.globalCompositeOperation="destination-out"; x.filter="blur("+(FRESQUE.flou/2)+"px)";
+  const e=(ecr!==undefined?ecr:FRESQUE.ecran);
+  const b=boitesTexte(carte);
+  x.fillStyle="rgba(0,0,0,"+(1-e)+")";
+  b.filter(o=>!o.fort).forEach(o=>x.fillRect(o.x-dx-6,o.y-dy-3,o.w+12,o.h+6));
+  x.fillStyle="rgba(0,0,0,"+(1-FRESQUE.ecranClef)+")";
+  b.filter(o=>o.fort).forEach(o=>x.fillRect(o.x-dx-10,o.y-dy-6,o.w+20,o.h+12));
+  x.filter="none"; x.globalCompositeOperation="source-over";
+  const m="url("+c.toDataURL("image/png")+")";
+  toile.style.webkitMaskImage=m; toile.style.maskImage=m;
+  toile.style.webkitMaskComposite="source-over"; toile.style.maskComposite="add";
+  toile.style.webkitMaskSize="100% 100%"; toile.style.maskSize="100% 100%";
+}
+
+function fresque(carte,illu){
+  const toile=carte.querySelector(".toile"); if(!toile||!illu) return;
+  const o=(typeof illu==="string")?{src:illu}:illu;
+  const ech=o.echelle!==undefined?o.echelle:FRESQUE.echelle;
+  const ecr=o.ecran!==undefined?o.ecran:FRESQUE.ecran;
+  const r=carte.getBoundingClientRect(), W=Math.round(r.width), H=Math.round(r.height);
+  if(!W||!H) return;
+  const boites=boitesTexte(carte), cx=plageLibre(boites,W), Wi=W*ech;
+  /* Placement en PIXELS, jamais en pourcentage : le pourcentage s'inverse dès
+     que l'image est plus large que la carte, et change encore de sens quand
+     elle est plus étroite. En pixels, le calcul est le même des deux côtés —
+     on amène le centre du dessin sur le centre de la plage libre, puis on
+     borne pour que l'image ne décolle pas du bord opposé. */
+  toile.style.opacity=(o.opacite!==undefined?o.opacite:1);
+  toile.style.backgroundImage="url("+o.src+")";
+
+  /* Deux cadrages. Par défaut l'échelle porte sur la LARGEUR : c'est le verso,
+     où le dessin déborde volontiers. `cadre:"tenir"` la porte sur la HAUTEUR :
+     c'est la carte de grille, basse et large, où un dessin calé en largeur
+     déborde toujours par le haut, quel que soit le format du fichier. La
+     largeur se déduit alors du rapport réel de l'image, lu une fois chargée. */
+  const poser=(Wi)=>{
+    let x = cx*W - Wi/2;
+    x = (Wi>=W) ? Math.max(W-Wi, Math.min(0, x)) : Math.max(0, Math.min(W-Wi, x));
+    toile.style.backgroundPosition=Math.round(x)+"px bottom";
+  };
+  if(o.cadre==="tenir"){
+    toile.style.backgroundSize="auto "+(ech*100)+"%";
+    const im=new Image();
+    im.onload=()=>poser(ech*H*im.naturalWidth/im.naturalHeight);
+    im.src=o.src;
+    if(im.complete) poser(ech*H*im.naturalWidth/im.naturalHeight);
+  }else{
+    toile.style.backgroundSize=(ech*100)+"% auto";
+    poser(Wi);
+  }
+  const m=masque(boites,W,H,ecr,o.paliers==="bas"?FRESQUE.paliersBas:(o.paliers==="doux"?FRESQUE.paliersDoux:undefined));
+  toile.style.webkitMaskImage="url("+m+")"; toile.style.maskImage="url("+m+")";
+  toile.style.webkitMaskSize="100% 100%"; toile.style.maskSize="100% 100%";
+}
+
+const D={
+ racine:{type:"duo"},
+ indisp:{q:"Trois protections indispensables",type:"grille",
+   cartes:[["secu","Sécurité","5 ministères régaliens|Défense, Intérieur, Justice, Affaires étrangères, Comptes\u00a0publics"],
+           ["soli","Solidarité","550 € par mois|pour chaque citoyen"],
+           ["educ","Éducation","6 600 € par an|pour chaque enfant"]]},
+ resti:{type:"miroir"},
+ secu:{q:"5 des 7 ministères : Défense, Intérieur, Justice, Affaires étrangères, Comptes publics",type:"grille",
+   cartes:[["reg","Régalien concentré","55 fonctions<br>rendues|aux ministères,<br>responsables<br>devant vous"],
+           ["com","Commune autonome","1 échelon local|où votre vote<br>s'exprime<br>directement"],
+           ["code","Recodification","Quelques dizaines<br>de pages|par domaine, contre<br>67 000 pages ajoutées<br>chaque année"],
+           ["imp","Fusion des impôts","4 impôts<br>et une cotisation|au lieu de<br>438 prélèvements"]]},
+ soli:{q:"Solidarité",type:"grille",
+   cartes:[["aide","Aide fondamentale universelle","550 € par mois<br>275 € par enfant|identique pour<br>chaque citoyen"],
+           ["sante","Bouclier sanitaire","plafond unique à 5 %<br>du revenu annuel|10 % de reste à charge unique par soin essentiel"],
+           ["eparg","Compte épargne personnel","+300 € par mois|vos cotisations<br>à votre nom,<br>pour votre retraite"]]},
+ educ:{q:"Éducation",type:"grille",
+   cartes:[["cpte","Compte éducation","6 600 € par an<br>au nom de l'enfant|de sa naissance à ses 18 ans,<br>libre choix de l'école"],
+           ["etud","Études et formation","le même compte pour tous|pour étudier, se former ou épargner, toute la vie"]]},
+
+ reg:{t:"Régalien concentré",c:"55 fonctions rendues aux ministères",
+   a:"Amendes, cartes d'identité, passeports : l'État délègue à des agences ce qui engage son autorité. Aucune personne morale tierce ne peut se substituer à sa responsabilité devant vous, et chaque intermédiaire dilue la démocratie.",
+   d:"55 fonctions d'agence sont réinternalisées dans les ministères, parce qu'elles engagent la puissance publique directement et que seul l'Etat peut les exercer. 746 agences exerçant des missions facultatives sont fermées ou cédées. 303 opérateurs deviennent pleinement autonomes dont les universités, les centres de recherche, les musées.",
+   d2:"Un service qui décide, un ministre qui en répond devant vous et devant le Parlement directement, pas de perte de responsabilité et pas de surcoût administratif. Le monopole de la force légitime, la justice et la défense sont la raison d'être de l'État : ils se délèguent moins que tout le reste.",
+   m:"M-002, M-003, M-004",f:"folios 67-68",o:["GraphAgences"],l:[["com","Commune autonome"],["code","Recodification"]]},
+ com:{t:"Commune autonome",c:"un seul échelon local",
+   a:"Entre vous et l'État s'intercalent l'intercommunalité, le département et la région. Un électeur sur trois seulement se déplace pour élire les conseils régionaux et départementaux : ces échelons décident sans mandat clair. Ils imposent surtout des surcoûts administratifs.",
+   d:"La commune devient l'échelon politique local unique. La préfecture reste le relais de l'État, accessible à tous. Les communes s'associent librement en syndicats pour l'eau, les déchets ou les transports, comme elles le font depuis 1890, et fusionnent si elles le veulent. La dimension ne fait pas la vertu : les plus petites communes dégagent près de deux fois plus de marge pour investir que les plus grandes. Elles sont entièrement autonomes et responsables financièrement devant les électeurs.",
+   d2:"Toute la taxe foncière leur revient : la ressource et la décision au même endroit, à portée de votre voix.",
+   m:"M-010, M-011, M-012, M-014",f:"folios 71-76",o:[],l:[["reg","Régalien concentré"],["imp","Fusion des impôts"]]},
+ code:{t:"Recodification",c:"quelques dizaines de pages par domaine",
+   a:"49 millions de mots de droit applicable, le double d'il y a vingt ans, 67 000 pages ajoutées chaque année. Une justice engorgée et imprévisible rend ses décisions après des décennies, et les atteintes aux enfants attendent parmi les dossiers en souffrance.",
+   d:"Chaque domaine tient dans un code essentiel ramené au principe ancestral de la médecine : ne pas nuire. La loi redevient l'exception qui sanctionne la nuisance, la liberté la règle. Une nouvelle norme doit prouver sa nécessité et chiffrer son coût avant d'exister.",
+   d2:"C'est la condition d'un État de droit effectif : deux règles comprises et réellement appliquées valent mieux que vingt règles affichées en vain, et une justice plus rapide est une justice plus humaine. En cas de contentieux, c'est la conformité à l'esprit du code essentiel qui prévaut : un texte original vaut mieux que ses commentaires.",
+   m:"M-063, M-064, M-065",f:"folios 92-93",o:[],l:[["reg","Régalien concentré"]]},
+ imp:{t:"Fusion des impôts",c:"4 impôts principaux au lieu de 438 prélèvements",
+   a:"438 impôts, taxes et contributions, 486 niches, 1,7 milliard de combinaisons pour calculer un taux de charge. Personne ne sait plus ce qu'il paie ni pourquoi : un impôt illisible n'est ni équitable ni consenti.",
+   d:"TVA, revenu, sociétés, foncier : quatre impôts existants et connus, sur quatre assiettes économiques. Zéro niche, donc zéro régime de faveur. Celui qui n'a pas de conseiller fiscal cesse d'être le seul à payer plein tarif. Les impôts cachés, frais de notaire, droits de succession et taxes locales, cèdent la place à une taxe foncière unifiée en euros par mètre carré, au taux fixé localement.",
+   d2:"Un taux unique de 23 % sur le revenu, avec l'aide fondamentale universelle pour franchise : 77 centimes conservés sur chaque euro gagné, un impôt que vous pouvez calculer vous-même. Aligner notre fiscalité sur les meilleurs standards de simplicité peut augmenter la richesse produite de 5 %.",
+   d3:"La refonte fiscale se fait sans augmenter les impôts : elle les baisse, grâce à la restitution des économies sur la feuille de paie.",
+   m:"M-026, M-028, M-029, M-036",f:"folios 91-101",o:[],l:[["code","Recodification"],["sal","Salaire net"]]},
+
+ aide:{t:"Aide fondamentale universelle",c:"550 € par mois, 275 € par enfant",
+   a:"Les aides enferment les citoyens dans des cases : selon que vous êtes locataire, parent isolé, chômeur ou travailleur précaire, des sommes différentes sont versées sous conditions. Un tiers des éligibles ne reçoit rien : près d'un million de personnes renoncent devant un formulaire de sept pages. Les seuils laissent de côté ce qui ne rentre pas dans les cases.",
+   d:"Une aide unique, le même droit pour chaque citoyen versé par l'administration fiscale sans condition ni guichet : 550 € par mois par adulte valide, 275 € par mois par enfant. Personne n'a plus à se prouver pour être protégé de l'indigence. Les personnes affectées d'un handicap conservent une aide double sans condition de revenu.",
+   d2:"En activité l'aide fondamentale fait office de franchise adossée au taux unique d'impôt sur le revenu de 23 % : chaque heure travaillée rapporte davantage de manière certaine, sans effet de seuil. Aujourd'hui, un salarié augmenté peut perdre plus en aide sociale qu'il ne gagne. Demain, jamais.",
+   m:"M-036, M-039, M-040, M-041",f:"folios 111-116",o:[],l:[["imp","Fusion des impôts"],["sante","Bouclier sanitaire"]]},
+ sante:{t:"Bouclier sanitaire",c:"10 % du prix du soin, plafonnés à 5 % de votre revenu annuel",
+   a:"Selon votre statut, votre âge, votre contrat ou votre affection, la cotisation et le reste à charge varient sans que personne ne puisse le justifier ou vous l'annoncer à l'avance. L’assurance et la solidarité sont à géométrie variable. Le même dossier traité deux fois, par la sécurité sociale et par la mutuelle, vous impose des surcoûts : 16,9 Md€ de frais de gestion par an. L'illusion de la gratuité crée de la pénurie et du mauvais soin.",
+   d:"Un reste à charge uniforme, prévisible et soutenable : 10 % du prix de chaque soin essentiel, quelle que soit votre situation, plafonné à 5 % de votre revenu dans l'année. Le même barème pour tous, connu avant d'entrer chez le médecin.",
+   d2:"Une complémentaire en vraie concurrence et sans obligation pour les soins non essentiels, jusqu'à 300 € par an économisés par foyer, vos cotisations sur un compte santé à votre nom qui s'épargne et cofinance l'autonomie et la dépendance.",
+   m:"M-053, M-054, M-055, M-056",f:"folios 117-122",o:[],l:[["aide","Aide fondamentale"],["eparg","Compte épargne personnel"]]},
+ eparg:{t:"Compte épargne personnel",c:"+300 € par mois, à votre nom",
+   a:"Vous cotisez pour une retraite promise à d'autres et un chômage dont tous profitent. Le régime de retraite vous a fait une promesse insolvable : le système perd 125 Md€ par an, et l'équilibrer aujourd'hui supposerait de partir à 69 ans ou d'amputer les pensions d'un tiers.",
+   d:"Vos cotisations vous appartiennent, sur un compte épargne à votre nom géré comme vous l'entendez. Le patrimoine public facultatif vous est transféré sur ce compte et les économies sur les dépenses facultatives l'abondent de 300 € par mois au salaire type à horizon trois ans.",
+   d2:"Vous en disposez pour vous former, passer un coup dur d'inactivité, financer un congé parental et partir en retraite au moment que vous choisissez. Cette épargne retraite prospère et s'ajoute au socle par répartition de 1 100 € par mois pour tous pour vous assurer un niveau de vie au moins équivalent aux perspectives actuelles.",
+   m:"M-042, M-043, M-044, M-045",f:"folios 103-110",o:[],l:[["pat","Patrimoine restitué"],["sal","Salaire net"]]},
+
+ cpte:{t:"Compte éducation",c:"6 600 € par an au nom de l'enfant",
+   a:"La carte scolaire vous assigne à un établissement qui ne promet que des résultats médiocres au classements internationaux. La gestion rigide des professeurs induit des disparités de temps d'encadrement et de financement entre enfants : 23 % d'écart entre académies et plus entre départements. Seuls ceux qui savent ou qui peuvent parviennent à échapper au système en payant deux fois.",
+   d:"6 600 € par an pour chaque enfant sur un compte à son nom, de sa naissance à ses 18 ans. L'argent suit l'enfant dans l'école de votre choix agréée et évaluée sur ses résultats par le ministère, qu'elle soit publique, privée ou associative. Elle s'organise librement pour recruter les meilleurs professeurs et répondre aux besoins de votre enfant.",
+   d2:"Le salaire net moyen des enseignants est maintenu et augmenté de +13 % au titre de la restitution. L'Etat ne crée plus d'inégalité entre une famille modeste et une famille aisée.",
+   m:"M-058, M-059, M-060",f:"folios 123-129",o:[],l:[["etud","Études et formation"]]},
+ etud:{t:"Études et formation",c:"un compte à vous, pour la vie",
+   a:"Trois inscrits sur dix seulement obtiennent leur licence en trois ans. Les études des uns sont payées par tous les travailleurs, y compris les plus modestes et ceux qui commencent à travailler tôt en apprenant un métier.",
+   d:"À 18 ans, le compte éducation vous est transféré et reste valable toute votre vie. Vous l'utilisez en une fois ou en différé, pour des études supérieures, un apprentissage, une formation professionnelle, ou pour améliorer votre retraite avec l'épargne accumulée. Aucune voie n'est pénalisée, aucune n'est avantagée.",
+   d2:"Les universités sont libres, autonomes et payantes. Elles fixent leur offre, leur sélection et leurs prix, recherchent des mécénats et offrent des bourses d'excellence. L'aide fondamentale de 550 € par mois s'y ajoute dès la majorité, quelle que soit la voie choisie : un jeune qui travaille garde son aide, un jeune qui étudie la garde aussi.",
+   m:"M-039, M-061, M-062",f:"folios 123-129",o:[],l:[["cpte","Compte éducation"],["aide","Aide fondamentale"]]},
+
+ sal:{t:"Salaire net",c:"+300 € par mois",
+   a:"Quand une heure de travail produit 63 € de richesse, l'Etat en prélève 29 € et le travailleur ne reçoit que 23 €. Le travail ne paie plus. La CSG et la CRDS portent l'intitulé social sans vous ouvrir aucun droit, et pèsent plus lourd sur le travail que sur les pensions et les allocations.",
+   d:"+13 % de salaire net en un an. Les économies faites par l'Etat sont restituées aux travailleurs en priorité et immédiatement. La CSG et la CRDS disparaissent sur les revenus d'activité, sans toucher au coût du travail pour les entreprises. +300 € nets par mois pour un salaire type, +180 € nets au niveau du SMIC.",
+   d2:"Salariés, indépendants, temps partiel, public comme privé : la hausse arrive sur la fiche de paie, au rythme de +2 % par mois à partir du sixième mois. Un travail revalorisé de +13 % vous permet aussi de partir plus tôt à la retraite, ou de gagner plus en partant plus tard.",
+   m:"M-025, M-071",f:"folio 89",o:[],l:[["eparg","Compte épargne personnel"],["pat","Patrimoine restitué"]]},
+ pat:{t:"Patrimoine restitué",c:"+20 000 € par foyer",
+   a:"L'État détient environ 600 Md€ de biens et de titres qui ne servent aucune de ses missions indispensables : participations, terrains, bureaux, logements. L'Etat est mauvais gestionnaire : son portefeuille a rendu 5,3 % par an quand le marché en rendait 9,8 %. En étant juge et partie, l'Etat ne peut pas remplir ses fonctions de contrôleur.",
+   d:"Ce patrimoine vous revient en trois ans, en titres échangeables déposés sur votre compte épargne personnel. Chaque vente réalisée par les fonds de défaisance donne lieu à un versement immédiat. Soit 20 000 € rendus par foyer à horizon trois ans.",
+   d2:"Les locataires du parc social sortent progressivement du parc et sont prioritaires pour acheter leur logement. L'offre locative privée gagne environ 25 % de volume et se fluidifie. Le rendement restitué associé équivaut à au moins 18 Md€ par an, soit 500 € par an de rente additionnelle pour une personne à la retraite.",
+   m:"M-047, M-048, M-049, M-050",f:"folio 106",o:[],l:[["eparg","Compte épargne personnel"]]},
+
+ struct:{q:"<b>68 Md€ économisés par an</b><i>38 Md€ de fonctionnement · 30 Md€ de masse salariale</i>",type:"grille",
+   cartes:[["agences","Agences","746 agences fermées<br>sur 1 104|55 réinternalisées, 303 conservées"],
+           ["minis","Ministères","28 ministères fermés<br>sur 35|7 conservés, indispensables"],
+           ["ech","Échelons locaux","3 échelons<br>fermés sur 4|la commune est conservée"],
+           ["agents","Agents publics","580 000 postes<br>fermés|soit 10 % des emplois publics"]]},
+ agences:{t:"Agences",c:"303 au lieu de 1 104",
+   a:"1 104 agences, organismes centraux, autorités et instances consultatives. Une dépense décidée une fois se reconduit chaque année sans que son utilité soit jamais réexaminée, plus personne ne sait qui fait quoi et les contribuables sont piégés par la complexité. Trois critères suffisent pourtant à reconnaître une mission facultative : ce qui a existé sans ministère jusqu'à récemment, ce qui prospère sans l'État ailleurs, ce qui ne disparaîtrait pas s'il se retirait.",
+   d:"801 agences en moins et les dépenses associées restituées aux travailleurs. 303 opérateurs subsistent sous un statut autonome : 258 universités et centres de recherche, 40 musées, 5 autorités indépendantes, qui vivent de leurs propres revenus ou dont l'indépendance est la raison d'être.",
+   d2:"746 agences sont fermées ou cédées, avec un plan de départ équitable des agents. 55 fonctions régaliennes retournent dans les ministères.",
+   m:"M-002, M-004, M-005",f:"",o:["GraphAgences"],l:[["minis","Ministères"],["reg","Régalien concentré"]]},
+ minis:{t:"Ministères",c:"7 au lieu de 35",
+   a:"35 ministres et secrétaires d'État, chacun avec son cabinet, son administration centrale, son périmètre à défendre et sa clientèle. Les responsabilités se chevauchent et se diluent. Le ministère de la Culture n'existait pas avant 1959, et la culture ne s'en portait pas plus mal.",
+   d:"Sept ministères, un par mission indispensable : Défense, Intérieur, Justice, Affaires étrangères, Comptes publics, Solidarité nationale, Enseignement. Aucun secrétariat d'État. Chaque enjeu où l'État est nécessaire pour protéger les Français relève de l'un d'eux, sans confusion des rôles entre public et privé.",
+   d2:"Un sujet, un ministre, une responsabilité identifiable devant vous. Les 28 autres occupations ne disparaîtraient pas si l'État s'en retirait : c'est bien ce qui les range au facultatif. Les citoyens les feront librement, directement, avec leur propre argent, sans interférence.",
+   m:"M-001",f:"folios 65-70",o:[],l:[["agences","Agences"],["ech","Échelons locaux"]]},
+ ech:{t:"Échelons locaux",c:"1 au lieu de 4",
+   a:"Commune, intercommunalité, département, région : quatre niveaux de délibération, quatre budgets, quatre fiscalités pour le même territoire. Leurs missions se répètent et se dévorent entre elles, et la distance entre la décision et le citoyen entrave la démocratie.",
+   d:"La commune reste seule, avec la préfecture pour relais unique de l'État sur le territoire. Les missions indispensables que le département exerçait sont exercées directement par l'État : handicap, enfance, sécurité civile et incendie. Notre solidarité envers les plus démunis cesse de dépendre d'un budget indexé sur le marché immobilier.",
+   d2:"Toute la taxe foncière revient à la commune, qui décide seule de son emploi et en répond devant ses électeurs : l'autonomie financière est ce qui rend la responsabilité politique réelle. Une commune défaillante est placée sous la tutelle temporaire du préfet, qui garantit à ses habitants la continuité des missions indispensables.",
+   m:"M-010, M-011, M-012, M-015",f:"folios 71-76",o:[],l:[["com","Commune autonome"],["minis","Ministères"]]},
+ agents:{t:"Agents publics",c:"Plan de départ à 70 % du traitement, jusqu'à sept ans",
+   a:"5,8 millions d'agents publics, un actif sur cinq, deux fois plus qu'en Suisse ou en Allemagne. Les missions facultatives mobilisent des agents dont personne n'a jamais rediscuté le poste, pendant que ceux du terrain manquent de moyens.",
+   d:"580 000 postes affectés à des missions facultatives sont fermés, trois quarts dans les échelons territoriaux, un quart dans les agences et les ministères, soit une réduction de 10 % des effectifs publics.",
+   d2:"Chaque agent dont le poste est fermé conserve 70 % de son traitement jusqu'à sept ans, cumulable avec un emploi privé : deux fois et demie le dispositif actuel de départ volontaire. Les agents sont protégés et peuvent aller exercer leurs talents au bénéfice de tous. L'économie sert d'abord à mieux payer les agents publics indispensables.",
+   m:"M-007, M-008, M-009",f:"folios 77-82",o:["Graph236"],l:[["agences","Agences"],["sal","Salaire net"]]},
+
+ subv:{q:"<b>69 Md€ économisés par an</b>",type:"grille",
+   cartes:[["subvent","Aides aux entreprises","41 Md€ économisés par an|aides à l'emploi et à l'investissement, rendues en baisse d'impôt"],
+           ["subvpart","Chèques aux particuliers","19 Md€ économisés par an|chèques ciblés aux ménages, rendus en pouvoir d'achat"],
+           ["subvasso","Subventions aux associations","9 Md€ économisés par an|chacun donne à qui il veut, avec l'argent qui lui est rendu"]]},
+ subvent:{t:"Entreprises",c:"−41 Md€ par an",
+   a:"L'État taxe l'activité, puis rend une part du produit aux entreprises sous forme d'aides : 23 Md€ pour l'emploi, l'apprentissage et l'insertion, 7 Md€ pour l'investissement, 12 Md€ versés par les collectivités. Les entreprises les mieux introduites captent l'essentiel, alimentant le capitalisme de connivence. Les travailleurs et les PME ordinaires paient l'addition.",
+   d:"Toutes les aides s'éteignent en trois ans. Le bénéfice est redistribué en priorité à tous les travailleurs sous forme de salaire net. Tous les travailleurs et tous les entrepreneurs redeviennent égaux devant l'impôt. Les clients enrichis font vivre les entreprises qui proposent les meilleurs produits, services, innovations, sans interférence politique ou administrative.",
+   d2:"Dans la refonte fiscale, l'entreprise est déchargée des impôts de production et autres prélèvements sur la main-d'œuvre : le coût du travail baisse pour toutes, le temps administratif redevient du temps productif.",
+   d3:"La refonte fiscale se fait sans augmenter les impôts : elle les baisse, grâce à la restitution des économies sur la feuille de paie.",
+   m:"M-016, M-017, M-031",f:"",o:["Annexe Manuscrit","Détail Economies"],l:[["imp","Fusion des impôts"],["sal","Salaire net"]]},
+ subvpart:{t:"Particuliers",c:"−19 Md€ par an",
+   a:"Un chèque ciblé par besoin, un dossier par chèque : 16 Md€ d'aides au logement, un chèque énergie, un pass loisir, chacun avec ses conditions et ses seuils. L'aide ne fait qu'augmenter les prix et disparaît dès que le travailleur rate le dossier ou gagne du revenu.",
+   d:"Finis les chèques fléchés, vive le revenu libre d'emploi ! Les aides ciblées sont éteintes et restituées intégralement aux travailleurs. Leur salaire net augmente de +13 % et ils en disposent exactement comme ils veulent, quand ils veulent, où ils veulent. Leur pouvoir d'achat n'est plus administré, ils retrouvent la jouissance du fruit de leur travail.",
+   d2:"Environ 80 € d'aides ciblées en moins contre 300 € de salaire net en plus : 220 € par mois de mieux, dont vous décidez entièrement l'emploi. Pour les aides au logement, la transition est progressive : les baux actuels conservent leur aide et s'éteignent sur trois ans, les baux nouveaux sont à égalité sans aide.",
+   m:"M-019",f:"",o:["Annexe Manuscrit","Détail Economies"],l:[["aide","Aide fondamentale"],["sal","Salaire net"]]},
+ subvasso:{t:"Associations",c:"−9 Md€ par an",
+   a:"3 Md€ d'aide publique au développement, 2,5 Md€ d'hébergement d'urgence, des milliards d'euros en subventions culturelles et politique territoriale. L'argent va à des associations qu'aucun citoyen n'a choisies, et le soutien se reconduit sans que son résultat soit examiné. La subvention occasionne clientélisme politique, frais de gestion, et dépendance administrative.",
+   d:"Les subventions s'éteignent. Les citoyens retrouvent le fruit de leur travail et donnent directement aux causes qui leur tiennent à coeur, pas à celles qui ont les faveurs des puissants du moment. Une association vit de ses membres, de ses bénévoles, de ses donateurs, et en répond devant eux.",
+   d2:"Un socle d'hébergement d'urgence réservé aux femmes vulnérables, battues ou avec enfants, dans une logique de protection.",
+   m:"M-019",f:"",o:["Annexe Manuscrit","Détail Economies"],l:[["aide","Aide fondamentale"],["ech","Échelons locaux"]]},
+
+ niches:{q:"<b>52 Md€ restitués par an</b>",type:"grille",
+   cartes:[["nichrev","Niches sur les revenus","29 Md€ restitués|exonérations et abattements, rendus en<br>baisse d'impôt<br>pour tous"],
+           ["nichtva","Niches TVA et sociétés","23 Md€ restitués|taux réduits et<br>crédits d'impôt,<br>rendus en<br>suppression<br>de taxes"]]},
+ nichrev:{t:"Revenus",c:"−29 Md€ par an",
+   a:"486 niches fiscales au total dont une sur huit a un coût inconnu de l'administration. L'Etat a organisé l'inégalité devant l'impôt, l'impossibilité du consentement éclairé, l'absence de redevabilité. Exonérations salariales, abattement sur les pensions, épargne réglementée, niches sociales. Deux revenus égaux sont imposés différemment selon leur origine et leur usage. Celui qui n'a pas de conseiller paie le tarif entier.",
+   d:"Les niches sur les revenus sont progressivement supprimées. Le rendement libéré revient d'abord directement en salaire net pour tous les travailleurs. Aucune catégorie n'est plus lésée faute de lobby suffisamment installé. La pression fiscale globale baisse. La fraude ne peut plus tirer parti de la complexité et devient plus facile à traquer.",
+   d2:"Un seul impôt sur le revenu, à 23 %, sans exception ni régime de faveur. L'aide fondamentale unique fait office de franchise sociale. Chaque euro gagné au travail est traité comme le voisin.",
+   d3:"La refonte fiscale se fait sans augmenter les impôts : elle les baisse, grâce à la restitution des économies sur la feuille de paie.",
+   m:"M-026",f:"",o:["Détail Niches","Flux"],l:[["imp","Fusion des impôts"],["sal","Salaire net"]]},
+ nichtva:{t:"TVA et sociétés",c:"−23 Md€ par an",
+   a:"23 régimes de TVA, 45 % de crédits d'impôt sont versés par le fisc sans même percevoir d'impôt, les grandes entreprises paient un taux d'imposition réel plus faible que les PME. Un seul crédit d'impôt bénéficie à un groupe unique pour plus de 100 M€ par an.",
+   d:"Une TVA unique au taux actuel de 20 %, un impôt simple sur les sociétés, aucune exception à négocier. Un coiffeur et un hôtelier sont taxés de la même façon. Chaque secteur cesse d'obtenir son régime particulier et paie la règle commune. Aucun secteur n'est empêché de prospérer par le surcoût que lui impose un autre. Deux entrepreneurs, deux produits : à égalité devant le consommateur et devant l'investisseur.",
+   d2:"C'est la contrepartie du taux unique : on ne peut baisser l'impôt de tous qu'en cessant de l'aménager pour quelques-uns.",
+   d3:"La refonte fiscale se fait sans augmenter les impôts : elle les baisse, grâce à la restitution des économies sur la feuille de paie.",
+   m:"M-026",f:"",o:["Détail Niches","Flux"],l:[["imp","Fusion des impôts"],["subvent","Aides aux entreprises"]]},
+
+ chom:{t:"Assurance chômage transformée",c:"−30 Md€ par an",
+   a:"La durée moyenne d'inscription était de vingt mois à fin 2024, un mois de plus que la durée du droit lui-même. Reprendre un emploi revient souvent à renoncer à un droit acquis : le système récompense celui qui attend la fin de son indemnisation plutôt que celui qui retrouve vite un poste durable.",
+   d:"L'indemnisation collective couvre les six premiers mois, pour le coup dur que personne ne choisit. Au-delà, la part que vous versiez revient sur votre compte épargne, à votre nom, placée chez le gestionnaire de votre choix. Épargner ses cotisations chômage pour soi est la meilleure garantie de les retrouver au bout du compte.",
+   d2:"La cotisation devient votre capital : ce que vous n'avez pas consommé grossit votre retraite. Chercher un emploi cesse d'être un calcul entre deux droits, puisque reprendre le travail ne vous retire plus rien.",
+   m:"M-042, M-043",f:"",o:["Graph236"],l:[["eparg","Compte épargne personnel"]]},
+ rend:{t:"Rendement du patrimoine",c:"−18 Md€ par an",
+   a:"Le patrimoine public non essentiel rapporte à l'État, qui le gère mal : de 2013 à 2023, l'Agence des participations de l'État a rendu 5,3 % par an contre 9,8 % pour le CAC 40, soit 52 % d'écart de richesse cumulé en dix ans. Areva, Renault, France Télécom portent les stigmates de cette gestion. L'État immobilise par ailleurs 97 millions de mètres carrés au niveau central, sous-occupés d'au moins 36 %, et cinq fois plus au niveau local.",
+   d:"Une fois le patrimoine restitué, ce rendement vous revient : 18 Md€ par an, versés sur les comptes épargne des Français plutôt qu'au budget de l'État. Le salarié ordinaire profite des mêmes performances que tous les actionnaires, sur un capital qu'il détient, place et transmet librement.",
+   d2:"Au moins 500 € par an et par personne à la retraite, sous les hypothèses prudentes de 3 % de rendement net et de 24 ans de retraite.",
+   m:"M-047, M-049",f:"",o:["Input Capitalisation"],l:[["pat","Patrimoine restitué"]]},
+ stub:{type:"stub"}
+};
+let pile=[];
+const vue=document.getElementById("vue"),fil=document.getElementById("fil"),
+      q=document.getElementById("q"),retour=document.getElementById("retour");
+const CHEMIN={racine:"Propositions",indisp:"Propositions · <b>Indispensable</b>",
+ resti:"Propositions · <b>Facultatif</b>",secu:"Indispensable · <b>Sécurité</b>",
+ soli:"Indispensable · <b>Solidarité</b>",educ:"Indispensable · <b>Éducation</b>",
+ reg:"Sécurité",com:"Sécurité",code:"Sécurité",imp:"Sécurité",
+ aide:"Solidarité",sante:"Solidarité",eparg:"Solidarité · Restitué",
+ cpte:"Éducation",etud:"Éducation",sal:"Restitué",pat:"Restitué",
+ struct:"Économies",agences:"Économies · Administrations",minis:"Économies · Administrations",ech:"Économies · Administrations",agents:"Économies · Administrations",
+ subv:"Économies · <b>Subventions</b>",subvent:"Économies · Subventions",subvpart:"Économies · Subventions",subvasso:"Économies · Subventions",
+ niches:"Économies · <b>Niches</b>",nichrev:"Économies · Niches",nichtva:"Économies · Niches",
+ chom:"Économies",rend:"Économies"};
+
+/* La carte est publique : elle ne porte AUCUNE reference interne — ni code de
+   mesure, ni folio du livre, ni nom d'onglet. `n.m`, `n.f` et `n.o` restent au
+   fichier pour la tracabilite ; seuls sortent les renvois de RENVOIS, qui sont
+   des adresses du site. */
+function sources(n){ return ""; }
+
+/* Un mot court ne reste pas seul en fin de ligne : il est solidaire du mot
+   qui le suit. Trois lettres ou moins — « LES », « ET », « de », « au » —
+   se lient d'office, partout ou du texte se compose. */
+function souder(t){
+  /* Deux passes : la premiere consomme l'espace qui suit le mot court, ce qui
+     masque un second mot court juste apres — « 275 € par enfant » n'en liait
+     qu'un sur deux. */
+  const une=x=>String(x).replace(/(^|[\s>])([\wÀ-ÿ'’%€]{1,3})\s(?=[\wÀ-ÿ])/g,"$1$2\u00a0");
+  return une(une(t));
+}
+/* Les renvois vers le site : le graphique seul, en lien de texte, et
+   seulement s'il n'est pas deja cliquable dans le texte de la carte. Les
+   vignettes (graphiques, videos, chiffres) chargeaient la lecture : retirees
+   le 20261102. La table RENVOIS garde tout ; elle ne rend ici que les graphiques. */
+function renvoisSite(id,texte){
+  const r=(RENVOIS[id]||[]).filter(([u,genre])=>genre==="Graphique"&&!(texte||"").includes(SITE+u));
+  if(!r.length) return "";
+  return `<p class="vgraph">${r.length>1?"Graphiques":"Graphique"} : `
+    +r.map(([u,,nom])=>`<a href="${SITE}${u}">${nom}</a>`).join(" · ")+`</p>`;
+}
+/* Les amendements qui portent la carte, a part : c'est le texte de loi. */
+function amendementsSite(id){
+  const r=AMENDEMENTS[id]||[]; if(!r.length) return "";
+  return `<div class="amendements"><span class="genre">Les amendements</span><ul>`
+    +r.map(([u,nom])=>`<li><a href="${SITE}${u}">${nom}</a></li>`).join("")+`</ul></div>`;
+}
+/* Les mots a cliquer : la premiere occurrence d'une expression du texte mene a
+   une autre carte ou a un graphique. Le texte ne change pas, il s'eclaire. */
+function motsDans(id,txt){
+  if(!txt) return txt;
+  for(const [expr,k,u] of (MOTS[id]||[])){
+    const i=txt.indexOf(expr); if(i<0) continue;
+    const lien=k?`<span class="mot" data-k="${k}">${expr}</span>`:/^https?:/.test(u)?`<a class="mot" href="${u}" target="_blank" rel="noopener">${expr}</a>`:`<a class="mot" href="${SITE}${u}">${expr}</a>`;
+    txt=txt.slice(0,i)+lien+txt.slice(i+expr.length);
+  }
+  return txt;
+}
+/* Une planche qui n'est pas un verso porte ses renvois sous sa grille. */
+function liensSite(id){
+  const h=renvoisSite(id)+amendementsSite(id); if(!h) return;
+  const d=document.createElement("div"); d.className="liens"; d.innerHTML=h; vue.appendChild(d);
+}
+/* L'ancre dit la carte ouverte : propositions.html#sal ouvre « Salaire net ».
+   Chaque carte retournée écrit la sienne, et le bouton retour du navigateur
+   suit la pile des cartes. */
+function pileDe(h){
+  const k=decodeURIComponent((h||"").slice(1));
+  return k&&k!=="racine"&&k!=="stub"&&D[k]?[k]:[];
+}
+function aller(id){pile.push(id);
+  history.pushState({pile:pile.slice(),n:((history.state&&history.state.n)||0)+1},"","#"+id);
+  rendre(id);}
+function rendre(id){
+  retour.style.display=pile.length?"block":"none";
+  fil.innerHTML=CHEMIN[id]||"";
+  const n=D[id]||D.stub; q.innerHTML=n.q||"";
+  /* Le detail du total court jusqu'au bout de la ligne : il se rend aussi
+     grand que la colonne le permet, et jamais plus. La taille se cherche, elle
+     ne se fixe pas — la ligne n'a pas la meme longueur d'une planche a l'autre. */
+  const det=q.querySelector("i");
+  if(det){for(let t=24;t>=13;t--){det.style.fontSize=t+"px";
+    if(det.scrollWidth<=q.clientWidth) break;}}
+  vue.innerHTML="";
+  if(id==="racine"){
+    q.innerHTML="";
+    vue.innerHTML=`<div class="duo">
+      <div class="moitie claire" data-go="indisp"><div class="toile"></div>
+        <div class="dit"><div class="n">État<br>indispensable</div>
+        <div class="c">7 missions</div>
+        <div class="p">Sécurité, solidarité, éducation : trois protections indispensables.</div></div></div>
+      <div class="moitie sombre" data-go="resti"><div class="toile"></div>
+        <div class="dit"><div class="n">État<br>facultatif</div>
+        <div class="c">−236 Md€ par an</div>
+        <div class="p">Restitués : +600 € par mois et par travailleur, +20 000 € par foyer.</div></div></div>
+    </div>`;
+    vue.querySelectorAll("[data-go]").forEach(e=>e.onclick=()=>aller(e.dataset.go));
+    const [mg,md]=vue.querySelectorAll(".moitie");
+    requestAnimationFrame(()=>{fresque(mg,ILLUS.racine_g);fresque(md,ILLUS.racine_d);});
+    return;}
+  if(n.type==="miroir"){
+    q.innerHTML="";
+    vue.innerHTML=`<div class="miroir">
+      <div class="col sombre">
+        <div class="tete"><div class="n">Économies</div>
+          <div class="tot">236 Md€</div></div>
+        <div class="unite">par an</div>
+        <ul>
+          <li data-k="struct"><span>Administrations facultatives</span><b>68 Md€ / an</b></li>
+          <li data-k="subv"><span>Subventions</span><b>69 Md€ / an</b></li>
+          <li data-k="niches"><span>Niches fiscales et sociales</span><b>52 Md€ / an</b></li>
+          <li data-k="chom"><span class="long">Assurance chômage transformée</span><b>30 Md€ / an</b></li>
+          <li data-k="rend"><span>Rendement du patrimoine</span><b>18 Md€ / an</b></li>
+        </ul>
+        <div class="part">
+          <div class="apart" data-k="pat"><span>Patrimoine<br>public rendu</span><b>600 Md€</b></div></div>
+        <div class="reste"></div>
+      </div>
+      <div class="egal">=</div>
+      <div class="col claire">
+        <div class="tete"><div class="n">Restitution</div>
+          <div class="tot">+600 €</div></div>
+        <div class="unite">par mois et par travailleur</div>
+        <ul>
+          <li data-k="sal"><span>Salaire net</span><b>+300 € / mois</b></li>
+          <li data-k="eparg"><span class="long">Compte épargne personnel</span><b>+300 € / mois</b></li>
+        </ul>
+        <div class="part">
+          <div class="apart" data-k="pat"><span>Patrimoine<br>public rendu</span><b>+20 000 € / foyer</b></div></div>
+        <div class="reste"></div>
+      </div>
+    </div>`;
+    vue.querySelectorAll("[data-k]").forEach(e=>e.onclick=()=>aller(e.dataset.k));
+    vue.insertAdjacentHTML("beforeend",'<p class="arrondi">La somme des arrondis peut différer de l’arrondi de la somme.</p>');
+    liensSite(id);return;}
+  if(n.type==="grille"){
+    const g=document.createElement("div");g.className="grille";
+    /* Une carte dont le dessin se tient sous l'ecriture a besoin de hauteur :
+       sinon la bande libre se reduit a rien et le dessin se rend en vignette. */
+    if(n.cartes.some(c=>(ILLUS_CARTE[c[0]]||{}).sousTexte)) g.classList.add("bas");
+    n.cartes.forEach(([k,t,c])=>{const d=document.createElement("div");d.className="carte";
+      const[ch,lg]=(c||"").split("|");
+      const flot=(il2=>il2&&il2.flot)(ILLUS_CARTE[k]);
+      d.innerHTML=(flot?"":`<div class="toile"></div>`)+`<div class="dit"><div class="t">${souder(t)}</div>`
+        +(ch?`<div class="c">${souder(ch)}</div>`
+            +(flot?`<div class="toile"></div>`:"")
+            +`<div class="lg">${souder(lg||"")}</div>`:"")+`</div>`;
+      d.onclick=()=>aller(k);g.appendChild(d);
+      const il=ILLUS_CARTE[k];
+      if(il){const t=d.querySelector(".toile");
+        t.style.backgroundImage="url("+(il.src||il)+")";
+        const im=new Image();
+        const classer=()=>{const r=im.naturalWidth/im.naturalHeight;
+          if(r>2.2) d.classList.add("large");
+          else if(r<0.7) d.classList.add("haut");
+          else if(r<1.6) d.classList.add("moyen");
+          else d.classList.add("allonge");};
+        im.onload=classer; im.src=(il.src||il);
+        if(im.complete&&im.naturalWidth) classer();}
+      });
+    vue.appendChild(g);
+    /* Une grille de la branche Economies se ferme sur son total : sans lui, le
+       lecteur voit des montants sans savoir ce qu'ils font ensemble. */
+    if(n.concl){const c=document.createElement("div");c.className="concl";
+      c.innerHTML='<span>Au total</span><b>'+n.concl+'</b>';vue.appendChild(c);}
+    liensSite(id);
+    requestAnimationFrame(()=>g.querySelectorAll(".carte").forEach((d,i)=>{
+      const il=ILLUS_CARTE[n.cartes[i][0]];
+      if(il&&il.bandeau) d.classList.add("bandeau");
+      if(il&&il.flot) d.classList.add("flot");
+      if(il&&il.flot&&il.silhouette){const t2=d.querySelector(".toile");
+        t2.style.shapeOutside="url("+il.silhouette+")";
+        t2.style.shapeImageThreshold=".05";t2.style.shapeMargin="6px";}
+      if(il&&il.hauteur){const t=d.querySelector(".toile");t.style.height=il.hauteur+"px";}
+      if(il&&il.colonne){const t=d.querySelector(".toile");
+        t.style.flexBasis=il.colonne; t.style.width=il.colonne;}
+      if(il) ecranCarte(d,il.ecran,il.sousTexte);}));
+    return;}
+  if(n.type==="stub"){q.innerHTML="";
+    vue.innerHTML=`<div class="verso"><div class="vtete"><h2>Carte à écrire</h2></div>
+      <div class="vcorps"><p class="src">—</p></div></div>`;return;}
+  q.innerHTML="";
+  const corps=[n.a,n.d,n.d2,n.d3].map(t=>motsDans(id,t)).join(" ");
+  const site=renvoisSite(id,corps);
+  const renvois=n.l.map(([k,lab])=>`<span class="lien" data-k="${k}">${lab}</span>`).join("")+site+amendementsSite(id);
+  vue.innerHTML=`<div class="verso">
+    <div class="toile"></div>
+    <div class="vtete"><h2>${n.t}</h2><div class="c">${n.c}</div></div>
+    <div class="filet"></div>
+    <div class="vcorps">
+      <div class="bloc avant"><span class="lab">Aujourd'hui</span><p>${motsDans(id,n.a)}</p></div>
+      <div class="bloc apres"><span class="lab">Demain</span><p>${motsDans(id,n.d)}</p>${n.d2?`<p>${motsDans(id,n.d2)}</p>`:""}${n.d3?`<p>${motsDans(id,n.d3)}</p>`:""}</div>
+      ${sources(n)}</div>
+    ${renvois?`<div class="liens">${renvois}</div>`:""}</div>`;
+  vue.querySelectorAll(".lien[data-k],.mot[data-k]").forEach(e=>e.onclick=()=>aller(e.dataset.k));
+  const carte=vue.querySelector(".verso");
+  if(carte&&ILLUS[id]) requestAnimationFrame(()=>fresque(carte,ILLUS[id]));
+}
+retour.onclick=()=>{
+  if(history.state&&history.state.n>0){history.back();return;}
+  pile.pop(); const id=pile.length?pile[pile.length-1]:"racine";
+  history.replaceState({pile:pile.slice(),n:0},"",id==="racine"?location.pathname+location.search:"#"+id);
+  rendre(id);};
+window.addEventListener("popstate",e=>{
+  pile=e.state&&e.state.pile?e.state.pile.slice():pileDe(location.hash);
+  rendre(pile.length?pile[pile.length-1]:"racine");});
+let minuteur;
+window.addEventListener("resize",()=>{clearTimeout(minuteur);
+  minuteur=setTimeout(()=>{const id=pile.length?pile[pile.length-1]:"racine";rendre(id);},120);});
+pile=pileDe(location.hash);
+history.replaceState({pile:pile.slice(),n:0},"");
+rendre(pile.length?pile[pile.length-1]:"racine");
+</script>
+<div class=site-pied><template shadowrootmode="open"><link rel=stylesheet href="fiche.css"><style>:host{display:block;background:#b23a10;padding:1.4rem 1rem;--nuit:#b23a10;--sable:#f7f3e8;--pap:#fdfcfa;--chif:Archivo,'Helvetica Neue',Arial,sans-serif;}.s-retour{margin-bottom:0}.s-pied{margin:0 auto}@media(max-width:600px){:host{padding:.8rem .5rem}}</style><p class=s-pied><a class=a-parici href="contact.html">Je m’exprime</a><a class=a-parici href="adherer.html">J’adhère</a><a class="a-parici a-elu" href="ecrire.html">J’écris à mon élu</a><a class=s-ml href="auteurs.html">Les auteurs</a><a class=s-ml href="mentions-legales.html">Mentions légales</a></p></template></div>
+</body>
+</html>

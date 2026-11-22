@@ -1,0 +1,573 @@
+/**
+ * « Non chiffré » panels: announced promises and unquantified losses, each with tier + source, filtered to the
+ * household. Never summed into disposable income. Amount hints are text only.
+ */
+import { eur0 } from './fmt.ts';
+import { afuOf } from './plan/afu.ts';
+import type { NHousehold } from './normalize.ts';
+import {
+  MANIFESTE,
+  SRC_AM19_DMTO,
+  SRC_AM1_NICHES,
+  SRC_AM20_PV,
+  SRC_AM22_TAXES,
+  SRC_AM25_AFFECTEES,
+  SRC_AM27_CEP,
+  SRC_AM28,
+  SRC_AM29_TF,
+  SRC_P2_26_FP,
+  SRC_P2_28_INDEX,
+  SRC_P2_29_HLM,
+  SRC_P2_32_APL,
+  SRC_P2_34_CHEQUE,
+  SRC_PLFSS1_EXO,
+  SRC_PLFSS4_BOUCLIER,
+  SRC_PLFSS5_INDEX,
+  SRC_PLFSS7_PF,
+  SRC_PLFSS9_CONTRIB,
+  fiche,
+} from './params/plan.ts';
+import type { UnquantifiedItem } from './types.ts';
+
+interface Ctx {
+  nh: NHousehold;
+  /** today's computed amounts, monthly */
+  today: { rsa: number; apl: number; are: number; lowIncome: boolean; anyBenefit: boolean };
+}
+
+interface Entry {
+  item: UnquantifiedItem | ((c: Ctx) => UnquantifiedItem);
+  when: (c: Ctx) => boolean;
+}
+
+const has = (c: Ctx, pred: (a: NHousehold['adults'][number]) => boolean) => c.nh.adults.some(pred);
+const workers = (c: Ctx) => has(c, (a) => a.salary !== null);
+const retirees = (c: Ctx) => has(c, (a) => a.activity === 'retraite');
+const renters = (c: Ctx) => c.nh.housing.status === 'locataire';
+const owners = (c: Ctx) =>
+  c.nh.housing.status === 'proprietaire' || c.nh.housing.status === 'proprietaire_credit';
+/** PLFSS am. 4, L. 160-13-1 IV: « Ce taux est de 5 % ». */
+const BOUCLIER_RATE = 0.05;
+const kids = (c: Ctx, max = 25) => c.nh.children.some((k) => k.age < max);
+
+const CATALOGUE: Entry[] = [
+  // ------------------------------------------------------------------ promises
+  {
+    when: workers,
+    item: {
+      id: 'cep_restitution',
+      direction: 'promise',
+      tier: 'announced',
+      title: 'Compte d’épargne personnel : « 300 € par mois »',
+      detail:
+        'Le versement de restitution est égal au revenu d’activité × un taux fixé chaque année par la loi de finances ; à défaut de taux voté, il est nul. L’argent est bloqué jusqu’à la retraite puis versé en rente viagère.',
+      amountHint: '300 €/mois annoncés « d’ici trois ans » ; 0 € par défaut dans le texte',
+      sources: [MANIFESTE, SRC_AM27_CEP, fiche('travailleur', 'Travailleur')],
+    },
+  },
+  {
+    when: () => true,
+    item: {
+      id: 'patrimoine_restitue',
+      direction: 'promise',
+      tier: 'announced',
+      title: 'Patrimoine public « rendu » : 20 000 € par foyer',
+      detail:
+        '600 Md€ d’actifs publics (participations, foncier, logements) seraient cédés et « rendus » en trois ans, avec un rendement annoncé de 600 €/an par foyer. Le « versement de patrimoine » au compte d’épargne est un montant global voté chaque année (nul à défaut).',
+      amountHint: '20 000 €/foyer en trois ans annoncés ; 0 € par défaut dans le texte',
+      sources: [MANIFESTE, fiche('foyer', 'Foyer'), SRC_AM27_CEP],
+    },
+  },
+  {
+    when: (c) => kids(c, 19),
+    item: (c) => ({
+      id: 'compte_education',
+      direction: 'promise',
+      tier: 'announced',
+      title: 'Compte éducation : 6 600 € par enfant et par an',
+      detail:
+        'Versé sur un compte au nom de l’enfant jusqu’à 18 ans pour payer l’école choisie (publique, privée ou associative). Aucun texte juridique ne le crée.',
+      amountHint: `6 600 €/an × ${c.nh.children.filter((k) => k.age < 19).length} enfant(s) annoncés (non versés au foyer)`,
+      sources: [MANIFESTE, fiche('famille', 'Famille')],
+    }),
+  },
+  {
+    when: retirees,
+    item: {
+      id: 'complement_viager',
+      direction: 'promise',
+      tier: 'announced',
+      title: 'Retraités : complément viager « 500 € par an au moins »',
+      detail:
+        'Le mécanisme est écrit (amendement PLF-P1 n° 27, III et IV) : un « versement de patrimoine » est porté chaque année au compartiment de restitution du compte d’épargne personnel, puis servi en rente viagère à partir de l’âge légal de départ ou de la liquidation de la pension. Mais son montant est un montant global voté chaque année par la loi de finances, nul à défaut ; aucun plancher de 500 € ne figure dans le texte : les 500 € sont annoncés par la fiche.',
+      amountHint: '500 €/an au moins annoncés par la fiche ; 0 € par défaut dans le texte',
+      sources: [fiche('retraite', 'Retraité'), SRC_AM27_CEP],
+    },
+  },
+  {
+    when: renters,
+    item: {
+      id: 'loyers_baisse',
+      direction: 'promise',
+      tier: 'announced',
+      title: 'Loyers en baisse',
+      detail:
+        '« +25 % d’offre locative privée » et fin de l’APL qui « cesse de pousser les prix » : le plan annonce une baisse des loyers, non chiffrée par ménage.',
+      sources: [fiche('locataire', 'Locataire')],
+    },
+  },
+  {
+    when: (c) => renters(c) || owners(c),
+    item: {
+      id: 'droits_mutation',
+      direction: 'promise',
+      tier: 'law',
+      title: 'Frais de notaire : barème unique de 1 % / 3 %',
+      detail:
+        'Barème unique au 1er janvier 2027 : rien sous 10 000 €, 1 % de 10 000 à 100 000 €, 3 % au-delà, soit 3 900 € pour un appartement de 200 000 € (exemple de l’amendement). Aujourd’hui, l’exposé de l’amendement compte « 10 000 euros » ; en fait, depuis la hausse permise par la loi de finances pour 2025 (art. 116, à partir du 1er avril 2025), 88 départements appliquent le taux de 5 % (situation au 1er juin 2026), soit environ 6,32 % avec la taxe communale et les frais d’assiette : environ 12 640 € sur 200 000 €, ou environ 11 610 € dans un département resté à 4,50 % et pour un premier achat de résidence principale (exclu de la hausse). Qui paie le nouveau droit ? Les sources divergent : l’exposé de l’amendement n° 19 dit « le vendeur pour une vente » ; le texte de loi dit qu’il est « supporté par celui qui liquide la plus-value sur laquelle [il] s’impute », et l’amendement n° 20 l’impute sur l’impôt de plus-value du cédant pour les droits payés « lors de l’acquisition » : lu ainsi, l’acheteur le paie à l’achat, en acompte de l’impôt sur sa future plus-value. Les parties peuvent en convenir autrement.',
+      amountHint:
+        'sur un achat à 200 000 € : 3 900 € au lieu d’environ 12 640 € aujourd’hui dans la plupart des départements (≈ −8 700 €)',
+      sources: [
+        SRC_AM19_DMTO,
+        SRC_AM20_PV,
+        {
+          label:
+            'BOFiP 14771-PGP (17 juin 2026) : taux départemental porté jusqu’à 5 % pour trois ans à partir du 1er avril 2025 (LF 2025, art. 116), sauf premier achat de résidence principale ; 88 départements à 5 % au 1er juin 2026 (Banque des Territoires, jechange.fr)',
+          url: 'https://bofip.impots.gouv.fr/bofip/14771-PGP.html',
+        },
+        fiche('locataire', 'Locataire'),
+      ],
+    },
+  },
+  {
+    when: () => true,
+    item: (c) => {
+      // L. 160-13-1 III: floor = 5 % × « le montant annuel de l’aide fondamentale universelle ». PLF-P1 am. 28
+      // defines « le montant de l’aide fondamentale » per foyer (6 600 € per adult, « Il est minoré de 3 300 € »
+      // per pensioner…), and the resources are « celles du foyer fiscal » ⇒ the foyer's own AFU (R2V-2).
+      const floor = BOUCLIER_RATE * afuOf(c.nh).annual;
+      return {
+        id: 'bouclier_sanitaire',
+        direction: 'promise',
+        tier: 'law',
+        title: 'Bouclier sanitaire : reste à charge plafonné à 5 % du revenu',
+        detail: `À partir de 2028 (si l’AFU entre en vigueur), ce qui reste à votre charge au titre du ticket modérateur, des participations forfaitaires, des franchises et du forfait journalier est plafonné chaque année à 5 % des ressources du foyer fiscal, diminuées de l’impôt sur le revenu. Plancher : 5 % du montant annuel de l’aide fondamentale, lu comme celle de votre foyer (minoration pour pension comprise), soit ${eur0(floor)} par an pour vous (330 € pour une personne seule, 165 € pour un retraité seul dont la pension a été liquidée avant 2028).`,
+        sources: [SRC_PLFSS4_BOUCLIER, SRC_AM28, fiche('patient', 'Patient')],
+      };
+    },
+  },
+  {
+    when: () => true,
+    item: {
+      id: 'frais_gestion_sante',
+      direction: 'promise',
+      tier: 'announced',
+      title: '« 300 € par an de frais de gestion en moins » (santé)',
+      detail:
+        'Concurrence des complémentaires et fin de « l’intermédiaire obligatoire ». Aucun texte.',
+      amountHint: '300 €/an annoncés',
+      sources: [fiche('patient', 'Patient')],
+    },
+  },
+  {
+    when: () => true,
+    item: {
+      id: 'prix_taxes',
+      direction: 'promise',
+      tier: 'announced',
+      title: 'Taxes spécifiques supprimées dans les prix',
+      detail:
+        'Les amendements suppriment 54 taxes d’État, 72 taxes affectées à des organismes, 21 contributions sociales et 20 impositions locales, « à rendement constant » ; le plan annonce que les produits faits en France deviennent « plus abordables » et une « inflation faciale inférieure à 2 % ». Seule la fin des certificats d’économies d’énergie est estimée ici.',
+      sources: [
+        fiche('consommateur', 'Consommateur'),
+        fiche('citoyen', 'Citoyen'),
+        SRC_AM22_TAXES,
+        SRC_AM25_AFFECTEES,
+        SRC_PLFSS9_CONTRIB,
+        SRC_AM29_TF,
+      ],
+    },
+  },
+  {
+    when: () => true,
+    item: {
+      id: 'accise_electricite',
+      direction: 'promise',
+      tier: 'law',
+      title: 'Accise sur l’électricité ramenée à 1 € par mégawattheure',
+      detail:
+        'Au 1er juillet 2027, les tarifs de l’accise sur l’électricité qui ne sont pas nuls passent à 1 € par mégawattheure pour les ménages (0,5 € pour les autres consommations), le niveau appliqué en 2023 et 2024 selon l’amendement. La baisse de votre facture n’est pas chiffrée ici : le simulateur ne connaît pas votre consommation d’électricité.',
+      sources: [SRC_AM22_TAXES],
+    },
+  },
+  {
+    when: workers,
+    item: {
+      id: 'exonerations_salaire',
+      direction: 'promise',
+      tier: 'announced',
+      title: '« 9 Md€ rendus au salaire net » (fin des exonérations patronales)',
+      detail:
+        'L’exposé de l’amendement PLFSS n° 1 affirme que la suppression des exonérations de cotisations « rend 9 milliards d’euros au salaire net ». La fiche Entreprise ajoute que le gain de la suppression des taxes sur les salaires « va au salarié, non à l’entreprise ». Le simulateur ne suppose aucune hausse de salaire brut (H4).',
+      sources: [SRC_PLFSS1_EXO, fiche('entreprise', 'Entreprise')],
+    },
+  },
+  {
+    when: (c) => has(c, (a) => a.activity === 'chomage'),
+    item: {
+      id: 'compte_chomage',
+      direction: 'promise',
+      tier: 'announced',
+      title: 'Compte épargne alimenté par les cotisations chômage',
+      detail:
+        'Après six mois, « un compte qui est le vôtre : ce que vous n’utilisez pas vous reste ». Aucun texte ne fixe ses règles.',
+      sources: [fiche('personne-sans-emploi', 'Personne sans emploi')],
+    },
+  },
+  {
+    when: (c) => has(c, (a) => a.salary?.status === 'fonctionnaire'),
+    item: {
+      id: 'indemnite_agent_public',
+      direction: 'promise',
+      tier: 'law',
+      title:
+        'Fonctionnaire dont le poste est supprimé (État ; territorial sur délibération) : 70 % du traitement jusqu’à 7 ans',
+      detail:
+        'De plein droit pour les fonctionnaires de l’État dont le corps exerce une mission supprimée par le plan ; une collectivité territoriale (ou son établissement public) qui supprime un emploi pour cette raison peut, par une délibération motivée, l’appliquer à ses fonctionnaires, et paie alors l’indemnité ; la fonction publique hospitalière n’est pas visée. Indemnité de 70 % d’une assiette égale au traitement indiciaire brut plus une part des primes fixée par décret (au plus un quart du traitement ; nulle à défaut de décret, donc 70 % du traitement), le montant mensuel restant au plus égal au traitement, pendant 24 mois augmentés d’un mois par trimestre de services publics, au plus 84 mois (7 ans) et au plus jusqu’à la date d’une retraite sans décote. Elle se cumule en entier avec un emploi privé et compte pour la retraite comme une période de chômage indemnisé, dans la limite de la durée de l’allocation chômage.',
+      sources: [
+        SRC_P2_26_FP,
+        fiche('agent-public-dont-le-poste-est-supprime', 'Agent public dont le poste est supprimé'),
+      ],
+    },
+  },
+
+  // ------------------------------------------------------------------ losses
+  {
+    when: (c) => has(c, (a) => a.activity === 'chomage' || a.salary !== null),
+    item: (c) => {
+      const are = c.today.are;
+      return {
+        id: 'chomage_6_mois',
+        direction: 'loss',
+        tier: 'announced',
+        title: 'Indemnisation chômage limitée à six mois',
+        detail:
+          'Le plan annonce que l’indemnisation « passe de treize à six mois » (la durée maximale actuelle va de 18 à 27 mois selon l’âge : 548 jours avant 55 ans, 685 jours à 55-56 ans, 822 jours à partir de 57 ans ; après une rupture conventionnelle depuis le 1er septembre 2026 : 15 mois avant 55 ans, 20,5 mois ensuite). Aucun texte juridique. Le simulateur garde le montant mensuel de l’ARE inchangé (H6).',
+        amountHint:
+          are > 0
+            ? `à partir du 7e mois d’indemnisation : ARE = 0, soit −${eur0(are)}/mois`
+            : 'en cas de perte d’emploi : 6 mois d’indemnisation au lieu de 6 à 18 mois aujourd’hui (jusqu’à 27 mois à partir de 57 ans)',
+        sources: [fiche('personne-sans-emploi', 'Personne sans emploi')],
+      };
+    },
+  },
+  {
+    when: (c) => kids(c, 6) && c.nh.childcare === 'creche',
+    item: {
+      id: 'creche_cmg',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Fin du financement des crèches par les caisses d’allocations familiales',
+      detail:
+        'Votre enfant va en crèche municipale ou associative : son tarif est aujourd’hui calculé selon vos revenus parce que la caisse d’allocations familiales (CAF) paie le reste à la crèche (prestation de service unique, PSU). Cette action sociale des CAF est abrogée au 1er janvier 2028 avec les prestations familiales. Personne ne sait combien la crèche facturerait ensuite : le simulateur ne le chiffre pas. Seul le crédit d’impôt pour frais de garde (chiffré, et supprimé progressivement d’ici 2029) est compté.',
+      amountHint:
+        'le financement public d’une place en crèche dépasse souvent ce que paient les parents',
+      sources: [SRC_PLFSS7_PF],
+    },
+  },
+  {
+    when: (c) => kids(c, 6) && c.nh.childcare === null,
+    item: {
+      id: 'creche_cmg',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Fin des aides à la garde des jeunes enfants',
+      detail:
+        'Mode de garde non renseigné. Le complément de libre choix du mode de garde (assistante maternelle, micro-crèche) et le financement des crèches par les caisses d’allocations familiales sont abrogés au 1er janvier 2028. Indiquez votre mode de garde pour que le complément soit chiffré.',
+      sources: [SRC_PLFSS7_PF],
+    },
+  },
+  {
+    when: (c) =>
+      kids(c, 6) &&
+      (c.nh.childcare === 'assistante_maternelle' || c.nh.childcare === 'micro_creche'),
+    item: (c) => ({
+      id: 'creche_cmg',
+      direction: 'loss',
+      tier: 'law',
+      title:
+        c.nh.childcare === 'assistante_maternelle'
+          ? 'Fin de la prise en charge des cotisations de votre assistante maternelle'
+          : 'Fin du complément de mode de garde de la micro-crèche',
+      detail:
+        c.nh.childcare === 'assistante_maternelle'
+          ? 'Le complément de libre choix du mode de garde (CMG) a deux parts : une aide sur le salaire (chiffrée ci-dessus) et la prise en charge à 100 % des cotisations sociales de l’assistante maternelle, payées directement par Pajemploi. Les deux disparaissent au 1er janvier 2028 (abrogation de la PAJE) : vous paieriez aussi ces cotisations, non chiffrées ici.'
+          : 'Le complément de mode de garde « structure » (chiffré ci-dessus) disparaît au 1er janvier 2028 avec la PAJE ; le prix de la micro-crèche pourrait aussi changer.',
+      sources: [SRC_PLFSS7_PF],
+    }),
+  },
+  {
+    when: () => true,
+    item: {
+      id: 'reste_a_charge_10',
+      direction: 'loss',
+      tier: 'announced',
+      title: 'Reste à charge de 10 % par acte de soin',
+      detail:
+        '« Un reste à charge de 10 % par acte apparaît, plafonné à 5 % de votre revenu, et les dépenses de confort sortent du bouclier. » (annoncé par la fiche, sans texte). Ce point-ci, en revanche, est écrit dans l’amendement PLFSS n° 4 : pour les affections reconnues à partir du 1er janvier 2028, le plafond de 5 % remplace l’exonération du ticket modérateur des affections de longue durée (ALD) ; les ALD reconnues avant gardent leur exonération.',
+      sources: [fiche('patient', 'Patient'), SRC_PLFSS4_BOUCLIER],
+    },
+  },
+  {
+    when: (c) => retirees(c) || c.today.anyBenefit,
+    item: {
+      id: 'gel_indexation',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Fin de la revalorisation automatique des pensions et prestations',
+      detail:
+        'Pour les revalorisations à partir du 1er janvier 2027, les pensions des régimes de base (amendement PLFSS n° 5), l’AAH, la prime d’activité et le RSA (amendement PLF-P2 n° 28) ne sont plus revalorisés automatiquement : seulement par la loi de finances ou de financement de la sécurité sociale, ou par décret si les comptes sont en excédent. Les retraites complémentaires (Agirc-Arrco) ne sont visées par aucun des deux. L’AFU elle-même n’est pas indexée (6 600 € nominaux). Le simulateur raisonne en euros 2026.',
+      sources: [SRC_PLFSS5_INDEX, SRC_P2_28_INDEX, fiche('retraite', 'Retraité')],
+    },
+  },
+  {
+    when: () => true,
+    item: {
+      id: 'epargne_exonerations',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Fin des exonérations sur l’épargne (Livret A, assurance-vie, PEA, PEL…)',
+      detail:
+        'Tous les produits deviennent des compartiments du compte d’épargne personnel ; les gains sont taxés à 30 % de la plus-value réelle à la sortie. Les plans ouverts ou alimentés à partir du 1er juillet 2027 perdent leurs avantages. La suppression de vingt et une contributions sociales (amendement PLFSS n° 9) est compensée par une hausse, non chiffrée, de la CSG sur les revenus du patrimoine et des placements.',
+      sources: [SRC_AM20_PV, SRC_AM1_NICHES, SRC_PLFSS9_CONTRIB],
+    },
+  },
+  {
+    when: owners,
+    item: {
+      id: 'taxe_fonciere',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Taxe foncière unique : montant inconnu',
+      detail:
+        'À partir de 2028 : base = valeur locative de marché (tarifs INSEE à créer), taux communal entre 10 et 30 %. Le plan indique qu’« à 10 %, un logement acquitte à peu près la taxe foncière d’aujourd’hui ». Le même amendement supprime vingt autres impositions locales (parts locales de l’accise sur l’électricité, taxes spéciales d’équipement, taxe locale sur la publicité extérieure, taxe de balayage…), compensées aux collectivités par la dotation globale de fonctionnement. Non chiffrable aujourd’hui (H8).',
+      sources: [SRC_AM29_TF],
+    },
+  },
+  {
+    when: owners,
+    item: {
+      id: 'plus_value_residence',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Plus-value sur la résidence principale imposée',
+      detail:
+        'L’exonération de la plus-value sur la résidence principale est abrogée (amendement PLF-P1 n° 20, I 3°, qui abroge le 1° du II de l’article 150 U du CGI) pour les cessions à partir du 1er janvier 2027 : la revente serait imposée à 30 % du gain réel (prix d’achat corrigé de l’inflation) ; les droits de mutation payés lors d’un achat fait à partir de 2027 viennent en déduction de cet impôt.',
+      sources: [SRC_AM20_PV, SRC_AM1_NICHES],
+    },
+  },
+  {
+    when: (c) => has(c, (a) => a.salary?.status === 'fonctionnaire'),
+    item: {
+      id: 'postes_publics',
+      direction: 'loss',
+      tier: 'announced',
+      title: '580 000 postes publics fermés, fin du statut (indemnité de 70 % jusqu’à 7 ans)',
+      detail:
+        'Le plan annonce 580 000 postes publics fermés et la fin du statut de la fonction publique (droit du travail commun). Pour un fonctionnaire de l’État dont le poste est supprimé, l’amendement prévoit une indemnité de 70 % du traitement indiciaire brut (plus une part des primes si un décret la fixe) pendant 24 mois plus un mois par trimestre de services (au plus 7 ans, et pas au-delà de la date d’une retraite sans décote ; voir « promesses ») : une baisse de 30 % de votre traitement tant qu’aucun décret ne fixe la part des primes, puis plus rien. Ce régime s’applique de plein droit aux fonctionnaires de l’État ; une collectivité territoriale peut, par délibération, l’appliquer à ses fonctionnaires ; la fonction publique hospitalière n’est pas visée.',
+      sources: [
+        MANIFESTE,
+        fiche('agent-public-indispensable', 'Agent public indispensable'),
+        SRC_P2_26_FP,
+      ],
+    },
+  },
+  {
+    when: (c) => c.today.lowIncome,
+    item: {
+      id: 'cheque_energie',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Chèque énergie supprimé au 1er janvier 2027',
+      detail:
+        'Le chèque énergie (48 à 277 € par an selon les revenus) est abrogé : aucun chèque n’est émis au titre de 2027 (ceux de la campagne 2026 restent payés). Il n’est pas calculé dans la situation actuelle du simulateur.',
+      amountHint: '48 à 277 €/an aujourd’hui',
+      sources: [SRC_P2_34_CHEQUE],
+    },
+  },
+  {
+    when: (c) => c.today.rsa > 0,
+    item: {
+      id: 'droits_connexes',
+      direction: 'loss',
+      tier: 'announced',
+      title:
+        'Droits liés au RSA : complémentaire santé solidaire, tarifs sociaux, aides locales, prime de Noël',
+      detail:
+        'Les aides sociales locales (36 Md€) sont « fusionnées » dans l’AFU selon les chiffrages ; les droits connexes au RSA ne sont pas modélisés.',
+      sources: [
+        {
+          label:
+            'Classeur « Synthèse des chiffrages », onglet Refonte fiscalité (aides sociales locales 36,1 Md€)',
+        },
+      ],
+    },
+  },
+  {
+    when: (c) => has(c, (a) => a.activity === 'etudiant') || c.nh.children.some((k) => k.age >= 16),
+    item: {
+      id: 'etudes_payantes',
+      direction: 'loss',
+      tier: 'announced',
+      title: 'Bourses et gratuité des études',
+      detail:
+        '« Vos études se paient sur votre compte éducation. » Les bourses sont comptées parmi les aides remplacées par l’AFU (H1). Les bourses ne sont pas modélisées dans la situation actuelle.',
+      sources: [fiche('jeune-adulte', 'Jeune adulte')],
+    },
+  },
+  {
+    when: (c) => c.nh.emploiDomicileAnnual > 0,
+    item: {
+      id: 'emploi_domicile_cotisations',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Emploi à domicile : exonérations de cotisations supprimées',
+      detail:
+        'En plus du crédit d’impôt (chiffré), l’exonération de cotisations patronales des particuliers employeurs (CSS L241-10) est réduite d’un tiers au 1er juillet 2027, de deux tiers en 2028 et supprimée en 2029 : le coût horaire augmente.',
+      sources: [
+        {
+          label: 'Liasse PLFSS 2027, am. n° 1 (IV)',
+          url: 'https://france-resolution.fr/amendements/Liasse_PLFSS.pdf',
+        },
+        fiche('foyer', 'Foyer'),
+      ],
+    },
+  },
+  {
+    when: (c) => renters(c) && c.today.apl > 0,
+    item: {
+      id: 'apl_nouveau_bail',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Plus d’APL en cas de déménagement',
+      detail:
+        'Aucun droit nouveau pour une demande déposée à partir du 1er juin 2027, et un droit ouvert sur une demande déposée à partir du 1er janvier 2027 n’est servi que douze mois au plus ; un droit existant s’éteint au départ du logement (et au terme du bail pour les logements non conventionnés, au plus tard le 1er janvier 2030).',
+      sources: [SRC_P2_32_APL],
+    },
+  },
+  {
+    when: (c) => renters(c),
+    item: {
+      id: 'parc_social',
+      direction: 'loss',
+      tier: 'announced',
+      title: 'Vente du parc social en trois ans',
+      detail:
+        'Les logements sociaux seraient « proposés à la vente en trois ans » (4,5 millions de logements ; annoncé par la fiche, sans texte). Écrit dans l’amendement PLF-P2 n° 29 : à partir du 1er janvier 2027, l’État n’attribue plus aucune aide nouvelle à la construction ou à l’achat de logements sociaux.',
+      sources: [fiche('locataire', 'Locataire'), SRC_P2_29_HLM],
+    },
+  },
+  {
+    when: (c) => c.nh.children.some((k) => k.aeeh),
+    item: {
+      id: 'aeeh_complements',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Compléments d’AEEH et PCH enfant',
+      detail:
+        'L’AEEH (base et compléments) fait partie des prestations familiales abrogées en 2028. Seule l’AEEH de base est chiffrée ; les compléments (jusqu’à plus de 1 000 €/mois) ne le sont pas.',
+      sources: [SRC_PLFSS7_PF],
+    },
+  },
+  {
+    when: workers,
+    item: {
+      id: 'titres_restaurant_heures_sup',
+      direction: 'loss',
+      tier: 'law',
+      title: 'Heures supplémentaires, titres-restaurant, intéressement : fin des exonérations',
+      detail:
+        'Ces exonérations d’impôt et de cotisations (non modélisées) tombent dès les revenus 2026 (heures supplémentaires, titres-restaurant) ou 2028 (intéressement, participation) pour l’impôt, et le 1er juillet 2027 pour les cotisations.',
+      sources: [SRC_AM1_NICHES, SRC_PLFSS1_EXO],
+    },
+  },
+];
+
+/** v1.1: short plain titles (no acronym without expansion). */
+const PLAIN: Record<string, string | ((c: Ctx) => string)> = {
+  cep_restitution: 'Un compte d’épargne promis, sans montant voté',
+  patrimoine_restitue: 'Des biens publics vendus et « rendus » aux foyers',
+  compte_education: 'Un compte pour payer l’école de vos enfants',
+  complement_viager: 'Un petit complément de retraite promis',
+  loyers_baisse: 'Des loyers qui baisseraient',
+  droits_mutation: 'Des frais de notaire bien plus bas',
+  bouclier_sanitaire: 'Vos frais de santé plafonnés à 5 % du revenu',
+  frais_gestion_sante: 'Une mutuelle moins chère',
+  prix_taxes: 'Des prix allégés de certaines taxes',
+  accise_electricite: 'Une facture d’électricité allégée d’une taxe',
+  exonerations_salaire: 'Des salaires bruts qui pourraient monter',
+  compte_chomage: 'Un compte alimenté par vos cotisations chômage',
+  indemnite_agent_public:
+    'Si votre poste de fonctionnaire est supprimé : 70 % du traitement jusqu’à 7 ans',
+  chomage_6_mois: 'Le chômage payé six mois seulement',
+  creche_cmg: (c) =>
+    c.nh.childcare === 'creche'
+      ? 'La crèche pourrait coûter beaucoup plus cher'
+      : c.nh.childcare === 'assistante_maternelle'
+        ? 'Les cotisations de votre assistante maternelle à votre charge'
+        : 'La micro-crèche sans aide',
+  reste_a_charge_10: '10 % de chaque soin à votre charge',
+  gel_indexation: 'Pensions et aides qui ne suivent plus les prix',
+  epargne_exonerations: 'Fin du Livret A et de l’assurance-vie sans impôt',
+  taxe_fonciere: 'Une nouvelle taxe foncière, montant inconnu',
+  plus_value_residence: 'Un impôt sur la plus-value en revendant votre logement',
+  postes_publics: 'Votre poste public pourrait être supprimé',
+  cheque_energie: 'Plus de chèque énergie',
+  droits_connexes: 'Fin des aides liées au RSA (mutuelle gratuite, tarifs sociaux)',
+  etudes_payantes: 'Des études payantes, sans bourse',
+  emploi_domicile_cotisations: 'Une aide à domicile plus chère',
+  apl_nouveau_bail: 'Plus d’aide au logement si vous déménagez',
+  parc_social: 'Les logements sociaux mis en vente',
+  aeeh_complements: 'Fin des compléments pour enfant handicapé',
+  titres_restaurant_heures_sup: 'Heures sup et titres-restaurant imposés',
+};
+
+/**
+ * v1.1: an item is `prominent` when it could plausibly exceed ~50 €/month for THIS household, so the UI can
+ * show it next to the headline.
+ */
+const PROMINENT: Record<string, (c: Ctx) => boolean> = {
+  chomage_6_mois: (c) => c.today.are > 0,
+  creche_cmg: (c) => c.nh.childcare !== null, // a paid mode (crèche, AM, micro-crèche) is declared
+  postes_publics: () => true, // only listed for a fonctionnaire
+  indemnite_agent_public: () => false,
+  gel_indexation: (c) => retirees(c) || c.today.rsa > 0 || has(c, (a) => a.disability !== 'none'),
+  reste_a_charge_10: (c) => has(c, (a) => a.disability !== 'none'),
+  droits_connexes: (c) => c.today.rsa > 0,
+  aeeh_complements: () => true,
+  emploi_domicile_cotisations: (c) => c.nh.emploiDomicileAnnual >= 3000,
+  apl_nouveau_bail: (c) => c.today.apl >= 50,
+};
+
+export function unquantifiedFor(c: Ctx): {
+  promises: UnquantifiedItem[];
+  losses: UnquantifiedItem[];
+} {
+  const items = CATALOGUE.filter((e) => e.when(c)).map((e) =>
+    typeof e.item === 'function' ? e.item(c) : e.item,
+  );
+  const clean = (it: UnquantifiedItem): UnquantifiedItem => {
+    const plain = PLAIN[it.id];
+    const out: UnquantifiedItem = {
+      ...it,
+      plainTitle: typeof plain === 'function' ? plain(c) : (plain ?? it.title),
+      prominent: PROMINENT[it.id]?.(c) ?? false,
+    };
+    if (out.amountHint === undefined) delete out.amountHint;
+    return out;
+  };
+  return {
+    promises: items.filter((i) => i.direction === 'promise').map(clean),
+    losses: items.filter((i) => i.direction === 'loss').map(clean),
+  };
+}

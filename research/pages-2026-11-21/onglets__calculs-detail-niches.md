@@ -1,0 +1,39 @@
+<!-- source: https://france-resolution.fr/onglets/calculs-detail-niches.html -->
+
+# Détail Niches — Synthèse des chiffrages — Résolution
+
+_Meta description_: Onglet « Détail Niches » du classeur « Synthèse des chiffrages », en ligne.
+
+Résolution
+
+# Détail Niches
+
+Onglet 4 sur 7 du classeur « Synthèse des chiffrages », 24 lignes.
+
+Télécharger le classeur complet (337 Ko)
+
+| Md€ |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+|  | Données utilisées sur les dépenses fiscales (hors champ social) |  |  |  | Niches supprimées pour CSG (Md€) | Restitué en CSG | Restitué en taxes | Total supprimé | Hypothèses |  | Tous ménages | Actifs | Retraités | Toutes entreprises | Autres |
+|  |  | Nombre | Md€ (2024) |  | Niches fiscales | 43,1 | 29,1 | 72,3 | Hors outre-mer (sauf crédits et réductions d'impôt), hors agriculture |  | -17,3 | -7,8 | -4,8 | -20,4 | 0,0 |
+|  | Niches fiscales recensées en PLF 2026 : | 465 | 89,4 |  | Taux réduits TVA | 9,9 | 9,9 | 19,9 | Taux réduits ciblés recyclés à 50 % du coût |  | -1,0 |  |  | -1,0 |  |
+|  | Niches fiscales augmentées de la TVA toutes APU : | 465 | 101,3 |  | dont travaux à 10 % et 5,5 % (y.c. HLM) | 4,4 | 4,4 | 8,8 |  |  | -2,2 |  |  | -2,2 |  |
+|  | Niches fiscales au fait générateur éteint : | 47 | 3,8 |  | dont restauration-hôtellerie à 10 % | 2,8 | 2,8 | 5,7 |  |  | -1,4 |  |  | -1,4 |  |
+|  | Niches fiscales au fait générateur éteint fin 2025 : | 35 | 1,3 |  | dont activités culturelles à 10 % et 5,5 % | 0,8 | 0,8 | 1,6 |  |  | -0,4 |  |  | -0,4 |  |
+|  | Taux réduits de TVA non comptabilisés en niche* : | 21 | 33 |  | Impôt sur le revenu | 19,8 | 7,2 | 27,0 | Abattements et assimilés recyclés à 100 %, reste à 50 % |  | -4,9 |  |  |  |  |
+|  | Niches fiscales augmentées de la TVA toutes APU : | 486 | 135 |  | dont exonérations salariales | 4,8 | 3,4 | 8,2 | Dont intéressement, heures supplémentaires, titres restaurant, etc. |  |  | -4,8 |  |  |  |
+|  | * Estimation du CPO, février 2023, p. 32, de 30 Md€ en 2021 dont 20 Md€ sur l'eau et l'alimentation |  |  |  | dont abattement retraites 10 % | 4,8 |  | 4,8 | Hors emploi à domicile et garde d'enfant |  |  |  | -4,8 |  |  |
+|  | * Projection sur 2024 au pro-rata de la TVA dans les comptes nationaux de l'Insee |  |  |  | dont épargne réglementée | 3,3 | 0,6 | 2,7 | Dont livret A, plans d'épargne, assurance vie, etc. |  | -3,3 |  |  |  |  |
+|  |  |  |  |  | dont déductions travaux | 1,0 | 1,0 | 2,0 |  |  | -1,0 |  |  |  |  |
+|  |  |  |  |  | dont réductions dons | 1,0 | 1,0 | 2,0 | Suppression en 2 ans |  |  |  |  |  |  |
+|  |  |  |  |  | Impôt sur les sociétés | 8,2 | 7,8 | 16,0 | Crédits et réductions d'impôt recyclés à 50 % |  |  |  |  | -1,3 |  |
+|  |  |  |  |  | dont crédit impôt recherche, innovation | 4,1 | 4,1 | 8,1 |  |  |  |  |  | -4,1 |  |
+|  |  |  |  |  | dont sociétés immobilières et HLM | 1,0 | 0,6 | 1,6 |  |  |  |  |  | -1,0 |  |
+|  |  |  |  |  | dont réductions dons | 0,8 | 0,8 | 1,6 | Suppression en 2 ans |  |  |  |  |  |  |
+|  |  |  |  |  | dont taux réduit propriété intellectuelle | 0,6 | 0,6 | 1,2 |  |  |  |  |  | -0,6 |  |
+|  |  |  |  |  | dont prêts à taux zéro | 0,4 | 0,4 | 0,8 |  |  | -0,4 |  |  |  |  |
+|  |  |  |  |  | Autres impôts et taxes | 5,2 | 4,2 | 9,4 | Hors outre-mer, hors agriculture |  | -0,6 |  |  | -0,6 |  |
+|  |  |  |  |  | dont malus auto | 1,7 | 1,7 | 3,3 | Hybride, électrique, hydrogène, utilitaires, etc. |  | -1,7 |  |  |  |  |
+|  |  |  |  |  | dont accises carburants (pro. et mén.) | 1,5 | 1,5 | 2,9 | Dont un quart sur les particuliers |  | -0,4 |  |  | -1,1 |  |
+|  |  |  |  |  | dont énergo-intensifs | 0,7 | 0,7 | 1,5 |  |  |  |  |  | -0,7 |  |
+|  |  |  |  |  | Niches sociales | 9 | 9 | 18 | Rendement recyclé à 50 % |  |  | -3 |  | -6 |  |
+

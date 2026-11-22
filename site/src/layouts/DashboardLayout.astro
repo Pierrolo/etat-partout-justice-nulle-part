@@ -1,0 +1,44 @@
+---
+/**
+ * Shell shared by every /comprendre/<slug> page: breadcrumbs, title/lede from the registry in
+ * lib/site.ts, prev/next navigation. Page files only provide the body (default slot).
+ *
+ *   <DashboardLayout slug="depenses" lede="…">…content…</DashboardLayout>
+ */
+import Breadcrumbs from '@/components/site/Breadcrumbs.astro';
+import DashboardNav from '@/components/site/DashboardNav.astro';
+import PageHeader from '@/components/site/PageHeader.astro';
+import { COMPRENDRE_PAGES } from '@/lib/site';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  slug: string;
+  /** Overrides the registry title (h1 and <title>) when it carries a figure read from facts.json. */
+  title?: string;
+  /** One or two sentences under the title. */
+  lede?: string;
+  /** Meta description (defaults to the registry teaser). */
+  description?: string;
+}
+
+const { slug, title, lede, description } = Astro.props;
+const page = COMPRENDRE_PAGES.find((p) => p.slug === slug);
+if (!page) throw new Error(`DashboardLayout: unknown slug "${slug}" (add it to COMPRENDRE_PAGES)`);
+---
+
+<BaseLayout title={title ?? page.title} description={description ?? page.teaser}>
+  <PageHeader eyebrow="Comprendre" title={title ?? page.title} lede={lede ?? page.teaser}>
+    <Breadcrumbs
+      slot="before"
+      items={[
+        { label: 'Accueil', href: '/' },
+        { label: 'Comprendre', href: '/comprendre/' },
+        { label: title ?? page.title },
+      ]}
+    />
+  </PageHeader>
+  <div class="wrap space-y-10">
+    <slot />
+  </div>
+  <DashboardNav slug={slug} />
+</BaseLayout>

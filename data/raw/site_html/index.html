@@ -1,0 +1,164 @@
+<!doctype html><html lang=fr><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>État partout, justice nulle part</title><meta name=description content="Dix-huit situations. Chaque fiche dit ce que le plan vous donne, et ce qu’il vous retire."><meta property="og:title" content="État partout, justice nulle part"><meta property="og:description" content="Dix-huit situations. Chaque fiche dit ce que le plan vous donne, et ce qu’il vous retire."><meta property="og:type" content="article"><link rel=stylesheet href="fiche.css"><div class=a-fond><div class=a-haut><p class=a-sig>Ingrid <b>Barrat</b> · Arthur <b>Marle</b> · Moïse <b>Mitterrand</b><span class=a-marque>Résolution</span></p><div class=a-livre><a class=a-livre-nom href="livre.html">Le livre</a><details class=a-commande><summary class="a-appel a-lien a-vif">Commander le livre</summary><div class=a-options><a href="https://www.leslibraires.fr/livre/26622846-etat-partout-justice-nulle-part-ingrid-barrat-arthur-marle-moise-mitterrand-chronique" target=_blank rel="noopener noreferrer">Chez votre libraire</a><a href="https://www.fnac.com/a23281828/Ingrid-Barrat-Etat-partout-justice-nulle-part" target=_blank rel="noopener noreferrer">Fnac</a><a href="https://www.amazon.fr/%C3%89tat-partout-justice-nulle-part/dp/236602648X" target=_blank rel="noopener noreferrer">Amazon</a></div></details><span class=a-bientot>Disponible dès maintenant en librairie</span></div></div><div class=a-corps><h1 class="a-titre a-cond">État partout,<span>justice nulle part</span></h1><div class=a-promesse><p class=a-cond>Vous rendre <b>600 €</b> par mois</p><a class=a-parici href="manifeste.html">C’est possible, par ici →</a></div></div><hr class=a-filet><div class=a-bas><ul class=a-rub><li><a href="manifeste.html">Manifeste</a></li><li><a href="fiches.html">Propositions</a></li><li><a href="donnees.html">Données</a></li><li><a href="videos.html">Vidéos</a></li><li><a href="auteurs.html">Auteurs</a></li></ul></div><p class=s-pied><a class=a-parici href="contact.html">Je m’exprime</a><a class=a-parici href="adherer.html">J’adhère</a><a class="a-parici a-elu" href="ecrire.html">J’écris à mon élu</a><a class=s-ml href="mentions-legales.html">Mentions légales</a><span class=r-sigles><a href="https://www.youtube.com/@FranceResolution" target=_blank rel="noopener noreferrer" aria-label="France Résolution sur YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FF0000" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z"/><path fill="#fff" d="M9.75 15.02V8.98L15.5 12z"/></svg></a><a href="https://www.instagram.com/franceresolution/" target=_blank rel="noopener noreferrer" aria-label="France Résolution sur Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><radialGradient id="ig1" cx="30%" cy="107%" r="150%"><stop offset="0" stop-color="#fdf497"/><stop offset=".05" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".9" stop-color="#285aeb"/></radialGradient></defs><rect x="1" y="1" width="22" height="22" rx="6" fill="url(#ig1)"/><rect x="5.5" y="5.5" width="13" height="13" rx="4" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="16.4" cy="7.6" r="1" fill="#fff"/></svg></a></span></p></div><script>
+(function () {
+  // Cadrage de la photo des auteurs : la photo couvre toute la garde ; on
+  // cherche l'échelle et la position qui donnent à chaque tête (cheveux
+  // compris) le plus grand écart au texte le plus proche, mesuré de la même
+  // façon en haut, en bas, à gauche et à droite. Sur mobile, un visage à la fois.
+  var IW = 1600, IH = 1066;                       // img/auteurs.jpg
+  var VISAGES = [[.145, .05, .28, .28],           // têtes, du haut des cheveux
+                 [.43, .195, .535, .375],         // au menton : x0, y0, x1, y1,
+                 [.69, .15, .795, .345]];         // en fraction de la photo
+  var fond = document.querySelector('.a-fond');
+  if (!fond) return;
+
+  function obstacles() {
+    var f = fond.getBoundingClientRect(), out = [];
+    function boite(r) {
+      if (r.width && r.height) out.push([r.left - f.left, r.top - f.top, r.right - f.left, r.bottom - f.top]);
+    }
+    // Les lettres, ligne par ligne : une ligne en bloc (« justice nulle part »,
+    // « Résolution ») a une boîte pleine largeur, pas son texte.
+    ['.a-sig', '.a-titre', '.a-promesse p'].forEach(function (s) {
+      var el = fond.querySelector(s); if (!el) return;
+      var tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), n;
+      while ((n = tw.nextNode())) {
+        if (!n.nodeValue.trim()) continue;
+        var r = document.createRange(); r.selectNodeContents(n);
+        Array.prototype.forEach.call(r.getClientRects(), boite);
+      }
+    });
+    ['.a-livre > *', '.a-promesse a', '.a-rub a', '.s-pied a'].forEach(function (s) {
+      Array.prototype.forEach.call(fond.querySelectorAll(s), function (el) {
+        boite(el.getBoundingClientRect());
+      });
+    });
+    return out;
+  }
+
+  // Écart signé entre deux boîtes : distance si elles sont séparées, moins la
+  // profondeur de recouvrement sinon. Même mesure dans toutes les directions.
+  function ecart(a, b) {
+    var dx = Math.max(b[0] - a[2], a[0] - b[2]), dy = Math.max(b[1] - a[3], a[1] - b[3]);
+    return dx > 0 && dy > 0 ? Math.sqrt(dx * dx + dy * dy) : Math.max(dx, dy);
+  }
+
+  // Le plus petit écart d'une tête au texte et aux bords de l'écran ; une
+  // tête coupée par le bord compte triple : c'est pire qu'un léger contact.
+  function jeu(v, obs, W, H) {
+    var e = Math.min(v[0], W - v[2], v[1]);
+    if (e < 0) e *= 3;
+    for (var j = 0; j < obs.length; j++) e = Math.min(e, ecart(v, obs[j]));
+    return e;
+  }
+
+  // Coût d'un cadrage : moins l'écart le plus petit de toutes les têtes,
+  // jusqu'à un écart suffisant ; au-delà, seule la bande en haut départage.
+  var ASSEZ = 24;
+  function cout(visages, obs, W, H) {
+    var e = Infinity;
+    visages.forEach(function (v) { e = Math.min(e, jeu(v, obs, W, H)); });
+    return -Math.min(e, ASSEZ);
+  }
+
+  function place(s, ox, oy, i) {
+    var v = VISAGES[i];
+    return [ox + v[0] * IW * s, oy + v[1] * IH * s, ox + v[2] * IW * s, oy + v[3] * IH * s];
+  }
+
+  function cadrer() {
+    var W = fond.clientWidth, H = fond.clientHeight;
+    if (!W || !H) return;
+    var obs = obstacles(), base = Math.max(W / IW, H / IH), KMIN = 1;
+    // La photo couvre toute la largeur et le bas ; elle peut descendre un peu
+    // sous le haut de l'écran, fondue dans le brique. À écart égal, la plus
+    // petite bande, puis la moins agrandie, l'emporte.
+    function jour(k, y) { return Math.round(Math.max(0, y) / 4 + (k - 1) * 20); }
+    function plages(k) {                     // positions admises à l'échelle k
+      var s = base * k, sw = IW * s, sh = IH * s;
+      var x1 = 0, x0 = W - sw, y1 = Math.max(0, Math.min(.35 * H, sh - H)), y0 = H - sh;
+      return { s: s, sw: sw, sh: sh, x0: x0, x1: x1, y0: y0, y1: y1 };
+    }
+    var groupe = null, solo = null, k, P, x, y;
+    // Un visage à la fois, chacun avec sa hauteur et sa position (portrait,
+    // et paysage peu allongé si les trois ensemble ne tiennent pas).
+    if (W < 1.5 * H) {
+      for (k = 1; k <= 1.6001; k += .03) {
+        P = plages(k);
+        var px = Math.max((P.x1 - P.x0) / 30, 1), py = Math.max((P.y1 - P.y0) / 48, 1), tot = -Infinity, pos = [];
+        for (var i = 0; i < 3; i++) {
+          var b = null;
+          for (y = P.y1; y >= P.y0 - .5; y -= py) {
+            for (x = P.x1; x >= P.x0 - .5; x -= px) {
+              var cc = [Math.round(cout([place(P.s, x, y, i)], obs, W, H) / 4), jour(k, y)];
+              if (!b || plusPetit(cc, b.c)) b = { c: cc, x: x, y: y };
+            }
+          }
+          pos.push(b); tot = Math.max(tot, b.c[0]);
+        }
+        var scs = [tot, k];
+        if (!solo || plusPetit(scs, solo.sc)) solo = { sc: scs, s: P.s, pos: pos };
+      }
+    }
+    if (W >= H) {
+      // Paysage : les trois ensemble, photo fixe.
+      var essai = function (kk, x, y) {
+        var Q = plages(kk);
+        var vs = [0, 1, 2].map(function (i) { return place(Q.s, x, y, i); });
+        var sc = [Math.round(cout(vs, obs, W, H) / 4), jour(kk, y), kk];
+        if (!groupe || plusPetit(sc, groupe.sc)) groupe = { sc: sc, s: Q.s, ox: x, oy: y, k: kk };
+      };
+      for (k = KMIN; k <= 1.6001; k += .03) {
+        P = plages(k);
+        var pasX = Math.max((P.x1 - P.x0) / 24, 1), pasY = Math.max((P.y1 - P.y0) / 48, 1);
+        for (y = P.y1; y >= P.y0 - .5; y -= pasY)
+          for (x = P.x1; x >= P.x0 - .5; x -= pasX) essai(k, x, y);
+      }
+      // Affinage au pixel autour du meilleur.
+      var g = groupe;
+      for (var kk = Math.max(KMIN, g.k - .03); kk <= g.k + .0301; kk += .005) {
+        P = plages(kk);
+        for (y = Math.min(P.y1, g.oy + 30); y >= Math.max(P.y0, g.oy - 30); y -= 2)
+          for (x = Math.min(P.x1, g.ox + 40); x >= Math.max(P.x0, g.ox - 40); x -= 2) essai(kk, x, y);
+      }
+    }
+    // Les trois ensemble s'ils ne mordent que d'une vingtaine de pixels au plus
+    // sur le texte ; sinon, un visage à la fois s'il fait mieux.
+    var m = groupe && (!solo || groupe.sc[0] <= 6 || groupe.sc[0] <= solo.sc[0]) ? groupe : solo;
+    var st = fond.style, FONDU = 80;
+    function fondu(y) {       // brique plein au-dessus du bord de la photo, puis fondu
+      st.setProperty('--b1', Math.max(y, 0) + 'px');
+      st.setProperty('--b2', (y > 0 ? y + FONDU : 0) + 'px');
+    }
+    st.setProperty('--ps', Math.round(IW * m.s) + 'px ' + Math.round(IH * m.s) + 'px');
+    if (m === solo) {
+      m.pos.forEach(function (p, i) {
+        var y = Math.round(p.y);
+        st.setProperty('--x' + (i + 1), Math.round(p.x) + 'px');
+        st.setProperty('--y' + (i + 1), y + 'px');
+        st.setProperty('--f' + (i + 1), Math.max(y, 0) + 'px');      // fondu propre
+        st.setProperty('--g' + (i + 1), (y > 0 ? y + FONDU : 0) + 'px'); // à chaque arrêt
+      });
+      st.setProperty('--px', Math.round(m.pos[1].x) + 'px');
+      st.setProperty('--py', Math.round(m.pos[1].y) + 'px');
+      fondu(Math.round(Math.max.apply(null, m.pos.map(function (p) { return p.y; }))));
+      fond.classList.add('a-defile');
+    } else {
+      st.setProperty('--px', Math.round(m.ox) + 'px');
+      st.setProperty('--py', Math.round(m.oy) + 'px');
+      fondu(Math.round(m.oy));
+      fond.classList.remove('a-defile');
+    }
+  }
+
+  function plusPetit(a, b) {
+    for (var i = 0; i < a.length; i++) { if (a[i] !== b[i]) return a[i] < b[i]; }
+    return false;
+  }
+
+  var attente;
+  function relancer() { clearTimeout(attente); attente = setTimeout(cadrer, 80); }
+  window.addEventListener('resize', relancer);
+  cadrer();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(cadrer);
+})();
+</script></html>

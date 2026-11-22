@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.astro/
+.vite/
+*.tsbuildinfo
+coverage/
+
+# Playwright
+playwright-report/
+test-results/
+blob-report/
+.playwright/
+
+# env / editor / OS
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log
+
+# Python (pipeline/ and scripts/)
+__pycache__/
+*.pyc
+.venv/

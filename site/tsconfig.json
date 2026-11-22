@@ -1,0 +1,23 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [
+    ".astro/types.d.ts",
+    "src/**/*",
+    "e2e/**/*",
+    "scripts/**/*",
+    "playwright.config.ts",
+    "vitest.config.ts"
+  ],
+  "exclude": ["dist", "node_modules"],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": ["node"],
+    "noUncheckedIndexedAccess": true,
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

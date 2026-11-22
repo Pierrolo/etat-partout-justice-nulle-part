@@ -1,0 +1,70 @@
+---
+import { IconMoon, IconSun } from '@/components/ui/icons';
+---
+
+<!--
+  Light / dark toggle. Preference is stored in localStorage under "epjn-theme" (a per-viewer
+  convenience, not a cookie, never sent anywhere); without it the OS setting wins.
+  The button stays invisible until the script has run (no dead control without JavaScript).
+-->
+<button
+  type="button"
+  class="theme-toggle inline-flex size-11 cursor-pointer items-center justify-center rounded-md border border-transparent text-ink-2 hover:bg-sunken hover:text-ink"
+  aria-pressed="false"
+  data-theme-toggle
+>
+  <span class="sr-only">Thème sombre</span>
+  <IconMoon size={20} className="theme-icon-moon" />
+  <IconSun size={20} className="theme-icon-sun" />
+</button>
+
+<style>
+  .theme-toggle:not([data-ready]) {
+    visibility: hidden;
+  }
+  .theme-toggle .theme-icon-sun {
+    display: none;
+  }
+  .theme-toggle[aria-pressed='true'] .theme-icon-sun {
+    display: block;
+  }
+  .theme-toggle[aria-pressed='true'] .theme-icon-moon {
+    display: none;
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const KEY = 'epjn-theme';
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function effective(): 'light' | 'dark' {
+    const t = root.dataset.theme;
+    if (t === 'light' || t === 'dark') return t;
+    return mq.matches ? 'dark' : 'light';
+  }
+
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
+  function sync() {
+    const dark = effective() === 'dark';
+    buttons.forEach((b) => {
+      b.setAttribute('aria-pressed', String(dark));
+      b.dataset.ready = '';
+    });
+  }
+
+  buttons.forEach((b) =>
+    b.addEventListener('click', () => {
+      const next = effective() === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem(KEY, next);
+      } catch {
+        /* storage blocked: the choice simply lasts for this page view */
+      }
+      sync();
+    }),
+  );
+  mq.addEventListener('change', sync);
+  sync();
+</script>

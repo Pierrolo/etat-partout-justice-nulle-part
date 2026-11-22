@@ -1,0 +1,18 @@
+# Not ours to reformat: raw/derived data, research notes, pipeline, harvest scripts, generated JSON.
+data/
+research/
+docs/
+scripts/
+pipeline/
+site/src/data/
+pnpm-lock.yaml
+dist/
+.astro/
+coverage/
+playwright-report/
+test-results/
+
+# engine: generated files
+engine/src/params/baseline-2026.ts
+engine/cas-types-results.json
+engine/test/__snapshots__
