@@ -6,7 +6,7 @@
  *   - under a strict CSP (inline scripts allowed, no external host).
  *
  * Usage:  node scripts/make-portable.mjs [--out <dir>] [--dist <site/dist>] [--sentinel-dir <dir>] [--keep-build]
- *   --out          output folder (default: $PORTABLE_OUT or the scratchpad `portable/site/`). Wiped first.
+ *   --out          output folder (default: $PORTABLE_OUT or `dist-portable/site/` at the repo root). Wiped first.
  *   --dist         the regular production build (default site/dist). Never modified: it is only the REFERENCE the
  *                  portable copy is compared with (same pages, same static assets, same HTML modulo hashes).
  *   --sentinel-dir reuse an existing sentinel build instead of building (debugging).
@@ -52,10 +52,8 @@ import { fileURLToPath } from 'node:url';
 const posix = path.posix;
 const SENT_NAME = '__EPJN_BASE__';
 const SENT_BASE = `/${SENT_NAME}/`;
-const DEFAULT_OUT =
-  '/tmp/claude-0/-home-user-etat-partout-justice-nulle-part/baab7dd5-e189-57f4-831a-57c57e1912f4/scratchpad/portable/site';
-
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const DEFAULT_OUT = path.join(repoRoot, 'dist-portable', 'site');
 const siteDir = path.join(repoRoot, 'site');
 
 /* ── CLI ─────────────────────────────────────────────────────────────────────────────────────────────────────── */
@@ -497,7 +495,12 @@ function main() {
 
     // safety: never write into the source tree or the regular build
     const out = path.resolve(opts.out);
-    for (const protectedDir of [opts.dist, siteDir, repoRoot]) {
+    const exportDir = path.join(repoRoot, 'dist-portable');
+    const inExportDir = (() => {
+      const r = path.relative(exportDir, out);
+      return !r.startsWith('..') && !path.isAbsolute(r);
+    })();
+    for (const protectedDir of [opts.dist, siteDir, ...(inExportDir ? [] : [repoRoot])]) {
       const r = path.relative(path.resolve(protectedDir), out);
       if (r === '' || (!r.startsWith('..') && !path.isAbsolute(r))) {
         throw new Error(`refusing to write the portable copy into ${protectedDir} (${out})`);

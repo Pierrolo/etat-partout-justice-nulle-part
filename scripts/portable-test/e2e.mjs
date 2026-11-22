@@ -5,7 +5,7 @@
  *
  *   node scripts/portable-test/e2e.mjs [--portable <dir>] [--site <dir>] [--prefix /p/abc/] [--headed]
  *
- *   --portable  folder holding the launcher `index.html` (fragment) and `site/` (default: the scratchpad `portable/`)
+ *   --portable  folder holding the launcher `index.html` (fragment) and `site/` (default: `dist-portable/` at the repo root)
  *   --site      serve this folder as `site/` instead (negative control: pass site/dist and watch the test fail)
  *
  * What it checks
@@ -35,7 +35,7 @@ const arg = (n, d) => {
   return i === -1 ? d : argv[i + 1];
 };
 const portableDir = path.resolve(
-  arg('--portable', '/tmp/claude-0/-home-user-etat-partout-justice-nulle-part/baab7dd5-e189-57f4-831a-57c57e1912f4/scratchpad/portable'),
+  arg('--portable', new URL('../../dist-portable/', import.meta.url).pathname),
 );
 const siteOverride = arg('--site') ? path.resolve(arg('--site')) : undefined;
 const siteDirOnDisk = siteOverride ?? path.join(portableDir, 'site');

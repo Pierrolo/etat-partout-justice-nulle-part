@@ -28,3 +28,6 @@ blob-report/
 __pycache__/
 *.pyc
 .venv/
+
+# portable export (pnpm export)
+dist-portable/

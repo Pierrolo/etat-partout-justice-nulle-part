@@ -17,7 +17,8 @@
     "test:e2e": "pnpm --filter @epjn/site test:e2e",
     "lint": "eslint . && prettier --check .",
     "typecheck": "pnpm -r --if-present typecheck",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "export": "pnpm build && node scripts/make-portable.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
