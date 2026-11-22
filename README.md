@@ -33,9 +33,26 @@ pnpm preview        # sert site/dist/
 
 Variables d'environnement (build) :
 
-- `BASE_PATH` — sous-chemin de publication, ex. `/etat-partout-justice-nulle-part/` pour GitHub Pages (défaut `/`).
-- `SITE_URL` — origine absolue (ex. `https://user.github.io`), utilisée pour `canonical` et Open Graph.
+- `BASE_PATH` — sous-chemin de publication si le site est servi ailleurs qu'à la racine (défaut `/`).
+- `SITE_URL` — origine absolue (ex. `https://mon-site.fr`), utilisée pour `canonical` et Open Graph.
 - `ASTRO_TELEMETRY_DISABLED=1` — recommandé en CI.
+
+## Publier sur votre propre hébergement
+
+Deux possibilités, selon l'hébergeur :
+
+1. **À la racine d'un domaine** (ex. `https://mon-site.fr/`) :
+   - lancez `pnpm build` ;
+   - envoyez le contenu de `site/dist/` sur l'hébergement.
+2. **N'importe où, même dans un sous-dossier ou sur un hébergeur qui ne résout pas les dossiers en `index.html`** :
+   - lancez `pnpm export` ;
+   - envoyez le contenu de `dist-portable/site/`.
+
+   Tous les liens y sont relatifs (`…/index.html`), donc le dossier fonctionne tel quel depuis n'importe quelle adresse.
+
+Le site est entièrement statique : aucun serveur, aucune base de données, aucun cookie. N'importe quel hébergement de fichiers convient (OVH, o2switch, Netlify, Cloudflare Pages, un serveur nginx…).
+
+Pour vérifier un export : `node scripts/portable-test/e2e.mjs --help`. Ce script parcourt toutes les pages derrière un préfixe aléatoire, sans résolution de dossier et avec une CSP stricte.
 
 ## Organisation du dépôt
 
@@ -54,7 +71,7 @@ site/       Astro 6 (statique) + îlots React 19 + Tailwind CSS v4
   e2e/            Playwright : smoke + axe + zéro requête tierce
 pipeline/   scripts Python : data/derived → site/src/data/*.json
 data/ research/ scripts/ docs/   matériaux de départ, recherche, spécification
-.github/workflows/   ci.yml (lint, types, tests, build, e2e) · deploy.yml (GitHub Pages)
+.github/workflows/   ci.yml (lint, types, tests, build, e2e)
 ```
 
 ## Système de design (en bref)
